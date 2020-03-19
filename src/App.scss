@@ -6,6 +6,22 @@ body {
   perspective:1000;
 }
 
+h3 {
+  margin: .2rem auto;
+  text-align: center;
+  font-size: .28rem;
+}
+
+section {
+  padding: .2rem .4rem;
+  font-size: .24rem;
+  letter-spacing: 2px;
+  p {
+    text-indent: .2rem;
+  }
+  
+}
+
 img {
   border: 0 none;
   max-width: 100%;
@@ -18,11 +34,16 @@ img {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #d0e1da;
   min-height: 100%;
 }
 .none {
   display: none;
+}
+
+.article-code {
+  margin: .2rem .4rem;
+  padding: .2rem .4rem;
+  background-color: #f7f9fa;
 }
 
 @keyframes rotate{
