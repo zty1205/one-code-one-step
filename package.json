@@ -1,0 +1,44 @@
+{
+  "name": "zty-leet-code",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "antd": "^4.0.3",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.4.0"
+  },
+  "scripts": {
+    "eject": "react-scripts eject",
+    "start": "react-app-rewired start",
+    "build": "dotenv -e .env.production react-app-rewired build",
+    "build:test": "dotenv -e .env.test react-app-rewired build",
+    "test": "react-app-rewired test"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "babel-plugin-import": "^1.13.0",
+    "customize-cra": "^0.9.1",
+    "dotenv": "^8.2.0",
+    "node-sass": "^4.13.1",
+    "react-app-rewired": "^2.1.5"
+  }
+}

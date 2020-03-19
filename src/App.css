@@ -1,0 +1,31 @@
+html,
+body {
+  height: 100%;
+  transform: translateZ(0);
+  backface-visibility:hidden;
+  perspective:1000;
+}
+
+img {
+  border: 0 none;
+  max-width: 100%;
+  vertical-align: top;
+  pointer-events: none;
+}
+
+.page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #d0e1da;
+  min-height: 100%;
+}
+.none {
+  display: none;
+}
+
+@keyframes rotate{
+  from{-webkit-transform: rotate(0deg)}
+  to{-webkit-transform: rotate(360deg)}
+}
