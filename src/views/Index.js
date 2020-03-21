@@ -4,12 +4,12 @@ import './Index.scss'
 
 import questions from 'assets/js/questions.js'
 
-function content(text) {
-  let cont = text ? text.join('\r\n').replace(/。/g, '。\r\n') : ''
-  return <div className="popover-content">
-    {cont}
-  </div>
-}
+// function content(text) {
+//   let cont = text ? text.join('\r\n').replace(/。/g, '。\r\n') : ''
+//   return <div className="popover-content">
+//     {cont}
+//   </div>
+// }
 
 export default class Index extends React.Component {
   UNSAFE_componentWillMount() {
