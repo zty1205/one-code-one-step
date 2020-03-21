@@ -1,15 +1,30 @@
+.page-index {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: .2rem;
+}
+
 .card-box {
   margin: .1rem .2rem;
   width: 6rem;
   max-width: 300px;
 
   .card-content-box {
-    word-break: break-all;
+    word-break: break-word;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 4;
     overflow: hidden;
   }
+
+  .card-content-rate {
+    margin-top: .2rem;
+  }
+}
+
+.popover-content {
+  white-space: pre-line;
 }
 
