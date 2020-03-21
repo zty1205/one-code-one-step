@@ -1,5 +1,6 @@
 import React from 'react';
 import './index.scss'
+import { Button } from 'antd';
 
 var num = [2, 3, 4, 7, 11, 15], tar = 9
 var nums = [2, 7, 11, 15], target = 9
@@ -94,6 +95,13 @@ export default class Index extends React.Component {
   componentDidMount() {
 
   }
+  handleInfo() {
+    this.setState(preState => {
+      return {
+        showInfo: !preState.showInfo
+      }
+    })
+  }
   render() {
     return (
       <div className="page page-question page-sums">
@@ -108,15 +116,26 @@ export default class Index extends React.Component {
 
           <p>因为 nums[0] + nums[1] = 2 + 7 = 9</p>
           <p> 所以返回 [0, 1]</p>
+          <div className="btn-box" >
+            <Button type="link" size='small' onClick={this.handleInfo.bind(this)}>
+              {this.state.showInfo ? '关闭解析' : '查看答案'}
+            </Button>
+          </div>
         </article>
 
         {
           this.state.showInfo ? <div className="code-info">
+            <div className="code-info-title">提示</div>
             <ul>
-              <li>不能sort</li>
-              <li>考察查找算法</li>
+              <li>不能对原数组进行sort</li>
+              <li>本提主要考察 - 查找算法</li>
             </ul>
+            <div className="code-info-title">最优答案</div>
+            <div>
+                
+            </div>
           </div> : null
+          
         }
 
       </div>
