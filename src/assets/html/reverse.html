@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <h3>7. 整数翻转</h3>
+      <section>
+        <div class="mutil-p">
+          <p>
+            给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。
+          </p>
+          <p>
+            假设我们的环境只能存储得下 32 位的有符号整数，则其数值范围为 [−2^31,
+            2^31 − 1]。
+          </p>
+          <p>请根据这个假设，如果反转后整数溢出那么就返回 0。</p>
+        </div>
+      </section>
+      <section class="code-title">示例：</section>
+      <article class="article-code">
+        <div class="mutil-p">
+          <p>输入: 123, 输出: 321</p>
+          <p>输入: -123, 输出: -321</p>
+          <p>输入: 120, 输出: 21</p>
+        </div>
+      </article>
+    </div>
+  </body>
+  <script>
+    var reverse1 = function(x) {
+      let f = false;
+      if (x < 0) {
+        f = true;
+      }
+      var str = f ? String(x).substring(1) : String(x);
+      var strList = str.split("").reverse();
+      for (var i = 0; i < strList.length; i++) {
+        if (strList[i] === "0") {
+          strList[i] = undefined;
+        } else {
+          break;
+        }
+      }
+      var str = strList.filter(x => x).join("");
+      var num = Number(str);
+      var number = f ? -num : num;
+      if (number < -Math.pow(2, 31) || number > Math.pow(2, 31) - 1) {
+        number = 0;
+      }
+      return number;
+    };
+
+    var reverse = function(x) {
+      let overflow = function(x) {
+        return x >= Math.pow(2, 31) - 1 || x <= -Math.pow(2, 31) ? 0 : x;
+      };
+      x = overflow(x);
+
+      let isNegative = x < 0;
+      if (isNegative) {
+        x = -x;
+      }
+      let a = 0;
+      while (x > 9) {
+        a = a * 10 + (x % 10) * 10; // 求余 乘10
+        // console.log("a = ", a);
+        x = parseInt(x / 10);
+        // console.log("x = ", x);
+      }
+      a += x;
+
+      return isNegative ? overflow(-a) : overflow(a);
+    };
+
+    console.log("123 expected 321", reverse(123));
+    // 相当于两辆火车 1. A的车尾去B的车尾  2. A的倒数第二 去 B 的车尾，原本B车尾*10上升一位。 3 上车采用加法
+
+    console.log("120 expected 21", reverse(120));
+    console.log("-123 expected -321", reverse(-123));
+    console.log("-120 expected -21", reverse(-120));
+    console.log("-(2 ^ 32)", reverse(-Math.pow(2, 32)));
+    console.log("2 ^ 33", reverse(Math.pow(2, 33)));
+  </script>
+</html>

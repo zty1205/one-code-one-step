@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <h3>1. 两数之和</h3>
+      <section>
+        <div class="mutil-p">
+          <p>
+            给定一个整数数组 nums 和一个目标值
+            target，请你在该数组中找出和为目标值的那 两个
+            整数，并返回他们的数组下标。
+          </p>
+          <p>
+            你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。
+          </p>
+        </div>
+      </section>
+      <section class="code-title">示例：</section>
+      <article class="article-code">
+        <div class="mutil-p">
+          <p>给定 nums = [2, 7, 11, 15], target = 9</p>
+          <p>因为 nums[0] + nums[1] = 2 + 7 = 9</p>
+          <p>所以返回 [0, 1]</p>
+        </div>
+      </article>
+    </div>
+  </body>
+  <script>
+    var num = [2, 3, 4, 7, 11, 15],
+      tar = 9;
+    var nums = [2, 7, 11, 15],
+      target = 9;
+    var nums2 = [2, 7, 8, 11, 15],
+      target2 = 18;
+    var nums3 = [2, 7, 9, 9, 12, 15],
+      target3 = 18;
+
+    // ----------------------------------
+    var isDef = function(val) {
+      return val !== undefined && val !== null && val !== "";
+    };
+    var twoSum = function(nums, target) {
+      var map = {};
+      // hash映射 使得查找更加方便
+      for (let i = 0; i < nums.length; i++) {
+        map[nums[i]] = i;
+      }
+      for (var i = 0; i < nums.length; i++) {
+        var delNum = target - nums[i];
+        if (isDef(map[delNum]) && map[delNum] !== i) {
+          return [i, map[delNum]];
+        }
+      }
+      return false;
+    };
+
+    // ----------------------------------
+
+    var twoSum2 = function(nums, target) {
+      function findIndex(nums, i, delNum) {
+        for (let idx = i + 1; idx < nums.length; idx++) {
+          if (nums[idx] === delNum) {
+            return idx;
+          }
+        }
+        return -1;
+      }
+      if (!nums || nums.length < 2) {
+        return [];
+      } else if (nums.length === 2) {
+        return nums[0] + nums[1] === target ? [0, 1] : [];
+      } else {
+        for (let i = 0; i < nums.length; i++) {
+          let idx = findIndex(nums, i, target - nums[i]);
+          if (idx !== -1) {
+            return [i, idx];
+          }
+        }
+      }
+      return [];
+    };
+
+    console.log(
+      "num = [2, 3, 4, 7, 11, 15], tar = 9 expect [0, 3]",
+      twoSum(num, tar)
+    );
+    console.log(
+      "nums = [2, 7, 11, 15], target = 9 expect [0, 1]",
+      twoSum(nums, target)
+    );
+    console.log(
+      "nums2 = [2, 7, 8, 11, 15], target2 = 18 expect [1, 3]",
+      twoSum(nums2, target2)
+    );
+    console.log(
+      "nums3 = [2, 7, 9, 9, 12, 15], target3 = 18 expect [2, 3]",
+      twoSum(nums3, target3)
+    );
+  </script>
+</html>
