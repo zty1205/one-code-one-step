@@ -50,6 +50,7 @@
       for (let i = 0; i < nums.length; i++) {
         map[nums[i]] = i;
       }
+      console.log('map = ', map)
       for (var i = 0; i < nums.length; i++) {
         var delNum = target - nums[i];
         if (isDef(map[delNum]) && map[delNum] !== i) {

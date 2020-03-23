@@ -265,6 +265,109 @@ const questions = [{
       level: 'O(n log n)'
     }
   ]
-}]
+},{
+  id: 677,
+  title: '键值映射',
+  content: [
+    '实现一个 MapSum 类里的两个方法，insert 和 sum。',
+    '对于方法 insert，你将得到一对（字符串，整数）的键值对。字符串表示键，整数表示值。',
+    '如果键已经存在，那么原来的键值对将被替代成新的键值对。',
+    '对于方法 sum，你将得到一个表示前缀的字符串，你需要返回所有以该前缀开头的键的值的总和。'
+  ],
+  explame: [
+    '输入: insert("apple", 3), 输出: Null',
+    '输入: sum("ap"), 输出: 3',
+    '输入: insert("app", 2), 输出: Null',
+    '输入: sum("ap"), 输出: 5'
+  ],
+  difficulty: 3,
+  dName: '中等',
+  path: 'MapSum.html',
+  info: [
+    'ES6的map',
+    '前缀可以考虑正则或是前缀树'
+  ],
+  answer: [
+    {
+      aid: 1,
+      desc: '正则匹配',
+      explain: '',
+      content: `
+      var MapSum = function() {
+        this.map = new Map()
+      };
+
+      MapSum.prototype.insert = function(key, val) {
+        this.map.set(key, val)
+      };
+      
+      MapSum.prototype.sum = function(prefix) {
+        var arr = [...this.map]
+        var reg = new RegExp('^(\${prefix})')
+        let sum = 0
+        for (let i = 0; i < arr.length; i++) {
+          var item = arr[i]
+          if (reg.test(item[0])) {
+            sum += item[1]
+          }
+        }
+        return sum
+      };
+      `,
+      level: 'O(n)'
+    }
+  ]
+},{
+  id: 231,
+  title: "2的幂",
+  content: [
+    '给定一个整数，编写一个函数来判断它是否是 2 的幂次方。'
+  ],
+  explame: [
+    '输入: 1 输出: true 解释: 2^0 = 1',
+    '输入: 16 输出: true 解释: 2^4 = 16',
+    '输入: 218 输出: false'
+  ],
+  difficulty: 1,
+  dName: '简单',
+  path: 'isPowerOfTwo.html',
+  info: [
+    'while',
+    '位运算'
+  ],
+  answer: [
+    {
+      aid: 1,
+      desc: '除',
+      explain: '',
+      content: `
+      var isPowerOfTwo = function(n) {
+        if (n === 0) return false
+        while(Number.isInteger(n)) {
+          n = n / 2
+        }
+        return n === 0.5
+      };
+      
+      var isPowerOfTwo = function(n) {
+        return Number.isInteger(Math.log2(n));
+      };
+      `,
+      level: 'O(log2(n))'
+    },
+    {
+      aid: 1,
+      desc: '位运算且',
+      explain: '2的幂数的数字的二进制有且只有一个1，其余均是0 n & (n-1)：清零最低位的1  合起来 n & (n-1) == 0',
+      content: `
+      var isPowerOfTwo = function(n) {
+        return n > 0 && (n & (n-1)) === 0;
+      };
+      `,
+      level: 'O(log2(n))'
+    }
+  ]
+}
+]
 
 export default questions

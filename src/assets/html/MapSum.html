@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimal-ui, viewport-fit=cover">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no, email=no">
+  <meta name="x5-orientation" content="portrait">
+  <title>Document</title>
+  <link rel="stylesheet" href="">
+  <style>
+
+  </style>
+</head>
+<body>
+
+</body>
+<script>
+/**
+ * Initialize your data structure here.
+ */
+var MapSum = function() {
+  this.map = new Map()
+};
+
+/** 
+ * @param {string} key 
+ * @param {number} val
+ * @return {void}
+ */
+MapSum.prototype.insert = function(key, val) {
+  this.map.set(key, val)
+};
+
+/** 
+ * @param {string} prefix
+ * @return {number}
+ */
+MapSum.prototype.sum = function(prefix) {
+  console.log('map arr = ', [...this.map])
+  var arr = [...this.map]
+  var reg = new RegExp(`^(${prefix})`)
+  console.log('reg = ', reg)
+  let sum = 0
+  for (let i = 0; i < arr.length; i++) {
+    var item = arr[i]
+    if (reg.test(item[0])) {
+      sum += item[1]
+    }
+  }
+  return sum
+};
+
+/**
+ * Your MapSum object will be instantiated and called as such:
+ * var obj = new MapSum()
+ * obj.insert(key,val)
+ * var param_2 = obj.sum(prefix)
+ */
+var m = new MapSum()
+m.insert("a", 1)
+m.insert("a", 111)
+m.insert("b", 2)
+m.insert("bav", 3)
+m.insert("da", 4)
+m.insert("daccc", 5)
+m.insert("dvaccc", 6)
+m.sum("b")
+console.log('m.sum("b") expected 5', m.sum("b"))
+console.log('m.sum("da") expected 9', m.sum("da"))
+console.log('m.sum("") expected 9', m.sum(""))
+</script>
+</html>
