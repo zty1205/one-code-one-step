@@ -76,6 +76,56 @@ const questions = [{
   ]
 },
 {
+  id: 2,
+  title: '两数相加',
+  content: [
+  '给出两个 非空 的链表用来表示两个非负的整数。',
+  '其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。',
+  '如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。',
+  '您可以假设除了数字 0 之外，这两个数都不会以 0 开头。'
+  ],
+  explame: [
+    '输入：(2 -> 4 -> 3) + (5 -> 6 -> 4)',
+    '输出：7 -> 0 -> 8',
+    '原因：342 + 465 = 807',
+  ],
+  difficulty: 3,
+  dName: '中等',
+  path: 'addTwoNumbers.html',
+  info: [
+    '链表的简单应用',
+    'node = node.next',
+    '不能直接转string变数值相加，会超过最大数值',
+    '模拟加法计算过程'
+  ],
+  answer: [
+    {
+      aid: 1,
+      desc: '模拟加法计算过程',
+      explain: '',
+      content: `
+      var addTwoNumbers = function (l1, l2) {
+        var sum;var add = 0;
+        var node = new ListNode('header') // 头指针
+        var tmp = node
+        while(l1 || l2) {
+          var n1 = l1 ? l1.val : 0
+          var n2 = l2 ? l2.val : 0
+          sum = n1 + n2 + add
+          add = sum / 10 >= 1 ? 1 : 0  // 进位标志
+          tmp.next = new ListNode(sum % 10)
+          tmp = tmp.next
+          if(l1) l1 = l1.next
+          if(l2) l2 = l2.next
+        }
+        if( add > 0 ) tmp.next = new ListNode(add)
+        return node.next
+      };
+      `,
+      level: 'O(n)'
+    }
+  ]
+},{
   id: 7,
   title: '整数翻转',
   content: [
