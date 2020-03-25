@@ -126,6 +126,103 @@ const questions = [{
     }
   ]
 },{
+  id: 3,
+  title: '无重复字符的最长子串',
+  content: [
+    '给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。'
+  ],
+  explame: [
+    '输入: "abcabcbb" 输出: 3',
+    '解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。',
+    '输入: "bbbbb" 输出: 1',
+    '解释: 因为无重复字符的最长子串是 "b"，所以其长度为 1。',
+    '输入: "pwwkew" 输出: 3',
+    '解释: 因为无重复字符的最长子串是 "wke"，所以其长度为 3。 请注意，你的答案必须是 子串 的长度，"pwke" 是一个子序列，不是子串。'
+  ],
+  difficulty: 3,
+  dName: '中等',
+  path: 'lengthOfLongestSubstring.html',
+  info: [
+    '使用hash映射或是indexof排重',
+    '滑动窗口算法'
+  ],
+  answer: [
+    {
+      aid: 1,
+      desc: '暴力破解，两层循环',
+      explain: '',
+      content: `
+      var lengthOfLongestSubstring = function(s) {
+        if (s.length <= 1) return s.length
+        let maxL = -1, curL = 0, map = {}
+        for (let i = 0; i < s.length; i++) {
+          for(j = i; j < s.length; j++) {
+            let char = s[j]
+            if (map[char]) {
+              maxL = Math.max(maxL, curL)
+              curL = 0
+              map = {}
+              break
+            } else {
+              map[char] = true
+              curL++
+            }
+          }
+        }
+        return maxL === -1 ? curL : Math.max(maxL, curL)
+      };
+      `,
+      level: 'O(n^2)'
+    },
+    {
+      aid: 2,
+      desc: '滑动窗口',
+      explain: '',
+      content: `
+      var isDef = function(val) {
+        return val !== '' && val !== undefined && val !== null
+      }
+      
+      var lengthOfLongestSubstring3 = function(s) { // 滑动窗口
+        if (s.length <= 1) return s.length
+        let maxL = -1, map = {}
+        let left = 0, right = 0
+        while(left < s.length && right < s.length) {
+          var char = s[right]
+          if (isDef(map[char]) && map[char] >= left) { // 忽略下标小于left的map
+            maxL = Math.max(maxL, right - left)
+            left = map[char] + 1
+          } else {
+            map[char] = right
+            right++
+          }
+        }
+        return Math.max(maxL, right - left)
+      `,
+      level: 'O(n)'
+    },
+    {
+      aid: 3,
+      desc: '评论区的一个更好的高效写法',
+      explain: '',
+      content: `
+      var lengthOfLongestSubstring = function(s) {
+        let left = 0, maxL = 0, index = 0
+        for (let j = 0; j < s.length; j++){
+          index = s.slice(left, j).indexOf(s[j])
+          if (index === -1){
+            maxL = Math.max(maxL, j + 1 - left);
+          } else {
+            left += index + 1;
+          }
+        }
+        return maxL;
+      };
+      `,
+      level: 'O(n)'
+    }
+  ]
+},{
   id: 7,
   title: '整数翻转',
   content: [
