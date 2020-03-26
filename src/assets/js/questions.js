@@ -24,6 +24,7 @@ const questions = [{
       explain: '',
       content: `
       let twoSum = function (nums, target) {
+        // nums.slice(index).findIndex()
         function findIndex(nums, i, delNum) {
           for (let idx = i + 1; idx < nums.length; idx++) {
             if (nums[idx] === delNum) {
