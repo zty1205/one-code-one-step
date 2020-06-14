@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>70. 爬楼梯</title>
+  </head>
+  <body>
+    <pre>
+假设你正在爬楼梯。需要 n 阶你才能到达楼顶。
+
+每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？
+
+注意：给定 n 是一个正整数。
+
+示例 1：
+
+输入： 2
+输出： 2
+解释： 有两种方法可以爬到楼顶。
+1.  1 阶 + 1 阶
+2.  2 阶
+示例 2：
+
+输入： 3
+输出： 3
+解释： 有三种方法可以爬到楼顶。
+1.  1 阶 + 1 阶 + 1 阶
+2.  1 阶 + 2 阶
+3.  2 阶 + 1 阶
+ </pre
+    >
+  </body>
+  <script>
+    // f(n) = f(n-1) + f(n-2), f(1) = 1, f(2) = 2  超时或者栈溢出  时间复杂度：O(2^n)，树形递归的大小为 2^n
+
+    var climbStairs1 = function (n) {
+      if (n <= 2) return n;
+      return climbStairs(n - 2) + climbStairs(n - 1);
+    };
+    var climbStairs = function (n) {
+      if (n <= 2) return n;
+      let a = 1,
+        b = 2,
+        i = 2,
+        res = 0;
+      while (i++ < n) {
+        res = a + b;
+        [a, b] = [b, res];
+      }
+      return res;
+    };
+    window.climbStairs = climbStairs;
+    let test_case = [24]; //[1, 2, 3, 4, 5, 10,25, 45, 100];
+    test_case.forEach((x) => console.log(`x = ${x}, result = ${climbStairs(x)}`));
+  </script>
+</html>

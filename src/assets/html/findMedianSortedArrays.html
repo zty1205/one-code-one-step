@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, user-scalable=no, minimal-ui, viewport-fit=cover">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no, email=no">
+  <meta name="x5-orientation" content="portrait">
+  <title>Document</title>
+  <link rel="stylesheet" href="">
+  <style>
+
+  </style>
+</head>
+
+<body>
+  <div>
+    给定两个大小为 m 和 n 的有序数组 nums1 和 nums2。
+    请你找出这两个有序数组的中位数，并且要求算法的时间复杂度为 O(log(m + n))。
+    你可以假设 nums1 和 nums2 不会同时为空。
+  </div>
+</body>
+<script>
+  /**
+   * @param {number[]} nums1
+   * @param {number[]} nums2
+   * @return {number}
+   */
+  var findMedianSortedArrays = function (nums1, nums2) {
+    let n1 = nums1 || []
+    let n2 = nums2 || []
+    let arr = n1.concat(n2)
+    arr.sort((a, b) => a - b)
+    let length = arr.length
+    let double = length % 2
+    let mIdx = length / 2
+    if (double === 0) {
+      return (arr[mIdx] + arr[mIdx - 1]) / 2
+    }
+    let m = Math.floor(mIdx)
+    return arr[m]
+  };
+
+  /**
+   * @param {number[]} nums1
+   * @param {number[]} nums2
+   * @return {number}
+   */
+  var findMedianSortedArrays = function (nums1, nums2) {
+    if (nums1.length > nums2.length) [nums1, nums2] = [nums2, nums1];
+
+    const length1 = nums1.length;
+    const length2 = nums2.length;
+    let min = 0;
+    let max = length1;
+    let half = Math.floor((length1 + length2 + 1) / 2);
+    while (max >= min) {
+      debugger
+      const i = Math.floor((max + min) / 2);
+      const j = half - i;
+      if (i > min && nums1[i - 1] > nums2[j]) {
+        max = i - 1;
+      } else if (i < max && nums1[i] < nums2[j - 1]) {
+        min = i + 1;
+      } else {
+        let left, right;
+        if (i === 0) left = nums2[j - 1];
+        else if (j === 0) left = nums1[i - 1];
+        else left = Math.max(nums1[i - 1], nums2[j - 1]);
+
+        if (i === length1) right = nums2[j];
+        else if (j === length2) right = nums1[i];
+        else right = Math.min(nums1[i], nums2[j]);
+
+        return (length1 + length2) % 2 ? left : (left + right) / 2;
+      }
+    }
+    return 0;
+  };
+
+  var findMedianSortedArrays = function (nums1, nums2) {
+    let n = nums1.length;
+    let m = nums2.length;
+    let left = parseInt((n + m + 1) / 2);
+    let right = parseInt((n + m + 2) / 2);
+    //将偶数和奇数的情况合并，如果是奇数，会求两次同样的 k 。
+    return (getKth(nums1, 0, n - 1, nums2, 0, m - 1, left) + getKth(nums1, 0, n - 1, nums2, 0, m - 1, right)) * 0.5;
+  }
+
+  function getKth(nums1, start1, end1, nums2, start2, end2, k) {
+    let len1 = end1 - start1 + 1;
+    let len2 = end2 - start2 + 1;
+    //让 len1 的长度小于 len2，这样就能保证如果有数组空了，一定是 len1 
+    if (len1 > len2) return getKth(nums2, start2, end2, nums1, start1, end1, k);
+    if (len1 == 0) return nums2[start2 + k - 1];
+
+    if (k == 1) return Math.min(nums1[start1], nums2[start2]);
+
+    let i = start1 + Math.min(len1, parseInt(k / 2)) - 1;
+    let j = start2 + Math.min(len2, parseInt(k / 2)) - 1;
+
+    if (nums1[i] > nums2[j]) {
+      return getKth(nums1, start1, end1, nums2, j + 1, end2, k - (j - start2 + 1));
+    }
+    else {
+      return getKth(nums1, i + 1, end1, nums2, start2, end2, k - (i - start1 + 1));
+    }
+  }
+
+  function middle(num) {
+    return parseInt(num / 2)
+  }
+
+  var findMedianSortedArrays = function (nums1, nums2) {
+    let n1 = nums1 || [], n2 = nums2 || []
+
+    let m1 = middle(n1.length + n2.length + 1)
+    let m2 = middle(n1.length + n2.length + 2)
+    // console.log('m1 = ', m1)
+    // console.log('m2 = ', m2)
+    // console.log('findKth(n1, 0, n2, 0, m1) = ', findKth(n1, 0, n2, 0, m1))
+    // console.log('findKth(n1, 0, n2, 0, m2) = ', findKth(n1, 0, n2, 0, m2))
+    // return findKth(n1, 0, n2, 0,  m2)
+    return (findKth(n1, 0, n2, 0, m1) + findKth(n1, 0, n2, 0, m2)) / 2
+  }
+
+  function findKth(arr1, left1, arr2, left2, kth) {
+    // debugger
+    if (left1 >= arr1.length) return arr2[left2 + kth - 1] // arr1已被删完 第k大 下标为k-1
+    if (left2 >= arr2.length) return arr1[left1 + kth - 1]
+    if (kth === 1) return Math.min(arr1[left1], arr2[left2])
+
+    let mid1 = left1 + Math.min(arr1.length, middle(kth)) - 1
+    let mid2 = left2 + Math.min(arr2.length, middle(kth)) - 1
+
+    if (arr1[mid1] < arr2[mid2]) {
+      return findKth(arr1, mid1 + 1, arr2, left2, kth - (mid1 - left1 + 1))
+    } else {
+      return findKth(arr1, left1, arr2, mid2 + 1, kth - (mid2 - left2 + 1))
+    }
+  }
+
+  let n1 = [1, 2], n2 = [3, 4]
+  console.log(`[${n1}] & [${n2}] findMedianSortedArrays expected 2.5 = `, findMedianSortedArrays(n1, n2))
+
+  let n11 = [6, 7, 8], n21 = [3, 4, 5]
+  console.log(`[${n11}] & [${n21}] findMedianSortedArrays expected 5.5 = `, findMedianSortedArrays(n11, n21))
+
+  let n12 = null, n22 = [3, 4, 5]
+  console.log(`[${n12}] & [${n22}] findMedianSortedArrays expected 4 = `, findMedianSortedArrays(n12, n22))
+
+  let n13 = [1, 2, 3], n23 = null
+  console.log(`[${n13}] & [${n23}] findMedianSortedArrays expected 2 = `, findMedianSortedArrays(n13, n23))
+
+  let n14 = [1, 4, 9], n24 = [2, 5, 8]
+  console.log(`[${n14}] & [${n24}] findMedianSortedArrays expected 4.5 = `, findMedianSortedArrays(n14, n24))
+
+  let n15 = [1, 4, 9, 10], n25 = [2, 5, 8] // 1,2,4,5,8,9,10
+  console.log(`[${n15}]  & [${n25}] findMedianSortedArrays expected 5 = `, findMedianSortedArrays(n15, n25))
+
+  let n16 = [1], n26 = [2, 3, 4, 5, 6, 7, 8] // 1,2,4,5,8,9,10
+  console.log(`[${n16}] & [${n26}] findMedianSortedArrays expected 4.5 = `, findMedianSortedArrays(n16, n26))
+
+  let n17 = [1,2,5,7,10,11], n27 = [2, 3, 4, 5, 6, 7, 8, 9,10] // 1,2,2,3,4,5,5, 6 ,7,7,8,9,10,10,11
+  console.log(`[${n17}] & [${n27}] findMedianSortedArrays expected 6 = `, findMedianSortedArrays(n17, n27))
+
+  let n18 = [1,2,5,7,10], n28 = [2, 3, 4, 5, 6, 7, 8, 9,10] // 1,2,2,3,4,5, 5,6 ,7,7,8,9,10,10
+  console.log(`[${n18}] & [${n28}] findMedianSortedArrays expected 5.5 = `, findMedianSortedArrays(n18, n28))
+
+  // 执行用时 :
+  // 112 ms
+  // , 在所有 JavaScript 提交中击败了
+  // 97.83%
+  // 的用户
+  // 内存消耗 :
+  // 38.6 MB
+  // , 在所有 JavaScript 提交中击败了
+  // 100.00%
+  // 的用户
+
+  // 第k大元素
+  function kth(arr, k) {
+    if (!arr || !arr.length) return
+    if (k > arr.length) return Math.max.apply(null, arr)
+    let list = arr.sort()
+    return list[k - 1]
+  }
+
+  function kth2() {
+    var findKthLargest = function (nums, k) {
+      return quickSort(nums, k - 1, 0, nums.length - 1);
+    };
+
+    let quickSort = (arr, k, l, h) => {
+      let low = l,
+        high = h,
+        pivot;
+
+      if (h === 0) return arr[k]; // [1],1 => 1
+
+      pivot = partition(arr, low, high);
+
+      if (k > pivot) {
+        if (k == arr.length || (pivot + 1) == high) {
+          return arr[k];
+        } else {
+          return quickSort(arr, k, pivot + 1, high);
+        }
+      }
+      if (k === pivot) return arr[k];
+      if (k < pivot) return quickSort(arr, k, low, pivot - 1);
+    };
+
+    let partition = (arr, low, high) => {
+      for (let j = low; j <= high; j++) {
+        if (arr[j] > arr[high]) {
+          swap(arr, low, j);
+          low++;
+        }
+      }
+      swap(arr, low, high);
+      return low;
+    };
+
+    let swap = (arr, low, high) => {
+      let tmp = arr[low];
+      arr[low] = arr[high];
+      arr[high] = tmp;
+    };
+
+  }
+
+</script>
+
+</html>

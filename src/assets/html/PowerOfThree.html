@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=2, initial-scale=1.0">
+  <title>3的整次幂</title>
+</head>
+<body>
+  <div>326. 3的幂</div>
+</body>
+<script>
+// 1. 数学方法
+var isPowerOfThree = function(n) {
+  if (n < 1) return false
+  while(Number.isInteger(n)) {
+    n = n / 3
+  }
+  return n === 1/3
+}
+/*
+执行用时 :
+248 ms
+, 在所有 JavaScript 提交中击败了
+82.03%
+的用户
+内存消耗 :
+45.1 MB
+, 在所有 JavaScript 提交中击败了
+100.00%
+的用户
+*/
+
+// 位表示法
+var isPowerOfThree2 = function(n) {
+  if (n < 0) return false
+  let str = n.toString(3);
+  return '1' + new Array(str.length -1).fill(0).join('') === str
+};
+
+/*
+执行用时 :
+320 ms
+, 在所有 JavaScript 提交中击败了
+13.77%
+的用户
+内存消耗 :
+45.3 MB
+, 在所有 JavaScript 提交中击败了
+100.00%
+的用户
+*/
+
+// 数论 这个数一定能被最大3次幂整除
+const MAX_SAFE_POWER_OF_THREE = Math.pow(3, parseInt(Math.log(Number.MAX_SAFE_INTEGER)/Math.log(3)));
+var isPowerOfThree3 = function(n) {
+  return n < 0 ? false: Number.isInteger(MAX_SAFE_POWER_OF_THREE / n)
+};
+
+/*
+执行用时 :
+264 ms
+, 在所有 JavaScript 提交中击败了
+59.85%
+的用户
+内存消耗 :
+46.2 MB
+, 在所有 JavaScript 提交中击败了
+100.00%
+的用户
+*/
+
+// 优化下 Math.pow  2^33还不够 更大的数的情况下 效率高
+
+function fastPow(x,n){  
+  // if(n == 0){  
+  //   return 1;  
+  // } else if(n % 2 == 1){  
+  //   return fastPow(x,n-1) * x;  
+  // } else{  
+  //   var r = fastPow(x,n/2);  
+  //   return r * r; 
+  return n === 0 ? 1 :
+    n % 2 === 1 ?  fastPow(x, n-1) * x :
+    fastPow(x,n/2) * fastPow(x,n/2);   
+} 
+
+const test_case = [-3, 1, 2, 3, 4, 27]
+test_case.forEach(x => {
+  console.log(`powerOfThree ${x} = `, isPowerOfThree(x))
+  console.log(`powerOfThree2 ${x} = `, isPowerOfThree2(x))
+  console.log(`powerOfThree3 ${x} = `, isPowerOfThree2(x))
+})
+
+</script>
+</html>

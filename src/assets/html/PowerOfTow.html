@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=2, initial-scale=1.0">
+  <title>2的整次幂</title>
+</head>
+<body>
+  <div>231. 2的幂</div>
+</body>
+<script>
+// 1. 数学方法
+function powerOfTwo(num) {
+  if (num < 1) return false
+  while(Number.isInteger(num)) {
+    num = num / 2
+  }
+  return num === 0.5
+}
+
+// 位运算 & 与 | 或 非 ~
+function powerOfTwo2(num) {
+  return num > 0 && ((num & (num - 1)) === 0)
+}
+
+const test_case = [1, 2, 3, 4, 50, 52, 64]
+test_case.forEach(x => {
+  console.log(`powerOfTwo ${x} = `, powerOfTwo(x))
+  console.log(`powerOfTwo2 ${x} = `, powerOfTwo(x))
+})
+</script>
+</html>
