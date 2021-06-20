@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 输入一个链表，反转链表后，输出新链表的表头。
+
+      function ListNode(x) {
+        this.val = x;
+        this.next = null;
+      }
+      let head = {
+        val: 1,
+        next: {
+          val: 2,
+          next: {
+            val: 3,
+            next: {
+              val: 4,
+              next: {
+                val: 5,
+                next: null
+              }
+            }
+          }
+        }
+      };
+
+      function ReverseList(pHead) {
+        // write code here
+        let cur = null;
+        let pre = pHead;
+        let tmp = null;
+        while (pre) {
+          tmp = pre.next;
+          pre.next = cur;
+          cur = pre;
+          pre = tmp;
+        }
+        return cur;
+      }
+
+      console.log('ReverseList head = ', ReverseList(head));
+    </script>
+  </body>
+</html>

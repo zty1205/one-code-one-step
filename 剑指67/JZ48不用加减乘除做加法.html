@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 写一个函数，求两个整数之和，要求在函数体内不得使用+、-、*、/四则运算符号。
+
+      // 位运算 如何求 ”和“ 于 “进位”
+      function Add(num1, num2) {
+        // write code here
+        return num2 === 0 ? num1 : Add(num1 ^ num2, (num1 & num2) << 1);
+      }
+
+      console.log('1 + 2 = ', Add(1, 2));
+      console.log('0 + 0 = ', Add(0, 0));
+      console.log('10 + 11 = ', Add(10, 11));
+
+      // 在一位加法中
+
+      // 异或能保证第一位正确 但是不能处理进位
+      // 1 + 1 = 10  1 ^ 1 = 0
+      // 1 + 0 = 01  1 ^ 0 = 1
+      // 0 + 1 = 01  0 ^ 1 = 1
+      // 0 + 0 = 00  0 ^ 0 = 0
+
+      // 与运算 能算出加法是否进位
+      // 1 + 1 = 10  1 & 1 = 1
+      // 1 + 0 = 01  1 & 0 = 0
+      // 0 + 1 = 01  0 & 1 = 0
+      // 0 + 0 = 00  0 & 0 = 0
+
+      // 位运算中 使用 >> 1 表示移动操作
+      // 那么 1 + 1 = 1 ^ 1 + (1 & 1) >> 1
+
+      // 两位加法就重新再来一次上面的操作
+    </script>
+  </body>
+</html>

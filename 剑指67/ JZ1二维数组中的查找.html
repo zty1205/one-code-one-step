@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // https://www.nowcoder.com/practice/abc3fe2ce8e146608e868a70efebf62e?tpId=13&tqId=11154&rp=1&ru=%2Fta%2Fcoding-interviews&qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking&tab=answerKey
+      /**
+       * 题目描述在一个二维数组中（每个一维数组的长度相同），每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。
+       * 请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。
+       * @example 示例1
+       * @params 输入7,[[1,2,8,9],[2,4,9,12],[4,7,10,13],[6,8,11,15]]
+       * @return 返回值true
+       */
+      let target = 1;
+      let array = [
+        [1, 2, 8, 9],
+        [2, 4, 9, 12],
+        [4, 7, 10, 13],
+        [6, 8, 11, 15]
+      ];
+
+      // 使用内置函数
+      function Find1(target, array) {
+        return array.flat(4).some((x) => x === target);
+      }
+
+      // 根据递增的性质去查找 以右上角的数作为基准点进行移动
+      function Find(target, array) {
+        let col = array.length;
+        if (col === 0) return false;
+        let row = array[0].length;
+        if (row === 0) return false;
+
+        let c = 0;
+        let r = row - 1;
+        while (c < col && r >= 0) {
+          let num = array[c][r];
+          if (num === target) {
+            return true;
+          } else if (num < target) {
+            c++;
+          } else {
+            r--;
+          }
+        }
+        return false;
+      }
+
+      console.log('Find(target, array) = ', Find(target, array));
+      // 其他方法 1: 暴力循环 2: 手动实现flat 在查找
+
+      /* 下面展示如何实现flat */
+
+      // 遍历
+      function flat1(arr) {
+        while (arr.some((item) => Array.isArray(item))) {
+          arr = [].concat(...arr);
+        }
+        return arr;
+      }
+
+      // 递归
+      function flat2(arr1) {
+        return arr1.reduce((acc, val) => (Array.isArray(val) ? acc.concat(flat2(val)) : acc.concat(val)), []);
+      }
+
+      // 非递归
+      function stackFlatten(input) {
+        const stack = [...input];
+        const res = [];
+        while (stack.length) {
+          const next = stack.pop();
+          if (Array.isArray(next)) {
+            stack.push(...next);
+          } else {
+            res.push(next);
+          }
+        }
+        return res.reverse();
+      }
+    </script>
+  </body>
+</html>

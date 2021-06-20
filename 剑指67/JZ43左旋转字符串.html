@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // https://www.nowcoder.com/practice/12d959b108cb42b1ab72cef4d36af5ec?tpId=13&tqId=11196&rp=1&ru=%2Fta%2Fcoding-interviews&qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking&tab=answerKey
+
+      // 汇编语言中有一种移位指令叫做循环左移（ROL），现在有个简单的任务，就是用字符串模拟这个指令的运算结果。
+      // 对于一个给定的字符序列S，请你把其循环左移K位后的序列输出。
+      // 例如，字符序列S=”abcXYZdef”,要求输出循环左移3位后的结果，即“XYZdefabc”。是不是很简单？OK，搞定它！
+
+      // 直接交换位置  如果n > str.leng
+
+      function swap(str, i, j) {
+        let tmp = str[i];
+        str[i] = str[j];
+        str[j] = tmp;
+
+        console.log('str = ', str, i, j);
+        return str;
+      }
+      function LeftRotateString(str, n) {
+        // write code here
+        if (!n) return str;
+        if (!str) return '';
+        let _n = n % str.length;
+        return str.substring(_n) + str.slice(0, _n);
+      }
+
+      function LeftRotateString(str, n) {
+        // write code here
+        if (typeof str !== 'string') return '';
+        let len = str.length;
+        if (len == 0) return '';
+        n = n % len;
+        str += str;
+        return str.substr(n, len);
+      }
+
+      let str = 'abcXYZdef';
+      str = '';
+      let n = 3;
+      let res = 'XYZdefabc';
+
+      console.log(`str: ${str}, n: ${n}  LeftRotateString => ${LeftRotateString(str, n)}`);
+    </script>
+  </body>
+</html>

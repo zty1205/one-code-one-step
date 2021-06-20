@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // https://www.nowcoder.com/practice/c61c6999eecb4b8f88a98f66b273a3cc?tpId=13&tqId=11218&rp=1&ru=%2Fta%2Fcoding-interviews&qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking&tab=answerKey
+
+      // 请设计一个函数，用来判断在一个矩阵中是否存在一条包含某字符串所有字符的路径。
+      // 路径可以从矩阵中的任意一个格子开始，每一步可以在矩阵中向左，向右，向上，向下移动一个格子。
+      // 如果一条路径经过了矩阵中的某一个格子，则该路径不能再进入该格子。 例如
+      //  | a b c e |
+      //  | s f c s |
+      //  | a d e e |
+      // 矩阵中包含一条字符串"bcced"的路径，但是矩阵中不包含"abcb"路径，
+      // 因为字符串的第一个字符b占据了矩阵中的第一行第二个格子之后，路径不能再次进入该格子
+
+      function hasPath(matrix, rows, cols, str) {
+        let h = rows;
+        let w = cols;
+        let str_len = str.length;
+        const dir = [-1, 0, 1, 0, -1];
+
+        function dfs(mat, i, j, pos, str) {
+          // 因为dfs调用前，没有进行边界检查，
+          // 所以需要第一步进行边界检查，
+          // 因为后面需要访问mat中元素，不能越界访问
+          if (i < 0 || i >= h || j < 0 || j >= w) {
+            return false;
+          }
+
+          let ch = mat[i * w + j];
+          // 判断是否访问过
+          // 如果没有访问过，判断是否和字符串str[pos]匹配
+          if (ch == '#' || ch != str[pos]) {
+            return false;
+          }
+
+          // 如果匹配，判断是否匹配到最后一个字符
+          if (pos + 1 == str_len) {
+            return true;
+          }
+
+          // 说明当前字符成功匹配，标记一下，下次不能再次进入
+          mat[i * w + j] = '#';
+          console.log('mat = ', mat);
+          for (let k = 0; k < 4; ++k) {
+            if (dfs(mat, i + dir[k], j + dir[k + 1], pos + 1, str)) {
+              return true;
+            }
+          }
+          // 如果4个方向都无法匹配 str[pos + 1]
+          // 则回溯， 将'#' 还原成 ch
+          mat[i * w + j] = ch;
+          // 说明此次匹配是不成功的
+          return false;
+        }
+
+        for (let i = 0; i < rows; ++i) {
+          for (let j = 0; j < cols; ++j) {
+            if (dfs(matrix.split(''), i, j, 0, str)) {
+              return true;
+            }
+          }
+        }
+        return false;
+      }
+
+      let matrix = 'ABCESFCSADEE';
+      let rows = 3;
+      let cols = 4;
+      let str = 'ABCCED';
+      let res = true;
+
+      console.log('hasPath = ', hasPath(matrix, rows, cols, str));
+    </script>
+  </body>
+</html>

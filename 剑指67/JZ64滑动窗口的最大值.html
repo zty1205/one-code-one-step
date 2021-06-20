@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // https://www.nowcoder.com/practice/1624bc35a45c42c0bc17d17fa0cba788?tpId=13&tqId=11217&rp=1&ru=%2Fta%2Fcoding-interviews&qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking&tab=answerKey
+      // 给定一个数组和滑动窗口的大小，找出所有滑动窗口里数值的最大值。
+      // 例如，如果输入数组{2,3,4,2,6,2,5,1}及滑动窗口的大小3，那么一共存在6个滑动窗口，
+      // 他们的最大值分别为{4,4,6,6,6,5}； 针对数组{2,3,4,2,6,2,5,1}的滑动窗口有以下6个：
+      // {[2,3,4],2,6,2,5,1}， {2,[3,4,2],6,2,5,1}， {2,3,[4,2,6],2,5,1}，
+      // {2,3,4,[2,6,2],5,1}， {2,3,4,2,[6,2,5],1}， {2,3,4,2,6,[2,5,1]}。
+      // 窗口大于数组长度的时候，返回空
+
+      function maxInWindows(num, size) {
+        // write code here
+        if (size === 0 || size > num.length) return [];
+        if (size === 1) return num;
+        let res = [];
+        for (let right = size; right <= num.length; right++) {
+          res.push(Math.max.apply(Math, num.slice(right - size, right)));
+        }
+        return res;
+      }
+
+      let num = [2, 3, 4, 2, 6, 2, 5, 1];
+      let size = 3;
+      let res = [4, 4, 6, 6, 6, 5];
+
+      console.log(`${num} size: ${size} expect ${res} maxInWindows => ${maxInWindows(num, size)}`);
+    </script>
+  </body>
+</html>

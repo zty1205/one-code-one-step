@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 输入两个链表，找出它们的第一个公共结点。
+      //（注意因为传入数据是链表，所以错误测试数据的提示是用其他方式显示的，保证传入数据是正确的）
+
+      function ListNode(x) {
+        this.val = x;
+        this.next = null;
+      }
+
+      let A1 = new ListNode('A1');
+      let B1 = new ListNode('B1');
+      let C1 = new ListNode('C1');
+
+      let A2 = new ListNode('A2');
+      let B2 = new ListNode('B2');
+
+      let M = new ListNode('Common');
+
+      A1.next = B1;
+      B1.next = M;
+      M.next = C1;
+
+      A2.next = M;
+      M.next = B2;
+      function FindFirstCommonNode1(pHead1, pHead2) {
+        // write code here
+        if (!pHead1 || !pHead2) return;
+        let p1 = pHead1;
+        let map = new Map();
+        while (p1) {
+          map.set(p1, p1);
+          p1 = p1.next;
+        }
+        let p2 = pHead2;
+        while (p2) {
+          if (map.has(p2)) {
+            return p2;
+          }
+          p2 = p2.next;
+        }
+        return null;
+      }
+
+      // abcde 和 123d4
+      // abcde123d4
+      // 123d4abcde
+      function FindFirstCommonNode(pHead1, pHead2) {
+        // write code here
+        if (!pHead1 || !pHead2) return;
+        let p1 = pHead1;
+        let p2 = pHead2;
+        while (p1 != p2) {
+          p1 = p1.next;
+          p2 = p2.next;
+          if (p1 != p2) {
+            if (p1 === null) p1 = pHead2;
+            if (p2 === null) p2 = pHead1;
+          }
+        }
+        return p1;
+      }
+
+      console.log('FindFirstCommonNode = ', FindFirstCommonNode(A1, A2));
+    </script>
+  </body>
+</html>

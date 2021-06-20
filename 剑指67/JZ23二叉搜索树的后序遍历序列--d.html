@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历的结果。
+      // 如果是则返回true,否则返回false。
+      // 假设输入的数组的任意两个数字都互不相同。
+
+      const arr = [4, 8, 6, 12, 16, 14, 10]; // res = true
+
+      //    10
+      //  6   14
+      // 4 8 12 16
+      // 后序：左右根
+      // 二叉搜索树  左 < 根 < 右
+
+      function VerifySquenceOfBST(sequence) {
+        // write code here
+        function verifyBST(seq, startIndex, rootIndex) {
+          if (startIndex >= rootIndex) return true;
+          let i; // 左右字数的分界点
+          for (i = startIndex; i < rootIndex; i++) {
+            if (sequence[i] > sequence[rootIndex]) {
+              break;
+            }
+          }
+          for (let j = i; j < rootIndex; j++) {
+            if (sequence[j] < sequence[rootIndex]) {
+              // 右子树应该大
+              return false;
+            }
+          }
+          return verifyBST(seq, 0, i - 1) && verifyBST(seq, i, rootIndex - 1);
+        }
+        if (!sequence || !sequence.length) return false;
+        return verifyBST(sequence, 0, sequence.length - 1);
+      }
+
+      console.log(`${arr} VerifySquenceOfBST => ${VerifySquenceOfBST(arr)}`);
+    </script>
+  </body>
+</html>

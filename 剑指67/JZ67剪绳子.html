@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="desc">数学题</div>
+    <script>
+      // 给你一根长度为n的绳子，请把绳子剪成整数长的m段（m、n都是整数，n>1并且m>1，m<=n），
+      // 每段绳子的长度记为k[1],...,k[m]。请问k[1]x...xk[m]可能的最大乘积是多少？
+      // 例如，当绳子的长度是8时，我们把它剪成长度分别为2、3、3的三段，此时得到的最大乘积是18。
+
+      // 已知 x1 + x2 + x3 + ... xN = n
+      // 求 x1 * x2 * x3 * ... xN 的最大值
+      function cutRope(number) {
+        // write code here
+        if (number <= 3) return number;
+        else {
+          if (number % 3 == 0) {
+            return Math.pow(3, number / 3);
+          } else if (number % 3 == 1) {
+            return 4 * Math.pow(3, Math.floor(number / 3) - 1);
+          } else {
+            return 2 * Math.pow(3, Math.floor(number / 3));
+          }
+        }
+      }
+
+      // 2 + 3 + 3
+      const input = 8;
+      const res = 18;
+
+      // 1 数学求导
+      // 2 动态规划
+    </script>
+  </body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // https://www.nowcoder.com/practice/6aa9e04fc3794f68acf8778237ba065b?tpId=13&tqId=11186&rp=1&ru=%2Fta%2Fcoding-interviews&qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking&tab=answerKey
+      // 把只包含质因子2、3和5的数称作丑数（Ugly Number）。例如6、8都是丑数，但14不是，因为它包含质因子7。 习惯上我们把1当做是第一个丑数。求按从小到大的顺序的第N个丑数。
+
+      // 1,2,3,4,5,6,8,9,10,
+      // 2 , 3 , 5 自由组合 可以重复
+      function GetUglyNumber_Solution(index) {
+        // write code here
+        if (index <= 2) {
+          return index;
+        }
+        const dp = [1];
+        let a = 0,
+          b = 0,
+          c = 0;
+        for (let j = 1; j < index; j++) {
+          const num1 = dp[a] * 2;
+          const num2 = dp[b] * 3;
+          const num3 = dp[c] * 5;
+          dp[j] = Math.min(num1, num2, num3);
+          if (num1 === dp[j]) a++;
+          if (num2 === dp[j]) b++;
+          if (num3 === dp[j]) c++;
+          console.log('dp = ', [...dp]);
+          console.log('a ,b c = ', a, b, c);
+        }
+        return dp[index - 1];
+      }
+
+      const input = 7;
+      const res = 8;
+
+      console.log(`input: ${input}, res: ${res} = ${GetUglyNumber_Solution(input)}`);
+    </script>
+  </body>
+</html>

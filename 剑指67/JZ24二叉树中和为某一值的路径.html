@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // https://www.nowcoder.com/practice/b736e784e3e34731af99065031301bca?tpId=13&&tqId=11177&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking
+
+      // 输入一颗二叉树的根节点和一个整数，按字典序打印出二叉树中结点值的和为输入整数的所有路径。
+      // 路径定义为从树的根结点开始往下一直到叶结点所经过的结点形成一条路径。
+
+      // 必须是跟节点 到 叶子节点
+
+      const tree = {
+        val: 10,
+        left: {
+          val: 5,
+          left: {
+            val: 4,
+            left: null,
+            right: null
+          },
+          right: {
+            val: 7,
+            left: null,
+            right: null
+          }
+        },
+        right: {
+          val: 12,
+          left: null,
+          right: null
+        }
+      };
+
+      function sum(arr = []) {
+        return arr.reduce((pre, cur) => pre + cur, 0);
+      }
+
+      function FindPath(root, expectNumber) {
+        // write code here
+
+        if (!root) return [];
+        const res = [];
+        // 深度遍历
+        function dps(node, stack) {
+          if (!node) return;
+          console.log('val = ', node.val);
+          stack.push(node.val);
+          let _sum = sum(stack);
+          if (_sum === expectNumber && !node.left && !node.right) {
+            res.push(stack);
+          }
+          if (_sum > expectNumber) {
+            return;
+          }
+          dps(node.left, [...stack]);
+          dps(node.right, [...stack]);
+        }
+        dps(root, []);
+        return res;
+      }
+
+      const e1 = 22;
+      console.log('expectNumber 22 FindPath: ', FindPath(tree, 22));
+    </script>
+  </body>
+</html>

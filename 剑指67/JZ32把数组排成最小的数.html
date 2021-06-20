@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 题目描述
+      // 输入一个正整数数组，把数组里所有数字拼接起来排成一个数，打印能拼接出的所有数字中最小的一个。
+      // 例如输入数组{3，32，321}，则打印出这三个数字能排成的最小数字为321323。
+
+      // 1 输出全排列 求最小值 复杂度太高
+
+      // 没怎么理解
+      function PrintMinNumber(numbers) {
+        const tmpArr = [],
+          count = [];
+        if (numbers.length < 2) {
+          return numbers[0] || '';
+        }
+        PrintNumber('');
+        function PrintNumber1(str) {
+          if (str.length === numbers.join('').length) {
+            tmpArr.push(Number(str));
+            return false;
+          }
+          for (let i = 0; i < numbers.length; i++) {
+            if (!count[i]) {
+              count[i] = true;
+              PrintNumber(str + numbers[i]);
+              count[i] = false;
+            }
+          }
+        }
+
+        return Math.min(...tmpArr);
+      }
+
+      // 类似选择排序 把太大的放后面
+      function PrintMinNumber(numbers) {
+        if (numbers == null || numbers.length == 0) return '';
+        for (let i = 0; i < numbers.length; i++) {
+          for (let j = i + 1; j < numbers.length; j++) {
+            let sum1 = Number(numbers[i] + '' + numbers[j]);
+            let sum2 = Number(numbers[j] + '' + numbers[i]);
+            if (sum1 > sum2) {
+              let temp = numbers[j];
+              numbers[j] = numbers[i];
+              numbers[i] = temp;
+            }
+          }
+        }
+        let str = '';
+        for (let i = 0; i < numbers.length; i++) str = str + numbers[i];
+        return str;
+      }
+
+      const input = [3, 32, 321];
+      console.log(`input: ${input} , expect: 321323 => PrintMinNumber `, PrintMinNumber(input));
+    </script>
+  </body>
+</html>

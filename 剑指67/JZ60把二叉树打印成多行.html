@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 从上到下按层打印二叉树，同一层结点从左至右输出。每一层输出一行。
+      // 层次遍历 反转 2, 4, ...2k
+
+      function Print(pRoot) {
+        // write code here
+        if (!pRoot) return [];
+        let stack = [];
+        let nextStack = [];
+        let node = pRoot;
+        let res = [];
+        let arr = [];
+        while (node) {
+          arr.push(node.val);
+          node.left && nextStack.push(node.left);
+          node.right && nextStack.push(node.right);
+
+          if (stack.length === 0) {
+            res.push(arr);
+            arr = [];
+            stack = nextStack;
+            nextStack = [];
+          }
+
+          node = stack.shift();
+        }
+        return res;
+      }
+
+      const tree = {
+        val: 8,
+        left: {
+          val: 6,
+          left: {
+            val: 5,
+            left: null,
+            right: null
+          },
+          right: {
+            val: 7,
+            left: null,
+            right: null
+          }
+        },
+        right: {
+          val: 10,
+          left: {
+            val: 9,
+            left: null,
+            right: null
+          },
+          right: {
+            val: 11,
+            left: null,
+            right: null
+          }
+        }
+      };
+
+      // {8,6,10,5,7,9,11}
+      let res = [[8], [6, 10], [5, 7, 9, 11]];
+
+      console.log('Print => ', Print(tree));
+    </script>
+  </body>
+</html>

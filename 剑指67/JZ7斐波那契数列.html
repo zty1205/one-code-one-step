@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1, 1, 2, 3, 5, 8
+      // 递归 相似的子问题
+      function Fibonacci1(n) {
+        // write code here
+        if (n <= 1) return n;
+        return Fibonacci(n - 1) + Fibonacci(n - 2);
+      }
+
+      // 循环
+      function Fibonacci(n) {
+        if (n <= 1) return n;
+        let arr = [0, 1];
+        for (let i = 2; i <= n; i++) {
+          arr[i] = arr[i - 1] + arr[i - 2];
+        }
+        return arr.pop();
+      }
+
+      // 过大的话 会引起栈溢出 使用尾递归：对于尾递归来说，由于只存在一个调用帧，所以永远不会发生“栈溢出”错误。
+
+      function Fibonacci2(n) {
+        return _f(n, 0, 1);
+        function _f(n, acc1, acc2) {
+          if (n === 0) return 0;
+          if (n === 1) return acc2;
+          return _f(n - 1, acc2, acc1 + acc2);
+        }
+      }
+
+      console.log('Fibonacci 2  expect 1 = ', Fibonacci(2));
+      console.log('Fibonacci 4  expect 3 = ', Fibonacci(4));
+      console.log('Fibonacci 6  expect 8 = ', Fibonacci(6));
+    </script>
+  </body>
+</html>

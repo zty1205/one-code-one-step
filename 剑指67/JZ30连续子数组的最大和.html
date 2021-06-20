@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // https://www.nowcoder.com/practice/459bd355da1549fa8a49e350bf3df484?tpId=13&&tqId=11183&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking
+
+      // 输入一个整型数组，数组里有正数也有负数。数组中的一个或连续多个整数组成一个子数组。求所有子数组的和的最大值。要求时间复杂度为 O(n).
+
+      const input = [1, -2, 3, 10, -4, 7, 2, -5];
+      const res = 18;
+
+      // 不是滑动窗口 是 动态规划
+      function FindGreatestSumOfSubArray1(array) {
+        // write code here
+        if (!array) return null;
+        const len = array.length;
+
+        if (len === 1) return array[0];
+
+        let max = Number.MIN_VALUE;
+        let i = 0;
+        let j = 1;
+        let sum = array[0];
+        while (i < len && j < len) {
+          if (array[j] + sum >= sum) {
+            sum += array[j];
+            j++;
+          } else {
+            max = Math.max(sum, max);
+            sum -= array[0];
+            i++;
+          }
+        }
+        return max;
+      }
+
+      // f(n) = max(f(n-1)+array[n], array[n])  以array[n]为结尾的最大和
+      // array[n] 为正 那么 f(n-1) 为正 max=f(n-1)+array[n] ; f(n-1) 为负 max=array[n]
+      // array[n] 为负 那么 f(n-1) 为正 max=f(n-1)+array[n] ; f(n-1) 为负 max=array[n]
+      function FindGreatestSumOfSubArray(array) {
+        let max = array[0];
+        let dp = [max];
+        for (i = 1; i < array.length; i++) {
+          dp[i] = Math.max(array[i], dp[i - 1] + array[i]);
+          max = Math.max(max, dp[i]);
+        }
+        console.log('dp = ', dp);
+        return max;
+      }
+
+      console.log(`input: ${input} , expect: 18 => ${FindGreatestSumOfSubArray(input)}`);
+    </script>
+  </body>
+</html>

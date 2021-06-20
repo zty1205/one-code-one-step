@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 我们可以用2*1的小矩形横着或者竖着去覆盖更大的矩形。
+      // 请问用n个2*1的小矩形无重叠地覆盖一个2*n的大矩形，总共有多少种方法？
+      // 比如n=3时，2*3的矩形块有3种覆盖方法：
+
+      // n = 3  res = 3   : 111 12 21
+      // n = 4  res = 5   : 1111 211 121 112 22
+
+      // 想法
+      // 2代表2*2有两种方式 最后可以理解为 走1步2步有几种方式 和跳台阶一样
+      // n = 5 res =? 1+2
+
+      function rectCover(number) {
+        // write code here
+        if (number <= 2) return number;
+        return rectCover(number - 1) + rectCover(number - 2);
+      }
+      console.log('rectCover 3 expect 3', rectCover(3));
+      console.log('rectCover 4 expect 5', rectCover(4));
+      console.log('rectCover 6 expect 13', rectCover(6));
+    </script>
+  </body>
+</html>

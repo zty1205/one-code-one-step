@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // https://www.nowcoder.com/practice/45327ae22b7b413ea21df13ee7d6429c?tpId=13&tqId=11205&rp=1&ru=%2Fta%2Fcoding-interviews&qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking&tab=answerKey
+
+      // 请实现一个函数用来匹配包括'.'和'*'的正则表达式。
+      // 模式中的字符'.'表示任意一个字符，而'*'表示它前面的字符可以出现任意次（包含0次）。
+      // 在本题中，匹配是指字符串的所有字符匹配整个模式。
+      // 例如，字符串"aaa"与模式"a.a"和"ab*ac*a"匹配，但是与"aa.a"和"ab*a"均不匹配
+
+      function match1(s, pattern) {
+        // write code here
+        return new RegExp(pattern).test(s);
+      }
+
+      // *开头 **怎么办 budui
+      function match2(s, pattern) {
+        // write code here
+        if (!pattern) return false;
+        let sLen = s.length;
+        let pLen = pattern.length;
+        let i = (j = 0);
+        while (i < sLen || j < pLen) {
+          let p = pattern[j];
+          if (p === '.') {
+            i++;
+            j++;
+          } else if (p === '*') {
+            if (s[i] !== p) {
+            }
+          } else {
+            if (s[i] === p) {
+              i++;
+              j++;
+            } else {
+              return false;
+            }
+          }
+        }
+        return true;
+      }
+
+      function match(str, pattern) {
+        function _match(str, i, pattern, j) {
+          let s = str[i];
+          let p = pattern[j];
+          let pn = pattern[j + 1];
+          console.log('s,p,pn = ', { s, p, pn });
+          if (!str[i] && !pattern[j]) return true;
+          if (str[i] && !pattern[j]) return false;
+          if (pattern[j + 1] !== '*') {
+            if (str[i] === pattern[j] || (str[i] && pattern[j] === '.')) {
+              return _match(str, i + 1, pattern, j + 1);
+            } else {
+              return false;
+            }
+          } else {
+            if (str[i] === pattern[j] || (str[i] && pattern[j] === '.')) {
+              // * 代表0个或多个
+              return _match(str, i, pattern, j + 2) || _match(str, i + 1, pattern, j);
+            } else {
+              return _match(str, i, pattern, j + 2);
+            }
+          }
+        }
+        return _match(str, 0, pattern, 0);
+      }
+
+      let s = 'aaa';
+      let pattern = 'ab*ac*a'; //  'a*a';
+      let res = true;
+
+      pattern = 'a*a';
+
+      console.log(`${s} ${pattern} expect ${res} match ${match(s, pattern)}`);
+    </script>
+  </body>
+</html>

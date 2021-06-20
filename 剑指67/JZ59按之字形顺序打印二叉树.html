@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // https://www.nowcoder.com/practice/91b69814117f4e8097390d107d2efbe0?tpId=13&tqId=11212&rp=1&ru=%2Fta%2Fcoding-interviews&qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking&tab=answerKey
+
+      // 请实现一个函数按照之字形打印二叉树，
+      // 即第一行按照从左到右的顺序打印，第二层按照从右至左的顺序打印，第三行按照从左到右的顺序打印，
+      // 其他行以此类推。
+
+      function TreeNode(x) {
+        this.val = x;
+        this.left = null;
+        this.right = null;
+      }
+
+      // 层次遍历 反转 2, 4, ...2k
+
+      function Print(pRoot) {
+        // write code here
+        if (!pRoot) return [];
+        let stack = [];
+        let nextStack = [];
+        let node = pRoot;
+        let res = [];
+        let arr = [];
+        while (node) {
+          arr.push(node.val);
+          node.left && nextStack.push(node.left);
+          node.right && nextStack.push(node.right);
+
+          if (stack.length === 0) {
+            res.push(arr);
+            arr = [];
+            stack = nextStack;
+            nextStack = [];
+          }
+
+          node = stack.shift();
+        }
+        return res.map((arr, idx) => (idx & 1 ? arr.reverse() : arr));
+      }
+
+      const tree = {
+        val: 8,
+        left: {
+          val: 6,
+          left: {
+            val: 5,
+            left: null,
+            right: null
+          },
+          right: {
+            val: 7,
+            left: null,
+            right: null
+          }
+        },
+        right: {
+          val: 10,
+          left: {
+            val: 9,
+            left: null,
+            right: null
+          },
+          right: {
+            val: 11,
+            left: null,
+            right: null
+          }
+        }
+      };
+
+      // {8,6,10,5,7,9,11}
+      let res = [[8], [10, 6], [5, 7, 9, 11]];
+
+      console.log('Print => ', Print(tree));
+    </script>
+  </body>
+</html>

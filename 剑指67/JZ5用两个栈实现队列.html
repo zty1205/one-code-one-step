@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    // 用两个栈来实现一个队列，完成队列的Push和Pop操作。 队列中的元素为int类型。
+    const stackA = []; // 入队
+    const stackB = []; // 出队
+
+    // 栈只有pop和push方法 而不是扩展到到js的数组
+
+    function push(node) {
+      // write code here
+      stackA.push(node);
+    }
+    function pop() {
+      // write code here
+      if (stackB.length) {
+        return stackB.pop();
+      } else {
+        while (stackA.length) {
+          stackB.push(stackA.pop());
+        }
+        return stackB.pop();
+      }
+    }
+
+    push(1);
+    push(2);
+    push(3);
+
+    console.log(pop(), `stackA: ${stackA} , stackB: ${stackB}`);
+  </script>
+</html>

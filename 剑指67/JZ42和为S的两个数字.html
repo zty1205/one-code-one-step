@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 输入一个递增排序的数组和一个数字S，在数组中查找两个数，使得他们的和正好是S，如果有多对数字的和等于S，输出两个数的乘积最小的。
+      // 对应每个测试案例，输出两个数，小的先输出。
+
+      // 哈希
+      function FindNumbersWithSum(array, sum) {
+        // write code here
+        let map = {};
+        array.forEach((element) => {
+          map[element] = element;
+        });
+        let chen_ji = Number.MAX_VALUE;
+        let res1, res2;
+        array.forEach((element) => {
+          let cha = sum - element;
+          if (element < sum && cha in map) {
+            let cj = element * sum;
+            if (cj < chen_ji) {
+              chen_ji = cj;
+              res1 = element;
+              res2 = cha;
+            }
+          }
+        });
+        return res2 ? [res1, res2] : [];
+      }
+
+      // 双指针
+      function FindNumbersWithSum(array, sum) {
+        // write code here
+        let left = 0;
+        let right = array.length - 1;
+        let chen_ji = Number.MAX_VALUE;
+        let res1, res2;
+        while (left < right) {
+          let l = array[left];
+          let r = array[right];
+          let s = l + r;
+          if (s < sum) {
+            left++;
+          } else if (s > sum) {
+            right--;
+          } else {
+            let cj = l * r;
+            if (cj < chen_ji) {
+              chen_ji = cj;
+              res1 = l;
+              res2 = r;
+            }
+            left++;
+            right--;
+          }
+        }
+        return res2 ? [res1, res2] : [];
+      }
+
+      let array = [1, 2, 4, 7, 11, 15];
+      let sum = 15;
+      let res = [4, 11];
+
+      array = [1, 2, 4, 7, 11, 16];
+      sum = 17;
+      res = [1, 16];
+
+      console.log(`array: ${array}, sum: ${sum} expect ${res} =>  ${FindNumbersWithSum(array, sum)}`);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // https://www.nowcoder.com/practice/7fe2212963db4790b57431d9ed259701?tpId=13&&tqId=11175&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking
+
+      // 从上往下打印出二叉树的每个节点，同层节点从左至右打印  输出数组
+
+      function TreeNode(x) {
+        this.val = x;
+        this.left = null;
+        this.right = null;
+      }
+      // 层次遍历二叉树
+      function PrintFromTopToBottom(root) {
+        // write code here
+        if (!root) return [];
+        const res = [];
+        let stack = [];
+        let n = root;
+        while (n) {
+          res.push(n.val);
+          n.left && stack.push(n.left);
+          n.right && stack.push(n.right);
+          n = stack.shift();
+        }
+
+        return res;
+      }
+
+      const tree = {
+        val: 8,
+        left: {
+          val: 6,
+          left: {
+            val: 5,
+            left: null,
+            right: null
+          },
+          right: {
+            val: 7,
+            left: null,
+            right: null
+          }
+        },
+        right: {
+          val: 10,
+          left: {
+            val: 9,
+            left: null,
+            right: null
+          },
+          right: {
+            val: 11,
+            left: null,
+            right: null
+          }
+        }
+      };
+
+      console.log('层次遍历二叉树 = ', PrintFromTopToBottom(tree));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 一只青蛙一次可以跳上1级台阶，也可以跳上2级。求该青蛙跳上一个n级的台阶总共有多少种跳法（先后次序不同算不同的结果）。
+
+      function jumpFloor(number) {
+        // write code here
+        if (number <= 2) return number;
+        // 最后一次只可能是跳一个台阶或2个台阶 这题和斐波那契额数列一致
+        return jumpFloor(number - 2) + jumpFloor(number - 1);
+      }
+
+      console.log('number 1 expect 1 = ', jumpFloor(1));
+      console.log('number 4 expect 5 = ', jumpFloor(4));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // https://www.nowcoder.com/practice/cf7e25aa97c04cc1a68c8f040e71fb84?tpId=13&tqId=11214&rp=1&ru=%2Fta%2Fcoding-interviews&qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking&tab=answerKey
+
+      // 请实现两个函数，分别用来序列化和反序列化二叉树
+      // 二叉树的序列化是指：把一棵二叉树按照某种遍历方式的结果以某种格式保存为字符串，从而使得内存中建立起来的二叉树可以持久保存。
+      // 序列化可以基于先序、中序、后序、层序的二叉树遍历方式来进行修改，序列化的结果是一个字符串，
+      // 序列化时通过 某种符号表示空节点（#），以 ！ 表示一个结点值的结束（value!）。
+      // 二叉树的反序列化是指：根据某种遍历顺序得到的序列化字符串结果str，重构二叉树。
+      // 例如，我们可以把一个只有根节点为1的二叉树序列化为"1,"，然后通过自己的函数来解析回这个二叉树
+
+      // 这题的自测输入 和 题 不太准
+
+      function TreeNode(x) {
+        this.val = x;
+        this.left = null;
+        this.right = null;
+      }
+      // 中序
+      function Serialize(pRoot) {
+        // write code here
+        if (!pRoot) return '#';
+        return pRoot.val + ',' + Serialize(pRoot.left) + ',' + Serialize(pRoot.right);
+      }
+
+      // 8,6,5,#,#,7,#,#,10,9,#,#,11,#,#
+      // ["8", "6", "5", "#", "#", "7", "#", "#", "10", "9", "#", "#", "11", "#", "#"]  length = 15
+      // '8,6,#,#,#';
+
+      function Deserialize(s) {
+        // write code here
+        let index = -1;
+        let arr = s.split(',');
+        function _deserialize(str) {
+          index++; //索引每次加一
+          let len = arr.length;
+          if (index > len) {
+            return null;
+          }
+          let treeNode = null;
+          if (arr[index] !== '#') {
+            //不是叶子节点 继续走 是叶子节点出递归
+            treeNode = new TreeNode(Number(arr[index]));
+            treeNode.left = _deserialize(str);
+            treeNode.right = _deserialize(str);
+          }
+          return treeNode;
+        }
+        return _deserialize(s);
+      }
+
+      let tree = {
+        val: 8,
+        left: {
+          val: 6,
+          left: {
+            val: 5,
+            left: null,
+            right: null
+          },
+          right: {
+            val: 7,
+            left: null,
+            right: null
+          }
+        },
+        right: {
+          val: 10,
+          left: {
+            val: 9,
+            left: null,
+            right: null
+          },
+          right: {
+            val: 11,
+            left: null,
+            right: null
+          }
+        }
+      };
+
+      let ser = '8,6,5,#,#,7,#,#,10,9,#,#,11,#,#';
+
+      // tree = {
+      //   val: 8,
+      //   left: {
+      //     val: 6,
+      //     left: null,
+      //     right: null
+      //   },
+      //   right: {
+      //     val: 10,
+      //     left: null,
+      //     right: null
+      //   }
+      // };
+      // ser = '8,6,#,#,10,#,#';
+
+      // tree = {
+      //   val: 8,
+      //   left: {
+      //     val: 6,
+      //     left: null,
+      //     right: null
+      //   },
+      //   right: null
+      // };
+      // ser = '8,6,#,#,#';
+
+      console.log('Serialize = ', Serialize(tree));
+      console.log('Deserialize ser = ', Deserialize(ser));
+      console.log('Deserialize Serialize = ', Deserialize(Serialize(tree)));
+    </script>
+  </body>
+</html>

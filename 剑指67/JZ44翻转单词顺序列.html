@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // https://www.nowcoder.com/practice/3194a4f4cf814f63919d0790578d51f3?tpId=13&tqId=11197&rp=1&ru=%2Fta%2Fcoding-interviews&qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking&tab=answerKey
+      // 牛客最近来了一个新员工Fish，每天早晨总是会拿着一本英文杂志，写些句子在本子上。同事Cat对Fish写的内容颇感兴趣，有一天他向Fish借来翻看，但却读不懂它的意思。例如，“student. a am I”。后来才意识到，这家伙原来把句子单词的顺序翻转了，正确的句子应该是“I am a student.”。Cat对一一的翻转这些单词顺序可不在行，你能帮助他么？
+
+      // 最后一个单词不一样
+      function reverseStr(str) {
+        // if (!str || str.length === 1) return str;
+        // if (/\./.test(str)) return `.${str.replace('.', '')}`;
+        // return str.split('').reverse().join('');
+
+        if (/\./.test(str)) return `${str.replace('.', '')}`;
+        return str;
+      }
+
+      function ReverseSentence1(str) {
+        // write code here
+        if (!str) return str;
+        let res = str.split(' ').reduceRight((pre, cur) => (pre += `${cur} `), '');
+        return res.substring(0, str.length);
+      }
+
+      function ReverseSentence(str) {
+        // write code here
+        return str.split(' ').reverse().join(' ');
+      }
+
+      let input = 'nowcoder. a am I';
+      let res = 'I am a nowcoder.';
+
+      input = 'Hello.';
+      res = 'Hello.';
+
+      const result = ReverseSentence(input);
+
+      console.log(`${input}, expect ${res} => ${result} result: ${result === res}`);
+    </script>
+  </body>
+</html>

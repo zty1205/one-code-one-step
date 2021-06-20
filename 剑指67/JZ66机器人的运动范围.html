@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // https://www.nowcoder.com/practice/6e5207314b5241fb83f2329e89fdecc8?tpId=13&tqId=11219&rp=1&ru=%2Fta%2Fcoding-interviews&qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking&tab=answerKey
+
+      // 地上有一个m行和n列的方格。一个机器人从坐标0,0的格子开始移动，每一次只能向左，右，上，下四个方向移动一格，
+      // 但是不能进入行坐标和列坐标的数位之和大于k的格子。
+      // 例如，当k为18时，机器人能够进入方格（35,37），因为3+5+3+7 = 18。
+      // 但是，它不能进入方格（35,38），因为3+5+3+8 = 19。
+      // 请问该机器人能够达到多少个格子？
+
+      // 用几何分析
+      let add = 0;
+      let no = 0;
+      function movingCount(threshold, rows, cols) {
+        if (rows <= 0 || cols <= 0 || threshold < 0) return 0;
+
+        // let isVisited = Array.from({ length: rows }, (x) => Array.from({ length: cols }));
+        let isVisited = Array.from({ length: rows }, (x) => []);
+        // console.log('is', isVisited[0][2]);
+        console.log('isVisited = ', JSON.parse(JSON.stringify(isVisited)));
+        let count = movingCountCore(threshold, rows, cols, 0, 0, isVisited);
+        // console.log('isVisited = ', isVisited);
+        // console.log('add = ', add);
+
+        // console.log('no = ', no);
+        // console.log('count = ', count);
+        return count;
+      }
+
+      function movingCountCore(threshold, rows, cols, row, col, isVisited) {
+        // console.log(' -- col row ', col, row, isVisited[row] ? isVisited[row][col] : 'unExist');
+        // console.log('row < 0: ', row, row < 0);
+        // console.log('col < 0: ', col, col < 0);
+        // console.log('row >= rows: ', row >= rows);
+        // console.log('row >= rows: ', row >= rows);
+        // let isV = JSON.parse(JSON.stringify(isVisited));
+        // console.log('isVisited: ', isV[row] ? isV[row][col] : 'unExist');
+        // console.log(' check(row) + check(col) > threshold: ', check(row) + check(col) > threshold);
+
+        if (
+          row < 0 ||
+          col < 0 ||
+          row >= rows ||
+          col >= cols ||
+          isVisited[row][col] ||
+          check(row) + check(col) > threshold
+        ) {
+          // console.log(' -- col row ', col, row, isVisited[row] ? isVisited[row][col] : 'unExist');
+          console.log('%c ----- in -------', 'color: red');
+          return 0;
+        }
+        isVisited[row][col] = true;
+        console.log('%c ------ add ------', 'color: blue');
+        return (
+          1 +
+          movingCountCore(threshold, rows, cols, row - 1, col, isVisited) +
+          movingCountCore(threshold, rows, cols, row + 1, col, isVisited) +
+          movingCountCore(threshold, rows, cols, row, col - 1, isVisited) +
+          movingCountCore(threshold, rows, cols, row, col + 1, isVisited)
+        );
+      }
+
+      function check(num) {
+        let sum = 0;
+        while (num > 0) {
+          sum += num % 10;
+          // num /= 10;
+          num = Math.floor(num / 10);
+        }
+        return sum;
+      }
+
+      let threshold = 5;
+      let rows = 10;
+      let cols = 10;
+      let res = 21;
+
+      console.log(
+        `threshold: ${threshold}, rows: ${rows}, cols: ${cols} expect ${res}  movingCount => ${movingCount(
+          threshold,
+          rows,
+          cols
+        )}`
+      );
+    </script>
+  </body>
+</html>

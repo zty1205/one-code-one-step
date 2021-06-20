@@ -1,4 +1,4 @@
-# zty-leet-code
+# zty-lee-code
 
 ## 一、LeetCode
 
@@ -31,5 +31,10 @@
 ![code](/src/assets/img/code.jpg)
 
 <br/>
+<br/>
+
+## 二、剑指 offer
+
+在剑指 67 目录下面可以看到 67 道剑指 offer 的 html 文件
 
 > 生命不息，刷题不止

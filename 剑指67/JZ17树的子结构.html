@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 输入两棵二叉树A，B，判断B是不是A的子结构。（ps：我们约定空树不是任意一个树的子结构）
+      // 注意的是 子结构 而不是子树
+      function TreeNode(x) {
+        this.val = x;
+        this.left = null;
+        this.right = null;
+      }
+      const Tree = {
+        val: 1,
+        left: {
+          val: 2,
+          left: {
+            val: 4,
+            left: null,
+            right: null
+          },
+          right: {
+            val: 5,
+            left: null,
+            right: null
+          }
+        },
+        right: {
+          val: 3,
+          left: {
+            val: 6,
+            left: null,
+            right: null
+          },
+          right: {
+            val: 7,
+            left: null,
+            right: null
+          }
+        }
+      };
+      const subTree = {
+        val: 3,
+        left: {
+          val: 6,
+          left: null,
+          right: null
+        },
+        right: {
+          val: 7,
+          left: null,
+          right: null
+        }
+      };
+
+      const subTree1 = {
+        val: 3,
+        left: {
+          val: 6,
+          left: null,
+          right: null
+        },
+        right: {
+          val: 8,
+          left: null,
+          right: null
+        }
+      };
+
+      // 感觉树太大就会爆栈的
+
+      function HasSubtree(root1, root2) {
+        function doesTreeHasTree(tree1, tree2) {
+          if (tree2 == null) {
+            return true;
+          }
+          if (tree1 == null) {
+            return false;
+          }
+
+          if (tree1.val != tree2.val) {
+            return false;
+          }
+          return doesTreeHasTree(tree1.left, tree2.left) && doesTreeHasTree(tree1.right, tree2.right);
+        }
+        if (root2 == null || root1 == null) {
+          return false;
+        }
+        return doesTreeHasTree(root1, root2) || HasSubtree(root1.left, root2) || HasSubtree(root1.right, root2);
+      }
+
+      console.log(Tree, subTree, '= HasSubtree =>', HasSubtree(Tree, subTree));
+      console.log(Tree, subTree1, '= HasSubtree =>', HasSubtree(Tree, subTree1));
+    </script>
+  </body>
+</html>

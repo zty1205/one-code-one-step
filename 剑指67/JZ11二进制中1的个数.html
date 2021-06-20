@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>位运算和数学知识（靠发现）</div>
+    <script>
+      // 输入一个整数，输出该数32位二进制表示中1的个数。其中负数用补码表示。
+
+      // n = 10 res = 2    10 => 1010
+      // n = 11 res = 3    11 => 1011
+      // n = 12 res = 2    11 => 1100
+
+      // 如1100&1011=1000.也就是说，把一个整数减去1，再和原整数做与运算，会把该整数最右边一个1变成0.那么一个整数的二进制有多少个1，就可以进行多少次这样的操作。
+
+      function NumberOf1(n) {
+        // write code here
+        let count = 0;
+        while (n) {
+          n = n & (n - 1);
+          count++;
+        }
+        return count;
+      }
+
+      console.log('NumberOf1 10 expect 2 = ', NumberOf1(10));
+      console.log('NumberOf1 11 expect 3 = ', NumberOf1(11));
+      console.log('NumberOf1 12 expect 2 = ', NumberOf1(12));
+
+      // 补充知识  原码 补码 反码 加法器 加法器 乘法器 除法器
+    </script>
+  </body>
+</html>

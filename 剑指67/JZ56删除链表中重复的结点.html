@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // https://www.nowcoder.com/practice/fc533c45b73a41b0b44ccba763f866ef?tpId=13&tqId=11209&rp=1&ru=%2Fta%2Fcoding-interviews&qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking&tab=answerKey
+
+      // 在一个排序的链表中，存在重复的结点，请删除该链表中重复的结点，重复的结点不保留，返回链表头指针。
+      // 例如，链表1->2->3->3->4->4->5 处理后为 1->2->5
+      // 如果是 1->2->3->2->4 处理后为 1->3->4 哦 不用考虑 这是一个排序的链表 那需要两个指针
+      // 如果头节点就重复呢
+
+      function ListNode(x) {
+        this.val = x;
+        this.next = null;
+      }
+
+      function deleteDuplication(pHead) {
+        // write code here
+        if (!pHead) return null;
+        let map = new Map();
+
+        let left = new ListNode('head');
+        let head = left;
+        left.next = pHead;
+        let right = pHead;
+
+        while (right) {
+          // debugger;
+          if (map.has(right.val)) {
+            // 重复节点
+            while (right && map.has(right.val)) {
+              right = right.next;
+            }
+            left.next = right;
+          } else {
+            map.set(right.val, true);
+            let _p = left;
+            left = right;
+            right = right.next;
+            if (right && right.val === left.val) {
+              left = _p;
+            }
+          }
+        }
+        console.log('map = ', map);
+
+        return head.next;
+      }
+
+      let head = {
+        val: 1,
+        next: {
+          val: 2,
+          next: {
+            val: 3,
+            next: {
+              val: 3,
+              next: {
+                val: 4,
+                next: {
+                  val: 4,
+                  next: {
+                    val: 5,
+                    next: null
+                  }
+                }
+              }
+            }
+          }
+        }
+      };
+      // 1->3->5
+
+      head = {
+        val: 1,
+        next: {
+          val: 1,
+          next: {
+            val: 1,
+            next: {
+              val: 1,
+              next: {
+                val: 1,
+                next: {
+                  val: 1,
+                  next: {
+                    val: 2,
+                    next: null
+                  }
+                }
+              }
+            }
+          }
+        }
+      };
+
+      // 2
+
+      // head = {
+      //   val: 1,
+      //   next: {
+      //     val: 1,
+      //     next: {
+      //       val: 2,
+      //       next: null
+      //     }
+      //   }
+      // };
+
+      console.log('deleteDuplication = ', deleteDuplication(head));
+    </script>
+  </body>
+</html>

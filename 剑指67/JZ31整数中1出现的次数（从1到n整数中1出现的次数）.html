@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 求出1~13的整数中1出现的次数,并算出100~1300的整数中1出现的次数？
+      // 为此他特别数了一下1~13中包含1的数字有1、10、11、12、13因此共出现6次,但是对于后面问题他就没辙了。
+      // ACMer希望你们帮帮他,并把问题更加普遍化,可以很快的求出任意非负整数区间中1出现的次数（从1 到 n 中1出现的次数）。
+
+      const input = 13;
+      const res = 6;
+
+      // 1  = 1   个位1
+      // 10 - 19 21 ~ 91  = 10 + 10 -1 = 19 个位10次 十位 10次 去掉11
+      // 234
+
+      // https://leetcode-cn.com/problems/1nzheng-shu-zhong-1chu-xian-de-ci-shu-lcof/solution/mian-shi-ti-43-1n-zheng-shu-zhong-1-chu-xian-de-2/
+
+      // 数学规律
+
+      // 个位上的1 + 十位的1 + 百位的1
+
+      function NumberOf1Between1AndN_Solution(n) {
+        // write code here
+        let digit = 1,
+          res = 0;
+        let high = Math.floor(n / 10),
+          cur = n % 10,
+          low = 0;
+        while (high != 0 || cur != 0) {
+          if (cur == 0) res += high * digit;
+          else if (cur == 1) res += high * digit + low + 1;
+          else res += (high + 1) * digit;
+          low += cur * digit;
+          cur = high % 10;
+          high = Math.floor(high / 10);
+          digit *= 10;
+        }
+        return res;
+      }
+
+      console.log('NumberOf1Between1AndN_Solution 13', NumberOf1Between1AndN_Solution(13));
+    </script>
+  </body>
+</html>

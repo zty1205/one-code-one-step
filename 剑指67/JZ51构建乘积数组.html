@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const A = [1, 2, 3, 4, 5];
+      // B[i] = 等于 A中除了 A[i] 以外的数的乘积  该题不能使用除法
+      const B = [120, 60, 40, 30, 24];
+
+      function multiply(array) {
+        // write code here
+        let arr = [];
+        array.forEach((item, index) => {
+          const _a = [...array];
+          _a[index] = 1;
+          arr[index] = _a.reduce((pre, cur) => {
+            pre *= cur;
+            return pre;
+          }, 1);
+        });
+        return arr;
+      }
+
+      function multiply(array) {
+        // write code here
+        let len = array.length;
+        let temp = new Array(len);
+        for (let i = 0; i < len; i++) {
+          let cur = array.splice(i, 1);
+          temp[i] = array.reduce((pre, current) => {
+            return pre * current;
+          }, 1);
+          array.splice(i, 0, cur);
+        }
+        return temp;
+      }
+
+      function multiply(array) {
+        // write code here
+        if (array == null || array.length <= 1) {
+          return null;
+        }
+        var len = array.length;
+        var B = [];
+        B[0] = 1;
+        var temp = 1;
+        for (var i = 1; i < len; i++) {
+          B[i] = B[i - 1] * array[i - 1];
+        }
+        for (var j = len - 2; j >= 0; j--) {
+          temp = temp * array[j + 1];
+          B[j] = B[j] * temp;
+        }
+        return B;
+      }
+
+      console.log(`${A} = multiply => expect ${B} , res = ${multiply(A)}`);
+    </script>
+  </body>
+</html>

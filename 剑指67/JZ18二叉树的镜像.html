@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <img src="../img/j2.png" alt="" srcset="" />
+    <script>
+      // 题目描述
+      // 操作给定的二叉树，将其变换为源二叉树的镜像。
+      function TreeNode(x) {
+        this.val = x;
+        this.left = null;
+        this.right = null;
+      }
+      // val: 8,
+      //  left: {},
+      //  right: {},
+      const tree = {
+        val: 8,
+        left: {
+          val: 6,
+          left: {
+            val: 5,
+            left: null,
+            right: null
+          },
+          right: {
+            val: 7,
+            left: null,
+            right: null
+          }
+        },
+        right: {
+          val: 10,
+          left: {
+            val: 9,
+            left: null,
+            right: null
+          },
+          right: {
+            val: 11,
+            left: null,
+            right: null
+          }
+        }
+      };
+      function Mirror(root) {
+        // write code here
+        if (!root) return;
+        let tmp = root.left;
+        root.left = root.right;
+        root.right = tmp;
+        Mirror(root.left);
+        Mirror(root.right);
+        return root;
+      }
+      console.log(tree, ' == Mirror =>', Mirror(tree));
+    </script>
+  </body>
+</html>

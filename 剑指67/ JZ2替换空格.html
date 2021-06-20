@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * 请实现一个函数，将一个字符串中的每个空格替换成“%20”。例如，当字符串为We Are Happy.则经过替换之后的字符串为We%20Are%20Happy。
+       */
+      function replaceSpace(str) {
+        return str.replace(/\s/g, '%20');
+      }
+      let str = 'We Are Happy';
+      str = 'hello world';
+      console.log(`${str} replaceSpace: ${replaceSpace(str)}`);
+    </script>
+  </body>
+</html>

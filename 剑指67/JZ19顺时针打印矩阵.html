@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 入一个矩阵，按照从外向里以顺时针的顺序依次打印出每一个数字，
+      // 例如，如果输入如下4 X 4矩阵： 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
+      // 则依次打印出数字1,2,3,4,8,12,16,15,14,13,9,5,6,7,11,10.
+
+      // 直接干就完事
+      function printMatrix(matrix) {
+        // write code here
+        let list = [];
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+          return list;
+        }
+        // 边界值
+        let up = 0;
+        let down = matrix.length - 1;
+        let left = 0;
+        let right = matrix[0].length - 1;
+        while (true) {
+          // 最上面一行
+          for (let col = left; col <= right; col++) {
+            list.push(matrix[up][col]);
+          }
+          // 向下逼近
+          up++;
+          // 判断是否越界
+          if (up > down) {
+            break;
+          }
+          // 最右边一列
+          for (let row = up; row <= down; row++) {
+            list.push(matrix[row][right]);
+          }
+          // 向左逼近
+          right--;
+          // 判断是否越界
+          if (left > right) {
+            break;
+          }
+          // 最下面一行
+          for (let col = right; col >= left; col--) {
+            list.push(matrix[down][col]);
+          }
+          // 向上逼近
+          down--;
+          // 判断是否越界
+          if (up > down) {
+            break;
+          }
+          // 最左边一列
+          for (let row = down; row >= up; row--) {
+            list.push(matrix[row][left]);
+          }
+          // 向右逼近
+          left++;
+          // 判断是否越界
+          if (left > right) {
+            break;
+          }
+        }
+        return list;
+      }
+
+      // 1 flat后 用下标 +4 -1 -4 -4 + 1 好像不太行
+      // [0,0] [0,1] [0,2]
+      // [0,3] [1,3] [2,3]
+      // [3,3] [3,2] [3,1]
+      // [3,0] [2,0] [1,0]
+      // 上面为1轮 每次变动的是 3 * 4 + 1 * 4
+      // 如果为5*5 每轮为 4*4 + 2*4 + 1
+      // 如果是 4 * 3
+
+      const matrix = [
+        [1, 2, 3, 4],
+        [5, 6, 7, 8],
+        [9, 10, 11, 12],
+        [13, 14, 15, 16]
+      ];
+      console.log(matrix, '== printMatrix => ', printMatrix(matrix));
+    </script>
+  </body>
+</html>

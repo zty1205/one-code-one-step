@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 给一个链表，若其中包含环，请找出该链表的环的入口结点，否则，输出null。
+
+      function ListNode(x) {
+        this.val = x;
+        this.next = null;
+      }
+      function EntryNodeOfLoop(pHead) {
+        // write code here
+        if (!pHead) return null;
+        let p = pHead;
+        let hash = new Map();
+        while (p) {
+          if (hash.has(p)) {
+            return p;
+          } else {
+            hash.set(p, true);
+          }
+          p = p.next;
+        }
+
+        return null;
+      }
+
+      // 慢快指针， 有环的话 快一定会等于(追上)慢
+      var hasCycle = function (head) {
+        if (!head || !head.next) return false;
+        let slow = head;
+        let fast = head.next;
+        while (fast != slow) {
+          if (!fast || !fast.next) return false;
+          slow = slow.next;
+          fast = fast.next.next;
+        }
+        return fast;
+      };
+
+      const A = new ListNode('A');
+      const B = new ListNode('B');
+      const C = new ListNode('C');
+      const D = new ListNode('D');
+
+      A.next = B;
+      B.next = C;
+      C.next = D;
+      D.next = B;
+
+      const a = new ListNode('a');
+      const b = new ListNode('b');
+      const c = new ListNode('c');
+      const d = new ListNode('d');
+
+      a.next = b;
+      b.next = c;
+      c.next = d;
+
+      console.log('EntryNodeOfLoop A = ', EntryNodeOfLoop(A));
+      console.log('EntryNodeOfLoop a = ', EntryNodeOfLoop(a));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 给定一个double类型的浮点数base和int类型的整数exponent。求base的exponent次方。
+      // 保证base和exponent不同时为0
+
+      function Power1(base, exponent) {
+        // write code here
+        return Math.pow(base, exponent);
+      }
+
+      // 运行超时 考虑 指数为负数
+      function Power2(base, exponent) {
+        if (exponent < 0) {
+          base = 1 / base;
+          exponent = -exponent;
+        }
+        let ret = 1.0;
+        for (let i = 0; i < exponent; ++i) ret *= base;
+        return ret;
+      }
+
+      // 快速幂
+      function Power(base, exponent) {
+        function q_p(b, e) {
+          if (e === 0) return 1;
+          const res = q_p(b, e >> 1);
+          if (e & 1) {
+            // 奇数
+            return res * res * b;
+          } else {
+            return res * res;
+          }
+        }
+
+        if (base === 0 || base === 1) return base;
+
+        if (exponent < 0) {
+          base = 1 / base;
+          exponent = -exponent;
+        }
+        return q_p(base, exponent);
+      }
+
+      console.log('2^3 = ', Power(2, 3));
+    </script>
+  </body>
+</html>

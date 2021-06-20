@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 在数组中的两个数字，如果前面一个数字大于后面的数字，则这两个数字组成一个逆序对。输入一个数组,求出这个数组中的逆序对的总数P。并将P对1000000007取模的结果输出。 即输出P%1000000007
+
+      // 对于50\%50%的数据,size\leq 10^4size≤10 ^4
+
+      // 对于75\%75%的数据,size\leq 10^5size≤10^5
+
+      // 对于100\%100%的数据,size\leq 2*10^5size≤2∗10^5
+
+      // 题目保证输入的数组中没有的相同的数字
+
+      const input = [1, 2, 3, 4, 5, 6, 7, 0];
+      const res = 7;
+
+      // 暴力循环  超时了
+      function InversePairs(data) {
+        // write code here
+        if (!data || !data.length) return 0;
+        let res = 0;
+        for (let i = 1; i < data.length; i++) {
+          for (let j = 0; j < i; j++) {
+            if (data[i] < data[j]) res++;
+          }
+        }
+        return res;
+      }
+
+      function merge_sort(array) {
+        function merge(left, right) {
+          let tmp = [];
+          while (left.length && right.length) {
+            if (left[0] > right[0]) tmp.push(right.shift());
+            else tmp.push(left.shift());
+          }
+          return tmp.concat(left, right);
+        }
+        if (array.length <= 1) return array;
+        let mid = array.length >> 1;
+        let left = array.slice(0, mid);
+        let right = array.slice(mid);
+        return merge(merge_sort(left), merge_sort(right));
+      }
+
+      function InversePairs(data) {
+        let res = 0;
+        function merge_sort(array, res) {
+          function merge(left, right, res) {
+            let l = left.length;
+            let r = right.length;
+
+            return [].concat(left, right);
+          }
+          if (array.length <= 1) return array;
+          let mid = array.length >> 1;
+          let left = array.slice(0, mid);
+          let right = array.slice(mid);
+          return merge(merge_sort(left), merge_sort(right), 0);
+        }
+        merge_sort(data, 0);
+        return res;
+      }
+
+      function InversePairs(data) {
+        if (!data || data.length === 0) {
+          return 0;
+        }
+        const num = mergeSort(data, 0, data.length - 1, []);
+        return num % 1000000007;
+      }
+      function mergeSort(array, left, right, temp) {
+        if (left < right) {
+          const mid = Math.floor((right + left) / 2);
+          const l = mergeSort(array, left, mid, temp);
+          const r = mergeSort(array, mid + 1, right, temp);
+          const m = merge(array, left, right, temp);
+          return l + r + m;
+        } else {
+          return 0;
+        }
+      }
+      function merge(array, left, right, temp) {
+        const mid = Math.floor((right + left) / 2);
+        let tempIndex = 0;
+        let count = 0;
+        let leftIndex = left;
+        let rightIndex = mid + 1;
+        for (let i = left; i <= right; i++) {
+          temp[i] = array[i];
+        }
+        for (let i = left; i <= right; i++) {
+          if (leftIndex === mid + 1) {
+            array[i] = temp[rightIndex];
+            rightIndex++;
+          } else if (rightIndex === right + 1) {
+            array[i] = temp[leftIndex];
+            leftIndex++;
+          } else if (temp[leftIndex] > temp[rightIndex]) {
+            array[i] = temp[rightIndex];
+            rightIndex++;
+            count += mid - leftIndex + 1;
+          } else {
+            array[i] = temp[leftIndex];
+            leftIndex++;
+          }
+        }
+
+        return count;
+      }
+
+      console.log('merge_sort = ', merge_sort(input));
+
+      console.log(`input: ${input}, res: ${res} InversePairs = ${InversePairs(input)}`);
+    </script>
+  </body>
+</html>

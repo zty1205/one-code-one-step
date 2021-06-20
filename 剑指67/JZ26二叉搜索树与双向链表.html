@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // https://www.nowcoder.com/practice/947f6eb80d944a84850b0538bf0ec3a5?tpId=13&&tqId=11179&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking
+
+      // 输入一棵二叉搜索树，将该二叉搜索树转换成一个排序的双向链表。要求不能创建任何新的结点，只能调整树中结点指针的指向。
+
+      // 二叉搜索树  左 < 跟 < 右
+
+      function TreeNode(x) {
+        this.val = x;
+        this.left = null;
+        this.right = null;
+      }
+
+      function Convert(pRootOfTree) {
+        let pre = null;
+        let root = null;
+        function _Convert(pRootOfTree) {
+          if (pRootOfTree == null) return null;
+          _Convert(pRootOfTree.left);
+          if (root == null) {
+            root = pRootOfTree;
+          }
+          if (pre != null) {
+            pRootOfTree.left = pre;
+            pre.right = pRootOfTree;
+          }
+          pre = pRootOfTree;
+          _Convert(pRootOfTree.right);
+          return root;
+        }
+        return _Convert(pRootOfTree);
+      }
+
+      const tree = {
+        val: 10,
+        left: {
+          val: 5,
+          left: {
+            val: 4,
+            left: null,
+            right: null
+          },
+          right: {
+            val: 7,
+            left: null,
+            right: null
+          }
+        },
+        right: {
+          val: 12,
+          left: null,
+          right: null
+        }
+      };
+
+      console.log(tree, '= Convert => ', Convert(tree));
+    </script>
+  </body>
+</html>

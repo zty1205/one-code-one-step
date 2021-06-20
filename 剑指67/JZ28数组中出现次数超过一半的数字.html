@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。
+      // 例如输入一个长度为9的数组{1,2,3,2,2,2,5,4,2}。由于数字2在数组中出现了5次，超过数组长度的一半，因此输出2。
+      // 如果不存在则输出0
+
+      const input = [1, 2, 3, 2, 2, 2, 5, 4, 2];
+      const res = 2;
+
+      // 哈希count
+      function MoreThanHalfNum_Solution(numbers) {
+        // write code here
+        if (!numbers || !numbers.length) return 0;
+        if (numbers.length === 1) return numbers[0];
+
+        let ml = numbers.length >> 1;
+        let map = {};
+        for (let i = 0; i < numbers.length; i++) {
+          if (map[numbers[i]]) {
+            map[numbers[i]] = map[numbers[i]] + 1;
+            if (map[numbers[i]] > ml) {
+              return numbers[i];
+            }
+          } else {
+            map[numbers[i]] = 1;
+          }
+        }
+        console.log('map = ', map);
+        return 0;
+      }
+
+      console.log({ input, res }, ' == MoreThanHalfNum_Solution => ', MoreThanHalfNum_Solution(input));
+    </script>
+  </body>
+</html>

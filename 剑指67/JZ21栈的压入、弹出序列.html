@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 输入两个整数序列，第一个序列表示栈的压入顺序，请判断第二个序列是否可能为该栈的弹出顺序。
+      // 假设压入栈的所有数字均不相等。\
+      // 例如序列1,2,3,4,5是某栈的压入顺序，
+      // 序列4,5,3,2,1是该压栈序列对应的一个弹出序列，
+      // 但4,3,5,1,2就不可能是该压栈序列的弹出序列。
+      // （注意：这两个序列的长度是相等的）
+
+      // 模拟入栈出栈
+      function IsPopOrder1(pushV, popV) {
+        if (pushV.length !== popV.length) return false;
+        let stack = [];
+
+        let popNode = popV.shift();
+
+        let pushNode = pushV.shift();
+
+        // 把一个出栈节点前面的全部推入stack
+        while (pushNode) {
+          stack.push(pushNode);
+          if (pushNode === popNode) break;
+          pushNode = pushV.shift();
+        }
+        // 干掉了第一个节点
+        if (stack[stack.length - 1] !== popNode) return false;
+        stack.pop();
+        popNode = popV.shift();
+
+        while (popNode) {
+          // 如果恰好是前一个
+          if (popNode === stack[stack.length - 1]) {
+            popNode = popV.shift();
+            stack.pop();
+          } else {
+            // 推完了
+            if (pushV.length === 0) return false;
+            pushNode = pushV.shift();
+            while (pushNode) {
+              stack.push(pushNode);
+              if (pushNode === popNode) break;
+              pushNode = pushV.shift();
+            }
+            if (stack[stack.length - 1] !== popNode) return false;
+            stack.pop();
+            popNode = popV.shift();
+          }
+        }
+
+        return stack.length === 0;
+      }
+
+      function IsPopOrder(pushV, popV) {
+        if (pushV.length !== popV.length) return false;
+        let stack = [];
+
+        let popNode = popV.shift();
+
+        let pushNode = pushV.shift();
+        while (pushNode) {
+          stack.push(pushNode);
+          if (pushNode === popNode) break;
+          pushNode = pushV.shift();
+        }
+        // 干掉了第一个节点
+        if (stack[stack.length - 1] !== popNode) {
+          console.log('return 1 :::: ', { stack, popNode, popV, pushNode, pushV });
+          return false;
+        }
+        stack.pop();
+        popNode = popV.shift();
+
+        while (popNode) {
+          // 如果恰好是前一个
+          if (popNode === stack[stack.length - 1]) {
+            popNode = popV.shift();
+            stack.pop();
+          } else {
+            // 推完了
+            if (pushV.length === 0) {
+              console.log('return 2 :::: ', { stack, popNode, popV, pushNode, pushV });
+              return false;
+            }
+            pushNode = pushV.shift();
+            while (pushNode) {
+              stack.push(pushNode);
+              if (pushNode === popNode) break;
+              pushNode = pushV.shift();
+            }
+            if (stack[stack.length - 1] !== popNode) {
+              console.log('return 2 :::: ', { stack, popNode, popV, pushNode, pushV });
+              return false;
+            }
+            stack.pop();
+            popNode = popV.shift();
+          }
+        }
+
+        return stack.length === 0;
+      }
+
+      function IsPopOrder(pushV, popV) {
+        if (pushV.length !== popV.length) return false;
+
+        let stack = [];
+        let popNode = popV.shift();
+        let pushNode = pushV.shift();
+
+        while (popNode) {
+          // debugger;
+          if (popNode !== pushNode) {
+            if (stack[stack.length - 1] === popNode) {
+              stack.pop();
+              popNode = popV.shift();
+            } else if (pushV.length) {
+              while (pushNode !== popNode) {
+                stack.push(pushNode);
+                pushNode = pushV.shift();
+              }
+            } else {
+              return false;
+            }
+          } else {
+            popNode = popV.shift();
+            pushNode = pushV.shift();
+          }
+        }
+        return stack.length === 0;
+      }
+
+      const pushV1 = [1, 2, 3, 4, 5];
+      const popV1 = [4, 3, 5, 1, 2];
+      console.log({ pushV1, popV1 }, ' == IsPopOrder expect false => ', IsPopOrder(pushV1, popV1));
+
+      const pushV2 = [1, 2, 3, 4, 5];
+      const popV2 = [4, 5, 3, 2, 1];
+      console.log({ pushV2, popV2 }, ' == IsPopOrder expect true => ', IsPopOrder(pushV2, popV2));
+
+      const pushV3 = [1, 2, 3, 4, 5];
+      const popV3 = [4, 3, 5, 2, 1];
+      console.log({ pushV3, popV3 }, ' == IsPopOrder expect true => ', IsPopOrder(pushV3, popV3));
+    </script>
+  </body>
+</html>

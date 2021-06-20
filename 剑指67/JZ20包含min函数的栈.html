@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 定义栈的数据结构，
+      // 请在该类型中实现一个能够得到栈中所含最小元素的min函数（时间复杂度应为O（1））。
+      // 得补充 node 为 number 不然题意不明
+      let minValue = Number.MAX_VALUE;
+      let stack = [];
+      function push(node) {
+        // write code here
+        stack.push(node);
+        minValue = node < minValue ? node : minValue;
+      }
+      function pop() {
+        // write code here
+        let n = stack.pop();
+        if (n === minValue) {
+          minValue = Math.min.apply(Math, stack);
+        }
+      }
+      function top1() {
+        // write code here
+        return stack[stack.length - 1];
+      }
+      function min() {
+        // write code here
+        return minValue;
+      }
+
+      push(3);
+      console.log('-- ', min());
+    </script>
+  </body>
+</html>

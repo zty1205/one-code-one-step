@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 在一个字符串(0<=字符串长度<=10000，全部由字母组成)中找到第一个只出现一次的字符,并返回它的位置,
+      // 如果没有则返回 -1（需要区分大小写）.（从0开始计数）
+
+      const input = 'google';
+      const res = 4;
+
+      function FirstNotRepeatingChar1(str) {
+        if (!str) return -1;
+        // write code here
+        // 单个的时候 map 设置为下标 超出一个的时候设置为-1
+        let map = {};
+        for (let i = 0; i < str.length; i++) {
+          map[str[i]] = map[str[i]] || map[str[i]] === 0 ? true : i;
+        }
+        console.log('map = ', map);
+        let indexArray = Object.values(map).filter(Number.isInteger);
+        console.log('indexArray = ', indexArray);
+        return indexArray.length === 0 ? -1 : Math.min.apply(Math, indexArray);
+      }
+
+      function FirstNotRepeatingChar(str) {
+        if (!str) return -1;
+        let map = {};
+        // 第一次统计
+        for (let i = 0; i < str.length; i++) {
+          map[str[i]] = map[str[i]] ? map[str[i]] + 1 : 1;
+        }
+
+        // 第二次拿出那个值
+        for (let i = 0; i < str.length; i++) {
+          if (map[str[i]] === 1) return i;
+        }
+
+        return -1;
+      }
+
+      console.log({ input, res }, '== FirstNotRepeatingChar => ', FirstNotRepeatingChar(input));
+    </script>
+  </body>
+</html>

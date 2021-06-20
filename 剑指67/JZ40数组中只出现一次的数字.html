@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 位运算? 或 hash
+      // 一个整型数组里除了两个数字之外，其他的数字都出现了两次。
+      // 请写程序找出这两个只出现一次的数字。
+      // a ^ a = 0 a ^ 0 = a  异或
+
+      const input = [1, 2, 3, 3, 4, 4, 5, 5, 6, 6];
+      const res = [1, 2];
+
+      function FindNumsAppearOnce(array) {
+        // write code here
+        // return list, 比如[a,b]，其中ab是出现一次的两个数字
+        if (!array || !array.length) return [];
+        let res = [];
+        let map = {};
+        array.forEach((ele) => (map[ele] = map[ele] ? map[ele] + 1 : 1));
+        console.log('map = ', map);
+        for (let k in map) {
+          if (map[k] === 1) res.push(k);
+        }
+        return res;
+      }
+
+      // a ^ 0 = a a ^ a = 0 a^a^a = a 使用异或运算符
+      var singleNumber = function (nums) {
+        let res = 0;
+        nums.map((x) => {
+          res = res ^ x;
+        });
+        return res;
+      };
+
+      var singleNumber = function (nums = []) {
+        return nums.reduce((pre, cur) => pre ^ cur, 0);
+      };
+
+      console.log(`input: ${input}, res: ${res} FindNumsAppearOnce =>  ${FindNumsAppearOnce(input)}`);
+    </script>
+  </body>
+</html>

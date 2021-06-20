@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // https://www.nowcoder.com/practice/ff05d44dfdb04e1d83bdbdab320efbcb?tpId=13&tqId=11211&rp=1&ru=%2Fta%2Fcoding-interviews&qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking&tab=answerKey
+
+      // 请实现一个函数，用来判断一棵二叉树是不是对称的。
+      // 注意，如果一个二叉树同此二叉树的镜像是同样的，定义其为对称的。
+
+      function TreeNode(x) {
+        this.val = x;
+        this.left = null;
+        this.right = null;
+      }
+      function isSymmetrical(pRoot) {
+        if (!pRoot) return true;
+        function compare(leftChild, rightChild) {
+          if (!leftChild && !rightChild) return true;
+          if ((leftChild && !rightChild) || (!leftChild && rightChild) || leftChild.val !== rightChild.val)
+            return false;
+          return compare(leftChild.left, rightChild.right) && compare(leftChild.right, rightChild.left);
+        }
+
+        return compare(pRoot.left, pRoot.right);
+      }
+
+      const tree = {
+        val: 8,
+        left: {
+          val: 6,
+          left: {
+            val: 5,
+            left: null,
+            right: null
+          },
+          right: {
+            val: 7,
+            left: null,
+            right: null
+          }
+        },
+        right: {
+          val: 6,
+          left: {
+            val: 7,
+            left: null,
+            right: null
+          },
+          right: null
+        }
+      };
+
+      // {8,6,6,5,7,7,5} true
+      // {8,6,6,5,7,7} false
+
+      console.log('isSymmetrical => ', isSymmetrical(tree));
+    </script>
+  </body>
+</html>

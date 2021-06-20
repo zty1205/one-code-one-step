@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // https://www.nowcoder.com/practice/9023a0c988684a53960365b889ceaf5e?tpId=13&tqId=11210&rp=1&ru=%2Fta%2Fcoding-interviews&qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking&tab=answerKey
+
+      // 给定一个二叉树和其中的一个结点，请找出中序遍历顺序的下一个结点并且返回。
+      // 注意，树中的结点不仅包含左右子结点，同时包含指向父结点的指针
+
+      function TreeLinkNode(x) {
+        this.val = x;
+        this.left = null;
+        this.right = null;
+        this.next = null;
+      }
+
+      // 中序 左根右
+      // 输出中序遍历？
+      // 题意有点怪
+      function GetNext(pNode) {
+        // write code here
+        let root;
+        let tmp = pNode;
+        while (tmp) {
+          // 找到root节点
+          root = tmp;
+          tmp = tmp.next;
+        }
+        let array = [];
+        function dfs(node) {
+          node.left && dfs(node.left);
+          array.push(node);
+          node.right && dfs(node.right);
+        }
+        dfs(root);
+        let idx = array.findIndex((x) => x === pNode);
+        return array[idx + 1] || null;
+      }
+
+      const T1 = new TreeLinkNode(1);
+      const T2 = new TreeLinkNode(2);
+      const T3 = new TreeLinkNode(3);
+      const T4 = new TreeLinkNode(4);
+      const T5 = new TreeLinkNode(5);
+      const T6 = new TreeLinkNode(6);
+
+      T1.left = T2;
+      T1.right = T3;
+      T2.next = T1;
+      T3.next = T1;
+
+      T2.left = T4;
+      T2.right = T5;
+      T4.next = T2;
+      T5.next = T2;
+
+      T3.right = T6;
+      T6.next = T3;
+    </script>
+  </body>
+</html>

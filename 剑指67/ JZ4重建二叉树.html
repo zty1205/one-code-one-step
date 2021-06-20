@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // https://www.nowcoder.com/practice/8a19cbe657394eeaac2f6ea9b0f6fcf6?tpId=13&&tqId=11157&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking
+
+      /**
+       * 输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。
+       * 假设输入的前序遍历和中序遍历的结果中都不含重复的数字。
+       * 例如输入前序遍历序列{1,2,4,7,3,5,6,8}和中序遍历序列{4,7,2,1,5,3,8,6}，则重建二叉树并返回。
+       *
+       * @params [1,2,3,4,5,6,7],[3,2,4,1,6,5,7]
+       * @return {1,2,5,3,4,6,7}
+       */
+
+      // 前序遍历 是根左右   中序是左根右
+      /**
+       *        1
+       *     2     5
+       *    3 4   6 7
+       */
+
+      function TreeNode(x) {
+        this.val = x;
+        this.left = null;
+        this.right = null;
+      }
+
+      function reConstructBinaryTree(pre, vin) {
+        // write code here
+        //利用递归实现 其中preStart代表的是先序遍历的第一个节点的下标位置 后边的依次类推
+        function rebuild(preStart, preEnd, vinStart, vinEnd) {
+          let node = new TreeNode(pre[preStart]);
+          //判断是否只有一个节点 如果只有一个节点 则返回节点本身
+          if (preStart == preEnd && vinStart == vinEnd) {
+            return node;
+          }
+          let index = vin.indexOf(pre[preStart]); //查找树的根节点
+          let leftLen = index - vinStart; //左子树的长度
+          let leftPrend = preStart + leftLen; //先选出先序遍历的左子树的所有节点
+          if (leftLen > 0) {
+            //此时相当于遍历左子树的左子树  因此先序遍历开始的节点需加一 中序遍历结束的节点需减一
+            node.left = rebuild(preStart + 1, leftPrend, vinStart, index - 1);
+          }
+          if (leftLen < preEnd - preStart) {
+            node.right = rebuild(leftPrend + 1, preEnd, index + 1, vinEnd);
+          }
+          return node;
+        }
+        let head = rebuild(0, pre.length - 1, 0, vin.length - 1);
+        return head;
+      }
+
+      function reConstructBinaryTree(pre, vin) {
+        if (!pre.length || !vin.length) return null;
+        let val = pre[0];
+        let node = new TreeNode(val);
+        let index = vin.indexOf(val);
+        node.left = reConstructBinaryTree(pre.slice(1, index + 1), vin.slice(0, index));
+        node.right = reConstructBinaryTree(pre.slice(1 + index), vin.slice(index + 1));
+        return node;
+      }
+      const pre = [1, 2, 3, 4, 5, 6, 7];
+      const vin = [3, 2, 4, 1, 6, 5, 7];
+      console.log(`pre: ${pre} , vin: ${vin} : tree = `, reConstructBinaryTree(pre, vin));
+
+      // 拓展什么情况下能构建二叉树，什么情况下不能？
+      // 如果含有重复数字如何？
+    </script>
+  </body>
+</html>

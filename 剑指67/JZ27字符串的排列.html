@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // https://www.nowcoder.com/practice/fe6b651b66ae47d7acce78ffdd9a96c7?tpId=13&&tqId=11180&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking
+
+      // 输入一个字符串,按字典序打印出该字符串中字符的所有排列。
+      // 例如输入字符串abc,则按字典序打印出由字符a,b,c所能排列出来的所有字符串abc,acb,bac,bca,cab和cba。
+
+      // 输入一个字符串,长度不超过9(可能有字符重复),字符只包括大小写字母。
+      function Permutation(str) {
+        let arr = Array.from(str);
+        return getStrArr(arr);
+      }
+      function getStrArr(arr) {
+        let str = '';
+        let res = new Set();
+        function subGetStrArr(arr) {
+          if (arr.length === 1) {
+            str += arr[0];
+            res.add(str);
+            return;
+          }
+          for (let i = 0; i < arr.length; i++) {
+            let tempArr = arr.concat();
+            let curStr = arr[i],
+              temp = str;
+            str += curStr;
+            tempArr.splice(i, 1);
+            subGetStrArr(tempArr);
+            str = temp;
+          }
+        }
+        subGetStrArr(arr);
+        return Array.from(res);
+      }
+
+      // 回溯
+      function Permutation(str) {
+        let arr = Array.from(str);
+        let res = new Set();
+        function track(curStr, arr) {
+          if (arr.length === 0) {
+            res.add(curStr);
+            return;
+          }
+          for (let j = 0; j < arr.length; j++) {
+            let list = [...arr];
+            track(curStr + list.splice(j, 1), list);
+          }
+        }
+        track('', arr);
+        return [...res];
+      }
+
+      const input = 'ab';
+      const res = ['ab', 'ba'];
+
+      console.log(input, '== Permutation => ', Permutation(input));
+    </script>
+  </body>
+</html>

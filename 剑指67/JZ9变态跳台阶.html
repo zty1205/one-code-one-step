@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 贪心算法
+      // 一只青蛙一次可以跳上1级台阶，也可以跳上2级……它也可以跳上n级。求该青蛙跳上一个n级的台阶总共有多少种跳法。
+      // f(0) = 0
+      // f(1) = 1
+      // f(2) = 2
+      // f(3) = 4
+      // f(4) = 8 // 4 13 31 22 1111 112 211 121
+      // f(n) =f(n-1) + f(n-2) + f(n-3) ..... + f(2) + f(1)
+      // f(n-1) = f(n-2) + f(n-3) ..... + f(2) + f(1)
+      function jumpFloorII1(number) {
+        // write code here
+        if (number === 0) return 0;
+        return Math.pow(2, number - 1);
+      }
+
+      function jumpFloorII(number) {
+        return j(number, 1);
+        function j(n, acc) {
+          if (n === 0) return 0;
+          if (n === 1) return acc;
+          return j(n - 1, acc * 2);
+        }
+      }
+
+      console.log('jumpFloorII 2 expect 2 = ', jumpFloorII(2));
+      console.log('jumpFloorII 3 expect 4 = ', jumpFloorII(3));
+      console.log('jumpFloorII 4 expect 8 = ', jumpFloorII(4));
+      console.log('jumpFloorII 5 expect 16 = ', jumpFloorII(5));
+    </script>
+  </body>
+</html>

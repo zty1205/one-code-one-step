@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // LL今天心情特别好,因为他去买了一副扑克牌,发现里面居然有2个大王,2个小王(一副牌原本是54张^_^)...
+      // 他随机从中抽出了5张牌,想测测自己的手气,看看能不能抽到顺子,如果抽到的话,他决定去买体育彩票,嘿嘿！！
+      // “红心A,黑桃3,小王,大王,方片5”,“Oh My God!”不是顺子.....LL不高兴了,
+      // 他想了想,决定大\小 王可以看成任何数字,并且A看作1,J为11,Q为12,K为13。
+      // 上面的5张牌就可以变成“1,2,3,4,5”(大小王分别看作2和4),“So Lucky!”。
+      // LL决定去买体育彩票啦。 现在,要求你使用这幅牌模拟上面的过程,然后告诉我们LL的运气如何，
+      // 如果牌能组成顺子就输出true，否则就输出false。为了方便起见,你可以认为大小王是0。
+
+      // sort一下 缺的个数和0的个数一样
+
+      // 失败没考虑重复的数 加个map
+      function IsContinuous(numbers) {
+        // write code here
+        if (numbers.length <= 1) return !!numbers.length;
+        let arr = numbers.sort((a, b) => a - b);
+        console.log('arr = ', arr);
+        let zero = 0;
+        let inNeed = 0;
+        while (zero < arr.length && !arr[zero]) {
+          zero++;
+        } // 0的个数
+        console.log('zero = ', zero);
+        if (zero === arr.length) return true;
+
+        // 初始化pre 和 map
+        let pre = arr[zero];
+        let map = {
+          [pre]: true
+        };
+
+        for (let i = zero + 1; i < arr.length; i++) {
+          let cur = arr[i];
+          if (map[cur]) return false;
+          map[cur] = true;
+
+          inNeed += cur - pre - 1;
+          console.log('for', { i, cur, pre, inNeed });
+          if (inNeed > zero) return false;
+          pre = cur;
+        }
+        console.log('inNeed = ', inNeed);
+        return zero >= inNeed;
+      }
+
+      function IsContinuous(numbers) {
+        if (!numbers.length) return false;
+        let arr = new Array(14).fill(0);
+        let min = 14;
+        let max = 0;
+        for (let n of numbers) {
+          if (n > 0) {
+            if (arr[n]) return false;
+            arr[n] = n;
+            min = Math.min(min, n);
+            max = Math.max(max, n);
+          }
+        }
+        return max - min < 5;
+      }
+
+      let input = [0, 3, 2, 6, 4];
+      let res = true;
+
+      input = [0, 7, 2, 6, 4];
+      res = false;
+
+      input = [0, 0, 0, 0];
+      res = true;
+
+      input = [1, 0, 0, 1, 0];
+      res = false;
+
+      input = [1, 2, 3, 4, 5];
+      res = true;
+
+      console.log(`input: ${input} expect ${res} IsContinuous => `, IsContinuous(input));
+    </script>
+  </body>
+</html>
