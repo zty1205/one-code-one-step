@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 实现 strStr() 函数。
+
+      // 给定一个 haystack 字符串和一个 needle 字符串，在 haystack 字符串中找出 needle 字符串出现的第一个位置 (从0开始)。如果不存在，则返回  -1。。
+
+      var strStr = function (haystack = '', needle = '') {
+        if (!needle) return 0;
+        let length = needle.length;
+
+        for (let i = 0; i < haystack.length - length + 1; i++) {
+          if (haystack[i] === needle[0]) {
+            console.log('haystack.substring(i, i + length = ', haystack.substring(i, i + length));
+            if (haystack.substring(i, i + length) === needle) {
+              return i;
+            }
+          }
+        }
+        return -1;
+      };
+
+      let haystack = 'hello';
+      let needle = 'll';
+      let res = 2;
+
+      // haystack = 'aaaaa';
+      // needle = 'bba';
+      // res = -1;
+
+      haystack = 'a';
+      needle = 'a';
+      res = 0;
+
+      console.log(`haystack: ${haystack}, needle: ${needle}, res: ${res} === ${strStr(haystack, needle)}`);
+    </script>
+  </body>
+</html>

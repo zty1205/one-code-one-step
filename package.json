@@ -1,7 +1,11 @@
 {
   "name": "zty-leet-code",
   "version": "0.1.0",
-  "keywords": ["react", "antd", "leetCode"],
+  "keywords": [
+    "react",
+    "antd",
+    "leetCode"
+  ],
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",

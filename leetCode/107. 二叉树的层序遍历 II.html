@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 给定一个二叉树，返回其节点值自底向上的层序遍历。 （即按从叶子节点所在层到根节点所在的层，逐层从左向右遍历）
+
+      // 例如：
+      // 给定二叉树 [3,9,20,null,null,15,7],
+
+      //     3
+      //    / \
+      //   9  20
+      //     /  \
+      //    15   7
+      // 返回锯齿形层序遍历如下：
+
+      // [
+      //   [15,7],
+      //   [9,20],
+      //   [3]
+      // ]
+
+      var levelOrderBottom = function (root) {
+        if (!root) return [];
+        let res = [];
+        let queue = [root];
+        while (queue.length) {
+          let curSize = queue.length;
+          res.unshift([]);
+          for (let i = 0; i < curSize; i++) {
+            let node = queue.shift();
+            res[0].push(node.val);
+            node.left && queue.push(node.left);
+            node.right && queue.push(node.right);
+          }
+        }
+        return res;
+      };
+
+      let root = {
+        val: 3,
+        left: {
+          val: 9
+        },
+        right: {
+          val: 20,
+          left: {
+            val: 15
+          },
+          right: {
+            val: 7
+          }
+        }
+      };
+
+      console.log('levelOrderBottom tree = ', levelOrderBottom(root));
+    </script>
+  </body>
+</html>

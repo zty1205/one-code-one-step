@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 给定两个整数 n 和 k，返回 1 ... n 中所有可能的 k 个数的组合。
+      var combine = function (n, k) {
+        let res = [];
+        let list = Array.from({ length: n }, (val, i) => i + 1);
+        function track(arr, idx) {
+          if (arr.length === k) {
+            res.push(arr);
+            return;
+          }
+          for (let i = idx; i < list.length; i++) {
+            let _a = [...arr];
+            _a.push(list[i]);
+            track(_a, i + 1);
+          }
+        }
+        track([], 0);
+        return res;
+      };
+
+      let n = 4,
+        k = 2,
+        res = [
+          [2, 4],
+          [3, 4],
+          [2, 3],
+          [1, 2],
+          [1, 3],
+          [1, 4]
+        ];
+
+      console.log(`n: ${n} , k : ${k} res = `, combine(n, k));
+    </script>
+  </body>
+</html>

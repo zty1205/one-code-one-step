@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 存在一个按升序排列的链表，给你这个链表的头节点 head ，
+      // 请你删除链表中所有存在数字重复情况的节点，只保留原始链表中 没有重复出现 的数字。
+      // 返回同样按升序排列的结果链表。
+
+      function ListNode(val, next) {
+        this.val = val === undefined ? 0 : val;
+        this.next = next === undefined ? null : next;
+      }
+
+      // 重复的把自已也得删
+
+      // 一次统计 一次删除
+      var deleteDuplicates = function (head) {
+        if (!head) return null;
+        let node = head;
+        let map = {};
+        while (node) {
+          map[node.val] = map[node.val] ? map[node.val] + 1 : 1;
+          node = node.next;
+        }
+        let h = new ListNode('h');
+        h.next = head;
+        node = h;
+        while (node.next) {
+          if (map[node.next.val] > 1) {
+            node.next = node.next.next;
+          } else {
+            node = node.next;
+          }
+        }
+        return h.next;
+      };
+
+      let head = {
+        val: 1,
+        next: {
+          val: 1,
+          next: {
+            val: 2,
+            next: null
+          }
+        }
+      };
+
+      head = {
+        val: 1,
+        next: {
+          val: 1,
+          next: {
+            val: 2,
+            next: {
+              val: 3,
+              next: {
+                val: 3,
+                next: null
+              }
+            }
+          }
+        }
+      };
+
+      head = {
+        val: 1,
+        next: {
+          val: 1,
+          next: {
+            val: 1,
+            next: null
+          }
+        }
+      };
+
+      head = {
+        val: 1,
+        next: {
+          val: 1,
+          next: {
+            val: 1,
+            next: {
+              val: 2,
+              next: {
+                val: 3,
+                next: null
+              }
+            }
+          }
+        }
+      };
+
+      console.log('deleteDuplicates = ', deleteDuplicates(head));
+    </script>
+  </body>
+</html>

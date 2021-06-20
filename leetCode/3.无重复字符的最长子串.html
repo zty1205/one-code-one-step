@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <link rel="stylesheet" href="./style/var.css" />
+    <link rel="stylesheet" href="./style/main.css" />
+    <link rel="stylesheet" href="./style/main-mock.css" />
+    <link rel="stylesheet" href="./style/main-question.css" />
+    <link rel="stylesheet" href="./style/common.css" />
+  </head>
+  <body>
+    <h1>3. 无重复字符的最长子串</h1>
+    <div class="css-1e1vffy-Tools e1o5n5iy0">
+      <span data-small-spacing="true" class="css-1p5igso-Difficulty e1o5n5iy1">难度</span>
+      <span data-degree="medium" class="css-1p5igso-Difficulty e1o5n5iy1">中等</span>
+    </div>
+    <div class="content__1Y2H">
+      <div class="notranslate">
+        <p>
+          给定一个字符串，请你找出其中不含有重复字符的&nbsp;
+          <strong>最长子串&nbsp;</strong>
+          的长度。
+        </p>
+
+        <p>&nbsp;</p>
+
+        <p><strong>示例&nbsp;1:</strong></p>
+
+        <pre><strong>输入: </strong>s = "abcabcbb"
+    <strong>输出: </strong>3 
+    <strong>解释:</strong> 因为无重复字符的最长子串是 <code>"abc"，所以其</code>长度为 3。
+    </pre>
+
+        <p><strong>示例 2:</strong></p>
+
+        <pre><strong>输入: </strong>s = "bbbbb"
+    <strong>输出: </strong>1
+    <strong>解释: </strong>因为无重复字符的最长子串是 <code>"b"</code>，所以其长度为 1。
+    </pre>
+
+        <p><strong>示例 3:</strong></p>
+
+        <pre><strong>输入: </strong>s = "pwwkew"
+    <strong>输出: </strong>3
+    <strong>解释: </strong>因为无重复字符的最长子串是&nbsp;<code>"wke"</code>，所以其长度为 3。
+    &nbsp;    请注意，你的答案必须是 <strong>子串 </strong>的长度，<code>"pwke"</code>&nbsp;是一个<em>子序列，</em>不是子串。
+    </pre>
+
+        <p><strong>示例 4:</strong></p>
+
+        <pre><strong>输入: </strong>s = ""
+    <strong>输出: </strong>0
+    </pre>
+
+        <p>&nbsp;</p>
+
+        <p><strong>提示：</strong></p>
+
+        <ul>
+          <li>
+            <code>
+              0 &lt;= s.length &lt;= 5 * 10
+              <sup>4</sup>
+            </code>
+          </li>
+          <li>
+            <code>s</code>
+            &nbsp;由英文字母、数字、符号和空格组成
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>
+  <script src="./js/common.js"></script>
+  <script>
+    function run(testCase = [], resultList = [], fun) {
+      testCase.forEach((c, i) => {
+        console.log(`输入 ${c} , 期望 ${resultList[i]} , 结果为：%c${fun.call(null, c)}`, 'color: red');
+      });
+    }
+  </script>
+  <script>
+    // 给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。
+    var isDef = function (val) {
+      return val !== '' && val !== undefined && val !== null;
+    };
+    var lengthOfLongestSubstring = function (s) {
+      console.log(`%c--- ${s} ---`, 'color: blue;font-size: 14px');
+      // 试试滑动窗口
+      if (s.length <= 1) return s.length;
+      let maxL = -1,
+        map = {};
+      let left = 0,
+        right = 0;
+      console.log(`%cleft == index: ${left}, char: ${s[left]}`, 'color: red');
+      console.log(`right == index: ${right}, char: ${s[right]}`);
+      // debugger
+      while (left < s.length && right < s.length) {
+        var char = s[right];
+        if (isDef(map[char]) && map[char] >= left) {
+          // 忽略下标小于left的map
+          maxL = Math.max(maxL, right - left);
+          left = map[char] + 1;
+          console.log(`%cleft == index: ${left}, char: ${s[left]}`, 'color: red');
+        } else {
+          map[char] = right;
+          right++;
+          console.log(`right == index: ${right}, char: ${s[right]}`);
+        }
+      }
+      return Math.max(maxL, right - left);
+    };
+
+    const all_test_case = ['abcbbcbb', 'abcabcbb', 'bbbbb', 'pwwkew', ''];
+    const all_result_list = [3, 3, 1, 3, 0];
+    const test_case = [all_test_case[0]]; // [...all_test_case];
+    const result_list = [all_result_list[0]]; // [...all_result_list];
+    run(test_case, result_list, lengthOfLongestSubstring);
+  </script>
+</html>

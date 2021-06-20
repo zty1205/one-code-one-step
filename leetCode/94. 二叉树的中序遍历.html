@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 中序遍历
+
+      //     3
+      //    / \
+      //   9  20
+      //     /  \
+      //    15   7
+
+      // 9 3 15 20 7
+      var inorderTraversal = function (root) {
+        if (!root) return [];
+        let res = [];
+        function fun(root) {
+          if (!root) return;
+          root.left && fun(root.left);
+          res.push(root.val);
+          root.right && fun(root.right);
+        }
+        fun(root);
+        return res;
+      };
+
+      let root = {
+        val: 3,
+        left: {
+          val: 9
+        },
+        right: {
+          val: 20,
+          left: {
+            val: 15
+          },
+          right: {
+            val: 7
+          }
+        }
+      };
+
+      console.log('inorderTraversal = ', inorderTraversal(root));
+    </script>
+  </body>
+</html>

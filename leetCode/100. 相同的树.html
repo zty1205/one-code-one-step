@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var isSameTree = function (p, q) {
+        if (!p && !q) return true;
+        // return p && q && p.val === q.val && isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+        return !!p && !!q && p.val === q.val && isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+      };
+
+      var isSameTree = function (p, q) {
+        if (!p && !q) return true;
+        else if (p == null || q == null) return false;
+        else if (p.val !== q.val) return false;
+        return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+      };
+
+      let p = {
+        val: 1,
+        left: {
+          val: 2
+        }
+      };
+
+      let q = {
+        val: 1,
+        right: {
+          val: 2
+        }
+      };
+
+      // p = {
+      //   val: 1,
+      //   left: {
+      //     val: 2
+      //   },
+      //   right: {
+      //     val: 3
+      //   }
+      // };
+
+      // q = {
+      //   val: 1,
+      //   left: {
+      //     val: 2
+      //   },
+      //   right: {
+      //     val: 3
+      //   }
+      // };
+
+      console.log('isSameTree = ', isSameTree(p, q));
+      // console.log('isSameTree = ', isSameTree(p.left, q.left));
+      // console.log('isSameTree = ', isSameTree(p.right, q.right));
+    </script>
+  </body>
+</html>

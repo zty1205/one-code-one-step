@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <link rel="stylesheet" href="./style/var.css" />
+    <link rel="stylesheet" href="./style/main.css" />
+    <link rel="stylesheet" href="./style/main-mock.css" />
+    <link rel="stylesheet" href="./style/main-question.css" />
+    <link rel="stylesheet" href="./style/common.css" />
+  </head>
+  <body>
+    <h1>4.寻找两个正序数组的中位数.html</h1>
+    <div class="css-1e1vffy-Tools e1o5n5iy0">
+      <span data-small-spacing="true" class="css-1p5igso-Difficulty e1o5n5iy1">难度</span>
+      <span data-degree="hard" class="css-1p5igso-Difficulty e1o5n5iy1">困难</span>
+    </div>
+    <div class="content__1Y2H">
+      <div class="notranslate">
+        <p>
+          给定两个大小为 m 和 n 的正序（从小到大）数组&nbsp;
+          <code>nums1</code>
+          和&nbsp;
+          <code>nums2</code>
+          。请你找出并返回这两个正序数组的中位数。
+        </p>
+
+        <p>
+          <strong>进阶：</strong>
+          你能设计一个时间复杂度为
+          <code>O(log (m+n))</code>
+          的算法解决此问题吗？
+        </p>
+
+        <p>&nbsp;</p>
+
+        <p><strong>示例 1：</strong></p>
+
+        <pre><strong>输入：</strong>nums1 = [1,3], nums2 = [2]
+      <strong>输出：</strong>2.00000
+      <strong>解释：</strong>合并数组 = [1,2,3] ，中位数 2
+      </pre>
+
+        <p><strong>示例 2：</strong></p>
+
+        <pre><strong>输入：</strong>nums1 = [1,2], nums2 = [3,4]
+      <strong>输出：</strong>2.50000
+      <strong>解释：</strong>合并数组 = [1,2,3,4] ，中位数 (2 + 3) / 2 = 2.5
+      </pre>
+
+        <p><strong>示例 3：</strong></p>
+
+        <pre><strong>输入：</strong>nums1 = [0,0], nums2 = [0,0]
+      <strong>输出：</strong>0.00000
+      </pre>
+
+        <p><strong>示例 4：</strong></p>
+
+        <pre><strong>输入：</strong>nums1 = [], nums2 = [1]
+      <strong>输出：</strong>1.00000
+      </pre>
+
+        <p><strong>示例 5：</strong></p>
+
+        <pre><strong>输入：</strong>nums1 = [2], nums2 = []
+      <strong>输出：</strong>2.00000
+      </pre>
+
+        <p>&nbsp;</p>
+
+        <p><strong>提示：</strong></p>
+
+        <ul>
+          <li><code>nums1.length == m</code></li>
+          <li><code>nums2.length == n</code></li>
+          <li><code>0 &lt;= m &lt;= 1000</code></li>
+          <li><code>0 &lt;= n &lt;= 1000</code></li>
+          <li><code>1 &lt;= m + n &lt;= 2000</code></li>
+          <li>
+            <code>
+              -10
+              <sup>6</sup>
+              &lt;= nums1[i], nums2[i] &lt;= 10
+              <sup>6</sup>
+            </code>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>
+  <script>
+    function run(testCase = [], resultList = [], fun) {
+      testCase.forEach((c, i) => {
+        console.log(`输入 ${c} , 期望 ${resultList[i]} , 结果为：%c${fun.apply(null, c)}`, 'color: red');
+      });
+    }
+  </script>
+  <script>
+    function middle(num) {
+      return parseInt(num / 2);
+    }
+
+    var findMedianSortedArrays = function (nums1, nums2) {
+      let n1 = nums1 || [],
+        n2 = nums2 || [];
+
+      let m1 = middle(n1.length + n2.length + 1);
+      let m2 = middle(n1.length + n2.length + 2);
+
+      return (findKth(n1, 0, n2, 0, m1) + findKth(n1, 0, n2, 0, m2)) / 2;
+    };
+
+    function findKth(arr1, left1, arr2, left2, kth) {
+      // debugger
+      if (left1 >= arr1.length) return arr2[left2 + kth - 1]; // arr1已被删完 第k大 下标为k-1
+      if (left2 >= arr2.length) return arr1[left1 + kth - 1];
+      if (kth === 1) return Math.min(arr1[left1], arr2[left2]);
+
+      let mid1 = left1 + Math.min(arr1.length, middle(kth)) - 1;
+      let mid2 = left2 + Math.min(arr2.length, middle(kth)) - 1;
+
+      if (arr1[mid1] < arr2[mid2]) {
+        return findKth(arr1, mid1 + 1, arr2, left2, kth - (mid1 - left1 + 1));
+      } else {
+        return findKth(arr1, left1, arr2, mid2 + 1, kth - (mid2 - left2 + 1));
+      }
+    }
+
+    const all_test_case = [
+      [[1, 3], [2]],
+      [
+        [1, 2],
+        [3, 4]
+      ],
+      [
+        [0, 0],
+        [0, 0]
+      ],
+      [[], [1]],
+      [[2], []]
+    ];
+    const all_result_list = [2.0, 2.5, 0.0, 1.0, 2.0];
+    const test_case = [...all_test_case];
+    const result_list = [...all_result_list];
+    run(test_case, result_list, findMedianSortedArrays);
+  </script>
+</html>

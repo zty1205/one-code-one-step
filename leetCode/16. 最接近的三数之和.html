@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 给定一个包括 n 个整数的数组 nums 和 一个目标值 target。
+      // 找出 nums 中的三个整数，使得它们的和与 target 最接近。返回这三个数的和。
+      // 假定每组输入只存在唯一答案。
+      var threeSumClosest = function (nums, target) {
+        nums.sort((a, b) => a - b);
+        let res = nums[0] + nums[1] + nums[nums.length - 1];
+
+        for (let i = 0; i < nums.length - 2; i++) {
+          const n1 = nums[i];
+          let l = i + 1;
+          let r = nums.length - 1;
+          while (l < r) {
+            const n2 = nums[l];
+            const n3 = nums[r];
+            const sum = n1 + n2 + n3;
+            if (sum > target) {
+              r--;
+            } else {
+              l++;
+            }
+            if (Math.abs(sum - target) < Math.abs(res - target)) {
+              res = sum;
+            }
+          }
+        }
+        return res;
+      };
+    </script>
+  </body>
+</html>

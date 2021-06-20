@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 实现获取 下一个排列 的函数，算法需要将给定数字序列重新排列成字典序中下一个更大的排列。
+
+      // 如果不存在下一个更大的排列，则将数字重新排列成最小的排列（即升序排列）。
+
+      // 必须 原地 修改，只允许使用额外常数空间。
+
+      var nextPermutation = function (nums = []) {
+        const length = nums.length;
+        if (length === 1) return nums;
+        let guard = nums[length - 1];
+
+        // 找到比guard小的且差距最小的
+        let min = Number.MAX_VALUE;
+        let idx = -1;
+        for (let i = length - 2; i >= 0; i--) {
+          if (nums[i] < guard) {
+            let oldM = min;
+            min = Math.min(min, guard - nums[i]);
+            if (min < oldM) idx = i;
+          }
+        }
+        console.log('idx = ', idx);
+        if (idx < 0) {
+          return nums.reverse();
+        } else {
+          let item = nums[idx];
+          nums.splice(idx, 1, guard, item);
+          nums.pop();
+          return nums;
+        }
+      };
+
+      // https://leetcode-cn.com/problems/next-permutation/solution/xia-yi-ge-pai-lie-suan-fa-xiang-jie-si-lu-tui-dao-/
+      var nextPermutation = function (nums = []) {
+        const length = nums.length;
+        if (length === 1) return nums;
+        let i = length - 2;
+        let j = length - 1;
+        let k = j;
+        while (i >= 0 && nums[i] >= nums[j]) {
+          i--;
+          j--;
+        }
+        if (i >= 0) {
+          while (nums[i] >= nums[k]) {
+            k--;
+          }
+          [nums[i], nums[k]] = [nums[k], nums[i]];
+        }
+        // reverse A[j:end]
+        console.log('nums = ', [...nums]);
+        console.log('j = ', j, length - 1);
+        for (let start = j, end = length - 1; start < end; start++, end--) {
+          [nums[start], nums[end]] = [nums[end], nums[start]];
+        }
+        return nums;
+      };
+
+      let nums = [1, 2, 3];
+      let res = [1, 3, 2];
+
+      nums = [3, 2, 1];
+      res = [1, 2, 3];
+
+      // nums = [1, 1, 5];
+      // res = [1, 5, 1];
+
+      // nums = [1, 1, 5, 5];
+      // res = [1, 5, 1, 5];
+
+      // nums = [1, 3, 2];
+      // res = [2, 1, 3];
+
+      console.log(`nums: ${nums}, res: ${res} nextPermutation == ${nextPermutation(nums)}`);
+    </script>
+  </body>
+</html>

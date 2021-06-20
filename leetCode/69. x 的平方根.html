@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 实现 int sqrt(int x) 函数。
+
+      // 计算并返回 x 的平方根，其中 x 是非负整数。
+
+      // 由于返回类型是整数，结果只保留整数的部分，小数部分将被舍去。
+
+      var mySqrt = function (x) {
+        let l = 0;
+        let r = x;
+        let res = 0;
+        while (l <= r) {
+          let mid = (l + r) >> 1;
+          if (mid * mid <= x) {
+            res = mid;
+            l = mid + 1;
+          } else {
+            r = mid - 1;
+          }
+        }
+        return res;
+      };
+
+      // let x = 4;
+      // let res = 2;
+
+      x = 8;
+      res = 2;
+
+      console.log(`mySqrt ${x}`, mySqrt(x));
+      window.mySqrt = mySqrt;
+    </script>
+  </body>
+</html>

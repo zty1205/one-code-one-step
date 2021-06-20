@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 给定一个非负索引 k，其中 k ≤ 33，返回杨辉三角的第 k 行。
+      // 在杨辉三角中，每个数是它左上方和右上方的数的和。
+      // 输入: 4
+      // 输出:
+      //  [1,4,6,4,1]
+      // 你可以优化你的算法到 O(k) 空间复杂度吗？
+
+      // 后一个数 = 前一个 * (n-m+1) / m
+
+      var getRow = function (rowIndex) {
+        let res = [];
+        for (let i = 0; i < rowIndex + 1; i++) {
+          let row = Array.from({ length: i + 1 }).fill(1);
+          for (let j = 1; j < i; j++) {
+            row[j] = res[i - 1][j - 1] + res[i - 1][j];
+          }
+          res.push(row);
+        }
+        return res.pop();
+      };
+
+      var getRow = function (rowIndex) {
+        const row = new Array(rowIndex + 1);
+        row[0] = 1;
+        for (let i = 1; i <= rowIndex; ++i) {
+          row[i] = (row[i - 1] * (rowIndex - i + 1)) / i;
+        }
+        return row;
+      };
+
+      const rowIndex = 4;
+      console.log(`getRow ${rowIndex} = `, getRow(rowIndex));
+    </script>
+  </body>
+</html>

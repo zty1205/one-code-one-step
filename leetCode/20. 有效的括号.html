@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串 s ，判断字符串是否有效。
+      // 有效字符串需满足：
+      // 左括号必须用相同类型的右括号闭合。
+      // 左括号必须以正确的顺序闭合。
+
+      // const map = {
+      //   '{': '}',
+      //   '}': '{',
+      //   '[': ']',
+      //   ']': '[',
+      //   '(': ')',
+      //   ')': '('
+      // };
+
+      const map = {
+        '}': '{',
+        ']': '[',
+        ')': '('
+      };
+
+      // 用一个辅助栈就行
+      var isValid = function (s) {
+        let stack = [];
+        let len = s.length;
+        let i = 0;
+        while (i < len) {
+          console.log('s[i] = ', s[i], map[s[i]], stack[stack.length - 1], stack.length);
+          // console.log('stack = ', [...stack]);
+          // console.log('map[s[i]] = ', map[s[i]]);
+          // console.log('stack[stack.length]= ', [...stack].pop());
+          console.log('bol = ', stack[stack.length - 1] === map[s[i]]);
+          if (map[s[i]] && stack[stack.length - 1] === map[s[i]]) {
+            console.log('pop');
+            stack.pop();
+          } else {
+            console.log('push');
+            stack.push(s[i]);
+          }
+          // stack[stack.length] === map[s[i]] ? stack.pop() : stack.push(s[i]);
+          i++;
+        }
+        return !stack.length;
+      };
+
+      var isValid = function (s) {
+        let stack = [];
+        let len = s.length;
+        let i = 0;
+        while (i < len) {
+          map[s[i]] && stack[stack.length - 1] === map[s[i]] ? stack.pop() : stack.push(s[i]);
+          i++;
+        }
+        return !stack.length;
+      };
+
+      let s = '()[]{}';
+      let res = true;
+
+      // s = '(]';
+      // res = false;
+
+      // s = '([])';
+      // res = true;
+
+      s = '(){}}{';
+      res = false;
+      console.log(`$s isValid ${res} => ${isValid(s)}`);
+    </script>
+  </body>
+</html>

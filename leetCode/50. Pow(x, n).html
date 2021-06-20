@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 实现 pow(x, n) ，即计算 x 的 n 次幂函数（即，xn）。
+      var myPow = function (x, n) {
+        if (n === 0) return 1;
+        if (n < 0) return 1 / myPow(x, -n);
+        if (n % 2) return x * myPow(x, n - 1);
+        return myPow(x * x, n / 2);
+      };
+
+      let x = 2.0;
+      let n = 10;
+      let res = 1024.0;
+
+      x = 2.1;
+      n = 3;
+      res = 9.261;
+
+      x = 2.0;
+      n = -2;
+      res = 0.25;
+
+      x = 2.0;
+      n = -2147483648;
+      res = 0;
+
+      console.log(`${x} ^ ${n} = ${res} === ${myPow(x, n)}`);
+    </script>
+  </body>
+</html>

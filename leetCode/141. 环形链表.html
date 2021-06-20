@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 给定一个链表，判断链表中是否有环。
+      /**
+       * Definition for singly-linked list.
+       * function ListNode(val) {
+       *     this.val = val;
+       *     this.next = null;
+       * }
+       */
+
+      /**
+       * @param {ListNode} head
+       * @return {boolean}
+       */
+      function ListNode(val) {
+        this.val = val;
+        this.next = null;
+      }
+      // 慢快指针， 有环的话 快一定会等于(追上)慢
+      var hasCycle = function (head) {
+        if (!head || !head.next) return false;
+        let slow = head;
+        let fast = head.next;
+        while (fast != slow) {
+          if (!fast || !fast.next) return false;
+          slow = slow.next;
+          fast = fast.next.next;
+        }
+        return true;
+      };
+
+      const A = new ListNode(3);
+      const B = new ListNode(2);
+      const C = new ListNode(0);
+      const D = new ListNode(-4);
+      A.next = B;
+      B.next = C;
+      C.next = D;
+      D.next = B;
+      console.log('hasCycle = ', hasCycle(A));
+    </script>
+  </body>
+</html>

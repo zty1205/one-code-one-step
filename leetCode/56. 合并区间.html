@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 以数组 intervals 表示若干个区间的集合，
+      // 其中单个区间为 intervals[i] = [starti, endi] 。
+      // 请你合并所有重叠的区间，并返回一个不重叠的区间数组，该数组需恰好覆盖输入中的所有区间。
+
+      var merge = function (intervals = []) {
+        if (intervals.length < 2) return intervals;
+        intervals.sort((arr1, arr2) => arr1[0] - arr2[0]);
+        let res = [intervals[0]];
+
+        for (let i = 0; i < intervals.length; i++) {
+          let inter = intervals[i];
+          let peek = res[res.length - 1];
+          if (inter[0] > peek[1]) {
+            res.push(inter);
+          } else {
+            peek[1] = Math.max(inter[1], peek[1]);
+          }
+        }
+        return res;
+      };
+
+      let intervals = [
+        [1, 3],
+        [2, 6],
+        [8, 10],
+        [15, 18]
+      ];
+      let res = [
+        [1, 6],
+        [8, 10],
+        [15, 18]
+      ];
+
+      console.log('merge = ', merge(intervals));
+    </script>
+  </body>
+</html>

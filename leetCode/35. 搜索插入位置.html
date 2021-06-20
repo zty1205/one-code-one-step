@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。
+      // 如果目标值不存在于数组中，返回它将会被按顺序插入的位置。
+      // 你可以假设数组中无重复元素
+
+      // var searchInsert = function (nums, target) {
+      //   let i = 0;
+      //   while (nums[i] < target) i++;
+      //   return i;
+      // };
+
+      var searchInsert = function (nums, target) {
+        let start = 0;
+        let res = nums.length;
+        let end = res - 1;
+
+        while (start <= end) {
+          let mid = (start + end) >> 1;
+          if (target <= nums[mid]) {
+            res = mid;
+            end = mid - 1;
+          } else {
+            start = mid + 1;
+          }
+        }
+        return res;
+      };
+
+      let nums = [1, 3, 5, 6];
+      let target = 5;
+      let res = 2;
+
+      nums = [1, 3, 5, 6];
+      target = 2;
+      res = 1;
+
+      console.log(`nums: ${nums}, target: ${target}, res: ${res} == ${searchInsert(nums, target)}`);
+    </script>
+  </body>
+</html>

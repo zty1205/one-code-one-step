@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 给你二叉树的根节点 root 和一个表示目标和的整数 targetSum ，判断该树中是否存在 根节点到叶子节点 的路径，这条路径上所有节点值相加等于目标和 targetSum 。
+
+      // 叶子节点 是指没有子节点的节点。
+
+      var hasPathSum = function (root, targetSum) {
+        if (!root) return false;
+        function addP(node, sum) {
+          if (!node.left && !node.right) return sum === targetSum;
+          let left = node.left ? addP(node.left, sum + node.left.val) : false;
+          let right = node.right ? addP(node.right, sum + node.right.val) : false;
+          return left || right;
+        }
+        return addP(root, root.val);
+      };
+
+      var hasPathSum = function (root, targetSum) {
+        if (!root) return false;
+        if (!root.right && !root.left) return root.val === targetSum;
+        return hasPathSum(root.right, targetSum - root.val) || hasPathSum(root.left, targetSum - root.val);
+      };
+
+      //  3
+      //  / \
+      // 9  20
+      //   /  \
+      //  15   7
+      let root = {
+        val: 3,
+        left: {
+          val: 9
+        },
+        right: {
+          val: 20,
+          left: {
+            val: 15
+          },
+          right: {
+            val: 7
+          }
+        }
+      };
+      console.log('hasPathSum 12 true = ', hasPathSum(root, 12));
+      console.log('hasPathSum 13 false = ', hasPathSum(root, 13));
+      console.log('hasPathSum 29 false = ', hasPathSum(root, 29));
+      console.log('hasPathSum 30 true = ', hasPathSum(root, 30));
+    </script>
+  </body>
+</html>

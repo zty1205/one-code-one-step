@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 给你一个有序数组 nums ，请你 原地 删除重复出现的元素，使每个元素 只出现一次 ，返回删除后数组的新长度。
+      // 不要使用额外的数组空间，你必须在 原地 修改输入数组 并在使用 O(1) 额外空间的条件下完成。
+
+      //
+      // 说明:
+      // 为什么返回数值是整数，但输出的答案是数组呢?
+      // 请注意，输入数组是以「引用」方式传递的，这意味着在函数里修改输入数组对于调用者是可见的。
+      var removeDuplicates = function (nums) {
+        for (let i = 0; i < nums.length; i++) {
+          if (nums[i] === nums[i + 1]) {
+            nums.splice(i + 1, 1);
+            i--;
+          }
+        }
+        return nums.length;
+      };
+
+      var removeDuplicates2 = function (nums) {
+        if (nums.length == 0) return 0;
+        let i = 0;
+        for (let j = 1; j < nums.length; j++) {
+          if (nums[j] != nums[i]) {
+            i++;
+            nums[i] = nums[j];
+          }
+        }
+        return i + 1;
+      };
+
+      let nums = [1, 1, 2];
+      let res = 2;
+
+      // nums = [0, 0, 1, 1, 1, 2, 2, 3, 3, 4];
+      // res = 5;
+      console.log(` removeDuplicates ${res} = `, removeDuplicates(nums), nums);
+    </script>
+  </body>
+</html>

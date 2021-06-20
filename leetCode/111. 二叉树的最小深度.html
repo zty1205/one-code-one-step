@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var minDepth = function (root) {};
+
+      // 深度遍历
+      var minDepth = function (root) {
+        if (!root) return 0;
+        if (!root.left && !root.right) return 1;
+        let min_dep = Number.MAX_VALUE;
+        if (root.right) {
+          min_dep = Math.min(minDepth(root.right), min_dep);
+        }
+        if (root.left) {
+          min_dep = Math.min(minDepth(root.left), min_dep);
+        }
+        return min_dep + 1;
+      };
+
+      //  3
+      //  / \
+      // 9  20
+      //   /  \
+      //  15   7
+      let root = {
+        val: 3,
+        left: {
+          val: 9
+        },
+        right: {
+          val: 20,
+          left: {
+            val: 15
+          },
+          right: {
+            val: 7
+          }
+        }
+      };
+
+      console.log('minDepth = ', minDepth(root));
+    </script>
+  </body>
+</html>

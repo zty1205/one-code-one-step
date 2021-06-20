@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //   给定一个由 整数 组成的 非空 数组所表示的非负整数，在该数的基础上加一。
+
+      // 最高位数字存放在数组的首位， 数组中每个元素只存储单个数字。
+
+      // 你可以假设除了整数 0 之外，这个整数不会以零开头。
+
+      var plusOne = function (digits) {
+        let add = 0;
+        let len = digits.length - 1;
+        digits[len]++;
+        while (len >= 0) {
+          let sum = digits[len] + add;
+          digits[len] = sum % 10;
+          add = Math.floor(sum / 10);
+          console.log('add = ', add);
+          len--;
+        }
+        if (add) {
+          digits.unshift(add);
+        }
+        return digits;
+      };
+
+      let digits = [1, 2, 3];
+      let res = [1, 2, 4];
+
+      // digits = [4, 3, 2, 1];
+      // res = [4, 3, 2, 2];
+
+      // digits = [0];
+      // res = [1];
+
+      // digits = [9];
+      // res = [1, 0];
+
+      // digits = [9, 9];
+      // res = [1, 0, 0];
+
+      console.log(`${digits} plusOne = ${res} === ${plusOne(digits)}`);
+    </script>
+  </body>
+</html>

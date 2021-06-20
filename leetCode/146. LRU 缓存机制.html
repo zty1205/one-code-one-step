@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 运用你所掌握的数据结构，设计和实现一个  LRU (最近最少使用) 缓存机制 。
+      // 实现 LRUCache 类：
+
+      // LRUCache(int capacity) 以正整数作为容量 capacity 初始化 LRU 缓存
+      // int get(int key) 如果关键字 key 存在于缓存中，则返回关键字的值，否则返回 -1 。
+      // void put(int key, int value) 如果关键字已经存在，则变更其数据值；如果关键字不存在，则插入该组「关键字-值」。当缓存容量达到上限时，它应该在写入新数据之前删除最久未使用的数据值，从而为新的数据值留出空间。
+      //
+
+      // 进阶：你是否可以在 O(1) 时间复杂度内完成这两种操作？
+
+      function deepClone(obj = new Object(), map = new WeakMap()) {
+        // 简单类型
+        if (obj == null || typeof obj !== 'object') return obj;
+        if (obj instanceof Date) return new Date(obj);
+        if (obj instanceof RegExp) return new Date(obj);
+
+        if (map.has(obj)) return map.get(obj);
+
+        let o = new obj.constructor();
+        map.set(obj, o);
+
+        for (let k in obj) {
+          if (obj.hasOwnProperty(k)) {
+            // 遍历一个实例对象的所有属性时忽略掉继承属性(从原型继承的属性)
+            o[k] = deepClone(obj[k], map);
+          }
+        }
+        return o;
+      }
+
+      function DLinkedNode(key, val) {
+        this.key = key;
+        this.val = val;
+        this.pre = null;
+        this.next = null;
+      }
+
+      /**
+       * @param {number} capacity
+       */
+      var LRUCache = function (capacity) {
+        this.hash = {};
+        this.size = 0;
+        this.capacity = capacity;
+
+        this.head = new DLinkedNode('HEAD');
+        this.tail = new DLinkedNode('TAIL');
+        this.head.next = this.tail;
+        this.tail.pre = this.head;
+      };
+
+      /**
+       * @param {number} key
+       * @return {number}
+       */
+      LRUCache.prototype.get = function (key) {
+        const node = this.hash[key];
+        if (!node) return -1;
+        this.moveToHead(node);
+        return node.val;
+      };
+
+      /**
+       * @param {number} key
+       * @param {number} value
+       * @return {void}
+       */
+      LRUCache.prototype.put = function (key, value) {
+        let node = this.hash[key];
+        if (node) {
+          node.val = value;
+          this.moveToHead(node);
+        } else {
+          if (this.size === this.capacity) {
+            this.delLRUNode();
+          }
+          const node = new DLinkedNode(key, value);
+          this.hash[key] = node;
+          this.addToHead(node);
+        }
+      };
+
+      LRUCache.prototype.moveToHead = function (node) {
+        this.removeNode(node);
+        this.addToHead(node);
+      };
+
+      LRUCache.prototype.removeNode = function (node) {
+        let preNode = node.pre;
+        let nextNode = node.next;
+        preNode.next = nextNode;
+        nextNode.pre = preNode;
+        this.size--;
+      };
+
+      LRUCache.prototype.addToHead = function (node) {
+        let nextNode = this.head.next;
+
+        this.head.next = node;
+        node.pre = this.head;
+
+        node.next = nextNode;
+        nextNode.pre = node;
+        this.size++;
+      };
+
+      LRUCache.prototype.delLRUNode = function () {
+        let node = this.tail.pre;
+        this.removeNode(node);
+        delete this.hash[node.key];
+      };
+
+      /**
+       * Your LRUCache object will be instantiated and called as such:
+       * var obj = new LRUCache(capacity)
+       * var param_1 = obj.get(key)
+       * obj.put(key,value)
+       */
+
+      const lRUCache = new LRUCache(2);
+      lRUCache.put(1, 0); // 缓存是 {1=1}
+      lRUCache.put(2, 2); // 缓存是 {1=1, 2=2}
+
+      console.log('get 1 = ', lRUCache.get(1)); // 返回 1
+      lRUCache.put(3, 3); // 该操作会使得关键字 2 作废，缓存是 {1=1, 3=3}
+      lRUCache.get(2); // 返回 -1 (未找到)
+      lRUCache.put(4, 4); // 该操作会使得关键字 1 作废，缓存是 {4=4, 3=3}
+      console.log('get 1 = ', lRUCache.get(1)); // 返回 -1 (未找到)
+      console.log('get 3 = ', lRUCache.get(3)); // 返回 3
+      console.log('get 4 = ', lRUCache.get(4)); // 返回 4
+    </script>
+  </body>
+</html>

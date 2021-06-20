@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 给定一个只包含数字的字符串，用以表示一个 IP 地址，返回所有可能从 s 获得的 有效 IP 地址 。你可以按任何顺序返回答案。
+      // 有效 IP 地址 正好由四个整数（每个整数位于 0 到 255 之间组成，且不能含有前导 0），整数之间用 '.' 分隔。
+      // 例如："0.1.2.201" 和 "192.168.1.1" 是 有效 IP 地址，但是 "0.011.255.245"、"192.168.1.312" 和 "192.168@1.1" 是 无效 IP 地址。
+
+      // 存数据就可 无效管逗号
+      var restoreIpAddresses = function (s) {
+        let res = [];
+        const arr = Array.from(s);
+        console.log('arr = ', arr);
+        function isValid(strArr) {
+          function _valid(str) {
+            if (/^0\d+/.test(str)) return false;
+            let num = Number(str);
+            return num >= 0 && num <= 255;
+          }
+
+          for (let i = 0; i < strArr.length; i++) {
+            if (!_valid(strArr[i])) {
+              return false;
+            }
+          }
+          return true;
+        }
+        function track(list, idx) {
+          console.log('track = ', { list, idx });
+          if (idx === arr.length) {
+            res.push(list);
+            return;
+          }
+          for (let i = idx; i < arr.length; i++) {
+            arr[i] !== undefined && track([...list, arr[i]], idx + 1);
+            arr[i + 1] !== undefined && track([...list, `${arr[i]}${arr[i + 1]}`], idx + 2);
+            arr[i + 2] !== undefined && track([...list, `${arr[i]}${arr[i + 1]}${arr[i + 2]}`], idx + 3);
+          }
+        }
+        track([], 0);
+
+        return res;
+      };
+
+      // https://leetcode-cn.com/problems/restore-ip-addresses/solution/shou-hua-tu-jie-huan-yuan-dfs-hui-su-de-xi-jie-by-/
+      var restoreIpAddresses = (s) => {
+        const res = [];
+        // 复原从start开始的子串
+        const dfs = (subRes, start) => {
+          if (subRes.length == 4 && start == s.length) {
+            // 片段满4段，且耗尽所有字符
+            res.push(subRes.join('.')); // 拼成字符串，加入解集
+            return; // 返不返回都行，指针已经到头了，严谨的说还是返回
+          }
+          if (subRes.length == 4 && start < s.length) {
+            // 满4段，字符未耗尽，不用往下选了
+            return;
+          }
+          for (let len = 1; len <= 3; len++) {
+            // 枚举出选择，三种切割长度
+            if (start + len - 1 >= s.length) return; // 加上要切的长度就越界，不能切这个长度
+            if (len != 1 && s[start] == '0') return; // 不能切出'0x'、'0xx'
+
+            const str = s.substring(start, start + len); // 当前选择切出的片段
+            if (len == 3 && +str > 255) return; // 不能超过255
+
+            subRes.push(str); // 作出选择，将片段加入subRes
+            dfs(subRes, start + len); // 基于当前选择，继续选择，注意更新指针
+            subRes.pop(); // 上面一句的递归分支结束，撤销最后的选择，进入下一轮迭代，考察下一个切割长度
+          }
+        };
+
+        dfs([], 0); // dfs入口
+        return res;
+      };
+
+      var restoreIpAddresses = function (s) {
+        let res = [];
+        const length = s.length;
+        function track(list, idx) {
+          if (list.length === 4 && idx === length) {
+            res.push(list.join('.'));
+            return;
+          }
+          if (list.length === 4 && idx < length) {
+            return;
+          }
+          for (let i = 1; i <= 3; i++) {
+            if (idx + i - 1 >= length) return;
+            if (i !== 1 && s[idx] === '0') return;
+            const str = s.substring(idx, idx + i);
+            if (i === 3 && +str > 255) return;
+            list.push(str);
+            track(list, idx + i);
+            list.pop();
+          }
+        }
+        track([], 0);
+
+        return res;
+      };
+
+      let s = '25525511135';
+      let res = ['255.255.11.135', '255.255.111.35'];
+
+      // s = '0000';
+      // res = ['0.0.0.0'];
+
+      // s = '1111';
+      // res = ['1.1.1.1'];
+
+      // s = '010010';
+      // res = ['0.10.0.10', '0.100.1.0'];
+
+      // s = '101023';
+      // res = ['1.0.10.23', '1.0.102.3', '10.1.0.23', '10.10.2.3', '101.0.2.3'];
+
+      console.log(`s: ${s} restoreIpAddresses => `, restoreIpAddresses(s));
+    </script>
+  </body>
+</html>

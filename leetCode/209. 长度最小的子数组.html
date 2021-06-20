@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 给定一个含有 n 个正整数的数组和一个正整数 target 。
+      // 找出该数组中满足其和 ≥ target 的长度最小的
+      // 连续子数组 [numsl, numsl+1, ..., numsr-1, numsr] ，并返回其长度。
+      // 如果不存在符合条件的子数组，返回 0 。
+
+      var minSubArrayLen = function (target, nums) {
+        let len = nums.length;
+        if (!len) return 0;
+        let min = Number.MAX_VALUE;
+        let start = 0;
+        let end = 0;
+        let sum = 0;
+
+        while (end < len) {
+          sum = sum + nums[end];
+          while (sum >= target) {
+            min = Math.min(min, end - start + 1);
+            sum -= nums[start];
+            start++;
+          }
+          end++;
+        }
+        return min === Number.MAX_VALUE ? 0 : min;
+      };
+
+      let to_targets = [7, 4, 11];
+      let to_nums = [
+        [2, 3, 1, 2, 4, 3],
+        [1, 4, 4],
+        [1, 1, 1, 1, 1, 1, 1, 1]
+      ];
+      let to_res = [2, 1, 0];
+
+      const length = 4;
+      let targets = to_targets.slice(0, length);
+      let nums = to_nums.slice(0, length);
+      let res = to_res.slice(0, length);
+
+      function run() {
+        nums.forEach((arr, idx) => {
+          console.log(
+            `arr: ${arr} target: ${targets[idx]} expect: ${res[idx]} => ${minSubArrayLen(targets[idx], nums[idx])}`
+          );
+        });
+      }
+
+      run();
+    </script>
+  </body>
+</html>

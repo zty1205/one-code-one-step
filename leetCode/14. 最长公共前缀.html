@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 编写一个函数来查找字符串数组中的最长公共前缀。
+      // 如果不存在公共前缀，返回空字符串 ""。
+      // 二分法
+      var longestCommonPrefix = function (strArr) {
+        if (strArr == null || strArr.length == 0) {
+          return '';
+        }
+        return twoCommonPrefix(strArr, 0, strArr.length - 1);
+      };
+      function twoCommonPrefix(arr, start, end) {
+        if (start === end) return arr[start];
+        let mid = ((end - start) >> 1) + start;
+        let str1 = twoCommonPrefix(arr, start, mid);
+        let str2 = twoCommonPrefix(arr, mid + 1, end);
+        return commonPrefix(str1, str2);
+      }
+      function commonPrefix(str1, str2) {
+        let len = 0;
+        while (str1[len] && str1[len] === str2[len]) {
+          len++;
+        }
+        return str1.substring(0, len);
+      }
+
+      console.log('fl == ', longestCommonPrefix(['flower', 'flow', 'flight']));
+      console.log('""  === ', longestCommonPrefix(['dog', 'racecar', 'car']));
+    </script>
+  </body>
+</html>

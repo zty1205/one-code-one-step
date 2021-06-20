@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 给你一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，
+      // 使得 a + b + c = 0 ？请你找出所有和为 0 且不重复的三元组。
+      // 注意：答案中不可以包含重复的三元组。
+
+      var threeSum = function (numArr = []) {
+        if (numArr.length < 3) return [];
+        let res = [];
+        let map = {};
+
+        numArr = numArr.sort((a, b) => b - a);
+        numArr.map((val, idx) => {
+          map[val] = idx;
+        });
+        let execMap = {};
+        if (numArr.filter((x) => x === 0).length > 2) {
+          execMap[0] = true;
+          res.push([0, 0, 0]);
+        }
+        for (let j = 0; j < numArr.length; j++) {
+          if (!execMap[numArr[j]]) {
+            execMap[numArr[j]] = true;
+            twoSum(j + 1, -numArr[j]);
+          }
+        }
+        function twoSum(start, target) {
+          console.log('twoSum', { start, target });
+          for (let i = start; i < numArr.length; i++) {
+            let exec = {};
+            if (!exec[numArr[i]]) {
+              exec[numArr[i]] = true;
+              console.log('\n ----------');
+              console.log('i = ', i);
+              console.log('numArr[i] = ', numArr[i]);
+              console.log('target - numArr[i] = ', target - numArr[i]);
+              console.log('map[target - numArr[i]] = ', map[target - numArr[i]]);
+              console.log('target - numArr[i] in map = ', target - numArr[i] in map);
+              console.log('map[target - numArr[i]] > i = ', map[target - numArr[i]] > i);
+              if (target - numArr[i] in map && map[target - numArr[i]] > i) {
+                res.push([-target, numArr[i], target - numArr[i]]);
+              }
+            }
+          }
+        }
+        return res;
+      };
+
+      var threeSum1 = function (numArr = []) {
+        if (numArr.length < 3) return [];
+        let res = [];
+        let map = {};
+        numArr.map((val, idx) => {
+          map[val] = idx;
+        });
+        numArr = numArr.sort((a, b) => b - a);
+        let execMap = {};
+        for (let j = 0; j < numArr.length; j++) {
+          if (!execMap[numArr[j]]) {
+            execMap[numArr[j]] = true;
+            twoSum(j + 1, -numArr[j]);
+          }
+        }
+        function twoSum(start, target) {
+          let exec = {};
+          for (let i = start; i < numArr.length; i++) {
+            if (!exec[numArr[i]]) {
+              exec[numArr[i]] = true;
+              if (target - numArr[i] in map && map[target - numArr[i]] > i) {
+                res.push([-target, numArr[i], target - numArr[i]]);
+              }
+            }
+          }
+        }
+        return res;
+      };
+
+      let input = [[-1, 0, 1, 2, -1, -4], [], [0], [-1, 0, 1], [0, 0, 0, 0], [-1, 0, 1, 0]];
+      let res = [
+        [
+          [-1, -1, 2],
+          [-1, 0, 1]
+        ],
+        [],
+        [],
+        [[-1, 0, 1]],
+        [[0, 0, 0]],
+        [[-1, 0, 1]]
+      ];
+
+      input = [[-1, 0, 1, 2, -1, -4]];
+      res = [
+        [
+          [-1, -1, 2],
+          [-1, 0, 1]
+        ]
+      ];
+
+      // let input = [[-1, 0, 1]];
+      // let res = [[[-1, 0, 1]]];
+
+      // 上面的方法解决不了这个
+      // let input = [[-1, 0, 1, 0]]; //  [[0, 0, 0, 0]];
+      // let res = [[-1, 0, 1]]; //[[0, 0, 0]];
+
+      var threeSum = function (numArr = []) {
+        if (numArr.length < 3) return [];
+        numArr = numArr.sort((a, b) => a - b);
+        console.log('numArr = ', numArr);
+        let length = numArr.length;
+        let firstMap = {};
+        let res = [];
+        for (let i = 0; i < length; i++) {
+          console.log('\n ------- ');
+          let first = numArr[i];
+          console.log('first = ', first);
+          if (first > 0 || i > length - 2) break;
+          if (firstMap[first]) continue;
+          firstMap[first] = true;
+          let secondMap = {};
+          for (let j = i + 1; j < length; j++) {
+            let second = numArr[j];
+            console.log('second = ', second);
+            if (secondMap[second]) continue;
+            secondMap[second] = true;
+            let third = -(first + second);
+            console.log('third = ', third);
+            for (let k = j + 1; k < length; k++) {
+              console.log('numArr[k] = ', numArr[k]);
+              if (third === numArr[k]) {
+                res.push([first, second, third]);
+                break;
+              }
+            }
+          }
+        }
+        return res;
+      };
+
+      var threeSum = function (numArr = []) {
+        if (numArr.length < 3) return [];
+        numArr = numArr.sort((a, b) => a - b);
+        let length = numArr.length;
+        let firstMap = {};
+        let res = [];
+        for (let i = 0; i < length; i++) {
+          let first = numArr[i];
+          if (first > 0 || i > length - 2) break;
+          if (firstMap[first]) continue;
+          firstMap[first] = true;
+          let secondMap = {};
+          for (let j = i + 1; j < length; j++) {
+            let second = numArr[j];
+            if (secondMap[second]) continue;
+            secondMap[second] = true;
+            let third = -(first + second);
+            for (let k = j + 1; k < length; k++) {
+              if (third === numArr[k]) {
+                res.push([first, second, third]);
+                break;
+              }
+            }
+          }
+        }
+        return res;
+      };
+
+      // 双指针
+      var threeSum = function (numArr) {
+        if (numArr.length < 3) return [];
+        numArr.sort((a, b) => a - b); // 排序
+
+        const res = [];
+
+        for (let i = 0; i < numArr.length - 2; i++) {
+          // 外层遍历
+          let first = numArr[i];
+          if (first > 0) break;
+          if (i - 1 >= 0 && first == numArr[i - 1]) continue;
+
+          let left = i + 1; // 左指针
+          let right = numArr.length - 1; // 右指针
+
+          while (left < right) {
+            let second = numArr[left],
+              third = numArr[right];
+
+            if (first + second + third === 0) {
+              // 三数和=0，加入解集res
+              res.push([first, second, third]);
+              while (left < right && numArr[left] == second) left++; // 直到指向不一样的数
+              while (left < right && numArr[right] == third) right--; // 直到指向不一样的数
+            } else if (first + second + third < 0) {
+              // 三数和小于0，则左指针右移
+              left++;
+            } else {
+              // 三数和大于0，则右指针左移
+              right--;
+            }
+          }
+        }
+        return res;
+      };
+
+      input.forEach((i, idx) => {
+        console.log(`${i} threeSum ${res[idx]} == ${threeSum(i)}`);
+      });
+    </script>
+  </body>
+</html>

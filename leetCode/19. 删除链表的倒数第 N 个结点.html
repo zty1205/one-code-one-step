@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 给你一个链表，删除链表的倒数第 n 个结点，并且返回链表的头结点。
+      // 进阶：你能尝试使用一趟扫描实现吗？
+      /**
+       * Definition for singly-linked list.
+       * function ListNode(val, next) {
+       *     this.val = (val===undefined ? 0 : val)
+       *     this.next = (next===undefined ? null : next)
+       * }
+       */
+      /**
+       * @param {ListNode} head
+       * @param {number} n
+       * @return {ListNode}
+       */
+      function ListNode(val, next) {
+        this.val = val === undefined ? 0 : val;
+        this.next = next === undefined ? null : next;
+      }
+      // 两个节点 节点相距n+1  当最后一个节点到底时 前一个就是倒数第n个
+      var removeNthFromEnd = function (head, n) {
+        let append = head;
+        let i = n + 1;
+        while (n && append) {
+          n--;
+          append = append.next;
+        }
+        console.log('n = ', n);
+        console.log('append = ', append);
+        if (n > 1) return head;
+        if (n === 1) return head.next;
+        let _node = head;
+        while (append && append.next) {
+          console.log('while---');
+          append = append.next;
+          _node = _node.next;
+        }
+        console.log('_node = ', _node);
+        _node.next = _node.next ? _node.next.next : null;
+        return head;
+      };
+
+      // var removeNthFromEnd = function (head, n) {
+      //   let append = head;
+      //   let i = n + 1;
+      //   while (n && append) {
+      //     n--;
+      //     append = append.next;
+      //   }
+      //   if (n > 1) return head;
+      //   if (n === 1) return head.next;
+      //   let _node = head;
+      //   while (append && append.next) {
+      //     append = append.next;
+      //     _node = _node.next;
+      //   }
+      //   _node.next = _node.next ? _node.next.next : null;
+      //   return head;
+      // };
+
+      var removeNthFromEnd = function (head, n) {
+        let fast = head,
+          slow = head;
+        // 快先走 n 步
+        while (--n) {
+          fast = fast.next;
+        }
+        if (!fast || !fast.next) return head.next;
+        fast = fast.next;
+        // fast、slow 一起前进
+        while (fast && fast.next) {
+          fast = fast.next;
+          slow = slow.next;
+        }
+        slow.next = slow.next ? slow.next.next : null;
+        return head;
+      };
+
+      let head = [1, 2, 3, 4, 5],
+        n = 2;
+      let res = [1, 2, 3, 5];
+      let node = {
+        val: 1,
+        next: {
+          val: 2,
+          next: {
+            val: 3,
+            next: {
+              val: 4,
+              next: {
+                val: 5,
+                next: null
+              }
+            }
+          }
+        }
+      };
+
+      node = {
+        val: 1,
+        next: null
+      };
+      n = 1;
+
+      // node = {
+      //   val: 1,
+      //   next: {
+      //     val: 2,
+      //     next: null
+      //   }
+      // };
+      // n = 1;
+      console.log('removeNthFromEnd = ', removeNthFromEnd(node, 2));
+    </script>
+  </body>
+</html>

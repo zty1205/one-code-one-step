@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 给定两个整数，被除数 dividend 和除数 divisor。将两数相除，要求不使用乘法、除法和 mod 运算符。
+
+      // 返回被除数 dividend 除以除数 divisor 得到的商。
+
+      // 整数除法的结果应当截去（truncate）其小数部分，例如：truncate(8.345) = 8 以及 truncate(-2.7335) = -2
+
+      var divide = function (dividend, divisor) {
+        if (dividend === 0) return 0;
+        if (divisor === 1) return dividend;
+        if (divisor === -1) {
+          if (dividend > Math.pow(-2, 31) - 1) return -dividend;
+          return Math.pow(2, 31) - 1;
+        }
+        let bigThanZero = true;
+        if (dividend < 0) {
+          dividend = -dividend;
+          bigThanZero = !bigThanZero;
+        }
+        if (divisor < 0) {
+          divisor = -divisor;
+          bigThanZero = !bigThanZero;
+        }
+        let res = 0;
+
+        while (dividend - divisor >= 0) {
+          res++;
+          dividend = dividend - divisor;
+        }
+        return bigThanZero ? res : -res;
+      };
+
+      var divide = function (dividend, divisor) {
+        var res = 0;
+        var sign = dividend > 0 ? (divisor > 0 ? '' : '-') : divisor > 0 ? '-' : '';
+        dividend = Math.abs(dividend);
+        divisor = Math.abs(divisor);
+        var strdiv = String(dividend);
+        var quot = '',
+          remainder = '';
+        for (var i = 0; i < strdiv.length; i++) {
+          remainder += strdiv[i];
+          var temp = 0;
+          var m = parseInt(remainder);
+          while (divisor <= m) {
+            m = m - divisor;
+            temp++;
+          }
+          quot += temp;
+          remainder = String(m);
+        }
+        var res = parseInt(sign + quot);
+        if (res > Math.pow(2, 31) - 1 || res < Math.pow(-2, 31)) return Math.pow(2, 31) - 1;
+        return res;
+      };
+
+      // console.log('10/3 = ', divide(10, 3));
+      // console.log('7/-3 = ', divide(7, -3));
+      console.log('-1/1 = ', divide(-1, 1));
+    </script>
+  </body>
+</html>

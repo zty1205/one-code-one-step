@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 给定一个可能包含重复元素的整数数组 nums，返回该数组所有可能的子集（幂集）。
+      // 说明：解集不能包含重复的子集。
+
+      // 直接用78题+set 但是得确保有序 但是性能不好 应该只需要判断新加的数和末尾的数即可
+      // 不对 应该是for循环的时候只能使用不同的值
+      var subsetsWithDup = function (nums) {
+        let arr = nums.sort((a, b) => a - b);
+        let res = [];
+        // 这里的idx就是下标了 会自动结束
+        function track(list, idx) {
+          res.push(list);
+          for (let i = idx; i < arr.length; i++) {
+            if (i > idx && arr[i] === arr[i - 1]) {
+              continue;
+            }
+            track([...list, arr[i]], i + 1);
+          }
+        }
+        track([], 0);
+        return res;
+      };
+
+      let nums = [1, 2, 2];
+      let res = [[2], [1], [1, 2, 2], [2, 2], [1, 2], []];
+
+      console.log('subsetsWithDup = ', subsetsWithDup(nums));
+    </script>
+  </body>
+</html>

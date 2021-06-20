@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const digitMap1 = {
+        2: ['a', 'b', 'c'],
+        3: ['d', 'e', 'f'],
+        4: ['g', 'h', 'i'],
+        5: ['j', 'k', 'l'],
+        6: ['m', 'n', 'o'],
+        7: ['p', 'q', 'r', 's'],
+        8: ['t', 'u', 'v'],
+        9: ['w', 'x', 'y', 'z']
+      };
+
+      const digitMap = {
+        2: 'abc',
+        3: 'def',
+        4: 'ghi',
+        5: 'jkl',
+        6: 'mno',
+        7: 'pqrs',
+        8: 'tuv',
+        9: 'wxyz'
+      };
+
+      // 回溯
+      var letterCombinations = function (digits) {
+        if (!digits) return [];
+        let res = [];
+
+        function dfs(curStr, i) {
+          if (i > digits.length - 1) {
+            res.push(curStr);
+            return;
+          } else {
+            const letters = digitMap[digits[i]];
+            for (const letter of letters) {
+              dfs(curStr + letter, i + 1);
+            }
+          }
+        }
+        dfs('', 0);
+        return res;
+      };
+
+      function DFS(tree) {
+        function _dfs(node, list) {
+          list.push(node);
+          if (node.children) {
+            for (let i = 0; i < node.children.length; i++) {
+              _dfs(node.children[i], list);
+            }
+          }
+          return list;
+        }
+        return _dfs(tree, []);
+      }
+
+      console.log('23 letterCombinations = ', letterCombinations('23'));
+    </script>
+  </body>
+</html>

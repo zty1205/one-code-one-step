@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 给定一个链表，返回链表开始入环的第一个节点。 如果链表无环，则返回 null。
+      /**
+       * Definition for singly-linked list.
+       * function ListNode(val) {
+       *     this.val = val;
+       *     this.next = null;
+       * }
+       */
+
+      /**
+       * @param {ListNode} head
+       * @return {boolean}
+       */
+      function ListNode(val) {
+        this.val = val;
+        this.next = null;
+      }
+      // 慢快指针， 有环的话 快一定会等于(追上)慢
+      // 一个等式关系
+
+      // 从相遇点到入环点的距离加上 n-1n−1 圈的环长，恰好等于从链表头部到入环点的距离。
+      // 因此，当发现 \textit{slow}slow 与 \textit{fast}fast 相遇时，我们再额外使用一个指针 \textit{ptr}ptr。起始，它指向链表头部；随后，它和 \textit{slow}slow 每次向后移动一个位置。最终，它们会在入环点相遇。
+
+      var detectCycle = function (head) {
+        if (head === null) {
+          return null;
+        }
+        let slow = head,
+          fast = head;
+        while (fast !== null) {
+          slow = slow.next;
+          if (fast.next !== null) {
+            fast = fast.next.next;
+          } else {
+            return null;
+          }
+          if (fast === slow) {
+            let ptr = head;
+            while (ptr !== slow) {
+              ptr = ptr.next;
+              slow = slow.next;
+            }
+            return ptr;
+          }
+        }
+        return null;
+      };
+
+      const A = new ListNode(3);
+      const B = new ListNode(2);
+      const C = new ListNode(0);
+      const D = new ListNode(-4);
+      A.next = B;
+      B.next = C;
+      C.next = D;
+      D.next = B;
+      console.log('detectCycle = ', detectCycle(A));
+    </script>
+  </body>
+</html>

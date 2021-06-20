@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 数字 n 代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且 有效的 括号组合。
+      var generateParenthesis = function (n) {
+        let res = new Set();
+        function track(curVal, step) {
+          if (step === n) {
+            res.add(curVal);
+            return;
+          }
+          for (let i = 0; i < curVal.length; i++) {
+            track(curVal.substring(0, i) + '()' + curVal.substring(i), step + 1);
+          }
+        }
+        track('()', 1);
+        return Array.from(res);
+      };
+
+      let n = 3;
+      let res = ['((()))', '(()())', '(())()', '()(())', '()()()'];
+
+      // n = 1;
+      // res = ['()'];
+
+      console.log(`generateParenthesis ${n} = `, generateParenthesis(n));
+    </script>
+  </body>
+</html>

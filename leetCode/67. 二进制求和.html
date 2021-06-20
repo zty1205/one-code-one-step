@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 给你两个二进制字符串，返回它们的和（用二进制表示）。
+      // 输入为 非空 字符串且只包含数字 1 和 0。
+
+      var addBinary = function (a, b) {
+        let res = '';
+        let aLen = a.length;
+        let bLen = b.length;
+        let max = Math.max(aLen, bLen);
+        console.log('max = ', max);
+        let add = 0;
+        while (max--) {
+          aLen--;
+          bLen--;
+          console.log('a = ', a[aLen] ? +a[aLen] : 0);
+          console.log('b = ', b[bLen] ? +b[bLen] : 0);
+          let sum = (a[aLen] ? +a[aLen] : 0) + (b[bLen] ? +b[bLen] : 0) + add;
+          console.log('sum = ', sum);
+          add = Math.floor(sum / 2);
+          console.log('add = ', add);
+          res = (sum % 2) + res;
+        }
+        if (add) {
+          res = add + res;
+        }
+        return res;
+      };
+
+      var addBinary = function (a, b) {
+        let res = '';
+        let aLen = a.length;
+        let bLen = b.length;
+        let max = Math.max(aLen, bLen);
+        let add = 0;
+        while (max--) {
+          aLen--;
+          bLen--;
+          let sum = (a[aLen] ? +a[aLen] : 0) + (b[bLen] ? +b[bLen] : 0) + add;
+          add = Math.floor(sum / 2);
+          res = (sum % 2) + res;
+        }
+        if (add) {
+          res = add + res;
+        }
+        return res;
+      };
+
+      // let a = '11';
+      // let b = '1';
+      // let res = '100';
+
+      a = '1010';
+      b = '1011';
+      res = '10101';
+
+      console.log(`addBinary ${a} + ${b} = ${res} `, addBinary(a, b));
+    </script>
+  </body>
+</html>

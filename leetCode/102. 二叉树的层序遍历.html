@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var levelOrder = function (root) {
+        if (!root) return [];
+        let level = [root];
+        let nextLevel = [];
+        let res = [];
+        while (level.length) {
+          res.push(level.map((x) => x.val));
+          for (let node of level) {
+            node.left && nextLevel.push(node.left);
+            node.right && nextLevel.push(node.right);
+          }
+          level = nextLevel;
+          nextLevel = [];
+        }
+        return res;
+      };
+
+      var levelOrder = function (root) {
+        const ret = [];
+        if (!root) {
+          return ret;
+        }
+
+        const q = [];
+        q.push(root);
+        while (q.length !== 0) {
+          const currentLevelSize = q.length;
+          ret.push([]);
+          for (let i = 1; i <= currentLevelSize; ++i) {
+            const node = q.shift();
+            ret[ret.length - 1].push(node.val);
+            if (node.left) q.push(node.left);
+            if (node.right) q.push(node.right);
+          }
+        }
+
+        return ret;
+      };
+
+      let root = {
+        val: 3,
+        left: {
+          val: 9
+        },
+        right: {
+          val: 20,
+          left: {
+            val: 15
+          },
+          right: {
+            val: 7
+          }
+        }
+      };
+
+      let res = [[3], [9, 20], [15, 7]];
+
+      console.log('levelOrder = ', levelOrder(root));
+    </script>
+  </body>
+</html>

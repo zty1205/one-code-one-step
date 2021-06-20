@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 给你两个有序整数数组 nums1 和 nums2，
+      // 请你将 nums2 合并到 nums1 中，使 nums1 成为一个有序数组。
+
+      // 初始化 nums1 和 nums2 的元素数量分别为 m 和 n 。
+      // 你可以假设 nums1 的空间大小等于 m + n，这样它就有足够的空间保存来自 nums2 的元素。
+
+      // 合并使用插入排序
+      var merge = function (nums1, m, nums2, n) {
+        for (let i = 0; i < n; i++) {
+          nums1[m + i] = nums2[i];
+        }
+        for (let i = 1; i < nums1.length; i++) {
+          let guard = nums1[i];
+          let j = i;
+          while (j - 1 >= 0 && nums1[j - 1] > guard) {
+            nums1[j] = nums1[j - 1];
+            j--;
+          }
+          nums1[j] = guard;
+        }
+        return nums1;
+      };
+
+      var merge = function (nums1, m, nums2, n) {
+        for (let i = 0; i < n; i++) {
+          nums1[m + i] = nums2[i];
+        }
+        for (let i = 1; i < nums1.length; i++) {
+          let guard = nums1[i];
+          let j = i;
+          while (j - 1 >= 0 && nums1[j - 1] > guard) {
+            nums1[j] = nums1[j - 1];
+            j--;
+          }
+          nums1[j] = guard;
+        }
+        return nums1;
+      };
+
+      let nums1 = [1, 2, 3, 0, 0, 0];
+      let m = 3;
+      let nums2 = [2, 5, 6];
+      let n = 3;
+      let res = [1, 2, 2, 3, 5, 6];
+
+      nums1 = [1];
+      m = 1;
+      nums2 = [];
+      n = 0;
+      res = [1];
+
+      nums1 = [2, 0];
+      m = 1;
+      nums2 = [1];
+      n = 1;
+
+      console.log('', merge(nums1, m, nums2, n));
+
+      let count = 3;
+      while (count--) {
+        console.log('count = ', count);
+      }
+
+      let count1 = 3;
+      while (count1) {
+        count1 -= 1;
+        console.log('count1 = ', count1);
+      }
+    </script>
+  </body>
+</html>
