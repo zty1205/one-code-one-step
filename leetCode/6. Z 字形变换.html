@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>6. Z 字形变换</title>
+  </head>
+  <body>
+    <script src="./run.js"></script>
+    <script>
+      // 将一个给定字符串 s 根据给定的行数 numRows ，以从上往下、从左到右进行 Z 字形排列。
+      // 比如输入字符串为 "PAYPALISHIRING" 行数为 3 时，排列如下：
+
+      // P   A   H   N
+      // A P L S I I G
+      // Y   I   R
+      // 之后，你的输出需要从左往右逐行读取，产生出一个新的字符串
+
+      // 示例 2：
+      // 输入：s = "PAYPALISHIRING", numRows = 4
+      // 输出："PINALSIGYAHRPI"
+      // 解释：
+      // P     I    N
+      // A   L S  I G
+      // Y A   H R
+      // P     I
+
+      /**
+       * @param {string} s
+       * @param {number} numRows
+       * @return {string}
+       */
+
+      // 找规律
+      // 第一行 每次相加 2 * (row -1)
+      // 第二行 每次相加 2 * (row -2) 然后 + 2 * 1
+      // 第二行 每次相加 2 * (row - 3) 然后 + 2 * 2
+      // 最后行 每次相加 0 然后 2 * (row -1)
+      var convert = function (s, numRows) {
+        if (numRows === 1) return s;
+        let res = '';
+        const offset = 2 * (numRows - 1);
+        for (let i = 0; i < numRows; i++) {
+          for (let j = 0; j + i < s.length; j = j + offset) {
+            res += s[i + j];
+            // 不是第一行 或 最后一行
+            if (i != 0 && i != numRows - 1 && j + offset - i < s.length) {
+              res += s[j + offset - i];
+            }
+          }
+        }
+        return res;
+      };
+
+      const input = [
+        ['PAYPALISHIRING', 3],
+        ['PAYPALISHIRING', 4],
+        ['A', 1]
+      ];
+
+      const res = ['PAHNAPLSIIGYIR', 'PINALSIGYAHRPI', 'A'];
+
+      runList(input, res, convert);
+    </script>
+  </body>
+</html>

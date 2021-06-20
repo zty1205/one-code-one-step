@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>5. 最长回文子串</title>
+  </head>
+  <body>
+    <script src="./run.js"></script>
+    <script>
+      // 给你一个字符串 s，找到 s 中最长的回文子串。
+
+      /**
+       * @param {string} s
+       * @return {string}
+       */
+
+      // 中心扩展算法
+      var longestPalindrome = function (s) {
+        if (s.length === 1) return s;
+        if (s.length === 2) return s[1] === s[0] ? s : s[0];
+
+        let _findPalindrome = (right, left) => {
+          while (s[right] === s[left] && right >= 0 && left < s.length) {
+            left++;
+            right--;
+          }
+          return { right, left, length: left - right - 1 };
+        };
+
+        let MaxStr1 = (a, b) => {
+          return a.length < b.length ? { ...a, ...b } : a;
+        };
+
+        let str = { right: 0, left: 0, length: 0 };
+        // 循环遍历
+        for (let i = 1; i < s.length; i++) {
+          curs = _findPalindrome(i - 1, i + 1);
+          str = MaxStr1(str, curs);
+          if (s[i - 1] === s[i]) {
+            curs = _findPalindrome(i - 2, i + 1);
+            str = MaxStr1(str, curs);
+          }
+        }
+        return s.substring(str.right + 1, str.left);
+      };
+
+      // 动态规划算法
+      // dp[i-1][j+1] === dp[i][j] && s[i-1] === s[j+1]
+      var longestPalindrome = function (s) {
+        const length = s.length;
+        if (length === 1) return s;
+        let dp = Array.from({ length }, (v, k) => Array.from({ length }, (v1, k1) => k1 === k));
+
+        let maxLen = 1;
+        let begin = 0;
+
+        // 子串长度
+        for (let l = 2; l < length; l++) {
+          for (let i = 0; i < length; i++) {
+            const j = i + l - 1;
+            if (j > length) break;
+
+            if (s[j] !== s[i]) {
+              dp[i][j] = false;
+            } else {
+              dp[i][j] = j - i < 3 ? true : dp[i + 1][j - 1];
+            }
+
+            if (dp[i][j] && j - i + 1 > maxLen) {
+              maxLen = j - i + 1;
+              begin = i;
+            }
+          }
+        }
+
+        return s.substring(begin, begin + maxLen);
+      };
+
+      const input = [['babad'], ['cbbd'], ['a'], ['ac']];
+      const res = ['bab', 'bb', 'a', 'a'];
+
+      // longestPalindrome('babad');
+
+      runList(input, res, longestPalindrome);
+    </script>
+  </body>
+</html>

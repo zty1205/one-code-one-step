@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>8. 字符串转换整数 (atoi)</title>
+  </head>
+  <body>
+    <script src="./run.js"></script>
+    <script>
+      // 请你来实现一个 myAtoi(string s) 函数，使其能将字符串转换成一个 32 位有符号整数（类似 C/C++ 中的 atoi 函数）。
+
+      // 函数 myAtoi(string s) 的算法如下：
+
+      // 读入字符串并丢弃无用的前导空格
+      // 检查下一个字符（假设还未到字符末尾）为正还是负号，读取该字符（如果有）。 确定最终结果是负数还是正数。 如果两者都不存在，则假定结果为正。
+      // 读入下一个字符，直到到达下一个非数字字符或到达输入的结尾。字符串的其余部分将被忽略。
+      // 将前面步骤读入的这些数字转换为整数（即，"123" -> 123， "0032" -> 32）。如果没有读入数字，则整数为 0 。必要时更改符号（从步骤 2 开始）。
+      // 如果整数数超过 32 位有符号整数范围 [−2^31,  2^31 − 1] ，需要截断这个整数，使其保持在这个范围内。具体来说，小于 −231 的整数应该被固定为 −231 ，大于 231 − 1 的整数应该被固定为 231 − 1 。
+      // 返回整数作为最终结果。
+      // 注意：
+
+      // 本题中的空白字符只包括空格字符 ' ' 。
+      // 除前导空格或数字后的其余字符串外，请勿忽略 任何其他字符。
+
+      /**
+       * @param {string} s
+       * @return {number}
+       */
+
+      const STATUS = {
+        start: 0,
+        signed: 1,
+        number: 2,
+        end: -1
+      };
+      const MAC_STATUS = {
+        [STATUS.start]: {
+          [STATUS.start]: STATUS.start,
+          [STATUS.signed]: STATUS.signed,
+          [STATUS.number]: STATUS.number,
+          [STATUS.end]: STATUS.end
+        },
+        [STATUS.signed]: {
+          [STATUS.start]: STATUS.end,
+          [STATUS.signed]: STATUS.end,
+          [STATUS.number]: STATUS.number,
+          [STATUS.end]: STATUS.end
+        },
+        [STATUS.number]: {
+          [STATUS.start]: STATUS.end,
+          [STATUS.signed]: STATUS.end,
+          [STATUS.number]: STATUS.number,
+          [STATUS.end]: STATUS.end
+        },
+        [STATUS.end]: {
+          [STATUS.start]: STATUS.end,
+          [STATUS.signed]: STATUS.end,
+          [STATUS.number]: STATUS.end,
+          [STATUS.end]: STATUS.end
+        }
+      };
+
+      function getStatus(char) {
+        if (char === ' ') {
+          return STATUS.start;
+        } else if (/[+|-]/.test(char)) {
+          return STATUS.signed;
+        } else if (/\d/.test(char)) {
+          return STATUS.number;
+        } else {
+          return STATUS.end;
+        }
+      }
+
+      // 状态机
+      var myAtoi = function (s) {
+        let cur_status = STATUS.start;
+        let number = 0;
+        let sign = 1;
+        for (let char of s) {
+          let get_status = getStatus(char);
+          cur_status = MAC_STATUS[cur_status][get_status];
+
+          if (cur_status === STATUS.start) {
+            continue;
+          } else if (cur_status === STATUS.signed) {
+            sign = char === '+' ? 1 : -1;
+          } else if (cur_status === STATUS.number) {
+            // 加法
+            number = number * 10 + (char - 0);
+
+            // 范围判断
+            number = sign === 1 ? Math.min(number, Math.pow(2, 31) - 1) : Math.min(number, -Math.pow(-2, 31));
+          } else {
+            break;
+          }
+        }
+        return sign * number;
+      };
+
+      var myAtoi = function (s) {
+        // debugger;
+        if (!s) return 0;
+        s = s.trim();
+        if (!/[\d-\+]/.test(s[0])) return 0;
+        const sign = s[0] === '-' ? -1 : 1;
+        let number = 0;
+        if (/[-\+]/.test(s[0])) s = s.substr(1);
+        for (let char of s) {
+          if (/\d/.test(char)) {
+            number = number * 10 + +char;
+            number = sign === 1 ? Math.min(number, Math.pow(2, 31) - 1) : Math.min(number, -Math.pow(-2, 31));
+          } else {
+            break;
+          }
+        }
+        return sign * number;
+      };
+
+      const input = [['42'], ['   -42'], ['4193 with words'], ['words and 987'], ['-91283472332']];
+      const res = [42, -42, 4193, 0, -2147483648];
+
+      runList(input, res, myAtoi);
+    </script>
+  </body>
+</html>
