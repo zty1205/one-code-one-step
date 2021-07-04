@@ -44,6 +44,20 @@
         return cur;
       }
 
+      function ReverseList(pHead) {
+        let cur = pHead;
+        let tmp;
+        let head = new ListNode('header');
+        while (cur) {
+          let tmp = cur.next;
+          let n = head.next;
+          head.next = cur;
+          cur.next = n;
+          cur = tmp;
+        }
+        return head.next;
+      }
+
       console.log('ReverseList head = ', ReverseList(head));
     </script>
   </body>

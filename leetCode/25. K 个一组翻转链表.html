@@ -18,18 +18,42 @@
       // 你可以设计一个只使用常数额外空间的算法来解决此问题吗？
       // 你不能只是单纯的改变节点内部的值，而是需要实际进行节点交换。
 
-      var reverseKGroup = function (head, k) {
-        if (k === 1 || !head || !head.next) return head;
-      };
-
       function ListNode(val, next) {
         this.val = val === undefined ? 0 : val;
         this.next = next === undefined ? null : next;
       }
 
-      function reverseGroup(head, node, end = null) {
-        let;
-      }
+      var reverseKGroup = function (head, k) {
+        if (k === 1 || !head || !head.next) return head;
+        let length = 0;
+        let h = head;
+        while (h) {
+          length++;
+          h = h.next;
+        }
+        let loop = Math.floor(length / k);
+        let cur = head;
+        let temp;
+        let header = new ListNode('header');
+        let curHeader = header;
+        let nextHeader;
+        while (loop--) {
+          let count = k;
+          while (count-- && cur) {
+            if (count === k - 1) {
+              nextHeader = cur;
+            }
+            let tmp = cur.next;
+            let n = curHeader.next;
+            curHeader.next = cur;
+            cur.next = n;
+            cur = tmp;
+          }
+          curHeader = nextHeader;
+        }
+        if (cur) curHeader.next = cur;
+        return header.next;
+      };
 
       let head = {
         val: 1,
@@ -47,6 +71,9 @@
           }
         }
       };
+      let k = 3;
+
+      console.log(head, `, ${k} res = `, reverseKGroup(head, k));
     </script>
   </body>
 </html>

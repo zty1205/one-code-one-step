@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="./run.js"></script>
+    <script>
+      // 给定一个按照升序排列的整数数组 nums，和一个目标值 target。找出给定目标值在数组中的开始位置和结束位置。
+
+      // 如果数组中不存在目标值 target，返回 [-1, -1]。
+
+      // 进阶：
+      // 你可以设计并实现时间复杂度为 O(log n) 的算法解决此问题吗？
+
+      /**
+       * @param {number[]} nums
+       * @param {number} target
+       * @return {number[]}
+       */
+
+      // 二分查找到中间位置，再找两边
+      var searchRange = function (nums = [], target) {
+        let res = [-1, -1];
+        if (!nums.length) return res;
+        let start = 0;
+        let end = nums.length - 1;
+        let index;
+        while (start <= end) {
+          let mid = (start + end) >> 1;
+          if (nums[mid] === target) {
+            index = mid;
+            start = end + 1;
+          } else if (nums[mid] < target) {
+            start = mid + 1;
+          } else {
+            end = mid - 1;
+          }
+        }
+        if (index == null) return res;
+        let i = (j = index);
+        while (nums[i - 1] === target) i--;
+        while (nums[j + 1] === target) j++;
+        return [i, j];
+      };
+
+      // 递归 通过
+      var searchRange1 = function (nums = [], target) {
+        const length = nums.length;
+        if (!length) return [-1, -1];
+
+        function find(start, end) {
+          if (start >= end) {
+            return nums[start] === target ? [start, end] : [-1, -1];
+          }
+          const midLength = (start + end) >> 1;
+          const [ll, lr] = find(start, midLength);
+          const [rl, rr] = find(midLength + 1, end);
+
+          console.log('[ll, lr] = ', [ll, lr]);
+          console.log('[rl, rr] = ', [rl, rr]);
+
+          let l = [ll, lr, rl].filter((x) => x !== -1)[0];
+          l = l != null ? l : -1;
+          const r = Math.max.apply(Math, [lr, rl, rr]);
+
+          console.log('[l, r] = ', [l, r]);
+          return [l, r];
+        }
+
+        return find(0, length - 1);
+      };
+
+      const input = [[[5, 7, 7, 8, 8, 10], 8], [[5, 7, 7, 8, 8, 10], 6], [[]]];
+      const res = [
+        [3, 4],
+        [-1, -1],
+        [-1, -1]
+      ];
+
+      let i = [5, 7, 7, 8, 8, 10];
+      let r = 8;
+
+      // r = 6;
+
+      // i = [];
+
+      i = [2, 2];
+      r = 2;
+
+      i = [1];
+      r = 1;
+
+      // i = [1, 4];
+      // r = 4;
+      console.log('searchRange = ', searchRange(i, r));
+
+      // 301 和 302的区别
+      // app 怎么帮助页面优化性能
+      // app webview 切换后台 又回来后定时器会怎么样
+    </script>
+  </body>
+</html>

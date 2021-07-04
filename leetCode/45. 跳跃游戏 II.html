@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>45. 跳跃游戏 II</title>
+  </head>
+  <body>
+    <script src="./run.js"></script>
+    <script>
+      // 给定一个非负整数数组，你最初位于数组的第一个位置。
+
+      // 数组中的每个元素代表你在该位置可以跳跃的最大长度。
+
+      // 你的目标是使用最少的跳跃次数到达数组的最后一个位置。
+
+      // 假设你总是可以到达数组的最后一个位置。
+
+      // 反向 n
+      var jump = function (nums = []) {
+        let position = nums.length - 1;
+        let steps = 0;
+        while (position > 0) {
+          for (let i = 0; i < position; i++) {
+            if (i + nums[i] >= position) {
+              position = i;
+              steps++;
+              break;
+            }
+          }
+        }
+        return steps;
+      };
+
+      var jump = function (nums) {
+        let length = nums.length;
+        let end = 0;
+        let maxPosition = 0;
+        let steps = 0;
+        for (let i = 0; i < length - 1; i++) {
+          debugger;
+          maxPosition = Math.max(maxPosition, i + nums[i]);
+          if (i == end) {
+            end = maxPosition;
+            steps++;
+          }
+        }
+        return steps;
+      };
+
+      const input = [
+        [2, 3, 1, 1, 4],
+        [2, 3, 0, 1, 4]
+      ];
+      const res = [2, 2];
+
+      console.log('jump = ', jump(input[0]));
+
+      // runList(input, res, jump);
+    </script>
+  </body>
+</html>
