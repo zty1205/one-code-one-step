@@ -37,6 +37,29 @@
         return dp[n - 1][0];
       };
 
+      // 动态规划
+      // dp[i][0] 表示第i天没有股票的最大利润
+      // dp[i][1] 表示第i天有股票的最大利润
+      var maxProfit = function (prices) {
+        let dp0 = 0;
+        let dp1 = -prices[0];
+        for (let i = 1; i < prices.length; i++) {
+          dp0 = Math.max(dp0, dp1 + prices[i]);
+          dp1 = Math.max(dp0 - prices[i], dp1);
+        }
+        return Math.max(dp0, dp1);
+      };
+
+      // 贪心
+      // 只能计算最大利润而于实际不符
+      var maxProfit = function (prices) {
+        let res = 0;
+        for (let i = 1; i < prices.length; i++) {
+          res += max(0, prices[i] - prices[i - 1]);
+        }
+        return res;
+      };
+
       let prices = [7, 1, 5, 3, 6, 4];
       let res = 7;
 

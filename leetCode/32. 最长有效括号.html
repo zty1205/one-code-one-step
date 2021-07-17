@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="./run.js"></script>
+    <script>
+      // 给你一个只包含 '(' 和 ')' 的字符串，找出最长有效（格式正确且连续）括号子串的长度。
+      var longestValidParentheses = function (s) {
+        if (!s) return 0;
+        let maxCount = 0;
+        let stack = [-1];
+        for (let i = 0; i < s.length; i++) {
+          if (s[i] === '(') {
+            stack.push(i);
+          } else {
+            stack.pop();
+            if (!stack.length) {
+              stack.push(i);
+            } else {
+              maxCount = Math.max(maxCount, i - stack[stack.length - 1]);
+            }
+          }
+        }
+        return maxCount;
+      };
+
+      const input = [['(()'], [')()())'], ['']];
+      const res = [2, 4, 0];
+
+      runList(input, res, longestValidParentheses);
+    </script>
+  </body>
+</html>

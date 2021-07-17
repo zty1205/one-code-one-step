@@ -39,8 +39,8 @@
         let maxPosition = 0;
         let steps = 0;
         for (let i = 0; i < length - 1; i++) {
-          debugger;
           maxPosition = Math.max(maxPosition, i + nums[i]);
+          // 如果nums[0] = 3 那么maxPosition 就是前三项中能跳的最长的 这就是贪心算法
           if (i == end) {
             end = maxPosition;
             steps++;
