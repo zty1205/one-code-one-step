@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>实现柯里化</title>
+  </head>
+  <body>
+    <script>
+      function curry(fn, ...arg) {
+        return arg.length < fn.length ? (...args) => curry(fn, ...arg, ...args) : fn(...arg);
+      }
+      function add(n1, n2, n3) {
+        return n1 + n2 + n3;
+      }
+      const add2 = curry(add, 1, 2);
+      console.log('add2 = ', add2);
+      console.log('add2 3 = ', add2(3));
+    </script>
+  </body>
+</html>

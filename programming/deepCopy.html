@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>实现一个深拷贝</title>
+  </head>
+  <body>
+    <script>
+      // 实现一个deepClone
+      function deepClone(obj = new Object(), map = new WeakMap()) {
+        // 简单类型
+        if (obj == null || typeof obj !== 'object') return obj;
+        if (obj instanceof Date) return new Date(obj);
+        if (obj instanceof RegExp) return new Date(obj);
+
+        if (map.has(obj)) return map.get(obj);
+
+        let o = new obj.constructor();
+        map.set(obj, o);
+
+        for (let k in obj) {
+          console.log('k = ', k);
+          if (obj.hasOwnProperty(k)) {
+            // 遍历一个实例对象的所有属性时忽略掉继承属性(从原型继承的属性)
+            o[k] = deepClone(obj[k], map);
+          }
+        }
+        return o;
+      }
+
+      const obj = {
+        time: new Date(),
+        reg: new RegExp('11'),
+        num: 1,
+        arr: [1, 2],
+        obj: {
+          name: 'zty'
+        }
+      };
+
+      console.log('obj = ', obj);
+      console.log('deepClone obj = ', deepClone(obj));
+    </script>
+  </body>
+</html>
