@@ -46,3 +46,7 @@
 - [实现一个深拷贝](./programming/deepCopy.html)
 - [大数相加](./programming/maxAdd.html)
 - [数组拍平](./programming/flat.html)
+- [防抖节流](./programming/debounce_throttle.html)
+- [千分位](./programming/formatCommaNumber.html)
+- [字符串反转](./programming/reverseString.html)
+- [数组去重](./programming/uniqueArray.html)

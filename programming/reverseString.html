@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>字符串反转</title>
+  </head>
+  <body>
+    <script>
+      // 字符串反转
+      const char1 = ['h', 'e', 'l', 'l', 'o'];
+      const char2 = ['h', 'e', 'l', 'l'];
+      const char3 = ['a', 'b'];
+      function reverseString(s = []) {
+        const n = s.length;
+        for (let left = 0, right = n - 1; left < right; ++left, --right) {
+          [s[left], s[right]] = [s[right], s[left]];
+        }
+      }
+
+      reverseString(char1);
+      console.log('reverseString char1 = ', char1);
+      reverseString(char2);
+      console.log('reverseString char2 = ', char2);
+      reverseString(char3);
+      console.log('reverseString char3 = ', char3);
+    </script>
+  </body>
+</html>

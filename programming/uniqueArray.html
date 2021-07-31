@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数组去重</title>
+  </head>
+  <body>
+    <script>
+      // {value: 1} {value:1}  也被去掉了 这是不对的
+      function unique1(array) {
+        var obj = {};
+        return array.filter(function (item, index, array) {
+          // 区别  1和"1" 和 对象
+          let key = typeof item + JSON.stringify(item);
+          return obj[key] ? false : (obj[key] = true);
+        });
+      }
+
+      // es6的新数据类型由于能比较内存地址 所以可以正真的排重
+      function unique2(arr = []) {
+        return [...new Set(arr)];
+      }
+
+      function unique3(arr = []) {
+        const map = new Map();
+        return arr.filter((x) => !map.has(x) && map.set(x, 1));
+      }
+
+      const arr1 = [1, 2, 2, 3, '3', { value: 1 }, { value: 1 }, { value: 2 }];
+      const _obj = { value: 1 };
+      const arr2 = [1, '1', _obj, _obj];
+
+      console.log('unique1 arr = ', unique1(arr1));
+      console.log('unique2 arr = ', unique2(arr1));
+      console.log('unique3 arr = ', unique3(arr1));
+
+      console.log('unique1 arr2 = ', unique1(arr2));
+      console.log('unique2 arr2 = ', unique2(arr2));
+      console.log('unique3 arr2 = ', unique3(arr2));
+    </script>
+  </body>
+</html>

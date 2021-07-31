@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>防抖节流</title>
+  </head>
+  <body>
+    <script>
+      // 防抖 - 节流
+      function debounce1(fn, timeout) {
+        let timer;
+        return function (...arg) {
+          timer = setTimeout(() => {
+            fu.apply(this, arg);
+            clearTimeout(timer);
+          }, timeout);
+        };
+      }
+
+      function throttle1(fn, timeout) {
+        let timer;
+        return function (...arg) {
+          if (!timer) {
+            timer = setTimeout(() => {
+              fn.apply(this, arg);
+              clearTimeout(timer);
+              timer = null;
+            }, timeout);
+          }
+        };
+      }
+
+      function debounce(func, wait, immediate) {
+        let timeout;
+
+        const debounced = (...args) => {
+          let result;
+          let previous = Date.now();
+
+          if (!timeout) {
+            timeout = setTimeout(() => {
+              let passed = Date.now();
+              if (wait > passed) {
+                // 保证定时器在wait的时间后执行 而不会提前执行
+                timeout = setTimeout(later, wait - passed);
+              } else {
+                timeout = null;
+                if (!immediate) result = func.apply(this, args);
+              }
+            }, wait);
+
+            if (immediate) result = func.apply(this, args);
+          }
+          return result;
+        };
+
+        debounced.cancel = () => {
+          clearTimeout(timeout);
+          timeout = null;
+        };
+        return debounced;
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>千分位</title>
+  </head>
+  <body>
+    <script>
+      // 千分位
+      function formatCommaNumber1(number) {
+        let arr = String(number).split('.');
+        arr[0] = arr[0].replace(/\B(?=(\d{3})+\b)/g, ',');
+        return arr.join('.');
+      }
+
+      function formatCommaNumber2(num) {
+        return num.toString().replace(/\d+/, function (n) {
+          // 先提取整数部分
+          return n.replace(/(\d)(?=(\d{3})+$)/g, function ($1) {
+            return $1 + ',';
+          });
+        });
+      }
+
+      var a = 1234567894532;
+      var b = 673439.4542;
+      console.log(`formatCommaNumber1 ${a}= `, formatCommaNumber1(a));
+      console.log(`formatCommaNumber2 ${a}= `, formatCommaNumber2(a));
+      console.log(`formatCommaNumber1 ${b}= `, formatCommaNumber1(b));
+      console.log(`formatCommaNumber2 ${b}= `, formatCommaNumber2(b));
+    </script>
+  </body>
+</html>
