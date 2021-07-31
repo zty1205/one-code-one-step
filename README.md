@@ -44,3 +44,5 @@
 - [实现一个 trim 方法](./programming/trim.html)
 - [实现柯里化](./programming/curry.html)
 - [实现一个深拷贝](./programming/deepCopy.html)
+- [大数相加](./programming/maxAdd.html)
+- [数组拍平](./programming/flat.html)

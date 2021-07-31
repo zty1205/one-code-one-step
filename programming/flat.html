@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数组拍平</title>
+  </head>
+  <body>
+    <script>
+      let arr = [1, [2, 3], [4, [5, [6, 7]]], [8, [9, [10, [11, 12]]]]];
+      function flat1(arr = []) {
+        return arr.flat(4);
+      }
+
+      function flat2(arr = []) {
+        while (arr.some((x) => Array.isArray(x))) {
+          arr = [].concat(...arr);
+        }
+        return arr;
+      }
+
+      function flat3(arr = []) {
+        return arr.reduce((pre, cur) => {
+          return Array.isArray(cur) ? pre.concat(flat3(cur)) : pre.concat(cur);
+        }, []);
+      }
+
+      function flat4(arr = []) {
+        let stack = [...arr];
+        let res = [];
+        while (stack.length) {
+          let item = stack.pop();
+          if (Array.isArray(item)) {
+            stack.push(...item);
+          } else {
+            res.unshift(item);
+          }
+        }
+        return res;
+      }
+
+      // 控制层数
+      function flat5(arr, dep = 1) {
+        return dep > 0
+          ? arr.reduce((pre, cur) => pre.concat(Array.isArray(cur) ? flat5(cur, dep - 1) : cur), [])
+          : arr.slice();
+      }
+
+      function flat6(arr, dep = 1) {
+        let array = [...arr];
+        while (dep > 0) {
+          if (array.some((x) => Array.isArray(x))) {
+            array = [].concat(...array);
+          } else {
+            break;
+          }
+          dep--;
+        }
+        return array;
+      }
+
+      console.log('arr = ', arr);
+      console.log('flat1 = ', flat1(arr));
+      console.log('flat2 = ', flat2(arr));
+      console.log('flat3 = ', flat3(arr));
+      console.log('flat4 = ', flat4(arr));
+      console.log('flat5 1= ', flat5(arr, 1));
+      console.log('flat5 2= ', flat5(arr, 2));
+      console.log('flat6 1= ', flat6(arr, 1));
+      console.log('flat6 2= ', flat6(arr, 2));
+    </script>
+  </body>
+</html>

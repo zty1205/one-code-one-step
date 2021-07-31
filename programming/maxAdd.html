@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>大数相加</title>
+  </head>
+  <body>
+    <script>
+      // 大数相加 假设两个都有值且为整数
+      function maxAdd(num1, num2) {
+        let n1 = String(num1);
+        let n2 = String(num2);
+        let maxLength = Math.max(n1.length, n2.length);
+        n1 = n1.padStart(maxLength, '0');
+        n2 = n2.padStart(maxLength, '0');
+        let res = '';
+        let add = 0; // 进位 标志
+        for (let i = maxLength - 1; i >= 0; i--) {
+          let sum = Number(n1[i]) + Number(n2[i]) + add;
+          res = (sum % 10) + res;
+          add = Math.floor(sum / 10);
+        }
+        if (add) {
+          res = add + res;
+        }
+        return res;
+      }
+      console.log('11 + 22 = ', maxAdd(11, 22));
+      console.log('111 + 22 = ', maxAdd(111, 22));
+      console.log('456 + 78 = ', maxAdd(456, 78));
+      console.log('11111111111 + 2222222222222 = ', maxAdd(11111111111, 2222222222222));
+    </script>
+  </body>
+</html>
