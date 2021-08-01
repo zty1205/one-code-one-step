@@ -50,3 +50,6 @@
 - [千分位](./programming/formatCommaNumber.html)
 - [字符串反转](./programming/reverseString.html)
 - [数组去重](./programming/uniqueArray.html)
+- [素数](./programming/isPrime.html)
+- [回文数](./programming/isPalindrome.html)
+- [实现 find 函数，使下列的代码调用正确](./programming/find.html)

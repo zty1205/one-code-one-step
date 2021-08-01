@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>回文数</title>
+  </head>
+  <body>
+    <script>
+      console.clear();
+      // 回文数  12321  数是整数
+
+      // 使用字符串
+      var isPalindrome1 = function (x) {
+        // 小于0的数
+        if (x < 0) return false;
+        // 0 - 9
+        if (x < 10) return true;
+        // 10的倍数
+        if (x % 10 === 0) return false;
+        let s = String(x);
+        for (let start = 0, end = s.length - 1; start < end; start++, end--) {
+          if (s[start] !== s[end]) return false;
+        }
+        return true;
+      };
+
+      // 重新生成一个数
+      var isPalindrome = function (x) {
+        // 小于0的数
+        if (x < 0) return false;
+        // 0 - 9
+        if (x < 10) return true;
+        // 10的倍数
+        if (x % 10 === 0) return false;
+        let s = x;
+        let num = 0;
+        while (s > 0) {
+          num = num * 10 + (s % 10);
+          s = Math.floor(s / 10);
+        }
+        return num === x;
+      };
+
+      let isPalindromeNumS = [-11, -1, 0, 1, 10, 11, 121, 123];
+      isPalindromeNumS.forEach((x) => {
+        console.log(`${x} isPalindrome = `, isPalindrome(x));
+      });
+    </script>
+  </body>
+</html>
