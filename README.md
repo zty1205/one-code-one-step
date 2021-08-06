@@ -141,6 +141,7 @@
 - [34.在排序数组中查找元素的第一个和最后一个位置.html](./leetCode/34.在排序数组中查找元素的第一个和最后一个位置.html)
 - [35.搜索插入位置.html](./leetCode/35.搜索插入位置.html)
 - [36.有效的数独.html](./leetCode/36.有效的数独.html)
+- [37.解数独](./leetCode/37.解数独.html)
 - [39.组合总和.html](./leetCode/39.组合总和.html)
 - [40.组合总和 II.html](./leetCode/40.组合总和II.html)
 - [43.字符串相乘.html](./leetCode/43.字符串相乘.html)

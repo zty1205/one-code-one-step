@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>37.解数独</title>
+  </head>
+  <body>
+    <script>
+      // 编写一个程序，通过填充空格来解决数独问题。
+
+      // 数独的解法需 遵循如下规则：
+
+      // 数字 1-9 在每一行只能出现一次。
+      // 数字 1-9 在每一列只能出现一次。
+      // 数字 1-9 在每一个以粗实线分隔的 3x3 宫内只能出现一次。（请参考示例图）
+      // 数独部分空格内已填入了数字，空白格用 '.' 表示。
+
+      /**
+       * @param {character[][]} board
+       * @return {void} Do not return anything, modify board in-place instead.
+       */
+      var solveSudoku = function (board) {
+        // 辅助空间初始化
+
+        // line[i][j]  表示第 i+1 行的 j+1 已使用
+        // column[i][j]  表示第 i+1 列的 j+1 已使用
+        // block[i][j][k]  表示第 i 行 第 j+1 的九宫格 的 k+1 已使用
+        let line = Array.from({ length: 9 }, () => Array.from({ length: 9 }));
+        let column = Array.from({ length: 9 }, () => Array.from({ length: 9 }));
+        let block = Array.from({ length: 3 }, () => Array.from({ length: 3 }, () => Array.from({ length: 9 })));
+        let valid = false;
+        let spaces = [];
+
+        // 统计
+        for (let i = 0; i < 9; ++i) {
+          for (let j = 0; j < 9; ++j) {
+            if (board[i][j] == '.') {
+              spaces.push([i, j]);
+            } else {
+              let digit = board[i][j] - 1;
+              let _l = Math.floor(i / 3),
+                _r = Math.floor(j / 3);
+              line[i][digit] = column[j][digit] = block[_l][_r][digit] = true;
+            }
+          }
+        }
+
+        // 回溯
+        function dfs(board, pos) {
+          if (pos == spaces.length) {
+            valid = true;
+            return;
+          }
+
+          let space = spaces[pos];
+          let i = space[0],
+            j = space[1];
+          for (let digit = 0; digit < 9 && !valid; ++digit) {
+            let _l = Math.floor(i / 3),
+              _r = Math.floor(j / 3);
+            // 如果有重复使用的 则回溯
+            if (!line[i][digit] && !column[j][digit] && !block[_l][_r][digit]) {
+              line[i][digit] = column[j][digit] = block[_l][_r][digit] = true;
+              board[i][j] = `${digit + 1}`;
+              dfs(board, pos + 1);
+              line[i][digit] = column[j][digit] = block[_l][_r][digit] = false;
+            }
+          }
+        }
+
+        dfs(board, 0);
+        console.log('line = ', line);
+        console.log('column = ', column);
+        console.log('block = ', block);
+        console.log('board = ', board);
+      };
+
+      let board = [
+        ['5', '3', '.', '.', '7', '.', '.', '.', '.'],
+        ['6', '.', '.', '1', '9', '5', '.', '.', '.'],
+        ['.', '9', '8', '.', '.', '.', '.', '6', '.'],
+        ['8', '.', '.', '.', '6', '.', '.', '.', '3'],
+        ['4', '.', '.', '8', '.', '3', '.', '.', '1'],
+        ['7', '.', '.', '.', '2', '.', '.', '.', '6'],
+        ['.', '6', '.', '.', '.', '.', '2', '8', '.'],
+        ['.', '.', '.', '4', '1', '9', '.', '.', '5'],
+        ['.', '.', '.', '.', '8', '.', '.', '7', '9']
+      ];
+
+      let res = [
+        ['5', '3', '4', '6', '7', '8', '9', '1', '2'],
+        ['6', '7', '2', '1', '9', '5', '3', '4', '8'],
+        ['1', '9', '8', '3', '4', '2', '5', '6', '7'],
+        ['8', '5', '9', '7', '6', '1', '4', '2', '3'],
+        ['4', '2', '6', '8', '5', '3', '7', '9', '1'],
+        ['7', '1', '3', '9', '2', '4', '8', '5', '6'],
+        ['9', '6', '1', '5', '3', '7', '2', '8', '4'],
+        ['2', '8', '7', '4', '1', '9', '6', '3', '5'],
+        ['3', '4', '5', '2', '8', '6', '1', '7', '9']
+      ];
+
+      solveSudoku(board);
+    </script>
+  </body>
+</html>
