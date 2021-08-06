@@ -2,63 +2,33 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>121. 买卖股票的最佳时机</title>
+    <title>Document</title>
   </head>
   <body>
-    <pre>
-给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。
+    <script>
+      // 给定一个数组 prices ，它的第 i 个元素 prices[i] 表示一支给定股票第 i 天的价格。
+      // 你只能选择 某一天 买入这只股票，并选择在 未来的某一个不同的日子 卖出该股票。设计一个算法来计算你所能获取的最大利润。
+      // 返回你可以从这笔交易中获取的最大利润。如果你不能获取任何利润，返回 0 。
 
-如果你最多只允许完成一笔交易（即买入和卖出一支股票一次），设计一个算法来计算你所能获取的最大利润。
+      var maxProfit = function (prices) {
+        let res = 0;
+        let min = prices[1];
+        for (let i = 1; i < prices.length; i++) {
+          min = Math.min(min, prices[i - 1]);
+          res = Math.max(res, prices[i] - min);
+        }
+        return res;
+      };
 
-注意：你不能在买入股票前卖出股票。
+      let prices = [7, 1, 5, 3, 6, 4];
+      let res = 5;
 
- 
+      prices = [7, 6, 4, 3, 1];
+      res = 0;
 
-示例 1:
-
-输入: [7,1,5,3,6,4]
-输出: 5
-解释: 在第 2 天（股票价格 = 1）的时候买入，在第 5 天（股票价格 = 6）的时候卖出，最大利润 = 6-1 = 5 。
-     注意利润不能是 7-1 = 6, 因为卖出价格需要大于买入价格；同时，你不能在买入前卖出股票。
-示例 2:
-
-输入: [7,6,4,3,1]
-输出: 0
-解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。
-
- </pre
-    >
+      console.log(`prices: ${prices}， res: ${res} = `, maxProfit(prices));
+    </script>
   </body>
-  <script>
-    /**
-     * @param {number[]} prices
-     * @return {number}
-     */
-    // f(n) 下标n 天卖出的最大值 f(n) = Max f(n-1) - a[n-1] + a[n] , f(n-1)
-    // f(0) = 0, f(1) = a[1] > a[0] ? a[1] - a[0] : 0
-    // f(2) = Max(f(1)-a[1]+a[2], f(1))
-    var maxProfit = function (prices) {
-      let length = prices.length;
-      if (length < 2) return 0;
-      let i = 0,
-        max = 0,
-        pre = 0;
-      while (i++ < length - 1) {
-        pre = Math.max(pre - prices[i - 1] + prices[i], 0);
-        // pre = Math.max(pre - prices[i - 1] + prices[i], pre);  不对的
-        max = Math.max(max, pre);
-        console.log(`pre = ${pre}, max = ${max}`);
-      }
-      return max;
-    };
-
-    const test_case = [
-      [7, 1, 5, 3, 6, 4],
-      [7, 6, 4, 3, 1], // 5 // 0
-      [2, 1, 2, 1, 0, 1, 2] // 2
-    ];
-    const result = [5, 0, 2];
-    test_case.forEach((arr, i) => console.log(`${arr} , expect ${result[i]}, get: ${maxProfit(arr)}`));
-  </script>
 </html>
