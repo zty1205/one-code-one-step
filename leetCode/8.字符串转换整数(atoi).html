@@ -7,7 +7,6 @@
     <title>8. 字符串转换整数 (atoi)</title>
   </head>
   <body>
-    <script src="./run.js"></script>
     <script>
       // 请你来实现一个 myAtoi(string s) 函数，使其能将字符串转换成一个 32 位有符号整数（类似 C/C++ 中的 atoi 函数）。
 
@@ -121,6 +120,15 @@
 
       const input = [['42'], ['   -42'], ['4193 with words'], ['words and 987'], ['-91283472332']];
       const res = [42, -42, 4193, 0, -2147483648];
+
+      function runList(input = [], res = [], func) {
+        input.forEach((item, idx) => {
+          const result = func(...item);
+          console.log(
+            `input: ${item}, expect res ${res[idx]} === ${result}, isRight: ${String(result) === String(res[idx])}`
+          );
+        });
+      }
 
       runList(input, res, myAtoi);
     </script>

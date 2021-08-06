@@ -7,7 +7,6 @@
     <title>Document</title>
   </head>
   <body>
-    <script src="./run.js"></script>
     <script>
       // 给你一个只包含 '(' 和 ')' 的字符串，找出最长有效（格式正确且连续）括号子串的长度。
       var longestValidParentheses = function (s) {
@@ -31,6 +30,15 @@
 
       const input = [['(()'], [')()())'], ['']];
       const res = [2, 4, 0];
+
+      function runList(input = [], res = [], func) {
+        input.forEach((item, idx) => {
+          const result = func(...item);
+          console.log(
+            `input: ${item}, expect res ${res[idx]} === ${result}, isRight: ${String(result) === String(res[idx])}`
+          );
+        });
+      }
 
       runList(input, res, longestValidParentheses);
     </script>

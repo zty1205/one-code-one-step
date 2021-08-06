@@ -7,7 +7,6 @@
     <title>5. 最长回文子串</title>
   </head>
   <body>
-    <script src="./run.js"></script>
     <script>
       // 给你一个字符串 s，找到 s 中最长的回文子串。
 
@@ -82,6 +81,15 @@
       const res = ['bab', 'bb', 'a', 'a'];
 
       // longestPalindrome('babad');
+
+      function runList(input = [], res = [], func) {
+        input.forEach((item, idx) => {
+          const result = func(...item);
+          console.log(
+            `input: ${item}, expect res ${res[idx]} === ${result}, isRight: ${String(result) === String(res[idx])}`
+          );
+        });
+      }
 
       runList(input, res, longestPalindrome);
     </script>
