@@ -145,6 +145,7 @@
 - [38.外观数列](./leetCode/38.外观数列.html)
 - [39.组合总和.html](./leetCode/39.组合总和.html)
 - [40.组合总和 II.html](./leetCode/40.组合总和II.html)
+- [41.缺失的第一个正数](./leetCode/41.缺失的第一个正数.html)
 - [43.字符串相乘.html](./leetCode/43.字符串相乘.html)
 - [45.跳跃游戏 II.html](./leetCode/45.跳跃游戏II.html)
 - [46.全排列.html](./leetCode/46.全排列.html)
