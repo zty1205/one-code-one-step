@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>42. 接雨水</title>
+  </head>
+  <body>
+    <div>
+      <img src="../img/rainwatertrap.png" alt="" />
+    </div>
+    <script>
+      // 给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。
+
+      // 示例 1：
+
+      // 输入：height = [0,1,0,2,1,0,1,3,2,1,2,1]
+      // 输出：6
+      // 解释：上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接 6 个单位的雨水（蓝色部分表示雨水）。
+
+      // 提示：
+
+      // n == height.length
+      // 0 <= n <= 3 * 10^4
+      // 0 <= height[i] <= 10^5
+
+      // 从中间往两边找第一个比自己大的  下一个从边界开始
+
+      function trap(height) {
+        if (!height == null || !height.length) return 0;
+        let res = 0;
+        let length = height.length;
+        let leftMax = [];
+        let rightMax = [];
+        leftMax[0] = height[0];
+        // 找到当前元素的最大右边界和左边界
+        for (let i = 1; i < length; i++) {
+          leftMax[i] = Math.max(height[i], leftMax[i - 1]);
+        }
+        rightMax[length - 1] = height[length - 1];
+        for (let i = length - 2; i >= 0; i--) {
+          rightMax[i] = Math.max(height[i], rightMax[i + 1]);
+        }
+        // 当前元素可以获得的雨水量 叠加
+        for (let i = 1; i < length - 1; i++) {
+          res += Math.min(leftMax[i], rightMax[i]) - height[i];
+        }
+        return res;
+      }
+
+      // 用栈来跟踪可能储水的最长的条形块。使用栈就可以在一次遍历内完成计算。
+
+      function trap(height) {
+        let res = 0,
+          current = 0;
+        let stack = [];
+        while (current < height.length) {
+          while (stack.length && height[current] > height[stack[stack.length - 1]]) {
+            let top = stack.pop();
+            if (!stack.length) break;
+            let distance = current - stack[stack.length - 1] - 1;
+            let boundHeight = Math.min(height[current], height[stack[stack.length - 1]]) - height[top];
+            res += distance * boundHeight;
+          }
+          stack.push(current++);
+        }
+        return res;
+      }
+
+      let height = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1];
+      let res = 6;
+
+      height = [4, 2, 0, 3, 2, 5];
+      res = 9;
+
+      console.log(`height: ${height}, res: ${res} = `, trap(height));
+    </script>
+  </body>
+</html>
