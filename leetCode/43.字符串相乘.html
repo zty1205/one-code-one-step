@@ -4,15 +4,58 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>43. 字符串相乘</title>
   </head>
   <body>
     <script>
       // 给定两个以字符串形式表示的非负整数 num1 和 num2，返回 num1 和 num2 的乘积，它们的乘积也表示为字符串形式。
 
-      // 模拟乘法 然后字符串加法
+      // num1 和 num2 的长度小于110。
+      // num1 和 num2 只包含数字 0-9。
+      // num1 和 num2 均不以零开头，除非是数字 0 本身。
+      // 不能使用任何标准库的大数类型（比如 BigInteger）或直接将输入转换为整数来处理。
+
+      /**
+       * @param {string} num1
+       * @param {string} num2
+       * @return {string}
+       */
+
+      // 想得挺美，需要开了超过最大安全数的问题
+      var multiply = function (num1, num2) {
+        return (num1 * num2).toString();
+      };
+
       var multiply = function (num1, num2) {
         if (num1 === '0' || num2 === '0') return '0';
+        // 非负整数, 所以无需考虑负号
+
+        let len1 = num1.length;
+        let len2 = num2.length;
+        // 预填充0 防止加法报错
+        let resArr = Array.from({ length: len1 + len2 + 2 }).fill(0);
+
+        // 通过字符串表示，首位即为数字的最高位
+        for (let i = len1 - 1; i >= 0; i--) {
+          for (let j = len2 - 1; j >= 0; j--) {
+            // i位数 * j位数 得到的结果为 (i + j - 1)位数 ~ (i + j)位数
+            resArr[i + j + 1] = resArr[i + j + 1] + num1[i] * num2[j];
+          }
+        }
+
+        // 将数组中的十位数展开, 进位操作
+        for (let i = len1 + len2 + 1; i > 0; i--) {
+          resArr[i - 1] = resArr[i - 1] + Math.floor(resArr[i] / 10);
+          resArr[i] %= 10;
+        }
+        let res = '';
+        let index = resArr[0] ? 0 : 1;
+        while (index < len1 + len2) {
+          res += resArr[index];
+          index++;
+        }
+
+        return res;
       };
 
       let num1 = '2';
@@ -23,7 +66,7 @@
       num2 = '456';
       res = '56088';
 
-      console.log(`${num1} * ${num2} = ${res} === ${multiply(num1, num2)}`);
+      console.log(`num1: ${num1}, num2: ${num2}, expect: ${res} = ${multiply(num1, num2)}`);
     </script>
   </body>
 </html>
