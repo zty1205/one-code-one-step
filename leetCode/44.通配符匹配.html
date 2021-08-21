@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>44. 通配符匹配</title>
+  </head>
+  <body>
+    <script>
+      // 给定一个字符串 (s) 和一个字符模式 (p) ，实现一个支持 '?' 和 '*' 的通配符匹配。
+
+      // '?' 可以匹配任何单个字符。
+      // '*' 可以匹配任意字符串（包括空字符串）。
+      // 两个字符串完全匹配才算匹配成功。
+
+      // 说明:
+
+      // s 可能为空，且只包含从 a-z 的小写字母。
+      // p 可能为空，且只包含从 a-z 的小写字母，以及字符 ? 和 *。
+
+      /**
+       * @param {string} s
+       * @param {string} p
+       * @return {boolean}
+       */
+
+      // 通过递归一个一个完后推
+      var isMatch = function (s, p) {
+        if (!p) return s === '';
+        if (!s) return !p || p === '*';
+        if (p === '*') return true;
+
+        if (s && p) {
+          function match(s, i, p, j) {
+            let char = s[i];
+            let pat = p[j];
+            if (!char && !pat) return true;
+            if (char === pat || pat === '?') {
+              return match(s, i + 1, p, j + 1);
+            } else if (pat === '*') {
+              let idxJ = j;
+              while (idxJ[j] !== '*' && idxJ < p.length) idxJ++;
+              let idxI = i;
+              while (s[idxI] !== pat[idxJ] && idxI < s.length) idxI++;
+              return match(s, idxI, p, idxJ);
+            } else {
+              return false;
+            }
+          }
+          return match(s, 0, p, 0);
+        }
+        return false;
+      };
+
+      // 动态规划
+
+      // p[i]是字母 dp[i][j] = p[i] === s[j] && dp[i-1][j-1]
+      // p[i]是问号 dp[i][j] = dp[i-1][j-1]
+      // p[i]是星号 dp[i][j] = dp[i-1][j] || dp[i][j-1] （表示是否使用星号）
+
+      // 边界情况
+      // p[0][0]=True，即当字符串 ss 和模式 pp 均为空时，匹配成功；
+
+      // dp[i][0] = false
+      // dp[i][0] = false
+      // dp[0][j] 只有当模式 p 的前 j 个字符均为星号时
+
+      var isMatch = function (s, p) {
+        let sLen = s.length;
+        let pLen = p.length;
+        const dp = Array.from({ length: sLen + 1 }, () => Array.from({ length: pLen + 1 }));
+        dp[0][0] = true;
+        for (let i = 1; i <= pLen; i++) {
+          if (p[i - 1] === '*') {
+            dp[0][i] = true;
+          } else {
+            break;
+          }
+        }
+
+        for (let i = 1; i <= sLen; i++) {
+          for (let j = 1; j <= pLen; j++) {
+            if (p[j - 1] === '*') {
+              dp[i][j] = dp[i][j - 1] || dp[i - 1][j];
+            } else if (p[j - 1] === '?' || s[i - 1] === p[j - 1]) {
+              dp[i][j] = dp[i - 1][j - 1];
+            }
+          }
+        }
+
+        return !!dp[sLen][pLen];
+      };
+
+      let s = 'aa';
+      let p = 'a';
+      let res = false;
+
+      // s = 'aa';
+      // p = '*';
+      // res = true;
+
+      // s = 'adceb';
+      // p = '*a*b';
+      // res = true;
+
+      // // 方法一未通过
+      // s = 'acdcb';
+      // p = 'a*c?b';
+      // res = false;
+
+      console.log(`s: ${s}, p: ${p}, expect ${res} = ${isMatch(s, p)}`);
+    </script>
+  </body>
+</html>
