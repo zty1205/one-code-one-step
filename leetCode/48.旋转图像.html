@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>48. 旋转图像</title>
+  </head>
+  <body>
+    <script>
+      // 给定一个 n × n 的二维矩阵 matrix 表示一个图像。请你将图像顺时针旋转 90 度。
+
+      // 你必须在 原地 旋转图像，这意味着你需要直接修改输入的二维矩阵。请不要 使用另一个矩阵来旋转图像。
+
+      /**
+       * @param {number[][]} matrix
+       * @return {void} Do not return anything, modify matrix in-place instead.
+       */
+
+      // 需要使用原地算法
+
+      // 第 i 行的第 j 个元素，在旋转后，在倒数第 i 列的第 j 个位置。
+      // 0,0 => 0,2 0,1 => 1,2  0,2 => 2,2
+      // 1,0 => 0,1 1,1 => 1,1 1,2 => 2,1
+      // matrix[i][j] => matrix[j][len-i]
+      // 使用一个辅助数组
+      var rotate = function (matrix = []) {
+        const col = (row = matrix.length);
+        const tmp = Array.from({ length: col }, () => Array.from({ row }));
+        for (let i = 0; i < col; i++) {
+          for (let j = 0; j < row; j++) {
+            tmp[j][col - 1 - i] = matrix[i][j];
+          }
+        }
+        matrix = tmp;
+        console.log('matrix = ', matrix);
+      };
+
+      // 不使用额外空间
+      // 之所以上溯需要一个辅助数组 是因为一次旋转一个元素会覆盖原来位置上的元素
+      // 那么如果我们一次性以中心旋转4个元素 就可以避免这个问题
+      // 需要考虑n 奇偶数的 中心文字
+      var rotate = function (matrix = []) {
+        const n = matrix.length;
+        for (let i = 0; i < n >> 1; ++i) {
+          for (let j = 0; j < (n + 1) >> 1; ++j) {
+            let temp = matrix[i][j];
+            matrix[i][j] = matrix[n - j - 1][i];
+            matrix[n - j - 1][i] = matrix[n - i - 1][n - j - 1];
+            matrix[n - i - 1][n - j - 1] = matrix[j][n - i - 1];
+            matrix[j][n - i - 1] = temp;
+          }
+        }
+        console.log('matrix = ', matrix);
+      };
+
+      let matrix = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9]
+      ];
+
+      let res = [
+        [7, 4, 1],
+        [8, 5, 2],
+        [9, 6, 3]
+      ];
+
+      // matrix = [
+      //   [5, 1, 9, 11],
+      //   [2, 4, 8, 10],
+      //   [13, 3, 6, 7],
+      //   [15, 14, 12, 16]
+      // ];
+      // res = [
+      //   [15, 13, 2, 5],
+      //   [14, 3, 4, 1],
+      //   [12, 6, 8, 9],
+      //   [16, 7, 10, 11]
+      // ];
+
+      // matrix = [[1]];
+      // res = [[1]];
+
+      rotate(matrix);
+    </script>
+  </body>
+</html>
