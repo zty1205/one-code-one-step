@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>49. 字母异位词分组</title>
+  </head>
+  <body>
+    <script>
+      // 给你一个字符串数组，请你将 字母异位词 组合在一起。可以按任意顺序返回结果列表。
+      // 字母异位词 是由重新排列源单词的字母得到的一个新单词，所有源单词中的字母都恰好只用一次。
+
+      // 1 <= strs.length <= 104
+      // 0 <= strs[i].length <= 100
+      // strs[i] 仅包含小写字母
+
+      /**
+       * @param {string[]} strs
+       * @return {string[][]}
+       */
+      const letterMap = {
+        a: 0,
+        b: 1,
+        c: 2,
+        d: 3,
+        e: 4,
+        f: 5,
+        g: 6,
+        h: 7,
+        i: 8,
+        j: 9,
+        k: 10,
+        l: 11,
+        m: 12,
+        n: 13,
+        o: 14,
+        p: 15,
+        q: 16,
+        r: 17,
+        s: 18,
+        t: 19,
+        u: 20,
+        v: 21,
+        w: 22,
+        x: 23,
+        y: 24,
+        z: 25
+      };
+      function sortStr(str) {
+        const arr = Array.from({ length: 26 }, () => '');
+        for (let s of str) {
+          arr[letterMap[s]] += s;
+        }
+        return arr.filter(Boolean).join('');
+      }
+      // 将字母排序后，分组
+      var groupAnagrams = function (strs) {
+        let map = strs.reduce((pre, cur) => {
+          let str = sortStr(cur);
+          if (pre[str]) {
+            pre[str].push(cur);
+          } else {
+            pre[str] = [cur];
+          }
+          return pre;
+        }, {});
+        return Object.values(map);
+      };
+
+      // 对上述进行优化
+      // 无序合成字母，使用统计字母的arr做对象的key
+      var groupAnagrams = function (strs) {
+        const map = {};
+        for (let s of strs) {
+          const count = Array.from({ length: 26 }, () => 0); // new Array(26).fill(0)
+          for (let c of s) {
+            count[c.charCodeAt() - 'a'.charCodeAt()]++;
+          }
+          map[count] ? map[count].push(s) : (map[count] = [s]);
+        }
+        console.log('map = ', map);
+        return Object.values(map);
+      };
+
+      let strs = ['eat', 'tea', 'tan', 'ate', 'nat', 'bat'];
+      let res = [['bat'], ['nat', 'tan'], ['ate', 'eat', 'tea']];
+
+      // strs = [''];
+      // res = [['']];
+
+      // strs = ['a'];
+      // res = [['a']];
+
+      // 不是说每个字母只使用一次么。。。
+      strs = ['ddddddddddg', 'dgggggggggg'];
+      res = [['dgggggggggg'], ['ddddddddddg']];
+
+      console.log('groupAnagrams = ', groupAnagrams(strs));
+    </script>
+  </body>
+</html>
