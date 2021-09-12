@@ -157,6 +157,7 @@
 - [50.Pow(x,n).html](<./leetCode/50.Pow(x,n).html>)
 - [51.N 皇后.html](./leetCode/51.N皇后.html)
 - [53.最大子序和.html](./leetCode/53.最大子序和.html)
+- [55.跳跃游戏.html](./leetCode/55.跳跃游戏.html)
 - [56.合并区间.html](./leetCode/56.合并区间.html)
 - [57.插入区间.html](./leetCode/57.插入区间.html)
 - [58.最后一个单词的长度.html](./leetCode/58.最后一个单词的长度.html)

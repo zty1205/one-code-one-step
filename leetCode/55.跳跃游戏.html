@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>55. 跳跃游戏</title>
+  </head>
+  <body>
+    <script>
+      // 给定一个非负整数数组 nums ，你最初位于数组的 第一个下标 。
+      // 数组中的每个元素代表你在该位置可以跳跃的最大长度。
+      // 判断你是否能够到达最后一个下标。
+
+      // 提示：
+
+      // 1 <= nums.length <= 3 * 104
+      // 0 <= nums[i] <= 105
+
+      /**
+       * @param {number[]} nums
+       * @return {boolean}
+       */
+
+      // 超时
+      var canJump = function (nums) {
+        let pos = nums.length - 1;
+        let res = false;
+        // 能跳到position处
+        function jump(position) {
+          if (position === 0) res = true;
+          for (let i = 0; i < position; i++) {
+            if (nums[i] + i >= position) {
+              jump(i);
+            }
+          }
+        }
+        jump(pos);
+        return res;
+      };
+
+      // 从后面往前走
+      var canJump = function (nums) {
+        let position = nums.length - 1;
+        while (position > 0) {
+          for (let i = 0; i < position; i++) {
+            if (i + nums[i] >= position) {
+              position = i;
+              break;
+            }
+            if (i === position - 1) return false;
+          }
+        }
+        return true;
+      };
+
+      // 贪心 如果 最远可以到达的位置 大于等于数组中的最后一个位置 那就就是可达
+      var canJump = function (nums) {
+        let position = nums.length - 1;
+        let maxPosition = 0;
+        for (let i = 0; i <= position; i++) {
+          if (i <= maxPosition) {
+            // 最远到达位置
+            maxPosition = Math.max(maxPosition, i + nums[i]);
+            if (maxPosition >= position) return true;
+          }
+        }
+        return false;
+      };
+
+      // let nums = [2, 3, 1, 1, 4];
+      // let res = true;
+
+      nums = [3, 2, 1, 0, 4];
+      res = false;
+
+      nums = [
+        8, 2, 4, 4, 4, 9, 5, 2, 5, 8, 8, 0, 8, 6, 9, 1, 1, 6, 3, 5, 1, 2, 6, 6, 0, 4, 8, 6, 0, 3, 2, 8, 7, 6, 5, 1, 7,
+        0, 3, 4, 8, 3, 5, 9, 0, 4, 0, 1, 0, 5, 9, 2, 0, 7, 0, 2, 1, 0, 8, 2, 5, 1, 2, 3, 9, 7, 4, 7, 0, 0, 1, 8, 5, 6,
+        7, 5, 1, 9, 9, 3, 5, 0, 7, 5
+      ];
+      res = true;
+
+      nums = [0];
+      res = true;
+
+      console.log(`nums: ${nums}, res: ${res} = `, canJump(nums));
+    </script>
+  </body>
+</html>
