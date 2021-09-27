@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>59. 螺旋矩阵 II</title>
+  </head>
+  <body>
+    <script>
+      // 给你一个正整数 n ，生成一个包含 1 到 n2 所有元素，且元素按顺时针顺序螺旋排列的 n x n 正方形矩阵 matrix 。
+
+      // 用螺旋矩阵的方式填
+      var generateMatrix = function (n) {
+        let matrix = new Array(n).fill(0).map(() => []);
+        let h = 0; // 上边界
+        let l = 0; // 左边界
+        let m = n; // 下边界
+        let i = 0;
+        let j = 0;
+        let num = 1;
+        let total = n * n;
+        matrix[0][0] = 1;
+        while (num <= total) {
+          while (j < n - 1) {
+            j++;
+            matrix[i][j] = ++num;
+          }
+          h++;
+          if (i >= m - 1) break;
+          while (i < m - 1) {
+            i++;
+            matrix[i][j] = ++num;
+          }
+          n--;
+          if (j <= l) break;
+          while (j > l) {
+            j--;
+            matrix[i][j] = ++num;
+          }
+          m--;
+          if (i <= h) break;
+          while (i > h) {
+            i--;
+            matrix[i][j] = ++num;
+          }
+          l++;
+        }
+        return matrix;
+      };
+
+      // 按层模拟
+      var generateMatrix = function (n) {
+        let num = 1;
+        const matrix = new Array(n).fill(0).map(() => new Array(n).fill(0));
+        let left = 0,
+          right = n - 1,
+          top = 0,
+          bottom = n - 1;
+        while (left <= right && top <= bottom) {
+          for (let column = left; column <= right; column++) {
+            matrix[top][column] = num;
+            num++;
+          }
+          for (let row = top + 1; row <= bottom; row++) {
+            matrix[row][right] = num;
+            num++;
+          }
+          if (left < right && top < bottom) {
+            for (let column = right - 1; column > left; column--) {
+              matrix[bottom][column] = num;
+              num++;
+            }
+            for (let row = bottom; row > top; row--) {
+              matrix[row][left] = num;
+              num++;
+            }
+          }
+          left++;
+          right--;
+          top++;
+          bottom--;
+        }
+        return matrix;
+      };
+
+      let n = 4;
+      let res = [
+        [1, 2, 3],
+        [8, 9, 4],
+        [7, 6, 5]
+      ];
+
+      // n = 1;
+      // res = [[1]];
+
+      console.log(`n: ${n} generateMatrix = `, generateMatrix(n));
+    </script>
+  </body>
+</html>
