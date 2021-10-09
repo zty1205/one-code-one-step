@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>61. 旋转链表</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * Definition for singly-linked list.
+       * function ListNode(val, next) {
+       *     this.val = (val===undefined ? 0 : val)
+       *     this.next = (next===undefined ? null : next)
+       * }
+       */
+      /**
+       * @param {ListNode} head
+       * @param {number} k
+       * @return {ListNode}
+       */
+
+      // 给你一个链表的头节点 head ，旋转链表，将链表每个节点向右移动 k 个位置。
+
+      function nodeLength(head) {
+        let length = 0;
+        let p = head;
+        while (p) {
+          length += 1;
+          p = p.next;
+        }
+        return length;
+      }
+
+      var rotateRight = function (head, k) {
+        if (!head) return head;
+
+        let length = nodeLength(head);
+        const loopCount = k % length;
+
+        if (!loopCount) return head;
+
+        let n = head;
+        let i = length - loopCount;
+        while (--i) {
+          n = n.next;
+        }
+        let header = n.next; // 新的头节点
+        n.next = null;
+        let n1 = header;
+        while (n1.next) {
+          n1 = n1.next;
+        }
+        n1.next = head;
+        return header;
+      };
+
+      // 官方 省略统计长度部分
+      var rotateRight = function (head, k) {
+        if (k === 0 || !head || !head.next) {
+          return head;
+        }
+        let n = 1;
+        let cur = head;
+        while (cur.next) {
+          cur = cur.next;
+          n++;
+        }
+
+        let add = n - (k % n);
+        if (add === n) {
+          return head;
+        }
+
+        cur.next = head;
+        while (add) {
+          cur = cur.next;
+          add--;
+        }
+
+        const ret = cur.next;
+        cur.next = null;
+        return ret;
+      };
+
+      let header = {
+        val: 1,
+        next: {
+          val: 2,
+          next: {
+            val: 3,
+            next: {
+              val: 4,
+              next: {
+                val: 5
+              }
+            }
+          }
+        }
+      };
+      let k = 2;
+
+      header = {
+        val: 0,
+        next: {
+          val: 1,
+          next: {
+            val: 2
+          }
+        }
+      };
+      k = 4;
+
+      console.log('rotateRight = ', rotateRight(header, k));
+    </script>
+  </body>
+</html>
