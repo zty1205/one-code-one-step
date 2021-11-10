@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>74.搜索二维矩阵</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * @param {number[][]} matrix
+       * @param {number} target
+       * @return {boolean}
+       */
+
+      // 编写一个高效的算法来判断 m x n 矩阵中，是否存在一个目标值。该矩阵具有如下特性：
+
+      // 每行中的整数从左到右按升序排列。
+      // 每行的第一个整数大于前一行的最后一个整数。
+
+      // m == matrix.length;
+      // n == matrix[i].length;
+      // 1 <= m, n <= 100
+      // - 10^4 <= matrix[i][j], target <= 10^4;
+
+      // 从对角线 matrix[0][n-1] 查找
+      var searchMatrix = function (matrix, target) {
+        const m = matrix.length;
+        const n = matrix[0].length;
+        let i = 0;
+        let j = n - 1;
+        while (i < m && j >= 0) {
+          if (matrix[i][j] === target) {
+            return true;
+          } else if (matrix[i][j] < target) {
+            i++;
+          } else {
+            j--;
+          }
+        }
+        return false;
+      };
+
+      // 列二分 + 行二分
+      // 第一个列 最接近target的元素
+      var searchMatrix = function (matrix, target) {
+        const m = matrix.length;
+        const n = matrix[0].length;
+
+        const findCol = () => {
+          let i = -1;
+          let h = m - 1;
+          while (i < h) {
+            const mid = Math.floor((h - i + 1) / 2) + i;
+            if (matrix[mid][0] <= target) {
+              i = mid;
+            } else {
+              h = mid - 1;
+            }
+          }
+          return i;
+        };
+
+        const findRow = (row) => {
+          let i = 0;
+          let h = row.length - 1;
+          while (i <= h) {
+            const mid = Math.floor((h - i) / 2) + i;
+            if (row[mid] == target) {
+              return true;
+            } else if (row[mid] > target) {
+              h = mid - 1;
+            } else {
+              i = mid + 1;
+            }
+          }
+          return false;
+        };
+
+        const col = findCol();
+        if (col < 0) return false;
+        return findRow(matrix[col]);
+      };
+
+      let matrix = [
+          [1, 3, 5, 7],
+          [10, 11, 16, 20],
+          [23, 30, 34, 60]
+        ],
+        target = 3,
+        res = true;
+
+      // matrix = [
+      //   [1, 3, 5, 7],
+      //   [10, 11, 16, 20],
+      //   [23, 30, 34, 60]
+      // ];
+      // target = 13;
+      // res = false;
+
+      // matrix = [[1]];
+      // target = 1;
+      // res = true;
+
+      console.log(`searchMatrix ${res} === `, searchMatrix(matrix, target));
+    </script>
+  </body>
+</html>

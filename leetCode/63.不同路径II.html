@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>62. 不同路径</title>
+  </head>
+  <body>
+    <script>
+      // 一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为“Start” ）。
+
+      // 机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为“Finish”）。
+
+      // 现在考虑网格中有障碍物。那么从左上角到右下角将会有多少条不同的路径？
+
+      // m == obstacleGrid.length
+      // n == obstacleGrid[i].length
+      // 1 <= m, n <= 100
+      // obstacleGrid[i][j] 为 0 或 1
+
+      /**
+       * @param {number[][]} obstacleGrid
+       * @return {number}
+       */
+      var uniquePathsWithObstacles = function (obstacleGrid) {};
+
+      let obstacleGrid = [
+        [0, 0, 0],
+        [0, 1, 0],
+        [0, 0, 0]
+      ];
+      let res = 2;
+
+      // 解释：
+      // 3x3 网格的正中间有一个障碍物。
+      // 从左上角到右下角一共有 2 条不同的路径：
+      // 1. 向右 -> 向右 -> 向下 -> 向下
+      // 2. 向下 -> 向下 -> 向右 -> 向右
+
+      // obstacleGrid = [
+      //   [0, 1],
+      //   [0, 0]
+      // ];
+      // res = 1;
+
+      // obstacleGrid = [[1, 0]];
+      // res = 0;
+
+      // 动态规划
+
+      // dp[i][j]表示从右上角大盘(i,j)路径数量
+      // 那么dp[i][j] = dp[i-1][j] 最后一步走下边 + dp[i][j-1] 最后一步走右边
+      // 对于边界情况i = 0 || j = 0 我们设置为1
+
+      var uniquePathsWithObstacles = function (obstacleGrid) {
+        const m = obstacleGrid.length;
+        const n = obstacleGrid[0].length;
+        // const dp = Array.from({ length: m }, (val1, key1) =>
+        //   Array.from({ length: n }, (val2, key2) => (!key1 || !key2 ? 1 : 0))
+        // );
+        const dp = Array.from({ length: m }, (val1, key1) => Array.from({ length: n }).fill(0));
+        console.log('dp = ', dp);
+        dp[0][0] = obstacleGrid[0][0] ? 0 : 1;
+        for (let i = 0; i < m; i++) {
+          for (let j = 0; j < n; j++) {
+            debugger;
+            if (obstacleGrid[i][j]) {
+              dp[i][j] = 0;
+              continue;
+            }
+            !obstacleGrid[i][j] && (dp[i][j] = (i === 0 ? 0 : dp[i - 1][j]) + (j === 0 ? 0 : dp[i][j - 1]));
+          }
+        }
+        return dp[m - 1][n - 1];
+      };
+
+      console.log(`res: ${res} === `, uniquePathsWithObstacles(obstacleGrid));
+    </script>
+  </body>
+</html>
