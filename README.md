@@ -173,6 +173,7 @@
 - [69.x 的平方根.html](./leetCode/69.x的平方根.html)
 - [70.爬楼梯.html](./leetCode/70.爬楼梯.html)
 - [71.简化路径.html](./leetCode/71.简化路径.html)
+- [73.矩阵置零.html](./leetCode/73.矩阵置零.html)
 - [74.搜索二维矩阵.html](./leetCode/74.搜索二维矩阵.html)
 - [77.组合.html](./leetCode/77.组合.html)
 - [78.子集.html](./leetCode/78.子集.html)
