@@ -183,6 +183,7 @@
 - [83.删除排序链表中的重复元素.html](./leetCode/83.删除排序链表中的重复元素.html)
 - [88.合并两个有序数组.html](./leetCode/88.合并两个有序数组.html)
 - [90.子集 II.html](./leetCode/90.子集II.html)
+- [91.解码方法.html](./leetCode/91.解码方法.html)
 - [93.复原 IP 地址.html](./leetCode/93.复原IP地址.html)
 - [94.二叉树的中序遍历.html](./leetCode/94.二叉树的中序遍历.html)
 - [100.相同的树.html](./leetCode/100.相同的树.html)

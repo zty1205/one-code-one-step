@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>91. 解码方法</title>
+  </head>
+  <body>
+    <script>
+      // 一条包含字母 A-Z 的消息通过以下映射进行了 编码 ：
+
+      // 'A' -> 1
+      // 'B' -> 2
+      // ...
+      // 'Z' -> 26
+      // 要 解码 已编码的消息，所有数字必须基于上述映射的方法，反向映射回字母（可能有多种方法）。例如，"11106" 可以映射为：
+
+      // "AAJF" ，将消息分组为 (1 1 10 6)
+      // "KJF" ，将消息分组为 (11 10 6)
+      // 注意，消息不能分组为  (1 11 06) ，因为 "06" 不能映射为 "F" ，这是由于 "6" 和 "06" 在映射中并不等价。
+
+      // 给你一个只含数字的 非空 字符串 s ，请计算并返回 解码 方法的 总数 。
+
+      // 题目数据保证答案肯定是一个 32 位 的整数
+
+      // 动态规划
+      // 假设f[i] 表示 到下标i的字符前的解法
+      // 如果使用了s[i] 作为编码那么 f[i] === f[i-1]
+      // 如果使用了s[i-1], s[i] 作为编码 那么 f[i] === f[i-2] 但必须满足条件  s[i-1] !== 0, s[i-1] * 10 + s[i] <= 26
+      // 如果同时满足两个条件 则进行累加
+
+      var numDecodings = function (s) {
+        const length = s.length;
+        const f = new Array(length + 1).fill(0);
+        f[0] = 1;
+        for (let i = 1; i <= length; i++) {
+          if (s[i - 1] !== '0') {
+            f[i] += f[i - 1];
+          }
+          if (i > 1 && s[i - 2] !== '0' && s[i - 2] * 10 + (s[i - 1] - 0) <= 26) {
+            f[i] += f[i - 2];
+          }
+        }
+        return f[length];
+      };
+
+      // 优化空间复杂度
+      var numDecodings = function (s) {
+        let pPre = 0,
+          pre = 1,
+          cur = 0;
+        for (let i = 1; i <= s.length; i++) {
+          cur = 0;
+          if (s[i - 1] !== '0') {
+            cur += pre;
+          }
+          if (i > 1 && s[i - 2] !== '0' && s[i - 2] * 10 + (s[i - 1] - 0) <= 26) {
+            cur += pPre;
+          }
+          pPre = pre;
+          pre = cur;
+        }
+        return cur;
+      };
+
+      let s = '12';
+      let res = 2;
+
+      s = '226';
+      res = 3;
+
+      s = '0';
+      res = 0;
+
+      s = '06';
+      res = 0;
+
+      console.log(`s: ${s}, res: ${res} === ${numDecodings(s)}`);
+    </script>
+  </body>
+</html>
