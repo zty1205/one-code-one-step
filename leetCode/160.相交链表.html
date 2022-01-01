@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>160.相交链表</title>
+  </head>
+  <body>
+    <img src="../img/leetcode/160.png" alt="" />
+    <script>
+      // 给你两个单链表的头节点 headA 和 headB ，请你找出并返回两个单链表相交的起始节点。如果两个链表不存在相交节点，返回 null 。
+
+      // 图示两个链表在节点 c1 开始相交：
+
+      // 题目数据 保证 整个链式结构中不存在环。
+
+      // 注意，函数返回结果后，链表必须 保持其原始结构 。
+
+      /**
+       * Definition for singly-linked list.
+       * function ListNode(val) {
+       *     this.val = val;
+       *     this.next = null;
+       * }
+       */
+
+      /**
+       * @param {ListNode} headA
+       * @param {ListNode} headB
+       * @return {ListNode}
+       */
+      var getIntersectionNode = function (headA, headB) {
+        let pA = headA;
+        let pB = headB;
+
+        let count = 0;
+
+        // pA pB尾部各拼接对方一次
+        while (count < 3) {
+          if (pA === pB) return pA;
+          pA = pA.next;
+          pB = pB.next;
+          if (!pA) {
+            pA = headB;
+            count++;
+          }
+          if (!pB) {
+            pB = headA;
+            count++;
+          }
+        }
+
+        return null;
+      };
+
+      function ListNode(val) {
+        this.val = val;
+        this.next = null;
+      }
+      const node1_B = new ListNode(1);
+      const node1_A = new ListNode(1);
+      const node4_A = new ListNode(4);
+      const node4 = new ListNode(4);
+      const node5 = new ListNode(5);
+      const node5_B = new ListNode(5);
+      const node6_B = new ListNode(6);
+      const node8 = new ListNode(8);
+
+      let headA = node4_A;
+      node4_A.next = node1_A;
+      node1_A.next = node8;
+
+      let headB = node5_B;
+      node5_B.next = node6_B;
+      node6_B.next = node1_B;
+      node1_B.next = node8;
+
+      node8.next = node4;
+      node4.next = node5;
+
+      // 4,1,8,4,5 5,6,1,8,4,5
+      // 5,6,1,8,4,5 4,1,8,4,5
+      //                 8 相交节点
+
+      console.log('getIntersectionNode = ', getIntersectionNode(headA, headB));
+    </script>
+  </body>
+</html>

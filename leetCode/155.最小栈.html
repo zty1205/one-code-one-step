@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>155.最小栈</title>
+  </head>
+  <body>
+    <script>
+      // 设计一个支持 push ，pop ，top 操作，并能在常数时间内检索到最小元素的栈。
+
+      // push(x) —— 将元素 x 推入栈中。
+      // pop() —— 删除栈顶的元素。
+      // top() —— 获取栈顶元素。
+      // getMin() —— 检索栈中的最小元素。
+
+      var MinStack = function () {
+        this.min = Number.MAX_VALUE;
+        this.list = [];
+      };
+
+      /**
+       * @param {number} val
+       * @return {void}
+       */
+      MinStack.prototype.push = function (val) {
+        this.list.push(val);
+        this.min = Math.min(this.min, val);
+      };
+
+      /**
+       * @return {void}
+       */
+      MinStack.prototype.pop = function () {
+        let res = this.list.pop();
+        if (!this.list.length) {
+          this.min = Number.MAX_VALUE;
+        }
+        if (res === this.min) {
+          this.min = Math.min.apply(Math, this.list);
+        }
+      };
+
+      /**
+       * @return {number}
+       */
+      MinStack.prototype.top = function () {
+        return this.list[this.list.length - 1];
+      };
+
+      /**
+       * @return {number}
+       */
+      MinStack.prototype.getMin = function () {
+        return this.min;
+      };
+
+      /**
+       * Your MinStack object will be instantiated and called as such:
+       * var obj = new MinStack()
+       * obj.push(val)
+       * obj.pop()
+       * var param_3 = obj.top()
+       * var param_4 = obj.getMin()
+       */
+
+      const minStack = new MinStack();
+      minStack.push(-2);
+      minStack.push(0);
+      minStack.push(-3);
+      console.log('min -3 = ', minStack.getMin()); //  --> 返回 -3.
+
+      minStack.pop();
+
+      console.log('top 0 = ', minStack.top()); // --> 返回 0.
+      console.log('min -2 = ', minStack.getMin()); // --> 返回 -2.
+
+      console.log('\nminStack = ', minStack);
+    </script>
+  </body>
+</html>
