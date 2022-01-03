@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>168.Excel表列名称</title>
+  </head>
+  <body>
+    <script>
+      // 给你一个整数 columnNumber ，返回它在 Excel 表中相对应的列名称。
+
+      // 例如：
+
+      // A -> 1
+      // B -> 2
+      // C -> 3
+      // ...
+      // Z -> 26
+      // AA -> 27
+      // AB -> 28
+      // ...
+      // ABCDEFGHIJKLNMOPQRSTUVWXYZ
+
+      /**
+       * @param {number} columnNumber
+       * @return {string}
+       */
+
+      // 进制数
+      // number = a0 + a1 * 26 + a2 * 26 ^ 2 + a3* 26 * 3 + .....
+      // =>  an + an-1 .... a0
+
+      // 得FXSHRXW
+
+      var convertToTitle = function (columnNumber) {
+        const char = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+        let res = '';
+        while (columnNumber > 0) {
+          let num = ((columnNumber - 1) % 26) + 1;
+          res = char[num - 1] + res;
+          columnNumber = Math.floor((columnNumber - num) / 26);
+        }
+
+        return res;
+      };
+
+      // 官方优化解法
+      var convertToTitle1 = function (columnNumber) {
+        const sb = [];
+        while (columnNumber !== 0) {
+          columnNumber--;
+          sb.push(String.fromCharCode((columnNumber % 26) + 'A'.charCodeAt()));
+          columnNumber = Math.floor(columnNumber / 26);
+        }
+        return sb.reverse().join('');
+      };
+
+      let columnNumber = 1; // 1
+      let res = 'A';
+
+      columnNumber = 28; // 1 * 26 + 2
+      res = 'AB';
+
+      columnNumber = 701; // 26 * 26 + 25
+      res = 'ZY';
+
+      columnNumber = 676; // 25 * 26 + 26
+      res = 'YZ';
+
+      // columnNumber = 1352; // 2 * 26 * 26
+      // res = 'AYZ';
+      //
+
+      // columnNumber = 17576; // 26 * 26 * 26   = 26 * 25 * 26 + 26
+      // res = 'YYZ';
+
+      // columnNumber = 456976; // 26 * 26 * 26 * 26   = 26 * 26 * 25 * 26 + 26
+      // res = 'ZZYZ';
+
+      columnNumber = 2147483647;
+      res = 'FXSHRXW';
+
+      console.log(`columnNumber: ${columnNumber}, res: ${res} \n ${convertToTitle(columnNumber)}`);
+      console.log(`columnNumber: ${columnNumber}, res: ${res} \n ${convertToTitle1(columnNumber)}`);
+    </script>
+  </body>
+</html>

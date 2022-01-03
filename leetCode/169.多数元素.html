@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>169.多数元素</title>
+  </head>
+  <body>
+    <script>
+      // 给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数 大于 ⌊ n/2 ⌋ 的元素。
+
+      // 你可以假设数组是非空的，并且给定的数组总是存在多数元素。
+
+      // 进阶：
+      // 尝试设计时间复杂度为 O(n)、空间复杂度为 O(1) 的算法解决此问题。
+
+      // 统计  但是空间复杂度为 O(n))
+      var majorityElement = function (nums = []) {
+        let max = 0;
+        let map = {};
+        let res = 0;
+        for (let i = 0; i < nums.length; i++) {
+          let el = nums[i];
+          if (!(el in map)) {
+            map[el] = 1;
+          } else {
+            map[el]++;
+          }
+          if (map[el] > max) {
+            max = map[el];
+            res = el;
+          }
+        }
+        return res;
+      };
+
+      // 官方 Boyer-Moore 投票算法
+      var majorityElement1 = function (nums = []) {
+        let count = 0;
+        let candidate = null;
+
+        nums.map((num) => {
+          if (count == 0) {
+            candidate = num;
+          }
+          count += num == candidate ? 1 : -1;
+        });
+
+        return candidate;
+      };
+
+      let nums = [3, 2, 3];
+      let res = 3;
+
+      nums = [2, 2, 1, 1, 1, 2, 2];
+      res = 2;
+
+      nums = [1, 1, 2, 2, 1, 2, 2, 2, 2, 3, 3, 3, 2];
+      res = 2;
+
+      // Moore candidate = 1
+      More = [1, 2, 1, 0];
+      // Moore candidate = 2
+      More = [1, 2, 1, 0, -1, 0, 1, 2, 3, 2, 1, 0, 1];
+      // 用众数去抵消非众数 只用众数能抵消完
+
+      console.log(`nums: ${nums}, res: ${res} \n  ${majorityElement(nums)}`);
+      console.log(`nums: ${nums}, res: ${res} \n  ${majorityElement1(nums)}`);
+    </script>
+  </body>
+</html>
