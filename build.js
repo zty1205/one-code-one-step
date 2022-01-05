@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 // 生成html 和 md link
-const list = ['167. 两数之和 II - 输入有序数组', '168. Excel表列名称', '169. 多数元素'];
+const list = [];
 
 const html_template = `
 <!DOCTYPE html>

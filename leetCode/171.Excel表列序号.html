@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>171.Excel表列序号</title>
+  </head>
+  <body>
+    <script>
+      // 给你一个字符串 columnTitle ，表示 Excel 表格中的列名称。返回该列名称对应的列序号。
+
+      /**
+       * @param {string} columnTitle
+       * @return {number}
+       */
+
+      // 进制转换
+      var titleToNumber = function (columnTitle = '') {
+        let res = 0;
+        const length = columnTitle.length;
+        for (let i = 0; i < length; i++) {
+          let char = columnTitle[i];
+          res += Math.pow(26, length - i - 1) * (char.charCodeAt() - 64);
+        }
+        return res;
+      };
+
+      // 对Math.pow进行优化
+      var titleToNumber = function (columnTitle = '') {
+        let res = 0;
+        let mul = 1;
+        for (let i = columnTitle.length - 1; i >= 0; i--) {
+          let char = columnTitle[i];
+          res += mul * (char.charCodeAt() - 64);
+          mul = mul * 26;
+        }
+        return res;
+      };
+
+      let columnTitle = 'A';
+      let res = 1;
+
+      columnTitle = 'AB';
+      res = 28;
+
+      columnTitle = 'ZY';
+      res = 701;
+
+      columnTitle = 'YZ';
+      res = 676;
+
+      console.log(`columnTitle: ${columnTitle} res: ${res} === ${titleToNumber(columnTitle)}`);
+    </script>
+  </body>
+</html>
