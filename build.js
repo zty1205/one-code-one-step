@@ -1,7 +1,21 @@
 const fs = require('fs');
 const path = require('path');
+const readline = require('readline');
 
-// 生成html 和 md link
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+async function getAnswer(ques) {
+  return new Promise((resolve) => {
+    rl.question(ques, (value) => {
+      resolve(value);
+    });
+  });
+}
+
+// 生成文件 和 md link
 const list = [];
 
 const html_template = `
@@ -21,6 +35,13 @@ const html_template = `
 </html>
 `;
 
+const sql_template = `-- #title#\n\n`;
+
+const TEMPLATE = {
+  html: html_template,
+  sql: sql_template
+};
+
 function getNumberByName(name) {
   const ms = name.match(/(\d+)\.(.+)/);
   return ms ? +ms[1] : 0;
@@ -33,33 +54,33 @@ function findIndex(num, list = []) {
   return res ? res - 1 : 0;
 }
 
-function buildMdLink(name, dist) {
-  return `- [${name}.html](./${dist}/${name}.html)`;
+function buildMdLink(name, dist, ext) {
+  return `- [${name}.${ext}](./${dist}/${name}.${ext})`;
 }
 
-function build(str, dist) {
+function build(str, dist, ext) {
   let name = str.replace(/\s/g, '');
-  const tem = html_template.replace(/#title#/, name);
-  fs.writeFileSync(`./${dist}/${name}.html`, tem);
+  const template = TEMPLATE[ext] || '';
+  const tem = template.replace(/#title#/, name);
+  fs.writeFileSync(`./${dist}/${name}.${ext}`, tem);
 
   const mdContent = fs.readFileSync(path.resolve(__dirname, './README.md'), { encoding: 'utf-8' });
-  // console.log('mdContent = ', mdContent);
-  const matchRes = mdContent.match(new RegExp(`- (.*)${dist}/(.*)\.html\\)`, 'g'));
+  const regexp = new RegExp(`- (.*)${dist}/(.*)\.[${Object.keys(TEMPLATE).join('|')}]\\)`, 'g');
+  const matchRes = mdContent.match(regexp);
   if (!matchRes) return;
   const numList = matchRes.map(getNumberByName);
   const curNum = getNumberByName(str);
   const idx = findIndex(curNum, numList);
 
   const lastHtml = matchRes[idx];
-  // console.log('lastHtml = ', lastHtml);
-  // console.log('newHtml = ', `${lastHtml}\n${buildMdLink(name, dist)}`);
-  const newContent = mdContent.replace(lastHtml, `${lastHtml}\n${buildMdLink(name, dist)}`);
-  // console.log('newContent = ', newContent);
+  const newContent = mdContent.replace(lastHtml, `${lastHtml}\n${buildMdLink(name, dist, ext)}`);
   fs.writeFileSync(path.resolve(__dirname, './README.md'), newContent, { encoding: 'utf-8' });
 }
 
-function main() {
-  list.map((s) => build(s, 'leetCode'));
+async function main() {
+  const ext = await getAnswer(` File extension default html ? `);
+  list.map((s) => build(s, 'leetCode', ext || 'html'));
+  rl.close();
 }
 
 main();
