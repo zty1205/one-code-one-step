@@ -200,6 +200,7 @@
 - [119.杨辉三角 II.html](./leetCode/119.杨辉三角II.html)
 - [121.买卖股票的最佳时机.html](./leetCode/121.买卖股票的最佳时机.html)
 - [122.买卖股票的最佳时机 II.html](./leetCode/122.买卖股票的最佳时机II.html)
+- [125.验证回文串.html](./leetCode/125.验证回文串.html)
 - [136.只出现一次的数字.html](./leetCode/136.只出现一次的数字.html)
 - [137.只出现一次的数字 II.html](./leetCode/137.只出现一次的数字II.html)
 - [141.环形链表.html](./leetCode/141.环形链表.html)
