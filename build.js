@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const readline = require('readline');
+const open = require('open', { allowNonzeroExitCode: true });
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -62,7 +63,8 @@ function build(str, dist, ext) {
   let name = str.replace(/\s/g, '');
   const template = TEMPLATE[ext] || '';
   const tem = template.replace(/#title#/, name);
-  fs.writeFileSync(`./${dist}/${name}.${ext}`, tem);
+  const file = `./${dist}/${name}.${ext}`;
+  fs.writeFileSync(file, tem);
 
   const mdContent = fs.readFileSync(path.resolve(__dirname, './README.md'), { encoding: 'utf-8' });
   const regexp = new RegExp(`- (.*)${dist}/(.*)\.[${Object.keys(TEMPLATE).join('|')}]\\)`, 'g');
@@ -73,14 +75,24 @@ function build(str, dist, ext) {
   const idx = findIndex(curNum, numList);
 
   const lastHtml = matchRes[idx];
-  const newContent = mdContent.replace(lastHtml, `${lastHtml}\n${buildMdLink(name, dist, ext)}`);
+  const link = buildMdLink(name, dist, ext);
+  const newContent = mdContent.replace(lastHtml, `${lastHtml}\n${link}`);
   fs.writeFileSync(path.resolve(__dirname, './README.md'), newContent, { encoding: 'utf-8' });
+  return {
+    name,
+    file,
+    link
+  };
 }
 
 async function main() {
   const ext = await getAnswer(` File extension default html ? `);
-  list.map((s) => build(s, 'leetCode', ext || 'html'));
+  const res = list.map((s) => build(s, 'leetCode', ext || 'html'));
+  if (res && res[0]) {
+    await open(res[0].file);
+  }
   rl.close();
+  process.exit();
 }
 
 main();
