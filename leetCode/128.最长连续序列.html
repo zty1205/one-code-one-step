@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>128.最长连续序列</title>
+  </head>
+  <body>
+    <script>
+      // 给定一个未排序的整数数组 nums ，找出数字连续的最长序列（不要求序列元素在原数组中连续）的长度。
+
+      // 请你设计并实现时间复杂度为 O(n) 的算法解决此问题。
+
+      // 提示：
+      // 0 <= nums.length <= 10^5
+      // -10^9 <= nums[i] <= 10^9
+
+      // O(n) 那不能使用排序 只能使用 常数次的 n 次遍历
+
+      // 每一个数都查询相邻值，最差可能是n^2 如果已被匹配过的数据不查找那么 复杂度也是O(n)
+      var longestConsecutive = function (nums = []) {
+        if (!nums.length) return 0;
+
+        // 标记使用 和 查找
+        const map = nums.reduce((pre, cur) => {
+          pre[cur] = true;
+          return pre;
+        }, {});
+
+        let res = 1;
+        for (let n of nums) {
+          if (map[n]) {
+            map[n] = false; // 标记false 则不能使用
+            let len = 1;
+            let low = n - 1;
+            let high = n + 1;
+            // 向下查找
+            while (map[low]) {
+              map[low] = false;
+              low--;
+              len++;
+            }
+            while (map[high]) {
+              map[high] = false;
+              high++;
+              len++;
+            }
+            if (len > res) res = len;
+          }
+        }
+        return res;
+      };
+
+      // 官方
+      var longestConsecutive = function (nums) {
+        let num_set = new Set(nums);
+
+        let longestStreak = 0;
+
+        for (const num of num_set) {
+          // 只往大的查找 所以也只需要 O（n）
+          if (!num_set.has(num - 1)) {
+            let currentNum = num;
+            let currentStreak = 1;
+
+            while (num_set.has(currentNum + 1)) {
+              currentNum += 1;
+              currentStreak += 1;
+            }
+
+            longestStreak = Math.max(longestStreak, currentStreak);
+          }
+        }
+
+        return longestStreak;
+      };
+
+      // 按照上面的思路只往上查 也无需设置map
+      var longestConsecutive = function (nums = []) {
+        if (!nums.length) return 0;
+
+        // 标记使用 和 查找
+        const map = nums.reduce((pre, cur) => {
+          pre[cur] = true;
+          return pre;
+        }, {});
+
+        let res = 1;
+        for (let n of nums) {
+          if (!map[n - 1]) {
+            let len = 1;
+            let high = n + 1;
+            // 向下查找
+            while (map[high]) {
+              high++;
+              len++;
+            }
+            if (len > res) res = len;
+          }
+        }
+        return res;
+      };
+
+      let nums = [100, 4, 200, 1, 3, 2];
+      let res = 4;
+
+      nums = [0, 3, 7, 2, 5, 8, 4, 6, 0, 1]; // 0,1,2,3,4,5,6,7,8
+      res = 9;
+
+      console.log(`nums: ${nums}`);
+      console.log(`res: ${res} === ${longestConsecutive(nums)}`);
+    </script>
+  </body>
+</html>

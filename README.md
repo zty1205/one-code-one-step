@@ -201,6 +201,8 @@
 - [121.买卖股票的最佳时机.html](./leetCode/121.买卖股票的最佳时机.html)
 - [122.买卖股票的最佳时机 II.html](./leetCode/122.买卖股票的最佳时机II.html)
 - [125.验证回文串.html](./leetCode/125.验证回文串.html)
+- [128.最长连续序列.html](./leetCode/128.最长连续序列.html)
+- [129.求根节点到叶节点数字之和.html](./leetCode/129.求根节点到叶节点数字之和.html)
 - [136.只出现一次的数字.html](./leetCode/136.只出现一次的数字.html)
 - [137.只出现一次的数字 II.html](./leetCode/137.只出现一次的数字II.html)
 - [141.环形链表.html](./leetCode/141.环形链表.html)
