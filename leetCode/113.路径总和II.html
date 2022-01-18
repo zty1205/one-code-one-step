@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>113.路径总和II</title>
+  </head>
+  <body>
+    <script>
+      // 给你二叉树的根节点 root 和一个整数目标和 targetSum ，找出所有 从根节点到叶子节点 路径总和等于给定目标和的路径。
+      // 叶子节点 是指没有子节点的节点。
+
+      /**
+       * Definition for a binary tree node.
+       * function TreeNode(val, left, right) {
+       *     this.val = (val===undefined ? 0 : val)
+       *     this.left = (left===undefined ? null : left)
+       *     this.right = (right===undefined ? null : right)
+       * }
+       */
+      /**
+       * @param {TreeNode} root
+       * @param {number} targetSum
+       * @return {number[][]}
+       */
+
+      // 树中节点总数在范围 [0, 5000] 内
+      // -1000 <= Node.val <= 1000
+      // -1000 <= targetSum <= 1000
+
+      // 遍历 合为target则push到结果集
+      var pathSum = function (root, targetSum) {
+        if (!root) return [];
+
+        let res = [];
+        function traverse(root, curArr, sum) {
+          if (!root) return;
+
+          const { left, right } = root;
+
+          if (sum === targetSum && !left && !right) {
+            // 叶子节点且和为target
+            res.push(curArr);
+            return;
+          }
+
+          if (left) {
+            traverse(left, [...curArr, left.val], sum + left.val);
+          }
+          if (right) {
+            traverse(right, [...curArr, right.val], sum + right.val);
+          }
+        }
+
+        traverse(root, [root.val], root.val);
+        return res;
+      };
+
+      // 深度遍历
+      var pathSum = function (root, targetSum) {
+        if (!root) return [];
+
+        let res = [];
+        let path = [];
+        function dfs(node, sum) {
+          // 使用减法
+          if (!node) return;
+          path.push(node.val);
+          sum -= node.val;
+          if (!node.left && !node.right && !sum) {
+            res.push([...path]);
+          }
+          dfs(node.left, sum);
+          dfs(node.right, sum);
+          path.pop();
+        }
+
+        dfs(root, targetSum);
+        return res;
+      };
+
+      //广度遍历
+      var pathSum = function (root, targetSum) {
+        if (!root) return [];
+
+        let res = [];
+        let node_queue = [root];
+        let sum_queue = [0];
+        let nodeMap = new WeakMap(); // 子节点 -> 父节点 查找路径方便 这里不能使用普通对象做哈希
+
+        function fillPath(node) {
+          let arr = [];
+          while (node) {
+            arr.unshift(node.val);
+            node = nodeMap.get(node);
+          }
+          res.push(arr);
+        }
+
+        while (node_queue.length) {
+          let node = node_queue.pop();
+          let curSum = sum_queue.pop() + node.val;
+
+          if (!node.left && !node.right) {
+            if (curSum === targetSum) {
+              fillPath(node);
+            }
+          } else {
+            if (node.left) {
+              node_queue.push(node.left);
+              sum_queue.push(curSum);
+              nodeMap.set(node.left, node);
+            }
+            if (node.right) {
+              node_queue.push(node.right);
+              sum_queue.push(curSum);
+              nodeMap.set(node.right, node);
+            }
+          }
+        }
+
+        return res;
+      };
+
+      let root = [5, 4, 8, 11, null, 13, 4, 7, 2, null, null, 5, 1];
+
+      root = {
+        val: 5,
+        left: {
+          val: 4,
+          left: {
+            val: 11,
+            left: {
+              val: 7
+            },
+            right: {
+              val: 2
+            }
+          }
+        },
+        right: {
+          val: 8,
+          left: {
+            val: 13
+          },
+          right: {
+            val: 4,
+            left: {
+              val: 5
+            },
+            right: {
+              val: 1
+            }
+          }
+        }
+      };
+      let targetSum = 22;
+      let res = [
+        [5, 4, 11, 2],
+        [5, 8, 4, 5]
+      ];
+
+      // root = {
+      //   val: 1,
+      //   left: {
+      //     val: 2
+      //   },
+      //   right: {
+      //     val: 3
+      //   }
+      // };
+      // targetSum = 5;
+      // res = [];
+
+      // root = {
+      //   val: 1,
+      //   left: {
+      //     val: 2
+      //   }
+      // };
+      // targetSum = 0;
+      // res = [];
+
+      // root = {
+      //   val: 1,
+      //   left: {
+      //     val: 2
+      //   }
+      // };
+      // targetSum = 1;
+      // res = [[1]];
+
+      // root = {
+      //   val: -2,
+      //   right: {
+      //     val: -3
+      //   }
+      // };
+      // targetSum = -5;
+      // res = [[-2, -3]];
+
+      console.log('root: ', root);
+      console.log(`targetSum: ${targetSum}, res: ${res} === `, pathSum(root, targetSum));
+    </script>
+  </body>
+</html>
