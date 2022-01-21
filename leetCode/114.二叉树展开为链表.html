@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>114.二叉树展开为链表</title>
+  </head>
+  <body>
+    <script>
+      // 给你二叉树的根结点 root ，请你将它展开为一个单链表：
+
+      // 展开后的单链表应该同样使用 TreeNode ，其中 right 子指针指向链表中下一个结点，而左子指针始终为 null 。
+      // 展开后的单链表应该与二叉树 先序遍历 顺序相同。
+
+      // 提示：
+
+      // 树中结点数在范围 [0, 2000] 内
+      // -100 <= Node.val <= 100
+      //
+
+      // 进阶：你可以使用原地算法（O(1) 额外空间）展开这棵树吗？
+
+      /**
+       * Definition for a binary tree node.
+       * function TreeNode(val, left, right) {
+       *     this.val = (val===undefined ? 0 : val)
+       *     this.left = (left===undefined ? null : left)
+       *     this.right = (right===undefined ? null : right)
+       * }
+       */
+      /**
+       * @param {TreeNode} root
+       * @return {void} Do not return anything, modify root in-place instead.
+       */
+
+      // 先序遍历  根左右
+      // 原地算法 递归 先使得叶子节点先序 再层层
+      // 注意 官方的答案为非原地算法。。。。。
+
+      var flatten = function (root) {
+        if (!root) {
+          return null;
+        } else if (!root.left && !root.right) {
+          // 叶子节点 直接返回
+          return root;
+        } else if (root.left && root.right) {
+          // 非叶子节点 递归 将左侧拼接到右侧的尾部
+          let r = root.right;
+          root.right = flatten(root.left);
+          root.left = null;
+          let n = root;
+          while (n.right) n = n.right;
+          n.right = flatten(r);
+          return root;
+        } else if (root.left) {
+          // 将左侧拼接到右侧
+          root.right = flatten(root.left);
+          root.left = null;
+          return root;
+        } else {
+          // 对right进行flat操作
+          flatten(root.right);
+          return root;
+        }
+      };
+
+      let root = {
+        val: 1,
+        left: {
+          val: 2,
+          left: {
+            val: 3
+          },
+          right: {
+            val: 4
+          }
+        },
+        right: {
+          val: 5,
+          right: {
+            val: 6
+          }
+        }
+      };
+
+      let res = {
+        val: 1,
+        right: {
+          val: 2,
+          right: {
+            val: 3,
+            right: {
+              val: 4,
+              right: {
+                val: 5,
+                right: {
+                  val: 6
+                }
+              }
+            }
+          }
+        }
+      };
+
+      // root = null;
+      // res = null;
+
+      // root = {
+      //   val: 0
+      // };
+      // res = {
+      //   val: 0
+      // };
+
+      // root = {
+      //   val: 1,
+      //   left: {
+      //     val: 2,
+      //     left: {
+      //       val: 3
+      //     },
+      //     right: null
+      //   },
+      //   right: null
+      // };
+
+      // res = {
+      //   val: 1,
+      //   right: {
+      //     val: 2,
+      //     right: {
+      //       val: 3
+      //     },
+      //     left: null
+      //   },
+      //   left: null
+      // };
+
+      // root = {
+      //   val: 1,
+      //   left: null,
+      //   right: {
+      //     val: 2,
+      //     left: {
+      //       val: 3
+      //     },
+      //     right: null
+      //   }
+      // };
+
+      // res = {
+      //   val: 1,
+      //   right: {
+      //     val: 2,
+      //     right: {
+      //       val: 3
+      //     },
+      //     left: null
+      //   },
+      //   left: null
+      // };
+
+      console.log('root = ', root);
+      console.log('res = ', res);
+      console.log('result = ', flatten(root));
+    </script>
+  </body>
+</html>
