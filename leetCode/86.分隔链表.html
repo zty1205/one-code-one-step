@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>86.分隔链表</title>
+  </head>
+  <body>
+    <img src="../img/leetcode/86.jpg" alt="" />
+    <script>
+      // 给你一个链表的头节点 head 和一个特定值 x ，请你对链表进行分隔，使得所有 小于 x 的节点都出现在 大于或等于 x 的节点之前。
+
+      // 你应当 保留 两个分区中每个节点的初始相对位置。
+
+      // 提示：
+
+      // 链表中节点的数目在范围 [0, 200] 内
+      // -100 <= Node.val <= 100
+      // -200 <= x <= 200
+
+      /**
+       * @param {ListNode} head
+       * @param {number} x
+       * @return {ListNode}
+       */
+
+      // 从头开始找到第一个大于等于x的节点 nodeA
+      // x后面所有小于x的节点都需要放到nodeA之前 保持相对位置
+      // 原地算法和指针
+      var partition = function (head, x) {
+        if (!head) return null;
+
+        // 设置一个节点指向头结点 因为head节点也可能需要移动
+        let h = { val: Number.MIN_VALUE, next: head };
+
+        let node = h;
+        // 找到 第一个大于等于x的节点 bigNode
+        while (node.next && node.next.val < x) node = node.next;
+        let preBigNode = node; // 1  // h
+        let bigNode = node.next; // 4 // 2
+
+        if (!bigNode) return head;
+
+        let preNode = bigNode; // 2
+        node = bigNode.next;
+        while (node) {
+          if (node.val < x) {
+            let minNode = node; // 2
+
+            // 剔除小节点
+            node = node.next; // 5
+            preNode.next = node;
+
+            // 拼上小节点
+            preBigNode.next = minNode;
+            minNode.next = bigNode;
+            preBigNode = minNode;
+          } else {
+            preNode = preNode.next;
+            node = node.next;
+          }
+        }
+
+        return h.next;
+      };
+
+      // 非原地算法 使用辅助链表
+      var partition = function (head, x) {
+        // 存放小的节点
+        let t = { next: null };
+        let temp = t;
+
+        // 原链表剩下的节点
+        let h = { next: head };
+        let node = h;
+
+        while (head) {
+          if (head.val < x) {
+            node.next = head.next;
+            let _h = head;
+            head = head.next;
+
+            t.next = _h;
+            t = t.next;
+          } else {
+            node = node.next;
+            head = head.next;
+          }
+        }
+        t.next = h.next;
+        return temp.next;
+      };
+
+      let head = {
+        val: 1,
+        next: {
+          val: 4,
+          next: {
+            val: 3,
+            next: {
+              val: 2,
+              next: {
+                val: 5,
+                next: {
+                  val: 2,
+                  next: null
+                }
+              }
+            }
+          }
+        }
+      };
+      let x = 3;
+      let res = {
+        val: 1,
+        next: {
+          val: 2,
+          next: {
+            val: 2,
+            next: {
+              val: 4,
+              next: {
+                val: 3,
+                next: {
+                  val: 5,
+                  next: null
+                }
+              }
+            }
+          }
+        }
+      };
+
+      head = {
+        val: 2,
+        next: {
+          val: 1,
+          next: null
+        }
+      };
+      x = 2;
+      res = {
+        val: 1,
+        next: {
+          val: 2,
+          next: null
+        }
+      };
+
+      // 试一下不用变的
+      head = {
+        val: 1,
+        next: {
+          val: 2,
+          next: null
+        }
+      };
+      x = 2;
+      res = {
+        val: 1,
+        next: {
+          val: 2,
+          next: null
+        }
+      };
+
+      console.log('head :>> ', head);
+      console.log('x :>> ', x);
+      console.log('res :>> ', res);
+
+      console.log('res :>> ', partition(head, x));
+    </script>
+  </body>
+</html>
