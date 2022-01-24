@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>189.轮转数组</title>
+  </head>
+  <body>
+    <script>
+      // 给你一个数组，将数组中的元素向右轮转 k 个位置，其中 k 是非负数。
+      // <= nums.length <= 105
+      // -231 <= nums[i] <= 231 - 1
+      // 0 <= k <= 105
+
+      /**
+       * @param {number[]} nums
+       * @param {number} k
+       * @return {void} Do not return anything, modify nums in-place instead.
+       */
+
+      // 原地算法
+      // 按题意一个一个换
+      // 超时。。
+      var rotate = function (nums, k) {
+        if (k === 0) return;
+        const _k = k % nums.length;
+
+        for (let i = 0; i < _k; i++) {
+          nums.unshift(nums.pop());
+        }
+      };
+
+      // 使用splice
+      var rotate = function (nums = [], k) {
+        if (k === 0) return;
+        const length = nums.length;
+        const _k = k % length;
+
+        nums.splice(0, 0, ...nums.splice(length - _k, _k));
+      };
+
+      // 反转两次
+      const reverse = (nums, start, end) => {
+        while (start < end) {
+          [nums[start], nums[end]] = [nums[end], nums[start]];
+          start += 1;
+          end -= 1;
+        }
+      };
+
+      var rotate = function (nums = [], k) {
+        k %= nums.length;
+        nums.reverse();
+        reverse(nums, 0, k - 1);
+        reverse(nums, k, nums.length - 1);
+        console.log('nums = ', nums);
+      };
+
+      // 环状替换
+      // 最大公约数
+      function gcd(x, y) {
+        return y ? gcd(y, x % y) : x;
+      }
+
+      var rotate = function (nums, k) {
+        const n = nums.length;
+        k = k % n;
+        let count = gcd(k, n); // 移动的次数为最大公约数
+        for (let start = 0; start < count; ++start) {
+          let current = start;
+          let prev = nums[start];
+          do {
+            const next = (current + k) % n; // current最后的位置
+            const temp = nums[next];
+            nums[next] = prev;
+            prev = temp;
+            current = next;
+          } while (start !== current);
+        }
+      };
+
+      let nums = [1, 2, 3, 4, 5, 6, 7];
+      let k = 3;
+      let res = [5, 6, 7, 1, 2, 3, 4];
+      // 解释:
+      // 向右轮转 1 步: [7,1,2,3,4,5,6]
+      // 向右轮转 2 步: [6,7,1,2,3,4,5]
+      // 向右轮转 3 步: [5,6,7,1,2,3,4]
+
+      nums = [-1, -100, 3, 99];
+      k = 2;
+      res = [3, 99, -1, -100];
+
+      // 解释:
+      // 向右轮转 1 步: [99,-1,-100,3]
+      // 向右轮转 2 步: [3,99,-1,-100]
+
+      console.log('res = ', res);
+      rotate(nums, k);
+    </script>
+  </body>
+</html>
