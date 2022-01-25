@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>剑指Offer09.用两个栈实现队列</title>
+  </head>
+  <body>
+    <script>
+      function deepClone(obj = new Object(), map = new WeakMap()) {
+        // 简单类型
+        if (obj == null || typeof obj !== 'object') return obj;
+        if (obj instanceof Date) return new Date(obj);
+        if (obj instanceof RegExp) return new RegExp(obj);
+
+        if (map.has(obj)) return map.get(obj);
+
+        let o = new obj.constructor();
+        map.set(obj, o);
+
+        for (let k in obj) {
+          if (obj.hasOwnProperty(k)) {
+            // 遍历一个实例对象的所有属性时忽略掉继承属性(从原型继承的属性)
+            o[k] = deepClone(obj[k], map);
+          }
+        }
+        return o;
+      }
+      window.deepClone = deepClone;
+    </script>
+    <script>
+      // 用两个栈实现一个队列。队列的声明如下，请实现它的两个函数 appendTail 和 deleteHead ，分别完成在队列尾部插入整数和在队列头部删除整数的功能。(若队列中没有元素，deleteHead 操作返回 -1 )
+
+      // 栈 先进后出 操作为push 和 pop
+      // 队列 先进先出
+      var CQueue = function () {
+        this.pushStack = [];
+        this.popStack = [];
+      };
+
+      /**
+       * @param {number} value
+       * @return {void}
+       */
+      CQueue.prototype.appendTail = function (value) {
+        let val;
+        while ((val = this.popStack.pop())) {
+          this.pushStack.push(val);
+        }
+        this.pushStack.push(value);
+      };
+
+      /**
+       * @return {number}
+       */
+      CQueue.prototype.deleteHead = function () {
+        let val;
+        while ((val = this.pushStack.pop())) {
+          this.popStack.push(val);
+        }
+        return this.popStack.length ? this.popStack.pop() : -1;
+      };
+
+      // 只在一个操作内进行循环
+      var CQueue = function () {
+        this.pushStack = [];
+        this.popStack = [];
+      };
+
+      CQueue.prototype.appendTail = function (value) {
+        this.pushStack.push(value);
+      };
+
+      CQueue.prototype.deleteHead = function () {
+        if (!this.popStack.length) {
+          // popStack为空的时间才能重新移动否则顺序变乱
+          while (this.pushStack.length) {
+            this.popStack.push(this.pushStack.pop());
+          }
+        }
+        return this.popStack.length ? this.popStack.pop() : -1;
+      };
+
+      let c1 = new CQueue();
+      c1.appendTail(3);
+      console.log('c1 appendTail 3 = ', deepClone(c1));
+      console.log('c1 deleteHead = ', c1.deleteHead());
+      console.log('c1 deleteHead = ', c1.deleteHead());
+
+      console.log('');
+      console.log('--------');
+      console.log('');
+
+      let c2 = new CQueue();
+      console.log('c2 deleteHead = ', c2.deleteHead());
+
+      c2.appendTail(5);
+      console.log('c2 appendTail 5 = ', deepClone(c2));
+      c2.appendTail(2);
+      console.log('c2 appendTail 2 = ', deepClone(c2));
+
+      console.log('c2 deleteHead = ', c2.deleteHead());
+      console.log('c2 deleteHead = ', c2.deleteHead());
+    </script>
+  </body>
+</html>
