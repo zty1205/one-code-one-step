@@ -1,23 +1,14 @@
 const fs = require('fs');
 const path = require('path');
-const readline = require('readline');
+const inquirer = require('inquirer');
 const open = require('open', { allowNonzeroExitCode: true });
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
+const NO_CODE_DIR = ['.git', 'node_modules', 'img', 'public', 'src'];
 
-async function getAnswer(ques) {
-  return new Promise((resolve) => {
-    rl.question(ques, (value) => {
-      resolve(value);
-    });
-  });
-}
-
-// 生成文件 和 md link
-const list = [];
+const NO_CODE_DIR_MAP = NO_CODE_DIR.reduce((pre, cur) => {
+  pre[cur] = true;
+  return pre;
+}, {});
 
 const html_template = `
 <!DOCTYPE html>
@@ -86,13 +77,61 @@ function build(str, dist, ext) {
 }
 
 async function main() {
-  const ext = await getAnswer(` File extension default html ? `);
-  const res = list.map((s) => build(s, 'leetCode', ext || 'html'));
-  if (res && res[0]) {
-    await open(res[0].file);
-  }
-  rl.close();
-  process.exit();
+  const files = fs.readdirSync(__dirname);
+
+  const codeDir = files
+    .filter((file) => {
+      const stat = fs.statSync(file);
+      return stat.isDirectory();
+    })
+    .filter((file) => !NO_CODE_DIR_MAP[file]);
+
+  inquirer
+    .prompt([
+      {
+        type: 'input',
+        message: '文件名，多个使用；分格',
+        name: 'name',
+        filter: function (val) {
+          return val ? val.split('；') : undefined;
+        },
+        validate: function (val) {
+          const done = this.async();
+          if (!val) {
+            done('请输入文件名');
+            return;
+          }
+          done(null, true);
+        }
+      },
+      {
+        type: 'input',
+        message: '文件后缀，默认html: ',
+        name: 'ext',
+        default: 'html',
+        when: function (answer) {
+          return answer.name;
+        }
+      },
+      {
+        type: 'list',
+        message: '文件夹，默认leetCode：',
+        name: 'dist',
+        default: 'leetCode',
+        choices: codeDir,
+        when: function (answer) {
+          return answer.name;
+        }
+      }
+    ])
+    .then(async (answer) => {
+      const { name, ext, dist } = answer;
+      const res = name.map((n) => build(n, dist, ext));
+      if (res && res[0]) {
+        await open(res[0].file);
+      }
+      process.exit();
+    });
 }
 
 main();
