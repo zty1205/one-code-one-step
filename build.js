@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const inquirer = require('inquirer');
-const open = require('open', { allowNonzeroExitCode: true });
+const open = require('open');
 
 const NO_CODE_DIR = ['.git', 'node_modules', 'img', 'public', 'src'];
 
@@ -35,7 +35,7 @@ const TEMPLATE = {
 };
 
 function getNumberByName(name) {
-  const ms = name.match(/(\d+)\.(.+)/);
+  const ms = name.match(/(\d+)/);
   return ms ? +ms[1] : 0;
 }
 
@@ -72,8 +72,21 @@ function build(str, dist, ext) {
   return {
     name,
     file,
-    link
+    link,
+    curNum
   };
+}
+
+function buildGitSH(files = [], dist) {
+  let content = `git add README.md\n`;
+  let num = `feat: ${dist}`;
+  files.forEach((f) => {
+    content += `git add ${f.file}\n`;
+    num += ` ${f.curNum}`;
+  });
+  content += `git commit -m '${num}'\n`;
+  content += `git push`;
+  fs.writeFileSync(path.resolve(__dirname, './deploy.sh'), content, { encoding: 'utf-8' });
 }
 
 async function main() {
@@ -90,10 +103,10 @@ async function main() {
     .prompt([
       {
         type: 'input',
-        message: '文件名，多个使用；分格',
+        message: '文件名，多个使用,分格',
         name: 'name',
         filter: function (val) {
-          return val ? val.split('；') : undefined;
+          return val ? val.split(',') : undefined;
         },
         validate: function (val) {
           const done = this.async();
@@ -128,8 +141,9 @@ async function main() {
       const { name, ext, dist } = answer;
       const res = name.map((n) => build(n, dist, ext));
       if (res && res[0]) {
-        await open(res[0].file);
+        await open(res[0].file, { allowNonzeroExitCode: true, background: true });
       }
+      buildGitSH(res, dist);
       process.exit();
     });
 }
