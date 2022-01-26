@@ -78,17 +78,22 @@ function convertAnswer(answers = []) {
   let htmlAnswers = '';
   for (let ans of answers) {
     let ansArr = ans.split(/\n/);
-    let [input, output] = ansArr;
-    htmlAnswers += `${input.replace('输入：', 'var ')};\n`;
-    htmlAnswers += `${output.replace('输出：', 'var res = ')};\n\n`;
+    const [input, output, explain] = ansArr;
+
+    let i = input.replace('输入: ', input.indexOf('=') === -1 ? 'var input = ' : 'var ');
+    let o = output.replace('输出: ', output.indexOf('=') === -1 ? 'var result = ' : 'var ');
+
+    htmlAnswers += `// ${i};\n`;
+    htmlAnswers += `// ${o};\n`;
+    htmlAnswers += `// ${explain};\n\n`;
   }
   return htmlAnswers;
 }
 
 function convertQuestionDomData(data) {
-  const { title, content, code } = data;
+  const { url, title, content, code } = data;
 
-  let htmlContent = ``;
+  let htmlContent = `\n// ${url}\n`;
 
   const questions = [];
   const answer = [];
@@ -119,7 +124,9 @@ function convertQuestionDomData(data) {
   let htmlAnswers = convertAnswer(answer);
   let htmlQuestion = convertQuestion(questions);
 
-  htmlContent += `\n${htmlQuestion}\n\n${code}\n\n${htmlAnswers}`;
+  const ansArea = '\n// --- answer-1 ---\n\n// --- answer-1 ---\n\n// --- answer-2 ---\n\n// --- answer-2 ---\n';
+
+  htmlContent += `\n${htmlQuestion}\n\n${code}\n\n${ansArea}\n\n${htmlAnswers}`;
 
   return {
     htmlTitle: title,
@@ -131,7 +138,7 @@ function convertQuestionDomData(data) {
 async function buildByUrl(url, dist, ext) {
   const data = await getPageDataByUrl(url);
 
-  const { htmlTitle, fileName: name, htmlContent } = convertQuestionDomData(data);
+  const { htmlTitle, fileName: name, htmlContent } = convertQuestionDomData({ ...data, url });
   const template = buildTemplate(ext, {
     htmlTitle,
     htmlContent
