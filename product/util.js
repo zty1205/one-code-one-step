@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const { FILE_TEMPLATE } = require('./config');
 const Log = require('./log');
+const minimist = require('minimist');
 
 async function sleep(time) {
   return new Promise((resolve) => setTimeout(resolve, time));
@@ -89,6 +90,20 @@ function buildGitSH(files = [], dist) {
   Log.SHEnd();
 }
 
+function getNPMParams(val, defaults) {
+  return val === 'false' ? false : val != null ? val : defaults;
+}
+
+function getNPMBuildParams(key, defaults) {
+  try {
+    const npm_config_argv = JSON.parse(process.env.npm_config_argv);
+    const argv = minimist(npm_config_argv.original);
+    return key ? getNPMParams(argv[key], defaults) : argv || defaults;
+  } catch (err) {
+    console.error('getNPMBuildParams err = ', err);
+  }
+}
+
 module.exports = {
   sleep,
   isHttpLink,
@@ -96,5 +111,6 @@ module.exports = {
   buildFileName,
   writeMD,
   writeCodeFile,
-  buildGitSH
+  buildGitSH,
+  getNPMBuildParams
 };

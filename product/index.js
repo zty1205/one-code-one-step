@@ -2,7 +2,7 @@ const open = require('open');
 const inquiry = require('./inquirer');
 const buildByName = require('./buildByName');
 const { buildByUrl } = require('./buildByUrl');
-const { buildGitSH } = require('./util');
+const { buildGitSH, getNPMBuildParams } = require('./util');
 const Log = require('./log');
 
 async function main() {
@@ -18,8 +18,10 @@ async function main() {
     res = name.map((n) => buildByName(n, dist, ext));
   }
 
-  if (res && res[0]) {
-    await open(res[0].file, { allowNonzeroExitCode: true, background: true });
+  if (res && res[0] && getNPMBuildParams('open', true)) {
+    if (ext === 'html') {
+      await open(res[0].file, { allowNonzeroExitCode: true, background: true });
+    }
   }
 
   buildGitSH(res, dist);

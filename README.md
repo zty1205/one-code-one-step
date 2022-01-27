@@ -43,6 +43,14 @@
 npm run file
 ```
 
+参数
+
+- open: 是否自动打开 html 文件
+
+```sh
+npm run file --open=false
+```
+
 输入
 
 - 题目名，多个使用","隔开：生成普通的代码文件
