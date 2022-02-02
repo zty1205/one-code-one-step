@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>剑指 Offer 03. 数组中重复的数字</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/
+
+      // 找出数组中重复的数字。
+      // 在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var findRepeatNumber = function (nums) {};
+
+      // --- answer-1 ---
+
+      // 使用hash
+      // 时间，空间O(n)
+      var findRepeatNumber = function (nums) {
+        let map = {};
+        for (let n of nums) {
+          if (n in map) {
+            return n;
+          } else {
+            map[n] = true;
+          }
+        }
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 利用题意内0～n-1 的范围内的特点，但是会改变原数组
+      // 每个数 放到n-1下标的位置，如果无重复，那么每个人都在自己的位置上 类似于桶排序
+      // 时间O(n)，空间O(1)
+      var findRepeatNumber = function (nums = []) {
+        let i = 0;
+        while (i < nums.length) {
+          if (nums[i] === i) {
+            i++;
+            continue;
+          }
+          if (nums[nums[i]] === nums[i]) return nums[i]; // 坑位被占住了
+          // 交换到正确位置
+          let tmp = nums[i];
+          nums[i] = nums[tmp];
+          nums[tmp] = tmp;
+        }
+        return -1;
+      };
+
+      // --- answer-2 ---
+
+      var input = [2, 3, 1, 0, 2, 5, 3];
+      // 输出：2 或 3;
+
+      console.log('input = ', input);
+      console.log('findRepeatNumber = ', findRepeatNumber(input));
+    </script>
+  </body>
+</html>

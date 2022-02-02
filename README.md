@@ -272,6 +272,7 @@ npm run file --open=false
 ## 五、剑指 offer 第二版
 
 - [剑指 Offer09.用两个栈实现队列](./剑指第二版/剑指Offer09.用两个栈实现队列.html)
+- [剑指Offer03.数组中重复的数字.html](./剑指第二版/剑指Offer03.数组中重复的数字.html)
 - [剑指 Offer10-I.斐波那契数列.html](./剑指第二版/剑指Offer10-I.斐波那契数列.html)
 - [剑指 Offer10-II.青蛙跳台阶问题.html](./剑指第二版/剑指Offer10-II.青蛙跳台阶问题.html)
 - [剑指Offer11.旋转数组的最小数字.html](./剑指第二版/剑指Offer11.旋转数组的最小数字.html)
