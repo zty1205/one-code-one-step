@@ -85,7 +85,7 @@ function convertAnswer(answers = []) {
 
     htmlAnswers += `// ${i};\n`;
     htmlAnswers += `// ${o};\n`;
-    htmlAnswers += `// ${explain};\n\n`;
+    htmlAnswers += explain ? `// ${explain};\n\n` : '\n\n';
   }
   return htmlAnswers;
 }
