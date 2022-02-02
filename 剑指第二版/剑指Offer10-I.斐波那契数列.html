@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>剑指 Offer 10- I. 斐波那契数列</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/fei-bo-na-qi-shu-lie-lcof/
+
+      // 写一个函数，输入 n ，求斐波那契（Fibonacci）数列的第 n 项（即 F(N)）。斐波那契数列的定义如下：
+      // 斐波那契数列由 0 和 1 开始，之后的斐波那契数就是由之前的两数相加而得出。
+      // 答案需要取模 1e9+7（1000000007），如计算初始结果为：1000000008，请返回 1。
+      // 提示：
+      // 0 <= n <= 100
+
+      /**
+       * @param {number} n
+       * @return {number}
+       */
+
+      // 注意：如直接按题意 return f(n-1) + f(n-2) 会爆栈
+      // 注意：答案需要取模 1e9+7（1000000007）
+      // 0 1 1 2 3 5 8 13
+      var fib = function (n) {};
+
+      // --- answer-1 ---
+
+      // 尾递归 类似 Array.prototype.reduce
+      var fib = function (n) {
+        if (n === 0) return 0;
+
+        function _fid(pre, cur, i) {
+          if (i === n) return cur;
+          return _fid(cur, (pre + cur) % 1000000007, i + 1);
+        }
+        return _fid(0, 1, 1);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 递归 两辅助变量
+      var fib = function (n) {
+        if (n < 2) return n;
+
+        let pre = 0;
+        let cur = 0;
+        let res = 1;
+        for (let i = 2; i <= n; ++i) {
+          pre = cur;
+          cur = res;
+          res = (pre + cur) % 1000000007;
+        }
+        return res;
+      };
+
+      // --- answer-3 ---
+
+      // 使用快速幂（二分相乘）降低复杂度
+      // 矩阵[[1,1],[1,0]] * [[F(N)], [F(n-1)]] = [[F(n+1)], F(n)]
+      // [1,1] * [F(n)]    = [1*F(n) + 1*F(n-1), 1*null+o*null] = [F(n) + F(n-1)] = [F(n+1)]
+      // [1,0] * [F(n-1)]  = [1*F(n) + 0*F(n-1), 1*null+o*null] = [F(n)]
+      // 得到 [[F(n+1)], [F(n)]] = [[1,1],[1,0]] ^ n * [[F(1)], F(n)]
+      // 其中的矩阵相乘可以使用快速幂降低复杂度
+
+      // 这里直接使用一位数组表示矩阵 [[a,b], [c,d]]
+
+      function isMax(a, b, c, d) {
+        if (Number.MAX_SAFE_INTEGER / b <= a) {
+          console.log('isMax a, b = ', a, b);
+        }
+      }
+
+      function mod(a, b, c, d) {
+        isMax(a, b, c, d);
+        // 使用乘法容易出现超过最大安全数的值
+        return (BigInt(a) * BigInt(b) + BigInt(c) * BigInt(d)) % BigInt(1000000007);
+      }
+
+      function multiply(m1, m2) {
+        const [a1, b1, c1, d1] = m1;
+        const [a2, b2, c2, d2] = m2;
+        return [mod(a1, a2, b1, c2), mod(a1, b2, b1, d2), mod(c1, a2, d1, c2), mod(c1, b2, d1, d2)];
+      }
+
+      function fastMul(a, n) {
+        let res = [1, 0, 0, 1]; // [[1,0],[0,1]] 表示的是矩阵的1
+        while (n > 0) {
+          if (n & 1) {
+            // 奇数
+            res = multiply(res, a);
+          }
+          n = n >> 1; // 取一半
+          a = multiply(a, a);
+        }
+        return res;
+      }
+
+      var fib = function (n) {
+        if (n < 2) return n;
+        return fastMul([1, 1, 1, 0], n - 1)[0];
+      };
+
+      // --- answer-3 ---
+
+      // F(0) = 0,   F(1) = 1;
+      // F(N) = F(N - 1) + F(N - 2), 其中 N > 1.;
+
+      var n = 2;
+      var res = 1;
+
+      // var n = 5;
+      // var res = 5;
+
+      var n = 45;
+      var res = 134903163;
+
+      var n = 81;
+      var res = 107920472;
+
+      var n = 100;
+      var res = 687995182;
+
+      console.log(`fib ${n} = ${res} === ${fib(n)}`);
+    </script>
+  </body>
+</html>
