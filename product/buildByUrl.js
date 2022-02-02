@@ -68,7 +68,7 @@ async function getPageDataByUrl(url) {
 
 function convertQuestion(questions = []) {
   let htmlQuestion = '';
-  let ques = questions.filter((q) => q.indexOf('例如') === -1);
+  let ques = questions.filter((q) => !q.startsWith('例如'));
   for (let qu of ques) {
     htmlQuestion += `// ${qu.replace(/\n/g, '\n// ')}\n`;
   }
