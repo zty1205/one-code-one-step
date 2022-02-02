@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>剑指 Offer 10- II. 青蛙跳台阶问题</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/qing-wa-tiao-tai-jie-wen-ti-lcof/
+
+      // 一只青蛙一次可以跳上1级台阶，也可以跳上2级台阶。求该青蛙跳上一个 n 级的台阶总共有多少种跳法。
+      // 答案需要取模 1e9+7（1000000007），如计算初始结果为：1000000008，请返回 1。
+      // 提示：
+      // 0 <= n <= 100
+
+      /**
+       * @param {number} n
+       * @return {number}
+       */
+
+      var numWays = function (n) {};
+
+      // --- answer-1 ---
+
+      // 动态规划的 f(n) = f(n-1) + f(n-2) 即最后一次跳1个台阶和第二次跳两个台阶
+      // n = 1 f(n) = 1 ; n = 2 f(n) = 2
+      // 所以该题和菲波那切数列解法一致 只是初始值不同
+      var numWays = function (n) {
+        if (n === 0) return 1;
+        if (n <= 2) return n;
+        let pre = 1;
+        let cur = 2;
+        let res = 0;
+        for (let i = 0; i < n - 2; i++) {
+          res = (pre + cur) % 1000000007;
+          pre = cur;
+          cur = res;
+        }
+        return res;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      // var n = 2;
+      // var result = 2;
+
+      var n = 7;
+      var result = 21;
+
+      // var n = 0;
+      // var result = 1;
+
+      console.log('n = ', n);
+      console.log('result = ', result);
+      console.log('numWays = ', numWays(n));
+    </script>
+  </body>
+</html>
