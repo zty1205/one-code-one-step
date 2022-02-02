@@ -28,7 +28,7 @@ async function getPageDataByUrl(url) {
     const js = document.querySelector('[data-cypress="LanguageSelector-JavaScript"]');
     js.click();
 
-    await sleep(300);
+    await sleep(520);
 
     const parentNode = document.querySelector('.content__1Y2H .notranslate');
 
@@ -80,8 +80,8 @@ function convertAnswer(answers = []) {
     let ansArr = ans.split(/\n/);
     const [input, output, explain] = ansArr;
 
-    let i = input.replace('输入: ', input.indexOf('=') === -1 ? 'var input = ' : 'var ');
-    let o = output.replace('输出: ', output.indexOf('=') === -1 ? 'var result = ' : 'var ');
+    let i = input.replace(/输入[：:]/, input.indexOf('=') === -1 ? 'var input = ' : 'var ');
+    let o = output.replace(/输出[：:]/, output.indexOf('=') === -1 ? 'var result = ' : 'var ');
 
     htmlAnswers += `// ${i};\n`;
     htmlAnswers += `// ${o};\n`;
