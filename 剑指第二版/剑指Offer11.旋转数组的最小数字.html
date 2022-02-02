@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>剑指 Offer 11. 旋转数组的最小数字</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/xuan-zhuan-shu-zu-de-zui-xiao-shu-zi-lcof/
+
+      // 把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。
+      // 给你一个可能存在 重复 元素值的数组 numbers ，它原来是一个升序排列的数组，并按上述情形进行了一次旋转。请返回旋转数组的最小元素。例如，数组 [3,4,5,1,2] 为 [1,2,3,4,5] 的一次旋转，该数组的最小值为1。
+
+      /**
+       * @param {number[]} numbers
+       * @return {number}
+       */
+      var minArray = function (numbers) {};
+
+      // --- answer-1 ---
+
+      // 实质就是寻找最小值
+      // 我们使用二分法
+      var minArray = function (numbers = []) {
+        let start = 0;
+        let end = numbers.length - 1;
+        while (start < end) {
+          let mid = (start + end) >> 1;
+          if (numbers[mid] < numbers[end]) {
+            end = mid;
+          } else if (numbers[mid] > numbers[end]) {
+            start = mid + 1;
+          } else {
+            end -= 1;
+          }
+        }
+        return numbers[start];
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var input = [3, 4, 5, 1, 2];
+      var result = 1;
+
+      // var input = [2, 2, 2, 0, 1];
+      // var result = 0;
+
+      console.log('input = ', input);
+      console.log('result = ', result);
+      console.log('minArray = ', minArray(input));
+    </script>
+  </body>
+</html>
