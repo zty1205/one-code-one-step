@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>剑指 Offer 25. 合并两个排序的链表</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/he-bing-liang-ge-pai-xu-de-lian-biao-lcof/
+
+      // 输入两个递增排序的链表，合并这两个链表并使新链表中的节点仍然是递增排序的。
+
+      /**
+       * Definition for singly-linked list.
+       * function ListNode(val) {
+       *     this.val = val;
+       *     this.next = null;
+       * }
+       */
+      /**
+       * @param {ListNode} l1
+       * @param {ListNode} l2
+       * @return {ListNode}
+       */
+      var mergeTwoLists = function (l1, l2) {};
+
+      // --- answer-1 ---
+
+      // 比大小拼接
+      var mergeTwoLists = function (l1, l2) {
+        let head = {
+          next: null
+        };
+        let p = head;
+        while (l1 && l2) {
+          if (l1.val < l2.val) {
+            p.next = l1;
+            l1 = l1 ? l1.next : null;
+          } else {
+            p.next = l2;
+            l2 = l2 ? l2.next : null;
+          }
+          p = p.next;
+        }
+        if (l1) p.next = l1;
+        if (l2) p.next = l2;
+        return head.next;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 递归 效率低一点
+      var mergeTwoLists = function (l1, l2) {
+        if (!l1) return l2;
+        if (!l2) return l1;
+        if (l1.val < l2.val) {
+          l1.next = mergeTwoLists(l1.next, l2);
+          return l1;
+        } else {
+          l2.next = mergeTwoLists(l1, l2.next);
+          return l2;
+        }
+      };
+
+      // --- answer-2 ---
+
+      // var input = 1->2->4, 1->3->4;
+      // var result = 1->1->2->3->4->4;
+
+      var l1 = {
+        val: 1,
+        next: {
+          val: 2,
+          next: {
+            val: 4,
+            next: null
+          }
+        }
+      };
+
+      var l2 = {
+        val: 1,
+        next: {
+          val: 3,
+          next: {
+            val: 4,
+            next: null
+          }
+        }
+      };
+
+      console.log('mergeTwoLists = ', mergeTwoLists(l1, l2));
+      // 两种方法都会改变原链表
+      console.log('l1 = ', l1);
+      console.log('l2 = ', l2);
+    </script>
+  </body>
+</html>
