@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>剑指 Offer 28. 对称的二叉树</title>
+  </head>
+  <body>
+    <script src="../helper/tree.js"></script>
+    <script>
+      // https://leetcode-cn.com/problems/dui-cheng-de-er-cha-shu-lcof/
+
+      // 请实现一个函数，用来判断一棵二叉树是不是对称的。如果一棵二叉树和它的镜像一样，那么它是对称的。
+      //     1
+      //    / \
+      //   2   2
+      //  / \ / \
+      // 3  4 4  3
+      // 但是下面这个 [1,2,2,null,3,null,3] 则不是镜像对称的:
+      //     1
+      //    / \
+      //   2   2
+      //    \   \
+      //    3    3
+
+      /**
+       * Definition for a binary tree node.
+       * function TreeNode(val) {
+       *     this.val = val;
+       *     this.left = this.right = null;
+       * }
+       */
+      /**
+       * @param {TreeNode} root
+       * @return {boolean}
+       */
+      var isSymmetric = function (root) {};
+
+      // --- answer-1 ---
+
+      // 构造镜像二叉树进行对比
+      var mirrorTree = function (root) {
+        if (!root) return null;
+        let tmp = mirrorTree(root.right);
+        root.right = mirrorTree(root.left);
+        root.left = tmp;
+        return root;
+      };
+
+      var isSymmetric = function (root) {
+        if (!root) return true;
+        const mTree = mirrorTree(JSON.parse(JSON.stringify(root)));
+        console.log('mTree = ', mTree);
+        function sym(root, mTree) {
+          if (!root && !mTree) return true;
+          if (root && mTree && root.val === mTree.val)
+            return sym(root.left, mTree.left) && sym(root.right, mTree.right);
+          return false;
+        }
+        return sym(root, mTree);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 上面太复杂 还有拷贝 直接递归
+      var isSymmetric = function (root) {
+        if (!root) return true;
+        function sym(left, right) {
+          if (!left && !right) return true;
+          if (left && right && left.val === right.val)
+            return sym(left.left, right.right) && sym(left.right, right.left);
+          return false;
+        }
+        return sym(root.left, root.right);
+      };
+
+      // --- answer-2 ---
+
+      var root = [1, 2, 2, 3, 4, 4, 3];
+      var result = true;
+
+      var root = [1, 2, 2, null, 3, null, 3];
+      var result = false;
+
+      var root = buildTreeByArray(root);
+
+      console.log('root = ', root);
+      console.log('result = ', result);
+      console.log('isSymmetric = ', isSymmetric(root));
+    </script>
+  </body>
+</html>
