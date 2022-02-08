@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>剑指 Offer 22. 链表中倒数第k个节点</title>
+  </head>
+  <body>
+    <script src="../helper/node.js"></script>
+    <script>
+      // https://leetcode-cn.com/problems/lian-biao-zhong-dao-shu-di-kge-jie-dian-lcof/
+
+      // 输入一个链表，输出该链表中倒数第k个节点。为了符合大多数人的习惯，本题从1开始计数，即链表的尾节点是倒数第1个节点。
+
+      /**
+       * Definition for singly-linked list.
+       * function ListNode(val) {
+       *     this.val = val;
+       *     this.next = null;
+       * }
+       */
+      /**
+       * @param {ListNode} head
+       * @param {number} k
+       * @return {ListNode}
+       */
+
+      // --- answer-1 ---
+
+      // 双指针
+      // 时间复杂度：O(n) 空间复杂度：O(1)
+      var getKthFromEnd = function (head, k) {
+        let _h = { next: head };
+        let cur = _h;
+        while (cur && k > 0) {
+          cur = cur.next;
+          k -= 1;
+        }
+        if (!cur && k > 0) return null;
+        let pre = _h;
+        while (cur) {
+          cur = cur.next;
+          pre = pre.next;
+        }
+        return pre;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // n-k节点
+      // 时间复杂度：O(n) 空间复杂度：O(1)
+      var getKthFromEnd = function (head, k) {
+        let length = 0;
+        let p = head;
+        while (p) {
+          length += 1;
+          p = p.next;
+        }
+        if (k > length) return null;
+        let count = length - k;
+        p = head;
+        while (count) {
+          p = p.next;
+          count -= 1;
+        }
+        return p;
+      };
+
+      // --- answer-2 ---
+
+      // 给定一个链表: 1->2->3->4->5, 和 k = 2.;
+      // ;
+      // 返回链表 4->5.;
+
+      var head = [1, 2, 3, 4, 5];
+      var k = 2;
+      var res = [4, 5];
+
+      var head = buildLinkNodeByArray(head);
+      var res = buildLinkNodeByArray(res);
+
+      console.log('head = ', head);
+      console.log('res = ', res);
+      console.log('getKthFromEnd = ', getKthFromEnd(head, k));
+    </script>
+  </body>
+</html>
