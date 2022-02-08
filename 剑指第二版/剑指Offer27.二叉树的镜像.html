@@ -38,7 +38,7 @@
 
       // --- answer-1 ---
 
-      // 递归
+      // 递归 时间复杂度O(N) 空间复杂度  O(logN) - O(N)
       var mirrorTree = function (root) {
         if (!root) return null;
         let tmp = mirrorTree(root.right);
