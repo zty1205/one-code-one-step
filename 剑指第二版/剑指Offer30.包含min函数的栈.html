@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>剑指 Offer 30. 包含min函数的栈</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script>
+      // https://leetcode-cn.com/problems/bao-han-minhan-shu-de-zhan-lcof/
+
+      // 定义栈的数据结构，请在该类型中实现一个能够得到栈的最小元素的 min 函数在该栈中，调用 min、push 及 pop 的时间复杂度都是 O(1)。
+
+      /**
+       * initialize your data structure here.
+       */
+      var MinStack = function () {
+        this.stack = [];
+        this.minStack = []; // minStack 只存比第一个数小的值
+      };
+
+      /**
+       * @param {number} x
+       * @return {void}
+       */
+      MinStack.prototype.push = function (x) {
+        this.stack.push(x);
+        if (!this.minStack.length || this.minStack[this.minStack.length - 1] >= x) {
+          this.minStack.push(x);
+        }
+      };
+
+      /**
+       * @return {void}
+       */
+      MinStack.prototype.pop = function () {
+        let x = this.stack.pop();
+        if (this.minStack.length && x === this.minStack[this.minStack.length - 1]) {
+          this.minStack.pop();
+        }
+      };
+
+      /**
+       * @return {number}
+       */
+      MinStack.prototype.top = function () {
+        return this.stack.length ? this.stack[this.stack.length - 1] : null;
+      };
+
+      /**
+       * @return {number}
+       */
+      MinStack.prototype.min = function () {
+        return this.minStack.length ? this.minStack[this.minStack.length - 1] : null;
+      };
+
+      /**
+       * Your MinStack object will be instantiated and called as such:
+       * var obj = new MinStack()
+       * obj.push(x)
+       * obj.pop()
+       * var param_3 = obj.top()
+       * var param_4 = obj.min()
+       */
+
+      // --- answer-1 ---
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      let minStack = new MinStack();
+      console.log('minStack = ', deepClone(minStack));
+
+      minStack.push(-2);
+      console.log('minStack = ', deepClone(minStack));
+
+      minStack.push(0);
+      console.log('minStack = ', deepClone(minStack));
+
+      minStack.push(-3);
+      console.log('minStack = ', deepClone(minStack));
+
+      console.log('min = -3 ::: ', minStack.min()); // --> 返回 -3.
+      console.log('minStack = ', deepClone(minStack));
+
+      minStack.pop();
+      console.log('minStack = ', deepClone(minStack));
+
+      console.log('top = 0 ::: ', minStack.top()); //    --> 返回 0.
+      console.log('minStack = ', deepClone(minStack));
+
+      console.log('min = -2 ::: ', minStack.min()); //  --> 返回 -2.
+      console.log('minStack = ', deepClone(minStack));
+    </script>
+  </body>
+</html>
