@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>剑指 Offer 40. 最小的k个数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/zui-xiao-de-kge-shu-lcof/
+
+      // 输入整数数组 arr ，找出其中最小的 k 个数。例如，输入4、5、1、6、2、7、3、8这8个数字，则最小的4个数字是1、2、3、4。
+      // 提示：
+      // 0 <= k <= arr.length <= 10000
+      // 0 <= arr[i] <= 10000
+
+      /**
+       * @param {number[]} arr
+       * @param {number} k
+       * @return {number[]}
+       */
+      var getLeastNumbers = function (arr, k) {};
+
+      // --- answer-1 ---
+
+      // sort 时间复杂度：O(nlogn) 空间复杂度 O(1)
+      var getLeastNumbers = function (arr = [], k) {
+        // 边界处理
+        if (!k) return [];
+        if (!arr.length) return arr;
+
+        arr.sort((a, b) => a - b);
+        return arr.slice(0, k);
+      };
+
+      // 冒泡排序 时间复杂度 O(kN) 空间复杂度 O(1)
+      var getLeastNumbers = function (arr = [], k) {
+        // 边界处理
+        if (!k) return [];
+        if (!arr.length) return arr;
+
+        for (let i = 0; i < k; i++) {
+          for (let j = i; j < arr.length; j++) {
+            if (arr[i] > arr[j]) {
+              let tmp = arr[i];
+              arr[i] = arr[j];
+              arr[j] = tmp;
+            }
+          }
+        }
+        return arr.slice(0, k);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 数字大小有限的情况下使用计数排序 时间复杂度 O(N)  空间复杂度 O(数组最大值)
+      // 空间复杂度可以降低到 max-min
+      // 数组计数
+      var getLeastNumbers = function (arr = [], k) {
+        if (!k) return [];
+        if (!arr.length) return arr;
+
+        const count = new Array();
+        for (let num of arr) {
+          count[num] = count[num] ? count[num] + 1 : 1;
+        }
+        let _c = 0;
+        let res = [];
+        for (let i = 0; i < count.length; i++) {
+          while (count[i]-- > 0 && k > _c) {
+            res[_c++] = i;
+          }
+          if (_c >= k) break;
+        }
+
+        return res;
+      };
+
+      // 对象计数
+      var getLeastNumbers = function (arr = [], k) {
+        if (!k) return [];
+        if (!arr.length) return arr;
+
+        const count = {};
+        for (let num of arr) {
+          count[num] = count[num] ? count[num] + 1 : 1;
+        }
+        let res = [];
+        for (let key in count) {
+          while (count[key]-- > 0 && k > res.length) {
+            res.push(Number(key));
+          }
+          if (res.length === k) break;
+        }
+
+        return res;
+      };
+
+      // --- answer-2 ---
+
+      // --- answer-3 ---
+
+      // 使用快排
+      // 时间复杂度  O(n) ~ O(n^2) 情况最差时，每次的划分点都是最大值或最小值，一共需要划分 n - 1n−1 次，而一次划分需要线性的时间复杂度，所以最坏情况下时间复杂度为 O(n^2)
+      // 空间复杂度 O(logn) ~ O(n)
+      function quickSort(array = [], start, end) {
+        if (start >= end) return;
+        let l = start;
+        let r = end;
+        let guard = array[start];
+
+        while (l < r) {
+          while (l < r && array[r] >= guard) r--;
+          while (l < r && array[l] <= guard) l++;
+          [array[l], array[r]] = [array[r], array[l]];
+        }
+        [array[l], array[start]] = [array[start], array[l]];
+        return l;
+      }
+      function quick(array = [], start, end, k) {
+        if (start >= end) return;
+        let idx = quickSort(array, start, end);
+        let num = idx - start + 1;
+
+        if (k === num) {
+          return;
+        } else if (k < num) {
+          quick(array, start, idx - 1, k);
+        } else {
+          quick(array, idx + 1, end, k - num);
+        }
+      }
+
+      var getLeastNumbers = function (arr = [], k) {
+        quick(arr, 0, arr.length - 1, k);
+        return arr.slice(0, k);
+      };
+
+      // --- answer-3 ---
+
+      var arr = [3, 2, 1],
+        k = 2;
+      var result = [1, 2]; // 或者 [2,1];
+
+      // var arr = [0, 1, 2, 1],
+      //   k = 1;
+      // var result = [0];
+
+      var arr = [0, 0, 1, 2, 4, 2, 2, 3, 1, 4],
+        k = 8;
+      var result = [0, 0, 1, 1, 2, 2, 2, 3];
+
+      var arr = [
+        0, 1, 1, 1, 4, 5, 3, 7, 7, 8, 10, 2, 7, 8, 0, 5, 2, 16, 12, 1, 19, 15, 5, 18, 2, 2, 22, 15, 8, 22, 17, 6, 22, 6,
+        22, 26, 32, 8, 10, 11, 2, 26, 9, 12, 9, 7, 28, 33, 20, 7, 2, 17, 44, 3, 52, 27, 2, 23, 19, 56, 56, 58, 36, 31,
+        1, 19, 19, 6, 65, 49, 27, 63, 29, 1, 69, 47, 56, 61, 40, 43, 10, 71, 60, 66, 42, 44, 10, 12, 83, 69, 73, 2, 65,
+        93, 92, 47, 35, 39, 13, 75
+      ];
+      k = 75;
+      var result = [
+        0, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 4, 5, 5, 5, 6, 6, 6, 7, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 10,
+        10, 10, 10, 11, 12, 12, 12, 13, 15, 15, 16, 17, 17, 18, 19, 19, 19, 19, 20, 22, 22, 22, 22, 23, 26, 26, 27, 27,
+        28, 29, 31, 32, 33, 35, 36, 39, 40, 42
+      ];
+
+      console.log('arr = ', arr);
+      console.log('k = ', k);
+      console.log('result = ', result);
+      console.log('getLeastNumbers = ', getLeastNumbers(arr, k));
+    </script>
+  </body>
+</html>

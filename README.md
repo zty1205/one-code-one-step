@@ -284,3 +284,4 @@ npm run file --open=false
 - [剑指 Offer28.对称的二叉树.html](./剑指第二版/剑指Offer28.对称的二叉树.html)
 - [剑指 Offer30.包含 min 函数的栈.html](./剑指第二版/剑指Offer30.包含min函数的栈.html)
 - [剑指 Offer32-II.从上到下打印二叉树 II.html](./剑指第二版/剑指Offer32-II.从上到下打印二叉树II.html)
+- [剑指 Offer40.最小的 k 个数.html](./剑指第二版/剑指Offer40.最小的k个数.html)
