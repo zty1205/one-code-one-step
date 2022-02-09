@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>剑指 Offer 32 - II. 从上到下打印二叉树 II</title>
+  </head>
+  <body>
+    <script src="../helper/tree.js"></script>
+    <script>
+      // https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-ii-lcof/
+
+      // 从上到下按层打印二叉树，同一层的节点按从左到右的顺序打印，每一层打印到一行。
+      // 返回其层次遍历结果：
+      // 提示：
+      // 注意：本题与主站 102 题相同：https://leetcode-cn.com/problems/binary-tree-level-order-traversal/
+
+      /**
+       * Definition for a binary tree node.
+       * function TreeNode(val) {
+       *     this.val = val;
+       *     this.left = this.right = null;
+       * }
+       */
+      /**
+       * @param {TreeNode} root
+       * @return {number[][]}
+       */
+      var levelOrder = function (root) {};
+
+      // --- answer-1 ---
+
+      // 层次遍历二叉树 时间复杂度 O(N) 空间复杂度 O(N)
+      var levelOrder = function (root) {
+        if (!root) return [];
+        const res = [];
+        let stack = [root];
+        let nextStack = [];
+        let level = [];
+
+        while (stack.length) {
+          let node = stack.shift();
+          level.push(node.val);
+
+          if (node.left) nextStack.push(node.left);
+          if (node.right) nextStack.push(node.right);
+
+          if (!stack.length) {
+            res.push(level);
+            level = [];
+            stack = nextStack;
+            nextStack = [];
+          }
+        }
+
+        return res;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 时间复杂度 O(N) 空间复杂度 O(N)
+      var levelOrder = function (root) {
+        if (!root) return [];
+        const res = [];
+        let stack = [root];
+
+        while (stack.length) {
+          let tmp = [];
+          for (let i = stack.length; i > 0; i--) {
+            let node = stack.shift();
+            tmp.push(node.val);
+            if (node.left) stack.push(node.left);
+            if (node.right) stack.push(node.right);
+          }
+          res.push(tmp);
+        }
+
+        return res;
+      };
+
+      // --- answer-2 ---
+
+      //     3
+      //    / \
+      //   9  20
+
+      //  [[3], [9, 20]];
+
+      var root = [3, 9, 20];
+      var res = [[3], [9, 20]];
+
+      var root = [3, 9, 20, null, null, 15, 7];
+      var res = [[3], [9, 20], [15, 7]];
+
+      var root = [1, 2, 3, 4, 5];
+      var res = [[1], [2, 3], [4, 5]];
+
+      var root = buildTreeByArray(root);
+
+      console.log('root = ', root);
+      console.log('res = ', res);
+      console.log('levelOrder = ', levelOrder(root));
+    </script>
+  </body>
+</html>
