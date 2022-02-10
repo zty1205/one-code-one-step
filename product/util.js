@@ -81,7 +81,7 @@ function buildGitSH(files = [], dist) {
   let num = `feat: ${dist}`;
   files.forEach((f) => {
     content += `git add ${f.file}\n`;
-    num += ` ${f.curNum}`;
+    num += f.curNum ? ` ${f.curNum}` : ` ${f.name}`;
   });
   content += `git commit -m '${num}'\n`;
   content += `git push`;
