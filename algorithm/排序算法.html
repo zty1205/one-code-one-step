@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>排序算法</title>
+  </head>
+  <body>
+    <script>
+      let array = [1, 2, 3, 7, 8, 9, 6, 5, 4];
+      array = [1, 2, 3, 8, 9, 6, 5, 4, 7];
+      array = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+      array = [1, 2, 4, 3, 5, 6, 7, 8, 9];
+      array = [12, 32, 44, 3, 52, 96, 71, 8, 79];
+      array = [1, 2, 5, 3, 5, 6, 7, 6, 6];
+
+      // 原型链上 Array.prototype.sort()
+
+      // 冒泡排序 大的往下沉 相邻的比较
+      // 时间复杂度O(n^2) 空间复杂度O(1)
+      // 稳定的排序算法
+      function bubble_sort(array) {
+        for (let i = 0; i < array.length; i++) {
+          for (let j = 0; j < array.length - i - 1; j++) {
+            if (array[j] > array[j + 1]) {
+              let temp = array[j];
+              array[j] = array[j + 1];
+              array[j + 1] = temp;
+            }
+          }
+        }
+        return array;
+      }
+
+      // 外循环的优化，如果已排序完成直接就return
+      function bubble_sort_2(array) {
+        let flag;
+        for (let i = 0; i < array.length; i++) {
+          flag = 0;
+          for (let j = 0; j < array.length - i - 1; j++) {
+            if (array[j] > array[j + 1]) {
+              let temp = array[j];
+              array[j] = array[j + 1];
+              array[j + 1] = temp;
+              flag = 1;
+            }
+          }
+
+          if (!flag) {
+            return array;
+          }
+        }
+        return array;
+      }
+
+      // 内循环优化 已排序的数字就不去遍历了
+      function bubble_sort_3(array) {
+        let flag;
+        let endIndex = array.length - 1;
+        let pos = 0;
+        for (let i = 0; i < array.length; i++) {
+          flag = 0;
+          for (let j = 0; j < endIndex; j++) {
+            if (array[j] > array[j + 1]) {
+              let temp = array[j];
+              array[j] = array[j + 1];
+              array[j + 1] = temp;
+              flag = 1;
+              pos = j;
+            }
+          }
+
+          endIndex = pos;
+
+          if (!flag) {
+            return array;
+          }
+        }
+        return array;
+      }
+
+      // 选择排序 每次把最小的放到前面  未排序的和前面的比较
+      // 时间复杂度O(n^2) 空间复杂度O(1)
+      // 注意和冒泡排序的区分
+      // 不稳定的排序算法  如序列5 8 5 2 9 就好引起不稳定
+      function choose_sort(array) {
+        for (let i = 0; i < array.length - 1; i++) {
+          for (let j = i + 1; j < array.length; j++) {
+            if (array[i] > array[j]) {
+              let temp = array[j];
+              array[j] = array[i];
+              array[i] = temp;
+            }
+          }
+        }
+        return array;
+      }
+
+      // 插入排序 从第一个作为有序数组，认为前面的数据是已排好序的，后面的数据往前面移动
+      // 时间复杂度O(n^2) 空间复杂度O(1)
+      // 稳定的排序算法
+      function insert_sort(array) {
+        for (let i = 1; i < array.length; i++) {
+          let cur = array[i];
+          let j = i;
+          while (j - 1 >= 0 && cur < array[j - 1]) {
+            array[j] = array[j - 1];
+            j--;
+          }
+          array[j] = cur;
+        }
+        return array;
+      }
+
+      // 希尔排序 使用序列（如4,2,1）的进行插入排序 效率更好 但不稳定
+      // 时间复杂度O(n^（1.3—2）) 空间复杂度O(1)
+      // 希尔排序是按照不同步长对元素进行插入排序，当刚开始元素很无序的时候，步长最大，所以插入排序的元素个数很少，速度很快；
+      // 当元素基本有序了，步长很小，插入排序对于有序的序列效率很高。所以，希尔排序的时间复杂度会比o(n^2)好一些。
+      // 不稳定的排序算法
+      function shell_sort(arr) {
+        let len = arr.length;
+        // gap 即为增量 这里每次去长度的一般
+        for (let gap = len >> 1; gap > 0; gap = gap >> 1) {
+          for (let i = gap; i < len; i++) {
+            let j = i;
+            let current = arr[i];
+            // 以current 为基准
+            while (j - gap >= 0 && current < arr[j - gap]) {
+              arr[j] = arr[j - gap];
+              j = j - gap;
+            }
+            arr[j] = current;
+          }
+        }
+        return arr;
+      }
+
+      // 快速排序 以基准点分开两边
+      // 时间复杂度O(NLogN) 空间复杂度O(1)
+      // 不稳定的排序算法
+      function quick_sort(array) {
+        function _sort(arr, start, end) {
+          if (start >= end) return;
+          let l = start;
+          let r = end;
+          let guard = arr[start];
+          while (l < r) {
+            // 里面还需判断 l r 防止超标
+            while (l < r && arr[r] >= guard) r--;
+            while (l < r && arr[l] <= guard) l++;
+
+            [arr[l], arr[r]] = [arr[r], arr[l]]; // change
+          }
+          [arr[l], arr[start]] = [arr[start], arr[l]]; // change
+
+          _sort(arr, start, l - 1);
+          _sort(arr, l + 1, end);
+          return arr;
+        }
+
+        return _sort(array, 0, array.length - 1);
+      }
+
+      // 归并排序 分治法 分成一小块一小块的再逐渐合起来
+      // 时间复杂度O(NLogN) 空间复杂度O(n)
+      // 稳定的排序算法
+      function merge_sort(arr) {
+        function merge(left, right) {
+          let tmp = [];
+
+          while (left.length && right.length) {
+            if (left[0] < right[0]) tmp.push(left.shift());
+            else tmp.push(right.shift());
+          }
+
+          return tmp.concat(left, right);
+        }
+
+        if (arr.length === 1) return arr;
+
+        let mid = arr.length >> 1;
+        let left = arr.slice(0, mid);
+        let right = arr.slice(mid);
+
+        return merge(merge_sort(left), merge_sort(right));
+      }
+
+      // 非递归版本
+      function merge_sort_2(arr = [], temp = new Array(arr.length), N = arr.length, length = 1) {
+        function merge(arr, temp, left, middle, right) {
+          const leftEnd = middle - 1; // 通过右边数组的起始位置得到左边数组的结束位置。
+          while (left <= leftEnd && middle < right) {
+            // 如果‘指针’没有越界。
+            if (arr[left] > arr[middle]) {
+              // 如果左边数组第一个元素比右边数组第一个元素大。
+              temp[left + middle - leftEnd - 1] = arr[middle++]; // 将右边数组最小的放入有序数组 temp（初始值为空)。
+            } else {
+              temp[left + middle - leftEnd - 1] = arr[left++]; // 将左边数组最小的放入有序数组 temp（初始值为空)。
+            }
+          }
+          while (left > leftEnd && middle < right) {
+            // 如果左边数组放完了，右边数组还有元素。
+            temp[left + middle - leftEnd - 1] = arr[middle++]; // 那么依次将右边数组剩余的元素放入 temp 。
+          }
+          while (left <= leftEnd && middle >= right) {
+            // 如果右边数组放完了，左边数组还有元素
+            temp[left + middle - leftEnd - 1] = arr[left++]; // 那么依次将左边数组剩余的元素放入 temp 。
+          }
+        }
+
+        // 将每个元素看作是相邻的数组长度为1。
+        let t; // 迭代深度。
+        for (t = 0; Math.pow(2, t) < N; t++, length *= 2) {
+          // 每次跳过的长度翻倍。
+          const even = t % 2 === 0; // 复用 arr 和 temp 来回赋值。
+          for (let left = 0; left < N; left += 2 * length) {
+            // 左边数组起始位置 left 从0开始。
+            const middle = left + length < N ? left + length : left; // 右边数组起始位置 middle 就是left + 一个数组长度length 但是不要超过 N 。
+            const right = left + 2 * length < N ? left + 2 * length : N; // 右边界 right 就是 left + 两个数组长度。
+            merge(even ? arr : temp, even ? temp : arr, left, middle, right); // 合并每两个相邻的数组。
+          }
+        }
+        if (t % 2 === 0) {
+          return arr; //返回arr
+        }
+        return temp; // 返回 temp 。
+      }
+
+      // 堆排序 构建二叉树搜索树的顺序存储
+      // 时间复杂度O(NLogN) 空间复杂度O(1)
+      // 不稳定的排序算法
+      function heap_sort(arr) {
+        // 交换两个节点
+        function swap(arr, i, j) {
+          let temp = arr[i];
+          arr[i] = arr[j];
+          arr[j] = temp;
+        }
+        function shiftDown(arr, i, length) {
+          let temp = arr[i]; // 当前父节点
+          // j<length 的目的是对结点 i 以下的结点全部做顺序调整
+          for (let j = 2 * i + 1; j < length; j = 2 * j + 1) {
+            temp = arr[i]; // 将 arr[i] 取出，整个过程相当于找到 arr[i] 应处于的位置
+            if (j + 1 < length && arr[j] < arr[j + 1]) {
+              j++; // 找到两个孩子中较大的一个，再与父节点比较
+            }
+            if (temp < arr[j]) {
+              swap(arr, i, j); // 如果父节点小于子节点:交换；否则跳出
+              i = j; // 交换后，temp 的下标变为 j
+            } else {
+              break;
+            }
+          }
+        }
+
+        // 初始化大顶堆，从第一个非叶子结点开始
+        for (let i = arr.length >> (1 - 1); i >= 0; i--) {
+          shiftDown(arr, i, arr.length);
+        }
+        // 排序，每一次for循环找出一个当前最大值，数组长度减一
+        for (let i = arr.length - 1; i > 0; i--) {
+          swap(arr, 0, i); // 根节点与最后一个节点交换
+          shiftDown(arr, 0, i); // 从根节点开始调整，并且最后一个结点已经为当前最大值，不需要再参与比较，所以第三个参数为 i，即比较到最后一个结点前一个即可
+        }
+        return arr;
+      }
+
+      // 基数排序 多关键字排序，同计数排序类似
+      // 空间复杂度 O (nlog(r)m)，其中r为所采取的基数，而m为堆数
+      // 空间复杂度 r + n
+      // 稳定的排序
+      function radix_sort(array) {
+        const radix = 10;
+        let len = String(Math.max.apply(Math, array)).length;
+        let radixArr = Array.from({ length: radix }, () => []);
+        for (let i = 0; i < len; i++) {
+          for (let j = 0; j < array.length; j++) {
+            let rad = Math.floor(array[j] / Math.pow(radix, i)) % radix;
+            radixArr[rad].push(array[j]);
+          }
+          array = [];
+          for (let k = 0; k < radixArr.length; k++) {
+            array = array.concat(radixArr[k]);
+            radixArr[k] = [];
+          }
+        }
+        return array;
+      }
+
+      // 计数排序是一个非基于比较的排序算法
+      // 时间复杂度为Ο(n+k)（其中k是整数的范围），快于任何比较排序算法。
+      // 当然这是一种牺牲空间换取时间的做法，而且当O(k)>O(n*log(n))的时候其效率反而不如基于比较的排序
+      // 稳定的排序算法。
+      function countSort(array) {
+        const max = Math.max.apply(Math, array);
+        const min = Math.min.apply(Math, array);
+        const len = max - min + 1;
+        let countArr = Array.from({ length: len }, () => 0);
+
+        // 计数
+        for (let i = 0; i < array.length; i++) {
+          countArr[array[i] - min] += 1;
+        }
+
+        for (let i = 1; i < countArr.length; i++) {
+          countArr[i] += countArr[i - 1];
+        }
+
+        let res = [];
+        for (let i = array.length - 1; i > -1; --i) {
+          countIndex = array[i] - min;
+          res[countArr[countIndex] - 1] = array[i];
+          countArr[countIndex] -= 1;
+        }
+        return res;
+      }
+
+      // 桶排序的平均时间复杂度为线性的O(N+C)，其中C=N*(logN-logM)。
+      // 如果相对于同样的N，桶数量M越大，其效率越高，最好的时间复杂度达到O(N)。
+      // 当然桶排序的空间复杂度为O(N+M)，如果输入数据非常庞大，而桶的数量也非常多，则空间代价无疑是昂贵的。
+      // 此外，桶排序是稳定的。
+      function bucketSort(array) {
+        const max = Math.max.apply(Math, array);
+        const min = Math.min.apply(Math, array);
+        const len = Math.floor((max - min) / 10) + 1;
+        let bucketArr = Array.from({ length: len }, () => []);
+
+        for (let i = 0; i < array.length; i++) {
+          let rad = Math.floor((array[i] - min) / 10);
+          bucketArr[rad].push(array[i]);
+        }
+
+        return bucketArr.reduce((preRes, cur) => {
+          preRes = preRes.concat(choose_sort(cur));
+          return preRes;
+        }, []);
+      }
+
+      // 内部 大于10时 使用快拍， 小于10时 使用插入
+      function array_sort(arr) {
+        return arr.sort();
+      }
+
+      console.log('bubble_sort = ', bubble_sort([...array]));
+      console.log('bubble_sort_2 = ', bubble_sort_2([...array]));
+      console.log('bubble_sort_3 = ', bubble_sort_3([...array]));
+      console.log('choose_sort = ', choose_sort([...array]));
+      console.log('insert_sort = ', insert_sort([...array]));
+      console.log('shell_sort = ', shell_sort([...array]));
+      console.log('quick_sort = ', quick_sort([...array]));
+      console.log('merge_sort = ', merge_sort([...array]));
+      console.log('merge_sort_2 = ', merge_sort_2([...array]));
+      console.log('heap_sort = ', heap_sort([...array]));
+      console.log('radix_sort = ', radix_sort([...array]));
+      console.log('bucketSort = ', bucketSort([...array]));
+      console.log('countSort = ', countSort([...array]));
+      console.log('array_sort = ', array_sort([...array]));
+    </script>
+  </body>
+</html>
