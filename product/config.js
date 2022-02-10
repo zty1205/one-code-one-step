@@ -1,4 +1,4 @@
-const NO_CODE_DIR_MAP = ['.git', 'node_modules', 'img', 'product', 'public', 'src'].reduce((pre, cur) => {
+const NO_CODE_DIR_MAP = ['.git', 'node_modules', 'img', 'product', 'public', 'src', 'helper'].reduce((pre, cur) => {
   pre[cur] = true;
   return pre;
 }, {});
