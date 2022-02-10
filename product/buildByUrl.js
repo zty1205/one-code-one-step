@@ -114,6 +114,7 @@ function convertQuestionDomData(data) {
         if (qusFinish) questions.push(text);
         break;
       case 'UL':
+      case 'OL':
         questions.push(`提示：\n${text}`);
         break;
       default:
