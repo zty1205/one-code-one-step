@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>遍历树算法</title>
+  </head>
+  <body>
+    <script src="../helper/tree.js"></script>
+    <script>
+      const root = buildTreeByArray([1, 2, 3, 4, 5, 6, 7]);
+
+      // 前序遍历 根左右
+      // 二叉树的深度遍历
+      // 1245367
+      function front_traverse_tree(root) {
+        const res = [];
+        function traverse(node) {
+          if (!node) return;
+          res.push(node.val);
+          traverse(node.left);
+          traverse(node.right);
+        }
+        traverse(root);
+        return res;
+      }
+
+      function front_traverse_tree_2(root) {
+        const res = [];
+        const stack = [root];
+        while (stack.length) {
+          let node = stack.pop();
+          res.push(node.val);
+          if (node.right) stack.push(node.right);
+          if (node.left) stack.push(node.left);
+        }
+        return res;
+      }
+
+      // 中序遍历 左根右
+      // 二叉树的深度遍历
+      // 4251637
+      function middle_traverse_tree(root) {
+        const res = [];
+        function traverse(node) {
+          if (!node) return;
+          traverse(node.left);
+          res.push(node.val);
+          traverse(node.right);
+        }
+        traverse(root);
+        return res;
+      }
+
+      function middle_traverse_tree_2(root) {
+        const res = [];
+        let stack = [];
+        let node = root;
+        while (node || stack.length) {
+          if (node) {
+            stack.push(node);
+            node = node.left;
+          } else {
+            node = stack.pop();
+            res.push(node.val);
+            node = node.right;
+          }
+        }
+        return res;
+      }
+
+      // 后序遍历 左右根
+      // 二叉树的深度遍历
+      // 4526731
+      function rear_traverse_tree(root) {
+        const res = [];
+        function traverse(node) {
+          if (!node) return;
+          traverse(node.left);
+          traverse(node.right);
+          res.push(node.val);
+        }
+        traverse(root);
+        return res;
+      }
+
+      // 利用 根右左  和 左右根 的镜像关系
+      function rear_traverse_tree_2(root) {
+        let res = [];
+        let stack = [root];
+        while (stack.length) {
+          let node = stack.pop();
+          res.push(node.val);
+          node.left && stack.push(node.left);
+          node.right && stack.push(node.right);
+        }
+        return res.reverse();
+      }
+
+      // 层次遍历
+      // 二叉树的广度遍历
+      function level_traverse_tree(root) {
+        const res = [];
+
+        const stack = [root];
+        while (stack.length) {
+          let node = stack.shift();
+          res.push(node.val);
+          if (node.left) stack.push(node.left);
+          if (node.right) stack.push(node.right);
+        }
+        return res;
+      }
+
+      console.log('front_traverse_tree 1245367 = ', front_traverse_tree(root));
+      console.log('front_traverse_tree_2 1245367 = ', front_traverse_tree_2(root));
+      console.log('middle_traverse_tree 4251637 = ', middle_traverse_tree(root));
+      console.log('middle_traverse_tree_2 4251637 = ', middle_traverse_tree_2(root));
+      console.log('rear_traverse_tree 4526731 = ', rear_traverse_tree(root));
+      console.log('rear_traverse_tree_2 4526731 = ', rear_traverse_tree_2(root));
+      console.log('level_traverse_tree 1234567 = ', level_traverse_tree(root));
+    </script>
+  </body>
+</html>
