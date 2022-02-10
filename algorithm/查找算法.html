@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>查找算法</title>
+  </head>
+  <body>
+    <script>
+      const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+      const target = 4;
+      const result = 3;
+
+      // 顺序查找
+      // 时间复杂度0(n) 空间复杂度O(1)
+      function sequence_search(arr, target) {
+        for (i = 0; i < arr.length; i++) {
+          if (arr[i] === target) {
+            return i;
+          }
+        }
+        return -1;
+      }
+
+      // hash查找
+      // 时间复杂度0(n) 空间复杂度O(n) 多次查找下效率快
+      function hash_search(arr = [], target) {
+        const map = arr.reduce((pre, cur, idx) => {
+          pre.set(cur, idx);
+          return pre;
+        }, new Map());
+        return map.has(target) ? map.get(target) : -1;
+      }
+
+      // 二分查找,又叫折半查找,时间复杂度为O(log2n)；
+      // 数组需要有序
+      // 递归算法
+      function mid_find(array, target) {
+        function _mid(array, target, start, end) {
+          if (start > end) return -1;
+          let mid = (end + start) >> 1;
+          let mVal = array[mid];
+          if (mVal === target) {
+            return mid;
+          } else if (mVal < target) {
+            return _mid(array, target, mid + 1, end);
+          } else {
+            return _mid(array, target, start, mid);
+          }
+        }
+        return _mid(array, target, 0, array.length - 1);
+      }
+
+      // 非递归算法
+      function mid_find_1(array, target) {
+        let start = 0;
+        let end = array.length - 1;
+        while (start <= end) {
+          let mid = (start + end) >> 1;
+          let mVal = array[mid];
+          if (mVal === target) {
+            return mid;
+          } else if (mVal < target) {
+            start = mid + 1;
+          } else {
+            end = mid;
+          }
+        }
+        return -1;
+      }
+
+      // 基于二分的插值插值和菲波那切数查找
+      function insertion_search(array, target) {
+        function _search(array, target, start, end) {
+          let mid = start + ((target - array[start]) / (array[end] - array[start])) * (end - start);
+          if (array[mid] == target) return mid;
+          if (array[mid] > target) return InsertionSearch(array, target, start, mid - 1);
+          if (array[mid] < target) return InsertionSearch(array, target, mid + 1, end);
+        }
+        return _search(array, target, 0, array.length - 1);
+      }
+
+      // 树型查找 构建查找树，根据树型结构进行查找如二叉查找树，红黑树 待定
+
+      console.log('result = ', result);
+      console.log('sequence_search = ', sequence_search(array, target));
+      console.log('hash_search = ', hash_search(array, target));
+      console.log('mid_find = ', mid_find(array, target));
+      console.log('mid_find_1 = ', mid_find_1(array, target));
+      console.log('insertion_search = ', insertion_search(array, target));
+    </script>
+  </body>
+</html>

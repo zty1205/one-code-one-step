@@ -312,6 +312,7 @@ npm run file --open=false
 ## Algorithm
 
 - [排序算法.html](./algorithm/排序算法.html)
+- [查找算法.html](./algorithm/查找算法.html)
 
 <br/>
 
