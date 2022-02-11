@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Boyer-Moore投票算法</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/shu-zu-zhong-chu-xian-ci-shu-chao-guo-yi-ban-de-shu-zi-lcof/
+
+      // 数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。
+      // 你可以假设数组是非空的，并且给定的数组总是存在多数元素。
+
+      // 众数和非众数进行抵消 留下的即是总数
+      // 众数记为+1 非众数记为-1
+      var majorityElement = function (nums = []) {
+        let count = 0;
+        let candidate = null;
+
+        for (let num of nums) {
+          if (count == 0) {
+            candidate = num;
+          }
+          count += num == candidate ? 1 : -1;
+        }
+
+        return candidate;
+      };
+
+      // --- answer-3 ---
+
+      var input = [1, 2, 3, 2, 2, 2, 5, 2, 4];
+      //        1  2  3  2  2  2  5  2  4
+      // major  1  1  3  3  2  2  2  2  2
+      // count  1  0  1  0  1  2  1  2  1
+
+      console.log('input = ', input);
+      console.log('result = ', result);
+      console.log('majorityElement = ', majorityElement(input));
+    </script>
+  </body>
+</html>

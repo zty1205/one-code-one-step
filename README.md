@@ -317,6 +317,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 ## Algorithm
 
 - [排序算法.html](./algorithm/排序算法.html)
+- [Boyer-Moore投票算法.html](./algorithm/Boyer-Moore投票算法.html)
 - [遍历树算法.html](./algorithm/遍历树算法.html)
 - [查找算法.html](./algorithm/查找算法.html)
 
