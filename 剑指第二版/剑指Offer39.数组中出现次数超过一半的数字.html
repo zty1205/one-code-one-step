@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>剑指 Offer 39. 数组中出现次数超过一半的数字</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/shu-zu-zhong-chu-xian-ci-shu-chao-guo-yi-ban-de-shu-zi-lcof/
+
+      // 数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。
+      // 你可以假设数组是非空的，并且给定的数组总是存在多数元素。
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var majorityElement = function (nums) {};
+
+      // --- answer-1 ---
+
+      // hash统计
+      // 时间复杂度O(n) 空间复杂度O(n)
+      var majorityElement = function (nums = []) {
+        const map = nums.reduce((pre, cur) => {
+          pre[cur] = pre[cur] ? pre[cur] + 1 : 1;
+          return pre;
+        }, {});
+        // 可以只遍历一次 维护最大的
+        const mid = nums.length >> 1;
+        for (let k in map) {
+          if (map[k] > mid) {
+            return k;
+          }
+        }
+        return 0;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 排序
+      var majorityElement = function (nums = []) {
+        nums.sort();
+        return nums[nums.length >> 1];
+      };
+
+      // --- answer-2 ---
+
+      // --- answer-3 ---
+
+      // 选举法
+      // 众数和非众数进行抵消 留下的即是总数
+      // 众数记为+1 非众数记为-1
+      var majorityElement = function (nums = []) {
+        let count = 0;
+        let candidate = null;
+
+        for (let num of nums) {
+          if (count == 0) {
+            candidate = num;
+          }
+          count += num == candidate ? 1 : -1;
+        }
+
+        return candidate;
+      };
+
+      // --- answer-3 ---
+
+      var input = [1, 2, 3, 2, 2, 2, 5, 4, 2];
+      var result = 2;
+
+      console.log('input = ', input);
+      console.log('result = ', result);
+      console.log('majorityElement = ', majorityElement(input));
+    </script>
+  </body>
+</html>
