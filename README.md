@@ -14,6 +14,34 @@
 
 <br/>
 
+## 生成 code 文件和 md 链接
+
+<br/>
+
+运行
+
+```sh
+npm run file
+```
+
+参数
+
+- open: 是否自动打开 code 文件
+- name: 文件名
+- ext: 后缀名
+- dir: 文件夹
+
+```sh
+npm run file --open=false --name=test --ext=html --dir=leetCode
+```
+
+文件名支持
+
+- 题目名，多个使用","隔开：生成普通的代码文件
+- LeetCode http 链接：将该网页上的信息写入代码文件
+
+<br/>
+
 ## 一、LeetCode
 
 可以通过以下方式
@@ -45,31 +73,6 @@
 ![code](/src/assets/img/code.jpg)
 
 <br/>
-<br/>
-
-### 1.3 如何生成刷题文件和 md 链接
-
-<br/>
-
-运行
-
-```sh
-npm run file
-```
-
-参数
-
-- open: 是否自动打开 html 文件
-
-```sh
-npm run file --open=false
-```
-
-输入
-
-- 题目名，多个使用","隔开：生成普通的代码文件
-- LeetCode 链接：会讲该网页上的信息写入代码文件
-
 <br/>
 
 ## 二、剑指 offer
@@ -306,7 +309,7 @@ npm run file --open=false
 - [剑指 Offer28.对称的二叉树.html](./剑指第二版/剑指Offer28.对称的二叉树.html)
 - [剑指 Offer30.包含 min 函数的栈.html](./剑指第二版/剑指Offer30.包含min函数的栈.html)
 - [剑指 Offer32-II.从上到下打印二叉树 II.html](./剑指第二版/剑指Offer32-II.从上到下打印二叉树II.html)
-- [剑指Offer39.数组中出现次数超过一半的数字.html](./剑指第二版/剑指Offer39.数组中出现次数超过一半的数字.html)
+- [剑指 Offer39.数组中出现次数超过一半的数字.html](./剑指第二版/剑指Offer39.数组中出现次数超过一半的数字.html)
 - [剑指 Offer40.最小的 k 个数.html](./剑指第二版/剑指Offer40.最小的k个数.html)
 
 <br/>

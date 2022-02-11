@@ -94,14 +94,27 @@ function getNPMParams(val, defaults) {
   return val === 'false' ? false : val != null ? val : defaults;
 }
 
+function handleNPMParamsArg(argv) {
+  if (!argv) return;
+  for (let k in argv) {
+    argv[k] = getNPMParams(argv[k]);
+  }
+  return argv;
+}
+
 function getNPMBuildParams(key, defaults) {
   try {
     const npm_config_argv = JSON.parse(process.env.npm_config_argv);
     const argv = minimist(npm_config_argv.original);
-    return key ? getNPMParams(argv[key], defaults) : argv || defaults;
+    return key ? getNPMParams(argv[key], defaults) : handleNPMParamsArg(argv) || defaults;
   } catch (err) {
     console.error('getNPMBuildParams err = ', err);
   }
+}
+
+function getExt(filename = '') {
+  const li = filename.lastIndexOf('.');
+  return li > 0 ? filename.substring(li + 1).toLowerCase() : null;
 }
 
 module.exports = {
@@ -112,5 +125,6 @@ module.exports = {
   writeMD,
   writeCodeFile,
   buildGitSH,
-  getNPMBuildParams
+  getNPMBuildParams,
+  getExt
 };

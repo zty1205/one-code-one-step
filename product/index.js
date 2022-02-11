@@ -6,7 +6,9 @@ const { buildGitSH, getNPMBuildParams } = require('./util');
 const Log = require('./log');
 
 async function main() {
-  const { name, isLink, ext, dist } = await inquiry();
+  const buildArgv = getNPMBuildParams(null, {});
+
+  const { name, isLink, ext, dist } = await inquiry(buildArgv);
 
   Log.ProgramStart();
   let res;
@@ -18,7 +20,7 @@ async function main() {
     res = name.map((n) => buildByName(n, dist, ext));
   }
 
-  if (res && res[0] && getNPMBuildParams('open', true)) {
+  if (res && res[0] && buildArgv.open) {
     if (ext === 'html') {
       await open(res[0].file, { allowNonzeroExitCode: true, background: true });
     }
