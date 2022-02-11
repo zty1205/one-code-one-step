@@ -311,6 +311,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [剑指 Offer32-II.从上到下打印二叉树 II.html](./剑指第二版/剑指Offer32-II.从上到下打印二叉树II.html)
 - [剑指 Offer39.数组中出现次数超过一半的数字.html](./剑指第二版/剑指Offer39.数组中出现次数超过一半的数字.html)
 - [剑指 Offer40.最小的 k 个数.html](./剑指第二版/剑指Offer40.最小的k个数.html)
+- [剑指Offer50.第一个只出现一次的字符.html](./剑指第二版/剑指Offer50.第一个只出现一次的字符.html)
 
 <br/>
 
