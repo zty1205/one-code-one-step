@@ -17,3 +17,16 @@ function buildLinkNodeByArray(array) {
 }
 
 window.buildLinkNodeByArray = buildLinkNodeByArray;
+
+function buildArrayByLinkNode(linkNode) {
+  if (!linkNode) return null;
+  const res = [];
+  let node = linkNode;
+  while (node) {
+    res.push(node.val);
+    node = node.next;
+  }
+  return res;
+}
+
+window.buildArrayByLinkNode = buildArrayByLinkNode;
