@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>剑指 Offer 18. 删除链表的节点</title>
+  </head>
+  <body>
+    <script src="../helper/node.js"></script>
+    <script>
+      // https://leetcode-cn.com/problems/shan-chu-lian-biao-de-jie-dian-lcof/
+
+      // 给定单向链表的头指针和一个要删除的节点的值，定义一个函数删除该节点。
+      // 返回删除后的链表的头节点。
+      // 注意：此题对比原题有改动
+      // 提示：
+      // 题目保证链表中节点的值互不相同
+      // 若使用 C 或 C++ 语言，你不需要 free 或 delete 被删除的节点
+
+      /**
+       * Definition for singly-linked list.
+       * function ListNode(val) {
+       *     this.val = val;
+       *     this.next = null;
+       * }
+       */
+      /**
+       * @param {ListNode} head
+       * @param {number} val
+       * @return {ListNode}
+       */
+      var deleteNode = function (head, val) {
+        return head;
+      };
+
+      // --- answer-1 ---
+
+      // 双指针
+      // 时间复杂度O(n) 空间复杂度O(1)
+      var deleteNode = function (head, val) {
+        const _header = { next: head };
+        let pre = _header;
+        let p = head;
+        while (p && p.val !== val) {
+          pre = pre.next;
+          p = p.next;
+        }
+        if (p) {
+          pre.next = p.next;
+        }
+        return _header.next;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 递归实现
+      // 时间复杂度O(n) 空间复杂度O(1)
+      var deleteNode = function (head, val) {
+        if (head === null) return null;
+        if (head.val === val) {
+          return head.next;
+        } else {
+          head.next = deleteNode(head.next, val);
+        }
+        return head;
+      };
+
+      // --- answer-2 ---
+
+      var head = [4, 5, 1, 9],
+        val = 5;
+      var result = [4, 1, 9];
+      // 解释: 给定你链表中值为 5 的第二个节点，那么在调用了你的函数之后，该链表应变为 4 -> 1 -> 9.;
+
+      var head = [4, 5, 1, 9],
+        val = 1;
+      var result = [4, 5, 9];
+      // 解释: 给定你链表中值为 1 的第三个节点，那么在调用了你的函数之后，该链表应变为 4 -> 5 -> 9.;
+
+      // var val = 0;
+      // var result = [4, 5, 1, 9];
+
+      console.log('head = ', head);
+      head = buildLinkNodeByArray(head);
+      console.log('head link = ', head);
+
+      const resultNode = deleteNode(head, val);
+      console.log('resultNode = ', resultNode);
+      console.log('result = ', result);
+      console.log('resultNode result = ', buildArrayByLinkNode(resultNode));
+    </script>
+  </body>
+</html>
