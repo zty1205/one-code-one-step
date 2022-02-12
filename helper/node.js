@@ -16,8 +16,6 @@ function buildLinkNodeByArray(array) {
   return header.next;
 }
 
-window.buildLinkNodeByArray = buildLinkNodeByArray;
-
 function buildArrayByLinkNode(linkNode) {
   if (!linkNode) return null;
   const res = [];
@@ -28,5 +26,3 @@ function buildArrayByLinkNode(linkNode) {
   }
   return res;
 }
-
-window.buildArrayByLinkNode = buildArrayByLinkNode;

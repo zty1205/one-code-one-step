@@ -15,5 +15,3 @@ function deepClone(obj = new Object(), map = new WeakMap()) {
   }
   return o;
 }
-
-window.deepClone = deepClone;

@@ -25,5 +25,3 @@ function buildTreeByArray(array) {
   }
   return root;
 }
-
-window.buildTreeByArray = buildTreeByArray;
