@@ -8,8 +8,19 @@ async function getPageDataByUrl(url) {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
 
+  await page.setRequestInterception(true);
+  page.on('request', (interceptedRequest) => {
+    //判断如果是 图片请求  就直接拦截
+    if (interceptedRequest.url().endsWith('.png') || interceptedRequest.url().endsWith('.svg')) {
+      //终止请求
+      interceptedRequest.abort();
+    } else {
+      interceptedRequest.continue(); //弹出
+    }
+  });
+
   await page.goto(url, {
-    timeout: 30 * 1000,
+    timeout: 0,
     waitUntil: [
       'load',
       'domcontentloaded',
