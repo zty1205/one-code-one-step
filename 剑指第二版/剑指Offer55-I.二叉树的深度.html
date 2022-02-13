@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>剑指 Offer 55 - I. 二叉树的深度</title>
+  </head>
+  <body>
+    <script src="../helper/tree.js"></script>
+    <script>
+      // https://leetcode-cn.com/problems/er-cha-shu-de-shen-du-lcof/
+
+      // 输入一棵二叉树的根节点，求该树的深度。从根节点到叶节点依次经过的节点（含根、叶节点）形成树的一条路径，最长路径的长度为树的深度。
+      // 给定二叉树 [3,9,20,null,null,15,7]，
+      // 返回它的最大深度 3 。
+      // 提示：
+      // 提示：
+      // 节点总数 <= 10000
+      // 注意：本题与主站 104 题相同：https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/
+
+      /**
+       * Definition for a binary tree node.
+       * function TreeNode(val) {
+       *     this.val = val;
+       *     this.left = this.right = null;
+       * }
+       */
+      /**
+       * @param {TreeNode} root
+       * @return {number}
+       */
+      var maxDepth = function (root) {};
+
+      // --- answer-1 ---
+
+      // 递归
+      // 时间复杂度 O(N) 空间复杂度 O(N) 递归深度
+      var maxDepth = function (root) {
+        function dep(node, depth) {
+          if (node == null) return depth;
+          depth += 1;
+          return Math.max(dep(node.left, depth), dep(node.right, depth));
+        }
+        return dep(root, 0);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 层次遍历
+      var maxDepth = function (root) {
+        if (!root) return 0;
+        let depth = 0;
+        let stack = [root];
+        let nextStack = [];
+        while (stack.length) {
+          let node = stack.shift();
+
+          if (node.left) nextStack.push(node.left);
+          if (node.right) nextStack.push(node.right);
+
+          if (stack.length === 0) {
+            depth += 1;
+            stack = nextStack;
+            nextStack = [];
+          }
+        }
+        return depth;
+      };
+
+      // --- answer-2 ---
+
+      //     3
+      //    / \;
+      //   9  20;
+
+      var root = [3, 9, 20];
+      var res = 2;
+
+      var root = [3, 9, 20, null, null, 15, 7];
+      var res = 3;
+
+      var root = [1, 2, 3, 4, 5];
+      var res = 3;
+
+      var root = buildTreeByArray(root);
+
+      console.log('root = ', root);
+      console.log('res = ', res);
+      console.log('maxDepth = ', maxDepth(root));
+    </script>
+  </body>
+</html>
