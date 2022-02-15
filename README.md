@@ -317,6 +317,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [剑指 Offer55-I.二叉树的深度.html](./剑指第二版/剑指Offer55-I.二叉树的深度.html)
 - [剑指 Offer57-II.和为 s 的连续正数序列.html](./剑指第二版/剑指Offer57-II.和为s的连续正数序列.html)
 - [剑指 Offer57.和为 s 的两个数字.html](./剑指第二版/剑指Offer57.和为s的两个数字.html)
+- [剑指Offer68-II.二叉树的最近公共祖先.html](./剑指第二版/剑指Offer68-II.二叉树的最近公共祖先.html)
 - [剑指 Offer68-I.二叉搜索树的最近公共祖先.html](./剑指第二版/剑指Offer68-I.二叉搜索树的最近公共祖先.html)
 
 <br/>

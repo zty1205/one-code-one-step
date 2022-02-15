@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>剑指 Offer 68 - II. 二叉树的最近公共祖先</title>
+  </head>
+  <body>
+    <script src="../helper/tree.js"></script>
+    <script>
+      // https://leetcode-cn.com/problems/er-cha-shu-de-zui-jin-gong-gong-zu-xian-lcof/
+
+      // 给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。
+      // 百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”
+      // 提示：
+      // 所有节点的值都是唯一的。
+      // p、q 为不同节点且均存在于给定的二叉树中。
+
+      /**
+       * Definition for a binary tree node.
+       * function TreeNode(val) {
+       *     this.val = val;
+       *     this.left = this.right = null;
+       * }
+       */
+      /**
+       * @param {TreeNode} root
+       * @param {TreeNode} p
+       * @param {TreeNode} q
+       * @return {TreeNode}
+       */
+      var lowestCommonAncestor = function (root, p, q) {};
+
+      // --- answer-1 ---
+
+      // 找到节点的路径
+      // 对比上一道题的差别是树没有了搜索性质
+
+      // 时间复杂度：O(N) 空间复杂度：O(N)
+      var lowestCommonAncestor = function (root, p, q) {
+        // 节点唯一可以使用普通对象
+        // const map = new WeakMap();
+        const map = {};
+        function bfs(root, parent) {
+          if (!root) return;
+          if (parent) {
+            map[root.val] = parent;
+          }
+          bfs(root.left, root);
+          bfs(root.right, root);
+        }
+        // 前序遍历构造 子节点映射父节点
+        bfs(root, null);
+        function getPath(node) {
+          let path = [];
+          while (node) {
+            path.push(node);
+            node = map[node.val];
+          }
+          return path;
+        }
+        const pathP = getPath(p);
+        const pathQ = getPath(q);
+        const hash = pathP.reduce((pre, cur) => {
+          pre[cur.val] = 1;
+          return pre;
+        }, {});
+        for (let node of pathQ) {
+          if (hash[node.val]) {
+            return node;
+          }
+        }
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 递归
+      // 情况1：q, r两个节点分别在父节点的左右两个子树
+      // 情况2：q, r就是父节点，另一个为子节点
+      // 时间复杂度：O(N) 空间复杂度：O(N)
+      var lowestCommonAncestor = function (root, p, q) {
+        let ancestor;
+        function dfs(root, p, q) {
+          if (root == null) return false;
+          let lSon = dfs(root.left, p, q); // 在left找到了p或q
+          let rSon = dfs(root.right, p, q); // 在right找到了p或q
+          if ((lSon && rSon) || ((root.val === p.val || root.val === q.val) && (lSon || rSon))) {
+            ancestor = root;
+          }
+          return lSon || rSon || root.val === p.val || root.val === q.val;
+        }
+        dfs(root, p, q);
+        return ancestor;
+      };
+
+      // --- answer-2 ---
+
+      var root = [3, 5, 1, 6, 2, 0, 8, null, null, 7, 4],
+        p = 5,
+        q = 1;
+      var result = 3;
+      // 解释: 节点 5 和节点 1 的最近公共祖先是节点 3。;
+
+      var root = [3, 5, 1, 6, 2, 0, 8, null, null, 7, 4],
+        p = 5,
+        q = 4;
+      var result = 5;
+      // 解释: 节点 5 和节点 4 的最近公共祖先是节点 5。因为根据定义最近公共祖先节点可以为节点本身。;
+
+      function build(root, p, q) {
+        let { root: tree, nodeMap } = buildTreeByArray(root, { nodeMap: true });
+
+        return {
+          root: tree,
+          p: nodeMap.get(p),
+          q: nodeMap.get(q)
+        };
+      }
+
+      var { root, p, q } = build(root, p, q);
+
+      console.log('root = ', root);
+      console.log('p = ', p);
+      console.log('q = ', q);
+      console.log('result = ', result);
+      console.log('lowestCommonAncestor = ', lowestCommonAncestor(root, p, q));
+    </script>
+  </body>
+</html>
