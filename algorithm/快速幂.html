@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>快速幂</title>
+  </head>
+  <body>
+    <script>
+      // 顾名思义，快速幂就是快速算底数的n次幂。其时间复杂度为 O(log₂N)， 与朴素的O(N)相比效率有了极大的提高。
+      // 计算 a^n
+      // 当n为偶数的时候 a^n = a^(n/2) * a^(n/2)
+      // 当n为奇数的时候 a^n = a^(n/2) * a^(n/2) * a
+
+      // 非递归
+      function quickPower(a, n) {
+        if (n === 0) return 1;
+        let res = 1;
+        while (n > 0) {
+          if (n & 1) {
+            // 奇数
+            res = res * a;
+          }
+          n = n >> 1;
+          // 这里的a会越变越大 a^2 a^4 ....
+          a = a * a;
+        }
+        return res;
+      }
+
+      // 递归 容易爆栈
+      function quickPower_2(a, n) {
+        if (n === 0) return 1;
+        return (n & 1 ? a : 1) * quickPower(a, n >> 1) * quickPower(a, n >> 1);
+      }
+
+      // 尾递归
+      function quickPower_3(a, n) {
+        if (n === 0) return 1;
+        return (n & 1 ? a : 1) * quickPower(a * a, n >> 1);
+      }
+
+      var a = 5;
+      var n = 8;
+      var result = Math.pow(a, n);
+      console.log('quickPower = ', quickPower(a, n));
+      console.log('quickPower_2 = ', quickPower_2(a, n));
+      console.log('quickPower_3 = ', quickPower_3(a, n));
+      console.log('result = ', result);
+    </script>
+  </body>
+</html>
