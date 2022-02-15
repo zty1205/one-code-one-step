@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>剑指 Offer 42. 连续子数组的最大和</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/lian-xu-zi-shu-zu-de-zui-da-he-lcof/
+
+      // 输入一个整型数组，数组中的一个或连续多个整数组成一个子数组。求所有子数组的和的最大值。
+      // 要求时间复杂度为O(n)。
+      // 提示：
+      // 1 <= arr.length <= 10^5
+      // -100 <= arr[i] <= 100
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var maxSubArray = function (nums) {};
+
+      // --- answer-1 ---
+
+      // f(i) 表示下标以i为结尾中的的最大子数组的和
+      // f(i+1) = f(i) + n[i+1], n[i+1] 的最大值
+      // 动态规划
+      // 时间复杂度：O(n) 空间复杂度：O(n)
+      var maxSubArray = function (nums) {
+        let max = nums[0];
+        let dp = [max];
+        for (let i = 1; i < nums.length; i++) {
+          let num = Math.max(dp[i - 1] + nums[i], nums[i]);
+
+          dp[i] = num;
+          max = Math.max(max, num);
+        }
+        console.log('dp = ', dp);
+        return max;
+      };
+
+      // 当前值只和上一个值有关，优化存储空间
+      // 时间复杂度：O(n) 空间复杂度：O(1)
+      var maxSubArray = function (nums) {
+        let max = nums[0];
+        let pre = max;
+        for (let i = 1; i < nums.length; i++) {
+          pre = Math.max(pre + nums[i], nums[i]);
+          max = Math.max(max, pre);
+        }
+        return max;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 分治
+      // 对于区间[l, r]维护四个变量
+      // lSum{l,r} 以l为左端的最大和
+      // rSum{l,r} 以r为右端的最大和
+      // maxSum{l,r} 区间[l, r]的最大和
+      // sum{l,r} 区间[l,r]的和
+
+      // 用m划分区间[l,r]为 [l,m] 和 [m+1,r]
+
+      // lSum{l,r} = Max: lSum{l,m} , sum{l,m} + lSum(m+1, r)
+      // rSum{l,r} = Max: rSum{m+1, r}, sum{m+1, r} + rSum(m+1, r)
+      // maxSum = Max: maxSum{l,m}, maxSum{m+1,r} , 【跨域m的】rSum{m+1, r} + lSum(l,m)
+      // sum{l,r} = sum{l,m} + sum{m+1,r}
+
+      // 从而进行分治
+
+      var maxSubArray = function (nums) {
+        function getSum(nums, l, r) {
+          if (l === r) {
+            return {
+              lSum: nums[l],
+              rSum: nums[l],
+              maxSum: nums[l],
+              sum: nums[l]
+            };
+          }
+          let m = (l + r) >> 1;
+          const left = getSum(nums, l, m);
+          const right = getSum(nums, m + 1, r);
+          return {
+            lSum: Math.max(left.lSum, left.sum + right.lSum),
+            rSum: Math.max(right.rSum, left.sum + right.rSum),
+            maxSum: Math.max(left.maxSum, right.maxSum, left.rSum + right.lSum),
+            sum: left.sum + right.sum
+          };
+        }
+        return getSum(nums, 0, nums.length - 1).maxSum;
+      };
+      // 渐进时间复杂度O(n) 空间复杂度O(logN)
+      // 在大数据情况下的查询较解法一快捷 且可以求任意子数组的字段和
+
+      // --- answer-2 ---
+
+      var nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4];
+      var result = 6;
+      // 解释: 连续子数组 [4,-1,2,1] 的和最大，为 6。;
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('result = ', maxSubArray(nums));
+    </script>
+  </body>
+</html>
