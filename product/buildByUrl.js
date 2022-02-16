@@ -100,6 +100,23 @@ function convertAnswer(answers = []) {
   }
   return htmlAnswers;
 }
+function convertFunctionCLogByCode(code = '') {
+  const params = code
+    .match(/@param.{.+}.(.+)\n/g)
+    .map((str) => {
+      let ms = str.match(/@param.{.+}.(.+)\n/);
+      return ms ? ms[1] : null;
+    })
+    .filter(Boolean);
+
+  let functionString = params.map((str) => `console.log('${str} = ' , ${str})\n`).join('');
+
+  const funcName = code.match(/var.(.+).=.function\(/);
+  if (funcName && funcName[1]) {
+    functionString += `console.log('${funcName[1]} = ' , ${funcName[1]}(${params.join(', ')}))\n`;
+  }
+  return functionString;
+}
 
 function convertQuestionDomData(data) {
   const { url, title, content, code } = data;
@@ -135,10 +152,11 @@ function convertQuestionDomData(data) {
 
   let htmlAnswers = convertAnswer(answer);
   let htmlQuestion = convertQuestion(questions);
+  let fCLog = convertFunctionCLogByCode(code);
 
   const ansArea = '\n// --- answer-1 ---\n\n// --- answer-1 ---\n\n// --- answer-2 ---\n\n// --- answer-2 ---\n';
 
-  htmlContent += `\n${htmlQuestion}\n\n${code}\n\n${ansArea}\n\n${htmlAnswers}`;
+  htmlContent += `\n${htmlQuestion}\n\n${code}\n\n${ansArea}\n\n${htmlAnswers}\n\n${fCLog}`;
 
   return {
     htmlTitle: title,
