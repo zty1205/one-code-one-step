@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>剑指 Offer 55 - II. 平衡二叉树</title>
+  </head>
+  <body>
+    <script src="../helper/tree.js"></script>
+    <script>
+      // https://leetcode-cn.com/problems/ping-heng-er-cha-shu-lcof/
+
+      // 输入一棵二叉树的根节点，判断该树是不是平衡二叉树。如果某二叉树中任意节点的左右子树的深度相差不超过1，那么它就是一棵平衡二叉树。
+      // 提示：
+      // 0 <= 树的结点个数 <= 10000
+
+      /**
+       * Definition for a binary tree node.
+       * function TreeNode(val) {
+       *     this.val = val;
+       *     this.left = this.right = null;
+       * }
+       */
+      /**
+       * @param {TreeNode} root
+       * @return {boolean}
+       */
+      var isBalanced = function (root) {};
+
+      // --- answer-1 ---
+
+      var maxDepth = function (root) {
+        function dep(node, depth) {
+          if (node == null) return depth;
+          depth += 1;
+          return Math.max(dep(node.left, depth), dep(node.right, depth));
+        }
+        return dep(root, 0);
+      };
+
+      var maxDepth = function (root) {
+        return root === null ? 0 : Math.max(height(root.left), height(root.right)) + 1;
+      };
+
+      // 根据定义
+      // 时间复杂度：O(n^2)  空间复杂度：O(n)
+      var isBalanced = function (root) {
+        if (root === null) return true;
+        let ld = maxDepth(root.left);
+        let rd = maxDepth(root.right);
+        let cha = ld > rd ? ld - rd : rd - ld;
+        return cha < 2 && isBalanced(root.left) && isBalanced(root.right);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 一旦子树不平衡 那么整个数就不平衡 从底而上
+      // 平衡返回高度 反正返回-1
+      // 类似于后续遍历
+      // 时间复杂度：O(n)  空间复杂度：O(n)
+      var height = function (root) {
+        if (root === null) return 0;
+
+        let lh = height(root.left);
+        let lr = height(root.right);
+        if (lh === -1 || lr === -1 || Math.abs(lh - lr) > 1) {
+          return -1;
+        } else {
+          return Math.max(lh, lr) + 1;
+        }
+      };
+
+      var isBalanced = function (root) {
+        return height(root) >= 0;
+      };
+
+      // --- answer-2 ---
+
+      var root = [3, 9, 20, null, null, 15, 7];
+      var result = true;
+      //   3
+      //  / \
+      // 9  20
+      //   /  \
+      //  15   7
+
+      var root = [1, 2, 2, 3, 3, null, null, 4, 4];
+      var result = false;
+      //        1
+      //       / \
+      //      2   2
+      //     / \
+      //    3   3
+      //   / \
+      //  4   4
+
+      var tree = buildTreeByArray(root);
+
+      console.log('root = ', root);
+      console.log('tree = ', tree);
+      console.log('result = ', result);
+      console.log('isBalanced = ', isBalanced(tree));
+    </script>
+  </body>
+</html>
