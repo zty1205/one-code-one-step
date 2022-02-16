@@ -32,7 +32,7 @@ function getNumberByName(name) {
 // 找到上一个html的下标
 function findIndex(num, list = []) {
   let res = 0;
-  while (num > list[res]) res++;
+  while (num >= list[res]) res++;
   return res ? res - 1 : 0;
 }
 
