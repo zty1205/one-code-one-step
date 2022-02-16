@@ -113,6 +113,28 @@
         return res;
       }
 
+      // 树的高度
+      function height_tree(root) {
+        return root === null ? 0 : Math.max(height_tree(root.left), height_tree(root.right)) + 1;
+      }
+
+      // 二叉树是否平衡
+      function is_balanced_tree(root) {
+        var height = function (root) {
+          if (root === null) return 0;
+
+          let lh = height(root.left);
+          let lr = height(root.right);
+          if (lh === -1 || lr === -1 || Math.abs(lh - lr) > 1) {
+            return -1;
+          } else {
+            return Math.max(lh, lr) + 1;
+          }
+        };
+
+        return height(root) >= 0;
+      }
+
       console.log('front_traverse_tree 1245367 = ', front_traverse_tree(root));
       console.log('front_traverse_tree_2 1245367 = ', front_traverse_tree_2(root));
       console.log('middle_traverse_tree 4251637 = ', middle_traverse_tree(root));
@@ -120,6 +142,8 @@
       console.log('rear_traverse_tree 4526731 = ', rear_traverse_tree(root));
       console.log('rear_traverse_tree_2 4526731 = ', rear_traverse_tree_2(root));
       console.log('level_traverse_tree 1234567 = ', level_traverse_tree(root));
+      console.log('height_tree 1234567 = ', height_tree(root));
+      console.log('is_balanced_tree 1234567 = ', is_balanced_tree(root));
     </script>
   </body>
 </html>
