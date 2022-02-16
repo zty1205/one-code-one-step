@@ -3,6 +3,7 @@ const path = require('path');
 const { FILE_TEMPLATE } = require('./config');
 const Log = require('./log');
 const minimist = require('minimist');
+var shell = require('shelljs');
 
 async function sleep(time) {
   return new Promise((resolve) => setTimeout(resolve, time));
@@ -47,6 +48,9 @@ function buildFileName(name, dist, ext) {
 function writeCodeFile(file, template) {
   Log.BuildFileStart(file);
   fs.writeFileSync(file, template, { encoding: 'utf-8' });
+
+  prettierFile(file);
+
   Log.BuildFileEnd();
 }
 
@@ -64,7 +68,11 @@ function writeMD(name, dist, ext) {
   const lastHtml = matchRes[idx];
   const link = buildMdLink(name, dist, ext);
   const newContent = mdContent.replace(lastHtml, `${lastHtml}\n${link}`);
-  fs.writeFileSync(path.resolve(__dirname, '../README.md'), newContent, { encoding: 'utf-8' });
+
+  const mdFile = path.resolve(__dirname, '../README.md');
+  fs.writeFileSync(mdFile, newContent, { encoding: 'utf-8' });
+
+  prettierFile(mdFile);
 
   Log.MDEnd();
 
@@ -115,6 +123,13 @@ function getNPMBuildParams(key, defaults) {
 function getExt(filename = '') {
   const li = filename.lastIndexOf('.');
   return li > 0 ? filename.substring(li + 1).toLowerCase() : null;
+}
+
+function prettierFile(file) {
+  Log.FormatFileStart(file);
+  const result = shell.exec(`prettier --write ${file}`, { silent: true });
+  Log.FormatFileEnd();
+  return result;
 }
 
 module.exports = {

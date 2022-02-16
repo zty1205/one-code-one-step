@@ -21,10 +21,10 @@ module.exports = {
     console.log(FgMagenta, `--- 浏览器数据获取完毕 ---`);
   },
   BuildFileStart(file) {
-    console.log(FgWhite, `--- 开始生成文件 ${file} ---`);
+    console.log(FgYellow, `--- 开始生成文件 ${file} ---`);
   },
   BuildFileEnd() {
-    console.log(FgWhite, `--- 文件生成完毕 ---`);
+    console.log(FgYellow, `--- 文件生成完毕 ---`);
   },
   MDStart() {
     console.log(FgYellow, '--- 开始生成MD链接 ---');
@@ -37,5 +37,11 @@ module.exports = {
   },
   SHEnd() {
     console.log(FgBlue, '--- sh文件生成完毕 ---');
+  },
+  FormatFileStart(file) {
+    console.log(FgWhite, `--- 开始格式化文件 ${file} ---`);
+  },
+  FormatFileEnd() {
+    console.log(FgWhite, `--- 文件格式化完毕 ---`);
   }
 };

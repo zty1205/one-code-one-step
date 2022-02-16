@@ -49,6 +49,8 @@
     "customize-cra": "^0.9.1",
     "dotenv": "^8.2.0",
     "node-sass": "^4.13.1",
-    "react-app-rewired": "^2.1.5"
+    "prettier": "2.5.1",
+    "react-app-rewired": "^2.1.5",
+    "shelljs": "^0.8.5"
   }
 }
