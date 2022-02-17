@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>剑指 Offer 53 - I. 在排序数组中查找数字 I</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/zai-pai-xu-shu-zu-zhong-cha-zhao-shu-zi-lcof/
+
+      // 统计一个数字在排序数组中出现的次数。
+      // 提示：
+      // 0 <= nums.length <= 105
+      // -109 <= nums[i] <= 109
+      // nums 是一个非递减数组
+      // -109 <= target <= 109
+
+      /**
+       * @param {number[]} nums
+       * @param {number} target
+       * @return {number}
+       */
+      var search = function (nums, target) {};
+
+      // --- answer-1 ---
+
+      // hash统计
+      var search = function (nums = [], target) {
+        const map = nums.reduce((pre, cur) => {
+          pre[cur] = (pre[cur] || 0) + 1;
+          return pre;
+        }, {});
+        return map[target] || 0;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 遍历 因为数组是非递减数组
+      var search = function (nums = [], target) {
+        if (nums.length === 0 || nums[0] > target) return 0;
+        let i = 0;
+        const length = nums.length;
+        while (i < length && nums[i] !== target) {
+          i++;
+        }
+
+        let j = i;
+        while (j < length && nums[j] === target) {
+          j++;
+        }
+        return j - i;
+      };
+
+      // --- answer-2 ---
+
+      // --- answer-3 ---
+
+      // 方法二 遍历转递归
+      var search = function (nums = [], target) {
+        if (nums.length === 0 || nums[0] > target) return 0;
+        function count(i, total) {
+          return i > nums.length || nums[i] > target ? total : count(i + 1, total + (nums[i] === target ? 1 : 0));
+        }
+        return count(0, 0);
+      };
+
+      // --- answer-3 ---
+
+      // --- answer-4 ---
+
+      // 二分
+      // 时间复杂度O(N) 空间复杂度O(logN)递归深度
+      var search = function (nums = [], target) {
+        function midSearch(start, end) {
+          if (start > end) return 0;
+          if (start === end) return nums[start] === target ? 1 : 0;
+          let mid = (start + end) >> 1;
+          let left = midSearch(start, mid);
+          let right = midSearch(mid + 1, end);
+          return left + right;
+        }
+        return midSearch(0, nums.length - 1);
+      };
+
+      // 官方的二分
+      const binarySearch = (nums, target, lower) => {
+        let left = 0,
+          right = nums.length - 1,
+          ans = nums.length;
+        while (left <= right) {
+          const mid = Math.floor((left + right) / 2);
+          if (nums[mid] > target || (lower && nums[mid] >= target)) {
+            right = mid - 1;
+            ans = mid;
+          } else {
+            left = mid + 1;
+          }
+        }
+        return ans;
+      };
+
+      var search = function (nums, target) {
+        let ans = 0;
+        const leftIdx = binarySearch(nums, target, true);
+        const rightIdx = binarySearch(nums, target, false) - 1;
+        if (leftIdx <= rightIdx && rightIdx < nums.length && nums[leftIdx] === target && nums[rightIdx] === target) {
+          ans = rightIdx - leftIdx + 1;
+        }
+        return ans;
+      };
+
+      // --- answer-4 ---
+
+      // --- answer-5 ---
+
+      // 原生
+      // var search = function (nums, target) {
+      //   return nums.filter((x) => x === target).length;
+      // };
+
+      // --- answer-5 ---
+
+      var nums = [5, 7, 7, 8, 8, 10],
+        target = 8;
+      var result = 2;
+
+      // var nums = [5, 7, 7, 8, 8, 10],
+      //   target = 6;
+      // var result = 0;
+
+      var nums = [1],
+        target = 1;
+      var result = 1;
+
+      console.log('nums = ', nums);
+      console.log('target = ', target);
+      console.log('result = ', result);
+      console.log('search = ', search(nums, target));
+    </script>
+  </body>
+</html>
