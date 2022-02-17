@@ -85,18 +85,18 @@ function convertQuestion(questions = []) {
   }
   return htmlQuestion;
 }
-function convertAnswer(answers = []) {
+function convertAnswer(answers = [], params = []) {
   let htmlAnswers = '';
   for (let ans of answers) {
     let ansArr = ans.split(/\n/);
     const [input, output, explain] = ansArr;
 
-    let i = input.replace(/输入[：:]/, input.indexOf('=') === -1 ? 'var input = ' : 'var ');
+    let i = input.replace(/输入[：:]/, input.indexOf('=') === -1 ? `var ${params[0] || 'input'} = ` : 'var ');
     let o = output.replace(/输出[：:]/, output.indexOf('=') === -1 ? 'var result = ' : 'var ');
 
     htmlAnswers += `// ${i};\n`;
     htmlAnswers += `// ${o};\n`;
-    htmlAnswers += explain ? `// ${explain};\n\n` : '\n\n';
+    htmlAnswers += explain ? `// ${explain}\n\n` : '\n\n';
   }
   return htmlAnswers;
 }
@@ -109,13 +109,19 @@ function convertFunctionCLogByCode(code = '') {
     })
     .filter(Boolean);
 
-  let functionString = params.map((str) => `console.log('${str} = ' , ${str})\n`).join('');
+  let fCLog = params.map((str) => `console.log('${str} = ' , ${str})\n`).join('');
+
+  fCLog += `console.log('result = ' , result)\n`;
 
   const funcName = code.match(/var.(.+).=.function\(/);
   if (funcName && funcName[1]) {
-    functionString += `console.log('${funcName[1]} = ' , ${funcName[1]}(${params.join(', ')}))\n`;
+    fCLog += `console.log('${funcName[1]} = ' , ${funcName[1]}(${params.join(', ')}))\n`;
   }
-  return functionString;
+  return {
+    params,
+    funcName,
+    fCLog
+  };
 }
 
 function convertQuestionDomData(data) {
@@ -150,9 +156,10 @@ function convertQuestionDomData(data) {
     }
   }
 
-  let htmlAnswers = convertAnswer(answer);
+  let { fCLog, params } = convertFunctionCLogByCode(code);
+
+  let htmlAnswers = convertAnswer(answer, params);
   let htmlQuestion = convertQuestion(questions);
-  let fCLog = convertFunctionCLogByCode(code);
 
   const ansArea = '\n// --- answer-1 ---\n\n// --- answer-1 ---\n\n// --- answer-2 ---\n\n// --- answer-2 ---\n';
 
