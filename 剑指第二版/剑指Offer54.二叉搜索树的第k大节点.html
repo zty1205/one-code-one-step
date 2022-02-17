@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>剑指 Offer 54. 二叉搜索树的第k大节点</title>
+  </head>
+  <body>
+    <script src="../helper/tree.js"></script>
+    <script>
+      // https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-di-kda-jie-dian-lcof/
+
+      // 给定一棵二叉搜索树，请找出其中第 k 大的节点的值。
+      // 提示：
+      // 1 ≤ k ≤ 二叉搜索树元素个数
+
+      /**
+       * Definition for a binary tree node.
+       * function TreeNode(val) {
+       *     this.val = val;
+       *     this.left = this.right = null;
+       * }
+       */
+      /**
+       * @param {TreeNode} root
+       * @param {number} k
+       * @return {number}
+       */
+      var kthLargest = function (root, k) {};
+
+      // --- answer-1 ---
+
+      // 二叉搜索树的中序遍历为递增数列 左根右
+      var kthLargest = function (root, k) {
+        let nodes = [];
+        function mid_traverse(node) {
+          if (!node) return;
+          mid_traverse(node.left);
+          nodes.push(node);
+          mid_traverse(node.right);
+        }
+        mid_traverse(root);
+        return nodes[nodes.length - k].val;
+      };
+
+      // 提前放回 优化存储空间
+      // 先右后左
+      var kthLargest = function (root, k) {
+        let res;
+        function mid_traverse(node) {
+          if (!node) return;
+          mid_traverse(node.right);
+          k--;
+          if (k === 0) {
+            res = node.val;
+            return;
+          }
+          mid_traverse(node.left);
+        }
+        mid_traverse(root);
+        return res;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var root = [3, 1, 4, null, 2],
+        k = 1;
+      var result = 4;
+      //    3
+      //   / \
+      //  1   4
+      //   \
+      //    2
+
+      // var root = [5, 3, 6, 2, 4, null, null, 1],
+      //   k = 3;
+      //        5
+      //       / \
+      //      3   6
+      //     / \
+      //    2   4
+      //   /
+      //  1
+      var result = 4;
+
+      console.log('root = ', root);
+      var tree = buildTreeByArray(root);
+      console.log('tree = ', tree);
+      console.log('k = ', k);
+      console.log('result = ', result);
+      console.log('kthLargest = ', kthLargest(tree, k));
+    </script>
+  </body>
+</html>
