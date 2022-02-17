@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>剑指 Offer 61. 扑克牌中的顺子</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/bu-ke-pai-zhong-de-shun-zi-lcof/
+
+      // 从若干副扑克牌中随机抽 5 张牌，判断是不是一个顺子，即这5张牌是不是连续的。2～10为数字本身，A为1，J为11，Q为12，K为13，而大、小王为 0 ，可以看成任意数字。A 不能视为 14。
+
+      /**
+       * @param {number[]} nums
+       * @return {boolean}
+       */
+      var isStraight = function (nums) {};
+
+      // --- answer-1 ---
+
+      // 统计最大值 最小值
+      // max - min不能大于5 且不能有重复值
+      var isStraight = function (nums) {
+        let max = 0;
+        let min = 20;
+        let zero = 0;
+        let map = {};
+        for (let n of nums) {
+          if (n === 0) {
+            zero++;
+          } else {
+            // 重复数字提前return
+            if (n in map) return false;
+            map[n] = 1;
+            max = Math.max(max, n);
+            min = Math.min(min, n);
+          }
+        }
+        return max - min < 5;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var nums = [1, 2, 3, 4, 5];
+      var result = true;
+
+      var nums = [0, 0, 1, 2, 5];
+      var result = true;
+
+      var nums = [0, 0, 2, 2, 5];
+      var result = false;
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('isStraight = ', isStraight(nums));
+    </script>
+  </body>
+</html>
