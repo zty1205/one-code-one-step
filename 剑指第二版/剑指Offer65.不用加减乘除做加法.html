@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>剑指 Offer 65. 不用加减乘除做加法</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/bu-yong-jia-jian-cheng-chu-zuo-jia-fa-lcof/
+
+      // 写一个函数，求两个整数之和，要求在函数体内不得使用 “+”、“-”、“*”、“/” 四则运算符号。
+      // 提示：
+      // a, b 均可能是负数或 0
+      // 结果不会溢出 32 位整数
+
+      /**
+       * @param {number} a
+       * @param {number} b
+       * @return {number}
+       */
+      var add = function (a, b) {};
+
+      // --- answer-1 ---
+
+      // 位运算
+      var add = function (a, b) {
+        while (b != 0) {
+          // 当进位为 0 时跳出
+          let c = (a & b) << 1; // c = 进位
+          a ^= b; // a = 非进位和
+          b = c; // b = 进位
+        }
+        return a;
+      };
+
+      // a ^ b 异或 ab相等为0 不等为1
+      // a & b 与 同时为1时等1
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      var add = function (a, b) {
+        return b === 0 ? a : add(a ^ b, (a & b) << 1);
+      };
+
+      // --- answer-2 ---
+
+      var a = 1,
+        b = 1;
+      var result = 2;
+
+      console.log('a = ', a);
+      console.log('b = ', b);
+      console.log('result = ', result);
+      console.log('add = ', add(a, b));
+    </script>
+  </body>
+</html>
