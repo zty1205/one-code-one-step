@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>剑指 Offer 24. 反转链表</title>
+  </head>
+  <body>
+    <script src="../helper/node.js"></script>
+    <script>
+      // https://leetcode-cn.com/problems/fan-zhuan-lian-biao-lcof/
+
+      // 定义一个函数，输入一个链表的头节点，反转该链表并输出反转后链表的头节点。
+
+      /**
+       * Definition for singly-linked list.
+       * function ListNode(val) {
+       *     this.val = val;
+       *     this.next = null;
+       * }
+       */
+      /**
+       * @param {ListNode} head
+       * @return {ListNode}
+       */
+
+      // 后一个节点 做头结点拼接节点链
+      var reverseList = function (head) {
+        if (head === null) return null;
+        let pre = head;
+        let cur = head.next;
+        pre.next = null;
+        let tmp = cur;
+        while (tmp) {
+          tmp = tmp.next;
+          cur.next = pre;
+          pre = cur;
+          cur = tmp;
+        }
+        return pre;
+      };
+
+      // 优化下
+      var reverseList = function (head) {
+        let pre = null;
+        let cur = head;
+        while (cur) {
+          const next = cur.next;
+          cur.next = pre;
+          pre = cur;
+          cur = next;
+        }
+        return pre;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 递归
+      var reverseList = function (head) {
+        if (head === null) return null;
+        let header;
+        function reverse(node, nextNode) {
+          if (!nextNode) {
+            header = node;
+          } else {
+            reverse(nextNode, nextNode.next).next = node;
+          }
+          return node;
+        }
+        let n = head.next;
+        head.next = null;
+        reverse(head, n);
+        return header;
+      };
+
+      // 优化下
+      var reverseList = function (head) {
+        if (head == null || head.next == null) {
+          return head;
+        }
+        const newHead = reverseList(head.next);
+        head.next.next = head;
+        head.next = null;
+        return newHead;
+      };
+
+      // --- answer-2 ---
+
+      // var head =  1->2->3->4->5->NULL;
+      // var result =  5->4->3->2->1->NULL;
+
+      var head = [1, 2, 3, 4, 5];
+      var result = [5, 4, 3, 2, 1];
+
+      var headNode = buildLinkNodeByArray(head);
+      var reverseNode = reverseList(headNode);
+
+      console.log('headNode = ', headNode);
+      console.log('head = ', head);
+      console.log('result = ', result);
+      console.log('reverseList = ', buildArrayByLinkNode(reverseNode));
+      console.log('reverseNode = ', reverseNode);
+    </script>
+  </body>
+</html>
