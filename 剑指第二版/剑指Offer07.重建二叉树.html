@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>剑指 Offer 07. 重建二叉树</title>
+  </head>
+  <body>
+    <script src="../helper/tree.js"></script>
+    <script>
+      // https://leetcode-cn.com/problems/zhong-jian-er-cha-shu-lcof/
+
+      // 输入某二叉树的前序遍历和中序遍历的结果，请构建该二叉树并返回其根节点。
+      // 假设输入的前序遍历和中序遍历的结果中都不含重复的数字。
+
+      /**
+       * Definition for a binary tree node.
+       * function TreeNode(val) {
+       *     this.val = val;
+       *     this.left = this.right = null;
+       * }
+       */
+      /**
+       * @param {number[]} preorder
+       * @param {number[]} inorder
+       * @return {TreeNode}
+       */
+
+      // 前序遍历的第一个就是根节点
+      // 利用根节点可以对着两个变量数组 切割左右部分
+      // 递归完成构建树
+      var buildTree = function (preorder = [], inorder = []) {
+        if (preorder.length === 0 || inorder.length === 0) return null;
+        let rootVal = preorder[0];
+        const root = new TreeNode(rootVal);
+        let idx = inorder.findIndex((x) => x === rootVal);
+        root.left = buildTree(preorder.slice(1, 1 + idx), inorder.slice(0, idx));
+        root.right = buildTree(preorder.slice(idx + 1), inorder.slice(idx + 1));
+        return root;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 迭代
+      var buildTree = function (preorder = [], inorder = []) {
+        if (preorder.length === 0 || inorder.length === 0) return null;
+        let root = new TreeNode(preorder[0]);
+        let stack = [root];
+
+        let inorderIndex = 0;
+        for (let i = 1; i < preorder.length; i++) {
+          debugger;
+          let preorderVal = preorder[i];
+          let node = stack[stack.length - 1];
+          // 左子树
+          if (node.val != inorder[inorderIndex]) {
+            node.left = new TreeNode(preorderVal);
+            stack.push(node.left);
+          } else {
+            // 右子树
+            while (stack.length && stack[stack.length - 1].val == inorder[inorderIndex]) {
+              node = stack.pop(); // pop了所有左节点 找到了根节点
+              inorderIndex++;
+            }
+            node.right = new TreeNode(preorderVal);
+            stack.push(node.right);
+          }
+        }
+        return root;
+      };
+
+      // --- answer-2 ---
+
+      var preorder = [3, 9, 20, 15, 7], // 根左右
+        inorder = [9, 3, 15, 20, 7]; // 左根右
+      var result = [3, 9, 20, null, null, 15, 7];
+
+      // Input: preorder = [-1], inorder = [-1];
+      // Output: [-1];
+
+      var resultTree = buildTreeByArray([...result]);
+      var tree = buildTree(preorder, inorder);
+
+      console.log('preorder = ', preorder);
+      console.log('inorder = ', inorder);
+      console.log('result = ', result);
+      console.log('result = ', buildArrayByTree(tree));
+      console.log('resultTree = ', resultTree);
+      console.log('buildTree = ', tree);
+    </script>
+  </body>
+</html>

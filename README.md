@@ -295,6 +295,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 ## 五、剑指 offer 第二版
 
 - [剑指 Offer09.用两个栈实现队列](./剑指第二版/剑指Offer09.用两个栈实现队列.html)
+- [剑指 Offer07.重建二叉树.html](./剑指第二版/剑指Offer07.重建二叉树.html)
 - [剑指 Offer04.二维数组中的查找.html](./剑指第二版/剑指Offer04.二维数组中的查找.html)
 - [剑指 Offer06.从尾到头打印链表.html](./剑指第二版/剑指Offer06.从尾到头打印链表.html)
 - [剑指 Offer05.替换空格.html](./剑指第二版/剑指Offer05.替换空格.html)
