@@ -40,3 +40,19 @@ function buildTreeByArray(array, config = {}) {
   }
   return config.nodeMap ? { root, nodeMap } : root;
 }
+
+function buildArrayByTree(root) {
+  const res = [];
+  const stack = [root];
+  while (stack.length) {
+    let node = stack.shift();
+    if (!node) {
+      res.push(null);
+    } else {
+      res.push(node.val);
+      stack.push(node && node.left);
+      stack.push(node && node.right);
+    }
+  }
+  return res;
+}
