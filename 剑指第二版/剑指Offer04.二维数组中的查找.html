@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>剑指 Offer 04. 二维数组中的查找</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/
+
+      // 在一个 n * m 的二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个高效的函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。
+
+      /**
+       * @param {number[][]} matrix
+       * @param {number} target
+       * @return {boolean}
+       */
+      var findNumberIn2DArray = function (matrix, target) {};
+
+      // --- answer-1 ---
+
+      // 二维数据有序, 可以从右上角进行查找
+      var findNumberIn2DArray = function (matrix = [], target) {
+        if (matrix.length === 0) return false;
+        const n = matrix.length,
+          m = matrix[0].length;
+        let i = 0,
+          j = m - 1;
+        while (i < n && j >= 0) {
+          let num = matrix[i][j];
+          if (num === target) {
+            console.log('i,j = ', i, j);
+            return true;
+          } else if (num > target) {
+            j--;
+          } else {
+            i++;
+          }
+        }
+        return false;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 使用原生api
+      var findNumberIn2DArray1 = function (matrix = [], target) {
+        return !!matrix.flat(2).find((x) => x === target);
+      };
+
+      // --- answer-2 ---
+
+      var matrix = [
+        [1, 4, 7, 11, 15],
+        [2, 5, 8, 12, 19],
+        [3, 6, 9, 16, 22],
+        [10, 13, 14, 17, 24],
+        [18, 21, 23, 26, 30]
+      ];
+
+      var target = 8;
+      var result = true;
+
+      var target = 20;
+      var result = false;
+
+      console.log('matrix = ', matrix);
+      console.log('target = ', target);
+      console.log('result = ', result);
+      console.log('findNumberIn2DArray = ', findNumberIn2DArray(matrix, target));
+    </script>
+  </body>
+</html>
