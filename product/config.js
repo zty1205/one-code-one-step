@@ -26,7 +26,15 @@ const FILE_TEMPLATE = {
   sql: sql_template
 };
 
+const WIN_GIT_HEADER = `
+echo "如果中文显示乱码"
+echo "1. 打开 控制面板—>区域—>管理—>更改系统区域设置"
+echo "2. 勾选：使用Unicode UTF-8提供全球语音支持"
+echo "3. 重启后即可解决"
+`
+
 module.exports = {
   NO_CODE_DIR_MAP,
-  FILE_TEMPLATE
+  FILE_TEMPLATE,
+  WIN_GIT_HEADER
 };

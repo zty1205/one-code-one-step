@@ -1,9 +1,13 @@
-const fs = require('fs');
-const path = require('path');
-const { FILE_TEMPLATE } = require('./config');
-const Log = require('./log');
-const minimist = require('minimist');
-var shell = require('shelljs');
+const fs = require("fs");
+const path = require("path");
+const { FILE_TEMPLATE, WIN_GIT_HEADER } = require("./config");
+const Log = require("./log");
+const minimist = require("minimist");
+var shell = require("shelljs");
+
+function getPlatform() {
+  return process.platform;
+}
 
 async function sleep(time) {
   return new Promise((resolve) => setTimeout(resolve, time));
@@ -14,7 +18,7 @@ function isHttpLink(url) {
 }
 
 function getTemplate(ext) {
-  return FILE_TEMPLATE[ext] || '';
+  return FILE_TEMPLATE[ext] || "";
 }
 
 function buildTemplate(ext, obj) {
@@ -47,7 +51,7 @@ function buildFileName(name, dist, ext) {
 
 function writeCodeFile(file, template) {
   Log.BuildFileStart(file);
-  fs.writeFileSync(file, template, { encoding: 'utf-8' });
+  fs.writeFileSync(file, template, { encoding: "utf-8" });
 
   prettierFile(file);
 
@@ -57,8 +61,13 @@ function writeCodeFile(file, template) {
 function writeMD(name, dist, ext) {
   Log.MDStart();
 
-  const mdContent = fs.readFileSync(path.resolve(__dirname, '../README.md'), { encoding: 'utf-8' });
-  const regexp = new RegExp(`- (.*)${dist}/(.*)\.[${Object.keys(FILE_TEMPLATE).join('|')}]\\)`, 'g');
+  const mdContent = fs.readFileSync(path.resolve(__dirname, "../README.md"), {
+    encoding: "utf-8",
+  });
+  const regexp = new RegExp(
+    `- (.*)${dist}/(.*)\.[${Object.keys(FILE_TEMPLATE).join("|")}]\\)`,
+    "g"
+  );
   const matchRes = mdContent.match(regexp);
   if (!matchRes) return;
   const numList = matchRes.map(getNumberByName);
@@ -69,8 +78,8 @@ function writeMD(name, dist, ext) {
   const link = buildMdLink(name, dist, ext);
   const newContent = mdContent.replace(lastHtml, `${lastHtml}\n${link}`);
 
-  const mdFile = path.resolve(__dirname, '../README.md');
-  fs.writeFileSync(mdFile, newContent, { encoding: 'utf-8' });
+  const mdFile = path.resolve(__dirname, "../README.md");
+  fs.writeFileSync(mdFile, newContent, { encoding: "utf-8" });
 
   prettierFile(mdFile);
 
@@ -78,13 +87,11 @@ function writeMD(name, dist, ext) {
 
   return {
     link,
-    curNum
+    curNum,
   };
 }
 
-function buildGitSH(files = [], dist) {
-  Log.SHStart();
-
+function buildGitCmd(files = [], dist) {
   let content = `git add README.md\n`;
   let num = `feat: ${dist}`;
   files.forEach((f) => {
@@ -93,13 +100,35 @@ function buildGitSH(files = [], dist) {
   });
   content += `git commit -m '${num}'\n`;
   content += `git push`;
-  fs.writeFileSync(path.resolve(__dirname, './deploy.sh'), content, { encoding: 'utf-8' });
+  return content;
+}
 
+function buildGitDelploy(files = [], dist) {
+  Log.SHStart();
+
+  const platform = getPlatform();
+
+  let fileName;
+
+  let content = buildGitCmd(files, dist);
+  switch (platform) {
+    case "win32":
+      fileName = "./deploy.ps1";
+      content =  WIN_GIT_HEADER + content 
+      break;
+    default:
+      fileName = "./deploy.sh";
+      break;
+  }
+
+  fs.writeFileSync(path.resolve(__dirname, fileName), content, {
+    encoding: "utf-8",
+  });
   Log.SHEnd();
 }
 
 function getNPMParams(val, defaults) {
-  return val === 'false' ? false : val != null ? val : defaults;
+  return val === "false" ? false : val != null ? val : defaults;
 }
 
 function handleNPMParamsArg(argv) {
@@ -114,14 +143,16 @@ function getNPMBuildParams(key, defaults) {
   try {
     const npm_config_argv = JSON.parse(process.env.npm_config_argv);
     const argv = minimist(npm_config_argv.original);
-    return key ? getNPMParams(argv[key], defaults) : handleNPMParamsArg(argv) || defaults;
+    return key
+      ? getNPMParams(argv[key], defaults)
+      : handleNPMParamsArg(argv) || defaults;
   } catch (err) {
-    console.error('getNPMBuildParams err = ', err);
+    console.error("getNPMBuildParams err = ", err);
   }
 }
 
-function getExt(filename = '') {
-  const li = filename.lastIndexOf('.');
+function getExt(filename = "") {
+  const li = filename.lastIndexOf(".");
   return li > 0 ? filename.substring(li + 1).toLowerCase() : null;
 }
 
@@ -139,7 +170,7 @@ module.exports = {
   buildFileName,
   writeMD,
   writeCodeFile,
-  buildGitSH,
+  buildGitDelploy,
   getNPMBuildParams,
-  getExt
+  getExt,
 };

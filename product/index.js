@@ -2,7 +2,7 @@ const open = require('open');
 const inquiry = require('./inquirer');
 const buildByName = require('./buildByName');
 const { buildByUrl } = require('./buildByUrl');
-const { buildGitSH, getNPMBuildParams } = require('./util');
+const { buildGitDelploy, getNPMBuildParams } = require('./util');
 const Log = require('./log');
 
 async function main() {
@@ -26,7 +26,7 @@ async function main() {
     }
   }
 
-  buildGitSH(res, dist);
+  buildGitDelploy(res, dist);
 
   Log.ProgramEnd();
   process.exit();
