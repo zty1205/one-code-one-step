@@ -329,6 +329,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [剑指 Offer54.二叉搜索树的第 k 大节点.html](./剑指第二版/剑指Offer54.二叉搜索树的第k大节点.html)
 - [剑指 Offer55-I.二叉树的深度.html](./剑指第二版/剑指Offer55-I.二叉树的深度.html)
 - [剑指 Offer55-II.平衡二叉树.html](./剑指第二版/剑指Offer55-II.平衡二叉树.html)
+- [剑指 Offer56-I.数组中数字出现的次数.html](./剑指第二版/剑指Offer56-I.数组中数字出现的次数.html)
 - [剑指 Offer57-II.和为 s 的连续正数序列.html](./剑指第二版/剑指Offer57-II.和为s的连续正数序列.html)
 - [剑指 Offer57.和为 s 的两个数字.html](./剑指第二版/剑指Offer57.和为s的两个数字.html)
 - [剑指 Offer58-I.翻转单词顺序.html](./剑指第二版/剑指Offer58-I.翻转单词顺序.html)
