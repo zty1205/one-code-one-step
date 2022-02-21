@@ -304,6 +304,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [剑指 Offer10-II.青蛙跳台阶问题.html](./剑指第二版/剑指Offer10-II.青蛙跳台阶问题.html)
 - [剑指 Offer11.旋转数组的最小数字.html](./剑指第二版/剑指Offer11.旋转数组的最小数字.html)
 - [剑指 Offer14-I.剪绳子.html](./剑指第二版/剑指Offer14-I.剪绳子.html)
+- [剑指 Offer14-II.剪绳子 II.html](./剑指第二版/剑指Offer14-II.剪绳子II.html)
 - [剑指 Offer15.二进制中 1 的个数.html](./剑指第二版/剑指Offer15.二进制中1的个数.html)
 - [剑指 Offer16.数值的整数次方.html](./剑指第二版/剑指Offer16.数值的整数次方.html)
 - [剑指 Offer17.打印从 1 到最大的 n 位数.html](./剑指第二版/剑指Offer17.打印从1到最大的n位数.html)

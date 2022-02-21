@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>剑指 Offer 14- II. 剪绳子 II</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/jian-sheng-zi-ii-lcof/
+
+      // 给你一根长度为 n 的绳子，请把绳子剪成整数长度的 m 段（m、n都是整数，n>1并且m>1），每段绳子的长度记为 k[0],k[1]...k[m - 1] 。请问 k[0]*k[1]*...*k[m - 1] 可能的最大乘积是多少？例如，当绳子的长度是8时，我们把它剪成长度分别为2、3、3的三段，此时得到的最大乘积是18。
+      // 答案需要取模 1e9+7（1000000007），如计算初始结果为：1000000008，请返回 1。
+      // 提示：
+      // 2 <= n <= 1000
+
+      /**
+       * @param {number} n
+       * @return {number}
+       */
+      var cuttingRope = function (n) {};
+
+      // --- answer-1 ---
+
+      // 这题和上一题差不多，但是需要考虑大数问题
+      // 时间O(logN)计算幂上， 空间复杂度O(1)
+      var cuttingRope = function (n) {
+        if (n <= 2) return 1;
+        if (n === 3) return 2;
+        if (n === 4) return 4;
+
+        let x = Math.floor(n / 3) - 1;
+        let y = n % 3;
+        // n -(3*x+y)  余下的可能是 3,4,5 对应余数0,1,2 对应长度积 *3,*4,*6
+
+        // 快速幂
+        let res = 1;
+        let a = 3;
+        while (x > 0) {
+          if (x % 2 === 1) {
+            // 奇数
+            res = (res * a) % 1000000007;
+          }
+          x = x >> 1;
+          // 这里的a会越变越大 a^2 a^4 ....就会越界
+          a = (a * a) % 1000000007;
+        }
+        let tmp = {
+          0: 3,
+          1: 4,
+          2: 6
+        };
+        return (res * tmp[y]) % 1000000007;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var n = 2;
+      var result = 1;
+      // 解释: 2 = 1 + 1, 1 × 1 = 1
+
+      var n = 10;
+      var result = 36;
+      // 解释: 10 = 3 + 3 + 4, 3 × 3 × 4 = 36
+
+      var n = 120;
+      var result = 953271190;
+
+      console.log('n = ', n);
+      console.log('result = ', result);
+      console.log('cuttingRope = ', cuttingRope(n));
+    </script>
+  </body>
+</html>
