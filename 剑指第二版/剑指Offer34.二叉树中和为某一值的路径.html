@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>剑指 Offer 34. 二叉树中和为某一值的路径</title>
+  </head>
+  <body>
+    <script src="../helper/tree.js"></script>
+    <script>
+      // https://leetcode-cn.com/problems/er-cha-shu-zhong-he-wei-mou-yi-zhi-de-lu-jing-lcof/
+
+      // 给你二叉树的根节点 root 和一个整数目标和 targetSum ，找出所有 从根节点到叶子节点 路径总和等于给定目标和的路径。
+      // 叶子节点 是指没有子节点的节点。
+      // 提示：
+      // 树中节点总数在范围 [0, 5000] 内
+      // -1000 <= Node.val <= 1000
+      // -1000 <= targetSum <= 1000
+
+      /**
+       * Definition for a binary tree node.
+       * function TreeNode(val, left, right) {
+       *     this.val = (val===undefined ? 0 : val)
+       *     this.left = (left===undefined ? null : left)
+       *     this.right = (right===undefined ? null : right)
+       * }
+       */
+      /**
+       * @param {TreeNode} root
+       * @param {number} target
+       * @return {number[][]}
+       */
+
+      var pathSum = function (root, target) {};
+
+      // --- answer-1 ---
+
+      var pathSum = function (root, target) {
+        if (root === null) return [];
+        const res = [];
+        function getPath(node, curSum, path = []) {
+          if (node === null) return;
+          if (node.left === null && node.right === null) {
+            curSum === target && res.push([...path]);
+            return;
+          }
+          if (node.left) {
+            path.push(node.left.val);
+            getPath(node.left, curSum + node.left.val, path);
+            path.pop();
+          }
+
+          if (node.right) {
+            path.push(node.right.val);
+            getPath(node.right, curSum + node.right.val, path);
+            path.pop();
+          }
+        }
+        getPath(root, root.val, [root.val]);
+        return res;
+      };
+
+      // 回溯
+      // 时间复杂度 O(N) 空间复杂度 O(N)
+      var pathSum = function (root, target) {
+        // 结果数组和路径数组
+        let res = [];
+        function recur(root, target, path) {
+          if (!root) return;
+          path.push(root.val);
+          target -= root.val;
+
+          // 注意数组是引用
+          if (target === 0 && !root.left && !root.right) res.push([...path]);
+
+          recur(root.left, target, path);
+          recur(root.right, target, path);
+
+          // 回溯的时候要将路径最后一个出栈
+          path.pop();
+        }
+
+        recur(root, target, []);
+        return res;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var root = [5, 4, 8, 11, null, 13, 4, 7, 2, null, null, 5, 1],
+        target = 22;
+      var result = [
+        [5, 4, 11, 2],
+        [5, 8, 4, 5]
+      ];
+
+      // var root = [1,2,3], target = 5;
+      // var result = [];
+
+      // var root = [1,2], target = 0;
+      // var result = [];
+
+      // var root = [-2, null, -3],
+      //   target = -5;
+      // var result = [-2, -3];
+
+      var tree = buildTreeByArray([...root]);
+      console.log('tree = ', tree);
+      console.log('root = ', root);
+      console.log('target = ', target);
+      console.log('result = ', result);
+      console.log('pathSum = ', pathSum(tree, target));
+    </script>
+  </body>
+</html>
