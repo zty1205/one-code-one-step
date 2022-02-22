@@ -36,6 +36,10 @@ function buildTreeByArray(array, config = {}) {
       node.right = right;
       stack.push(left);
       stack.push(right);
+    } else {
+      stack.shift();
+      stack.push(null);
+      stack.push(null);
     }
   }
   return config.nodeMap ? { root, nodeMap } : root;
