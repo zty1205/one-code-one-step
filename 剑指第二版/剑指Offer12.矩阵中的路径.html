@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>剑指 Offer 12. 矩阵中的路径</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/ju-zhen-zhong-de-lu-jing-lcof/
+
+      // 给定一个 m x n 二维字符网格 board 和一个字符串单词 word 。如果 word 存在于网格中，返回 true ；否则，返回 false 。
+      // 单词必须按照字母顺序，通过相邻的单元格内的字母构成，其中“相邻”单元格是那些水平相邻或垂直相邻的单元格。同一个单元格内的字母不允许被重复使用。
+      // 提示：
+      // 1 <= board.length <= 200
+      // 1 <= board[i].length <= 200
+      // board 和 word 仅由大小写英文字母组成
+
+      /**
+       * @param {character[][]} board
+       * @param {string} word
+       * @return {boolean}
+       */
+
+      function find(board, i, j, word, idx) {
+        // 越界或字符不对
+        if (i < 0 || i > board.length - 1 || j < 0 || j > board[0].length - 1 || board[i][j] !== word[idx])
+          return false;
+        // 查找结束
+        if (idx === word.length - 1) return true;
+
+        // 已访问过
+        board[i][j] = 'vis';
+        // 从四个方向进行遍历
+        let res =
+          find(board, i + 1, j, word, idx + 1) ||
+          find(board, i - 1, j, word, idx + 1) ||
+          find(board, i, j + 1, word, idx + 1) ||
+          find(board, i, j - 1, word, idx + 1);
+
+        // 恢复或者也可以说回溯, 自身做visited数组，降低空间复杂度和逻辑复杂度
+        board[i][j] = word[idx];
+        return res;
+      }
+
+      // M,N 分别为矩阵行列大小， KK 为字符串 word 长度。
+      // 时间复杂度 O(3^KMN) 空间复杂度 O(K) 搜索过程中的递归深度不超过 K
+      var exist = function (board, word) {
+        for (let i = 0; i < board.length; i++) {
+          for (let j = 0; j < board[0].length; j++) {
+            if (find(board, i, j, word, 0)) {
+              return true;
+            }
+          }
+        }
+        return false;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var board = [
+          ['A', 'B', 'C', 'E'],
+          ['S', 'F', 'C', 'S'],
+          ['A', 'D', 'E', 'E']
+        ],
+        word = 'ABCCED';
+      var result = true;
+
+      var board = [
+          ['a', 'b'],
+          ['c', 'd']
+        ],
+        word = 'abcd';
+      var result = false;
+
+      console.log('board = ', board);
+      console.log('word = ', word);
+      console.log('result = ', result);
+      console.log('exist = ', exist(board, word));
+    </script>
+  </body>
+</html>
