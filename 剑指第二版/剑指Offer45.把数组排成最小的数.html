@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>剑指 Offer 45. 把数组排成最小的数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/ba-shu-zu-pai-cheng-zui-xiao-de-shu-lcof/
+
+      // 输入一个非负整数数组，把数组里所有数字拼接起来排成一个数，打印能拼接出的所有数字中最小的一个。
+      // 提示：
+      // 0 < nums.length <= 100
+      // 提示：
+      // 输出结果可能非常大，所以你需要返回一个字符串而不是整数
+      // 拼接起来的数字可能会有前导 0，最后结果不需要去掉前导 0
+
+      /**
+       * @param {number[]} nums
+       * @return {string}
+       */
+      var minNumber = function (nums) {};
+
+      // --- answer-1 ---
+
+      // 例如3，34 334 > 343 所以 35放在3后
+      // 34,30  3440 > 3034 所以要将30移到34前面
+      // 通过两两对比将数放到合适的位置，可以用任意排序
+      // 这里距离插入排序
+      // 时间复杂度O(n^2) 空间复杂度O(1)
+      var minNumber = function (nums = []) {
+        if (nums.length === 1) return String(nums[0]);
+
+        function needSwap(a, b) {
+          let s1 = `${a}${b}`;
+          let s2 = `${b}${a}`;
+          for (let i = 0; i < s1.length; i++) {
+            if (+s1[i] === +s2[i]) {
+              continue;
+            } else {
+              return +s1[i] > +s2[i];
+            }
+          }
+        }
+
+        for (let i = 1; i < nums.length; i++) {
+          let cur = nums[i];
+          let j = i;
+          while (j - 1 >= 0 && needSwap(nums[j - 1], cur)) {
+            nums[j] = nums[j - 1];
+            j--;
+          }
+          nums[j] = cur;
+        }
+        return nums.join('');
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 使用快排
+      var minNumber = function (nums = []) {
+        function compare(a, b) {
+          return +`${a}${b}` < +`${b}${a}`;
+        }
+        function _sort(arr, start, end) {
+          if (start >= end) return;
+          let l = start;
+          let r = end;
+          let guard = arr[start];
+          while (l < r) {
+            while (l < r && compare(guard, arr[r])) r--;
+            while (l < r && !compare(guard, arr[l])) l++;
+
+            [arr[l], arr[r]] = [arr[r], arr[l]];
+          }
+          [arr[l], arr[start]] = [arr[start], arr[l]];
+
+          _sort(arr, start, l - 1);
+          _sort(arr, l + 1, end);
+          return arr;
+        }
+
+        _sort(nums, 0, nums.length - 1);
+        return nums.join('');
+      };
+
+      // --- answer-2 ---
+
+      var nums = [10, 2];
+      var result = '102';
+
+      var nums = [3, 30, 34, 5, 9];
+      var result = '3033459';
+
+      var nums = [3, 5, 34, 30, 9];
+      // [3,5] 35 < 53
+      // [3,35,5]
+      // [30,3,35,5]
+      var result = '3033459';
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('minNumber = ', minNumber(nums));
+    </script>
+  </body>
+</html>
