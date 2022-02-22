@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>剑指 Offer 56 - II. 数组中数字出现的次数 II</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-ii-lcof/
+
+      // 在一个数组 nums 中除一个数字只出现一次之外，其他数字都出现了三次。请找出那个只出现一次的数字。
+      // 提示：
+      // 1 <= nums.length <= 10000
+      // 1 <= nums[i] < 2^31
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var singleNumber = function (nums) {};
+
+      // --- answer-1 ---
+
+      // 无空间复杂度限制 可以统计
+      var singleNumber = function (nums = []) {
+        let count = nums.reduce((pre, cur) => {
+          pre[cur] = (pre[cur] || 0) + 1;
+          return pre;
+        }, {});
+        for (let nums in count) {
+          if (count[k] === 1) {
+            return +k;
+          }
+        }
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 7 = 0 1 1 1
+      // 7 = 0 1 1 1
+      // 7 = 0 1 1 1
+      // 6 = 0 1 1 0
+      // s = 0 4 4 3 按位%3
+      // r = 0 1 1 0 = 6
+      // 按位相加后求余可得结果
+      var singleNumber = function (nums) {
+        let count = new Array(32).fill(0);
+        // 统计
+        for (let i = 0; i < nums.length; i++) {
+          for (let j = 0; j < 32; j++) {
+            count[j] += (nums[i] >> (31 - j)) & 1;
+          }
+        }
+        let res = 0;
+        let m = 3;
+        for (let i = 0; i < 32; i++) {
+          res = (res << 1) + (count[i] % m);
+        }
+        return res;
+      };
+
+      // --- answer-2 ---
+
+      var nums = [3, 4, 3, 3];
+      var result = 4;
+
+      var nums = [9, 1, 7, 9, 7, 9, 7];
+      var result = 1;
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('singleNumber = ', singleNumber(nums));
+    </script>
+  </body>
+</html>
