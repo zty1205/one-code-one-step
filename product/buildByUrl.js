@@ -141,7 +141,11 @@ function convertQuestionDomData(data) {
 
     switch (tag) {
       case 'PRE':
-        answer.push(text);
+        if (text.indexOf('输入') !== -1) {
+          answer.push(text);
+        } else {
+          questions.push(`${text}`);
+        }
         break;
       case 'P':
         if (text.indexOf('示例') !== -1) qusFinish = false;
