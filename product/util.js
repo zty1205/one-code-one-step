@@ -1,9 +1,9 @@
-const fs = require("fs");
-const path = require("path");
-const { FILE_TEMPLATE, WIN_GIT_HEADER } = require("./config");
-const Log = require("./log");
-const minimist = require("minimist");
-var shell = require("shelljs");
+const fs = require('fs');
+const path = require('path');
+const { FILE_TEMPLATE, WIN_GIT_HEADER, BUILD_PARAMS } = require('./config');
+const Log = require('./log');
+const minimist = require('minimist');
+var shell = require('shelljs');
 
 function getPlatform() {
   return process.platform;
@@ -18,7 +18,7 @@ function isHttpLink(url) {
 }
 
 function getTemplate(ext) {
-  return FILE_TEMPLATE[ext] || "";
+  return FILE_TEMPLATE[ext] || '';
 }
 
 function buildTemplate(ext, obj) {
@@ -51,7 +51,7 @@ function buildFileName(name, dist, ext) {
 
 function writeCodeFile(file, template) {
   Log.BuildFileStart(file);
-  fs.writeFileSync(file, template, { encoding: "utf-8" });
+  fs.writeFileSync(file, template, { encoding: 'utf-8' });
 
   prettierFile(file);
 
@@ -61,13 +61,10 @@ function writeCodeFile(file, template) {
 function writeMD(name, dist, ext) {
   Log.MDStart();
 
-  const mdContent = fs.readFileSync(path.resolve(__dirname, "../README.md"), {
-    encoding: "utf-8",
+  const mdContent = fs.readFileSync(path.resolve(__dirname, '../README.md'), {
+    encoding: 'utf-8'
   });
-  const regexp = new RegExp(
-    `- (.*)${dist}/(.*)\.[${Object.keys(FILE_TEMPLATE).join("|")}]\\)`,
-    "g"
-  );
+  const regexp = new RegExp(`- (.*)${dist}/(.*)\.[${Object.keys(FILE_TEMPLATE).join('|')}]\\)`, 'g');
   const matchRes = mdContent.match(regexp);
   if (!matchRes) return;
   const numList = matchRes.map(getNumberByName);
@@ -78,8 +75,8 @@ function writeMD(name, dist, ext) {
   const link = buildMdLink(name, dist, ext);
   const newContent = mdContent.replace(lastHtml, `${lastHtml}\n${link}`);
 
-  const mdFile = path.resolve(__dirname, "../README.md");
-  fs.writeFileSync(mdFile, newContent, { encoding: "utf-8" });
+  const mdFile = path.resolve(__dirname, '../README.md');
+  fs.writeFileSync(mdFile, newContent, { encoding: 'utf-8' });
 
   prettierFile(mdFile);
 
@@ -87,7 +84,7 @@ function writeMD(name, dist, ext) {
 
   return {
     link,
-    curNum,
+    curNum
   };
 }
 
@@ -112,23 +109,23 @@ function buildGitDelploy(files = [], dist) {
 
   let content = buildGitCmd(files, dist);
   switch (platform) {
-    case "win32":
-      fileName = "./deploy.ps1";
-      content =  WIN_GIT_HEADER + content 
+    case 'win32':
+      fileName = './deploy.ps1';
+      content = WIN_GIT_HEADER + content;
       break;
     default:
-      fileName = "./deploy.sh";
+      fileName = './deploy.sh';
       break;
   }
 
   fs.writeFileSync(path.resolve(__dirname, fileName), content, {
-    encoding: "utf-8",
+    encoding: 'utf-8'
   });
   Log.SHEnd();
 }
 
 function getNPMParams(val, defaults) {
-  return val === "false" ? false : val != null ? val : defaults;
+  return val === 'false' ? false : val != null ? val : defaults;
 }
 
 function handleNPMParamsArg(argv) {
@@ -140,19 +137,28 @@ function handleNPMParamsArg(argv) {
 }
 
 function getNPMBuildParams(key, defaults) {
-  try {
-    const npm_config_argv = JSON.parse(process.env.npm_config_argv);
-    const argv = minimist(npm_config_argv.original);
-    return key
-      ? getNPMParams(argv[key], defaults)
-      : handleNPMParamsArg(argv) || defaults;
-  } catch (err) {
-    console.error("getNPMBuildParams err = ", err);
+  let params = {};
+  if (process.env.npm_config_argv) {
+    try {
+      const npm_config_argv = JSON.parse(process.env.npm_config_argv);
+      params = minimist(npm_config_argv.original);
+    } catch (err) {
+      console.error('getNPMBuildParams err = ', err);
+    }
+  } else {
+    // npm 8.n的参数改成npm_config_[name]
+    for (let k in process.env) {
+      const ms = k.match(/npm_config_(.+)/);
+      if (ms) {
+        params[ms[1]] = process.env[ms[0]];
+      }
+    }
   }
+  return key ? getNPMParams(params[key], defaults) : handleNPMParamsArg(params) || defaults;
 }
 
-function getExt(filename = "") {
-  const li = filename.lastIndexOf(".");
+function getExt(filename = '') {
+  const li = filename.lastIndexOf('.');
   return li > 0 ? filename.substring(li + 1).toLowerCase() : null;
 }
 
@@ -172,5 +178,5 @@ module.exports = {
   writeCodeFile,
   buildGitDelploy,
   getNPMBuildParams,
-  getExt,
+  getExt
 };
