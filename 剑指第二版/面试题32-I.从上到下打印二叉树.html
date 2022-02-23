@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>面试题32 - I. 从上到下打印二叉树</title>
+  </head>
+  <body>
+    <script src="../helper/tree.js"></script>
+    <script>
+      // https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-lcof/
+
+      // 从上到下打印出二叉树的每个节点，同一层的节点按照从左到右的顺序打印。
+      //     3
+      //    / \
+      //   9  20
+      //     /  \
+      //    15   7
+      // 返回：
+      // [3,9,20,15,7]
+      // 提示：
+      // 提示：
+      // 节点总数 <= 1000
+
+      /**
+       * Definition for a binary tree node.
+       * function TreeNode(val) {
+       *     this.val = val;
+       *     this.left = this.right = null;
+       * }
+       */
+      /**
+       * @param {TreeNode} root
+       * @return {number[]}
+       */
+      var levelOrder = function (root) {};
+
+      // --- answer-1 ---
+
+      // --- answer-1 ---
+
+      // 基础的层次遍历
+      var levelOrder = function (root) {
+        if (root === null) return [];
+        const result = [];
+        const stack = [root];
+        while (stack.length) {
+          let node = stack.shift();
+          result.push(node.val);
+          node.left && stack.push(node.left);
+          node.right && stack.push(node.right);
+        }
+        return result;
+      };
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var root = [3, 9, 20, null, null, 15, 7];
+      var result = [3, 9, 20, 15, 7];
+      var tree = buildTreeByArray(root);
+
+      console.log('root = ', root);
+      console.log('result = ', result);
+      console.log('levelOrder = ', levelOrder(tree));
+    </script>
+  </body>
+</html>
