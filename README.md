@@ -321,6 +321,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [剑指 Offer32-II.从上到下打印二叉树 II.html](./剑指第二版/剑指Offer32-II.从上到下打印二叉树II.html)
 - [剑指 Offer33.二叉搜索树的后序遍历序列.html](./剑指第二版/剑指Offer33.二叉搜索树的后序遍历序列.html)
 - [剑指 Offer34.二叉树中和为某一值的路径.html](./剑指第二版/剑指Offer34.二叉树中和为某一值的路径.html)
+- [剑指 Offer38.字符串的排列.html](./剑指第二版/剑指Offer38.字符串的排列.html)
 - [剑指 Offer39.数组中出现次数超过一半的数字.html](./剑指第二版/剑指Offer39.数组中出现次数超过一半的数字.html)
 - [剑指 Offer40.最小的 k 个数.html](./剑指第二版/剑指Offer40.最小的k个数.html)
 - [剑指 Offer42.连续子数组的最大和.html](./剑指第二版/剑指Offer42.连续子数组的最大和.html)

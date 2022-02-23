@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>剑指 Offer 38. 字符串的排列</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/zi-fu-chuan-de-pai-lie-lcof/
+
+      // 输入一个字符串，打印出该字符串中字符的所有排列。
+      // 你可以以任意顺序返回这个字符串数组，但里面不能有重复元素。
+
+      /**
+       * @param {string} s
+       * @return {string[]}
+       */
+      var permutation = function (s) {};
+
+      // --- answer-1 ---
+
+      // 回溯
+      // 时间复杂度：O(n×n!)空间复杂度：O(n)
+      var permutation = function (s = '') {
+        if (s.length < 2) return [s];
+        const result = [];
+        // 数组可以做visited
+        let arr = s.split('');
+        function recur(len, str) {
+          if (len === 0) {
+            result.push(str);
+            return;
+          }
+          for (let i = 0; i < arr.length; i++) {
+            if (arr[i] === '') {
+              continue;
+            } else {
+              let c = arr[i];
+              // 标记已访问
+              arr[i] = '';
+              recur(len - 1, str + c);
+              // 回溯
+              arr[i] = c;
+            }
+          }
+        }
+        recur(s.length, '');
+        // 字符串可能存在重复字母 还需要排重下
+        return [...new Set(result)];
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 下一个排列
+      var permutation = function (s) {
+        const ret = [];
+        const arr = Array.from(s).sort();
+
+        const nextPermutation = (arr) => {
+          let i = arr.length - 2;
+          while (i >= 0 && arr[i] >= arr[i + 1]) {
+            i--;
+          }
+          if (i < 0) {
+            return false;
+          }
+          let j = arr.length - 1;
+          while (j >= 0 && arr[i] >= arr[j]) {
+            j--;
+          }
+          swap(arr, i, j);
+          reverse(arr, i + 1);
+          return true;
+        };
+
+        const swap = (arr, i, j) => {
+          const temp = arr[i];
+          arr[i] = arr[j];
+          arr[j] = temp;
+        };
+
+        const reverse = (arr, start) => {
+          let left = start,
+            right = arr.length - 1;
+          while (left < right) {
+            swap(arr, left, right);
+            left++;
+            right--;
+          }
+        };
+
+        do {
+          ret.push(arr.join(''));
+        } while (nextPermutation(arr));
+        const size = ret.length;
+        const retArr = new Array(size).fill(0);
+        for (let i = 0; i < size; i++) {
+          retArr[i] = ret[i];
+        }
+        return retArr;
+      };
+
+      // --- answer-2 ---
+
+      var s = 'abc';
+      var result = ['abc', 'acb', 'bac', 'bca', 'cab', 'cba'];
+
+      var s = 'ab';
+      var result = ['ab', 'ba'];
+
+      // var s = 'aab';
+      // var result = ['aba', 'aab', 'baa'];
+
+      console.log('s = ', s);
+      console.log('result = ', result);
+      console.log('permutation = ', permutation(s));
+    </script>
+  </body>
+</html>
