@@ -329,6 +329,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [剑指 Offer39.数组中出现次数超过一半的数字.html](./剑指第二版/剑指Offer39.数组中出现次数超过一半的数字.html)
 - [剑指 Offer40.最小的 k 个数.html](./剑指第二版/剑指Offer40.最小的k个数.html)
 - [剑指 Offer42.连续子数组的最大和.html](./剑指第二版/剑指Offer42.连续子数组的最大和.html)
+- [剑指 Offer44.数字序列中某一位的数字.html](./剑指第二版/剑指Offer44.数字序列中某一位的数字.html)
 - [剑指 Offer45.把数组排成最小的数.html](./剑指第二版/剑指Offer45.把数组排成最小的数.html)
 - [剑指 Offer50.第一个只出现一次的字符.html](./剑指第二版/剑指Offer50.第一个只出现一次的字符.html)
 - [剑指 Offer52.两个链表的第一个公共节点.html](./剑指第二版/剑指Offer52.两个链表的第一个公共节点.html)

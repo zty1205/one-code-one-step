@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>剑指 Offer 44. 数字序列中某一位的数字</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/shu-zi-xu-lie-zhong-mou-yi-wei-de-shu-zi-lcof/
+
+      // 数字以0123456789101112131415…的格式序列化到一个字符序列中。在这个序列中，第5位（从下标0开始计数）是5，第13位是1，第19位是4，等等。
+      // 请写一个函数，求任意第n位对应的数字。
+      // 提示：
+      // 0 <= n < 2^31
+
+      /**
+       * @param {number} n
+       * @return {number}
+       */
+      var findNthDigit = function (n) {};
+
+      // --- answer-1 ---
+
+      // 1个1位 99-10+1 = 90个2位 + 999-100+1=900个3位
+      // 10 180+10=190 190+2700=2890
+      //
+      // 10
+      // 1   0
+      // 10  11
+      //
+      // 100
+      // 1   0   0
+      // 190 191 192
+      // 数学题
+      var findNthDigit = function (n) {
+        if (n < 10) return n;
+        let s = 1;
+        let base = 1; // 10 的 n 次方
+        let digit = 1; // 几位数
+        while (s < n) {
+          s += base * 9 * digit;
+          base *= 10;
+          digit++;
+        }
+        digit--;
+        base /= 10;
+        s -= base * 9 * digit;
+
+        // n - s / digit 就是从 100x 开始的第一位数
+        let num = Math.floor((n - s) / digit) + base;
+        let idx = (n - s) % digit;
+
+        return `${num}`[idx];
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // n用来减
+      var findNthDigit = function (n) {
+        let digit = 1;
+        let start = 1;
+        let count = 9;
+        while (n > count) {
+          n -= count;
+          digit += 1;
+          start *= 10;
+          count = digit * start * 9;
+        }
+        let num = start + (n - 1) / digit;
+        return `${num}`[(n - 1) % digit];
+      };
+
+      // --- answer-2 ---
+
+      // var n = 3;
+      // var result = 3;
+
+      // var n = 11;
+      // var result = 0;
+
+      // var n = 12;
+      // var result = 1;
+
+      // var n = 13;
+      // var result = 1;
+
+      var n = 998;
+      var result = 6;
+
+      var n = 9998;
+      var result = 2;
+
+      console.log('n = ', n);
+      console.log('result = ', result);
+      console.log('findNthDigit = ', findNthDigit(n));
+    </script>
+  </body>
+</html>
