@@ -319,6 +319,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [剑指 Offer28.对称的二叉树.html](./剑指第二版/剑指Offer28.对称的二叉树.html)
 - [剑指 Offer29.顺时针打印矩阵.html](./剑指第二版/剑指Offer29.顺时针打印矩阵.html)
 - [剑指 Offer30.包含 min 函数的栈.html](./剑指第二版/剑指Offer30.包含min函数的栈.html)
+- [剑指 Offer31.栈的压入、弹出序列.html](./剑指第二版/剑指Offer31.栈的压入、弹出序列.html)
 - [面试题 32-I.从上到下打印二叉树.html](./剑指第二版/面试题32-I.从上到下打印二叉树.html)
 - [剑指 Offer32-II.从上到下打印二叉树 II.html](./剑指第二版/剑指Offer32-II.从上到下打印二叉树II.html)
 - [剑指 Offer32-III.从上到下打印二叉树 III.html](./剑指第二版/剑指Offer32-III.从上到下打印二叉树III.html)

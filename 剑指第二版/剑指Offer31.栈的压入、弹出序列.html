@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>剑指 Offer 31. 栈的压入、弹出序列</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/zhan-de-ya-ru-dan-chu-xu-lie-lcof/
+
+      // 输入两个整数序列，第一个序列表示栈的压入顺序，请判断第二个序列是否为该栈的弹出顺序。假设压入栈的所有数字均不相等。例如，序列 {1,2,3,4,5} 是某栈的压栈序列，序列 {4,5,3,2,1} 是该压栈序列对应的一个弹出序列，但 {4,3,5,1,2} 就不可能是该压栈序列的弹出序列。
+      // 提示：
+      // 0 <= pushed.length == popped.length <= 1000
+      // 0 <= pushed[i], popped[i] < 1000
+      // pushed 是 popped 的排列。
+
+      /**
+       * @param {number[]} pushed
+       * @param {number[]} popped
+       * @return {boolean}
+       */
+      var validateStackSequences = function (pushed, popped) {};
+
+      // --- answer-1 ---
+
+      // 模拟
+      // 时间复杂度 O(N) 空间复杂度 O(N)
+      var validateStackSequences = function (pushed = [], popped = []) {
+        if (pushed.length === 0) return true;
+
+        let left = 0;
+        let right = 0;
+        let stack = [];
+
+        let count = pushed.length;
+        while (count--) {
+          debugger;
+          let popVal = popped[right];
+          while (pushed[left] != popVal && left < pushed.length) {
+            stack.push(pushed[left]);
+            left++;
+          }
+          left++;
+          right++;
+
+          while (stack.length && stack[stack.length - 1] === popped[right]) {
+            stack.pop();
+            right++;
+          }
+          if (left > pushed.length - 1) {
+            if (stack.length && stack[stack.length - 1] !== popped[right]) return false;
+            if (right === popped.length) return true;
+          }
+        }
+
+        return true;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // while true 太危险  优化下
+      // 逻辑简单化
+      var validateStackSequences = function (pushed = [], popped = []) {
+        let stack = [];
+        let i = 0;
+        for (let num of pushed) {
+          stack.push(num);
+          // 每一次push后都去看看能不能pop几个
+          while (stack.length && stack[stack.length - 1] === popped[i]) {
+            stack.pop();
+            i++;
+          }
+        }
+        return !stack.length;
+      };
+
+      // --- answer-2 ---
+
+      var pushed = [1, 2, 3, 4, 5],
+        popped = [4, 5, 3, 2, 1];
+      var result = true;
+      // 解释：我们可以按以下顺序执行：
+
+      var pushed = [1, 2, 3, 4, 5],
+        popped = [4, 3, 5, 1, 2];
+      var result = false;
+      // 解释：1 不能在 2 之前弹出。
+
+      var pushed = [8, 9, 2, 3, 7, 0, 5, 4, 6, 1];
+      popped = [6, 8, 2, 1, 3, 9, 0, 7, 4, 5];
+      var result = false;
+
+      console.log('pushed = ', pushed);
+      console.log('popped = ', popped);
+      console.log('result = ', result);
+      console.log('validateStackSequences = ', validateStackSequences(pushed, popped));
+    </script>
+  </body>
+</html>
