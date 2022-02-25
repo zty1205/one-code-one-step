@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>剑指 Offer 35. 复杂链表的复制</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/fu-za-lian-biao-de-fu-zhi-lcof/
+
+      // 请实现 copyRandomList 函数，复制一个复杂链表。在复杂链表中，每个节点除了有一个 next 指针指向下一个节点，还有一个 random 指针指向链表中的任意节点或者 null。
+      // 提示：
+      // -10000 <= Node.val <= 10000
+      // Node.random 为空（null）或指向链表中的节点。
+      // 节点数目不超过 1000 。
+
+      /**
+       * // Definition for a Node.
+       * function Node(val, next, random) {
+       *    this.val = val;
+       *    this.next = next;
+       *    this.random = random;
+       * };
+       */
+      /**
+       * @param {Node} head
+       * @return {Node}
+       */
+      var copyRandomList = function (head) {};
+
+      function Node(val, next, random) {
+        this.val = val;
+        this.next = next;
+        this.random = random;
+      }
+
+      // --- answer-1 ---
+
+      // 递归
+      // 老节点 映射 新节点
+      // 时间复杂度：O(n)空间复杂度：O(n)
+      var copyRandomList = function (head) {
+        let map = new WeakMap();
+        function copy(head) {
+          if (!head) return null;
+          if (!map.has(head)) {
+            const node = new Node(head.val, null, null);
+            map.set(head, node);
+            node.next = copy(head.next);
+            node.random = copy(head.random);
+          }
+          return map.get(head);
+        }
+        return copy(head);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 迭代
+      // 将A->B->C 拆成A->_A->B->_B->C->_C 每个节点后面放复制节点
+      // 将每个节点.random->NODE 往后移动以为 ->_NODE
+      // 将复制节点的.random->_NODE
+      var copyRandomList = function (head) {
+        if (head === null) {
+          return null;
+        }
+        for (let node = head; node !== null; node = node.next.next) {
+          const nodeNew = new Node(node.val, node.next, null);
+          node.next = nodeNew;
+        }
+        for (let node = head; node !== null; node = node.next.next) {
+          const nodeNew = node.next;
+          nodeNew.random = node.random !== null ? node.random.next : null;
+        }
+        const headNew = head.next;
+        for (let node = head; node !== null; node = node.next) {
+          const nodeNew = node.next;
+          node.next = node.next.next;
+          nodeNew.next = nodeNew.next !== null ? nodeNew.next.next : null;
+        }
+        return headNew;
+      };
+
+      // --- answer-2 ---
+
+      var head = [
+        [7, null],
+        [13, 0],
+        [11, 4],
+        [10, 2],
+        [1, 0]
+      ];
+      var result = [
+        [7, null],
+        [13, 0],
+        [11, 4],
+        [10, 2],
+        [1, 0]
+      ];
+
+      // var head = [
+      //   [1, 1],
+      //   [2, 1]
+      // ];
+      // var result = [
+      //   [1, 1],
+      //   [2, 1]
+      // ];
+
+      // var head = [
+      //   [3, null],
+      //   [3, 0],
+      //   [3, null]
+      // ];
+      // var result = [
+      //   [3, null],
+      //   [3, 0],
+      //   [3, null]
+      // ];
+
+      // var head = [];
+      // var result = [];
+      // 解释：给定的链表为空（空指针），因此返回 null。
+
+      function buildLinkNode(head = []) {
+        if (!head || !head.length) return null;
+        let h = {
+          next: undefined,
+          random: undefined
+        };
+        let p = h;
+        let nodeList = [];
+        for (let n of head) {
+          let [val, idx] = n;
+          let node = new Node(val, null, idx);
+          p.next = node;
+          nodeList.push(node);
+          p = p.next;
+        }
+        p = h.next;
+        while (p) {
+          if (p.random != null) {
+            p.random = nodeList[p.random];
+          }
+          p = p.next;
+        }
+        return h.next;
+      }
+
+      var linkedNode = buildLinkNode(head);
+
+      console.log('head = ', head);
+      console.log('result = ', result);
+      console.log('linkedNode = ', linkedNode);
+      console.log('copyRandomList = ', copyRandomList(linkedNode));
+    </script>
+  </body>
+</html>
