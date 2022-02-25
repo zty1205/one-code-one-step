@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>剑指 Offer 48. 最长不含重复字符的子字符串</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/zui-chang-bu-han-zhong-fu-zi-fu-de-zi-zi-fu-chuan-lcof/
+
+      // 请从字符串中找出一个最长的不包含重复字符的子字符串，计算该最长子字符串的长度。
+      // 提示：
+      // s.length <= 40000
+
+      /**
+       * @param {string} s
+       * @return {number}
+       */
+      var lengthOfLongestSubstring = function (s) {};
+
+      // --- answer-1 ---
+
+      // 滑动窗口
+      var lengthOfLongestSubstring = function (s) {
+        if (s.length === 0) return 0;
+        let start = 0;
+        let map = {};
+        let max = 1;
+        let i = 0;
+        for (; i < s.length; i++) {
+          let char = s[i];
+          if (char in map && map[char] >= start) {
+            max = Math.max(max, i - start);
+            start = map[char] + 1;
+          }
+          map[char] = i; // 记录下标
+        }
+        max = Math.max(max, i - start); // 整个字符串无重复字符
+        return max;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // dp[j] 代表以字符 s[j] 为结尾的 “最长不重复子字符串” 的长度。
+      // 固定右边界 j ，设字符 s[j]左边距离最近的相同字符为 s[i]，即 s[i] = s[j]
+      // 当 i < 0 ，即 s[j] 左边无相同字符，则 dp[j] = dp[j-1] + 1；
+      // 当 dp[j−1]<j−i ，说明字符 s[i] 在子字符串 dp[j-1] 区间之外 ，则 dp[j] = dp[j - 1] + 1 ；
+      // 当 dp[j−1]≥j−i ，说明字符 s[i] 在子字符串 dp[j-1] 区间之中 ，则 dp[j] 的左边界由 s[i] 决定，即 dp[j] = j - i ；
+
+      var lengthOfLongestSubstring = function (s) {
+        let map = {};
+        let max = 0;
+        let tmp = 0;
+        for (let j = 0; j < s.length; j++) {
+          let i = map[s[j]] || -1;
+          map[s[j]] = j;
+          tmp = tmp < j - i ? tmp + 1 : j - i; // dp[j - 1] -> dp[j]
+          max = Math.max(max, tmp); // max(dp[j - 1], dp[j])
+        }
+        return max;
+      };
+
+      // --- answer-2 ---
+
+      var s = 'abcabcbb';
+      var result = 3;
+      // 解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
+
+      var s = 'bbbbb';
+      var result = 1;
+      // 解释: 因为无重复字符的最长子串是 "b"，所以其长度为 1。
+
+      var s = 'pwwkew';
+      var result = 3;
+      // 解释: 因为无重复字符的最长子串是 "wke"，所以其长度为 3。
+
+      var s = ' ';
+      var result = 1;
+
+      var s = 'au';
+      var result = 2;
+
+      console.log('s = ', s);
+      console.log('result = ', result);
+      console.log('lengthOfLongestSubstring = ', lengthOfLongestSubstring(s));
+    </script>
+  </body>
+</html>
