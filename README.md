@@ -363,6 +363,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [Boyer-Moore 投票算法.html](./algorithm/Boyer-Moore投票算法.html)
 - [遍历树及树相关算法.html](./algorithm/遍历树及树相关算法.html)
 - [查找算法.html](./algorithm/查找算法.html)
+- [位运算.html](./algorithm/位运算.html)
 
 <br/>
 
