@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>剑指 Offer 59 - II. 队列的最大值</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script>
+      // https://leetcode-cn.com/problems/dui-lie-de-zui-da-zhi-lcof/
+
+      // 请定义一个队列并实现函数 max_value 得到队列里的最大值，要求函数max_value、push_back 和 pop_front 的均摊时间复杂度都是O(1)。
+      // 若队列为空，pop_front 和 max_value 需要返回 -1
+      // 提示：
+      // 1 <= push_back,pop_front,max_value的总操作数 <= 10000
+      // 1 <= value <= 10^5
+
+      var MaxQueue = function () {};
+      /**
+       * @return {number}
+       */
+      MaxQueue.prototype.max_value = function () {};
+      /**
+       * @param {number} value
+       * @return {void}
+       */
+      MaxQueue.prototype.push_back = function (value) {};
+      /**
+       * @return {number}
+       */
+      MaxQueue.prototype.pop_front = function () {};
+
+      // --- answer-1 ---
+
+      var MaxQueue = function () {
+        this.queue = []; // 正常队列
+        this.descending = []; // 保持队列单调递减
+      };
+
+      MaxQueue.prototype.max_value = function () {
+        return !this.descending.length ? -1 : this.descending[0];
+      };
+
+      MaxQueue.prototype.push_back = function (value) {
+        this.queue.push(value);
+        while (this.descending.length && this.descending[this.descending.length - 1] < value) {
+          this.descending.pop();
+        }
+        this.descending.push(value);
+      };
+
+      MaxQueue.prototype.pop_front = function () {
+        if (!this.queue.length) return -1;
+        const result = this.queue.shift();
+        if (result == this.descending[0]) this.descending.shift();
+        return result;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      // var value =  ;
+      // ["MaxQueue","push_back","push_back","max_value","pop_front","max_value"];
+      // [[],[1],[2],[],[],[]]
+
+      // var value =  ;
+      // ["MaxQueue","pop_front","max_value"];
+      // [[],[],[]]
+
+      var maxQueue = new MaxQueue();
+
+      maxQueue.push_back(5);
+      console.log('push_back 5 = ', deepClone(maxQueue));
+
+      maxQueue.push_back(3);
+      console.log('push_back 3 = ', deepClone(maxQueue));
+
+      maxQueue.push_back(2);
+      console.log('push_back 2 = ', deepClone(maxQueue));
+
+      maxQueue.push_back(1);
+      console.log('push_back 1 = ', deepClone(maxQueue));
+
+      maxQueue.push_back(4);
+      console.log('push_back 4 = ', deepClone(maxQueue));
+
+      console.log('max_value  = ', maxQueue.max_value());
+
+      maxQueue.pop_front();
+      console.log('pop_front  = ', deepClone(maxQueue));
+
+      console.log('max_value  = ', maxQueue.max_value());
+    </script>
+  </body>
+</html>

@@ -347,6 +347,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [剑指 Offer57.和为 s 的两个数字.html](./剑指第二版/剑指Offer57.和为s的两个数字.html)
 - [剑指 Offer58-I.翻转单词顺序.html](./剑指第二版/剑指Offer58-I.翻转单词顺序.html)
 - [剑指 Offer58-II.左旋转字符串.html](./剑指第二版/剑指Offer58-II.左旋转字符串.html)
+- [剑指 Offer59-II.队列的最大值.html](./剑指第二版/剑指Offer59-II.队列的最大值.html)
 - [剑指 Offer61.扑克牌中的顺子.html](./剑指第二版/剑指Offer61.扑克牌中的顺子.html)
 - [剑指 Offer62.圆圈中最后剩下的数字.html](./剑指第二版/剑指Offer62.圆圈中最后剩下的数字.html)
 - [剑指 Offer64.求 1+2+…+n.html](./剑指第二版/剑指Offer64.求1+2+…+n.html)
