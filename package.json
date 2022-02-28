@@ -28,7 +28,8 @@
     "test": "react-app-rewired test",
     "file": "node product/index.js",
     "deploy": "sh product/deploy.sh",
-    "deploy:win": "powershell product\\deploy.ps1"
+    "deploy:win": "powershell product\\deploy.ps1",
+    "count": "node product/count.js"
   },
   "eslintConfig": {
     "extends": "react-app"
