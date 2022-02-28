@@ -332,6 +332,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [剑指 Offer42.连续子数组的最大和.html](./剑指第二版/剑指Offer42.连续子数组的最大和.html)
 - [剑指 Offer44.数字序列中某一位的数字.html](./剑指第二版/剑指Offer44.数字序列中某一位的数字.html)
 - [剑指 Offer45.把数组排成最小的数.html](./剑指第二版/剑指Offer45.把数组排成最小的数.html)
+- [剑指 Offer46.把数字翻译成字符串.html](./剑指第二版/剑指Offer46.把数字翻译成字符串.html)
 - [剑指 Offer48.最长不含重复字符的子字符串.html](./剑指第二版/剑指Offer48.最长不含重复字符的子字符串.html)
 - [剑指 Offer49.丑数.html](./剑指第二版/剑指Offer49.丑数.html)
 - [剑指 Offer50.第一个只出现一次的字符.html](./剑指第二版/剑指Offer50.第一个只出现一次的字符.html)
