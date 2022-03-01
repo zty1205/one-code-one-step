@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>剑指 Offer 20. 表示数值的字符串</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/biao-shi-shu-zhi-de-zi-fu-chuan-lcof/
+
+      // 请实现一个函数用来判断字符串是否表示数值（包括整数和小数）。
+      // 数值（按顺序）可以分成以下几个部分：
+      // 提示：
+      // 若干空格
+      // 一个 小数 或者 整数
+      // （可选）一个 'e' 或 'E' ，后面跟着一个 整数
+      // 若干空格
+      // 小数（按顺序）可以分成以下几个部分：
+      // 提示：
+      // （可选）一个符号字符（'+' 或 '-'）
+      // 下述格式之一：
+      // 至少一位数字，后面跟着一个点 '.'
+      // 至少一位数字，后面跟着一个点 '.' ，后面再跟着至少一位数字
+      // 一个点 '.' ，后面跟着至少一位数字
+      // 整数（按顺序）可以分成以下几个部分：
+      // 提示：
+      // （可选）一个符号字符（'+' 或 '-'）
+      // 至少一位数字
+      // 部分数值列举如下：
+      // 提示：
+      // ["+100", "5e2", "-123", "3.1416", "-1E-16", "0123"]
+      // 部分非数值列举如下：
+      // 提示：
+      // ["12e", "1a3.14", "1.2.3", "+-5", "12e+5.4"]
+      // 提示：
+      // 1 <= s.length <= 20
+      // s 仅含英文字母（大写和小写），数字（0-9），加号 '+' ，减号 '-' ，空格 ' ' 或者点 '.' 。
+
+      /**
+       * @param {string} s
+       * @return {boolean}
+       */
+      var isNumber = function (s) {};
+
+      // --- answer-1 ---
+
+      // 遍历 分析 需要考虑的很全
+      var isNumber = function (s = '') {
+        s = s.trim();
+        if (!s) return false;
+
+        let hasSign = false;
+        let hasNum = false;
+        let hasPoint = false;
+        let hasE = false;
+
+        for (let i = 0; i < s.length; i++) {
+          let char = s[i].toLocaleLowerCase();
+          switch (char) {
+            case 'e':
+              // e只能由一个 且前后必须包含数字 前面为数字或数字..，后面为+-数字或数字
+              if (hasE) return false;
+              if (!/\d/.test(s[i - 1]) && !/\d\./.test(s[i - 2] + s[i - 1])) return false;
+              if (!/\d/.test(s[i + 1]) && !/[+-]\d/.test(s[i + 1] + s[i + 2])) return false;
+              hasE = true;
+              // e 前后可以各有符号位
+              hasSign = false;
+              break;
+            case '.':
+              // . 只能由一个且 前面为数字或无或符合，后面为数字或e数字
+              // e后面不能为浮点数
+              if (hasPoint || hasE) return false;
+              if (s[i - 1] && !/[+-\d]/.test(s[i - 1])) return false;
+              if (
+                s[i + 1] &&
+                !/[+-\d]/.test(s[i + 1]) &&
+                !/e\d/.test(s[i + 1] + s[i + 2]) &&
+                !/e[-+]\d/.test(s[i + 1] + s[i + 2] + s[i + 3])
+              )
+                return false;
+              hasPoint = true;
+              break;
+            case '+':
+            case '-':
+              // 符号位只能在第一位或是e的后面
+              if (hasSign) return false;
+              if (s !== 0 && !/[eE]/.test(s[i - 1])) return false;
+              hasSign = true;
+              break;
+            case ' ':
+              // 数中间不能有空格
+              return false;
+              break;
+            default:
+              if (/\d/.test(char)) {
+                // 数字必须包含至少一个数字
+                !hasNum && (hasNum = true);
+              } else {
+                // 数字不能包含字母
+                return false;
+              }
+              break;
+          }
+        }
+        if (!hasNum) return false;
+        return true;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 有限状态自动机
+      var isNumber = function (s = '') {
+        const State = {
+          STATE_INITIAL: 0,
+          STATE_INT_SIGN: 1,
+          STATE_INTEGER: 2,
+          STATE_POINT: 3,
+          STATE_POINT_WITHOUT_INT: 4,
+          STATE_FRACTION: 5,
+          STATE_EXP: 6,
+          STATE_EXP_SIGN: 7,
+          STATE_EXP_NUMBER: 8,
+          STATE_END: 9
+        };
+        const CharType = {
+          CHAR_NUMBER: 0,
+          CHAR_EXP: 1,
+          CHAR_POINT: 2,
+          CHAR_SIGN: 3,
+          CHAR_SPACE: 4,
+          CHAR_ILLEGAL: 5
+        };
+
+        const transfer = {
+          [State.STATE_INITIAL]: {
+            [CharType.CHAR_SPACE]: State.STATE_INITIAL,
+            [CharType.CHAR_NUMBER]: State.STATE_INTEGER,
+            [CharType.CHAR_POINT]: State.STATE_POINT_WITHOUT_INT,
+            [CharType.CHAR_SIGN]: State.STATE_INT_SIGN
+          },
+          [State.STATE_INT_SIGN]: {
+            [CharType.CHAR_NUMBER]: State.STATE_INTEGER,
+            [CharType.CHAR_POINT]: State.STATE_POINT_WITHOUT_INT
+          },
+          [State.STATE_INTEGER]: {
+            [CharType.CHAR_NUMBER]: State.STATE_INTEGER,
+            [CharType.CHAR_EXP]: State.STATE_EXP,
+            [CharType.CHAR_POINT]: State.STATE_POINT,
+            [CharType.CHAR_SPACE]: State.STATE_END
+          },
+          [State.STATE_POINT]: {
+            [CharType.CHAR_NUMBER]: State.STATE_FRACTION,
+            [CharType.CHAR_EXP]: State.STATE_EXP,
+            [CharType.CHAR_SPACE]: State.STATE_END
+          },
+          [State.STATE_POINT_WITHOUT_INT]: {
+            [CharType.CHAR_NUMBER]: State.STATE_FRACTION
+          },
+          [State.STATE_FRACTION]: {
+            [CharType.CHAR_NUMBER]: State.STATE_FRACTION,
+            [CharType.CHAR_EXP]: State.STATE_EXP,
+            [CharType.CHAR_SPACE]: State.STATE_END
+          },
+          [State.STATE_EXP]: {
+            [CharType.CHAR_NUMBER]: State.STATE_EXP_NUMBER,
+            [CharType.CHAR_SIGN]: State.STATE_EXP_SIGN
+          },
+          [State.STATE_EXP_SIGN]: {
+            [CharType.CHAR_NUMBER]: State.STATE_EXP_NUMBER
+          },
+          [State.STATE_EXP_NUMBER]: {
+            [CharType.CHAR_NUMBER]: State.STATE_EXP_NUMBER,
+            [CharType.CHAR_SPACE]: State.STATE_END
+          },
+          [State.STATE_END]: {
+            [CharType.CHAR_SPACE]: State.STATE_END
+          }
+        };
+
+        function toCharType(ch = '') {
+          if (/\d/.test(ch)) {
+            return CharType.CHAR_NUMBER;
+          } else if (ch.toLocaleLowerCase() === 'e') {
+            return CharType.CHAR_EXP;
+          } else if (ch === '.') {
+            return CharType.CHAR_POINT;
+          } else if (ch === '+' || ch === '-') {
+            return CharType.CHAR_SIGN;
+          } else if (ch === ' ') {
+            return CharType.CHAR_SPACE;
+          } else {
+            return CharType.CHAR_ILLEGAL;
+          }
+        }
+
+        let st = State.STATE_INITIAL;
+        for (let ch of s) {
+          let type = toCharType(ch);
+          if (!(type in transfer[st])) {
+            return false;
+          }
+          st = transfer[st][type];
+        }
+        return [
+          State.STATE_INTEGER,
+          State.STATE_POINT,
+          State.STATE_FRACTION,
+          State.STATE_EXP_NUMBER,
+          State.STATE_END
+        ].some((x) => x === st);
+      };
+
+      // --- answer-2 ---
+
+      var s = '0';
+      var result = true;
+
+      var s = 'e';
+      var result = false;
+
+      var s = '.';
+      var result = false;
+
+      var s = '   .1  ';
+      var result = true;
+
+      var s = '   e.1  ';
+      var result = false;
+
+      var s = '   +e.1  ';
+      var result = false;
+
+      var s = '0e';
+      var result = false;
+
+      var s = '0e-';
+      var result = false;
+
+      var s = '1e1';
+      var result = true;
+
+      var s = '1e-1';
+      var result = true;
+
+      var s = '-1E-16';
+      var result = true;
+
+      var s = '46.e3';
+      var result = true;
+
+      var s = '3.';
+      var result = true;
+
+      var s = '6e6.5';
+      var result = true;
+
+      var s = '32.e-80123';
+      var result = true;
+
+      console.log('s = ', s);
+      console.log('result = ', result);
+      console.log('isNumber = ', isNumber(s));
+    </script>
+  </body>
+</html>

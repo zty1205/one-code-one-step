@@ -310,6 +310,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [剑指 Offer16.数值的整数次方.html](./剑指第二版/剑指Offer16.数值的整数次方.html)
 - [剑指 Offer17.打印从 1 到最大的 n 位数.html](./剑指第二版/剑指Offer17.打印从1到最大的n位数.html)
 - [剑指 Offer18.删除链表的节点.html](./剑指第二版/剑指Offer18.删除链表的节点.html)
+- [剑指 Offer20.表示数值的字符串.html](./剑指第二版/剑指Offer20.表示数值的字符串.html)
 - [剑指 Offer21.调整数组顺序使奇数位于偶数前面.html](./剑指第二版/剑指Offer21.调整数组顺序使奇数位于偶数前面.html)
 - [剑指 Offer22.链表中倒数第 k 个节点.html](./剑指第二版/剑指Offer22.链表中倒数第k个节点.html)
 - [剑指 Offer24.反转链表.html](./剑指第二版/剑指Offer24.反转链表.html)
