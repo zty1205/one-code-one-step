@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>剑指 Offer 60. n个骰子的点数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/nge-tou-zi-de-dian-shu-lcof/
+
+      // 把n个骰子扔在地上，所有骰子朝上一面的点数之和为s。输入n，打印出s的所有可能的值出现的概率。
+      // 你需要用一个浮点数数组返回答案，其中第 i 个元素代表这 n 个骰子所能掷出的点数集合中第 i 小的那个的概率。
+
+      /**
+       * @param {number} n
+       * @return {number[]}
+       */
+
+      var dicesProbability = function (n) {};
+
+      // --- answer-1 ---
+
+      // 解题为和为m的n个骰子有几种情况
+      // 动态规划的公式 f(n, m) = f(n-1, m-1) + f(n-1, m-2), ... f(n-2, m-6)
+      // 可以对比下跳台阶问题
+
+      // 时间复杂度 O(n*n) =  O(nm) 空间复杂度 O(nm)
+      var dicesProbability = function (n) {
+        const BASE = 6;
+        if (n === 1) {
+          let radio = 1 / BASE;
+          return [radio, radio, radio, radio, radio, radio];
+        }
+        const max = BASE * n;
+        // 辅助数组
+        let dp = Array.from({ length: n }, (v, k) => Array.from({ length: max }, () => 0));
+
+        // n=1的边界处理
+        for (let j = 0; j < BASE; j++) {
+          dp[0][j] = 1;
+        }
+
+        for (let i = 1; i < n; i++) {
+          for (let j = i; j < (i + 1) * BASE; j++) {
+            let sum = 0;
+            let k = 1;
+            while (j - k >= 0 && k <= BASE) {
+              sum += dp[i - 1][j - k];
+              k++;
+            }
+            dp[i][j] = sum;
+          }
+        }
+
+        let arr = dp[n - 1];
+        let res = [];
+        const power = Math.pow(BASE, n);
+        for (let i = n - 1; i < max; i++) {
+          res.push(arr[i] / power);
+        }
+        return res;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // dp[n][m] 代表前 n 个骰子的点数和 m 的概率，并执行状态转移。而由于 dp[n] 仅由 dp[n-1] 递推得出，为降低空间复杂度，只建立两个一维数组 dp, tmp 交替前进即可。
+      var dicesProbability = function (n) {
+        const BASE = 6;
+        let dp = new Array(BASE).fill(1 / 6);
+        for (let i = 2; i <= n; i++) {
+          let tmp = new Array(5 * i + 1).fill(0);
+          for (let j = 0; j < dp.length; j++) {
+            for (let k = 0; k < BASE; k++) {
+              tmp[j + k] += dp[j] / BASE;
+            }
+          }
+          dp = tmp;
+        }
+        return dp;
+      };
+
+      // --- answer-2 ---
+
+      var n = 1;
+      var result = [0.16667, 0.16667, 0.16667, 0.16667, 0.16667, 0.16667];
+      // 1/6 * [1,1,1,1,1,1] // 1种组合情况
+
+      var n = 2;
+      var result = [0.02778, 0.05556, 0.08333, 0.11111, 0.13889, 0.16667, 0.13889, 0.11111, 0.08333, 0.05556, 0.02778];
+      // 1/36 * [1,2,3,4]
+      // 和为2：1+1
+      // 和为3：1+2, 2+1
+      // 和为4：1+3，3+1，2+2
+      // 和未5：1+4，4+1，2+3，3+2
+
+      var n = 3;
+      var result = [
+        0.00463, 0.01389, 0.02778, 0.0463, 0.06944, 0.09722, 0.11574, 0.125, 0.125, 0.11574, 0.09722, 0.06944, 0.0463,
+        0.02778, 0.01389, 0.00463
+      ];
+
+      console.log('n = ', n);
+      console.log('result = ', result);
+
+      console.log(
+        'dicesProbability = ',
+        dicesProbability(n).map((x) => Number(x.toFixed(5)))
+      );
+      console.log('dicesProbability = ', dicesProbability(n));
+    </script>
+  </body>
+</html>
