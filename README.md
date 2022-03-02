@@ -42,23 +42,11 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 一、LeetCode
-
-可以通过以下方式
-
-### 1.1 leetCode 目录
-
-可以直接查看项目下的 leetcode 目录，里面有包含了题目答案的 html 文件
+## 一、项目运行界面
 
 <br/>
 
-![code-html](/src/assets/img/code-html.png)
-
-<br/>
-
-### 1.2 运行项目
-
-也可以通过运行 react 项目查看题目，运行后的截图如下
+1. 通过运行 react 项目查看题目，运行后的截图如下
 
 <br/>
 
@@ -75,7 +63,14 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 <br/>
 <br/>
 
-## 二、剑指 offer
+2. 直接查看项目目录下的 html 文件
+
+<br/>
+<br/>
+
+## 二、剑指 67 (67 道)
+
+<br/>
 
 - [JZ1 二维数组中的查找.html](./剑指67/JZ1二维数组中的查找.html)
 - [JZ2 替换空格.html](./剑指67/JZ2替换空格.html)
@@ -147,7 +142,9 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode
+## 三、LeetCode (123 道)
+
+<br/>
 
 - [1.两数之和.html](./leetCode/1.两数之和.html)
 - [2.两数相加.html](./leetCode/2.两数相加.html)
@@ -275,7 +272,9 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 四、Programming 编程题
+## 四、Programming (12 道)
+
+<br/>
 
 - [实现一个 trim 方法](./programming/trim.html)
 - [实现柯里化](./programming/curry.html)
@@ -292,7 +291,9 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 五、剑指 offer 第二版
+## 五、剑指第二版 (67 道)
+
+<br/>
 
 - [剑指 Offer09.用两个栈实现队列](./剑指第二版/剑指Offer09.用两个栈实现队列.html)
 - [剑指 Offer07.重建二叉树.html](./剑指第二版/剑指Offer07.重建二叉树.html)
@@ -365,6 +366,8 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 <br/>
 
 ## Algorithm
+
+<br/>
 
 - [排序算法.html](./algorithm/排序算法.html)
 - [快速幂.html](./algorithm/快速幂.html)
