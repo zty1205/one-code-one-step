@@ -61,7 +61,8 @@ function writeCodeFile(file, template) {
 function writeMD(name, dist, ext) {
   Log.MDStart();
 
-  const mdContent = fs.readFileSync(path.resolve(__dirname, '../README.md'), {
+  const mdFile = path.resolve(__dirname, '../README.md');
+  const mdContent = fs.readFileSync(mdFile, {
     encoding: 'utf-8'
   });
   const regexp = new RegExp(`- (.*)${dist}/(.*)\.[${Object.keys(FILE_TEMPLATE).join('|')}]\\)`, 'g');
@@ -73,9 +74,10 @@ function writeMD(name, dist, ext) {
 
   const lastHtml = matchRes[idx];
   const link = buildMdLink(name, dist, ext);
-  const newContent = mdContent.replace(lastHtml, `${lastHtml}\n${link}`);
+  let newContent = mdContent.replace(lastHtml, `${lastHtml}\n${link}`);
 
-  const mdFile = path.resolve(__dirname, '../README.md');
+  newContent = writeMDCount(newContent);
+
   fs.writeFileSync(mdFile, newContent, { encoding: 'utf-8' });
 
   prettierFile(mdFile);
@@ -86,6 +88,40 @@ function writeMD(name, dist, ext) {
     link,
     curNum
   };
+}
+
+function writeMDCount(content) {
+  let ms = content.match(/-\s\[.+\]\(.+\)/g);
+  let countMap = {};
+  ms.forEach((link) => {
+    let mat = link.match(/\.\/(.+)\//);
+    if (mat) {
+      let key = mat[1].toLocaleLowerCase();
+      if (key in countMap) {
+        countMap[key]++;
+      } else {
+        countMap[key] = 1;
+      }
+    }
+  });
+
+  const l2Titles = content.match(/##\s.、(.+)/g);
+  for (let l2 of l2Titles) {
+    let title = l2
+      .split(/[、\(]/)[1]
+      .replace(/\s/g, '')
+      .toLocaleLowerCase();
+
+    if (title in countMap) {
+      let str = `${l2} (${countMap[title]}道)`;
+      ms = l2.match(/\(\d+\s道\)/);
+      if (ms) {
+        str = l2.replace(ms[0], `(${countMap[title]}道)`);
+      }
+      content = content.replace(l2, `${str}\n`);
+    }
+  }
+  return content;
 }
 
 function buildGitCmd(files = [], dist) {
