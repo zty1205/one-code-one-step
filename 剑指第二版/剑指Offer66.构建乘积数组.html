@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>剑指 Offer 66. 构建乘积数组</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/gou-jian-cheng-ji-shu-zu-lcof/
+
+      // 给定一个数组 A[0,1,…,n-1]，请构建一个数组 B[0,1,…,n-1]，其中 B[i] 的值是数组 A 中除了下标 i 以外的元素的积, 即 B[i]=A[0]×A[1]×…×A[i-1]×A[i+1]×…×A[n-1]。不能使用除法。
+      // 提示：
+      // 所有元素乘积之和不会溢出 32 位整数
+      // a.length <= 100000
+
+      /**
+       * @param {number[]} a
+       * @return {number[]}
+       */
+      var constructArr = function (a) {};
+
+      // --- answer-1 ---
+
+      // 不能使用除法, 除法在0的时候也是无效的
+      // 暴力×
+      function multiply(arr = []) {
+        return arr.reduce((pre, cur) => pre * cur);
+      }
+
+      var constructArr = function (a = []) {
+        if (!a.length) return [];
+        let result = new Array(a.length);
+        for (let i = 0; i < a.length; i++) {
+          let tmp = a[i];
+          a[i] = 1;
+          result[i] = multiply(a);
+          a[i] = tmp;
+        }
+        return result;
+      };
+      // 暴力失败在 new Array(100000).fill(1) 超时
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // [1,2,3,4,5]
+      // [1,1,3,4,5]
+      // [1,2,1,4,5]
+      // [1,2,3,1,5]
+      // [1,2,3,4,1]
+      // 和暴力法相似对角线置为1
+      // 先乘左下角 再乘右上角
+      var constructArr = function (a) {
+        const length = a.length;
+        if (!length) return [];
+        const result = [1];
+        let tmp = 1;
+        for (let i = 1; i < length; i++) {
+          result[i] = result[i - 1] * a[i - 1];
+        }
+        // [1,1,2,6,24]
+        for (let i = length - 2; i >= 0; i--) {
+          tmp *= a[i + 1]; // 5->5*4->5*4*3->5*4*3*2->5*4*3*2*1
+          result[i] *= tmp;
+        }
+        return result;
+      };
+
+      // --- answer-2 ---
+
+      var a = [1, 2, 3, 4, 5];
+      var result = [120, 60, 40, 30, 24];
+
+      // var a = [1, 2, 0, 4, 5];
+      // var result = [0, 0, 40, 0, 0];
+
+      console.log('a = ', a);
+      console.log('result = ', result);
+      console.log('constructArr = ', constructArr(a));
+    </script>
+  </body>
+</html>
