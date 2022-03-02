@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>剑指 Offer 36. 二叉搜索树与双向链表</title>
+  </head>
+  <body>
+    <script src="../helper/tree.js"></script>
+    <script>
+      // https://leetcode-cn.com/problems/er-cha-sou-suo-shu-yu-shuang-xiang-lian-biao-lcof/
+
+      // 输入一棵二叉搜索树，将该二叉搜索树转换成一个排序的循环双向链表。要求不能创建任何新的节点，只能调整树中节点指针的指向。
+      // 为了让您更好地理解问题，以下面的二叉搜索树为例：
+      // 我们希望将这个二叉搜索树转化为双向循环链表。链表中的每个节点都有一个前驱和后继指针。对于双向循环链表，第一个节点的前驱是最后一个节点，最后一个节点的后继是第一个节点。
+      // 下图展示了上面的二叉搜索树转化成的链表。“head” 表示指向链表中有最小元素的节点。
+      // 特别地，我们希望可以就地完成转换操作。当转化完成以后，树中节点的左指针需要指向前驱，树中节点的右指针需要指向后继。还需要返回链表中的第一个节点的指针。
+      // 注意：本题与主站 426 题相同：https://leetcode-cn.com/problems/convert-binary-search-tree-to-sorted-doubly-linked-list/
+      // 注意：此题对比原题有改动。
+
+      /**
+       * // Definition for a Node.
+       * function Node(val,left,right) {
+       *    this.val = val;
+       *    this.left = left;
+       *    this.right = right;
+       * };
+       */
+      /**
+       * @param {Node} root
+       * @return {Node}
+       */
+      var treeToDoublyList = function (root) {};
+
+      // --- answer-1 ---
+
+      // 中序遍历搜索树为递增数列
+      // 左 跟 右
+      var treeToDoublyList = function (root) {
+        if (root == null) return null;
+        let pre;
+        let head;
+
+        function dfs(cur) {
+          if (cur == null) return;
+          // 左子树
+          dfs(cur.left);
+          if (pre != null) {
+            pre.right = cur;
+          } else {
+            head = cur;
+          }
+          // 链接小的 左边部分
+          cur.left = pre;
+          pre = cur;
+          // 右子树
+          dfs(cur.right);
+        }
+
+        dfs(root);
+        head.left = pre;
+        pre.right = head;
+        return head;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var root = [4, 2, 5, 1, 3];
+      var tree = buildTreeByArray([...root]);
+      var { tree: cTree, nodeMap } = buildTreeByArray([...root], { nodeMap: true });
+
+      var node4 = nodeMap.get(4);
+      var node2 = nodeMap.get(2);
+      var node5 = nodeMap.get(5);
+      var node1 = nodeMap.get(1);
+      var node3 = nodeMap.get(3);
+
+      node1.right = node2;
+      node2.right = node3;
+      node3.right = node4;
+      node4.right = node5;
+      node5.right = node1;
+
+      node5.left = node4;
+      node4.left = node3;
+      node3.left = node4;
+      node2.left = node1;
+      node1.left = node5;
+
+      var root = [1];
+      var root = [-53];
+      var root = [8, -6, null, -8];
+      var tree = buildTreeByArray([...root]);
+
+      console.log('root = ', root);
+
+      console.log('tree = ', tree);
+      console.log('treeToDoublyList = ', treeToDoublyList(buildTreeByArray([...root])));
+    </script>
+  </body>
+</html>
