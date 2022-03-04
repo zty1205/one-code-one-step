@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>剑指 Offer 37. 序列化二叉树</title>
+  </head>
+  <body>
+    <script src="../helper/tree.js"></script>
+    <script>
+      // https://leetcode-cn.com/problems/xu-lie-hua-er-cha-shu-lcof/
+
+      // 请实现两个函数，分别用来序列化和反序列化二叉树。
+      // 你需要设计一个算法来实现二叉树的序列化与反序列化。这里不限定你的序列 / 反序列化算法执行逻辑，你只需要保证一个二叉树可以被序列化为一个字符串并且将这个字符串反序列化为原始的树结构。
+      // 提示：输入输出格式与 LeetCode 目前使用的方式一致，详情请参阅 LeetCode 序列化二叉树的格式。你并非必须采取这种方式，你也可以采用其他的方法解决这个问题。
+
+      /**
+       * Definition for a binary tree node.
+       * function TreeNode(val) {
+       *     this.val = val;
+       *     this.left = this.right = null;
+       * }
+       */
+      /**
+       * Encodes a tree to a single string.
+       *
+       * @param {TreeNode} root
+       * @return {string}
+       */
+      var serialize = function (root) {};
+      /**
+       * Decodes your encoded data to tree.
+       *
+       * @param {string} data
+       * @return {TreeNode}
+       */
+      var deserialize = function (data) {};
+
+      // --- answer-1 ---
+
+      const SPLIT = ',';
+      const EMPTY = 'NONE';
+
+      var serialize = function (root) {
+        function dfs(node, str) {
+          if (!node) {
+            str += `${EMPTY}${SPLIT}`;
+          } else {
+            str += `${node.val}${SPLIT}`;
+            str = dfs(node.left, str);
+            str = dfs(node.right, str);
+          }
+          return str;
+        }
+        return dfs(root, '');
+      };
+
+      var deserialize = function (data) {
+        function build(array) {
+          if (array[0] === EMPTY) {
+            array.shift();
+            return null;
+          }
+          const root = new TreeNode(+array[0]);
+          array.shift();
+          root.left = build(array);
+          root.right = build(array);
+
+          return root;
+        }
+        return build(data.split(SPLIT));
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 层次遍历
+      var serialize = function (root) {
+        if (!root) return null;
+
+        let result = '';
+        let queue = [root];
+        while (queue.length) {
+          let node = queue.shift();
+          if (!node) {
+            result += `${EMPTY}${SPLIT}`;
+          } else {
+            result += `${node.val}${SPLIT}`;
+            queue.push(node.left);
+            queue.push(node.right);
+          }
+        }
+        return result;
+      };
+
+      var deserialize = function (data) {
+        if (!data) return null;
+        let array = data.split(SPLIT);
+        const root = new TreeNode(+[array[0]]);
+        let i = 1;
+        let queue = [root];
+        let count = 5;
+        while (queue.length && i < array.length) {
+          let node = queue.shift();
+          if (array[i] !== EMPTY) {
+            node.left = new TreeNode(+array[i]);
+            queue.push(node.left);
+          }
+          i++;
+          if (array[i] !== EMPTY) {
+            node.right = new TreeNode(+array[i]);
+            queue.push(node.right);
+          }
+          i++;
+        }
+        return root;
+      };
+
+      // --- answer-2 ---
+
+      var root = [1, 2, 3, null, null, 4, 5];
+
+      var root = [-1, 0, 1];
+
+      var root = [5, 2, 3, null, null, 2, 4, 3, 1];
+
+      var tree = {
+        val: 5,
+        left: {
+          val: 2,
+          left: null,
+          right: null
+        },
+        right: {
+          val: 3,
+          left: {
+            val: 2,
+            left: {
+              val: 3,
+              left: null,
+              right: null
+            },
+            right: {
+              val: 1,
+              left: null,
+              right: null
+            }
+          },
+          right: {
+            val: 4,
+            left: null,
+            right: null
+          }
+        }
+      };
+
+      console.log('root = ', root);
+      console.log('tree = ', tree);
+
+      console.log('serialize = ', serialize(tree));
+      console.log('deserialize = ', deserialize(serialize(tree)));
+
+      console.log('deserialize = ', deserialize('5,2,3,NONE,NONE,2,4,3,1'));
+    </script>
+  </body>
+</html>

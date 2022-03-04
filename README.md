@@ -291,7 +291,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 五、剑指第二版 (72 道)
+## 五、剑指第二版 (73 道)
 
 <br/>
 
@@ -331,6 +331,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [剑指 Offer34.二叉树中和为某一值的路径.html](./剑指第二版/剑指Offer34.二叉树中和为某一值的路径.html)
 - [剑指 Offer35.复杂链表的复制.html](./剑指第二版/剑指Offer35.复杂链表的复制.html)
 - [剑指 Offer36.二叉搜索树与双向链表.html](./剑指第二版/剑指Offer36.二叉搜索树与双向链表.html)
+- [剑指 Offer37.序列化二叉树.html](./剑指第二版/剑指Offer37.序列化二叉树.html)
 - [剑指 Offer38.字符串的排列.html](./剑指第二版/剑指Offer38.字符串的排列.html)
 - [剑指 Offer39.数组中出现次数超过一半的数字.html](./剑指第二版/剑指Offer39.数组中出现次数超过一半的数字.html)
 - [剑指 Offer40.最小的 k 个数.html](./剑指第二版/剑指Offer40.最小的k个数.html)
