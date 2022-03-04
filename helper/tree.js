@@ -5,43 +5,41 @@ class TreeNode {
   }
 }
 
+const TREE_SPLIT = ',';
+const TREE_EMPTY = 'NONE';
+
 function _buildNodeMap(map = new Map(), node, config = {}) {
   if (!node || !config.nodeMap) return;
   map.set(node.val, node);
 }
 
-function buildTreeByArray(array, config = {}) {
-  if (!array || !Array.isArray(array)) return null;
+function buildTreeByArray(arr = [], config = {}) {
+  let array = arr.map((x) => (x = x || TREE_EMPTY));
+  const root = new TreeNode(+[array[0]]);
 
   const nodeMap = new Map();
-
-  array.reverse();
-  const root = new TreeNode(array.pop());
-
   _buildNodeMap(nodeMap, root, config);
 
-  const stack = [root];
-  while (array.length) {
-    let node = stack.shift();
-    let leftVal = array.pop();
-    let rightVal = array.pop();
-    if (node != null) {
-      let left = leftVal != null ? new TreeNode(leftVal) : null;
-      let right = rightVal != null ? new TreeNode(rightVal) : null;
+  let i = 1;
+  let queue = [root];
+  while (queue.length && i < array.length) {
+    let node = queue.shift();
+    if (array[i] !== TREE_EMPTY) {
+      node.left = new TreeNode(+array[i]);
+      queue.push(node.left);
 
-      _buildNodeMap(nodeMap, left, config);
-      _buildNodeMap(nodeMap, right, config);
-
-      node.left = left;
-      node.right = right;
-      stack.push(left);
-      stack.push(right);
-    } else {
-      stack.shift();
-      stack.push(null);
-      stack.push(null);
+      _buildNodeMap(nodeMap, node.left, config);
     }
+    i++;
+    if (array[i] !== TREE_EMPTY) {
+      node.right = new TreeNode(+array[i]);
+      queue.push(node.right);
+
+      _buildNodeMap(nodeMap, node.right, config);
+    }
+    i++;
   }
+
   return config.nodeMap ? { root, nodeMap } : root;
 }
 

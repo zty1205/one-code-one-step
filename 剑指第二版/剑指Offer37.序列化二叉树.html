@@ -101,7 +101,6 @@
         const root = new TreeNode(+[array[0]]);
         let i = 1;
         let queue = [root];
-        let count = 5;
         while (queue.length && i < array.length) {
           let node = queue.shift();
           if (array[i] !== EMPTY) {
@@ -126,43 +125,13 @@
 
       var root = [5, 2, 3, null, null, 2, 4, 3, 1];
 
-      var tree = {
-        val: 5,
-        left: {
-          val: 2,
-          left: null,
-          right: null
-        },
-        right: {
-          val: 3,
-          left: {
-            val: 2,
-            left: {
-              val: 3,
-              left: null,
-              right: null
-            },
-            right: {
-              val: 1,
-              left: null,
-              right: null
-            }
-          },
-          right: {
-            val: 4,
-            left: null,
-            right: null
-          }
-        }
-      };
+      var tree = buildTreeByArray([...root]);
 
       console.log('root = ', root);
       console.log('tree = ', tree);
 
       console.log('serialize = ', serialize(tree));
       console.log('deserialize = ', deserialize(serialize(tree)));
-
-      console.log('deserialize = ', deserialize('5,2,3,NONE,NONE,2,4,3,1'));
     </script>
   </body>
 </html>
