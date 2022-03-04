@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>面试题19. 正则表达式匹配</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/zheng-ze-biao-da-shi-pi-pei-lcof/
+
+      // 请实现一个函数用来匹配包含'. '和'*'的正则表达式。模式中的字符'.'表示任意一个字符，而'*'表示它前面的字符可以出现任意次（含0次）。在本题中，匹配是指字符串的所有字符匹配整个模式。例如，字符串"aaa"与模式"a.a"和"ab*ac*a"匹配，但与"aa.a"和"ab*a"均不匹配。
+      // 提示：
+      // s 可能为空，且只包含从 a-z 的小写字母。
+      // p 可能为空，且只包含从 a-z 的小写字母以及字符 . 和 *，无连续的 '*'。
+
+      /**
+       * @param {string} s
+       * @param {string} p
+       * @return {boolean}
+       */
+      var isMatch = function (s, p) {};
+
+      // --- answer-1 ---
+
+      // 根据题意 递归检测字母
+      var isMatch = function (s, p) {
+        if (s.length === 0) {
+          // 必须是 a*b*这种形式
+          if (p.length % 2 != 0) return false;
+          let i = 1;
+          while (i < p.length) {
+            if (p[i] !== '*') return false;
+            i += 2;
+          }
+          return true;
+        }
+
+        if (p.length === 0) return false;
+
+        let c1 = s[0],
+          c2 = p[0],
+          c3 = p[1] || 'a';
+
+        if (c3 !== '*') {
+          if (c1 === c2 || c2 === '.') {
+            return isMatch(s.substring(1), p.substring(1));
+          } else {
+            return false;
+          }
+        } else {
+          if (c1 === c2 || c2 === '.') {
+            return isMatch(s.substring(1), p) || isMatch(s, p.substring(2));
+          } else {
+            return isMatch(s, p.substring(2));
+          }
+        }
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 动态规划
+      // dp[i][j] 表示 ss 的前 i 个字符与 p 中的前 j 个字符是否能够匹配
+      // p[j] != #   === dp[i-1][j-1] or false
+      // p[j] == #  === dp[i-1][j] or dp[i][j-2]  即*表示1个活0个
+
+      function match(s, i, p, j) {
+        if (i == 0) {
+          return false;
+        }
+        if (p[j - 1] === '.') {
+          return true;
+        }
+        return s[i - 1] === p[j - 1];
+      }
+
+      var isMatch1 = function (s, p) {
+        let sLen = s.length;
+        let pLen = p.length;
+
+        let dp = Array.from({ length: sLen + 1 }, () => Array.from({ length: pLen + 1 }).fill(false));
+        dp[0][0] = true;
+        for (let i = 0; i <= sLen; i++) {
+          for (let j = 1; j <= pLen; j++) {
+            if (p[j - 1] === '*') {
+              dp[i][j] = dp[i][j - 2];
+              if (match(s, i, p, j - 1)) {
+                dp[i][j] = dp[i][j] || dp[i - 1][j];
+              }
+            } else {
+              if (match(s, i, p, j)) {
+                dp[i][j] = dp[i - 1][j - 1];
+              }
+            }
+          }
+        }
+        return dp[sLen][pLen];
+      };
+
+      // --- answer-2 ---
+
+      // var s = 'aa',
+      //   p = 'a',
+      //   result = false;
+
+      s = 'aa';
+      p = 'a*';
+      result = true;
+
+      s = 'ab';
+      p = '.*';
+      result = true;
+
+      s = 'aab';
+      p = 'c*a*b';
+      result = true;
+
+      s = 'mississippi';
+      p = 'mis*is*p*.';
+      result = false;
+
+      console.log('s = ', s);
+      console.log('p = ', p);
+      console.log('result = ', result);
+      console.log('isMatch = ', isMatch(s, p));
+    </script>
+  </body>
+</html>
