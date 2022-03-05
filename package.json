@@ -27,8 +27,7 @@
     "build:test": "dotenv -e .env.test react-app-rewired build",
     "test": "react-app-rewired test",
     "file": "node product/index.js",
-    "deploy": "sh product/deploy.sh",
-    "deploy:win": "powershell product\\deploy.ps1"
+    "deploy": "node product/deploy.js"
   },
   "eslintConfig": {
     "extends": "react-app"

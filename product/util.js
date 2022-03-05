@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { FILE_TEMPLATE, WIN_GIT_HEADER, BUILD_PARAMS } = require('./config');
+const { FILE_TEMPLATE, WIN_GIT_HEADER, BUILD_PARAMS, DEPLOY_FILE_NAME } = require('./config');
 const Log = require('./log');
 const minimist = require('minimist');
 var shell = require('shelljs');
@@ -146,11 +146,11 @@ function buildGitDelploy(files = [], dist) {
   let content = buildGitCmd(files, dist);
   switch (platform) {
     case 'win32':
-      fileName = './deploy.ps1';
+      fileName = `.\\${DEPLOY_FILE_NAME.WIN}`;
       content = WIN_GIT_HEADER + content;
       break;
     default:
-      fileName = './deploy.sh';
+      fileName = `./${DEPLOY_FILE_NAME.MAC}`;
       break;
   }
 
@@ -206,6 +206,7 @@ function prettierFile(file) {
 }
 
 module.exports = {
+  getPlatform,
   sleep,
   isHttpLink,
   buildTemplate,
