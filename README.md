@@ -291,7 +291,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 五、剑指第二版 (74 道)
+## 五、剑指第二版 (75 道)
 
 <br/>
 
@@ -359,6 +359,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [剑指 Offer58-I.翻转单词顺序.html](./剑指第二版/剑指Offer58-I.翻转单词顺序.html)
 - [剑指 Offer58-II.左旋转字符串.html](./剑指第二版/剑指Offer58-II.左旋转字符串.html)
 - [剑指 Offer59-II.队列的最大值.html](./剑指第二版/剑指Offer59-II.队列的最大值.html)
+- [剑指 Offer59-I.滑动窗口的最大值.html](./剑指第二版/剑指Offer59-I.滑动窗口的最大值.html)
 - [剑指 Offer60.n 个骰子的点数.html](./剑指第二版/剑指Offer60.n个骰子的点数.html)
 - [剑指 Offer61.扑克牌中的顺子.html](./剑指第二版/剑指Offer61.扑克牌中的顺子.html)
 - [剑指 Offer62.圆圈中最后剩下的数字.html](./剑指第二版/剑指Offer62.圆圈中最后剩下的数字.html)

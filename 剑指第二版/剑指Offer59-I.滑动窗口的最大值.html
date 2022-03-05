@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>剑指 Offer 59 - I. 滑动窗口的最大值</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/hua-dong-chuang-kou-de-zui-da-zhi-lcof/
+
+      // 给定一个数组 nums 和滑动窗口的大小 k，请找出所有滑动窗口里的最大值。
+
+      // 提示：
+
+      // 你可以假设 k 总是有效的，在输入数组不为空的情况下，1 ≤ k ≤ 输入数组的大小。
+
+      /**
+       * @param {number[]} nums
+       * @param {number} k
+       * @return {number[]}
+       */
+
+      var maxSlidingWindow = function (nums, k) {};
+
+      // --- answer-1 ---
+
+      // 题目很明显了 使用滑动窗口算法
+      // 利用局部最大值 开减少对比过程
+      // 1 在最大值还在窗口内 且窗口右侧的值小于等于最大值 此时，就可以无需比较 继续滑动窗口
+      // 2 在最大值还在窗口内 且窗口右侧的值大于等于最大值 此时，最大值就是新加入的值
+
+      // 时间复杂度O(n) 空间复杂度O(1)
+      var maxSlidingWindow = function (nums, k) {
+        if (k === 1 || nums.length < 2) return nums;
+        if (k === nums.length) return [Math.max.apply(Math, nums)];
+
+        const result = [];
+        let left = 0;
+
+        const length = nums.length;
+
+        while (left <= length - k) {
+          let right = left + 1;
+          let maxIndex = left;
+          let max = nums[left];
+          while (right - left < k) {
+            if (nums[right] >= max) {
+              max = nums[right];
+              maxIndex = right;
+            }
+            right++;
+          }
+          result.push(max);
+
+          // 1
+          while (left < maxIndex && right < length && nums[right] <= max) {
+            left++;
+            right++;
+            result.push(max);
+          }
+          // 2
+          while (right < length && nums[right] >= max) {
+            max = nums[right];
+            maxIndex = right;
+            result.push(max);
+            right++;
+            left++;
+          }
+          left++;
+        }
+
+        return result;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 分块和预处理
+      var maxSlidingWindow = function (nums, k) {
+        if (k === 1 || nums.length < 2) return nums;
+        if (k === nums.length) return [Math.max.apply(Math, nums)];
+        const n = nums.length;
+        const prefixMax = new Array(n).fill(0); // 从倒数开始 往前k个的最大值
+        const suffixMax = new Array(n).fill(0); // 从0开始 往后k个的最大值
+        // 最大的值 就是当前窗口的最大值
+        for (let i = 0; i < n; i++) {
+          if (i % k === 0) {
+            prefixMax[i] = nums[i];
+          } else {
+            prefixMax[i] = Math.max(prefixMax[i - 1], nums[i]);
+          }
+        }
+
+        for (let i = n - 1; i >= 0; --i) {
+          if (i === n - 1 || (i + 1) % k === 0) {
+            suffixMax[i] = nums[i];
+          } else {
+            suffixMax[i] = Math.max(suffixMax[i + 1], nums[i]);
+          }
+        }
+
+        const ans = [];
+        for (let i = 0; i < n - k + 1; i++) {
+          ans.push(Math.max(suffixMax[i], prefixMax[i + k - 1]));
+        }
+        return ans;
+      };
+
+      // --- answer-2 ---
+
+      var nums = [1, 3, -1, -3, 5, 3, 6, 7],
+        k = 3;
+      var result = [3, 3, 5, 5, 6, 7];
+      // 解释:
+      // 滑动窗口的位置                最大值
+      // ---------------               -----
+      // [1  3  -1] -3  5  3  6  7       3
+      //  1 [3  -1  -3] 5  3  6  7       3
+      //  1  3 [-1  -3  5] 3  6  7       5
+      //  1  3  -1 [-3  5  3] 6  7       5
+      //  1  3  -1  -3 [5  3  6] 7       6
+      //  1  3  -1  -3  5 [3  6  7]      7
+
+      // var nums = [1, 3, -1, -3, 2, 2, 6, 7],
+      //   k = 3;
+      // var result = [3, 3, 2, 2, 6, 7];
+      // 滑动窗口的位置                最大值
+      // ---------------               -----
+      // [1  3  -1] -3  2  2  6  7       3
+      //  1 [3  -1  -3] 2  2  6  7       3
+      //  1  3 [-1  -3  2] 2  6  7       2
+      //  1  3  -1 [-3  2  2] 6  7       2
+      //  1  3  -1  -3 [2  2  6] 7       6
+      //  1  3  -1  -3  2 [2  6  7]      7
+
+      var nums = [1, 3, -1, -3, 2, 3, 6, 7],
+        k = 5;
+      var result = [3, 3, 6, 7];
+
+      // 1,3,-1,-3,2
+      //             3,6,7
+      var pref = [1, 3, 3, 3, 3, 3, 6, 7];
+      var suff = [3, 3, 2, 2, 2, 7, 7, 7];
+
+      // var nums = [1, 3, -1, -3, 2, 3, 6, 7],
+      //   k = 4;
+      // var result = [3, 3, 3, 6, 7];
+
+      // 1,3,-1,-3
+      //           2,3,6,7
+      var pref = [1, 3, 3, 3, 2, 3, 6, 7];
+      var suff = [3, 3, -1, -3, 7, 7, 7, 7];
+
+      // var nums = [7, 2, 4];
+      // var k = 2;
+      // var result = [7, 4];
+
+      console.log("nums = ", nums);
+      console.log("k = ", k);
+      console.log("result = ", result);
+      console.log("maxSlidingWindow = ", maxSlidingWindow(nums, k));
+    </script>
+  </body>
+</html>
