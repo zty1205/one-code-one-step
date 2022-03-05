@@ -291,7 +291,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 五、剑指第二版 (73 道)
+## 五、剑指第二版 (74 道)
 
 <br/>
 
@@ -345,6 +345,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [剑指 Offer48.最长不含重复字符的子字符串.html](./剑指第二版/剑指Offer48.最长不含重复字符的子字符串.html)
 - [剑指 Offer49.丑数.html](./剑指第二版/剑指Offer49.丑数.html)
 - [剑指 Offer50.第一个只出现一次的字符.html](./剑指第二版/剑指Offer50.第一个只出现一次的字符.html)
+- [剑指 Offer51.数组中的逆序对.html](./剑指第二版/剑指Offer51.数组中的逆序对.html)
 - [剑指 Offer52.两个链表的第一个公共节点.html](./剑指第二版/剑指Offer52.两个链表的第一个公共节点.html)
 - [剑指 Offer53-II.0 ～ n-1 中缺失的数字.html](./剑指第二版/剑指Offer53-II.0～n-1中缺失的数字.html)
 - [剑指 Offer53-I.在排序数组中查找数字 I.html](./剑指第二版/剑指Offer53-I.在排序数组中查找数字I.html)
