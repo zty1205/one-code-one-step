@@ -142,7 +142,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (123 道)
+## 三、LeetCode (124 道)
 
 <br/>
 
@@ -241,6 +241,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [114.二叉树展开为链表.html](./leetCode/114.二叉树展开为链表.html)
 - [118.杨辉三角.html](./leetCode/118.杨辉三角.html)
 - [119.杨辉三角 II.html](./leetCode/119.杨辉三角II.html)
+- [120.三角形最小路径和.html](./leetCode/120.三角形最小路径和.html)
 - [121.买卖股票的最佳时机.html](./leetCode/121.买卖股票的最佳时机.html)
 - [122.买卖股票的最佳时机 II.html](./leetCode/122.买卖股票的最佳时机II.html)
 - [125.验证回文串.html](./leetCode/125.验证回文串.html)

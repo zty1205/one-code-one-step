@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>120. 三角形最小路径和</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/triangle/
+
+      // 给定一个三角形 triangle ，找出自顶向下的最小路径和。
+      // 每一步只能移动到下一行中相邻的结点上。相邻的结点 在这里指的是 下标 与 上一层结点下标 相同或者等于 上一层结点下标 + 1 的两个结点。也就是说，如果正位于当前行的下标 i ，那么下一步可以移动到下一行的下标 i 或 i + 1 。
+      // 提示：
+      // 1 <= triangle.length <= 200
+      // triangle[0].length == 1
+      // triangle[i].length == triangle[i - 1].length + 1
+      // -104 <= triangle[i][j] <= 104
+      // 提示：
+      // 你可以只使用 O(n) 的额外空间（n 为三角形的总行数）来解决这个问题吗？
+
+      /**
+       * @param {number[][]} triangle
+       * @return {number}
+       */
+      var minimumTotal = function (triangle) {};
+
+      // --- answer-0 ---
+
+      var minimumTotal = function (triangle) {
+        let ans = Number.MAX_VALUE;
+        function recur(triangle, i, j, sum) {
+          // 最后一行
+          if (i > triangle.length - 1) {
+            ans = Math.min(ans, sum);
+            return;
+          }
+          sum += triangle[i][j];
+          recur(triangle, i + 1, j, sum);
+          recur(triangle, i + 1, j + 1, sum);
+        }
+        recur(triangle, 0, 0, 0);
+        return ans;
+      };
+      // 当三角形达到100时超时，爆栈了
+
+      // --- answer-0 ---
+
+      // --- answer-1 ---
+
+      // 动态规划
+      // dp[i][j] 表示到i,j的最大值
+      // dp[i][j] = dp[i-1][j] , dp[i-1][j-1] + triangle[i][j]
+
+      function getVal(array, i, j) {
+        let val = array[i][j];
+        return val != null ? val : Number.MAX_VALUE;
+      }
+
+      var minimumTotal = function (triangle) {
+        const row = triangle.length;
+        // 这个二位数组的存储空间就是O(n) 可以换算成长度变成一位数组
+        let dp = Array.from({ length: row }, (v, k) => Array.from({ length: k + 1 }));
+        dp[0][0] = triangle[0][0];
+
+        for (let i = 1; i < row; i++) {
+          for (let j = 0; j <= i; j++) {
+            dp[i][j] = Math.min(getVal(dp, i - 1, j), getVal(dp, i - 1, j - 1)) + triangle[i][j];
+          }
+        }
+
+        let ans = Number.MAX_VALUE;
+        for (let i = 0; i < dp[row - 1].length; i++) {
+          ans = Math.min(ans, dp[row - 1][i]);
+        }
+
+        return ans;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      var minimumTotal = function (triangle) {
+        const n = triangle.length;
+        const dp = [triangle[0][0]];
+        for (let i = 1; i < n; i++) {
+          dp[i] = dp[i - 1] + triangle[i][i];
+          for (let j = i - 1; j > 0; j--) {
+            dp[j] = Math.min(dp[j - 1], dp[j]) + triangle[i][j];
+          }
+          // 累计第0项
+          dp[0] += triangle[i][0];
+        }
+        return Math.min.apply(Math, dp);
+      };
+
+      // --- answer-2 ---
+
+      var triangle = [[2], [3, 4], [6, 5, 7], [4, 1, 8, 3]];
+      var result = 11;
+      // 解释：如下面简图所示：
+      //    2
+      //   3 4
+      //  6 5 7
+      // 4 1 8 3
+
+      // var triangle = [[-10]];
+      // var result = -10;
+
+      // var triangle = [[0], [0, 0], [0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0, 0]];
+      // var result = 0;
+
+      console.log('triangle = ', triangle);
+      console.log('result = ', result);
+      console.log('minimumTotal = ', minimumTotal(triangle));
+    </script>
+  </body>
+</html>
