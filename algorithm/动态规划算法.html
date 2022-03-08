@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>动态规划算法</title>
+  </head>
+  <body>
+    <script>
+      // 动态规划（Dynamic Programming，DP）是运筹学的一个分支，是求解决策过程最优化的过程。
+      // 通常这个活动过程可以分为若干个互相联系的阶段，在每一个阶段都需作出决策（采取措施），一个阶段的决策确定以后，常常影响到下一个阶段的决策。\
+      // 比如，我们下一次循环的结果需要上一次循环得到的解。比如，不能选择相邻的数。
+
+      /**
+       * 动态规划解题的一般思路：
+       * 1. 分析最优解的性质和解构。通常是分析dp[i] 和 dp[i-1]的等式关系。类似于数学中的f(x) = a*f(x-1), f(x,y) = a*f(x,y)
+       * 2. 列出状态方程。类似于数学中的通项公式
+       * 3. 根据方程使用自顶而下(递归)或自底而上(循环)的策略求解
+       * 注意递归是否会爆栈
+       * 动态规划，更偏向于考验观察力和数学功底，找到状态方程是关键
+       */
+
+      // --- example-1 ---
+
+      // 经典斐波那契数列  1,1,2,3,5,8
+      // 自顶而下的算法策略，通常的形式为递归。即形式上，先算顶部，递归到底部返回
+      // 这里会栈溢出 // 优化方式 尾递归 或 转循环
+      function Fiber0(num) {
+        if (num <= 2) return 1;
+        return Fiber0(num - 1) + Fiber0(num - 2);
+      }
+
+      // 尾递归 类似array.reduce
+      function Fiber1(num) {
+        function f(pre, cur, n) {
+          if (n < 3) return cur;
+          return f(cur, pre + cur, n - 1);
+        }
+        return f(1, 1, num);
+      }
+
+      // 转循环
+      // 自底而上(循环) 从小的 往大的求
+      function Fiber2(num) {
+        if (num < 3) return 1;
+        let pre = 1;
+        let cur = 1;
+        let i = 2;
+        while (i++ < num) {
+          let tmp = cur;
+          cur += pre;
+          pre = tmp;
+        }
+        return cur;
+      }
+
+      const fibArr = [
+        [1, 1],
+        [10, 55],
+        [18, 2584]
+      ];
+
+      fibArr.forEach((item) => {
+        const [num, fib] = item;
+        console.log(`Fiber ${num}: ${fib} === ${Fiber0(num)}`);
+        console.log(`Fiber ${num}: ${fib} === ${Fiber1(num)}`);
+        console.log(`Fiber ${num}: ${fib} === ${Fiber2(num)}`);
+        console.log(``);
+      });
+
+      // --- example-1 ---
+
+      // --- example-2 ---
+
+      // 经典扔鸡蛋
+      // 题目：两个软硬程度一样但未知的鸡蛋，它们有可能都在一楼就摔碎，也可能从一百层楼摔下来没事。
+      // 有座100层的建筑，要你用这两个鸡蛋确定哪一层是鸡蛋可以安全落下的最高位置。可以摔碎两个鸡蛋。
+      // 在有限层数和蛋数的情况下，求即使最坏情况下需要的最少判断次数。
+
+      // 这是一道动态规划的题目，首先假设f[n][m]表示从m层楼仍n个鸡蛋，找到的安全位置的最少判断次数。
+      // 如果第一个鸡蛋第一次从[1, i]中任选第j层扔下，如果碎了，就必须从[1, j - 1]挨着试, 也就是dp[1][j - 1]；
+      // 如果不碎的话，那么还要在[j, i]层继续仍，即dp[2][i - j]。最坏情况下则取max(dp[1][j - 1], dp[2][i - j])次。
+
+      function egg(floor) {
+        // dp[1][i] = i, dp[2][i] = i 最差的情况预处理数据
+        let dp = Array.from(new Array(3), () => Array.from({ length: floor + 1 }, (v, k) => k));
+
+        for (let i = 1; i <= floor; i++) {
+          for (let j = 1; j < i; j++) {
+            dp[2][i] = Math.min(dp[2][i], 1 + Math.max(dp[1][j - 1], dp[2][i - j]));
+          }
+        }
+        return dp[2][floor];
+      }
+
+      // --- example-2 ---
+    </script>
+  </body>
+</html>
