@@ -30,7 +30,11 @@ function buildTreeByArray(arr = [], config = {}) {
 
       _buildNodeMap(nodeMap, node.left, config);
     }
+
     i++;
+    if (i >= array.length) {
+      break;
+    }
     if (array[i] !== TREE_EMPTY) {
       node.right = new TreeNode(+array[i]);
       queue.push(node.right);
