@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>145. 二叉树的后序遍历</title>
+  </head>
+  <body>
+    <script src="../helper/tree.js"></script>
+    <script>
+      // https://leetcode-cn.com/problems/binary-tree-postorder-traversal/
+
+      // 给你一棵二叉树的根节点 root ，返回其节点值的 后序遍历 。
+      // 提示：
+      // 树中节点的数目在范围 [0, 100] 内
+      // -100 <= Node.val <= 100
+
+      /**
+       * Definition for a binary tree node.
+       * function TreeNode(val, left, right) {
+       *     this.val = (val===undefined ? 0 : val)
+       *     this.left = (left===undefined ? null : left)
+       *     this.right = (right===undefined ? null : right)
+       * }
+       */
+      /**
+       * @param {TreeNode} root
+       * @return {number[]}
+       */
+      var postorderTraversal = function (root) {};
+
+      // --- answer-1 ---
+
+      // 左右根 递归算法
+      var postorderTraversal = function (root) {
+        let ans = [];
+        function traverse(node) {
+          if (!node) return;
+          traverse(node.left);
+          traverse(node.right);
+          ans.push(node.val);
+        }
+        traverse(root);
+        return ans;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 左右根 非递归算法
+      // 利用根右左的镜像关系
+      var postorderTraversal = function (root) {
+        if (!root) return [];
+        let ans = [];
+        let stack = [root];
+        while (stack.length) {
+          let node = stack.pop();
+          ans.push(node.val);
+          node.left && stack.push(node.left);
+          node.right && stack.push(node.right);
+        }
+        return ans.reverse();
+      };
+
+      // --- answer-2 ---
+
+      var root = [1, null, 2, 3];
+      var result = [3, 2, 1];
+
+      // var root = [];
+      // var result = [];
+
+      var root = [1];
+      var result = [1];
+
+      var root = [1, 2, 3, 4, 5, 6, 7];
+      var result = [4, 5, 2, 6, 7, 3, 1];
+
+      var tree = buildTreeByArray([...root]);
+
+      console.log('root = ', root);
+      console.log('result = ', result);
+      console.log('postorderTraversal = ', postorderTraversal(tree));
+    </script>
+  </body>
+</html>
