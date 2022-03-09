@@ -38,6 +38,50 @@
         return res;
       }
 
+      /**
+       * Morris 遍历的核心思想是利用树的大量空闲指针，实现空间开销的极限缩减。其前序遍历规则总结如下：
+       * 1. 新建临时节点，令该节点为 root；
+       * 2. 如果当前节点的左子节点为空，将当前节点加入答案，并遍历当前节点的右子节点；
+       * 3. 如果当前节点的左子节点不为空，在当前节点的左子树中找到当前节点在中序遍历下的前驱节点：
+       *  如果前驱节点的右子节点为空，将前驱节点的右子节点设置为当前节点。然后将当前节点加入答案，并将前驱节点的右子节点更新为当前节点。当前节点更新为当前节点的左子节点。
+       *  如果前驱节点的右子节点为当前节点，将它的右子节点重新设为空。当前节点更新为当前节点的右子节点。
+       * 4. 重复步骤 2 和步骤 3，直到遍历结束。
+       */
+      function front_traverse_tree_3(root) {
+        if (!root) return [];
+        let ans = [];
+        let p1 = root;
+        let p2 = null;
+
+        while (p1 != null) {
+          p2 = p1.left;
+          if (p2 != null) {
+            while (p2.right != null && p2.right != p1) {
+              p2 = p2.right;
+            }
+            if (p2.right == null) {
+              ans.push(p1.val);
+              p2.right = p1;
+              p1 = p1.left;
+              continue;
+            } else {
+              p2.right = null;
+            }
+          } else {
+            ans.push(p1.val);
+          }
+          p1 = p1.right;
+        }
+        return ans;
+      }
+
+      // 评论区的解释
+      // Morris其实解决了一个常规循环中循环到叶子节点后难以回到根节点的问题。
+      // 我们都知道前序遍历是先左后右，那么对任一节点p1来说，其右子树p1right所有节点必然在左子树p1left之后。
+      // 代码中第二个while做的是，在p1left里一直往右，直到找不到更右的点，记这一点为p2。然后把p1right接到p2的右边。
+      // 这样既保证了p1right在p1left所有点之后，又不需要再回到p1节点。
+      // 即在正常的往下循环的过程中，不断把右半部分剪下来，接到左半部分的最右下
+
       // 中序遍历 左根右
       // 二叉树的深度遍历
       // 4251637
@@ -135,15 +179,32 @@
         return height(root) >= 0;
       }
 
-      console.log('front_traverse_tree 1245367 = ', front_traverse_tree(root));
-      console.log('front_traverse_tree_2 1245367 = ', front_traverse_tree_2(root));
-      console.log('middle_traverse_tree 4251637 = ', middle_traverse_tree(root));
-      console.log('middle_traverse_tree_2 4251637 = ', middle_traverse_tree_2(root));
-      console.log('rear_traverse_tree 4526731 = ', rear_traverse_tree(root));
-      console.log('rear_traverse_tree_2 4526731 = ', rear_traverse_tree_2(root));
-      console.log('level_traverse_tree 1234567 = ', level_traverse_tree(root));
-      console.log('height_tree 1234567 = ', height_tree(root));
-      console.log('is_balanced_tree 1234567 = ', is_balanced_tree(root));
+      console.log('前序遍历，根左右：1245367');
+      console.log('前序 1245367 = ', front_traverse_tree(root));
+      console.log('前序 1245367 = ', front_traverse_tree_2(root));
+      console.log('前序 1245367 = ', front_traverse_tree_3(root));
+
+      console.log('');
+      console.log('中序遍历，左根右：4251637');
+      console.log('中序 4251637 = ', middle_traverse_tree(root));
+      console.log('中序 4251637 = ', middle_traverse_tree_2(root));
+
+      console.log('');
+      console.log('后序遍历，左右根：4526731');
+      console.log('后序 = ', rear_traverse_tree(root));
+      console.log('后序 = ', rear_traverse_tree_2(root));
+
+      console.log('');
+      console.log('层次遍历：1234567');
+      console.log('层次 = ', level_traverse_tree(root));
+
+      console.log('');
+      console.log('二叉树高度：3');
+      console.log('高度 = ', height_tree(root));
+
+      console.log('');
+      console.log('平衡二叉树：true');
+      console.log('平衡 = ', is_balanced_tree(root));
     </script>
   </body>
 </html>
