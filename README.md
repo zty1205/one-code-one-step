@@ -142,7 +142,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (125 道)
+## 三、LeetCode (126 道)
 
 <br/>
 
@@ -252,6 +252,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [137.只出现一次的数字 II.html](./leetCode/137.只出现一次的数字II.html)
 - [141.环形链表.html](./leetCode/141.环形链表.html)
 - [142.环形链表 II.html](./leetCode/142.环形链表II.html)
+- [144.二叉树的前序遍历.html](./leetCode/144.二叉树的前序遍历.html)
 - [146.LRU 缓存机制.html](./leetCode/146.LRU缓存机制.html)
 - [155.最小栈.html](./leetCode/155.最小栈.html)
 - [160.相交链表.html](./leetCode/160.相交链表.html)
