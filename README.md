@@ -142,7 +142,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (127 道)
+## 三、LeetCode (128 道)
 
 <br/>
 
@@ -269,6 +269,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [198.打家劫舍.html](./leetCode/198.打家劫舍.html)
 - [209.长度最小的子数组.html](./leetCode/209.长度最小的子数组.html)
 - [213.打家劫舍 II.html](./leetCode/213.打家劫舍II.html)
+- [257.二叉树的所有路径.html](./leetCode/257.二叉树的所有路径.html)
 - [337.打家劫舍 III.html](./leetCode/337.打家劫舍III.html)
 - [509.斐波那契数.html](./leetCode/509.斐波那契数.html)
 - [678.有效的括号字符串.html](./leetCode/678.有效的括号字符串.html)
