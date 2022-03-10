@@ -13,7 +13,21 @@ const html_template = `<!DOCTYPE html>
   </head>
   <body>
     <script>
+
+      /** 
+       * #htmlTitle#
+      */
+     
       #htmlContent#
+
+      // --- example-1 ---
+      
+      // --- example-1 ---
+      
+      // --- example-2 ---
+      
+      // --- example-2 ---
+
     </script>
   </body>
 </html>

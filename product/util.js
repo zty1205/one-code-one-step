@@ -24,7 +24,7 @@ function getTemplate(ext) {
 function buildTemplate(ext, obj) {
   let tem = getTemplate(ext);
   for (let k in obj) {
-    tem = tem.replace(`#${k}#`, obj[k]);
+    tem = tem.replace(new RegExp(`#${k}#`, 'g'), obj[k]);
   }
   return tem;
 }
