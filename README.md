@@ -388,6 +388,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [查找算法.html](./algorithm/查找算法.html)
 - [位运算.html](./algorithm/位运算.html)
 - [动态规划算法.html](./algorithm/动态规划算法.html)
+- [回溯算法.html](./algorithm/回溯算法.html)
 
 <br/>
 

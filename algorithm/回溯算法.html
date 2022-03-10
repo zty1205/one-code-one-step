@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>回溯算法</title>
+  </head>
+  <body>
+    <script>
+      // 回溯算法实际上一个类似枚举的搜索尝试过程，主要是在搜索尝试过程中寻找问题的解，当发现已不满足求解条件时，就“回溯”返回，尝试别的路径。
+      // 回溯法是一种选优搜索法，按选优条件向前搜索，以达到目标。但当探索到某一步时，发现原先选择并不优或达不到目标，就退回一步重新选择，
+      // 这种走不通就退回再走的技术为回溯法，而满足回溯条件的某个状态的点称为“回溯点”。
+
+      /**
+       * 回溯算法
+       * 回溯的执行过程类似数状结构上进行选优
+       */
+      // 总计出的通用回溯函数如下
+      function backtrackingAlgorithm(arr) {
+        // 函数的边界条件
+        if (!arr.length) return;
+        // 函数返回的数据结构
+        let ans = [];
+        // 回溯函数
+        function track() {
+          // 参数一般为 结果集，结果，还有可能的是下标，结束条件等
+          // 1. 回溯终止条件
+          // 2. 满足结果 添加结果
+          // 3. 操作当前节点 （步骤2，3可以零花互换）
+          // 4. 前往下一个节点，中间可能伴随 重置，剪枝 操作
+        }
+        track();
+        return ans;
+      }
+
+      // --- example-1 ---
+
+      // leetCode 39  给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。
+      // candidates 中的数字可以无限制重复被选取。
+      // 说明：
+      // 所有数字（包括 target）都是正整数。
+      // 解集不能包含重复的组合。
+
+      // 时间复杂度：O(S)O(S)，其中 SS 为所有可行解的长度之和。从分析给出的搜索树我们可以看出时间复杂度取决于搜索树所有叶子节点的深度之和，即所有可行解的长度之和。
+      // 在这题中，我们很难给出一个比较紧的上界，我们知道 O(n×2 n) 是一个比较松的上界，即在这份代码中，n 个位置每次考虑选或者不选，如果符合条件，就加入答案的时间代价。
+      // 但是实际运行的时候，因为不可能所有的解都满足条件，递归的时候我们还会用 target - candidates[idx] >= 0 进行剪枝，所以实际运行情况是远远小于这个上界的。
+      // 空间复杂度：O(target)。除答案数组外，空间复杂度取决于递归的栈深度，在最差情况下需要递归O(target) 层。
+
+      var combinationSum = function (candidates, target) {
+        if (!candidates || !candidates.length) return [];
+
+        let count = 0;
+
+        // 返回结果是个数组，定义ans为数组
+        let ans = [];
+        function track(arr, tar, idx) {
+          // arr为一个结果，tar则是判断结束条件, idx是下标用于寻找下一个节点
+          if (tar < 0) {
+            // 结束
+            return;
+          }
+          if (tar === 0) {
+            // 满足结果
+            ans.push([...arr]); // 数组是引用类型
+            return;
+          }
+
+          // console.log(`track run ${count}, arr: ${arr}, tar: ${tar}`);
+
+          for (let i = idx; i < candidates.length; i++) {
+            arr.push(candidates[i]);
+            count += 1;
+            track(arr, tar - candidates[i], i); // 数字可以复用
+            arr.pop(); // 状态重置
+          }
+        }
+        track([], target, 0);
+        console.log(`track run: ${count}`);
+        return ans;
+      };
+
+      // 剪枝优化1，进行排序
+      // 方法一的count值为559
+      // 剪枝后只有255
+      var combinationSum1 = function (candidates, target) {
+        if (!candidates || !candidates.length) return [];
+
+        candidates.sort((a, b) => a - b);
+
+        let count = 0;
+
+        let ans = [];
+        function track(arr, tar, idx) {
+          if (tar < 0) {
+            return;
+          }
+          if (tar === 0) {
+            ans.push([...arr]);
+            return;
+          }
+
+          for (let i = idx; i < candidates.length; i++) {
+            // 剪枝
+            if (tar - candidates[i] < 0) {
+              break;
+            }
+            arr.push(candidates[i]);
+            count += 1;
+            track(arr, tar - candidates[i], i); // 数字可以复用
+            arr.pop(); // 状态重置
+          }
+        }
+
+        track([], target, 0);
+        console.log(`track run: ${count}`);
+        return ans;
+      };
+
+      let candidates = [2, 3, 6, 7],
+        target = 7;
+      let result = [[7], [2, 2, 3]];
+
+      candidates = [4, 11, 12, 14, 16, 18, 24, 2, 3, 6, 7, 5, 1, 9];
+      target = 12;
+      result = ['70个解'];
+
+      console.log(`candidates: ${candidates} , target: ${target} combinationSum => `);
+      console.log(`result: ${result} `);
+      console.log(`result: `, combinationSum(candidates, target));
+
+      console.log(``);
+      console.log(`result: `, combinationSum1(candidates, target));
+
+      // --- example-1 ---
+
+      // --- example-2 ---
+
+      // 我们取一个树的简单例子，会更形象
+      // leetCode 257
+      // 给你一个二叉树的根节点 root ，按 任意顺序 ，返回所有从根节点到叶子节点的路径。
+      // 叶子节点 是指没有子节点的节点。
+
+      var binaryTreePaths = function (root) {
+        // 边界情况
+        if (!root) return [];
+
+        // 结果为一个数组
+        const ans = [];
+
+        // 回溯函数
+        function track(node, array) {
+          // 入参为node 本身即可做回溯结束条件, array 一个结果
+          if (!node) {
+            return;
+          }
+
+          // 处理当前节点
+          array.push(node.val);
+
+          // 满足条件
+          if (!node.left && !node.right) {
+            ans.push(array.join('->'));
+          }
+
+          // 处理子节点
+          track(node.left, array);
+          track(node.right, array);
+
+          // 状态重置 这个节点已经访问过了
+          array.pop();
+        }
+
+        track(root, []);
+        return ans;
+      };
+
+      var root = [1, 2, 3, null, 5];
+      var res = ['1->2->5', '1->3'];
+
+      var tree = buildTreeByArray([...root]);
+
+      console.log('root = ', root);
+      console.log('res = ', res);
+      console.log('res = ', binaryTreePaths(tree));
+
+      // --- example-2 ---
+
+      // 回溯：是一种方法论。
+      // 剪枝：是一种方法。
+      // dfs：是一种算法。
+      // 可以理解为 回溯 = 剪枝 + dfs
+      // 和动态规划的
+      // 共同点：用于求解多阶段决策问题。
+      // 不同点：
+      // 动态规划只需要求我们评估最优解是多少，最优解对应的具体解是什么并不要求。因此很适合应用于评估一个方案的效果；
+      // 回溯算法可以搜索得到所有的方案（当然包括最优解），但是本质上它是一种遍历算法，时间复杂度很高。
+    </script>
+  </body>
+</html>
