@@ -26,3 +26,21 @@ function buildArrayByLinkNode(linkNode) {
   }
   return res;
 }
+
+function buildLinkNodeByArrayWithMap(array, Factory = ListNode) {
+  if (!array || !Array.isArray(array)) return null;
+  let header = { next: null };
+  let p = header;
+  let map = {};
+
+  for (let i = 0; i < array.length; i++) {
+    let node = new Factory(array[i]);
+    map[i] = node;
+    p.next = node;
+    p = p.next;
+  }
+  return {
+    node: header.next,
+    map
+  };
+}
