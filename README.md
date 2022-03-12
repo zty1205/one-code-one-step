@@ -142,7 +142,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (129 道)
+## 三、LeetCode (130 道)
 
 <br/>
 
@@ -252,6 +252,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [138.复制带随机指针的链表.html](./leetCode/138.复制带随机指针的链表.html)
 - [137.只出现一次的数字 II.html](./leetCode/137.只出现一次的数字II.html)
 - [141.环形链表.html](./leetCode/141.环形链表.html)
+- [142.环形链表 II.html](./leetCode/142.环形链表II.html)
 - [142.环形链表 II.html](./leetCode/142.环形链表II.html)
 - [144.二叉树的前序遍历.html](./leetCode/144.二叉树的前序遍历.html)
 - [145.二叉树的后序遍历.html](./leetCode/145.二叉树的后序遍历.html)
