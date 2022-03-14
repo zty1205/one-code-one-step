@@ -96,6 +96,15 @@
         }, 0);
       }
 
+      function hammingWeight(n) {
+        let ans = 0;
+        while (n) {
+          n = n & (n - 1);
+          ans++;
+        }
+        return ans;
+      }
+
       const testUnits = [
         {
           a: 12,
@@ -124,6 +133,7 @@
         console.log(`isEven ${a} = `, isEven(a));
         console.log(`isEven ${a} = `, isEven(a));
         console.log(`findOneInArray ${oneArray} = `, findOneInArray(oneArray));
+        console.log(`hammingWeight ${a} = `, hammingWeight(a), a.toString(2));
 
         console.log(``);
       });
