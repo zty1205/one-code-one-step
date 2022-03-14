@@ -142,7 +142,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (131 道)
+## 三、LeetCode (132 道)
 
 <br/>
 
@@ -268,6 +268,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [182.查找重复的电子邮箱.sql](./leetCode/182.查找重复的电子邮箱.sql)
 - [183.从不订购的客户.sql](./leetCode/183.从不订购的客户.sql)
 - [189.轮转数组.html](./leetCode/189.轮转数组.html)
+- [190.颠倒二进制位.html](./leetCode/190.颠倒二进制位.html)
 - [198.打家劫舍.html](./leetCode/198.打家劫舍.html)
 - [209.长度最小的子数组.html](./leetCode/209.长度最小的子数组.html)
 - [213.打家劫舍 II.html](./leetCode/213.打家劫舍II.html)
