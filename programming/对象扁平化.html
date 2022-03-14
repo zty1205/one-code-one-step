@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>对象扁平化</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script>
+      /**
+       * 对象扁平化 - 将对象压缩
+       * 这里只包含普通类型和简单对象和数组
+       * 如 {a: 1, b: {c: 1}, d: [1]} => {"a":1, 'a.c': 1, 'd[0]': 1}
+       */
+
+      // 扁平化 回溯
+      function flatten(obj) {
+        if (!obj) return null;
+        const ans = {};
+        function flat(key, value) {
+          // 区分数组，对象，普通类型
+          if (_typeof(value) === 'Array') {
+            // 处理空数组
+            if (value.length === 0) {
+              ans[key] = [];
+              return;
+            }
+
+            for (let i = 0; i < value.length; i++) {
+              flat(key ? `${key}.[${i}]` : `[${i}]`, value[i]);
+            }
+          } else if (_typeof(value) === 'Object') {
+            // 处理空对象
+            let empty = true;
+
+            for (let k in value) {
+              empty && (empty = false);
+              flat(key ? `${key}.${k}` : `${k}`, value[k]);
+            }
+
+            if (empty && key) {
+              ans[key] = {};
+              return;
+            }
+          } else {
+            ans[key] = value;
+          }
+        }
+        flat('', obj);
+        return ans;
+      }
+
+      // 反扁平化
+      function unFlatten(obj) {
+        if (!obj) return null;
+        const ans = {};
+        const regex = /\.?([^.\[\]]+)|\[(\d+)\]/g; // [匹配文本，捕获1，捕获2]
+        for (let key in obj) {
+          let cur = ans;
+          let prop = '';
+          let m;
+          while ((m = regex.exec(key))) {
+            cur = cur[prop] || (cur[prop] = m[2] ? [] : {});
+            prop = m[2] || m[1];
+          }
+          cur[prop] = obj[key];
+        }
+        return ans[''] || ans;
+      }
+
+      const obj = {
+        num: 1,
+        arr: [1, 2],
+        subObj: {
+          str: 'name'
+        },
+        etArr: [],
+        etObject: {}
+      };
+
+      const emptyObj = {};
+
+      const arr = [
+        1,
+        {
+          n: 2,
+          arr: [1]
+        },
+        [4, 5],
+        []
+      ];
+
+      const flatObj = flatten(obj);
+      const flatEmptyObj = flatten(emptyObj);
+      const flatArr = flatten(arr);
+
+      const unFlatObj = unFlatten(flatObj);
+      const unFlatArr = unFlatten(flatArr);
+      const unFlatEmptyObj = unFlatten(flatEmptyObj);
+
+      console.log('obj = ', obj);
+      console.log('');
+      console.log('flatObj = ', flatObj);
+      console.log('unFlatObj = ', unFlatObj);
+
+      console.log('\n-----\n\n');
+
+      console.log('emptyObj = ', emptyObj);
+      console.log('');
+      console.log('flatEmptyObj = ', flatEmptyObj);
+      console.log('unFlatEmptyObj = ', unFlatEmptyObj);
+
+      console.log('\n-----\n\n');
+
+      console.log('arr = ', arr);
+      console.log('');
+      console.log('flatArr = ', flatArr);
+      console.log('unFlatArr = ', unFlatArr);
+    </script>
+  </body>
+</html>

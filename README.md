@@ -279,7 +279,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 四、Programming (12 道)
+## 四、Programming (13 道)
 
 <br/>
 
@@ -295,6 +295,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [素数](./programming/isPrime.html)
 - [回文数](./programming/isPalindrome.html)
 - [实现 find 函数，使下列的代码调用正确](./programming/find.html)
+- [对象扁平化.html](./programming/对象扁平化.html)
 
 <br/>
 
