@@ -1,3 +1,5 @@
+const _toString = Object.prototype.toString;
+
 function deepClone(obj = new Object(), map = new WeakMap()) {
   if (obj == null || typeof obj !== 'object') return obj;
   if (obj instanceof Date) return new Date(obj);
@@ -14,4 +16,9 @@ function deepClone(obj = new Object(), map = new WeakMap()) {
     }
   }
   return o;
+}
+
+function _typeof(object) {
+  let str = _toString.call(object);
+  return str.substring(8, str.length - 1);
 }
