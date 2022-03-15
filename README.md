@@ -142,7 +142,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (134 道)
+## 三、LeetCode (135 道)
 
 <br/>
 
@@ -271,6 +271,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [189.轮转数组.html](./leetCode/189.轮转数组.html)
 - [190.颠倒二进制位.html](./leetCode/190.颠倒二进制位.html)
 - [191.位 1 的个数.html](./leetCode/191.位1的个数.html)
+- [193.有效电话号码.sh](./leetCode/193.有效电话号码.sh)
 - [198.打家劫舍.html](./leetCode/198.打家劫舍.html)
 - [209.长度最小的子数组.html](./leetCode/209.长度最小的子数组.html)
 - [213.打家劫舍 II.html](./leetCode/213.打家劫舍II.html)
