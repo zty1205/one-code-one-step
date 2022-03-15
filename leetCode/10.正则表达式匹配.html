@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>10. 正则表达式匹配</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/regular-expression-matching/
+
+      // 给你一个字符串 s 和一个字符规律 p，请你来实现一个支持 '.' 和 '*' 的正则表达式匹配。
+      // 提示：
+      // '.' 匹配任意单个字符
+      // '*' 匹配零个或多个前面的那一个元素
+      // 所谓匹配，是要涵盖 整个 字符串 s的，而不是部分字符串。
+      // 提示：
+      // 1 <= s.length <= 20
+      // 1 <= p.length <= 30
+      // s 只包含从 a-z 的小写字母。
+      // p 只包含从 a-z 的小写字母，以及字符 . 和 *。
+      // 保证每次出现字符 * 时，前面都匹配到有效的字符
+
+      /**
+       * @param {string} s
+       * @param {string} p
+       * @return {boolean}
+       */
+      var isMatch = function (s, p) {};
+
+      // --- answer-1 ---
+
+      // 动态规划
+      // dp[i][j] 表示 ss 的前 i 个字符与 p 中的前 j 个字符是否能够匹配
+      // p[j] != #   === dp[i-1][j-1] or false
+      // p[j] == #  === dp[i-1][j] or dp[i][j-2]  即*表示1个活0个
+      function match(s, i, p, j) {
+        if (i == 0) {
+          return false;
+        }
+        if (p[j - 1] === '.') {
+          return true;
+        }
+        return s[i - 1] === p[j - 1];
+      }
+
+      var isMatch = function (s, p) {
+        let sLen = s.length;
+        let pLen = p.length;
+
+        let dp = Array.from({ length: sLen + 1 }, () => Array.from({ length: pLen + 1 }).fill(false));
+        dp[0][0] = true;
+        for (let i = 0; i <= sLen; i++) {
+          for (let j = 1; j <= pLen; j++) {
+            if (p[j - 1] === '*') {
+              dp[i][j] = dp[i][j - 2];
+              if (match(s, i, p, j - 1)) {
+                dp[i][j] = dp[i][j] || dp[i - 1][j];
+              }
+            } else {
+              if (match(s, i, p, j)) {
+                dp[i][j] = dp[i - 1][j - 1];
+              }
+            }
+          }
+        }
+        return dp[sLen][pLen];
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      var isMatch = function (s, p) {
+        if (s.length === 0) {
+          // 必须是 a*b*这种形式
+          if (p.length % 2 != 0) return false;
+          let i = 1;
+          while (i < p.length) {
+            if (p[i] !== '*') return false;
+            i += 2;
+          }
+          return true;
+        }
+
+        if (p.length === 0) return false;
+
+        let c1 = s[0],
+          c2 = p[0],
+          c3 = p[1] || 'a';
+
+        if (c3 !== '*') {
+          if (c1 === c2 || c2 === '.') {
+            return isMatch(s.substring(1), p.substring(1));
+          } else {
+            return false;
+          }
+        } else {
+          if (c1 === c2 || c2 === '.') {
+            return isMatch(s.substring(1), p) || isMatch(s, p.substring(2));
+          } else {
+            return isMatch(s, p.substring(2));
+          }
+        }
+      };
+
+      // --- answer-2 ---
+
+      var s = 'aa',
+        p = 'a';
+      var result = false;
+      // 解释："a" 无法匹配 "aa" 整个字符串。
+
+      var s = 'aa',
+        p = 'a*';
+      var result = true;
+      // 解释：因为 '*' 代表可以匹配零个或多个前面的那一个元素, 在这里前面的元素就是 'a'。因此，字符串 "aa" 可被视为 'a' 重复了一次。
+
+      var s = 'ab',
+        p = '.*';
+      var result = true;
+      // 解释：".*" 表示可匹配零个或多个（'*'）任意字符（'.'）。
+
+      console.log('s = ', s);
+      console.log('p = ', p);
+      console.log('result = ', result);
+      console.log('isMatch = ', isMatch(s, p));
+    </script>
+  </body>
+</html>
