@@ -19,11 +19,14 @@ const html_template = `<!DOCTYPE html>
 </html>
 `;
 
-const sql_template = `-- #title#\n\n`;
+const sql_template = `-- #htmlTitle#\n\n`;
+
+const sh_template = `# #htmlTitle#\n\n`;
 
 const FILE_TEMPLATE = {
   html: html_template,
-  sql: sql_template
+  sql: sql_template,
+  sh: sh_template
 };
 
 const WIN_GIT_HEADER = `
