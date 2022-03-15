@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>203. 移除链表元素</title>
+  </head>
+  <body>
+    <script src="../helper/node.js"></script>
+    <script>
+      // https://leetcode-cn.com/problems/remove-linked-list-elements/
+
+      // 提示：
+      // 列表中的节点数目在范围 [0, 104] 内
+      // 1 <= Node.val <= 50
+      // 0 <= val <= 50
+
+      /**
+       * Definition for singly-linked list.
+       * function ListNode(val, next) {
+       *     this.val = (val===undefined ? 0 : val)
+       *     this.next = (next===undefined ? null : next)
+       * }
+       */
+      /**
+       * @param {ListNode} head
+       * @param {number} val
+       * @return {ListNode}
+       */
+      var removeElements = function (head, val) {};
+
+      // --- answer-1 ---
+
+      // 直接删除，头指针
+      var removeElements = function (head, val) {
+        if (!head) return null;
+        let h = { next: head };
+        let node = h;
+        while (node) {
+          // 如果后面的节点=val 删除继续判断
+          if (node.next && node.next.val === val) {
+            node.next = node.next.next;
+          } else {
+            // !=val 移动
+            node = node.next;
+          }
+        }
+        return h.next;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 迭代有了，再搞个递归
+      var removeElements = function (head, val) {
+        if (!head) return null;
+        head.next = removeElements(head.next, val);
+        return head.val === val ? head.next : head;
+      };
+
+      // --- answer-2 ---
+
+      var head = [1, 2, 6, 3, 4, 5, 6],
+        val = 6;
+      var result = [1, 2, 3, 4, 5];
+
+      // var head = [],
+      //   val = 1;
+      // var result = [];
+
+      var head = [7, 7, 7, 7],
+        val = 7;
+      var result = [];
+
+      var nodeList = buildLinkNodeByArray(head);
+      var remove = removeElements(nodeList, val);
+
+      console.log('head = ', head);
+      console.log('val = ', val);
+      console.log('result = ', result);
+      console.log('result = ', buildArrayByLinkNode(remove));
+      console.log('removeElements = ', remove);
+    </script>
+  </body>
+</html>
