@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>92. 反转链表 II</title>
+  </head>
+  <body>
+    <script src="../helper/node.js"></script>
+    <script>
+      // https://leetcode-cn.com/problems/reverse-linked-list-ii/
+
+      // 提示：
+      // 链表中节点数目为 n
+      // 1 <= n <= 500
+      // -500 <= Node.val <= 500
+      // 1 <= left <= right <= n
+
+      /**
+       * Definition for singly-linked list.
+       * function ListNode(val, next) {
+       *     this.val = (val===undefined ? 0 : val)
+       *     this.next = (next===undefined ? null : next)
+       * }
+       */
+      /**
+       * @param {ListNode} head
+       * @param {number} left
+       * @param {number} right
+       * @return {ListNode}
+       */
+      var reverseBetween = function (head, left, right) {};
+
+      // --- answer-1 ---
+
+      var reverseBetween = function (head, left, right) {
+        if (!head) return null;
+        if (left === right) return head;
+        let _h = { next: head };
+        let node = _h;
+        let i = 0;
+        while (++i < left) node = node.next;
+        // 此时 i===left pre指向left前的节点
+        let pre = null;
+        let cur = node.next;
+        let tmp = cur;
+
+        while (i++ <= right) {
+          // 反转
+          let next = cur.next;
+          cur.next = pre;
+          pre = cur;
+          cur = next;
+        }
+
+        node.next = pre;
+        tmp.next = cur;
+
+        return _h.next;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var head = [1, 2, 3, 4, 5],
+        left = 1,
+        right = 4;
+      var result = [1, 4, 3, 2, 5];
+
+      // var left = 1;
+      // var result = [4, 3, 2, 1, 5];
+
+      // var head = [5],
+      //   left = 1,
+      //   right = 1;
+      // var result = [5];
+
+      var node = buildLinkNodeByArray(head);
+      var reverse = reverseBetween(node, left, right);
+
+      console.log('node = ', node, left, right);
+      console.log('result = ', result);
+      console.log('result = ', buildArrayByLinkNode(reverse));
+      console.log('head = ', head);
+      console.log('reverseBetween = ', reverse);
+    </script>
+  </body>
+</html>

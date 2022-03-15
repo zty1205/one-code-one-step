@@ -142,7 +142,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (137 道)
+## 三、LeetCode (138 道)
 
 <br/>
 
@@ -226,6 +226,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [88.合并两个有序数组.html](./leetCode/88.合并两个有序数组.html)
 - [90.子集 II.html](./leetCode/90.子集II.html)
 - [91.解码方法.html](./leetCode/91.解码方法.html)
+- [92.反转链表 II.html](./leetCode/92.反转链表II.html)
 - [93.复原 IP 地址.html](./leetCode/93.复原IP地址.html)
 - [94.二叉树的中序遍历.html](./leetCode/94.二叉树的中序遍历.html)
 - [100.相同的树.html](./leetCode/100.相同的树.html)
