@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>217. 存在重复元素</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/contains-duplicate/
+
+      // 提示：
+      // 1 <= nums.length <= 105
+      // -109 <= nums[i] <= 109
+
+      /**
+       * @param {number[]} nums
+       * @return {boolean}
+       */
+      var containsDuplicate = function (nums) {};
+
+      // --- answer-1 ---
+
+      // hash
+      // 时间空间复杂度 O(n)
+      var containsDuplicate = function (nums = []) {
+        let map = {};
+        for (let i = 0; i < nums.length; i++) {
+          let num = nums[i];
+          if (num in map) return true;
+          map[num] = 1;
+        }
+        return false;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 排序
+      // 时间复杂度 O(nlogn)
+      // 空间复杂度 O(n)
+      var containsDuplicate = function (nums) {
+        nums.sort((a, b) => a - b);
+        for (let i = 0; i < nums.length - 1; i++) {
+          if (nums[i] === nums[i + 1]) {
+            return true;
+          }
+        }
+        return false;
+      };
+
+      // --- answer-2 ---
+
+      var nums = [1, 2, 3, 1];
+      var result = true;
+
+      var nums = [1, 2, 3, 4];
+      var result = false;
+
+      var nums = [1, 1, 1, 3, 3, 4, 3, 2, 4, 2];
+      var result = true;
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('containsDuplicate = ', containsDuplicate(nums));
+    </script>
+  </body>
+</html>

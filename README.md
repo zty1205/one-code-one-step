@@ -142,7 +142,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (140 道)
+## 三、LeetCode (141 道)
 
 <br/>
 
@@ -280,6 +280,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [206.反转链表.html](./leetCode/206.反转链表.html)
 - [209.长度最小的子数组.html](./leetCode/209.长度最小的子数组.html)
 - [213.打家劫舍 II.html](./leetCode/213.打家劫舍II.html)
+- [217.存在重复元素.html](./leetCode/217.存在重复元素.html)
 - [232.用栈实现队列.html](./leetCode/232.用栈实现队列.html)
 - [257.二叉树的所有路径.html](./leetCode/257.二叉树的所有路径.html)
 - [337.打家劫舍 III.html](./leetCode/337.打家劫舍III.html)
