@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>205. 同构字符串</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/isomorphic-strings/
+
+      // 给定两个字符串 s 和 t ，判断它们是否是同构的。
+      // 如果 s 中的字符可以按某种映射关系替换得到 t ，那么这两个字符串是同构的。
+      // 每个出现的字符都应当映射到另一个字符，同时不改变字符的顺序。不同字符不能映射到同一个字符上，相同字符只能映射到同一个字符上，字符可以映射到自己本身。
+      // 提示：
+      // 1 <= s.length <= 5 * 104
+      // t.length == s.length
+      // s 和 t 由任意有效的 ASCII 字符组成
+
+      /**
+       * @param {string} s
+       * @param {string} t
+       * @return {boolean}
+       */
+      var isIsomorphic = function (s, t) {};
+
+      // --- answer-1 ---
+
+      // hash 重复的字母的结构相似
+      var isIsomorphic = function (s, t) {
+        let sMap = {};
+        let tMap = {};
+        for (let i = 0; i < s.length; i++) {
+          let chs = s[i];
+          let ct = t[i];
+          if (chs in sMap && ct in tMap) {
+            if (sMap[chs] !== tMap[ct]) return false;
+          } else if (!(chs in sMap) && !(ct in tMap)) {
+            sMap[chs] = i;
+            tMap[ct] = i;
+          } else {
+            return false;
+          }
+        }
+        return true;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var s = 'egg',
+        t = 'add';
+      var result = true;
+
+      // var s = 'foo',
+      //   t = 'bar';
+      // var result = false;
+
+      // var s = 'paper',
+      //   t = 'title';
+      // var result = true;
+
+      console.log('s = ', s);
+      console.log('t = ', t);
+      console.log('result = ', result);
+      console.log('isIsomorphic = ', isIsomorphic(s, t));
+    </script>
+  </body>
+</html>
