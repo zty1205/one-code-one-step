@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>23.合并K个升序链表</title>
   </head>
   <body>
     <script>
@@ -54,6 +54,28 @@
         return merge(array, 0, len - 1);
       };
 
+      // 排序走起
+      var mergeKLists1 = function (lists = []) {
+        if (!lists.length) return null;
+        let arr = [];
+        for (let i = 0; i < lists.length; i++) {
+          let node = lists[i];
+          while (node) {
+            arr.push(node);
+            node = node.next;
+          }
+        }
+        arr.sort((a, b) => a.val - b.val);
+        let header = { next: null };
+        let p = header;
+        for (let i = 0; i < arr.length; i++) {
+          let node = arr[i];
+          p.next = node;
+          p = p.next;
+        }
+        return header.next;
+      };
+
       let l1 = {
         val: 1,
         next: {
@@ -82,7 +104,12 @@
         }
       };
       let lists = [l1, l2, l3];
+
+      let lists1 = JSON.parse(JSON.stringify(lists));
+
       console.log('mergeKLists = ', mergeKLists(lists));
+
+      console.log('mergeKLists = ', mergeKLists1(lists1));
     </script>
   </body>
 </html>
