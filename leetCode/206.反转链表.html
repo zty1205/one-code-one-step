@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>206. 反转链表</title>
+  </head>
+  <body>
+    <script src="../helper/node.js"></script>
+    <script>
+      // https://leetcode-cn.com/problems/reverse-linked-list/
+
+      /**
+       * Definition for singly-linked list.
+       * function ListNode(val, next) {
+       *     this.val = (val===undefined ? 0 : val)
+       *     this.next = (next===undefined ? null : next)
+       * }
+       */
+      /**
+       * @param {ListNode} head
+       * @return {ListNode}
+       */
+      var reverseList = function (head) {};
+
+      // --- answer-1 ---
+
+      var reverseList = function (head) {
+        if (!head) return null;
+
+        let pre = head;
+        let cur = head.next;
+        pre.next = null;
+        let tmp = cur;
+        while (cur) {
+          tmp = cur.next;
+          cur.next = pre;
+          pre = cur;
+          cur = tmp;
+        }
+        return pre;
+      };
+
+      var reverseList = function (head) {
+        let pre = null;
+        let cur = head;
+        while (cur) {
+          const next = cur.next;
+          cur.next = pre;
+          pre = cur;
+          cur = next;
+        }
+        return pre;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 迭代
+      var reverseList = function (head) {
+        if (!head || !head.next) return head;
+
+        const newHead = reverseList(head.next);
+        head.next.next = head;
+        head.next = null;
+        return newHead;
+      };
+
+      // --- answer-2 ---
+
+      var head = buildLinkNodeByArray([1, 2, 3, 4, 5]);
+      var result = [5, 4, 3, 2, 1];
+
+      var reverse = reverseList(head);
+
+      console.log('head = ', head);
+      console.log('result = ', result);
+      console.log('result = ', buildArrayByLinkNode(reverse));
+      console.log('reverseList = ', reverse);
+    </script>
+  </body>
+</html>
