@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>233. 数字 1 的个数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/number-of-digit-one/
+
+      // 给定一个整数 n，计算所有小于等于 n 的非负整数中数字 1 出现的个数。
+      // 提示：
+      // 0 <= n <= 109
+
+      /**
+       * @param {number} n
+       * @return {number}
+       */
+      var countDigitOne = function (n) {};
+
+      // --- answer-1 ---
+
+      // 2位数：1 + 0~9 ， 1~9 + 1 = 19个 = 9*1+1*10
+      // 3位数 1+ 00~99 ， 1~9 + 1 + 0~9 ，1~9，+ 0~9 + 1 = 100+90+90=280=  9*20+1*100
+      // 统计每位上1出现的次数
+
+      // 数学知识
+      // 第k位1的出现次数 (n/10^k+1)*10^k + min( max(n % 10^k+1 - 10^k + 1 ), 10^k)
+      // 时间复杂度O(logN) 空间复杂度O(1)
+      var countDigitOne = function (n) {
+        if (n === 0) return 0;
+        if (n < 10) return 1;
+        let num = 1;
+        let result = 0;
+        for (let k = 0; n >= num; ++k) {
+          result += Math.floor(n / (num * 10)) * num + Math.min(Math.max((n % (num * 10)) - num + 1, 0), num);
+          num *= 10;
+        }
+        return result;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var n = 13;
+      var result = 6;
+
+      // var n = 0;
+      // var result = 0;
+
+      console.log('n = ', n);
+      console.log('result = ', result);
+      console.log('countDigitOne = ', countDigitOne(n));
+    </script>
+  </body>
+</html>
