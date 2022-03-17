@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>258. 各位相加</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/add-digits/
+
+      // 给定一个非负整数 num，反复将各个位上的数字相加，直到结果为一位数。返回这个结果。
+      // 提示：
+      // 0 <= num <= 231 - 1
+
+      /**
+       * @param {number} num
+       * @return {number}
+       */
+      var addDigits = function (num) {};
+
+      // --- answer-1 ---
+
+      var addDigits = function (num) {
+        while (num > 9) {
+          let sum = 0;
+          while (num > 0) {
+            let y = num % 10;
+            num = (num - y) / 10;
+            sum += y;
+          }
+          num = sum;
+        }
+        return num;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // num 展开为 an * 10 ^ n 推导
+      // num 不是 99 的倍数时，其数根即为 num 除以 9 的余数。
+      // num 是 9 的倍数时：
+      // 如果 num=0，则其数根是 0；
+      // 如果 num>0，则各位相加的结果大于 0，其数根也大于 0，因此其数根是 9。
+      var addDigits = function (num) {
+        return ((num - 1) % 9) + 1;
+      };
+
+      // --- answer-2 ---
+
+      var num = 38;
+      var result = 2;
+      // 解释: 各位相加的过程为：
+
+      var num = 0;
+      var result = 0;
+
+      var num = 10;
+      var result = 1;
+
+      console.log('num = ', num);
+      console.log('result = ', result);
+      console.log('addDigits = ', addDigits(num));
+    </script>
+  </body>
+</html>
