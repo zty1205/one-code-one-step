@@ -142,7 +142,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (148 道)
+## 三、LeetCode (149 道)
 
 <br/>
 
@@ -284,6 +284,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [213.打家劫舍 II.html](./leetCode/213.打家劫舍II.html)
 - [217.存在重复元素.html](./leetCode/217.存在重复元素.html)
 - [219.存在重复元素 II.html](./leetCode/219.存在重复元素II.html)
+- [225.用队列实现栈.html](./leetCode/225.用队列实现栈.html)
 - [232.用栈实现队列.html](./leetCode/232.用栈实现队列.html)
 - [233.数字 1 的个数.html](./leetCode/233.数字1的个数.html)
 - [235.二叉搜索树的最近公共祖先.html](./leetCode/235.二叉搜索树的最近公共祖先.html)

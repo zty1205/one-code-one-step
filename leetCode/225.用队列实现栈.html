@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>225. 用队列实现栈</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/implement-stack-using-queues/
+
+      // 请你仅使用两个队列实现一个后入先出（LIFO）的栈，并支持普通栈的全部四种操作（push、top、pop 和 empty）。
+      // 实现 MyStack 类：
+      // 提示：
+      // void push(int x) 将元素 x 压入栈顶。
+      // int pop() 移除并返回栈顶元素。
+      // int top() 返回栈顶元素。
+      // boolean empty() 如果栈是空的，返回 true ；否则，返回 false 。
+      // 注意：
+      // 提示：
+      // 你只能使用队列的基本操作 —— 也就是 push to back、peek/pop from front、size 和 is empty 这些操作。
+      // 你所使用的语言也许不支持队列。 你可以使用 list （列表）或者 deque（双端队列）来模拟一个队列 , 只要是标准的队列操作即可。
+      // 提示：
+      // 1 <= x <= 9
+      // 最多调用100 次 push、pop、top 和 empty
+      // 每次调用 pop 和 top 都保证栈不为空
+
+      var MyStack = function () {};
+      /**
+       * @param {number} x
+       * @return {void}
+       */
+      MyStack.prototype.push = function (x) {};
+      /**
+       * @return {number}
+       */
+      MyStack.prototype.pop = function () {};
+      /**
+       * @return {number}
+       */
+      MyStack.prototype.top = function () {};
+      /**
+       * @return {boolean}
+       */
+      MyStack.prototype.empty = function () {};
+
+      // --- answer-1 ---
+
+      var MyStack = function () {
+        this.queue = [];
+        this.helper = [];
+      };
+
+      // 最新的元素放最前面
+      MyStack.prototype.push = function (x) {
+        this.helper.push(x);
+        while (this.queue.length) {
+          this.helper.push(this.queue.shift());
+        }
+        let temp = this.queue;
+        this.queue = this.helper;
+        this.helper = temp;
+      };
+
+      MyStack.prototype.pop = function () {
+        return this.queue.shift();
+      };
+
+      MyStack.prototype.top = function () {
+        return this.queue[0];
+      };
+
+      MyStack.prototype.empty = function () {
+        return this.queue.length === 0;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 上面的辅助空间可以不需要，即使用一个队列
+      var MyStack = function () {
+        this.queue = [];
+      };
+
+      // 最新的元素放最前面
+      MyStack.prototype.push = function (x) {
+        let length = this.queue.length;
+        this.queue.push(x);
+        // 出队再入队
+        for (let i = 0; i < length; i++) {
+          this.queue.push(this.queue.shift());
+        }
+      };
+
+      MyStack.prototype.pop = function () {
+        return this.queue.shift();
+      };
+
+      MyStack.prototype.top = function () {
+        return this.queue[0];
+      };
+
+      MyStack.prototype.empty = function () {
+        return this.queue.length === 0;
+      };
+
+      // --- answer-2 ---
+
+      // var x = ;
+      // ["MyStack", "push", "push", "top", "pop", "empty"];
+      // [[], [1], [2], [], [], []]
+      // [null,null,null,2,2,false]
+
+      var myStack = new MyStack();
+
+      myStack.push(1);
+      myStack.push(2);
+
+      console.log('1,2 top = ', myStack.top());
+      console.log('1,2 top = ', myStack.top());
+
+      console.log('1,2 empty = ', myStack.empty());
+    </script>
+  </body>
+</html>
