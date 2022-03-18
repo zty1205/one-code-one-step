@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>220. 存在重复元素 III</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/contains-duplicate-iii/
+
+      // 给你一个整数数组 nums 和两个整数 k 和 t 。请你判断是否存在 两个不同下标 i 和 j，使得 abs(nums[i] - nums[j]) <= t ，同时又满足 abs(i - j) <= k 。
+      // 如果存在则返回 true，不存在返回 false。
+      // 提示：
+      // 0 <= nums.length <= 2 * 104
+      // -231 <= nums[i] <= 231 - 1
+      // 0 <= k <= 104
+      // 0 <= t <= 231 - 1
+
+      /**
+       * @param {number[]} nums
+       * @param {number} k
+       * @param {number} t
+       * @return {boolean}
+       */
+      var containsNearbyAlmostDuplicate = function (nums, k, t) {};
+
+      // --- answer-1 ---
+
+      // 暴力法
+      var containsNearbyAlmostDuplicate = function (nums, k, t) {
+        for (let i = 0; i < nums.length; i++) {
+          for (let j = 1; j <= k; j++) {
+            if (Math.abs(nums[i] - nums[i + j]) <= t) return true;
+          }
+        }
+        return false;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 利用桶排序的思想
+      // 整数y 表示为 y = a * (t+1) + b; 0<=b<=t，这个数存放在桶a， 桶大小t+1
+      // 为什么是t+1 而不是t?
+      // 为了兼容t = 0的情况
+      // 如果该数在同一个桶有其他数，那么满足条件
+      // 相邻的桶也存在可以满足的数
+
+      function getID(x, w) {
+        return x < 0 ? Math.floor((x + 1) / w) - 1 : Math.floor(x / w);
+      }
+
+      var containsNearbyAlmostDuplicate = function (nums, k, t) {
+        const n = nums.length;
+        const mp = new Map();
+        for (let i = 0; i < n; ++i) {
+          const x = nums[i];
+          const id = getID(x, t + 1);
+          if (mp.has(id)) {
+            return true;
+          }
+          if (mp.has(id - 1) && Math.abs(x - mp.get(id - 1)) <= t) {
+            return true;
+          }
+          if (mp.has(id + 1) && Math.abs(x - mp.get(id + 1)) <= t) {
+            return true;
+          }
+          mp.set(id, x);
+          if (i >= k) {
+            mp.delete(getID(nums[i - k], t + 1));
+          }
+        }
+        return false;
+      };
+
+      // --- answer-2 ---
+
+      var nums = [1, 2, 3, 1],
+        k = 3,
+        t = 0;
+      var result = true;
+
+      var nums = [1, 0, 1, 1],
+        k = 1,
+        t = 2;
+      var result = true;
+
+      var nums = [1, 5, 9, 1, 5, 9],
+        k = 2,
+        t = 3;
+      var result = false;
+
+      // var nums = [1, 2, 2, 3, 4, 5],
+      //   k = 3,
+      //   t = 0,
+      //   result = true;
+
+      console.log('nums = ', nums);
+      console.log('k = ', k);
+      console.log('t = ', t);
+      console.log('result = ', result);
+      console.log('containsNearbyAlmostDuplicate = ', containsNearbyAlmostDuplicate(nums, k, t));
+    </script>
+  </body>
+</html>
