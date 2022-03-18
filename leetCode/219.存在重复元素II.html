@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>219. 存在重复元素 II</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/contains-duplicate-ii/
+
+      // 给你一个整数数组 nums 和一个整数 k ，判断数组中是否存在两个 不同的索引 i 和 j ，满足 nums[i] == nums[j] 且 abs(i - j) <= k 。如果存在，返回 true ；否则，返回 false 。
+      // 提示：
+      // 1 <= nums.length <= 105
+      // -109 <= nums[i] <= 109
+      // 0 <= k <= 105
+
+      /**
+       * @param {number[]} nums
+       * @param {number} k
+       * @return {boolean}
+       */
+      var containsNearbyDuplicate = function (nums, k) {};
+
+      // --- answer-1 ---
+
+      // hash
+      var containsNearbyDuplicate = function (nums = [], k) {
+        if (k === 0) return false;
+        let map = {};
+        for (let i = 0; i < nums.length; i++) {
+          let num = nums[i];
+          if (num in map && i - map[num] <= k) return true;
+
+          map[num] = i;
+        }
+        return false;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 滑动窗口 窗口大小为k
+      // 空间复杂度降为 O(k)
+
+      var containsNearbyDuplicate = function (nums, k) {
+        const set = new Set();
+        for (let i = 0; i < nums.length; i++) {
+          if (i > k) set.delete(nums[i - k - 1]);
+
+          if (set.has(nums[i])) return true;
+
+          set.add(nums[i]);
+        }
+        return false;
+      };
+
+      // --- answer-2 ---
+
+      var nums = [1, 2, 3, 1],
+        k = 3;
+      var result = true;
+
+      var nums = [1, 0, 1, 1],
+        k = 1;
+      var result = true;
+
+      var nums = [1, 2, 3, 1, 2, 3],
+        k = 2;
+      var result = false;
+
+      console.log('nums = ', nums);
+      console.log('k = ', k);
+      console.log('result = ', result);
+      console.log('containsNearbyDuplicate = ', containsNearbyDuplicate(nums, k));
+    </script>
+  </body>
+</html>
