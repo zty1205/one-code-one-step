@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>228. 汇总区间</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/summary-ranges/
+
+      // 给定一个  无重复元素 的 有序 整数数组 nums 。
+      // 返回 恰好覆盖数组中所有数字 的 最小有序 区间范围列表 。也就是说，nums 的每个元素都恰好被某个区间范围所覆盖，并且不存在属于某个范围但不属于 nums 的数字 x 。
+      // 列表中的每个区间范围 [a,b] 应该按如下格式输出：
+      // 提示：
+      // "a->b" ，如果 a != b
+      // "a" ，如果 a == b
+      // 提示：
+      // 0 <= nums.length <= 20
+      // -231 <= nums[i] <= 231 - 1
+      // nums 中的所有值都 互不相同
+      // nums 按升序排列
+
+      /**
+       * @param {number[]} nums
+       * @return {string[]}
+       */
+      var summaryRanges = function (nums) {};
+
+      // --- answer-1 ---
+
+      // 如果是连续的数 就用一个区间包起来
+      var summaryRanges = function (nums) {
+        const ans = [];
+        let i = 0;
+        while (i < nums.length) {
+          const low = i;
+          i++;
+          while (i < nums.length && nums[i] === nums[i - 1] + 1) {
+            i++;
+          }
+          ans.push(`${nums[low]}${low < i - 1 ? '->' + nums[i - 1] : ''}`);
+        }
+        return ans;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var nums = [0, 1, 2, 4, 5, 7];
+      var result = ['0->2', '4->5', '7'];
+      // 解释：区间范围是：
+
+      var nums = [0, 2, 3, 4, 6, 8, 9];
+      var result = ['0', '2->4', '6', '8->9'];
+      // 解释：区间范围是：
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('summaryRanges = ', summaryRanges(nums));
+    </script>
+  </body>
+</html>
