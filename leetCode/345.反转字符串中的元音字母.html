@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>345. 反转字符串中的元音字母</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/reverse-vowels-of-a-string/
+
+      // 给你一个字符串 s ，仅反转字符串中的所有元音字母，并返回结果字符串。
+      // 元音字母包括 'a'、'e'、'i'、'o'、'u'，且可能以大小写两种形式出现。
+      // 提示：
+      // 1 <= s.length <= 3 * 105
+      // s 由 可打印的 ASCII 字符组成
+
+      /**
+       * @param {string} s
+       * @return {string}
+       */
+      var reverseVowels = function (s) {};
+
+      // --- answer-1 ---
+
+      // 首尾双指针
+      const yuan = {
+        a: true,
+        A: true,
+        e: true,
+        E: true,
+        i: true,
+        I: true,
+        o: true,
+        O: true,
+        u: true,
+        U: true
+      };
+
+      var reverseVowels = function (s) {
+        let arr = Array.from(s);
+        let start = 0;
+        let end = arr.length - 1;
+        while (start < end) {
+          while (!yuan[arr[start]] && start < arr.length) start++;
+          while (!yuan[arr[end]] && end > 0) end--;
+
+          if (start < end) {
+            let tmp = arr[start];
+            arr[start] = arr[end];
+            arr[end] = tmp;
+            start++;
+            end--;
+          }
+        }
+        return arr.join('');
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var s = 'hello';
+      var result = 'holle';
+
+      var s = 'leetcode';
+      //          l  tc d
+      var result = 'leotcede';
+
+      var s = 'bbbvv';
+      var result = 'bbbvv';
+
+      var s = '.,';
+      var result = '.,';
+
+      console.log('s = ', s);
+      console.log('result = ', result);
+      console.log('reverseVowels = ', reverseVowels(s));
+    </script>
+  </body>
+</html>
