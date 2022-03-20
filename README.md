@@ -142,7 +142,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (153 道)
+## 三、LeetCode (154 道)
 
 <br/>
 
@@ -291,6 +291,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [228.汇总区间.html](./leetCode/228.汇总区间.html)
 - [232.用栈实现队列.html](./leetCode/232.用栈实现队列.html)
 - [233.数字 1 的个数.html](./leetCode/233.数字1的个数.html)
+- [234.回文链表.html](./leetCode/234.回文链表.html)
 - [235.二叉搜索树的最近公共祖先.html](./leetCode/235.二叉搜索树的最近公共祖先.html)
 - [237.删除链表中的节点.html](./leetCode/237.删除链表中的节点.html)
 - [257.二叉树的所有路径.html](./leetCode/257.二叉树的所有路径.html)
