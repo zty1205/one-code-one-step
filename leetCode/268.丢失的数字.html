@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>268. 丢失的数字</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/missing-number/
+
+      // 给定一个包含 [0, n] 中 n 个数的数组 nums ，找出 [0, n] 这个范围内没有出现在数组中的那个数。
+      // 提示：
+      // n == nums.length
+      // 1 <= n <= 104
+      // 0 <= nums[i] <= n
+      // nums 中的所有数字都 独一无二
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var missingNumber = function (nums) {};
+
+      // --- answer-1 ---
+
+      // hash
+      var missingNumber = function (nums = []) {
+        let map = nums.reduce((pre, cur) => {
+          pre[cur] = 1;
+          return pre;
+        }, {});
+        for (let i = 0; i <= nums.length; i++) {
+          if (!(i in map)) {
+            return i;
+          }
+        }
+        return -1;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 排序
+      var missingNumber = function (nums) {
+        nums.sort((a, b) => a - b);
+        for (let i = 0; i < nums.length; i++) {
+          if (nums[i] !== i) {
+            return i;
+          }
+        }
+        return nums.length;
+      };
+
+      // --- answer-2 ---
+
+      // --- answer-3 ---
+
+      // 等差数列求和
+      var missingNumber = function (nums) {
+        const n = nums.length;
+        let total = Math.floor((n * (n + 1)) / 2);
+        let arrSum = 0;
+        for (let i = 0; i < n; i++) {
+          arrSum += nums[i];
+        }
+        return total - arrSum;
+      };
+
+      // --- answer-3 ---
+
+      var nums = [3, 0, 1];
+      var result = 2;
+      // 解释：n = 3，因为有 3 个数字，所以所有的数字都在范围 [0,3] 内。2 是丢失的数字，因为它没有出现在 nums 中。
+
+      var nums = [0, 1];
+      var result = 2;
+      // 解释：n = 2，因为有 2 个数字，所以所有的数字都在范围 [0,2] 内。2 是丢失的数字，因为它没有出现在 nums 中。
+
+      var nums = [9, 6, 4, 2, 3, 5, 7, 0, 1];
+      var result = 8;
+      // 解释：n = 9，因为有 9 个数字，所以所有的数字都在范围 [0,9] 内。8 是丢失的数字，因为它没有出现在 nums 中。
+
+      var nums = [0];
+      var result = 1;
+      // 解释：n = 1，因为有 1 个数字，所以所有的数字都在范围 [0,1] 内。1 是丢失的数字，因为它没有出现在 nums 中。
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('missingNumber = ', missingNumber(nums));
+    </script>
+  </body>
+</html>
