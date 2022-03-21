@@ -142,7 +142,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (156 道)
+## 三、LeetCode (157 道)
 
 <br/>
 
@@ -296,6 +296,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [237.删除链表中的节点.html](./leetCode/237.删除链表中的节点.html)
 - [257.二叉树的所有路径.html](./leetCode/257.二叉树的所有路径.html)
 - [258.各位相加.html](./leetCode/258.各位相加.html)
+- [263.丑数.html](./leetCode/263.丑数.html)
 - [268.丢失的数字.html](./leetCode/268.丢失的数字.html)
 - [337.打家劫舍 III.html](./leetCode/337.打家劫舍III.html)
 - [345.反转字符串中的元音字母.html](./leetCode/345.反转字符串中的元音字母.html)

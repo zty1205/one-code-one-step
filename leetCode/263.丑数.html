@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>263. 丑数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/ugly-number/
+
+      // 给你一个整数 n ，请你判断 n 是否为 丑数 。如果是，返回 true ；否则，返回 false 。
+      // 丑数 就是只包含质因数 2、3 和/或 5 的正整数。
+      // 提示：
+      // -231 <= n <= 231 - 1
+
+      /**
+       * @param {number} n
+       * @return {boolean}
+       */
+      var isUgly = function (n) {};
+
+      // --- answer-1 ---
+
+      var isUgly = function (n) {
+        if (n <= 0) {
+          return false;
+        }
+        const factors = [2, 3, 5];
+        for (const factor of factors) {
+          while (n % factor === 0) {
+            n /= factor;
+          }
+        }
+        return n == 1;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      // var n = 6;
+      // var result = true;
+      // 解释：6 = 2 × 3
+
+      // var n = 8;
+      // var result = true;
+      // 解释：8 = 2 × 2 × 2
+
+      var n = 14;
+      var result = false;
+      // 解释：14 不是丑数，因为它包含了另外一个质因数 7 。
+
+      // var n = 1;
+      // var result = true;
+      // 解释：1 通常被视为丑数。
+
+      console.log('n = ', n);
+      console.log('result = ', result);
+      console.log('isUgly = ', isUgly(n));
+    </script>
+  </body>
+</html>
