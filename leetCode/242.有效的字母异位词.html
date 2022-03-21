@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>242. 有效的字母异位词</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/valid-anagram/
+
+      // 给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。
+      // 注意：若 s 和 t 中每个字符出现的次数都相同，则称 s 和 t 互为字母异位词。
+      // 提示：
+      // 1 <= s.length, t.length <= 5 * 104
+      // s 和 t 仅包含小写字母
+
+      /**
+       * @param {string} s
+       * @param {string} t
+       * @return {boolean}
+       */
+      var isAnagram = function (s, t) {};
+
+      // --- answer-1 ---
+
+      function buildMap(s) {
+        let map = {};
+        for (let i = 0; i < s.length; i++) {
+          map[s[i]] = (map[s[i]] || 0) + 1;
+        }
+        return map;
+      }
+
+      // hash
+      var isAnagram = function (s, t) {
+        if (s.length !== t.length) return false;
+        let sMap = buildMap(s);
+        let tMap = buildMap(t);
+        for (let k in sMap) {
+          if (sMap[k] !== tMap[k]) return false;
+        }
+        return true;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 排序
+      var isAnagram = function (s, t) {
+        return s.length == t.length && Array.from(s).sort().join('') === Array.from(t).sort().join('');
+      };
+
+      // --- answer-2 ---
+
+      var s = 'anagram',
+        t = 'nagaram';
+      var result = true;
+
+      var s = 'rat',
+        t = 'car';
+      var result = false;
+
+      console.log('s = ', s);
+      console.log('t = ', t);
+      console.log('result = ', result);
+      console.log('isAnagram = ', isAnagram(s, t));
+    </script>
+  </body>
+</html>
