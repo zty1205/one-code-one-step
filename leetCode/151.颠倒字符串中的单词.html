@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>151. 颠倒字符串中的单词</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/reverse-words-in-a-string/
+
+      // 给你一个字符串 s ，颠倒字符串中 单词 的顺序。
+      // 单词 是由非空格字符组成的字符串。s 中使用至少一个空格将字符串中的 单词 分隔开。
+      // 返回 单词 顺序颠倒且 单词 之间用单个空格连接的结果字符串。
+      // 注意：输入字符串 s中可能会存在前导空格、尾随空格或者单词间的多个空格。返回的结果字符串中，单词间应当仅用单个空格分隔，且不包含任何额外的空格。
+      // 提示：
+      // 1 <= s.length <= 104
+      // s 包含英文大小写字母、数字和空格 ' '
+      // s 中 至少存在一个 单词
+
+      /**
+       * @param {string} s
+       * @return {string}
+       */
+      var reverseWords = function (s) {};
+
+      // --- answer-1 ---
+
+      // 原生api 卡卡解决
+      var reverseWords = function (s = '') {
+        return s.trim().replace(/\s+/g, ' ').split(' ').reverse().join(' ');
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 遍历
+      var reverseWords = function (s = '') {
+        s = s.trim();
+        let ans = '';
+        let words = '';
+        for (let i = 0; i < s.length; i++) {
+          if (s[i] === ' ') {
+            if (words) {
+              ans = ' ' + words + ans;
+              words = '';
+            }
+          } else {
+            words += s[i];
+          }
+        }
+        if (words) ans = words + ans;
+        return ans;
+      };
+
+      // --- answer-2 ---
+
+      var s = 'the sky is blue';
+      var result = 'blue is sky the';
+
+      // var s = '  hello world  ';
+      // var result = 'world hello';
+      // 解释：颠倒后的字符串中不能存在前导空格和尾随空格。
+
+      // var s = 'a good   example';
+      // var result = 'example good a';
+      // 解释：如果两个单词间有多余的空格，颠倒后的字符串需要将单词间的空格减少到仅有一个。
+
+      console.log('s = ', s);
+      console.log('result = ', result);
+      console.log('result = ', reverseWords(s));
+    </script>
+  </body>
+</html>
