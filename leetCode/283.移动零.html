@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>283. 移动零</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/move-zeroes/
+
+      // 给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。
+      // 请注意 ，必须在不复制数组的情况下原地对数组进行操作。
+      // 提示：
+      // 1 <= nums.length <= 104
+      // -231 <= nums[i] <= 231 - 1
+
+      /**
+       * @param {number[]} nums
+       * @return {void} Do not return anything, modify nums in-place instead.
+       */
+      var moveZeroes = function (nums) {};
+
+      // --- answer-1 ---
+
+      // 双指针 指向0的和非0的互换
+      var moveZeroes = function (nums = []) {
+        for (let i = 0; i < nums.length; i++) {
+          //   debugger;
+          if (nums[i] === 0) {
+            let j = i;
+            while (nums[j] === 0 && j < nums.length) j++;
+            if (nums[j]) {
+              // j!==i && j < nums.length && nums[j]!==0
+              nums[i] = nums[j];
+              nums[j] = 0;
+            }
+          }
+        }
+      };
+
+      // 优化比较次数
+      var moveZeroes = function (nums = []) {
+        let left = 0,
+          right = 0;
+        while (right < nums.length) {
+          if (nums[right]) {
+            let temp = nums[left];
+            nums[left] = nums[right];
+            nums[right] = temp;
+            left++;
+          }
+          right++;
+        }
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var nums = [0, 1, 0, 3, 12];
+      var result = [1, 3, 12, 0, 0];
+
+      var nums = [0];
+      var result = [0];
+
+      console.log('nums = ', [...nums]);
+      console.log('result = ', result);
+      moveZeroes(nums);
+      console.log('moveZeroes = ', nums);
+    </script>
+  </body>
+</html>
