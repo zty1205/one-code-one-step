@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>290. 单词规律</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/word-pattern/
+
+      // 给定一种规律 pattern 和一个字符串 s ，判断 s 是否遵循相同的规律。
+      // 这里的 遵循 指完全匹配，例如， pattern 里的每个字母和字符串 str 中的每个非空单词之间存在着双向连接的对应规律。
+      // 提示：
+      // 1 <= pattern.length <= 300
+      // pattern 只包含小写英文字母
+      // 1 <= s.length <= 3000
+      // s 只包含小写英文字母和 ' '
+      // s 不包含 任何前导或尾随对空格
+      // s 中每个单词都被 单个空格 分隔
+
+      /**
+       * @param {string} pattern
+       * @param {string} s
+       * @return {boolean}
+       */
+      var wordPattern = function (pattern, s) {};
+
+      // --- answer-1 ---
+
+      function buildMap(str = '', sp = '') {
+        return str.split('sp').reduce((pre, cur) => {
+          pre[cur] = (pre[cur] || 0) + 1;
+          return pre;
+        }, {});
+      }
+
+      // 映射
+      var wordPattern = function (pattern = '', s = '') {
+        pattern = pattern.split('');
+        s = s.split(' ');
+        if (pattern.length !== s.length) return false;
+        let map = {};
+        for (let i = 0; i < pattern.length; i++) {
+          let p = pattern[i];
+          let c = 'S' + s[i]; // 防止c和p相等
+          // 双向映射，考虑下面用例3和用例4的非1对1关系
+          if (!(p in map) && !(c in map)) {
+            map[p] = c;
+            map[c] = p;
+          } else if (p in map && c in map) {
+            if (map[p] !== c || map[c] !== p) return false;
+          } else {
+            return false;
+          }
+        }
+        return true;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var pattern = 'abba',
+        str = 'dog cat cat dog';
+      var result = true;
+
+      // var pattern = 'abba',
+      //   str = 'dog cat cat fish';
+      // var result = false;
+
+      // 用例3 patter 1对n
+      // var pattern = 'aaaa',
+      //   str = 'dog cat cat dog';
+      // var result = false;
+
+      // 用例4 patter n对1
+      // var pattern = 'abba',
+      //   str = 'dog dog dog dog';
+      // var result = false;
+
+      console.log('pattern = ', pattern);
+      console.log('str = ', str);
+      console.log('result = ', result);
+      console.log('wordPattern = ', wordPattern(pattern, str));
+    </script>
+  </body>
+</html>
