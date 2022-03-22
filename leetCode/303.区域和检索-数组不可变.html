@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>303. 区域和检索 - 数组不可变</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/range-sum-query-immutable/
+
+      // 给定一个整数数组  nums，处理以下类型的多个查询:
+      // 提示：
+      // 计算索引 left 和 right （包含 left 和 right）之间的 nums 元素的 和 ，其中 left <= right
+      // 实现 NumArray 类：
+      // 提示：
+      // NumArray(int[] nums) 使用数组 nums 初始化对象
+      // int sumRange(int i, int j) 返回数组 nums 中索引 left 和 right 之间的元素的 总和 ，包含 left 和 right 两点（也就是 nums[left] + nums[left + 1] + ... + nums[right] )
+      // 提示：
+      // 1 <= nums.length <= 104
+      // -105 <= nums[i] <= 105
+      // 0 <= i <= j < nums.length
+      // 最多调用 104 次 sumRange 方法
+
+      /**
+       * @param {number[]} nums
+       */
+      var NumArray = function (nums) {
+        let map = {};
+        let sum = 0;
+        for (let i = 0; i < nums.length; i++) {
+          sum += nums[i];
+          map[i] = sum;
+        }
+        this.numMap = map;
+      };
+      /**
+       * @param {number} left
+       * @param {number} right
+       * @return {number}
+       */
+      NumArray.prototype.sumRange = function (left, right) {};
+      /**
+       * Your NumArray object will be instantiated and called as such:
+       * var obj = new NumArray(nums)
+       * var param_1 = obj.sumRange(left,right)
+       */
+
+      // --- answer-1 ---
+
+      var NumArray = function (nums) {
+        let map = { '-1': 0 }; // 边界处理
+        let sum = 0;
+        for (let i = 0; i < nums.length; i++) {
+          sum += nums[i];
+          map[i] = sum;
+        }
+        this.numMap = map;
+      };
+
+      // left到right的和 = 0~right的和 - 0~left-1的和
+      NumArray.prototype.sumRange = function (left, right) {
+        return this.numMap[right] - this.numMap[left - 1];
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      // var nums = ;
+      // ["NumArray", "sumRange", "sumRange", "sumRange"];
+      // [[[-2, 0, 3, -5, 2, -1]], [0, 2], [2, 5], [0, 5]]
+
+      var nums = [-2, 0, 3, -5, 2, -1];
+
+      let numArray = new NumArray(nums);
+
+      console.log('nums = ', nums);
+      console.log('NumArray = ', numArray);
+
+      [
+        [0, 2, 1],
+        [2, 5, -1],
+        [0, 5, 3]
+      ].forEach((element) => {
+        const [left, right, result] = element;
+        console.log(`left: ${left}, right: ${right}, result: ${result} = `, numArray.sumRange(left, right));
+      });
+    </script>
+  </body>
+</html>
