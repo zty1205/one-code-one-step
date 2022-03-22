@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>292. Nim 游戏</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/nim-game/
+
+      // 你和你的朋友，两个人一起玩 Nim 游戏：
+      // 提示：
+      // 桌子上有一堆石头。
+      // 你们轮流进行自己的回合， 你作为先手 。
+      // 每一回合，轮到的人拿掉 1 - 3 块石头。
+      // 拿掉最后一块石头的人就是获胜者。
+      // 假设你们每一步都是最优解。请编写一个函数，来判断你是否可以在给定石头数量为 n 的情况下赢得游戏。如果可以赢，返回 true；否则，返回 false 。
+      // 提示：
+      // 1 <= n <= 231 - 1
+
+      /**
+       * @param {number} n
+       * @return {boolean}
+       */
+      var canWinNim = function (n) {};
+
+      // --- answer-1 ---
+
+      // dp[n] = boolean 表示是否获胜
+      // dp[n] = !dp[n-1] || !dp[n-2] || !dp[n-3]
+      var canWinNim = function (n) {
+        if (n < 4) return true;
+        const dp = [true, true, true];
+        for (let i = 3; i < n; i++) {
+          dp[i] = !dp[i - 1] || !dp[i - 2] || !dp[i - 3];
+        }
+        return dp[dp.length - 1];
+      };
+
+      var canWinNim = function (n) {
+        if (n < 4) return true;
+        const dp = [true, true, true];
+        function win(pPre, pre, cur, num) {
+          if (num === n) return cur;
+          return win(pre, cur, !pPre || !pre || !cur, num + 1);
+        }
+        return win(true, true, true, 3);
+      };
+      // 都超时了
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 如果石头堆中只有一块、两块、或是三块石头，那么在你的回合，你就可以把全部石子拿走，从而在游戏中取胜；
+      // 如果堆中恰好有四块石头，你就会失败。因为在这种情况下不管你取走多少石头，总会为你的对手留下几块，他可以将剩余的石头全部取完，从而他可以在游戏中打败你。
+      // 因此，要想获胜，在你的回合中，必须避免石头堆中的石子数为 44 的情况。s
+      var canWinNim = function (n) {
+        return n % 4 !== 0;
+      };
+
+      // --- answer-2 ---
+
+      var n = 4;
+      var result = false;
+      // 解释：以下是可能的结果:
+
+      // var n = 1;
+      // var result = true;
+
+      // var n = 2;
+      // var result = true;
+
+      var n = 11;
+      var result = true;
+
+      var n = 12;
+      var result = false;
+
+      console.log('n = ', n);
+      console.log('result = ', result);
+      console.log('canWinNim = ', canWinNim(n));
+    </script>
+  </body>
+</html>
