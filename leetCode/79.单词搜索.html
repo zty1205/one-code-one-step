@@ -4,122 +4,116 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>79. 单词搜索</title>
   </head>
   <body>
     <script>
-      // 给定一个二维网格和一个单词，找出该单词是否存在于网格中。
-      // 单词必须按照字母顺序，通过相邻的单元格内的字母构成，其中“相邻”单元格是那些水平相邻或垂直相邻的单元格。同一个单元格内的字母不允许被重复使用。
+      // https://leetcode-cn.com/problems/word-search/
 
+      // 给定一个 m x n 二维字符网格 board 和一个字符串单词 word 。如果 word 存在于网格中，返回 true ；否则，返回 false 。
+      // 单词必须按照字母顺序，通过相邻的单元格内的字母构成，其中“相邻”单元格是那些水平相邻或垂直相邻的单元格。同一个单元格内的字母不允许被重复使用。
+      // 提示：
+      // m == board.length
+      // n = board[i].length
+      // 1 <= m, n <= 6
+      // 1 <= word.length <= 15
+      // board 和 word 仅由大小写英文字母组成
+
+      /**
+       * @param {character[][]} board
+       * @param {string} word
+       * @return {boolean}
+       */
+      var exist = function (board, word) {};
+
+      // --- answer-1 ---
+
+      // 回溯
       var exist = function (board, word) {
+        const row = board.length;
+        const col = board[0].length;
         const directions = [
-          [-1, 0],
-          [0, -1],
           [0, 1],
-          [1, 0]
+          [0, -1],
+          [1, 0],
+          [-1, 0]
         ];
-        const rows = board.length;
-        if (!rows) return false;
-        const cols = board[0].length;
-        let visited = Array.from({ length: rows }, () => Array.from({ length: cols }));
-        const length = word.length;
-        const chars = Array.from(word);
-        for (let i = 0; i < rows; i++) {
-          for (let j = 0; j < cols; j++) {
-            if (track(i, j, 0)) {
-              return true;
-            }
+
+        const visited = Array.from({ length: row }, () => Array.from({ length: col }, () => false));
+
+        const check = (i, j, s, k) => {
+          // i,j 元素位置
+          // s word
+          // k word的第k个元素
+          if (board[i][j] != s.charAt(k)) {
+            return false;
+          } else if (k == s.length - 1) {
+            return true;
           }
-        }
-        function inArea(x, y) {
-          return x >= 0 && x < rows && y >= 0 && y < cols;
-        }
-        function track(x, y, start) {
-          if (start === length - 1) {
-            return board[x][y] === chars[start];
-          }
-          if (board[x][y] === chars[start]) {
-            for (let dir of directions) {
-              let newX = x + dir[0];
-              let newY = y + dir[1];
-              if (inArea(newX, newY) && !visited[newX][newY]) {
-                if (track(newX, newY, start + 1)) {
-                  return true;
+          visited[i][j] = true;
+          let result = false;
+          for (const [dx, dy] of directions) {
+            let nextI = i + dx,
+              nextJ = j + dy;
+            if (nextI >= 0 && nextI < row && nextJ >= 0 && nextJ < col) {
+              if (!visited[nextI][nextJ]) {
+                const flag = check(nextI, nextJ, s, k + 1);
+                if (flag) {
+                  result = true;
+                  break;
                 }
               }
+            }
+          }
+          visited[i][j] = false;
+          return result;
+        };
+
+        for (let i = 0; i < row; i++) {
+          for (let j = 0; j < col; j++) {
+            const flag = check(i, j, word, 0);
+            if (flag) {
+              return true;
             }
           }
         }
         return false;
       };
 
-      //   private static final int[][] DIRECTIONS = {{-1, 0}, {0, -1}, {0, 1}, {1, 0}};
-      //   private int rows;
-      //   private int cols;
-      //   private int len;
-      //   private boolean[][] visited;
-      //   private char[] charArray;
-      //   private char[][] board;
+      // --- answer-1 ---
 
-      //   public boolean exist(char[][] board, String word) {
-      //       rows = board.length;
-      //       if (rows == 0) {
-      //           return false;
-      //       }
-      //       cols = board[0].length;
-      //       visited = new boolean[rows][cols];
+      // --- answer-2 ---
 
-      //       this.len = word.length();
-      //       this.charArray = word.toCharArray();
-      //       this.board = board;
-      //       for (int i = 0; i < rows; i++) {
-      //           for (int j = 0; j < cols; j++) {
-      //               if (dfs(i, j, 0)) {
-      //                   return true;
-      //               }
-      //           }
-      //       }
-      //       return false;
-      //   }
+      // --- answer-2 ---
 
-      //   private boolean dfs(int x, int y, int begin) {
-      //       if (begin == len - 1) {
-      //           return board[x][y] == charArray[begin];
-      //       }
-      //       if (board[x][y] == charArray[begin]) {
-      //           visited[x][y] = true;
-      //           for (int[] direction : DIRECTIONS) {
-      //               int newX = x + direction[0];
-      //               int newY = y + direction[1];
-      //               if (inArea(newX, newY) && !visited[newX][newY]) {
-      //                   if (dfs(newX, newY, begin + 1)) {
-      //                       return true;
-      //                   }
-      //               }
-      //           }
-      //           visited[x][y] = false;
-      //       }
-      //       return false;
-      //   }
+      var board = [
+          ['A', 'B', 'C', 'E'],
+          ['S', 'F', 'C', 'S'],
+          ['A', 'D', 'E', 'E']
+        ],
+        word = 'ABCCED';
+      var result = true;
 
-      //   private boolean inArea(int x, int y) {
-      //       return x >= 0 && x < rows && y >= 0 && y < cols;
-      //   }
+      var board = [
+          ['A', 'B', 'C', 'E'],
+          ['S', 'F', 'C', 'S'],
+          ['A', 'D', 'E', 'E']
+        ],
+        word = 'SEE';
+      var result = true;
 
-      let board = [
-        ['A', 'B', 'C', 'E'],
-        ['S', 'F', 'C', 'S'],
-        ['A', 'D', 'E', 'E']
-      ];
+      var board = [
+          ['A', 'B', 'C', 'E'],
+          ['S', 'F', 'C', 'S'],
+          ['A', 'D', 'E', 'E']
+        ],
+        word = 'ABCB';
+      var result = false;
 
-      let word = 'ABCCED';
-      let res = true;
-      // word = 'SEE';
-      // res = true;
-      // word = 'ABCB';
-      // res = false;
-
-      console.log(`word: ${word} `, exist(board, word));
+      console.log('board = ', board);
+      console.log('word = ', word);
+      console.log('result = ', result);
+      console.log('exist = ', exist(board, word));
     </script>
   </body>
 </html>
