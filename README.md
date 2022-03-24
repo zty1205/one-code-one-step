@@ -142,7 +142,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (168 道)
+## 三、LeetCode (169 道)
 
 <br/>
 
@@ -311,6 +311,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [349.两个数组的交集.html](./leetCode/349.两个数组的交集.html)
 - [350.两个数组的交集 II.html](./leetCode/350.两个数组的交集II.html)
 - [367.有效的完全平方数.html](./leetCode/367.有效的完全平方数.html)
+- [374.猜数字大小.html](./leetCode/374.猜数字大小.html)
 - [509.斐波那契数.html](./leetCode/509.斐波那契数.html)
 - [678.有效的括号字符串.html](./leetCode/678.有效的括号字符串.html)
 - [873.最长的斐波那契子序列的长度.html](./leetCode/873.最长的斐波那契子序列的长度.html)
