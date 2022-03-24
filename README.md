@@ -142,7 +142,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (172 道)
+## 三、LeetCode (174 道)
 
 <br/>
 
@@ -205,6 +205,8 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [57.插入区间.html](./leetCode/57.插入区间.html)
 - [58.最后一个单词的长度.html](./leetCode/58.最后一个单词的长度.html)
 - [59.螺旋矩阵 II.html](./leetCode/59.螺旋矩阵II.html)
+- [60.排列序列.html](./leetCode/60.排列序列.html)
+- [60.排列序列.html](./leetCode/60.排列序列.html)
 - [61.旋转链表.html](./leetCode/61.旋转链表.html)
 - [62.不同路径.html](./leetCode/62.不同路径.html)
 - [62.不同路径 II.html](./leetCode/62.不同路径.html)
