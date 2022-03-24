@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>383. 赎金信</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/ransom-note/
+
+      // 给你两个字符串：ransomNote 和 magazine ，判断 ransomNote 能不能由 magazine 里面的字符构成。
+      // 如果可以，返回 true ；否则返回 false 。
+      // magazine 中的每个字符只能在 ransomNote 中使用一次。
+      // 提示：
+      // 1 <= ransomNote.length, magazine.length <= 105
+      // ransomNote 和 magazine 由小写英文字母组成
+
+      /**
+       * @param {string} ransomNote
+       * @param {string} magazine
+       * @return {boolean}
+       */
+      var canConstruct = function (ransomNote, magazine) {};
+
+      // --- answer-1 ---
+
+      function buildMap(str = '') {
+        let map = {};
+        for (let i = 0; i < str.length; i++) {
+          map[str[i]] = (map[str[i]] || 0) + 1;
+        }
+        return map;
+      }
+
+      // hash 字符统计
+      var canConstruct = function (ransomNote, magazine) {
+        let rm = buildMap(ransomNote);
+        let mm = buildMap(magazine);
+        for (let k in rm) {
+          if (!(k in mm) || rm[k] > mm[k]) {
+            return false;
+          }
+        }
+        return true;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      // var ransomNote = "a", magazine = "b";
+      // var result = false;
+
+      var ransomNote = 'aa',
+        magazine = 'ab';
+      var result = false;
+
+      // var ransomNote = 'aa',
+      //   magazine = 'aab';
+      // var result = true;
+
+      // var ransomNote = 'aa',
+      //   magazine = 'aba';
+      // var result = true;
+
+      console.log('ransomNote = ', ransomNote);
+      console.log('magazine = ', magazine);
+      console.log('result = ', result);
+      console.log('canConstruct = ', canConstruct(ransomNote, magazine));
+    </script>
+  </body>
+</html>
