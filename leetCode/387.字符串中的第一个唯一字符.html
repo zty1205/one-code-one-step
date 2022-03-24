@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>387. 字符串中的第一个唯一字符</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/first-unique-character-in-a-string/
+
+      // 给定一个字符串 s ，找到 它的第一个不重复的字符，并返回它的索引 。如果不存在，则返回 -1 。
+      // 提示：
+      // 1 <= s.length <= 105
+      // s 只包含小写字母
+
+      /**
+       * @param {string} s
+       * @return {number}
+       */
+      var firstUniqChar = function (s) {};
+
+      // --- answer-1 ---
+
+      // 先进行一次字符统计
+      var firstUniqChar = function (s = '') {
+        let map = {};
+        for (let i = 0; i < s.length; i++) {
+          map[s[i]] = (map[s[i]] || 0) + 1;
+        }
+        for (let i = 0; i < s.length; i++) {
+          if (map[s[i]] === 1) return i;
+        }
+        return -1;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 队列 + hash
+      var firstUniqChar = function (s) {
+        const position = new Map();
+        const q = [];
+        const n = s.length;
+        for (let [i, ch] of Array.from(s).entries()) {
+          if (!position.has(ch)) {
+            position.set(ch, i);
+            q.push([s[i], i]);
+          } else {
+            position.set(ch, -1);
+            while (q.length && position.get(q[0][0]) === -1) {
+              q.shift();
+            }
+          }
+        }
+        return q.length ? q[0][1] : -1;
+      };
+
+      // --- answer-2 ---
+
+      var s = 'leetcode';
+      var result = 0;
+
+      var s = 'loveleetcode';
+      var result = 2;
+
+      var s = 'aabb';
+      var result = -1;
+
+      console.log('s = ', s);
+      console.log('result = ', result);
+      console.log('firstUniqChar = ', firstUniqChar(s));
+    </script>
+  </body>
+</html>
