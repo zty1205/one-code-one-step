@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>389. 找不同</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/find-the-difference/
+
+      // 给定两个字符串 s 和 t ，它们只包含小写字母。
+      // 字符串 t 由字符串 s 随机重排，然后在随机位置添加一个字母。
+      // 请找出在 t 中被添加的字母。
+      // 提示：
+      // 0 <= s.length <= 1000
+      // t.length == s.length + 1
+      // s 和 t 只包含小写字母
+
+      /**
+       * @param {string} s
+       * @param {string} t
+       * @return {character}
+       */
+      var findTheDifference = function (s, t) {};
+
+      // --- answer-1 ---
+
+      function buildMap(str = '') {
+        let map = {};
+        for (let i = 0; i < str.length; i++) {
+          map[str[i]] = (map[str[i]] || 0) + 1;
+        }
+        return map;
+      }
+
+      // hash
+      var findTheDifference = function (s = '', t = '') {
+        if (s.length === 0) return t;
+        let sm = buildMap(s);
+        let tm = buildMap(t);
+        for (let k in tm) {
+          if (tm[k] !== sm[k]) return k;
+        }
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 位运算 多出来的字母出现的次数一定是奇数
+      var findTheDifference = function (s, t) {
+        let ans = 0;
+        for (const ch of s) {
+          ans ^= ch.charCodeAt();
+        }
+        for (const ch of t) {
+          ans ^= ch.charCodeAt();
+        }
+        return String.fromCharCode(ans);
+      };
+
+      // --- answer-2 ---
+
+      var s = 'abcd',
+        t = 'abcde';
+      var result = 'e';
+      // 解释：'e' 是那个被添加的字母。
+
+      var s = '',
+        t = 'y';
+      var result = 'y';
+
+      console.log('s = ', s);
+      console.log('t = ', t);
+      console.log('result = ', result);
+      console.log('findTheDifference = ', findTheDifference(s, t));
+    </script>
+  </body>
+</html>
