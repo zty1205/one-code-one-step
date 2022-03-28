@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>412. Fizz Buzz</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/fizz-buzz/
+
+      // 给你一个整数 n ，找出从 1 到 n 各个整数的 Fizz Buzz 表示，并用字符串数组 answer（下标从 1 开始）返回结果，其中：
+      // 提示：
+      // answer[i] == "FizzBuzz" 如果 i 同时是 3 和 5 的倍数。
+      // answer[i] == "Fizz" 如果 i 是 3 的倍数。
+      // answer[i] == "Buzz" 如果 i 是 5 的倍数。
+      // answer[i] == i （以字符串形式）如果上述条件全不满足。
+      // 提示：
+      // 1 <= n <= 104
+
+      /**
+       * @param {number} n
+       * @return {string[]}
+       */
+      var fizzBuzz = function (n) {};
+
+      // --- answer-1 ---
+
+      // --- answer-1 ---
+
+      var fizzBuzz = function (n) {
+        let ans = [];
+        for (let i = 1; i <= n; i++) {
+          if (i % 15 === 0) {
+            ans[i - 1] = 'FizzBuzz';
+          } else if (i % 3 === 0) {
+            ans[i - 1] = 'Fizz';
+          } else if (i % 5 === 0) {
+            ans[i - 1] = 'Buzz';
+          } else {
+            ans[i - 1] = i + '';
+          }
+        }
+        return ans;
+      };
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      // var n = 3;
+      // var result = ["1","2","Fizz"];
+
+      var n = 5;
+      var result = ['1', '2', 'Fizz', '4', 'Buzz'];
+
+      var n = 15;
+      var result = [
+        '1',
+        '2',
+        'Fizz',
+        '4',
+        'Buzz',
+        'Fizz',
+        '7',
+        '8',
+        'Fizz',
+        'Buzz',
+        '11',
+        'Fizz',
+        '13',
+        '14',
+        'FizzBuzz'
+      ];
+
+      console.log('n = ', n);
+      console.log('result = ', result);
+      console.log('fizzBuzz = ', fizzBuzz(n));
+    </script>
+  </body>
+</html>
