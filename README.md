@@ -142,7 +142,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (182 道)
+## 三、LeetCode (183 道)
 
 <br/>
 
@@ -220,6 +220,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [71.简化路径.html](./leetCode/71.简化路径.html)
 - [73.矩阵置零.html](./leetCode/73.矩阵置零.html)
 - [74.搜索二维矩阵.html](./leetCode/74.搜索二维矩阵.html)
+- [76.最小覆盖子串.html](./leetCode/76.最小覆盖子串.html)
 - [77.组合.html](./leetCode/77.组合.html)
 - [78.子集.html](./leetCode/78.子集.html)
 - [79.单词搜索.html](./leetCode/79.单词搜索.html)

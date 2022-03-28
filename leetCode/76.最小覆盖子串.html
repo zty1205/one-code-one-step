@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>76. 最小覆盖子串</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/minimum-window-substring/
+
+      // 给你一个字符串 s 、一个字符串 t 。返回 s 中涵盖 t 所有字符的最小子串。如果 s 中不存在涵盖 t 所有字符的子串，则返回空字符串 "" 。
+      // 注意：
+      // 提示：
+      // 对于 t 中重复字符，我们寻找的子字符串中该字符数量必须不少于 t 中该字符数量。
+      // 如果 s 中存在这样的子串，我们保证它是唯一的答案。
+      // 提示：
+      // 1 <= s.length, t.length <= 105
+      // s 和 t 由英文字母组成
+
+      /**
+       * @param {string} s
+       * @param {string} t
+       * @return {string}
+       */
+      var minWindow = function (s = '', t = '') {};
+
+      // --- answer-1 ---
+
+      var minWindow = function (s = '', t = '') {
+        let minLen = s.length + 1;
+        let start = s.length; // 结果子串起始位置
+        let map = {}; // 字符: 缺失个数
+        let charType = 0; // 字符种类数
+        for (const c of t) {
+          if (!map[c]) {
+            charType++;
+            map[c] = 1;
+          } else {
+            map[c]++;
+          }
+        }
+        let l = 0;
+        let r = 0;
+        debugger;
+        for (; r < s.length; r++) {
+          let ch = s[r];
+          if (ch in map) map[ch]--;
+          if (map[ch] == 0) charType--; // 种类数-1
+          while (charType == 0) {
+            // 当前窗口包含所有字符的前提下，尽量收缩窗口
+            if (r - l + 1 < minLen) {
+              // 当前窗口比minLen小
+              minLen = r - l + 1;
+              start = l; // 更新起点
+            }
+            // 左指针右移 尽可能缩小窗口
+            ch = s[l];
+            if (ch in map) map[ch]++; // 缺失个数+1
+            if (map[ch] > 0) charType++; // 缺失种类+1
+            l++;
+          }
+        }
+        return start == s.length ? '' : s.substring(start, start + minLen);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var s = 'ADOBECODEBANC',
+        t = 'ABC';
+      var result = 'BANC';
+
+      var s = 'a',
+        t = 'a';
+      var result = 'a';
+
+      var s = 'a',
+        t = 'aa';
+      var result = '';
+      // 解释: t 中两个字符 'a' 均应包含在 s 的子串中，
+
+      var s = 'ABAACBAB';
+      var t = 'ABC';
+      var result = 'ACB';
+
+      console.log('s = ', s);
+      console.log('t = ', t);
+      console.log('result = ', result);
+      console.log('minWindow = ', minWindow(s, t));
+    </script>
+  </body>
+</html>
