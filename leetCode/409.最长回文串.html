@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>409. 最长回文串</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/longest-palindrome/
+
+      // 给定一个包含大写字母和小写字母的字符串 s ，返回 通过这些字母构造成的 最长的回文串 。
+      // 在构造过程中，请注意 区分大小写 。比如 "Aa" 不能当做一个回文字符串。
+      // 提示：
+      // 1 <= s.length <= 2000
+      // s 只能由小写和/或大写英文字母组成
+
+      /**
+       * @param {string} s
+       * @return {number}
+       */
+      var longestPalindrome = function (s) {};
+
+      // --- answer-1 ---
+
+      // 统计字符
+      var longestPalindrome = function (s = '') {
+        if (s.length === 1) return 1;
+        let map = {};
+        for (let ch of s) {
+          map[ch] = (map[ch] || 0) + 1;
+        }
+        let ans = 0;
+        let odd = false;
+        for (let k in map) {
+          ans += map[k] % 2 === 0 ? map[k] : map[k] - 1;
+          if (map[k] % 2 !== 0 && !odd) {
+            // 有奇数个 那么可以是单个字符做对称中心 比如 bab
+            ans += 1;
+            odd = true;
+          }
+        }
+        return ans;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var s = 'abccccdd';
+      var result = 7;
+      // 解释: 我们可以构造的最长的回文串是"dccaccd", 它的长度是 7。
+
+      // var s = 'a';
+      // var result = 1;
+
+      var s = 'bb';
+      var result = 2;
+
+      console.log('s = ', s);
+      console.log('result = ', result);
+      console.log('longestPalindrome = ', longestPalindrome(s));
+    </script>
+  </body>
+</html>
