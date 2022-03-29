@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>342. 4的幂</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/power-of-four/
+
+      // 给定一个整数，写一个函数来判断它是否是 4 的幂次方。如果是，返回 true ；否则，返回 false 。
+      // 整数 n 是 4 的幂次方需满足：存在整数 x 使得 n == 4x
+      // 提示：
+      // -231 <= n <= 231 - 1
+
+      /**
+       * @param {number} n
+       * @return {boolean}
+       */
+      var isPowerOfFour = function (n) {};
+
+      // --- answer-1 ---
+
+      // %3一定余1
+      var isPowerOfFour = function (n) {
+        return n > 0 && (n & (n - 1)) == 0 && n % 3 == 1;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 二进制表示
+      // 1000 16
+      // 100000 64
+      // 唯一的1一定在偶数位上
+      // 0xaaaaaaaa = 10101010101010101010101010101010
+      var isPowerOfFour = function (n) {
+        return n > 0 && (n & (n - 1)) === 0 && (n & 0xaaaaaaaa) === 0;
+      };
+
+      // --- answer-2 ---
+
+      var n = 16;
+      var result = true;
+
+      var n = 5;
+      var result = false;
+
+      // var n = 1;
+      // var result = true;
+
+      console.log('n = ', n);
+      console.log('result = ', result);
+      console.log('isPowerOfFour = ', isPowerOfFour(n));
+    </script>
+  </body>
+</html>

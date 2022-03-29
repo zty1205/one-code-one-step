@@ -142,7 +142,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (183 道)
+## 三、LeetCode (184 道)
 
 <br/>
 
@@ -312,6 +312,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [292.Nim 游戏.html](./leetCode/292.Nim游戏.html)
 - [303.区域和检索-数组不可变.html](./leetCode/303.区域和检索-数组不可变.html)
 - [337.打家劫舍 III.html](./leetCode/337.打家劫舍III.html)
+- [342.4 的幂.html](./leetCode/342.4的幂.html)
 - [345.反转字符串中的元音字母.html](./leetCode/345.反转字符串中的元音字母.html)
 - [349.两个数组的交集.html](./leetCode/349.两个数组的交集.html)
 - [350.两个数组的交集 II.html](./leetCode/350.两个数组的交集II.html)
