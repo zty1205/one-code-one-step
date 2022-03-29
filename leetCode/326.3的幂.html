@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>326. 3 的幂</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/power-of-three/
+
+      // 给定一个整数，写一个函数来判断它是否是 3 的幂次方。如果是，返回 true ；否则，返回 false 。
+      // 整数 n 是 3 的幂次方需满足：存在整数 x 使得 n == 3x
+      // 提示：
+      // -231 <= n <= 231 - 1
+
+      /**
+       * @param {number} n
+       * @return {boolean}
+       */
+      var isPowerOfThree = function (n) {};
+
+      // --- answer-1 ---
+
+      // 除
+      var isPowerOfThree = function (n) {
+        while (n !== 0 && n % 3 === 0) {
+          n = Math.floor(n / 3);
+        }
+        return n === 1;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 最大 33 的幂的约数  3232 位有符号整数的范围内，最大的 33 的幂为 3^{19} = 11622614673
+      var isPowerOfThree = function (n) {
+        return n > 0 && 1162261467 % n === 0;
+      };
+
+      // --- answer-2 ---
+
+      // var n = 27;
+      // var result = true;
+
+      // var n = 0;
+      // var result = false;
+
+      // var n = 9;
+      // var result = true;
+
+      // var n = 45;
+      // var result = false;
+
+      console.log('n = ', n);
+      console.log('result = ', result);
+      console.log('isPowerOfThree = ', isPowerOfThree(n));
+    </script>
+  </body>
+</html>
