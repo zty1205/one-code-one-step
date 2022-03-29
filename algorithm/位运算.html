@@ -73,11 +73,19 @@
         return ~~fl;
       }
 
-      // num & -num 可以快速求第一个位为1
+      // num & -num 可以快速求第一个位为1 比如100 则返回4
+      // n & (n - 1) 可以直接将 n 二进制表示的最低位 1 移除 如果 n 是正整数并且n & (n - 1) = 0，那么 n 就是 2 的幂
 
       function firstOne(a) {
-        console.log(`binary ${a} = ${a.toString(2)}`);
-        return a & ~a;
+        console.log(`firstOne binary ${a} = ${a.toString(2)}`);
+        return a & -a;
+      }
+
+      function removeOne(a) {
+        console.log(`removeOne binary ${a} = ${a.toString(2)}`);
+        let ans = a & (a - 1);
+        console.log(`removeOne binary ${ans} = ${ans.toString(2)}`);
+        return ans;
       }
 
       // 奇数&1=1 偶数&1=0 在js中可以判断奇偶
@@ -117,6 +125,12 @@
           b: 7,
           fl: 2.718281828459045,
           oneArray: [5, 5, 7, 7, 6, 6, 2]
+        },
+        {
+          a: 1024,
+          b: 18,
+          fl: 1e1,
+          oneArray: [3, 1, 4, 1, 5, 5, 4]
         }
       ];
 
@@ -129,6 +143,8 @@
         console.log(`${a} / ${b} = `, divide(a, b));
         console.log(`floor ${fl} = `, floor(fl));
         console.log(`firstOne ${a} = `, firstOne(a));
+        console.log(`removeOne ${a} = `, removeOne(a));
+
         console.log(`isOdd ${a} = `, isOdd(a));
         console.log(`isEven ${a} = `, isEven(a));
         console.log(`isEven ${a} = `, isEven(a));
