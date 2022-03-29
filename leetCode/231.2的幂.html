@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>231. 2 的幂</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/power-of-two/
+
+      // 给你一个整数 n，请你判断该整数是否是 2 的幂次方。如果是，返回 true ；否则，返回 false 。
+      // 如果存在一个整数 x 使得 n == 2x ，则认为 n 是 2 的幂次方。
+      // 提示：
+      // -231 <= n <= 231 - 1
+
+      /**
+       * @param {number} n
+       * @return {boolean}
+       */
+      var isPowerOfTwo = function (n) {};
+
+      // --- answer-1 ---
+
+      // 位运算
+      var isPowerOfTwo = function (n) {
+        return n > 0 && (n & (n - 1)) == 0;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 位运算
+      var isPowerOfTwo = function (n) {
+        return n > 0 && (n & -n) === n;
+      };
+
+      // --- answer-2 ---
+
+      var n = 1;
+      var result = true;
+      // 解释：20 = 1
+
+      var n = 16;
+      var result = true;
+      // 解释：24 = 16
+
+      // var n = 3;
+      // var result = false;
+
+      // var n = 4;
+      // var result = true;
+
+      // var n = 5;
+      // var result = false;
+
+      console.log('n = ', n);
+      console.log('result = ', result);
+      console.log('isPowerOfTwo = ', isPowerOfTwo(n));
+    </script>
+  </body>
+</html>
