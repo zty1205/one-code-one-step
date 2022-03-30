@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>202. 快乐数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/happy-number/
+
+      // 编写一个算法来判断一个数 n 是不是快乐数。
+      // 「快乐数」 定义为：
+      // 提示：
+      // 对于一个正整数，每一次将该数替换为它每个位置上的数字的平方和。
+      // 然后重复这个过程直到这个数变为 1，也可能是 无限循环 但始终变不到 1。
+      // 如果这个过程 结果为 1，那么这个数就是快乐数。
+      // 如果 n 是 快乐数 就返回 true ；不是，则返回 false 。
+      // 提示：
+      // 1 <= n <= 231 - 1
+
+      /**
+       * @param {number} n
+       * @return {boolean}
+       */
+      var isHappy = function (n) {};
+
+      // --- answer-1 ---
+
+      // 19 => 82 => 68 => 100 => 1
+      // 12 => 5 => 25 => 29 => 85 => 89 => 145 => 42 => 20 => 4 => 16 => 37 => 58 => 89
+      // 13 => 10 => 1
+      // 14 => 17 => 50 => 25 => 29 => 85 => 89 => 145 => 42 => 20 => 4 => 16 => 37 => 58 => 89
+      // 15 => 26 => 40 => 16 => 37 => 58 => 89 => 145 => 42 => 20 => 4 => 16
+      // 非快乐数字最后会走向循环
+
+      // 时间复杂度,空间复杂度O(logn)
+      var isHappy = function (n) {
+        function next(n) {
+          let sum = 0;
+          while (n > 0) {
+            let num = n % 10;
+            n = (n - num) / 10;
+            sum += num * num;
+          }
+          return sum;
+        }
+
+        let map = {};
+        let arr = [n];
+        while (n !== 1 && !(n in map)) {
+          map[n] = 1;
+          n = next(n);
+          arr.push(n);
+        }
+        console.log('快乐：', arr.join(' => '));
+        return n === 1;
+      };
+
+      // 用快慢指针的方式降低空间复杂度
+      var isHappy1 = function (n) {
+        function next(n) {
+          let sum = 0;
+          while (n > 0) {
+            let num = n % 10;
+            n = (n - num) / 10;
+            sum += num * num;
+          }
+          return sum;
+        }
+
+        let slow = n;
+        let fast = next(n);
+        while (fast !== 1 && fast !== slow) {
+          slow = next(slow);
+          fast = next(next(fast));
+        }
+        return fast === 1;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 数学方法
+      // 非快乐数 最终都会走向 4 => 16 => 37 => 58 => 89 => 145 => 42 => 20 => 4 链上的某个节点
+      var isHappy = function (n) {
+        function next(n) {
+          let sum = 0;
+          while (n > 0) {
+            let num = n % 10;
+            n = (n - num) / 10;
+            sum += num * num;
+          }
+          return sum;
+        }
+
+        let map = { 4: 1, 16: 1, 20: 1, 37: 1, 42: 1, 58: 1, 89: 1, 145: 1 };
+
+        while (n !== 1 && !(n in map)) {
+          n = next(n);
+        }
+        return n === 1;
+      };
+
+      // --- answer-2 ---
+
+      var n = 19;
+      var result = true;
+      // 解释：
+      // 12 + 92 = 82
+      // 82 + 22 = 68
+      // 62 + 82 = 100
+      // 12 + 02 + 02 = 1
+
+      var n = 12;
+      var result = false;
+
+      var n = 13;
+      var result = true;
+
+      var n = 14;
+      var result = false;
+
+      var n = 15;
+      var result = false;
+
+      var n = 4;
+      var result = false;
+
+      console.log('n = ', n);
+      console.log('result = ', result);
+      console.log('isHappy = ', isHappy(n));
+    </script>
+  </body>
+</html>
