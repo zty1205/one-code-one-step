@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>414. 第三大的数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/third-maximum-number/
+
+      // 给你一个非空数组，返回此数组中 第三大的数 。如果不存在，则返回数组中最大的数。
+      // 提示：
+      // 1 <= nums.length <= 104
+      // -231 <= nums[i] <= 231 - 1
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var thirdMax = function (nums) {};
+
+      // --- answer-1 ---
+
+      // 注意重复数字
+      // 排序后进行操作
+      var thirdMax = function (nums) {
+        nums.sort((a, b) => a - b);
+        let i = 0;
+        let stack = [];
+        while (i < 3 && nums.length) {
+          let n = nums.pop();
+          if (n !== stack[stack.length - 1]) {
+            i += 1;
+            stack.push(n);
+          }
+        }
+        return stack.length === 3 ? stack.pop() : stack[0];
+      };
+
+      var thirdMax = function (nums) {
+        nums.sort((a, b) => a - b);
+        nums.reverse();
+        for (let i = 1, diff = 1; i < nums.length; ++i) {
+          if (nums[i] !== nums[i - 1] && ++diff === 3) {
+            // 此时 nums[i] 就是第三大的数
+            return nums[i];
+          }
+        }
+        return nums[0];
+      };
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 遍历
+      var thirdMax = function (nums) {
+        let a = -Number.MAX_VALUE,
+          b = -Number.MAX_VALUE,
+          c = -Number.MAX_VALUE;
+        for (const num of nums) {
+          if (num > a) {
+            c = b;
+            b = a;
+            a = num;
+          } else if (a > num && num > b) {
+            c = b;
+            b = num;
+          } else if (b > num && num > c) {
+            c = num;
+          }
+        }
+        return c === -Number.MAX_VALUE ? a : c;
+      };
+
+      // --- answer-2 ---
+
+      var nums = [3, 2, 1];
+      var result = 1;
+      // 解释：第三大的数是 1 。
+
+      var nums = [1, 2];
+      var result = 2;
+      // 解释：第三大的数不存在, 所以返回最大的数 2 。
+
+      // var nums = [2, 2, 3, 1];
+      // var result = 1;
+      // 解释：注意，要求返回第三大的数，是指在所有不同数字中排第三大的数。
+
+      var nums = [1, 2, 2, 5, 3, 5];
+      var result = 2;
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('thirdMax = ', thirdMax(nums));
+    </script>
+  </body>
+</html>
