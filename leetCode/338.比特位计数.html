@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>338. 比特位计数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/counting-bits/
+
+      // 给你一个整数 n ，对于 0 <= i <= n 中的每个 i ，计算其二进制表示中 1 的个数 ，返回一个长度为 n + 1 的数组 ans 作为答案。
+
+      /**
+       * @param {number} n
+       * @return {number[]}
+       */
+      var countBits = function (n) {};
+
+      // --- answer-1 ---
+
+      // 每位数做汉明重量
+      function hammingWeight(n) {
+        let ans = 0;
+        while (n) {
+          n = n & (n - 1);
+          ans++;
+        }
+        return ans;
+      }
+
+      var countBits = function (n) {
+        return Array.from({ length: n + 1 }, (v, k) => hammingWeight(k));
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 动态规划 维护最高位
+      // 即 1111 比 0111 的数量多1
+      var countBits = function (n) {
+        const bits = new Array(n + 1).fill(0);
+        let highBit = 0;
+        for (let i = 1; i <= n; i++) {
+          if ((i & (i - 1)) == 0) {
+            // 2的整数次幂 只有1个1
+            highBit = i;
+          }
+          bits[i] = bits[i - highBit] + 1;
+        }
+        return bits;
+      };
+
+      // 动态规划 维护最低位
+      var countBits = function (n) {
+        const bits = new Array(n + 1).fill(0);
+        for (let i = 1; i <= n; i++) {
+          bits[i] = bits[i >> 1] + (i & 1); // 移除调最低位，奇数的话末尾为1 则 + 1， 奇数 & 1 为 1
+        }
+        return bits;
+      };
+
+      // --- answer-2 ---
+
+      var n = 2;
+      var result = [0, 1, 1];
+
+      var n = 5;
+      var result = [0, 1, 1, 2, 1, 2];
+
+      var n = 10;
+      var result = [0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2];
+
+      var n = 20;
+      var result = [0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4, 1, 2, 2, 3, 2];
+      // [' 0', ' 1', ' 2', ' 3', ' 4', ' 5', ' 6', ' 7', ' 8', ' 9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20']
+      // [' 0', ' 1', ' 1', ' 2', ' 1', ' 2', ' 2', ' 3', ' 1', ' 2', ' 2', ' 3', ' 2', ' 3', ' 3', ' 4', ' 1', ' 2', ' 2', ' 3', ' 2']
+
+      var n = 36;
+      var result = [0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4, 1, 2, 2, 3, 2];
+      // [' 0', ' 1', ' 2', ' 3', ' 4', ' 5', ' 6', ' 7', ' 8', ' 9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36']
+      // [' 0', ' 1', ' 1', ' 2', ' 1', ' 2', ' 2', ' 3', ' 1', ' 2', ' 2', ' 3', ' 2', ' 3', ' 3', ' 4', ' 1', ' 2', ' 2', ' 3', ' 2', ' 3', ' 3', ' 4', ' 2', ' 3', ' 3', ' 4', ' 3', ' 4', ' 4', ' 5', ' 1', ' 2', ' 2', ' 3', ' 2']
+
+      console.log('n = ', n);
+      console.log('result = ', result);
+      console.log('countBits = ', countBits(n));
+    </script>
+  </body>
+</html>
