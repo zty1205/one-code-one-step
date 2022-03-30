@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>84. 柱状图中最大的矩形</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/largest-rectangle-in-histogram/
+
+      // 给定 n 个非负整数，用来表示柱状图中各个柱子的高度。每个柱子彼此相邻，且宽度为 1 。
+      // 求在该柱状图中，能够勾勒出来的矩形的最大面积。
+      // 提示：
+      // 1 <= heights.length <=105
+      // 0 <= heights[i] <= 104
+
+      /**
+       * @param {number[]} heights
+       * @return {number}
+       */
+      var largestRectangleArea = function (heights) {};
+
+      // --- answer-1 ---
+
+      // 暴力法 区域最小值 * 区域长度
+      var largestRectangleArea = function (heights = []) {
+        let max = 0;
+        for (let i = 0; i < heights.length; i++) {
+          let m = heights[i];
+          let min = heights[i];
+          for (let j = i; j < heights.length; j++) {
+            min = Math.min(min, heights[j]);
+            let area = min * (j - i + 1);
+            m = Math.max(m, area);
+          }
+          max = Math.max(max, m);
+        }
+        return max;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      var largestRectangleArea = function (heights = []) {
+        let n = heights.length;
+        let left = [];
+        let right = [];
+
+        let mono_stack = [];
+        for (let i = 0; i < n; ++i) {
+          while (mono_stack.length && heights[mono_stack[mono_stack.length - 1]] >= heights[i]) {
+            mono_stack.pop();
+          }
+          left[i] = !mono_stack.length ? -1 : mono_stack[mono_stack.length - 1];
+          mono_stack.push(i);
+        }
+
+        mono_stack = [];
+        for (let i = n - 1; i >= 0; --i) {
+          while (mono_stack.length && heights[mono_stack[mono_stack.length - 1]] >= heights[i]) {
+            mono_stack.pop();
+          }
+          right[i] = !mono_stack.length ? n : mono_stack[mono_stack.length - 1];
+          mono_stack.push(i);
+        }
+
+        console.log('left = ', left);
+        console.log('right = ', right);
+
+        let ans = 0;
+        for (let i = 0; i < n; ++i) {
+          ans = Math.max(ans, (right[i] - left[i] - 1) * heights[i]);
+        }
+        return ans;
+      };
+
+      // 这个讲解不错：https://leetcode-cn.com/problems/largest-rectangle-in-histogram/solution/84-by-ikaruga/
+      var largestRectangleArea = function (heights = []) {
+        let ans = 0;
+        let st = [];
+        heights.unshift(0);
+        heights.push(0);
+
+        function back(arr) {
+          return arr[arr.length - 1];
+        }
+
+        for (let i = 0; i < heights.length; i++) {
+          while (st.length && heights[back(st)] > heights[i]) {
+            let cur = back(st);
+            st.pop();
+            let left = back(st) + 1;
+            let right = i - 1;
+            ans = Math.max(ans, (right - left + 1) * heights[cur]);
+          }
+          st.push(i);
+        }
+        return ans;
+      };
+
+      // --- answer-2 ---
+
+      var heights = [2, 1, 5, 6, 2, 3];
+      var result = 10;
+      // 解释：最大的矩形为图中红色区域，面积为 10
+
+      // var heights = [2, 4];
+      // var result = 4;
+
+      console.log('heights = ', heights);
+      console.log('result = ', result);
+      console.log('largestRectangleArea = ', largestRectangleArea(heights));
+    </script>
+  </body>
+</html>

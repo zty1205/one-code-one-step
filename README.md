@@ -142,7 +142,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (187 道)
+## 三、LeetCode (188 道)
 
 <br/>
 
@@ -228,6 +228,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [81.搜索旋转排序数组 II.html](./leetCode/81.搜索旋转排序数组II.html)
 - [82.删除排序链表中的重复元素 II.html](./leetCode/82.删除排序链表中的重复元素II.html)
 - [83.删除排序链表中的重复元素.html](./leetCode/83.删除排序链表中的重复元素.html)
+- [84.柱状图中最大的矩形.html](./leetCode/84.柱状图中最大的矩形.html)
 - [88.合并两个有序数组.html](./leetCode/88.合并两个有序数组.html)
 - [90.子集 II.html](./leetCode/90.子集II.html)
 - [91.解码方法.html](./leetCode/91.解码方法.html)
