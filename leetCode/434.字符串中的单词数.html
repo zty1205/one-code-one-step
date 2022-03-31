@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>434. 字符串中的单词数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/number-of-segments-in-a-string/
+
+      // 统计字符串中的单词个数，这里的单词指的是连续的不是空格的字符。
+      // 请注意，你可以假定字符串里不包括任何不可打印的字符。
+
+      /**
+       * @param {string} s
+       * @return {number}
+       */
+      var countSegments = function (s) {};
+
+      // --- answer-1 ---
+
+      // 注意前后空格 和 联系的空格
+      var countSegments = function (s = '') {
+        s = s.trim();
+        return s ? s.split(/\s+/g).length : 0;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      var countSegments = function (s) {
+        let word = 0;
+        for (let i = 0; i < s.length; i++) {
+          if ((i === 0 || s[i - 1] === ' ') && s[i] !== ' ') {
+            word++;
+          }
+        }
+        return word;
+      };
+
+      // --- answer-2 ---
+
+      var s = 'Hello, my name is John';
+      var result = 5;
+      // 解释: 这里的单词是指连续的不是空格的字符，所以 "Hello," 算作 1 个单词。
+
+      var s = '                ';
+      var result = 0;
+
+      console.log('s = ', s);
+      console.log('result = ', result);
+      console.log('countSegments = ', countSegments(s));
+    </script>
+  </body>
+</html>
