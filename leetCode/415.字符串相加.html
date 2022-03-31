@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>415. 字符串相加</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/add-strings/
+
+      // 给定两个字符串形式的非负整数 num1 和num2 ，计算它们的和并同样以字符串形式返回。
+      // 你不能使用任何內建的用于处理大整数的库（比如 BigInteger）， 也不能直接将输入的字符串转换为整数形式。
+      // 提示：
+      // 1 <= num1.length, num2.length <= 104
+      // num1 和num2 都只包含数字 0-9
+      // num1 和num2 都不包含任何前导零
+
+      /**
+       * @param {string} num1
+       * @param {string} num2
+       * @return {string}
+       */
+      var addStrings = function (num1, num2) {};
+
+      // --- answer-1 ---
+
+      var addStrings = function (num1, num2) {
+        let l1 = num1.length - 1;
+        let l2 = num2.length - 1;
+        let add = 0;
+        let ans = '';
+        while (l1 >= 0 || l2 >= 0 || add != 0) {
+          const x = l1 >= 0 ? +num1[l1] : 0;
+          const y = l2 >= 0 ? +num2[l2] : 0;
+          const result = x + y + add;
+          let n = result % 10;
+          ans = n + ans;
+          add = (result - n) / 10;
+          l1 -= 1;
+          l2 -= 1;
+        }
+        return ans;
+      };
+
+      // 这个性能还优于上面的
+      var addStrings = function (num1, num2) {
+        let i = num1.length - 1,
+          j = num2.length - 1,
+          add = 0;
+        const ans = [];
+        while (i >= 0 || j >= 0 || add != 0) {
+          const x = i >= 0 ? num1.charAt(i) - '0' : 0;
+          const y = j >= 0 ? num2.charAt(j) - '0' : 0;
+          const result = x + y + add;
+          ans.push(result % 10);
+          add = Math.floor(result / 10);
+          i -= 1;
+          j -= 1;
+        }
+        return ans.reverse().join('');
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var num1 = '11',
+        num2 = '123';
+      var result = '134';
+
+      var num1 = '456',
+        num2 = '77';
+      var result = '533';
+
+      // var num1 = "0", num2 = "0";
+      // var result = "0";
+
+      console.log('num1 = ', num1);
+      console.log('num2 = ', num2);
+      console.log('result = ', result);
+      console.log('addStrings = ', addStrings(num1, num2));
+    </script>
+  </body>
+</html>
