@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>453. 最小操作次数使数组元素相等</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/minimum-moves-to-equal-array-elements/
+
+      // 给你一个长度为 n 的整数数组，每次操作将会使 n - 1 个元素增加 1 。返回让数组所有元素相等的最小操作次数。
+      // 提示：
+      // n == nums.length
+      // 1 <= nums.length <= 105
+      // -109 <= nums[i] <= 109
+      // 答案保证符合 32-bit 整数
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var minMoves = function (nums) {};
+
+      // --- answer-1 ---
+
+      // 往最小的减
+      var minMoves = function (nums = []) {
+        const minNum = Math.min.apply(Math, nums);
+        let res = 0;
+        for (const num of nums) {
+          res += num - minNum;
+        }
+        return res;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      // var nums = [1,2,3];
+      // var result = 3;
+      // 解释：[1,2,3]  =>  [2,3,3]  =>  [3,4,3]  =>  [4,4,4]
+
+      // var nums = [1,1,1];
+      // var result = 0;
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('minMoves = ', minMoves(nums));
+    </script>
+  </body>
+</html>
