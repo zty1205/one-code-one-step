@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>459. 重复的子字符串</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/repeated-substring-pattern/
+
+      // 给定一个非空的字符串 s ，检查是否可以通过由它的一个子串重复多次构成。
+      // 提示：
+      // 1 <= s.length <= 104
+      // s 由小写英文字母组成
+
+      /**
+       * @param {string} s
+       * @return {let}
+       */
+      var repeatedSubstringPattern = function (s) {};
+
+      // --- answer-1 ---
+
+      // 暴力 枚举子串
+      var repeatedSubstringPattern = function (s) {
+        let len = s.length;
+        for (let i = 1; i * 2 <= len; ++i) {
+          if (len % i == 0) {
+            let match = true;
+            for (let j = i; j < len; ++j) {
+              if (s.charAt(j) != s.charAt(j - i)) {
+                match = false;
+                break;
+              }
+            }
+            if (match) {
+              return true;
+            }
+          }
+        }
+        return false;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      // var  s = "abab";
+      // var result =  true;
+      // 解释: 可由子串 "ab" 重复两次构成。
+
+      // var  s = "aba";
+      // var result =  false;
+
+      // var  s = "abcabcabcabc";
+      // var result =  true;
+      // 解释: 可由子串 "abc" 重复四次构成。 (或子串 "abcabc" 重复两次构成。)
+
+      var s = 'aaa';
+      var result = true;
+
+      console.log('s = ', s);
+      console.log('result = ', result);
+      console.log('repeatedSubstringPattern = ', repeatedSubstringPattern(s));
+    </script>
+  </body>
+</html>
