@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>476. 数字的补数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/number-complement/
+
+      // 对整数的二进制表示取反（0 变 1 ，1 变 0）后，再转换为十进制表示，可以得到这个整数的补数。
+      // 提示：
+      // 例如，整数 5 的二进制表示是 "101" ，取反后得到 "010" ，再转回十进制表示得到补数 2 。
+      // 给你一个整数 num ，输出它的补数。
+      // 提示：
+      // 1 <= num < 231
+
+      /**
+       * @param {number} num
+       * @return {number}
+       */
+      var findComplement = function (num) {};
+
+      // --- answer-1 ---
+
+      // 数和补数的和 +1 为2的整次方幂
+      // 2 ^ 31 没有超过js的最大安全数
+      var findComplement = function (num) {
+        let s = 1;
+        while (s <= num) s = s * 2;
+        return s - num - 1;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 使用1111111111 进行异或运算
+      var findComplement = function (num) {
+        let highBit = 0;
+        for (let i = 1; i <= 30; ++i) {
+          if (num >= 1 << i) {
+            highBit = i;
+          } else {
+            break;
+          }
+        }
+        const mask = highBit == 30 ? 0x7fffffff : (1 << (highBit + 1)) - 1;
+        return num ^ mask;
+      };
+
+      // --- answer-2 ---
+
+      var num = 5;
+      var result = 2;
+      // 解释：5 的二进制表示为 101（没有前导零位），其补数为 010。所以你需要输出 2 。
+
+      var num = 1;
+      var result = 0;
+      // 解释：1 的二进制表示为 1（没有前导零位），其补数为 0。所以你需要输出 0 。
+
+      console.log('num = ', num);
+      console.log('result = ', result);
+      console.log('findComplement = ', findComplement(num));
+    </script>
+  </body>
+</html>
