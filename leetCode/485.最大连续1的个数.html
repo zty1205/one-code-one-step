@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>485. 最大连续 1 的个数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/max-consecutive-ones/
+
+      // 给定一个二进制数组 nums ， 计算其中最大连续 1 的个数。
+      // 提示：
+      // 1 <= nums.length <= 105
+      // nums[i] 不是 0 就是 1.
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var findMaxConsecutiveOnes = function (nums) {};
+
+      // --- answer-1 ---
+
+      var findMaxConsecutiveOnes = function (nums) {
+        let max = 0;
+        let temp = 0;
+        for (let n of nums) {
+          if (n === 1) {
+            temp += 1;
+          } else {
+            max = Math.max(max, temp);
+            temp = 0;
+          }
+        }
+        return Math.max(max, temp);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var nums = [1, 1, 0, 1, 1, 1];
+      var result = 3;
+      // 解释：开头的两位和最后的三位都是连续 1 ，所以最大连续 1 的个数是 3.
+
+      var nums = [1, 0, 1, 1, 0, 1];
+      var result = 2;
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('findMaxConsecutiveOnes = ', findMaxConsecutiveOnes(nums));
+    </script>
+  </body>
+</html>
