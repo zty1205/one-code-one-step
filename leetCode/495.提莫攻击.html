@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>495. 提莫攻击</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/teemo-attacking/
+
+      // 在《英雄联盟》的世界中，有一个叫 “提莫” 的英雄。他的攻击可以让敌方英雄艾希（编者注：寒冰射手）进入中毒状态。
+      // 当提莫攻击艾希，艾希的中毒状态正好持续 duration 秒。
+      // 正式地讲，提莫在 t 发起发起攻击意味着艾希在时间区间 [t, t + duration - 1]（含 t 和 t + duration - 1）处于中毒状态。如果提莫在中毒影响结束 前 再次攻击，中毒状态计时器将会 重置 ，在新的攻击之后，中毒影响将会在 duration 秒后结束。
+      // 给你一个 非递减 的整数数组 timeSeries ，其中 timeSeries[i] 表示提莫在 timeSeries[i] 秒时对艾希发起攻击，以及一个表示中毒持续时间的整数 duration 。
+      // 返回艾希处于中毒状态的 总 秒数。
+      // 提示：
+      // 1 <= timeSeries.length <= 104
+      // 0 <= timeSeries[i], duration <= 107
+      // timeSeries 按 非递减 顺序排列
+
+      /**
+       * @param {number[]} timeSeries
+       * @param {number} duration
+       * @return {number}
+       */
+      var findPoisonedDuration = function (timeSeries = [], duration = 1) {};
+
+      // --- answer-1 ---
+
+      // 照着题意来就完事
+      var findPoisonedDuration = function (timeSeries = [], duration = 1) {
+        let pre = timeSeries[0];
+        let sum = 0;
+        for (let i = 1; i < timeSeries.length; i++) {
+          let cur = timeSeries[i];
+          if (cur === pre) continue;
+
+          if (cur - pre < duration) {
+            sum += cur - pre;
+          } else {
+            sum += duration;
+          }
+          pre = cur;
+        }
+        return sum + duration;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var timeSeries = [1, 4],
+        duration = 2;
+      var result = 4;
+      // 解释：提莫攻击对艾希的影响如下：
+
+      var timeSeries = [1, 2],
+        duration = 2;
+      var result = 3;
+      // 解释：提莫攻击对艾希的影响如下：
+
+      console.log('timeSeries = ', timeSeries);
+      console.log('duration = ', duration);
+      console.log('result = ', result);
+      console.log('findPoisonedDuration = ', findPoisonedDuration(timeSeries, duration));
+    </script>
+  </body>
+</html>
