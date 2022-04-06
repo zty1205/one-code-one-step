@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>500. 键盘行</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/keyboard-row/
+
+      // 给你一个字符串数组 words ，只返回可以使用在 美式键盘 同一行的字母打印出来的单词。键盘如下图所示。
+      // 美式键盘 中：
+      // 提示：
+      // 第一行由字符 "qwertyuiop" 组成。
+      // 第二行由字符 "asdfghjkl" 组成。
+      // 第三行由字符 "zxcvbnm" 组成。
+      // 提示：
+      // 1 <= words.length <= 20
+      // 1 <= words[i].length <= 100
+      // words[i] 由英文字母（小写和大写字母）组成
+
+      /**
+       * @param {string[]} words
+       * @return {string[]}
+       */
+      var findWords = function (words) {};
+
+      // --- answer-1 ---
+
+      // 构建map  字符对应行所在数
+
+      function buildMap(array = []) {
+        return array.reduce((pre, cur, idx) => {
+          for (let c of cur) {
+            pre[c] = idx;
+          }
+          return pre;
+        }, {});
+      }
+
+      // 按题意来
+      var findWords = function (words) {
+        const map = buildMap(['qwertyuiop', 'asdfghjkl', 'zxcvbnm']);
+        // 或者直接定义 charIndex = "12210111011122000010020202";
+
+        const isMatch = (word = '') => {
+          let base = map[word[0]];
+          for (let i = 1; i < word.length; i++) {
+            if (map[word[i]] !== base) return false;
+          }
+          return true;
+        };
+
+        const ans = [];
+        for (let word of words) {
+          if (isMatch(word.toLocaleLowerCase())) ans.push(word);
+        }
+        return ans;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var words = ['Hello', 'Alaska', 'Dad', 'Peace'];
+      var result = ['Alaska', 'Dad'];
+
+      var words = ['omk'];
+      var result = [];
+
+      var words = ['adsdf', 'sfd'];
+      var result = ['adsdf', 'sfd'];
+
+      console.log('words = ', words);
+      console.log('result = ', result);
+      console.log('findWords = ', findWords(words));
+    </script>
+  </body>
+</html>
