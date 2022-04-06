@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>501. 二叉搜索树中的众数</title>
+  </head>
+  <body>
+    <script src="../helper/tree.js"></script>
+    <script>
+      // https://leetcode-cn.com/problems/find-mode-in-binary-search-tree/
+
+      // 给你一个含重复值的二叉搜索树（BST）的根节点 root ，找出并返回 BST 中的所有 众数（即，出现频率最高的元素）。
+      // 如果树中有不止一个众数，可以按 任意顺序 返回。
+      // 假定 BST 满足如下定义：
+      // 提示：
+      // 结点左子树中所含节点的值 小于等于 当前节点的值
+      // 结点右子树中所含节点的值 大于等于 当前节点的值
+      // 左子树和右子树都是二叉搜索树
+      // 提示：
+      // 树中节点的数目在范围 [1, 104] 内
+      // -105 <= Node.val <= 105
+
+      /**
+       * Definition for a binary tree node.
+       * function TreeNode(val, left, right) {
+       *     this.val = (val===undefined ? 0 : val)
+       *     this.left = (left===undefined ? null : left)
+       *     this.right = (right===undefined ? null : right)
+       * }
+       */
+      /**
+       * @param {TreeNode} root
+       * @return {number[]}
+       */
+      var findMode = function (root) {};
+
+      // --- answer-1 ---
+
+      // 中序遍历二叉树为递增序列
+      var findMode = function (root) {
+        let base = 0;
+        let count = 0;
+        let maxCount = 0;
+        let answer = [];
+
+        function visited(val) {
+          if (val === base) {
+            count += 1;
+          } else {
+            count = 1;
+            base = val;
+          }
+          if (count === maxCount) {
+            answer.push(base);
+          }
+          if (count > maxCount) {
+            maxCount = count;
+            answer = [base];
+          }
+        }
+
+        const midTree = (node) => {
+          if (!node) return;
+          midTree(node.left);
+          visited(node.val);
+          midTree(node.right);
+        };
+
+        midTree(root);
+        return answer;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var root = [1, null, 2, 2];
+      var result = [2];
+
+      var root = [0];
+      var result = [0];
+
+      var tree = buildTreeByArray([...root]);
+
+      console.log('root = ', root);
+      console.log('result = ', result);
+      console.log('tree = ', tree);
+      console.log('findMode = ', findMode(tree));
+    </script>
+  </body>
+</html>
