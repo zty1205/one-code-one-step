@@ -14,7 +14,7 @@ function _buildNodeMap(map = new Map(), node, config = {}) {
 }
 
 function buildTreeByArray(arr = [], config = {}) {
-  let array = arr.map((x) => (x = x || TREE_EMPTY));
+  let array = arr.map((x) => (x = x != null ? x : TREE_EMPTY));
   const root = new TreeNode(+[array[0]]);
 
   const nodeMap = new Map();
