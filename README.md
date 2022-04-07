@@ -142,7 +142,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (213 道)
+## 三、LeetCode (214 道)
 
 <br/>
 
@@ -277,6 +277,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [168.Excel 表列名称.html](./leetCode/168.Excel表列名称.html)
 - [169.多数元素.html](./leetCode/169.多数元素.html)
 - [171.Excel 表列序号.html](./leetCode/171.Excel表列序号.html)
+- [172.阶乘后的零.html](./leetCode/172.阶乘后的零.html)
 - [175.组合两个表.sql](./leetCode/175.组合两个表.sql)
 - [181.超过经理收入的员工.sql](./leetCode/181.超过经理收入的员工.sql)
 - [182.查找重复的电子邮箱.sql](./leetCode/182.查找重复的电子邮箱.sql)

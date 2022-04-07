@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>172. 阶乘后的零</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/factorial-trailing-zeroes/
+
+      // 给定一个整数 n ，返回 n! 结果中尾随零的数量。
+      // 提示 n! = n * (n - 1) * (n - 2) * ... * 3 * 2 * 1
+      // 提示：
+      // 0 <= n <= 104
+
+      /**
+       * @param {number} n
+       * @return {number}
+       */
+      var trailingZeroes = function (n) {};
+
+      // --- answer-1 ---
+
+      // n! 尾零的数量即为 n 中因子 10 的个数
+      // 而10由2和5两个质因子相乘 所以只需要取两个质因子的个数的最小值
+      // 5的个数明显小于2 所以去5的质因子的个数
+      var trailingZeroes = function (n) {
+        let ans = 0;
+        for (let i = 5; i <= n; i += 5) {
+          for (let x = i; x % 5 == 0; x /= 5) {
+            ans += 1;
+          }
+        }
+        return ans;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 上面在算质因子的个数时，存在重复计算的情况
+      var trailingZeroes = function (n) {
+        let ans = 0;
+        while (n !== 0) {
+          n = Math.floor(n / 5);
+          ans += n;
+        }
+        return ans;
+      };
+
+      // --- answer-2 ---
+
+      // var n = 3;
+      // var result = 0;
+      // 解释：3! = 6 ，不含尾随 0
+
+      var n = 5;
+      var result = 1;
+      // 解释：5! = 120 ，有一个尾随 0
+
+      // var n = 0;
+      // var result = 0;
+
+      console.log('n = ', n);
+      console.log('result = ', result);
+      console.log('trailingZeroes = ', trailingZeroes(n));
+    </script>
+  </body>
+</html>
