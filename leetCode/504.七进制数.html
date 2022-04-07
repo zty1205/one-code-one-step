@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>504. 七进制数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/base-7/
+
+      // 给定一个整数 num，将其转化为 7 进制，并以字符串形式输出。
+      // 提示：
+      // -107 <= num <= 107
+
+      /**
+       * @param {number} num
+       * @return {string}
+       */
+      var convertToBase7 = function (num) {};
+
+      // --- answer-1 ---
+
+      // num = n1 * 1 + n2 * 7 + n3*7^2
+      var convertToBase7 = function (num) {
+        if (num === 0) return '0';
+        const base = 7;
+        let negative = num < 0;
+        num = Math.abs(num);
+        const digits = [];
+        while (num > 0) {
+          let n = num % base;
+          digits.push(n);
+          num = (num - n) / base;
+        }
+        if (negative) {
+          digits.push('-');
+        }
+        return digits.reverse().join('');
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var num = 100;
+      var result = '202';
+
+      // var num = -7;
+      // var result = '-10';
+
+      console.log('num = ', num);
+      console.log('result = ', result);
+      console.log('convertToBase7 = ', convertToBase7(num));
+    </script>
+  </body>
+</html>
