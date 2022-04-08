@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>507. 完美数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/perfect-number/
+
+      // 对于一个 正整数，如果它和除了它自身以外的所有 正因子 之和相等，我们称它为 「完美数」。
+      // 给定一个 整数 n， 如果是完美数，返回 true；否则返回 false。
+      // 提示：
+      // 1 <= num <= 108
+
+      /**
+       * @param {number} num
+       * @return {boolean}
+       */
+      var checkPerfectNumber = function (num) {};
+
+      // --- answer-1 ---
+
+      var checkPerfectNumber = function (num) {
+        let sum = 0;
+        let mid = num >> 1;
+        for (let i = 1; i <= mid; i++) {
+          if (num % i === 0) sum += i;
+        }
+        console.log('sum = ', sum);
+        return num === sum;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 欧几里得-欧拉定理，每个偶完全数都可以写成 2^(p-1) * (2^p - 1)
+      var checkPerfectNumber = function (num) {
+        return num === 6 || num === 28 || num === 496 || num === 8128 || num === 33550336;
+      };
+
+      // --- answer-2 ---
+
+      var num = 28;
+      var result = true;
+      // 解释：28 = 1 + 2 + 4 + 7 + 14
+
+      var num = 7;
+      var result = false;
+
+      console.log('num = ', num);
+      console.log('result = ', result);
+      console.log('checkPerfectNumber = ', checkPerfectNumber(num));
+    </script>
+  </body>
+</html>
