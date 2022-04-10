@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>541. 反转字符串 II</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/reverse-string-ii/
+
+      // 给定一个字符串 s 和一个整数 k，从字符串开头算起，每计数至 2k 个字符，就反转这 2k 字符中的前 k 个字符。
+      // 提示：
+      // 如果剩余字符少于 k 个，则将剩余字符全部反转。
+      // 如果剩余字符小于 2k 但大于或等于 k 个，则反转前 k 个字符，其余字符保持原样。
+      // 提示：
+      // 1 <= s.length <= 104
+      // s 仅由小写英文组成
+      // 1 <= k <= 104
+
+      /**
+       * @param {string} s
+       * @param {number} k
+       * @return {string}
+       */
+      var reverseStr = function (s, k) {};
+
+      // --- answer-1 ---
+
+      // --- answer-1 ---
+
+      // 使用原生api
+      var reverseStr = function (s, k) {
+        const arr = Array.from(s);
+        for (let i = 0; i < s.length; i += 2 * k) {
+          reverse(arr, i, Math.min(i + k, s.length) - 1);
+        }
+        return arr.join('');
+      };
+
+      function reverse(arr, left, right) {
+        while (left < right) {
+          const temp = arr[left];
+          arr[left] = arr[right];
+          arr[right] = temp;
+          left++;
+          right--;
+        }
+      }
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var s = 'abcdefg',
+        k = 2;
+      var result = 'bacdfeg';
+
+      var s = 'abcd',
+        k = 2;
+      var result = 'bacd';
+
+      console.log('s = ', s);
+      console.log('k = ', k);
+      console.log('result = ', result);
+      console.log('reverseStr = ', reverseStr(s, k));
+    </script>
+  </body>
+</html>
