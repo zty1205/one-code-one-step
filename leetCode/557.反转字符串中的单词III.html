@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>557. 反转字符串中的单词 III</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/reverse-words-in-a-string-iii/
+
+      // 给定一个字符串 s ，你需要反转字符串中每个单词的字符顺序，同时仍保留空格和单词的初始顺序。
+      // 提示：
+      // 1 <= s.length <= 5 * 104
+      // s 包含可打印的 ASCII 字符。
+      // s 不包含任何开头或结尾空格。
+      // s 里 至少 有一个词。
+      // s 中的所有单词都用一个空格隔开。
+
+      /**
+       * @param {string} s
+       * @return {string}
+       */
+      var reverseWords = function (s) {};
+
+      // --- answer-1 ---
+
+      // 原生api
+      var reverseWords = function (s) {
+        return s
+          .split(/\s/)
+          .map((str) => Array.from(str).reverse().join(''))
+          .join(' ');
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 遍历
+      var reverseWords = function (s) {
+        const ans = [];
+        const length = s.length;
+        let i = 0;
+        while (i < length) {
+          let start = i;
+          while (i < length && s.charAt(i) != ' ') {
+            i++;
+          }
+          for (let p = start; p < i; p++) {
+            ans.push(s.charAt(start + i - 1 - p));
+          }
+          while (i < length && s.charAt(i) == ' ') {
+            i++;
+            ans.push(' ');
+          }
+        }
+        return ans.join('');
+      };
+
+      // --- answer-2 ---
+
+      // 注意: 在js中字符串不可变的，例如str[0] = 1 无法改变原字符串
+
+      var s = "Let's take LeetCode contest";
+      var result = "s'teL ekat edoCteeL tsetnoc";
+
+      // var  s = "God Ding";
+      // var result = "doG gniD";
+
+      console.log('s = ', s);
+      console.log('result = ', result);
+      console.log('reverseWords = ', reverseWords(s));
+    </script>
+  </body>
+</html>
