@@ -1,10 +1,12 @@
 {
   "name": "zty-leet-code",
   "version": "0.1.0",
+  "description": "编程，算法，LeetCode，这是一步步脚印",
   "keywords": [
     "react",
     "antd",
-    "leetCode"
+    "leetCode",
+    "algorithm"
   ],
   "private": true,
   "dependencies": {
