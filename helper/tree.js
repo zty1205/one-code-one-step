@@ -62,3 +62,32 @@ function buildArrayByTree(root) {
   }
   return res;
 }
+
+class NNode {
+  constructor(val, children) {
+    this.val = val;
+    this.children = children || [];
+  }
+}
+
+function buildNTreeByArray(list) {
+  if (!list || !list.length) return null;
+  let root = new NNode(list[0]);
+  let stack = [root];
+  let parent;
+  for (let i = 1; i < list.length; i++) {
+    let val = list[i];
+    if (val) {
+      let node = new NNode(val);
+      stack.push(node);
+      if (parent.children) {
+        parent.children.push(node);
+      } else {
+        parent.children = [node];
+      }
+    } else {
+      parent = stack.shift();
+    }
+  }
+  return root;
+}
