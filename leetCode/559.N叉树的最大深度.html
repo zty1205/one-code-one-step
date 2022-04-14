@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>559. N 叉树的最大深度</title>
+  </head>
+  <body>
+    <script src="../helper/tree.js"></script>
+    <script>
+      // https://leetcode-cn.com/problems/maximum-depth-of-n-ary-tree/
+
+      // 给定一个 N 叉树，找到其最大深度。
+      // 最大深度是指从根节点到最远叶子节点的最长路径上的节点总数。
+      // 提示：
+      // 树的深度不会超过 1000 。
+      // 树的节点数目位于 [0, 104] 之间。
+
+      /**
+       * // Definition for a Node.
+       * function Node(val,children) {
+       *    this.val = val;
+       *    this.children = children;
+       * };
+       */
+      /**
+       * @param {Node|null} root
+       * @return {number}
+       */
+      var maxDepth = function (root) {};
+
+      // --- answer-1 ---
+
+      // 深度遍历 非递归
+      var maxDepth = function (root) {
+        if (!root) return 0;
+        let depth = 0;
+        function recur(node, d) {
+          if (!node) {
+            depth = Math.max(d, depth);
+            return;
+          }
+          if (!node.children.length) {
+            depth = Math.max(d + 1, depth);
+            return;
+          }
+          for (let child of node.children) {
+            recur(child, d + 1);
+          }
+        }
+        recur(root, 0);
+        return depth;
+      };
+
+      // 递归
+      var maxDepth1 = function (root) {
+        if (!root) return 0;
+
+        let maxChildDepth = 0;
+        const children = root.children;
+        for (const child of children) {
+          const childDepth = maxDepth(child);
+          maxChildDepth = Math.max(maxChildDepth, childDepth);
+        }
+        return maxChildDepth + 1;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 广度遍历
+      var maxDepth = function (root) {
+        if (!root) {
+          return 0;
+        }
+        const queue = [root];
+        let ans = 0;
+        while (queue.length) {
+          let size = queue.length;
+          while (size > 0) {
+            const node = queue.shift();
+            const children = node.children;
+            for (const child of children) {
+              queue.push(child);
+            }
+            size--;
+          }
+          ans++;
+        }
+        return ans;
+      };
+
+      // --- answer-2 ---
+
+      var root = [1, null, 3, 2, 4, null, 5, 6];
+      var result = 3;
+
+      // var root = [
+      //   1,
+      //   null,
+      //   2,
+      //   3,
+      //   4,
+      //   5,
+      //   null,
+      //   null,
+      //   6,
+      //   7,
+      //   null,
+      //   8,
+      //   null,
+      //   9,
+      //   10,
+      //   null,
+      //   null,
+      //   11,
+      //   null,
+      //   12,
+      //   null,
+      //   13,
+      //   null,
+      //   null,
+      //   14
+      // ];
+      // var result = 5;
+
+      var tree = buildNTreeByArray(root);
+
+      console.log('tree = ', tree);
+      console.log('root = ', root);
+      console.log('result = ', result);
+      console.log('maxDepth = ', maxDepth(tree));
+    </script>
+  </body>
+</html>
