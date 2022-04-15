@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>563. 二叉树的坡度</title>
+  </head>
+  <body>
+    <script src="../helper/tree.js"></script>
+    <script>
+      // https://leetcode-cn.com/problems/binary-tree-tilt/
+
+      // 给你一个二叉树的根节点 root ，计算并返回 整个树 的坡度 。
+      // 一个树的 节点的坡度 定义即为，该节点左子树的节点之和和右子树节点之和的 差的绝对值 。如果没有左子树的话，左子树的节点之和为 0 ；没有右子树的话也是一样。空结点的坡度是 0 。
+      // 整个树 的坡度就是其所有节点的坡度之和。
+      // 提示：
+      // 树中节点数目的范围在 [0, 104] 内
+      // -1000 <= Node.val <= 1000
+
+      /**
+       * Definition for a binary tree node.
+       * function TreeNode(val, left, right) {
+       *     this.val = (val===undefined ? 0 : val)
+       *     this.left = (left===undefined ? null : left)
+       *     this.right = (right===undefined ? null : right)
+       * }
+       */
+      /**
+       * @param {TreeNode} root
+       * @return {number}
+       */
+      var findTilt = function (root) {};
+
+      // --- answer-1 ---
+
+      // 左右根 计算完后将子节点的值加到父节点
+      var findTilt = function (root) {
+        let tilt = 0;
+        function bfs(node) {
+          if (!node) return;
+          bfs(node.left);
+          bfs(node.right);
+          let leftVal = node.left ? node.left.val : 0;
+          let rightVal = node.right ? node.right.val : 0;
+          tilt += Math.abs(leftVal - rightVal);
+          node.val += leftVal + rightVal;
+        }
+        bfs(root);
+        return tilt;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var root = [1, 2, 3];
+      var result = 1;
+
+      var root = [4, 2, 9, 3, 5, null, 7];
+      var result = 15;
+
+      var root = [21, 7, 14, 1, 1, 2, 2, 3, 3];
+      var result = 9;
+
+      var tree = buildTreeByArray([...root]);
+
+      console.log('tree = ', tree);
+      console.log('root = ', root);
+      console.log('result = ', result);
+      console.log('findTilt = ', findTilt(tree));
+    </script>
+  </body>
+</html>
