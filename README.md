@@ -148,7 +148,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (223 道)
+## 三、LeetCode (224 道)
 
 <br/>
 
@@ -369,6 +369,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [520.检测大写字母.html](./leetCode/520.检测大写字母.html)
 - [530.二叉搜索树的最小绝对差.html](./leetCode/530.二叉搜索树的最小绝对差.html)
 - [541.反转字符串 II.html](./leetCode/541.反转字符串II.html)
+- [551.学生出勤记录 I.html](./leetCode/551.学生出勤记录I.html)
 - [557.反转字符串中的单词 III.html](./leetCode/557.反转字符串中的单词III.html)
 - [559.N 叉树的最大深度.html](./leetCode/559.N叉树的最大深度.html)
 - [563.二叉树的坡度.html](./leetCode/563.二叉树的坡度.html)
