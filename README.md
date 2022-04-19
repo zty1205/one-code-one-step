@@ -148,7 +148,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (226 道)
+## 三、LeetCode (227 道)
 
 <br/>
 
@@ -374,6 +374,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [559.N 叉树的最大深度.html](./leetCode/559.N叉树的最大深度.html)
 - [563.二叉树的坡度.html](./leetCode/563.二叉树的坡度.html)
 - [584.寻找用户推荐人.sql](./leetCode/584.寻找用户推荐人.sql)
+- [586.订单最多的客户.sql](./leetCode/586.订单最多的客户.sql)
 - [595.大的国家.sql](./leetCode/595.大的国家.sql)
 - [596.超过 5 名学生的课.sql](./leetCode/596.超过5名学生的课.sql)
 - [678.有效的括号字符串.html](./leetCode/678.有效的括号字符串.html)
