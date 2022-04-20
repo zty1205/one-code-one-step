@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>590. N 叉树的后序遍历</title>
+  </head>
+  <body>
+    <script src="../helper/tree.js"></script>
+    <script>
+      // https://leetcode-cn.com/problems/n-ary-tree-postorder-traversal/
+
+      // 给定一个 n 叉树的根节点 root ，返回 其节点值的 后序遍历 。
+      // 提示：
+      // 节点总数在范围 [0, 104] 内
+      // 0 <= Node.val <= 104
+      // n 叉树的高度小于或等于 1000
+
+      /**
+       * // Definition for a Node.
+       * function Node(val,children) {
+       *    this.val = val;
+       *    this.children = children;
+       * };
+       */
+      /**
+       * @param {Node|null} root
+       * @return {number[]}
+       */
+      var postorder = function (root) {};
+
+      // --- answer-1 ---
+
+      // 二叉树的左右根
+      // 递归版本
+      var postorder = function (root) {
+        const ans = [];
+        function dfs(node) {
+          if (!node) return;
+          for (let i = 0; i < node.children.length; i++) {
+            dfs(node.children[i]);
+          }
+          ans.push(node.val);
+        }
+        dfs(root);
+        return ans;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 非递归版本
+      // 根右左的镜像关系
+      var postorder = function (root) {
+        if (!root) return [];
+        const ans = [];
+        let stack = [root];
+        while (stack.length) {
+          let node = stack.pop();
+          ans.push(node.val);
+          for (let i = 0; i < node.children.length; i++) {
+            stack.push(node.children[i]);
+          }
+        }
+        return ans.reverse();
+      };
+
+      // --- answer-2 ---
+
+      var root = [1, null, 3, 2, 4, null, 5, 6];
+      var result = [5, 6, 3, 2, 4, 1];
+
+      var root = [
+        1,
+        null,
+        2,
+        3,
+        4,
+        5,
+        null,
+        null,
+        6,
+        7,
+        null,
+        8,
+        null,
+        9,
+        10,
+        null,
+        null,
+        11,
+        null,
+        12,
+        null,
+        13,
+        null,
+        null,
+        14
+      ];
+      var result = [2, 6, 14, 11, 7, 3, 12, 8, 4, 13, 9, 10, 5, 1];
+
+      var tree = buildNTreeByArray(root);
+
+      console.log('tree = ', tree);
+      console.log('root = ', root);
+      console.log('result = ', result);
+      console.log('postorder = ', postorder(tree));
+    </script>
+  </body>
+</html>
