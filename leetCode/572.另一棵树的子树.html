@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>572. 另一棵树的子树</title>
+  </head>
+  <body>
+    <script src="../helper/tree.js"></script>
+    <script>
+      // https://leetcode-cn.com/problems/subtree-of-another-tree/
+
+      /**
+       * Definition for a binary tree node.
+       * function TreeNode(val, left, right) {
+       *     this.val = (val===undefined ? 0 : val)
+       *     this.left = (left===undefined ? null : left)
+       *     this.right = (right===undefined ? null : right)
+       * }
+       */
+      /**
+       * @param {TreeNode} root
+       * @param {TreeNode} subRoot
+       * @return {boolean}
+       */
+      var isSubtree = function (root, subRoot) {};
+
+      // --- answer-1 ---
+
+      // 深度遍历 暴力破解
+      function isSub(rot, sub) {
+        if (!rot && !sub) {
+          return true;
+        }
+        if ((rot && !sub) || (!rot && sub) || rot.val != sub.val) {
+          return false;
+        }
+        return isSub(rot.left, sub.left) && isSub(rot.right, sub.right);
+      }
+
+      function dfs(rot, sub) {
+        if (!rot) {
+          return false;
+        }
+        return isSub(rot, sub) || dfs(rot.left, sub) || dfs(rot.right, sub);
+      }
+
+      var isSubtree = function (root, subRoot) {
+        return dfs(root, subRoot);
+      };
+
+      function isSub(root, subRoot) {
+        if (!root && subRoot) return false;
+        else if (root && !subRoot) return false;
+        else if (!root && !subRoot) return true;
+        else if (root.val != subRoot.val) return false;
+        return isSub(root.left, subRoot.left) && isSub(root.right, subRoot.right);
+      }
+
+      var isSubtree = function (root, subRoot) {
+        if (!root) return false;
+
+        return isSub(root, subRoot) || isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var root = [3, 4, 5, 1, 2],
+        subRoot = [4, 1, 2];
+      var result = true;
+
+      var root = [3, 4, 5, 1, 2, null, null, null, null, 0],
+        subRoot = [4, 1, 2];
+      var result = false;
+
+      var tree = buildTreeByArray([...root]);
+      var subTree = buildTreeByArray([...subRoot]);
+
+      console.log('root = ', root);
+      console.log('subRoot = ', subRoot);
+      console.log('result = ', result);
+      console.log('isSubtree = ', isSubtree(tree, subTree));
+    </script>
+  </body>
+</html>
