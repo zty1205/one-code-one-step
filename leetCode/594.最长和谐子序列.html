@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>594. 最长和谐子序列</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/longest-harmonious-subsequence/
+
+      // 和谐数组是指一个数组里元素的最大值和最小值之间的差别 正好是 1 。
+      // 现在，给你一个整数数组 nums ，请你在所有可能的子序列中找到最长的和谐子序列的长度。
+      // 数组的子序列是一个由数组派生出来的序列，它可以通过删除一些元素或不删除元素、且不改变其余元素的顺序而得到。
+      // 提示：
+      // 1 <= nums.length <= 2 * 104
+      // -109 <= nums[i] <= 109
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var findLHS = function (nums) {};
+
+      // --- answer-1 ---
+
+      var findLHS = function (nums) {
+        nums.sort((a, b) => a - b);
+        let left = 0;
+        let res = 0;
+        // 对每一个原生做滑动窗口
+        for (let right = 0; right < nums.length; right++) {
+          while (nums[right] - nums[left] > 1) {
+            left++;
+          }
+          if (nums[right] - nums[left] === 1) {
+            res = Math.max(res, right - left + 1);
+          }
+        }
+        return res;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // hash 找当前数字的n+1的个数
+      // 即在原数组中大于当前数1的都不要
+      var findLHS = function (nums = []) {
+        let map = nums.reduce((pre, cur, idx) => {
+          pre[cur] = (pre[cur] || 0) + 1;
+          return pre;
+        }, {});
+        let res = 0;
+        for (let key of map) {
+          if (map[key + 1]) {
+            res = Math.max(res, map[key] + map[key + 1]);
+          }
+        }
+        return res;
+      };
+
+      // --- answer-2 ---
+
+      var nums = [1, 3, 2, 2, 5, 2, 3, 7];
+      var result = 5;
+      // 解释：最长的和谐子序列是 [3,2,2,2,3]
+
+      var nums = [1, 2, 3, 4];
+      var result = 2;
+
+      var nums = [1, 1, 1, 1];
+      var result = 0;
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('findLHS = ', findLHS(nums));
+    </script>
+  </body>
+</html>
