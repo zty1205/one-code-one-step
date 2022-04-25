@@ -53,9 +53,9 @@
           return pre;
         }, {});
         let res = 0;
-        for (let key of map) {
-          if (map[key + 1]) {
-            res = Math.max(res, map[key] + map[key + 1]);
+        for (let key in map) {
+          if (map[+key + 1]) {
+            res = Math.max(res, map[key] + map[+key + 1]);
           }
         }
         return res;
@@ -67,11 +67,11 @@
       var result = 5;
       // 解释：最长的和谐子序列是 [3,2,2,2,3]
 
-      var nums = [1, 2, 3, 4];
-      var result = 2;
+      // var nums = [1, 2, 3, 4];
+      // var result = 2;
 
-      var nums = [1, 1, 1, 1];
-      var result = 0;
+      // var nums = [1, 1, 1, 1];
+      // var result = 0;
 
       console.log('nums = ', nums);
       console.log('result = ', result);
