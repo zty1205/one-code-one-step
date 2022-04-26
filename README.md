@@ -148,7 +148,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (235 道)
+## 三、LeetCode (236 道)
 
 <br/>
 
@@ -385,6 +385,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [594.最长和谐子序列.html](./leetCode/594.最长和谐子序列.html)
 - [595.大的国家.sql](./leetCode/595.大的国家.sql)
 - [596.超过 5 名学生的课.sql](./leetCode/596.超过5名学生的课.sql)
+- [599.两个列表的最小索引总和.html](./leetCode/599.两个列表的最小索引总和.html)
 - [678.有效的括号字符串.html](./leetCode/678.有效的括号字符串.html)
 - [873.最长的斐波那契子序列的长度.html](./leetCode/873.最长的斐波那契子序列的长度.html)
 
