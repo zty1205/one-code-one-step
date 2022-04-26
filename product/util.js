@@ -67,15 +67,30 @@ function writeMD(name, dist, ext) {
   });
   const regexp = new RegExp(`- (.*)${dist}/(.*)\.[${Object.keys(FILE_TEMPLATE).join('|')}]\\)`, 'g');
   const matchRes = mdContent.match(regexp);
-  if (!matchRes) return;
-  const numList = matchRes.map(getNumberByName);
-  const curNum = getNumberByName(name);
-  const idx = findIndex(curNum, numList);
 
-  const lastHtml = matchRes[idx];
+  let curNum;
+  let lastHtml;
+  let newHtml;
   const link = buildMdLink(name, dist, ext);
-  let newContent = mdContent.replace(lastHtml, `${lastHtml}\n${link}`);
 
+  if (!matchRes) {
+    const titleReg = new RegExp(`## (.*)${dist}`, 'gi');
+    const matchTitleRes = mdContent.match(titleReg);
+    if (!matchTitleRes) {
+      throw new Error(`请先创建二级标题 ${dist}`);
+    }
+    curNum = 0;
+    lastHtml = matchTitleRes[0];
+    newHtml = `${lastHtml}\n\n<br/>\n${link}` + '';
+  } else {
+    const numList = matchRes.map(getNumberByName);
+    curNum = getNumberByName(name);
+    const idx = findIndex(curNum, numList);
+    lastHtml = matchRes[idx];
+    newHtml = `${lastHtml}\n${link}`;
+  }
+
+  let newContent = mdContent.replace(lastHtml, `${lastHtml}\n${link}`);
   newContent = writeMDCount(newContent);
 
   fs.writeFileSync(mdFile, newContent, { encoding: 'utf-8' });
