@@ -140,10 +140,11 @@ function writeMDCount(content) {
 }
 
 function buildGitCmd(files = [], dist) {
-  let content = `git add README.md\n`;
+  // let content = `git add README.md\n`;
+  let content = `git add .\n`;
   let num = `feat: ${dist}`;
   files.forEach((f) => {
-    content += `git add ${f.file}\n`;
+    // content += `git add ${f.file}\n`;
     num += ` ${f.name}`;
   });
   content += `git commit -m '${num}'\n`;
