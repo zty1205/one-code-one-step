@@ -23,10 +23,17 @@ const sql_template = `-- #htmlTitle#\n\n`;
 
 const sh_template = `# #htmlTitle#\n\n`;
 
+const js_template = `
+/** 
+ * #htmlTitle#
+*/
+`;
+
 const FILE_TEMPLATE = {
   html: html_template,
   sql: sql_template,
-  sh: sh_template
+  sh: sh_template,
+  js: js_template
 };
 
 const WIN_GIT_HEADER = `

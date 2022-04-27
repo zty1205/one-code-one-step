@@ -12,6 +12,7 @@
 /build
 product/deploy.sh
 product/deploy.ps1
+designMode/dist
 
 # misc
 .DS_Store
