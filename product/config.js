@@ -33,7 +33,8 @@ const FILE_TEMPLATE = {
   html: html_template,
   sql: sql_template,
   sh: sh_template,
-  js: js_template
+  js: js_template,
+  ts: js_template
 };
 
 const WIN_GIT_HEADER = `

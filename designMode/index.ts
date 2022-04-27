@@ -1,3 +1,3 @@
-import * as FactoryPattern from './mode/FactoryPattern';
+import * as FactoryPattern from './FactoryPattern';
 
 FactoryPattern.run();

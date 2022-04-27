@@ -18,7 +18,7 @@ export default {
     resolve(),
     serve({
       open: true, // 是否打开浏览器
-      contentBase: './designMode', // 入口html的文件位置 会自动查找HTML文件
+      contentBase: './designMode/dist', // 入口html的文件位置 会自动查找HTML文件
       historyApiFallback: true, // Set to true to return index.html instead of 404
       host: 'localhost',
       port: 10001
