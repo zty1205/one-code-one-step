@@ -17,6 +17,7 @@
 - Programming 编程题
 - 剑指 offer 第二版
 - algorithm
+- designMode
 
 <br/>
 
@@ -493,7 +494,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## Algorithm
+## 六、Algorithm (9 道)
 
 <br/>
 
@@ -508,6 +509,12 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [滑动窗口算法-双指针.html](./algorithm/滑动窗口算法-双指针.html)
 
 <br/>
+
+## 七、DesignMode (1 道)
+
+- [FactoryPattern.js](./designMode/FactoryPattern.js)
+
+<br>
 
 ## End
 
