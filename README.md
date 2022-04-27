@@ -510,10 +510,11 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 七、DesignMode (2 道)
+## 七、DesignMode (3 道)
 
 - [FactoryPattern.ts](./designMode/FactoryPattern.ts)
 - [AbstractFactoryPattern.ts](./designMode/AbstractFactoryPattern.ts)
+- [SingletonPattern.ts](./designMode/SingletonPattern.ts)
 
 <br>
 
