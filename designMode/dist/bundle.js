@@ -8,7 +8,7 @@
  * 使用场景： 1、日志记录器：记录可能记录到本地硬盘、系统事件、远程服务器等，用户可以选择记录日志到什么地方。 2、数据库访问，当用户不知道最后系统采用哪一类数据库，以及数据库可能有变化时。 3、设计一个连接服务器的框架，需要三个协议，"POP3"、"IMAP"、"HTTP"，可以把这三个作为产品类，共同实现一个接口。
  * 注意事项：作为一种创建类模式，在任何需要生成复杂对象的地方，都可以使用工厂方法模式。有一点需要注意的地方就是复杂对象适合使用工厂模式，而简单对象，特别是只需要通过 new 就可以完成创建的对象，无需使用工厂模式。如果使用工厂模式，就需要引入一个工厂类，会增加系统的复杂度。
  */
-var Circle$1 = /** @class */ (function () {
+var Circle$2 = /** @class */ (function () {
     function Circle() {
     }
     Circle.prototype.say = function () {
@@ -39,7 +39,7 @@ var ShapeFactory$1 = /** @class */ (function () {
         var shape;
         switch (shapeType) {
             case 'CIRCLE':
-                shape = new Circle$1();
+                shape = new Circle$2();
                 break;
             case 'RECTANGLE':
                 shape = new Rectangle$1();
@@ -55,7 +55,7 @@ var ShapeFactory$1 = /** @class */ (function () {
     };
     return ShapeFactory;
 }());
-function run$5() {
+function run$6() {
     console.log('--- 工厂模式 ---');
     var sf = new ShapeFactory$1();
     var shape = sf.getShape('CIRCLE');
@@ -110,7 +110,7 @@ var Green = /** @class */ (function () {
     };
     return Green;
 }());
-var Circle = /** @class */ (function () {
+var Circle$1 = /** @class */ (function () {
     function Circle() {
     }
     Circle.prototype.say = function () {
@@ -141,7 +141,7 @@ var ShapeFactory = /** @class */ (function (_super) {
         var shape;
         switch (shapeType) {
             case 'CIRCLE':
-                shape = new Circle();
+                shape = new Circle$1();
                 break;
             case 'RECTANGLE':
                 shape = new Rectangle();
@@ -200,7 +200,7 @@ var FactoryProducer = /** @class */ (function () {
     };
     return FactoryProducer;
 }());
-function run$4() {
+function run$5() {
     console.log('\n--- 抽象工厂模式 ---');
     var FP = new FactoryProducer();
     var sf = FP.getFactory('SHAPE');
@@ -232,7 +232,7 @@ var Singleton = /** @class */ (function () {
     Singleton.instance = new Singleton();
     return Singleton;
 }());
-function run$3() {
+function run$4() {
     // 类“Singleton”的构造函数是私有的，仅可在类声明中访问。
     // let single = new Singleton()
     console.log('\n--- 单例模式 ---');
@@ -326,7 +326,7 @@ var MealBuilder = /** @class */ (function () {
     };
     return MealBuilder;
 }());
-function run$2() {
+function run$3() {
     console.log('\n--- 建造者模式 ---');
     var mealBuilder = new MealBuilder();
     var bc = mealBuilder.burgerCombo();
@@ -355,7 +355,7 @@ function inherits(subClass, superClass) {
         constructor: { value: subClass, writable: true, configurable: true }
     });
 }
-function run$1() {
+function run$2() {
     console.log('\n--- 原型模式 ---');
     function People(name) {
         this.name = name;
@@ -443,7 +443,7 @@ var AudioPlayer = /** @class */ (function () {
     };
     return AudioPlayer;
 }());
-function run() {
+function run$1() {
     console.log('\n--- 适配器模式 ---');
     var audioPlayer = new AudioPlayer();
     audioPlayer.play('mp3', 'My Heart Will Go On.mp3');
@@ -453,6 +453,62 @@ function run() {
     console.log('--- 适配器模式 ---\n');
 }
 
+/**
+ * BridgePattern 桥接模式
+ * 意图：将抽象部分与实现部分分离，使它们都可以独立的变化。
+ * 主要解决：在有多种可能会变化的情况下，用继承会造成类爆炸问题，扩展起来不灵活。
+ * 关键代码：抽象类依赖实现类。
+ * 优点： 1、抽象和实现的分离。 2、优秀的扩展能力。 3、实现细节对客户透明。
+ * 缺点：桥接模式的引入会增加系统的理解与设计难度，由于聚合关联关系建立在抽象层，要求开发者针对抽象进行设计与编程。
+ * 使用场景： 1、如果一个系统需要在构件的抽象化角色和具体化角色之间增加更多的灵活性，避免在两个层次之间建立静态的继承联系，通过桥接模式可以使它们在抽象层建立一个关联关系。 2、对于那些不希望使用继承或因为多层次继承导致系统类的个数急剧增加的系统，桥接模式尤为适用。 3、一个类存在两个独立变化的维度，且这两个维度都需要进行扩展。
+ * 注意事项：对于两个独立变化的维度，使用桥接模式再适合不过了
+ */
+var RedCircle = /** @class */ (function () {
+    function RedCircle() {
+    }
+    RedCircle.prototype.drawCircle = function (radius, x, y) {
+        console.log("Drawing Circle color: red, radius: ".concat(radius, ", x: ").concat(x, ", y: ").concat(y));
+    };
+    return RedCircle;
+}());
+var GreenCircle = /** @class */ (function () {
+    function GreenCircle() {
+    }
+    GreenCircle.prototype.drawCircle = function (radius, x, y) {
+        console.log("Drawing Circle color: green, radius: ".concat(radius, ", x: ").concat(x, ", y: ").concat(y));
+    };
+    return GreenCircle;
+}());
+var Shape = /** @class */ (function () {
+    function Shape(drawAPI) {
+        this.drawAPI = drawAPI;
+    }
+    return Shape;
+}());
+var Circle = /** @class */ (function (_super) {
+    __extends(Circle, _super);
+    function Circle(x, y, radius, drawAPI) {
+        var _this = _super.call(this, drawAPI) || this;
+        _this.x = x;
+        _this.y = y;
+        _this.radius = radius;
+        return _this;
+    }
+    Circle.prototype.draw = function () {
+        this.drawAPI.drawCircle(this.radius, this.x, this.y);
+    };
+    return Circle;
+}(Shape));
+function run() {
+    console.log('\n--- 桥接模式 ---');
+    var redCircle = new Circle(100, 100, 10, new RedCircle());
+    var greenCircle = new Circle(100, 100, 10, new GreenCircle());
+    redCircle.draw();
+    greenCircle.draw();
+    console.log('--- 桥接模式 ---\n');
+}
+
+run$6();
 run$5();
 run$4();
 run$3();
