@@ -55,7 +55,7 @@ var ShapeFactory$1 = /** @class */ (function () {
     };
     return ShapeFactory;
 }());
-function run$6() {
+function run$7() {
     console.log('--- 工厂模式 ---');
     var sf = new ShapeFactory$1();
     var shape = sf.getShape('CIRCLE');
@@ -200,7 +200,7 @@ var FactoryProducer = /** @class */ (function () {
     };
     return FactoryProducer;
 }());
-function run$5() {
+function run$6() {
     console.log('\n--- 抽象工厂模式 ---');
     var FP = new FactoryProducer();
     var sf = FP.getFactory('SHAPE');
@@ -232,7 +232,7 @@ var Singleton = /** @class */ (function () {
     Singleton.instance = new Singleton();
     return Singleton;
 }());
-function run$4() {
+function run$5() {
     // 类“Singleton”的构造函数是私有的，仅可在类声明中访问。
     // let single = new Singleton()
     console.log('\n--- 单例模式 ---');
@@ -326,7 +326,7 @@ var MealBuilder = /** @class */ (function () {
     };
     return MealBuilder;
 }());
-function run$3() {
+function run$4() {
     console.log('\n--- 建造者模式 ---');
     var mealBuilder = new MealBuilder();
     var bc = mealBuilder.burgerCombo();
@@ -355,7 +355,7 @@ function inherits(subClass, superClass) {
         constructor: { value: subClass, writable: true, configurable: true }
     });
 }
-function run$2() {
+function run$3() {
     console.log('\n--- 原型模式 ---');
     function People(name) {
         this.name = name;
@@ -443,7 +443,7 @@ var AudioPlayer = /** @class */ (function () {
     };
     return AudioPlayer;
 }());
-function run$1() {
+function run$2() {
     console.log('\n--- 适配器模式 ---');
     var audioPlayer = new AudioPlayer();
     audioPlayer.play('mp3', 'My Heart Will Go On.mp3');
@@ -499,7 +499,7 @@ var Circle = /** @class */ (function (_super) {
     };
     return Circle;
 }(Shape));
-function run() {
+function run$1() {
     console.log('\n--- 桥接模式 ---');
     var redCircle = new Circle(100, 100, 10, new RedCircle());
     var greenCircle = new Circle(100, 100, 10, new GreenCircle());
@@ -508,6 +508,65 @@ function run() {
     console.log('--- 桥接模式 ---\n');
 }
 
+/**
+ * FilterPattern 过滤器模式
+ * 过滤器模式（Filter Pattern）或标准模式（Criteria Pattern）是一种设计模式，这种模式允许开发人员使用不同的标准来过滤一组对象，通过逻辑运算以解耦的方式把它们连接起来。
+ * 这种类型的设计模式属于结构型模式，它结合多个标准来获得单一标准。
+ * js Array中的filter就属于该模式
+ */
+var Person = /** @class */ (function () {
+    function Person(name, gender) {
+        this.name = name;
+        this.gender = gender;
+    }
+    return Person;
+}());
+var CriteriaMale = /** @class */ (function () {
+    function CriteriaMale() {
+    }
+    CriteriaMale.prototype.meetCriteria = function (persons) {
+        var ps = [];
+        for (var _i = 0, persons_1 = persons; _i < persons_1.length; _i++) {
+            var p = persons_1[_i];
+            if (p.gender === 'Male') {
+                ps.push(p);
+            }
+        }
+        return ps;
+    };
+    return CriteriaMale;
+}());
+var CriteriaFemale = /** @class */ (function () {
+    function CriteriaFemale() {
+    }
+    CriteriaFemale.prototype.meetCriteria = function (persons) {
+        var ps = [];
+        for (var _i = 0, persons_2 = persons; _i < persons_2.length; _i++) {
+            var p = persons_2[_i];
+            if (p.gender === 'Female') {
+                ps.push(p);
+            }
+        }
+        return ps;
+    };
+    return CriteriaFemale;
+}());
+function run() {
+    console.log('\n--- 过滤器模式 ---');
+    var persons = [
+        new Person('Robert', 'Male'),
+        new Person('John', 'Male'),
+        new Person('Laura', 'Female'),
+        new Person('Diana', 'Female')
+    ];
+    var male = new CriteriaMale();
+    var female = new CriteriaFemale();
+    console.log('males ', male.meetCriteria(persons));
+    console.log('females ', female.meetCriteria(persons));
+    console.log('--- 过滤器模式 ---\n');
+}
+
+run$7();
 run$6();
 run$5();
 run$4();
