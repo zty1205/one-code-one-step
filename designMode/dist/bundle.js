@@ -8,7 +8,7 @@
  * 使用场景： 1、日志记录器：记录可能记录到本地硬盘、系统事件、远程服务器等，用户可以选择记录日志到什么地方。 2、数据库访问，当用户不知道最后系统采用哪一类数据库，以及数据库可能有变化时。 3、设计一个连接服务器的框架，需要三个协议，"POP3"、"IMAP"、"HTTP"，可以把这三个作为产品类，共同实现一个接口。
  * 注意事项：作为一种创建类模式，在任何需要生成复杂对象的地方，都可以使用工厂方法模式。有一点需要注意的地方就是复杂对象适合使用工厂模式，而简单对象，特别是只需要通过 new 就可以完成创建的对象，无需使用工厂模式。如果使用工厂模式，就需要引入一个工厂类，会增加系统的复杂度。
  */
-var Circle$2 = /** @class */ (function () {
+var Circle$3 = /** @class */ (function () {
     function Circle() {
     }
     Circle.prototype.say = function () {
@@ -39,7 +39,7 @@ var ShapeFactory$1 = /** @class */ (function () {
         var shape;
         switch (shapeType) {
             case 'CIRCLE':
-                shape = new Circle$2();
+                shape = new Circle$3();
                 break;
             case 'RECTANGLE':
                 shape = new Rectangle$1();
@@ -55,7 +55,7 @@ var ShapeFactory$1 = /** @class */ (function () {
     };
     return ShapeFactory;
 }());
-function run$8() {
+function run$9() {
     console.log('--- 工厂模式 ---');
     var sf = new ShapeFactory$1();
     var shape = sf.getShape('CIRCLE');
@@ -110,7 +110,7 @@ var Green = /** @class */ (function () {
     };
     return Green;
 }());
-var Circle$1 = /** @class */ (function () {
+var Circle$2 = /** @class */ (function () {
     function Circle() {
     }
     Circle.prototype.say = function () {
@@ -141,7 +141,7 @@ var ShapeFactory = /** @class */ (function (_super) {
         var shape;
         switch (shapeType) {
             case 'CIRCLE':
-                shape = new Circle$1();
+                shape = new Circle$2();
                 break;
             case 'RECTANGLE':
                 shape = new Rectangle();
@@ -200,7 +200,7 @@ var FactoryProducer = /** @class */ (function () {
     };
     return FactoryProducer;
 }());
-function run$7() {
+function run$8() {
     console.log('\n--- 抽象工厂模式 ---');
     var FP = new FactoryProducer();
     var sf = FP.getFactory('SHAPE');
@@ -232,7 +232,7 @@ var Singleton = /** @class */ (function () {
     Singleton.instance = new Singleton();
     return Singleton;
 }());
-function run$6() {
+function run$7() {
     // 类“Singleton”的构造函数是私有的，仅可在类声明中访问。
     // let single = new Singleton()
     console.log('\n--- 单例模式 ---');
@@ -326,7 +326,7 @@ var MealBuilder = /** @class */ (function () {
     };
     return MealBuilder;
 }());
-function run$5() {
+function run$6() {
     console.log('\n--- 建造者模式 ---');
     var mealBuilder = new MealBuilder();
     var bc = mealBuilder.burgerCombo();
@@ -355,7 +355,7 @@ function inherits(subClass, superClass) {
         constructor: { value: subClass, writable: true, configurable: true }
     });
 }
-function run$4() {
+function run$5() {
     console.log('\n--- 原型模式 ---');
     function People(name) {
         this.name = name;
@@ -443,7 +443,7 @@ var AudioPlayer = /** @class */ (function () {
     };
     return AudioPlayer;
 }());
-function run$3() {
+function run$4() {
     console.log('\n--- 适配器模式 ---');
     var audioPlayer = new AudioPlayer();
     audioPlayer.play('mp3', 'My Heart Will Go On.mp3');
@@ -485,7 +485,7 @@ var Shape = /** @class */ (function () {
     }
     return Shape;
 }());
-var Circle = /** @class */ (function (_super) {
+var Circle$1 = /** @class */ (function (_super) {
     __extends(Circle, _super);
     function Circle(x, y, radius, drawAPI) {
         var _this = _super.call(this, drawAPI) || this;
@@ -499,10 +499,10 @@ var Circle = /** @class */ (function (_super) {
     };
     return Circle;
 }(Shape));
-function run$2() {
+function run$3() {
     console.log('\n--- 桥接模式 ---');
-    var redCircle = new Circle(100, 100, 10, new RedCircle());
-    var greenCircle = new Circle(100, 100, 10, new GreenCircle());
+    var redCircle = new Circle$1(100, 100, 10, new RedCircle());
+    var greenCircle = new Circle$1(100, 100, 10, new GreenCircle());
     redCircle.draw();
     greenCircle.draw();
     console.log('--- 桥接模式 ---\n');
@@ -551,7 +551,7 @@ var CriteriaFemale = /** @class */ (function () {
     };
     return CriteriaFemale;
 }());
-function run$1() {
+function run$2() {
     console.log('\n--- 过滤器模式 ---');
     var persons = [
         new Person('Robert', 'Male'),
@@ -588,7 +588,7 @@ var Employee = /** @class */ (function () {
     };
     return Employee;
 }());
-function run() {
+function run$1() {
     console.log('\n--- 组合模式 ---');
     var CEO = new Employee('zty', 'CEO');
     var sale = new Employee('s-header', 'sale');
@@ -601,6 +601,62 @@ function run() {
     console.log('--- 组合模式 ---\n');
 }
 
+/**
+ * DecoratorPattern 装饰器模式
+ * 意图：动态地给一个对象添加一些额外的职责。就增加功能来说，装饰器模式相比生成子类更为灵活。
+ * 主要解决：一般的，我们为了扩展一个类经常使用继承方式实现，由于继承为类引入静态特征，并且随着扩展功能的增多，子类会很膨胀。
+ * 何时使用：在不想增加很多子类的情况下扩展类。
+ * 关键代码： 1、Component 类充当抽象角色，不应该具体实现。 2、修饰类引用和继承 Component 类，具体扩展类重写父类方法。
+ * 应用实例： 1、孙悟空有 72 变，当他变成"庙宇"后，他的根本还是一只猴子，但是他又有了庙宇的功能。 2、不论一幅画有没有画框都可以挂在墙上，但是通常都是有画框的，并且实际上是画框被挂在墙上。在挂在墙上之前，画可以被蒙上玻璃，装到框子里；这时画、玻璃和画框形成了一个物体。
+ * 优点：装饰类和被装饰类可以独立发展，不会相互耦合，装饰模式是继承的一个替代模式，装饰模式可以动态扩展一个实现类的功能。
+ * 缺点：多层装饰比较复杂。
+ * 使用场景： 1、扩展一个类的功能。 2、动态增加功能，动态撤销。
+ * 注意事项：可代替继承。
+ */
+var Circle = /** @class */ (function () {
+    function Circle() {
+    }
+    Circle.prototype.draw = function () {
+        console.log('Shape: Circle');
+    };
+    return Circle;
+}());
+// 实现了 Shape 接口的抽象装饰类。
+var ShapeDecorator = /** @class */ (function () {
+    function ShapeDecorator(decoratedShape) {
+        this.decoratedShape = decoratedShape;
+    }
+    ShapeDecorator.prototype.draw = function () {
+        this.decoratedShape.draw();
+    };
+    return ShapeDecorator;
+}());
+// 扩展了 ShapeDecorator 类的实体装饰类。
+var RedShapeDecorator = /** @class */ (function (_super) {
+    __extends(RedShapeDecorator, _super);
+    function RedShapeDecorator(decoratedShape) {
+        return _super.call(this, decoratedShape) || this;
+    }
+    RedShapeDecorator.prototype.draw = function () {
+        this.decoratedShape.draw();
+        this.setRedBorder(this.decoratedShape);
+    };
+    RedShapeDecorator.prototype.setRedBorder = function (decoratedShape) {
+        console.log('Border Color: Red');
+    };
+    return RedShapeDecorator;
+}(ShapeDecorator));
+function run() {
+    console.log('\n--- 装饰器模式 ---');
+    var circle = new Circle();
+    var redCircle = new RedShapeDecorator(new Circle());
+    circle.draw();
+    console.log('\nafter Decorator');
+    redCircle.draw();
+    console.log('--- 装饰器模式 ---\n');
+}
+
+run$9();
 run$8();
 run$7();
 run$6();

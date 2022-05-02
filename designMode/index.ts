@@ -7,6 +7,7 @@ import * as AdapterPattern from './AdapterPattern';
 import * as BridgePattern from './BridgePattern';
 import * as FilterPattern from './FilterPattern';
 import * as CompositePattern from './CompositePattern';
+import * as DecoratorPattern from './DecoratorPattern';
 
 FactoryPattern.run();
 AbstractFactoryPattern.run();
@@ -17,3 +18,4 @@ AdapterPattern.run();
 BridgePattern.run();
 FilterPattern.run();
 CompositePattern.run();
+DecoratorPattern.run();
