@@ -55,7 +55,7 @@ var ShapeFactory$1 = /** @class */ (function () {
     };
     return ShapeFactory;
 }());
-function run$7() {
+function run$8() {
     console.log('--- 工厂模式 ---');
     var sf = new ShapeFactory$1();
     var shape = sf.getShape('CIRCLE');
@@ -200,7 +200,7 @@ var FactoryProducer = /** @class */ (function () {
     };
     return FactoryProducer;
 }());
-function run$6() {
+function run$7() {
     console.log('\n--- 抽象工厂模式 ---');
     var FP = new FactoryProducer();
     var sf = FP.getFactory('SHAPE');
@@ -232,7 +232,7 @@ var Singleton = /** @class */ (function () {
     Singleton.instance = new Singleton();
     return Singleton;
 }());
-function run$5() {
+function run$6() {
     // 类“Singleton”的构造函数是私有的，仅可在类声明中访问。
     // let single = new Singleton()
     console.log('\n--- 单例模式 ---');
@@ -326,7 +326,7 @@ var MealBuilder = /** @class */ (function () {
     };
     return MealBuilder;
 }());
-function run$4() {
+function run$5() {
     console.log('\n--- 建造者模式 ---');
     var mealBuilder = new MealBuilder();
     var bc = mealBuilder.burgerCombo();
@@ -355,7 +355,7 @@ function inherits(subClass, superClass) {
         constructor: { value: subClass, writable: true, configurable: true }
     });
 }
-function run$3() {
+function run$4() {
     console.log('\n--- 原型模式 ---');
     function People(name) {
         this.name = name;
@@ -443,7 +443,7 @@ var AudioPlayer = /** @class */ (function () {
     };
     return AudioPlayer;
 }());
-function run$2() {
+function run$3() {
     console.log('\n--- 适配器模式 ---');
     var audioPlayer = new AudioPlayer();
     audioPlayer.play('mp3', 'My Heart Will Go On.mp3');
@@ -499,7 +499,7 @@ var Circle = /** @class */ (function (_super) {
     };
     return Circle;
 }(Shape));
-function run$1() {
+function run$2() {
     console.log('\n--- 桥接模式 ---');
     var redCircle = new Circle(100, 100, 10, new RedCircle());
     var greenCircle = new Circle(100, 100, 10, new GreenCircle());
@@ -551,7 +551,7 @@ var CriteriaFemale = /** @class */ (function () {
     };
     return CriteriaFemale;
 }());
-function run() {
+function run$1() {
     console.log('\n--- 过滤器模式 ---');
     var persons = [
         new Person('Robert', 'Male'),
@@ -566,6 +566,42 @@ function run() {
     console.log('--- 过滤器模式 ---\n');
 }
 
+/**
+ * CompositePattern 组合模式
+ * 意图：将对象组合成树形结构以表示"部分-整体"的层次结构。组合模式使得用户对单个对象和组合对象的使用具有一致性。
+ * 主要解决：它在我们树型结构的问题中，模糊了简单元素和复杂元素的概念，客户程序可以像处理简单元素一样来处理复杂元素，从而使得客户程序与复杂元素的内部结构解耦。
+ * 何时使用： 1、您想表示对象的部分-整体层次结构（树形结构）。 2、您希望用户忽略组合对象与单个对象的不同，用户将统一地使用组合结构中的所有对象。
+ * 关键代码：树枝内部组合该接口，并且含有内部属性 List，里面放 Component。
+ * 应用实例： 1、算术表达式包括操作数、操作符和另一个操作数，其中，另一个操作数也可以是操作数、操作符和另一个操作数。 2、在 JAVA AWT 和 SWING 中，对于 Button 和 Checkbox 是树叶，Container 是树枝。
+ * 优点： 1、高层模块调用简单。 2、节点自由增加。
+ * 缺点：在使用组合模式时，其叶子和树枝的声明都是实现类，而不是接口，违反了依赖倒置原则。
+ * 使用场景：部分、整体场景，如树形菜单，文件、文件夹的管理。
+ */
+var Employee = /** @class */ (function () {
+    function Employee(name, dept) {
+        this.name = name;
+        this.dept = dept;
+        this.staff = [];
+    }
+    Employee.prototype.add = function (e) {
+        this.staff.push(e);
+    };
+    return Employee;
+}());
+function run() {
+    console.log('\n--- 组合模式 ---');
+    var CEO = new Employee('zty', 'CEO');
+    var sale = new Employee('s-header', 'sale');
+    var s1 = new Employee('s1', 'sale');
+    var s2 = new Employee('s2', 'sale');
+    CEO.add(sale);
+    sale.add(s1);
+    sale.add(s2);
+    console.log('CEO = ', CEO);
+    console.log('--- 组合模式 ---\n');
+}
+
+run$8();
 run$7();
 run$6();
 run$5();

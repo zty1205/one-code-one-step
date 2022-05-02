@@ -6,6 +6,7 @@ import * as PrototypePattern from './PrototypePattern';
 import * as AdapterPattern from './AdapterPattern';
 import * as BridgePattern from './BridgePattern';
 import * as FilterPattern from './FilterPattern';
+import * as CompositePattern from './CompositePattern';
 
 FactoryPattern.run();
 AbstractFactoryPattern.run();
@@ -15,3 +16,4 @@ PrototypePattern.run();
 AdapterPattern.run();
 BridgePattern.run();
 FilterPattern.run();
+CompositePattern.run();
