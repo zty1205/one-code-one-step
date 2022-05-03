@@ -7,6 +7,7 @@ import * as DecoratorPattern from './DecoratorPattern';
 import * as FacadePattern from './FacadePattern';
 import * as FactoryPattern from './FactoryPattern';
 import * as FilterPattern from './FilterPattern';
+import * as FlyweightPattern from './FlyweightPattern';
 import * as PrototypePattern from './PrototypePattern';
 import * as SingletonPattern from './SingletonPattern';
 
@@ -19,5 +20,6 @@ DecoratorPattern.run();
 FacadePattern.run();
 FactoryPattern.run();
 FilterPattern.run();
+FlyweightPattern.run();
 PrototypePattern.run();
 SingletonPattern.run();

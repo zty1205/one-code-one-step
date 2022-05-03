@@ -69,7 +69,7 @@ var AbstractFactory = /** @class */ (function () {
     return AbstractFactory;
 }());
 // 形状工厂
-var ShapeFactory$1 = /** @class */ (function (_super) {
+var ShapeFactory$2 = /** @class */ (function (_super) {
     __extends(ShapeFactory, _super);
     function ShapeFactory() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -126,7 +126,7 @@ var FactoryProducer = /** @class */ (function () {
     }
     FactoryProducer.prototype.getFactory = function (choice) {
         if (choice === 'SHAPE') {
-            return new ShapeFactory$1();
+            return new ShapeFactory$2();
         }
         else if (choice === 'COLOR') {
             return new colorFactory();
@@ -137,7 +137,7 @@ var FactoryProducer = /** @class */ (function () {
     };
     return FactoryProducer;
 }());
-function run$a() {
+function run$b() {
     console.log('--- 抽象工厂模式 ---');
     var FP = new FactoryProducer();
     var sf = FP.getFactory('SHAPE');
@@ -223,7 +223,7 @@ var AudioPlayer = /** @class */ (function () {
     };
     return AudioPlayer;
 }());
-function run$9() {
+function run$a() {
     console.log('--- 适配器模式 ---');
     var audioPlayer = new AudioPlayer();
     audioPlayer.play('mp3', 'My Heart Will Go On.mp3');
@@ -280,7 +280,7 @@ var Circle$2 = /** @class */ (function (_super) {
     };
     return Circle;
 }(Shape));
-function run$8() {
+function run$9() {
     console.log('--- 桥接模式 ---');
     var redCircle = new Circle$2(100, 100, 10, new RedCircle());
     var greenCircle = new Circle$2(100, 100, 10, new GreenCircle());
@@ -375,7 +375,7 @@ var MealBuilder = /** @class */ (function () {
     };
     return MealBuilder;
 }());
-function run$7() {
+function run$8() {
     console.log('--- 建造者模式 ---');
     var mealBuilder = new MealBuilder();
     var bc = mealBuilder.burgerCombo();
@@ -410,7 +410,7 @@ var Employee = /** @class */ (function () {
     };
     return Employee;
 }());
-function run$6() {
+function run$7() {
     console.log('--- 组合模式 ---');
     var CEO = new Employee('zty', 'CEO');
     var sale = new Employee('s-header', 'sale');
@@ -469,7 +469,7 @@ var RedShapeDecorator = /** @class */ (function (_super) {
     };
     return RedShapeDecorator;
 }(ShapeDecorator));
-function run$5() {
+function run$6() {
     console.log('--- 装饰器模式 ---');
     var circle = new Circle$1();
     var redCircle = new RedShapeDecorator(new Circle$1());
@@ -501,7 +501,7 @@ var Rectangle$1 = /** @class */ (function () {
     };
     return Rectangle;
 }());
-var Square$1 = /** @class */ (function () {
+var Square$2 = /** @class */ (function () {
     function Square() {
     }
     Square.prototype.draw = function () {
@@ -513,7 +513,7 @@ var Square$1 = /** @class */ (function () {
 var ShapeMaker = /** @class */ (function () {
     function ShapeMaker() {
         this.rectangle = new Rectangle$1();
-        this.square = new Square$1();
+        this.square = new Square$2();
     }
     ShapeMaker.prototype.drawSquare = function () {
         this.square.draw();
@@ -523,7 +523,7 @@ var ShapeMaker = /** @class */ (function () {
     };
     return ShapeMaker;
 }());
-function run$4() {
+function run$5() {
     console.log('--- 外观模式 ---');
     var shapeMaker = new ShapeMaker();
     shapeMaker.drawRectangle();
@@ -556,7 +556,7 @@ var Rectangle = /** @class */ (function () {
     };
     return Rectangle;
 }());
-var Square = /** @class */ (function () {
+var Square$1 = /** @class */ (function () {
     function Square() {
     }
     Square.prototype.say = function () {
@@ -564,7 +564,7 @@ var Square = /** @class */ (function () {
     };
     return Square;
 }());
-var ShapeFactory = /** @class */ (function () {
+var ShapeFactory$1 = /** @class */ (function () {
     function ShapeFactory() {
     }
     ShapeFactory.prototype.getShape = function (shapeType) {
@@ -577,7 +577,7 @@ var ShapeFactory = /** @class */ (function () {
                 shape = new Rectangle();
                 break;
             case 'Square':
-                shape = new Square();
+                shape = new Square$1();
                 break;
             default:
                 shape = null;
@@ -587,9 +587,9 @@ var ShapeFactory = /** @class */ (function () {
     };
     return ShapeFactory;
 }());
-function run$3() {
+function run$4() {
     console.log('--- 工厂模式 ---');
-    var sf = new ShapeFactory();
+    var sf = new ShapeFactory$1();
     var shape = sf.getShape('CIRCLE');
     shape.say();
     console.log('--- 工厂模式 ---');
@@ -639,7 +639,7 @@ var CriteriaFemale = /** @class */ (function () {
     };
     return CriteriaFemale;
 }());
-function run$2() {
+function run$3() {
     console.log('--- 过滤器模式 ---');
     var persons = [
         new Person('Robert', 'Male'),
@@ -652,6 +652,65 @@ function run$2() {
     console.log('males ', male.meetCriteria(persons));
     console.log('females ', female.meetCriteria(persons));
     console.log('--- 过滤器模式 ---');
+    console.log('');
+}
+
+/**
+ * FlyweightPattern 享元模式
+ * 意图：运用共享技术有效地支持大量细粒度的对象。
+ * 主要解决：在有大量对象时，有可能会造成内存溢出，我们把其中共同的部分抽象出来，如果有相同的业务请求，直接返回在内存中已有的对象，避免重新创建。
+ * 何时使用： 1、系统中有大量对象。 2、这些对象消耗大量内存。 3、这些对象的状态大部分可以外部化。 4、这些对象可以按照内蕴状态分为很多组，当把外蕴对象从对象中剔除出来时，每一组对象都可以用一个对象来代替。 5、系统不依赖于这些对象身份，这些对象是不可分辨的。
+ * 如何解决：用唯一标识码判断，如果在内存中有，则返回这个唯一标识码所标识的对象。
+ * 关键代码：用 HashMap 存储这些对象。
+ * 应用实例： 1、JAVA 中的 String，如果有则返回，如果没有则创建一个字符串保存在字符串缓存池里面。 2、数据库的数据池。
+ * 优点：大大减少对象的创建，降低系统的内存，使效率提高。
+ * 缺点：提高了系统的复杂度，需要分离出外部状态和内部状态，而且外部状态具有固有化的性质，不应该随着内部状态的变化而变化，否则会造成系统的混乱。
+ * 使用场景： 1、系统有大量相似对象。 2、需要缓冲池的场景。
+ * 注意事项： 1、注意划分外部状态和内部状态，否则可能会引起线程安全问题。 2、这些类必须有一个工厂对象加以控制。
+ */
+var Square = /** @class */ (function () {
+    function Square(color) {
+        this.color = color;
+    }
+    Square.prototype.setX = function (x) {
+        this.x = x;
+    };
+    Square.prototype.draw = function () {
+        console.log("Square draw color: ".concat(this.color, ", x: ").concat(this.x));
+    };
+    return Square;
+}());
+// 创建一个工厂，生成基于给定信息的实体类的对象。
+var ShapeFactory = /** @class */ (function () {
+    function ShapeFactory() {
+    }
+    ShapeFactory.getSquare = function (color) {
+        var square = this.map.get(color);
+        if (square == null) {
+            square = new Square(color);
+            this.map.set(color, square);
+            console.log("Creating Square of color : ".concat(color));
+        }
+        return square;
+    };
+    ShapeFactory.map = new Map();
+    return ShapeFactory;
+}());
+function run$2() {
+    console.log('--- 享元模式 ---');
+    var colors = ['Red', 'Yellow', 'Blue'];
+    function getRandomColor() {
+        return colors[Math.floor(Math.random() * colors.length)];
+    }
+    function getRandomX() {
+        return Math.floor(Math.random() * 100);
+    }
+    for (var i = 0; i < 10; ++i) {
+        var square = ShapeFactory.getSquare(getRandomColor());
+        square.setX(getRandomX());
+        square.draw();
+    }
+    console.log('--- 享元模式 ---');
     console.log('');
 }
 
@@ -718,6 +777,7 @@ function run() {
     console.log('');
 }
 
+run$b();
 run$a();
 run$9();
 run$8();
