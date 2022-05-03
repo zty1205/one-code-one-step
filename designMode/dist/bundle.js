@@ -55,7 +55,7 @@ var Circle$3 = /** @class */ (function () {
     };
     return Circle;
 }());
-var Rectangle$1 = /** @class */ (function () {
+var Rectangle$2 = /** @class */ (function () {
     function Rectangle() {
     }
     Rectangle.prototype.say = function () {
@@ -81,7 +81,7 @@ var ShapeFactory$1 = /** @class */ (function (_super) {
                 shape = new Circle$3();
                 break;
             case 'RECTANGLE':
-                shape = new Rectangle$1();
+                shape = new Rectangle$2();
                 break;
             default:
                 shape = null;
@@ -137,7 +137,7 @@ var FactoryProducer = /** @class */ (function () {
     };
     return FactoryProducer;
 }());
-function run$9() {
+function run$a() {
     console.log('\n--- 抽象工厂模式 ---');
     var FP = new FactoryProducer();
     var sf = FP.getFactory('SHAPE');
@@ -222,7 +222,7 @@ var AudioPlayer = /** @class */ (function () {
     };
     return AudioPlayer;
 }());
-function run$8() {
+function run$9() {
     console.log('\n--- 适配器模式 ---');
     var audioPlayer = new AudioPlayer();
     audioPlayer.play('mp3', 'My Heart Will Go On.mp3');
@@ -278,7 +278,7 @@ var Circle$2 = /** @class */ (function (_super) {
     };
     return Circle;
 }(Shape));
-function run$7() {
+function run$8() {
     console.log('\n--- 桥接模式 ---');
     var redCircle = new Circle$2(100, 100, 10, new RedCircle());
     var greenCircle = new Circle$2(100, 100, 10, new GreenCircle());
@@ -372,7 +372,7 @@ var MealBuilder = /** @class */ (function () {
     };
     return MealBuilder;
 }());
-function run$6() {
+function run$7() {
     console.log('\n--- 建造者模式 ---');
     var mealBuilder = new MealBuilder();
     var bc = mealBuilder.burgerCombo();
@@ -406,7 +406,7 @@ var Employee = /** @class */ (function () {
     };
     return Employee;
 }());
-function run$5() {
+function run$6() {
     console.log('\n--- 组合模式 ---');
     var CEO = new Employee('zty', 'CEO');
     var sale = new Employee('s-header', 'sale');
@@ -464,7 +464,7 @@ var RedShapeDecorator = /** @class */ (function (_super) {
     };
     return RedShapeDecorator;
 }(ShapeDecorator));
-function run$4() {
+function run$5() {
     console.log('\n--- 装饰器模式 ---');
     var circle = new Circle$1();
     var redCircle = new RedShapeDecorator(new Circle$1());
@@ -472,6 +472,59 @@ function run$4() {
     console.log('\nafter Decorator');
     redCircle.draw();
     console.log('--- 装饰器模式 ---\n');
+}
+
+/**
+ * FacadePattern 外观模式
+ * 意图：为子系统中的一组接口提供一个一致的界面，外观模式定义了一个高层接口，这个接口使得这一子系统更加容易使用。
+ * 主要解决：降低访问复杂系统的内部子系统时的复杂度，简化客户端之间的接口。
+ * 何时使用： 1、客户端不需要知道系统内部的复杂联系，整个系统只需提供一个"接待员"即可。 2、定义系统的入口。
+ * 如何解决：客户端不与系统耦合，外观类与系统耦合。
+ * 关键代码：在客户端和复杂系统之间再加一层，这一层将调用顺序、依赖关系等处理好。
+ * 应用实例： 1、去医院看病，可能要去挂号、门诊、划价、取药，让患者或患者家属觉得很复杂，如果有提供接待人员，只让接待人员来处理，就很方便。 2、JAVA 的三层开发模式。
+ * 优点： 1、减少系统相互依赖。 2、提高灵活性。 3、提高了安全性。
+ * 缺点：不符合开闭原则，如果要改东西很麻烦，继承重写都不合适。
+ * 使用场景： 1、为复杂的模块或子系统提供外界访问的模块。 2、子系统相对独立。 3、预防低水平人员带来的风险。
+ * 注意事项：在层次化结构中，可以使用外观模式定义系统中每一层的入口。
+ */
+var Rectangle$1 = /** @class */ (function () {
+    function Rectangle() {
+    }
+    Rectangle.prototype.draw = function () {
+        console.log(' Rectangle ::: draw() ');
+    };
+    return Rectangle;
+}());
+var Square$1 = /** @class */ (function () {
+    function Square() {
+    }
+    Square.prototype.draw = function () {
+        console.log(' Square ::: draw() ');
+    };
+    return Square;
+}());
+// 创建一个外观类。
+var ShapeMaker = /** @class */ (function () {
+    function ShapeMaker() {
+        this.rectangle = new Rectangle$1();
+        this.square = new Square$1();
+    }
+    ShapeMaker.prototype.drawSquare = function () {
+        this.square.draw();
+    };
+    ShapeMaker.prototype.drawRectangle = function () {
+        this.rectangle.draw();
+    };
+    return ShapeMaker;
+}());
+function run$4() {
+    console.log('');
+    console.log('--- 外观模式 ---');
+    var shapeMaker = new ShapeMaker();
+    shapeMaker.drawRectangle();
+    shapeMaker.drawSquare();
+    console.log('--- 外观模式 ---');
+    console.log('');
 }
 
 /**
@@ -656,6 +709,7 @@ function run() {
     console.log('--- 单例模式 ---\n');
 }
 
+run$a();
 run$9();
 run$8();
 run$7();
