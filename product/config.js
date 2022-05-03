@@ -29,12 +29,27 @@ const js_template = `
 */
 `;
 
+const ts_template = `
+/** 
+ * #htmlTitle#
+*/
+
+export function run() {
+  console.log('--- ---')
+
+
+
+  console.log('--- ---')
+  console.log('')
+}
+`;
+
 const FILE_TEMPLATE = {
   html: html_template,
   sql: sql_template,
   sh: sh_template,
   js: js_template,
-  ts: js_template
+  ts: ts_template
 };
 
 const WIN_GIT_HEADER = `
