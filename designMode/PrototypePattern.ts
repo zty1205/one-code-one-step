@@ -19,7 +19,7 @@ function inherits(subClass: Function, superClass: Function) {
 }
 
 export function run() {
-  console.log('\n--- 原型模式 ---');
+  console.log('--- 原型模式 ---');
 
   function People(name) {
     this.name = name;
@@ -32,5 +32,6 @@ export function run() {
   const man = new Man('man');
   console.log('man = ', man);
 
-  console.log('--- 原型模式 ---\n');
+  console.log('--- 原型模式 ---');
+  console.log('');
 }

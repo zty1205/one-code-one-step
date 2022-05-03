@@ -44,7 +44,7 @@ class CriteriaFemale implements Criteria {
 }
 
 export function run() {
-  console.log('\n--- 过滤器模式 ---');
+  console.log('--- 过滤器模式 ---');
 
   const persons = [
     new Person('Robert', 'Male'),
@@ -55,9 +55,9 @@ export function run() {
 
   const male = new CriteriaMale();
   const female = new CriteriaFemale();
-
   console.log('males ', male.meetCriteria(persons));
   console.log('females ', female.meetCriteria(persons));
 
-  console.log('--- 过滤器模式 ---\n');
+  console.log('--- 过滤器模式 ---');
+  console.log('');
 }

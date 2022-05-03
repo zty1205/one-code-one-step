@@ -74,7 +74,7 @@ class AudioPlayer implements MediaPlayer {
 }
 
 export function run() {
-  console.log('\n--- 适配器模式 ---');
+  console.log('--- 适配器模式 ---');
 
   const audioPlayer = new AudioPlayer();
   audioPlayer.play('mp3', 'My Heart Will Go On.mp3');
@@ -82,5 +82,6 @@ export function run() {
   audioPlayer.play('vlc', 'I believe.vlc');
   audioPlayer.play('avi', 'See You Again.avi');
 
-  console.log('--- 适配器模式 ---\n');
+  console.log('--- 适配器模式 ---');
+  console.log('');
 }

@@ -51,12 +51,13 @@ class Circle extends Shape {
 }
 
 export function run() {
-  console.log('\n--- 桥接模式 ---');
+  console.log('--- 桥接模式 ---');
 
   const redCircle = new Circle(100, 100, 10, new RedCircle());
   const greenCircle = new Circle(100, 100, 10, new GreenCircle());
   redCircle.draw();
   greenCircle.draw();
 
-  console.log('--- 桥接模式 ---\n');
+  console.log('--- 桥接模式 ---');
+  console.log('');
 }

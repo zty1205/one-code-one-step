@@ -44,7 +44,6 @@ class ShapeMaker {
 }
 
 export function run() {
-  console.log('');
   console.log('--- 外观模式 ---');
 
   const shapeMaker = new ShapeMaker();

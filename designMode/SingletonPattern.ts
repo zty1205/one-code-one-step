@@ -24,8 +24,11 @@ class Singleton {
 export function run() {
   // 类“Singleton”的构造函数是私有的，仅可在类声明中访问。
   // let single = new Singleton()
-  console.log('\n--- 单例模式 ---');
+  console.log('--- 单例模式 ---');
+
   const single = Singleton.getInstance();
   single.say();
-  console.log('--- 单例模式 ---\n');
+
+  console.log('--- 单例模式 ---');
+  console.log('');
 }

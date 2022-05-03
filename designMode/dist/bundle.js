@@ -138,7 +138,7 @@ var FactoryProducer = /** @class */ (function () {
     return FactoryProducer;
 }());
 function run$a() {
-    console.log('\n--- 抽象工厂模式 ---');
+    console.log('--- 抽象工厂模式 ---');
     var FP = new FactoryProducer();
     var sf = FP.getFactory('SHAPE');
     var cir = sf.getShape('CIRCLE');
@@ -146,7 +146,8 @@ function run$a() {
     var cf = FP.getFactory('COLOR');
     var red = cf.getColor('RED');
     red.fill();
-    console.log('--- 抽象工厂模式 ---\n');
+    console.log('--- 抽象工厂模式 ---');
+    console.log('');
 }
 
 /**
@@ -223,13 +224,14 @@ var AudioPlayer = /** @class */ (function () {
     return AudioPlayer;
 }());
 function run$9() {
-    console.log('\n--- 适配器模式 ---');
+    console.log('--- 适配器模式 ---');
     var audioPlayer = new AudioPlayer();
     audioPlayer.play('mp3', 'My Heart Will Go On.mp3');
     audioPlayer.play('mp4', 'Shape of My Heart.mp4');
     audioPlayer.play('vlc', 'I believe.vlc');
     audioPlayer.play('avi', 'See You Again.avi');
-    console.log('--- 适配器模式 ---\n');
+    console.log('--- 适配器模式 ---');
+    console.log('');
 }
 
 /**
@@ -279,12 +281,13 @@ var Circle$2 = /** @class */ (function (_super) {
     return Circle;
 }(Shape));
 function run$8() {
-    console.log('\n--- 桥接模式 ---');
+    console.log('--- 桥接模式 ---');
     var redCircle = new Circle$2(100, 100, 10, new RedCircle());
     var greenCircle = new Circle$2(100, 100, 10, new GreenCircle());
     redCircle.draw();
     greenCircle.draw();
-    console.log('--- 桥接模式 ---\n');
+    console.log('--- 桥接模式 ---');
+    console.log('');
 }
 
 /**
@@ -373,7 +376,7 @@ var MealBuilder = /** @class */ (function () {
     return MealBuilder;
 }());
 function run$7() {
-    console.log('\n--- 建造者模式 ---');
+    console.log('--- 建造者模式 ---');
     var mealBuilder = new MealBuilder();
     var bc = mealBuilder.burgerCombo();
     console.log('burgerCombo套餐: ', bc.getCost());
@@ -381,7 +384,8 @@ function run$7() {
     var cc = mealBuilder.chickenCombo();
     console.log('chickenCombo套餐: ', cc.getCost());
     cc.showItems();
-    console.log('--- 建造者模式 ---\n');
+    console.log('--- 建造者模式 ---');
+    console.log('');
 }
 
 /**
@@ -407,7 +411,7 @@ var Employee = /** @class */ (function () {
     return Employee;
 }());
 function run$6() {
-    console.log('\n--- 组合模式 ---');
+    console.log('--- 组合模式 ---');
     var CEO = new Employee('zty', 'CEO');
     var sale = new Employee('s-header', 'sale');
     var s1 = new Employee('s1', 'sale');
@@ -416,7 +420,8 @@ function run$6() {
     sale.add(s1);
     sale.add(s2);
     console.log('CEO = ', CEO);
-    console.log('--- 组合模式 ---\n');
+    console.log('--- 组合模式 ---');
+    console.log('');
 }
 
 /**
@@ -465,13 +470,14 @@ var RedShapeDecorator = /** @class */ (function (_super) {
     return RedShapeDecorator;
 }(ShapeDecorator));
 function run$5() {
-    console.log('\n--- 装饰器模式 ---');
+    console.log('--- 装饰器模式 ---');
     var circle = new Circle$1();
     var redCircle = new RedShapeDecorator(new Circle$1());
     circle.draw();
-    console.log('\nafter Decorator');
+    console.log('after Decorator');
     redCircle.draw();
-    console.log('--- 装饰器模式 ---\n');
+    console.log('--- 装饰器模式 ---');
+    console.log('');
 }
 
 /**
@@ -518,7 +524,6 @@ var ShapeMaker = /** @class */ (function () {
     return ShapeMaker;
 }());
 function run$4() {
-    console.log('');
     console.log('--- 外观模式 ---');
     var shapeMaker = new ShapeMaker();
     shapeMaker.drawRectangle();
@@ -587,7 +592,8 @@ function run$3() {
     var sf = new ShapeFactory();
     var shape = sf.getShape('CIRCLE');
     shape.say();
-    console.log('--- 工厂模式 ---\n');
+    console.log('--- 工厂模式 ---');
+    console.log('');
 }
 
 /**
@@ -634,7 +640,7 @@ var CriteriaFemale = /** @class */ (function () {
     return CriteriaFemale;
 }());
 function run$2() {
-    console.log('\n--- 过滤器模式 ---');
+    console.log('--- 过滤器模式 ---');
     var persons = [
         new Person('Robert', 'Male'),
         new Person('John', 'Male'),
@@ -645,7 +651,8 @@ function run$2() {
     var female = new CriteriaFemale();
     console.log('males ', male.meetCriteria(persons));
     console.log('females ', female.meetCriteria(persons));
-    console.log('--- 过滤器模式 ---\n');
+    console.log('--- 过滤器模式 ---');
+    console.log('');
 }
 
 /**
@@ -666,7 +673,7 @@ function inherits(subClass, superClass) {
     });
 }
 function run$1() {
-    console.log('\n--- 原型模式 ---');
+    console.log('--- 原型模式 ---');
     function People(name) {
         this.name = name;
     }
@@ -677,7 +684,8 @@ function run$1() {
     inherits(Man, People);
     var man = new Man('man');
     console.log('man = ', man);
-    console.log('--- 原型模式 ---\n');
+    console.log('--- 原型模式 ---');
+    console.log('');
 }
 
 /**
@@ -703,10 +711,11 @@ var Singleton = /** @class */ (function () {
 function run() {
     // 类“Singleton”的构造函数是私有的，仅可在类声明中访问。
     // let single = new Singleton()
-    console.log('\n--- 单例模式 ---');
+    console.log('--- 单例模式 ---');
     var single = Singleton.getInstance();
     single.say();
-    console.log('--- 单例模式 ---\n');
+    console.log('--- 单例模式 ---');
+    console.log('');
 }
 
 run$a();

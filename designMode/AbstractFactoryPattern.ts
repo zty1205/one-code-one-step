@@ -99,7 +99,8 @@ class FactoryProducer {
 }
 
 export function run() {
-  console.log('\n--- 抽象工厂模式 ---');
+  console.log('--- 抽象工厂模式 ---');
+
   const FP = new FactoryProducer();
   const sf = FP.getFactory('SHAPE');
   const cir = sf.getShape('CIRCLE');
@@ -108,5 +109,7 @@ export function run() {
   const cf = FP.getFactory('COLOR');
   const red = cf.getColor('RED');
   red.fill();
-  console.log('--- 抽象工厂模式 ---\n');
+
+  console.log('--- 抽象工厂模式 ---');
+  console.log('');
 }

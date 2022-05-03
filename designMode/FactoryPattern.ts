@@ -51,8 +51,11 @@ class ShapeFactory {
 
 export function run() {
   console.log('--- 工厂模式 ---');
+
   const sf = new ShapeFactory();
   const shape = sf.getShape('CIRCLE');
   shape.say();
-  console.log('--- 工厂模式 ---\n');
+
+  console.log('--- 工厂模式 ---');
+  console.log('');
 }

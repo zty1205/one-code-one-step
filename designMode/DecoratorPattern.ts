@@ -48,14 +48,15 @@ class RedShapeDecorator extends ShapeDecorator {
 }
 
 export function run() {
-  console.log('\n--- 装饰器模式 ---');
+  console.log('--- 装饰器模式 ---');
 
   const circle = new Circle();
   const redCircle = new RedShapeDecorator(new Circle());
 
   circle.draw();
-  console.log('\nafter Decorator');
+  console.log('after Decorator');
   redCircle.draw();
 
-  console.log('--- 装饰器模式 ---\n');
+  console.log('--- 装饰器模式 ---');
+  console.log('');
 }

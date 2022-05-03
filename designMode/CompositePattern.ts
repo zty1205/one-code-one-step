@@ -27,7 +27,7 @@ class Employee {
 }
 
 export function run() {
-  console.log('\n--- 组合模式 ---');
+  console.log('--- 组合模式 ---');
 
   const CEO = new Employee('zty', 'CEO');
   const sale = new Employee('s-header', 'sale');
@@ -37,8 +37,8 @@ export function run() {
   CEO.add(sale);
   sale.add(s1);
   sale.add(s2);
-
   console.log('CEO = ', CEO);
 
-  console.log('--- 组合模式 ---\n');
+  console.log('--- 组合模式 ---');
+  console.log('');
 }

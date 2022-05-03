@@ -76,7 +76,8 @@ class MealBuilder {
 }
 
 export function run() {
-  console.log('\n--- 建造者模式 ---');
+  console.log('--- 建造者模式 ---');
+
   let mealBuilder = new MealBuilder();
   let bc = mealBuilder.burgerCombo();
   console.log('burgerCombo套餐: ', bc.getCost());
@@ -86,5 +87,6 @@ export function run() {
   console.log('chickenCombo套餐: ', cc.getCost());
   cc.showItems();
 
-  console.log('--- 建造者模式 ---\n');
+  console.log('--- 建造者模式 ---');
+  console.log('');
 }
