@@ -137,7 +137,7 @@ var FactoryProducer = /** @class */ (function () {
     };
     return FactoryProducer;
 }());
-function run$b() {
+function run$c() {
     console.log('--- 抽象工厂模式 ---');
     var FP = new FactoryProducer();
     var sf = FP.getFactory('SHAPE');
@@ -223,7 +223,7 @@ var AudioPlayer = /** @class */ (function () {
     };
     return AudioPlayer;
 }());
-function run$a() {
+function run$b() {
     console.log('--- 适配器模式 ---');
     var audioPlayer = new AudioPlayer();
     audioPlayer.play('mp3', 'My Heart Will Go On.mp3');
@@ -280,7 +280,7 @@ var Circle$2 = /** @class */ (function (_super) {
     };
     return Circle;
 }(Shape));
-function run$9() {
+function run$a() {
     console.log('--- 桥接模式 ---');
     var redCircle = new Circle$2(100, 100, 10, new RedCircle());
     var greenCircle = new Circle$2(100, 100, 10, new GreenCircle());
@@ -375,7 +375,7 @@ var MealBuilder = /** @class */ (function () {
     };
     return MealBuilder;
 }());
-function run$8() {
+function run$9() {
     console.log('--- 建造者模式 ---');
     var mealBuilder = new MealBuilder();
     var bc = mealBuilder.burgerCombo();
@@ -410,7 +410,7 @@ var Employee = /** @class */ (function () {
     };
     return Employee;
 }());
-function run$7() {
+function run$8() {
     console.log('--- 组合模式 ---');
     var CEO = new Employee('zty', 'CEO');
     var sale = new Employee('s-header', 'sale');
@@ -469,7 +469,7 @@ var RedShapeDecorator = /** @class */ (function (_super) {
     };
     return RedShapeDecorator;
 }(ShapeDecorator));
-function run$6() {
+function run$7() {
     console.log('--- 装饰器模式 ---');
     var circle = new Circle$1();
     var redCircle = new RedShapeDecorator(new Circle$1());
@@ -523,7 +523,7 @@ var ShapeMaker = /** @class */ (function () {
     };
     return ShapeMaker;
 }());
-function run$5() {
+function run$6() {
     console.log('--- 外观模式 ---');
     var shapeMaker = new ShapeMaker();
     shapeMaker.drawRectangle();
@@ -587,7 +587,7 @@ var ShapeFactory$1 = /** @class */ (function () {
     };
     return ShapeFactory;
 }());
-function run$4() {
+function run$5() {
     console.log('--- 工厂模式 ---');
     var sf = new ShapeFactory$1();
     var shape = sf.getShape('CIRCLE');
@@ -639,7 +639,7 @@ var CriteriaFemale = /** @class */ (function () {
     };
     return CriteriaFemale;
 }());
-function run$3() {
+function run$4() {
     console.log('--- 过滤器模式 ---');
     var persons = [
         new Person('Robert', 'Male'),
@@ -696,7 +696,7 @@ var ShapeFactory = /** @class */ (function () {
     ShapeFactory.map = new Map();
     return ShapeFactory;
 }());
-function run$2() {
+function run$3() {
     console.log('--- 享元模式 ---');
     var colors = ['Red', 'Yellow', 'Blue'];
     function getRandomColor() {
@@ -731,7 +731,7 @@ function inherits(subClass, superClass) {
         constructor: { value: subClass, writable: true, configurable: true }
     });
 }
-function run$1() {
+function run$2() {
     console.log('--- 原型模式 ---');
     function People(name) {
         this.name = name;
@@ -744,6 +744,57 @@ function run$1() {
     var man = new Man('man');
     console.log('man = ', man);
     console.log('--- 原型模式 ---');
+    console.log('');
+}
+
+/**
+ * ProxyPattern 代理模式
+ * 意图：为其他对象提供一种代理以控制对这个对象的访问。
+ * 主要解决：在直接访问对象时带来的问题，比如说：要访问的对象在远程的机器上。在面向对象系统中，有些对象由于某些原因（比如对象创建开销很大，或者某些操作需要安全控制，或者需要进程外的访问），直接访问会给使用者或者系统结构带来很多麻烦，我们可以在访问此对象时加上一个对此对象的访问层。
+ * 何时使用：想在访问一个类时做一些控制。
+ * 如何解决：增加中间层。
+ * 关键代码：实现与被代理类组合。
+ * 应用实例： 1、Windows 里面的快捷方式。 2、猪八戒去找高翠兰结果是孙悟空变的，可以这样理解：把高翠兰的外貌抽象出来，高翠兰本人和孙悟空都实现了这个接口，猪八戒访问高翠兰的时候看不出来这个是孙悟空，所以说孙悟空是高翠兰代理类。 3、买火车票不一定在火车站买，也可以去代售点。 4、一张支票或银行存单是账户中资金的代理。支票在市场交易中用来代替现金，并提供对签发人账号上资金的控制。 5、spring aop。
+ * 优点： 1、职责清晰。 2、高扩展性。 3、智能化。
+ * 缺点： 1、由于在客户端和真实主题之间增加了代理对象，因此有些类型的代理模式可能会造成请求的处理速度变慢。 2、实现代理模式需要额外的工作，有些代理模式的实现非常复杂。
+ * 使用场景：按职责来划分，通常有以下使用场景： 1、远程代理。 2、虚拟代理。 3、Copy-on-Write 代理。 4、保护（Protect or Access）代理。 5、Cache代理。 6、防火墙（Firewall）代理。 7、同步化（Synchronization）代理。 8、智能引用（Smart Reference）代理。
+ * 注意事项： 1、和适配器模式的区别：适配器模式主要改变所考虑对象的接口，而代理模式不能改变所代理类的接口。 2、和装饰器模式的区别：装饰器模式为了增强功能，而代理模式是为了加以控制。
+ */
+var RealImage = /** @class */ (function () {
+    function RealImage(fileName) {
+        this.fileName = fileName;
+        this.loadFromDisk(fileName);
+    }
+    RealImage.prototype.display = function () {
+        console.log('Displaying ' + this.fileName);
+    };
+    RealImage.prototype.loadFromDisk = function (fileName) {
+        console.log('Loading ' + fileName);
+    };
+    return RealImage;
+}());
+// ProxyImage 是一个代理类，减少 RealImage 对象加载的内存占用。
+var ProxyImage = /** @class */ (function () {
+    function ProxyImage(fileName) {
+        this.fileName = fileName;
+    }
+    ProxyImage.prototype.display = function () {
+        if (!this.realImage) {
+            this.realImage = new RealImage(this.fileName);
+        }
+        this.realImage.display();
+    };
+    return ProxyImage;
+}());
+function run$1() {
+    console.log('--- 代理模式 ---');
+    var image = new ProxyImage('1.jpg');
+    // 图像将从磁盘加载
+    image.display();
+    console.log('');
+    // 图像不需要从磁盘加载
+    image.display();
+    console.log('--- 代理模式 ---');
     console.log('');
 }
 
@@ -777,6 +828,7 @@ function run() {
     console.log('');
 }
 
+run$c();
 run$b();
 run$a();
 run$9();

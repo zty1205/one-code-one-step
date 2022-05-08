@@ -9,6 +9,7 @@ import * as FactoryPattern from './FactoryPattern';
 import * as FilterPattern from './FilterPattern';
 import * as FlyweightPattern from './FlyweightPattern';
 import * as PrototypePattern from './PrototypePattern';
+import * as ProxyPattern from './ProxyPattern';
 import * as SingletonPattern from './SingletonPattern';
 
 AbstractFactoryPattern.run();
@@ -22,4 +23,5 @@ FactoryPattern.run();
 FilterPattern.run();
 FlyweightPattern.run();
 PrototypePattern.run();
+ProxyPattern.run();
 SingletonPattern.run();
