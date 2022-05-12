@@ -510,7 +510,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 七、DesignMode (15 道)
+## 七、DesignMode (16 道)
 
 - [FactoryPattern.ts](./designMode/FactoryPattern.ts)
 - [AbstractFactoryPattern.ts](./designMode/AbstractFactoryPattern.ts)
@@ -527,6 +527,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [ProxyPattern.ts](./designMode/ProxyPattern.ts)
 - [ChainOfResponsibilityPattern.ts](./designMode/ChainOfResponsibilityPattern.ts)
 - [CommandPattern.ts](./designMode/CommandPattern.ts)
+- [InterpreterPattern.ts](./designMode/InterpreterPattern.ts)
 
 <br>
 

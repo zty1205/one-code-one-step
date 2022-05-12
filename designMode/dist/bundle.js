@@ -137,7 +137,7 @@ var FactoryProducer = /** @class */ (function () {
     };
     return FactoryProducer;
 }());
-function run$e() {
+function run$f() {
     console.log('--- 抽象工厂模式 ---');
     var FP = new FactoryProducer();
     var sf = FP.getFactory('SHAPE');
@@ -223,7 +223,7 @@ var AudioPlayer = /** @class */ (function () {
     };
     return AudioPlayer;
 }());
-function run$d() {
+function run$e() {
     console.log('--- 适配器模式 ---');
     var audioPlayer = new AudioPlayer();
     audioPlayer.play('mp3', 'My Heart Will Go On.mp3');
@@ -280,7 +280,7 @@ var Circle$2 = /** @class */ (function (_super) {
     };
     return Circle;
 }(Shape));
-function run$c() {
+function run$d() {
     console.log('--- 桥接模式 ---');
     var redCircle = new Circle$2(100, 100, 10, new RedCircle());
     var greenCircle = new Circle$2(100, 100, 10, new GreenCircle());
@@ -375,7 +375,7 @@ var MealBuilder = /** @class */ (function () {
     };
     return MealBuilder;
 }());
-function run$b() {
+function run$c() {
     console.log('--- 建造者模式 ---');
     var mealBuilder = new MealBuilder();
     var bc = mealBuilder.burgerCombo();
@@ -455,7 +455,7 @@ var FileLogger = /** @class */ (function (_super) {
     };
     return FileLogger;
 }(AbstractLogger));
-function run$a() {
+function run$b() {
     console.log('--- 责任链模式 ---');
     var errorLogger = new ErrorLogger(AbstractLogger.ERROR);
     var fileLogger = new FileLogger(AbstractLogger.DEBUG);
@@ -531,7 +531,7 @@ var Broker = /** @class */ (function () {
     };
     return Broker;
 }());
-function run$9() {
+function run$a() {
     console.log('--- 命令模式 ---');
     var abcStock = new Stock();
     var buyStockOrder = new BuyStock(abcStock);
@@ -566,7 +566,7 @@ var Employee = /** @class */ (function () {
     };
     return Employee;
 }());
-function run$8() {
+function run$9() {
     console.log('--- 组合模式 ---');
     var CEO = new Employee('zty', 'CEO');
     var sale = new Employee('s-header', 'sale');
@@ -625,7 +625,7 @@ var RedShapeDecorator = /** @class */ (function (_super) {
     };
     return RedShapeDecorator;
 }(ShapeDecorator));
-function run$7() {
+function run$8() {
     console.log('--- 装饰器模式 ---');
     var circle = new Circle$1();
     var redCircle = new RedShapeDecorator(new Circle$1());
@@ -679,7 +679,7 @@ var ShapeMaker = /** @class */ (function () {
     };
     return ShapeMaker;
 }());
-function run$6() {
+function run$7() {
     console.log('--- 外观模式 ---');
     var shapeMaker = new ShapeMaker();
     shapeMaker.drawRectangle();
@@ -743,7 +743,7 @@ var ShapeFactory$1 = /** @class */ (function () {
     };
     return ShapeFactory;
 }());
-function run$5() {
+function run$6() {
     console.log('--- 工厂模式 ---');
     var sf = new ShapeFactory$1();
     var shape = sf.getShape('CIRCLE');
@@ -795,7 +795,7 @@ var CriteriaFemale = /** @class */ (function () {
     };
     return CriteriaFemale;
 }());
-function run$4() {
+function run$5() {
     console.log('--- 过滤器模式 ---');
     var persons = [
         new Person('Robert', 'Male'),
@@ -852,7 +852,7 @@ var ShapeFactory = /** @class */ (function () {
     ShapeFactory.map = new Map();
     return ShapeFactory;
 }());
-function run$3() {
+function run$4() {
     console.log('--- 享元模式 ---');
     var colors = ['Red', 'Yellow', 'Blue'];
     function getRandomColor() {
@@ -867,6 +867,66 @@ function run$3() {
         square.draw();
     }
     console.log('--- 享元模式 ---');
+    console.log('');
+}
+
+/**
+ * InterpreterPattern 解释器模式
+ * 意图：给定一个语言，定义它的文法表示，并定义一个解释器，这个解释器使用该标识来解释语言中的句子。
+ * 主要解决：对于一些固定文法构建一个解释句子的解释器。
+ * 何时使用：如果一种特定类型的问题发生的频率足够高，那么可能就值得将该问题的各个实例表述为一个简单语言中的句子。这样就可以构建一个解释器，该解释器通过解释这些句子来解决该问题。
+ * 如何解决：构建语法树，定义终结符与非终结符。
+ * 关键代码：构建环境类，包含解释器之外的一些全局信息，一般是 HashMap。
+ * 应用实例：编译器、运算表达式计算。
+ * 优点： 1、可扩展性比较好，灵活。 2、增加了新的解释表达式的方式。 3、易于实现简单文法。
+ * 缺点： 1、可利用场景比较少。 2、对于复杂的文法比较难维护。 3、解释器模式会引起类膨胀。 4、解释器模式采用递归调用方法。
+ * 使用场景： 1、可以将一个需要解释执行的语言中的句子表示为一个抽象语法树。 2、一些重复出现的问题可以用一种简单的语言来进行表达。 3、一个简单语法需要解释的场景。
+ */
+var TerminalExpression = /** @class */ (function () {
+    function TerminalExpression(data) {
+        this.data = data;
+    }
+    TerminalExpression.prototype.interpret = function (context) {
+        return context.indexOf(this.data) > -1;
+    };
+    return TerminalExpression;
+}());
+var OrExpression = /** @class */ (function () {
+    function OrExpression(exp1, exp2) {
+        this.exp1 = null;
+        this.exp2 = null;
+        this.exp1 = exp1;
+        this.exp2 = exp2;
+    }
+    OrExpression.prototype.interpret = function (context) {
+        return this.exp1.interpret(context) || this.exp2.interpret(context);
+    };
+    return OrExpression;
+}());
+var AndExpression = /** @class */ (function () {
+    function AndExpression(exp1, exp2) {
+        this.exp1 = null;
+        this.exp2 = null;
+        this.exp1 = exp1;
+        this.exp2 = exp2;
+    }
+    AndExpression.prototype.interpret = function (context) {
+        return this.exp1.interpret(context) && this.exp2.interpret(context);
+    };
+    return AndExpression;
+}());
+function run$3() {
+    console.log('--- 解释器模式 ---');
+    // 规则：Robert 和 John 是男性
+    var robert = new TerminalExpression('Robert');
+    var john = new TerminalExpression('John');
+    var isMale = new OrExpression(robert, john);
+    var julie = new TerminalExpression('Julie');
+    var married = new TerminalExpression('Married');
+    var isMarriedWoman = new AndExpression(julie, married);
+    console.log('John is male? ' + isMale.interpret('John'));
+    console.log('Jul is a married women? ' + isMarriedWoman.interpret('Married Jul'));
+    console.log('--- 解释器模式 ---');
     console.log('');
 }
 
@@ -984,6 +1044,7 @@ function run() {
     console.log('');
 }
 
+run$f();
 run$e();
 run$d();
 run$c();
