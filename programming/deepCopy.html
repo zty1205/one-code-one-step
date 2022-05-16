@@ -9,7 +9,7 @@
   <body>
     <script>
       // 实现一个deepClone
-      function deepClone(obj = new Object(), map = new WeakMap()) {
+      function deepClone(obj, map = new WeakMap()) {
         // 简单类型
         if (obj == null || typeof obj !== 'object') return obj;
         if (obj instanceof Date) return new Date(obj);
@@ -37,7 +37,9 @@
         arr: [1, 2],
         obj: {
           name: 'zty'
-        }
+        },
+        n: null,
+        u: undefined
       };
 
       console.log('obj = ', obj);
