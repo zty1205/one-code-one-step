@@ -137,7 +137,7 @@ var FactoryProducer = /** @class */ (function () {
     };
     return FactoryProducer;
 }());
-function run$h() {
+function run$i() {
     console.log('--- 抽象工厂模式 ---');
     var FP = new FactoryProducer();
     var sf = FP.getFactory('SHAPE');
@@ -223,7 +223,7 @@ var AudioPlayer = /** @class */ (function () {
     };
     return AudioPlayer;
 }());
-function run$g() {
+function run$h() {
     console.log('--- 适配器模式 ---');
     var audioPlayer = new AudioPlayer();
     audioPlayer.play('mp3', 'My Heart Will Go On.mp3');
@@ -280,7 +280,7 @@ var Circle$2 = /** @class */ (function (_super) {
     };
     return Circle;
 }(Shape));
-function run$f() {
+function run$g() {
     console.log('--- 桥接模式 ---');
     var redCircle = new Circle$2(100, 100, 10, new RedCircle());
     var greenCircle = new Circle$2(100, 100, 10, new GreenCircle());
@@ -375,7 +375,7 @@ var MealBuilder = /** @class */ (function () {
     };
     return MealBuilder;
 }());
-function run$e() {
+function run$f() {
     console.log('--- 建造者模式 ---');
     var mealBuilder = new MealBuilder();
     var bc = mealBuilder.burgerCombo();
@@ -455,7 +455,7 @@ var FileLogger = /** @class */ (function (_super) {
     };
     return FileLogger;
 }(AbstractLogger));
-function run$d() {
+function run$e() {
     console.log('--- 责任链模式 ---');
     var errorLogger = new ErrorLogger(AbstractLogger.ERROR);
     var fileLogger = new FileLogger(AbstractLogger.DEBUG);
@@ -531,7 +531,7 @@ var Broker = /** @class */ (function () {
     };
     return Broker;
 }());
-function run$c() {
+function run$d() {
     console.log('--- 命令模式 ---');
     var abcStock = new Stock();
     var buyStockOrder = new BuyStock(abcStock);
@@ -566,7 +566,7 @@ var Employee = /** @class */ (function () {
     };
     return Employee;
 }());
-function run$b() {
+function run$c() {
     console.log('--- 组合模式 ---');
     var CEO = new Employee('zty', 'CEO');
     var sale = new Employee('s-header', 'sale');
@@ -625,7 +625,7 @@ var RedShapeDecorator = /** @class */ (function (_super) {
     };
     return RedShapeDecorator;
 }(ShapeDecorator));
-function run$a() {
+function run$b() {
     console.log('--- 装饰器模式 ---');
     var circle = new Circle$1();
     var redCircle = new RedShapeDecorator(new Circle$1());
@@ -679,7 +679,7 @@ var ShapeMaker = /** @class */ (function () {
     };
     return ShapeMaker;
 }());
-function run$9() {
+function run$a() {
     console.log('--- 外观模式 ---');
     var shapeMaker = new ShapeMaker();
     shapeMaker.drawRectangle();
@@ -743,7 +743,7 @@ var ShapeFactory$1 = /** @class */ (function () {
     };
     return ShapeFactory;
 }());
-function run$8() {
+function run$9() {
     console.log('--- 工厂模式 ---');
     var sf = new ShapeFactory$1();
     var shape = sf.getShape('CIRCLE');
@@ -795,7 +795,7 @@ var CriteriaFemale = /** @class */ (function () {
     };
     return CriteriaFemale;
 }());
-function run$7() {
+function run$8() {
     console.log('--- 过滤器模式 ---');
     var persons = [
         new Person('Robert', 'Male'),
@@ -852,7 +852,7 @@ var ShapeFactory = /** @class */ (function () {
     ShapeFactory.map = new Map();
     return ShapeFactory;
 }());
-function run$6() {
+function run$7() {
     console.log('--- 享元模式 ---');
     var colors = ['Red', 'Yellow', 'Blue'];
     function getRandomColor() {
@@ -915,7 +915,7 @@ var AndExpression = /** @class */ (function () {
     };
     return AndExpression;
 }());
-function run$5() {
+function run$6() {
     console.log('--- 解释器模式 ---');
     // 规则：Robert 和 John 是男性
     var robert = new TerminalExpression('Robert');
@@ -968,7 +968,7 @@ var NameRepository = /** @class */ (function () {
     };
     return NameRepository;
 }());
-function run$4() {
+function run$5() {
     console.log('--- 迭代器模式 ---');
     var namesRepository = new NameRepository();
     for (var iter = namesRepository.getIterator(); iter.hasNext();) {
@@ -1013,13 +1013,88 @@ var User = /** @class */ (function () {
     };
     return User;
 }());
-function run$3() {
+function run$4() {
     console.log('--- 中介者模式 ---');
     var robert = new User('Robert');
     var john = new User('John');
     robert.sendMessage('Hi! John!');
     john.sendMessage('Hello! Robert!');
     console.log('--- 中介者模式 ---');
+    console.log('');
+}
+
+/**
+ * MementoPattern 备忘录模式
+ * 意图：在不破坏封装性的前提下，捕获一个对象的内部状态，并在该对象之外保存这个状态。
+ * 主要解决：所谓备忘录模式就是在不破坏封装的前提下，捕获一个对象的内部状态，并在该对象之外保存这个状态，这样可以在以后将对象恢复到原先保存的状态。
+ * 何时使用：很多时候我们总是需要记录一个对象的内部状态，这样做的目的就是为了允许用户取消不确定或者错误的操作，能够恢复到他原先的状态，使得他有"后悔药"可吃。
+ * 如何解决：通过一个备忘录类专门存储对象状态。
+ * 关键代码：客户不与备忘录类耦合，与备忘录管理类耦合。
+ * 应用实例： 1、后悔药。 2、打游戏时的存档。 3、Windows 里的 ctrl + z。 4、IE 中的后退。 5、数据库的事务管理。
+ * 优点： 1、给用户提供了一种可以恢复状态的机制，可以使用户能够比较方便地回到某个历史的状态。 2、实现了信息的封装，使得用户不需要关心状态的保存细节。
+ * 缺点：消耗资源。如果类的成员变量过多，势必会占用比较大的资源，而且每一次保存都会消耗一定的内存。
+ * 使用场景： 1、需要保存/恢复数据的相关状态场景。 2、提供一个可回滚的操作。
+ * 注意事项： 1、为了符合迪米特原则，还要增加一个管理备忘录的类。 2、为了节约内存，可使用原型模式+备忘录模式。
+ */
+// Memento包含了要被恢复的对象的状态
+var Memento = /** @class */ (function () {
+    function Memento(state) {
+        this.state = state;
+    }
+    Memento.prototype.getState = function () {
+        return this.state;
+    };
+    return Memento;
+}());
+// Originator 创建并在 Memento 对象中存储状态
+var Originator = /** @class */ (function () {
+    function Originator() {
+    }
+    Originator.prototype.setState = function (state) {
+        this.state = state;
+    };
+    Originator.prototype.getState = function () {
+        return this.state;
+    };
+    Originator.prototype.saveStateToMemento = function () {
+        return new Memento(this.state);
+    };
+    Originator.prototype.getStateFromMemento = function (memento) {
+        this.state = memento.getState();
+    };
+    return Originator;
+}());
+// Caretaker 对象负责从 Memento 中恢复对象的状态。
+var CareTaker = /** @class */ (function () {
+    function CareTaker() {
+        this.mementoList = [];
+    }
+    CareTaker.prototype.add = function (m) {
+        this.mementoList.push(m);
+    };
+    CareTaker.prototype.get = function (index) {
+        return this.mementoList[index];
+    };
+    return CareTaker;
+}());
+function run$3() {
+    console.log('--- 备忘录模式 ---');
+    var originator = new Originator();
+    var careTaker = new CareTaker();
+    originator.setState('State #1');
+    originator.setState('State #2');
+    careTaker.add(originator.saveStateToMemento());
+    originator.setState('State #3');
+    careTaker.add(originator.saveStateToMemento());
+    originator.setState('State #4');
+    console.log('Current State: ' + originator.getState());
+    originator.getStateFromMemento(careTaker.get(0));
+    console.log('First saved State: ' + originator.getState());
+    originator.getStateFromMemento(careTaker.get(1));
+    console.log('Second saved State: ' + originator.getState());
+    console.log('originator = ', originator);
+    console.log('careTaker = ', careTaker);
+    console.log('--- 备忘录模式 ---');
     console.log('');
 }
 
@@ -1137,6 +1212,7 @@ function run() {
     console.log('');
 }
 
+run$i();
 run$h();
 run$g();
 run$f();
