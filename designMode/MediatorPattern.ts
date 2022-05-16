@@ -12,6 +12,7 @@
  * 注意事项：不应当在职责混乱的时候使用。
  */
 
+// 创建中介类
 class ChatRoom {
   static showMessage(user: User, message: string): void {
     console.log(`${new Date().toLocaleTimeString()} ${user.getName()}: ${message}`);
@@ -31,8 +32,6 @@ class User {
     ChatRoom.showMessage(this, message);
   }
 }
-
-// 创建中介类
 
 export function run() {
   console.log('--- 中介者模式 ---');

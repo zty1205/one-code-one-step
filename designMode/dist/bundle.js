@@ -992,6 +992,7 @@ function run$4() {
  * 使用场景： 1、系统中对象之间存在比较复杂的引用关系，导致它们之间的依赖关系结构混乱而且难以复用该对象。 2、想通过一个中间类来封装多个类中的行为，而又不想生成太多的子类。
  * 注意事项：不应当在职责混乱的时候使用。
  */
+// 创建中介类
 var ChatRoom = /** @class */ (function () {
     function ChatRoom() {
     }
@@ -1012,7 +1013,6 @@ var User = /** @class */ (function () {
     };
     return User;
 }());
-// 创建中介类
 function run$3() {
     console.log('--- 中介者模式 ---');
     var robert = new User('Robert');
