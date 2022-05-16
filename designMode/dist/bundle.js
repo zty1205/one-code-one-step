@@ -137,7 +137,7 @@ var FactoryProducer = /** @class */ (function () {
     };
     return FactoryProducer;
 }());
-function run$f() {
+function run$g() {
     console.log('--- 抽象工厂模式 ---');
     var FP = new FactoryProducer();
     var sf = FP.getFactory('SHAPE');
@@ -223,7 +223,7 @@ var AudioPlayer = /** @class */ (function () {
     };
     return AudioPlayer;
 }());
-function run$e() {
+function run$f() {
     console.log('--- 适配器模式 ---');
     var audioPlayer = new AudioPlayer();
     audioPlayer.play('mp3', 'My Heart Will Go On.mp3');
@@ -280,7 +280,7 @@ var Circle$2 = /** @class */ (function (_super) {
     };
     return Circle;
 }(Shape));
-function run$d() {
+function run$e() {
     console.log('--- 桥接模式 ---');
     var redCircle = new Circle$2(100, 100, 10, new RedCircle());
     var greenCircle = new Circle$2(100, 100, 10, new GreenCircle());
@@ -375,7 +375,7 @@ var MealBuilder = /** @class */ (function () {
     };
     return MealBuilder;
 }());
-function run$c() {
+function run$d() {
     console.log('--- 建造者模式 ---');
     var mealBuilder = new MealBuilder();
     var bc = mealBuilder.burgerCombo();
@@ -455,7 +455,7 @@ var FileLogger = /** @class */ (function (_super) {
     };
     return FileLogger;
 }(AbstractLogger));
-function run$b() {
+function run$c() {
     console.log('--- 责任链模式 ---');
     var errorLogger = new ErrorLogger(AbstractLogger.ERROR);
     var fileLogger = new FileLogger(AbstractLogger.DEBUG);
@@ -531,7 +531,7 @@ var Broker = /** @class */ (function () {
     };
     return Broker;
 }());
-function run$a() {
+function run$b() {
     console.log('--- 命令模式 ---');
     var abcStock = new Stock();
     var buyStockOrder = new BuyStock(abcStock);
@@ -566,7 +566,7 @@ var Employee = /** @class */ (function () {
     };
     return Employee;
 }());
-function run$9() {
+function run$a() {
     console.log('--- 组合模式 ---');
     var CEO = new Employee('zty', 'CEO');
     var sale = new Employee('s-header', 'sale');
@@ -625,7 +625,7 @@ var RedShapeDecorator = /** @class */ (function (_super) {
     };
     return RedShapeDecorator;
 }(ShapeDecorator));
-function run$8() {
+function run$9() {
     console.log('--- 装饰器模式 ---');
     var circle = new Circle$1();
     var redCircle = new RedShapeDecorator(new Circle$1());
@@ -679,7 +679,7 @@ var ShapeMaker = /** @class */ (function () {
     };
     return ShapeMaker;
 }());
-function run$7() {
+function run$8() {
     console.log('--- 外观模式 ---');
     var shapeMaker = new ShapeMaker();
     shapeMaker.drawRectangle();
@@ -743,7 +743,7 @@ var ShapeFactory$1 = /** @class */ (function () {
     };
     return ShapeFactory;
 }());
-function run$6() {
+function run$7() {
     console.log('--- 工厂模式 ---');
     var sf = new ShapeFactory$1();
     var shape = sf.getShape('CIRCLE');
@@ -795,7 +795,7 @@ var CriteriaFemale = /** @class */ (function () {
     };
     return CriteriaFemale;
 }());
-function run$5() {
+function run$6() {
     console.log('--- 过滤器模式 ---');
     var persons = [
         new Person('Robert', 'Male'),
@@ -852,7 +852,7 @@ var ShapeFactory = /** @class */ (function () {
     ShapeFactory.map = new Map();
     return ShapeFactory;
 }());
-function run$4() {
+function run$5() {
     console.log('--- 享元模式 ---');
     var colors = ['Red', 'Yellow', 'Blue'];
     function getRandomColor() {
@@ -915,7 +915,7 @@ var AndExpression = /** @class */ (function () {
     };
     return AndExpression;
 }());
-function run$3() {
+function run$4() {
     console.log('--- 解释器模式 ---');
     // 规则：Robert 和 John 是男性
     var robert = new TerminalExpression('Robert');
@@ -927,6 +927,55 @@ function run$3() {
     console.log('John is male? ' + isMale.interpret('John'));
     console.log('Jul is a married women? ' + isMarriedWoman.interpret('Married Jul'));
     console.log('--- 解释器模式 ---');
+    console.log('');
+}
+
+/**
+ * IteratorPattern 迭代器模式
+ * 意图：提供一种方法顺序访问一个聚合对象中各个元素, 而又无须暴露该对象的内部表示。
+ * 主要解决：不同的方式来遍历整个整合对象。
+ * 何时使用：遍历一个聚合对象。
+ * 如何解决：把在元素之间游走的责任交给迭代器，而不是聚合对象。
+ * 关键代码：定义接口：hasNext, next。
+ * 应用实例：JAVA 中的 iterator。
+ * 优点： 1、它支持以不同的方式遍历一个聚合对象。 2、迭代器简化了聚合类。 3、在同一个聚合上可以有多个遍历。 4、在迭代器模式中，增加新的聚合类和迭代器类都很方便，无须修改原有代码。
+ * 缺点：由于迭代器模式将存储数据和遍历数据的职责分离，增加新的聚合类需要对应增加新的迭代器类，类的个数成对增加，这在一定程度上增加了系统的复杂性。
+ * 使用场景： 1、访问一个聚合对象的内容而无须暴露它的内部表示。 2、需要为聚合对象提供多种遍历方式。 3、为遍历不同的聚合结构提供一个统一的接口。
+ * 注意事项：迭代器模式就是分离了集合对象的遍历行为，抽象出一个迭代器类来负责，这样既可以做到不暴露集合的内部结构，又可让外部代码透明地访问集合内部的数据。
+ */
+var NameRepository = /** @class */ (function () {
+    function NameRepository() {
+        this.names = ['Robert', 'John', 'Julie', 'Lora'];
+        this.index = 0;
+    }
+    NameRepository.prototype.getIterator = function () {
+        return {
+            hasNext: this.hasNext.bind(this),
+            next: this.next.bind(this)
+        };
+    };
+    NameRepository.prototype.hasNext = function () {
+        if (this.index < this.names.length) {
+            return true;
+        }
+        return false;
+    };
+    NameRepository.prototype.next = function () {
+        if (this.hasNext()) {
+            return this.names[this.index++];
+        }
+        return null;
+    };
+    return NameRepository;
+}());
+function run$3() {
+    console.log('--- 迭代器模式 ---');
+    var namesRepository = new NameRepository();
+    for (var iter = namesRepository.getIterator(); iter.hasNext();) {
+        var name_1 = iter.next();
+        console.log('Name: ' + name_1);
+    }
+    console.log('--- 迭代器模式 ---');
     console.log('');
 }
 
@@ -1044,6 +1093,7 @@ function run() {
     console.log('');
 }
 
+run$g();
 run$f();
 run$e();
 run$d();
