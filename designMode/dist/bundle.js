@@ -137,7 +137,7 @@ var FactoryProducer = /** @class */ (function () {
     };
     return FactoryProducer;
 }());
-function run$i() {
+function run$j() {
     console.log('--- 抽象工厂模式 ---');
     var FP = new FactoryProducer();
     var sf = FP.getFactory('SHAPE');
@@ -223,7 +223,7 @@ var AudioPlayer = /** @class */ (function () {
     };
     return AudioPlayer;
 }());
-function run$h() {
+function run$i() {
     console.log('--- 适配器模式 ---');
     var audioPlayer = new AudioPlayer();
     audioPlayer.play('mp3', 'My Heart Will Go On.mp3');
@@ -280,7 +280,7 @@ var Circle$2 = /** @class */ (function (_super) {
     };
     return Circle;
 }(Shape));
-function run$g() {
+function run$h() {
     console.log('--- 桥接模式 ---');
     var redCircle = new Circle$2(100, 100, 10, new RedCircle());
     var greenCircle = new Circle$2(100, 100, 10, new GreenCircle());
@@ -375,7 +375,7 @@ var MealBuilder = /** @class */ (function () {
     };
     return MealBuilder;
 }());
-function run$f() {
+function run$g() {
     console.log('--- 建造者模式 ---');
     var mealBuilder = new MealBuilder();
     var bc = mealBuilder.burgerCombo();
@@ -455,7 +455,7 @@ var FileLogger = /** @class */ (function (_super) {
     };
     return FileLogger;
 }(AbstractLogger));
-function run$e() {
+function run$f() {
     console.log('--- 责任链模式 ---');
     var errorLogger = new ErrorLogger(AbstractLogger.ERROR);
     var fileLogger = new FileLogger(AbstractLogger.DEBUG);
@@ -531,7 +531,7 @@ var Broker = /** @class */ (function () {
     };
     return Broker;
 }());
-function run$d() {
+function run$e() {
     console.log('--- 命令模式 ---');
     var abcStock = new Stock();
     var buyStockOrder = new BuyStock(abcStock);
@@ -566,7 +566,7 @@ var Employee = /** @class */ (function () {
     };
     return Employee;
 }());
-function run$c() {
+function run$d() {
     console.log('--- 组合模式 ---');
     var CEO = new Employee('zty', 'CEO');
     var sale = new Employee('s-header', 'sale');
@@ -625,7 +625,7 @@ var RedShapeDecorator = /** @class */ (function (_super) {
     };
     return RedShapeDecorator;
 }(ShapeDecorator));
-function run$b() {
+function run$c() {
     console.log('--- 装饰器模式 ---');
     var circle = new Circle$1();
     var redCircle = new RedShapeDecorator(new Circle$1());
@@ -679,7 +679,7 @@ var ShapeMaker = /** @class */ (function () {
     };
     return ShapeMaker;
 }());
-function run$a() {
+function run$b() {
     console.log('--- 外观模式 ---');
     var shapeMaker = new ShapeMaker();
     shapeMaker.drawRectangle();
@@ -743,7 +743,7 @@ var ShapeFactory$1 = /** @class */ (function () {
     };
     return ShapeFactory;
 }());
-function run$9() {
+function run$a() {
     console.log('--- 工厂模式 ---');
     var sf = new ShapeFactory$1();
     var shape = sf.getShape('CIRCLE');
@@ -795,7 +795,7 @@ var CriteriaFemale = /** @class */ (function () {
     };
     return CriteriaFemale;
 }());
-function run$8() {
+function run$9() {
     console.log('--- 过滤器模式 ---');
     var persons = [
         new Person('Robert', 'Male'),
@@ -852,7 +852,7 @@ var ShapeFactory = /** @class */ (function () {
     ShapeFactory.map = new Map();
     return ShapeFactory;
 }());
-function run$7() {
+function run$8() {
     console.log('--- 享元模式 ---');
     var colors = ['Red', 'Yellow', 'Blue'];
     function getRandomColor() {
@@ -915,7 +915,7 @@ var AndExpression = /** @class */ (function () {
     };
     return AndExpression;
 }());
-function run$6() {
+function run$7() {
     console.log('--- 解释器模式 ---');
     // 规则：Robert 和 John 是男性
     var robert = new TerminalExpression('Robert');
@@ -968,7 +968,7 @@ var NameRepository = /** @class */ (function () {
     };
     return NameRepository;
 }());
-function run$5() {
+function run$6() {
     console.log('--- 迭代器模式 ---');
     var namesRepository = new NameRepository();
     for (var iter = namesRepository.getIterator(); iter.hasNext();) {
@@ -1013,7 +1013,7 @@ var User = /** @class */ (function () {
     };
     return User;
 }());
-function run$4() {
+function run$5() {
     console.log('--- 中介者模式 ---');
     var robert = new User('Robert');
     var john = new User('John');
@@ -1077,7 +1077,7 @@ var CareTaker = /** @class */ (function () {
     };
     return CareTaker;
 }());
-function run$3() {
+function run$4() {
     console.log('--- 备忘录模式 ---');
     var originator = new Originator();
     var careTaker = new CareTaker();
@@ -1095,6 +1095,90 @@ function run$3() {
     console.log('originator = ', originator);
     console.log('careTaker = ', careTaker);
     console.log('--- 备忘录模式 ---');
+    console.log('');
+}
+
+/**
+ * ObserverPattern 观察者模式
+ * 意图：定义对象间的一种一对多的依赖关系，当一个对象的状态发生改变时，所有依赖于它的对象都得到通知并被自动更新。
+ * 主要解决：一个对象状态改变给其他对象通知的问题，而且要考虑到易用和低耦合，保证高度的协作。
+ * 何时使用：一个对象（目标对象）的状态发生改变，所有的依赖对象（观察者对象）都将得到通知，进行广播通知。
+ * 如何解决：使用面向对象技术，可以将这种依赖关系弱化。
+ * 关键代码：在抽象类里有一个 ArrayList 存放观察者们。
+ * 应用实例： 1、拍卖的时候，拍卖师观察最高标价，然后通知给其他竞价者竞价。 2、西游记里面悟空请求菩萨降服红孩儿，菩萨洒了一地水招来一个老乌龟，这个乌龟就是观察者，他观察菩萨洒水这个动作。
+ * 优点： 1、观察者和被观察者是抽象耦合的。 2、建立一套触发机制。
+ * 缺点： 1、如果一个被观察者对象有很多的直接和间接的观察者的话，将所有的观察者都通知到会花费很多时间。 2、如果在观察者和观察目标之间有循环依赖的话，观察目标会触发它们之间进行循环调用，可能导致系统崩溃。 3、观察者模式没有相应的机制让观察者知道所观察的目标对象是怎么发生变化的，而仅仅只是知道观察目标发生了变化。
+ * 使用场景：
+ * 一个抽象模型有两个方面，其中一个方面依赖于另一个方面。将这些方面封装在独立的对象中使它们可以各自独立地改变和复用。
+ * 一个对象的改变将导致其他一个或多个对象也发生改变，而不知道具体有多少对象将发生改变，可以降低对象之间的耦合度。
+ * 一个对象必须通知其他对象，而并不知道这些对象是谁。
+ * 需要在系统中创建一个触发链，A对象的行为将影响B对象，B对象的行为将影响C对象……，可以使用观察者模式创建一种链式触发机制。
+ * 注意事项： 1、避免循环引用。 2、如果顺序执行，某一观察者错误会导致系统卡壳，一般采用异步方式。
+ */
+var Subject = /** @class */ (function () {
+    function Subject() {
+        this.observers = [];
+    }
+    Subject.prototype.getState = function () {
+        return this.state;
+    };
+    Subject.prototype.setState = function (state) {
+        this.state = state;
+        this.notifyAllObservers();
+    };
+    Subject.prototype.attach = function (observer) {
+        this.observers.push(observer);
+    };
+    Subject.prototype.notifyAllObservers = function () {
+        for (var _i = 0, _a = this.observers; _i < _a.length; _i++) {
+            var observer = _a[_i];
+            observer.update();
+        }
+    };
+    return Subject;
+}());
+// 创建实体观察者类。
+var Observer = /** @class */ (function () {
+    function Observer() {
+    }
+    return Observer;
+}());
+var BinaryObserver = /** @class */ (function (_super) {
+    __extends(BinaryObserver, _super);
+    function BinaryObserver(subject) {
+        var _this = _super.call(this) || this;
+        _this.subject = subject;
+        _this.subject.attach(_this);
+        return _this;
+    }
+    BinaryObserver.prototype.update = function () {
+        console.log('Binary String: ' + this.subject.getState().toString(2));
+    };
+    return BinaryObserver;
+}(Observer));
+var HexadecimalObserver = /** @class */ (function (_super) {
+    __extends(HexadecimalObserver, _super);
+    function HexadecimalObserver(subject) {
+        var _this = _super.call(this) || this;
+        _this.subject = subject;
+        _this.subject.attach(_this);
+        return _this;
+    }
+    HexadecimalObserver.prototype.update = function () {
+        console.log('Hexadecimal String: ' + this.subject.getState().toString(16));
+    };
+    return HexadecimalObserver;
+}(Observer));
+function run$3() {
+    console.log('--- 观察者模式 ---');
+    var subject = new Subject();
+    new HexadecimalObserver(subject);
+    new BinaryObserver(subject);
+    console.log('First state change: 28');
+    subject.setState(28);
+    console.log('Second state change: 10');
+    subject.setState(10);
+    console.log('--- 观察者模式 ---');
     console.log('');
 }
 
@@ -1212,6 +1296,7 @@ function run() {
     console.log('');
 }
 
+run$j();
 run$i();
 run$h();
 run$g();
