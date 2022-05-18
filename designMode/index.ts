@@ -18,6 +18,7 @@ import * as ObserverPattern from './ObserverPattern';
 import * as PrototypePattern from './PrototypePattern';
 import * as ProxyPattern from './ProxyPattern';
 import * as SingletonPattern from './SingletonPattern';
+import * as StatePattern from './StatePattern';
 
 AbstractFactoryPattern.run();
 AdapterPattern.run();
@@ -39,3 +40,4 @@ ObserverPattern.run();
 PrototypePattern.run();
 ProxyPattern.run();
 SingletonPattern.run();
+StatePattern.run();

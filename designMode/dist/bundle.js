@@ -137,7 +137,7 @@ var FactoryProducer = /** @class */ (function () {
     };
     return FactoryProducer;
 }());
-function run$j() {
+function run$k() {
     console.log('--- 抽象工厂模式 ---');
     var FP = new FactoryProducer();
     var sf = FP.getFactory('SHAPE');
@@ -223,7 +223,7 @@ var AudioPlayer = /** @class */ (function () {
     };
     return AudioPlayer;
 }());
-function run$i() {
+function run$j() {
     console.log('--- 适配器模式 ---');
     var audioPlayer = new AudioPlayer();
     audioPlayer.play('mp3', 'My Heart Will Go On.mp3');
@@ -280,7 +280,7 @@ var Circle$2 = /** @class */ (function (_super) {
     };
     return Circle;
 }(Shape));
-function run$h() {
+function run$i() {
     console.log('--- 桥接模式 ---');
     var redCircle = new Circle$2(100, 100, 10, new RedCircle());
     var greenCircle = new Circle$2(100, 100, 10, new GreenCircle());
@@ -375,7 +375,7 @@ var MealBuilder = /** @class */ (function () {
     };
     return MealBuilder;
 }());
-function run$g() {
+function run$h() {
     console.log('--- 建造者模式 ---');
     var mealBuilder = new MealBuilder();
     var bc = mealBuilder.burgerCombo();
@@ -455,7 +455,7 @@ var FileLogger = /** @class */ (function (_super) {
     };
     return FileLogger;
 }(AbstractLogger));
-function run$f() {
+function run$g() {
     console.log('--- 责任链模式 ---');
     var errorLogger = new ErrorLogger(AbstractLogger.ERROR);
     var fileLogger = new FileLogger(AbstractLogger.DEBUG);
@@ -531,7 +531,7 @@ var Broker = /** @class */ (function () {
     };
     return Broker;
 }());
-function run$e() {
+function run$f() {
     console.log('--- 命令模式 ---');
     var abcStock = new Stock();
     var buyStockOrder = new BuyStock(abcStock);
@@ -566,7 +566,7 @@ var Employee = /** @class */ (function () {
     };
     return Employee;
 }());
-function run$d() {
+function run$e() {
     console.log('--- 组合模式 ---');
     var CEO = new Employee('zty', 'CEO');
     var sale = new Employee('s-header', 'sale');
@@ -625,7 +625,7 @@ var RedShapeDecorator = /** @class */ (function (_super) {
     };
     return RedShapeDecorator;
 }(ShapeDecorator));
-function run$c() {
+function run$d() {
     console.log('--- 装饰器模式 ---');
     var circle = new Circle$1();
     var redCircle = new RedShapeDecorator(new Circle$1());
@@ -679,7 +679,7 @@ var ShapeMaker = /** @class */ (function () {
     };
     return ShapeMaker;
 }());
-function run$b() {
+function run$c() {
     console.log('--- 外观模式 ---');
     var shapeMaker = new ShapeMaker();
     shapeMaker.drawRectangle();
@@ -743,7 +743,7 @@ var ShapeFactory$1 = /** @class */ (function () {
     };
     return ShapeFactory;
 }());
-function run$a() {
+function run$b() {
     console.log('--- 工厂模式 ---');
     var sf = new ShapeFactory$1();
     var shape = sf.getShape('CIRCLE');
@@ -795,7 +795,7 @@ var CriteriaFemale = /** @class */ (function () {
     };
     return CriteriaFemale;
 }());
-function run$9() {
+function run$a() {
     console.log('--- 过滤器模式 ---');
     var persons = [
         new Person('Robert', 'Male'),
@@ -852,7 +852,7 @@ var ShapeFactory = /** @class */ (function () {
     ShapeFactory.map = new Map();
     return ShapeFactory;
 }());
-function run$8() {
+function run$9() {
     console.log('--- 享元模式 ---');
     var colors = ['Red', 'Yellow', 'Blue'];
     function getRandomColor() {
@@ -915,7 +915,7 @@ var AndExpression = /** @class */ (function () {
     };
     return AndExpression;
 }());
-function run$7() {
+function run$8() {
     console.log('--- 解释器模式 ---');
     // 规则：Robert 和 John 是男性
     var robert = new TerminalExpression('Robert');
@@ -968,7 +968,7 @@ var NameRepository = /** @class */ (function () {
     };
     return NameRepository;
 }());
-function run$6() {
+function run$7() {
     console.log('--- 迭代器模式 ---');
     var namesRepository = new NameRepository();
     for (var iter = namesRepository.getIterator(); iter.hasNext();) {
@@ -1013,7 +1013,7 @@ var User = /** @class */ (function () {
     };
     return User;
 }());
-function run$5() {
+function run$6() {
     console.log('--- 中介者模式 ---');
     var robert = new User('Robert');
     var john = new User('John');
@@ -1077,7 +1077,7 @@ var CareTaker = /** @class */ (function () {
     };
     return CareTaker;
 }());
-function run$4() {
+function run$5() {
     console.log('--- 备忘录模式 ---');
     var originator = new Originator();
     var careTaker = new CareTaker();
@@ -1169,7 +1169,7 @@ var HexadecimalObserver = /** @class */ (function (_super) {
     };
     return HexadecimalObserver;
 }(Observer));
-function run$3() {
+function run$4() {
     console.log('--- 观察者模式 ---');
     var subject = new Subject();
     new HexadecimalObserver(subject);
@@ -1199,7 +1199,7 @@ function inherits(subClass, superClass) {
         constructor: { value: subClass, writable: true, configurable: true }
     });
 }
-function run$2() {
+function run$3() {
     console.log('--- 原型模式 ---');
     function People(name) {
         this.name = name;
@@ -1254,7 +1254,7 @@ var ProxyImage = /** @class */ (function () {
     };
     return ProxyImage;
 }());
-function run$1() {
+function run$2() {
     console.log('--- 代理模式 ---');
     var image = new ProxyImage('1.jpg');
     // 图像将从磁盘加载
@@ -1286,7 +1286,7 @@ var Singleton = /** @class */ (function () {
     Singleton.instance = new Singleton();
     return Singleton;
 }());
-function run() {
+function run$1() {
     // 类“Singleton”的构造函数是私有的，仅可在类声明中访问。
     // let single = new Singleton()
     console.log('--- 单例模式 ---');
@@ -1296,6 +1296,69 @@ function run() {
     console.log('');
 }
 
+/**
+ * StatePattern 状态模式
+ * 意图：允许对象在内部状态发生改变时改变它的行为，对象看起来好像修改了它的类。
+ * 主要解决：对象的行为依赖于它的状态（属性），并且可以根据它的状态改变而改变它的相关行为。
+ * 何时使用：代码中包含大量与对象状态有关的条件语句。
+ * 如何解决：将各种具体的状态类抽象出来。
+ * 关键代码：通常命令模式的接口中只有一个方法。而状态模式的接口中有一个或者多个方法。而且，状态模式的实现类的方法，一般返回值，或者是改变实例变量的值。也就是说，状态模式一般和对象的状态有关。实现类的方法有不同的功能，覆盖接口中的方法。状态模式和命令模式一样，也可以用于消除 if...else 等条件选择语句。
+ * 应用实例： 1、打篮球的时候运动员可以有正常状态、不正常状态和超常状态。 2、曾侯乙编钟中，'钟是抽象接口','钟A'等是具体状态，'曾侯乙编钟'是具体环境（Context）。
+ * 优点： 1、封装了转换规则。 2、枚举可能的状态，在枚举状态之前需要确定状态种类。 3、将所有与某个状态有关的行为放到一个类中，并且可以方便地增加新的状态，只需要改变对象状态即可改变对象的行为。 4、允许状态转换逻辑与状态对象合成一体，而不是某一个巨大的条件语句块。 5、可以让多个环境对象共享一个状态对象，从而减少系统中对象的个数。
+ * 缺点： 1、状态模式的使用必然会增加系统类和对象的个数。 2、状态模式的结构与实现都较为复杂，如果使用不当将导致程序结构和代码的混乱。 3、状态模式对"开闭原则"的支持并不太好，对于可以切换状态的状态模式，增加新的状态类需要修改那些负责状态转换的源代码，否则无法切换到新增状态，而且修改某个状态类的行为也需修改对应类的源代码。
+ * 使用场景： 1、行为随状态改变而改变的场景。 2、条件、分支语句的代替者。
+ * 注意事项：在行为受状态约束的时候使用状态模式，而且状态不超过 5 个。
+ */
+var StartState = /** @class */ (function () {
+    function StartState() {
+    }
+    StartState.prototype.doAction = function (context) {
+        console.log('Player is in start state');
+        context.setState(this);
+    };
+    StartState.prototype.toString = function () {
+        return 'Start State';
+    };
+    return StartState;
+}());
+var StopState = /** @class */ (function () {
+    function StopState() {
+    }
+    StopState.prototype.doAction = function (context) {
+        console.log('Player is in stop state');
+        context.setState(this);
+    };
+    StopState.prototype.toString = function () {
+        return 'Stop State';
+    };
+    return StopState;
+}());
+// Context 是一个带有某个状态的类
+var Context = /** @class */ (function () {
+    function Context() {
+    }
+    Context.prototype.setState = function (state) {
+        this.state = state;
+    };
+    Context.prototype.getState = function () {
+        return this.state;
+    };
+    return Context;
+}());
+function run() {
+    console.log('--- 状态模式 ---');
+    var context = new Context();
+    var startState = new StartState();
+    startState.doAction(context);
+    console.log(context.getState().toString());
+    var stopState = new StopState();
+    stopState.doAction(context);
+    console.log(context.getState().toString());
+    console.log('--- 状态模式 ---');
+    console.log('');
+}
+
+run$k();
 run$j();
 run$i();
 run$h();

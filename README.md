@@ -510,7 +510,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 七、DesignMode (20 道)
+## 七、DesignMode (21 道)
 
 - [FactoryPattern.ts](./designMode/FactoryPattern.ts)
 - [AbstractFactoryPattern.ts](./designMode/AbstractFactoryPattern.ts)
@@ -532,6 +532,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [MediatorPattern.ts](./designMode/MediatorPattern.ts)
 - [MementoPattern.ts](./designMode/MementoPattern.ts)
 - [ObserverPattern.ts](./designMode/ObserverPattern.ts)
+- [StatePattern.ts](./designMode/StatePattern.ts)
 
 <br>
 
