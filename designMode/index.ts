@@ -19,6 +19,7 @@ import * as PrototypePattern from './PrototypePattern';
 import * as ProxyPattern from './ProxyPattern';
 import * as SingletonPattern from './SingletonPattern';
 import * as StatePattern from './StatePattern';
+import * as StrategyPattern from './StrategyPattern';
 
 AbstractFactoryPattern.run();
 AdapterPattern.run();
@@ -41,3 +42,4 @@ PrototypePattern.run();
 ProxyPattern.run();
 SingletonPattern.run();
 StatePattern.run();
+StrategyPattern.run();

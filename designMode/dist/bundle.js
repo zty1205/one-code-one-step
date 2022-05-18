@@ -137,7 +137,7 @@ var FactoryProducer = /** @class */ (function () {
     };
     return FactoryProducer;
 }());
-function run$k() {
+function run$l() {
     console.log('--- 抽象工厂模式 ---');
     var FP = new FactoryProducer();
     var sf = FP.getFactory('SHAPE');
@@ -223,7 +223,7 @@ var AudioPlayer = /** @class */ (function () {
     };
     return AudioPlayer;
 }());
-function run$j() {
+function run$k() {
     console.log('--- 适配器模式 ---');
     var audioPlayer = new AudioPlayer();
     audioPlayer.play('mp3', 'My Heart Will Go On.mp3');
@@ -280,7 +280,7 @@ var Circle$2 = /** @class */ (function (_super) {
     };
     return Circle;
 }(Shape));
-function run$i() {
+function run$j() {
     console.log('--- 桥接模式 ---');
     var redCircle = new Circle$2(100, 100, 10, new RedCircle());
     var greenCircle = new Circle$2(100, 100, 10, new GreenCircle());
@@ -375,7 +375,7 @@ var MealBuilder = /** @class */ (function () {
     };
     return MealBuilder;
 }());
-function run$h() {
+function run$i() {
     console.log('--- 建造者模式 ---');
     var mealBuilder = new MealBuilder();
     var bc = mealBuilder.burgerCombo();
@@ -455,7 +455,7 @@ var FileLogger = /** @class */ (function (_super) {
     };
     return FileLogger;
 }(AbstractLogger));
-function run$g() {
+function run$h() {
     console.log('--- 责任链模式 ---');
     var errorLogger = new ErrorLogger(AbstractLogger.ERROR);
     var fileLogger = new FileLogger(AbstractLogger.DEBUG);
@@ -531,7 +531,7 @@ var Broker = /** @class */ (function () {
     };
     return Broker;
 }());
-function run$f() {
+function run$g() {
     console.log('--- 命令模式 ---');
     var abcStock = new Stock();
     var buyStockOrder = new BuyStock(abcStock);
@@ -566,7 +566,7 @@ var Employee = /** @class */ (function () {
     };
     return Employee;
 }());
-function run$e() {
+function run$f() {
     console.log('--- 组合模式 ---');
     var CEO = new Employee('zty', 'CEO');
     var sale = new Employee('s-header', 'sale');
@@ -625,7 +625,7 @@ var RedShapeDecorator = /** @class */ (function (_super) {
     };
     return RedShapeDecorator;
 }(ShapeDecorator));
-function run$d() {
+function run$e() {
     console.log('--- 装饰器模式 ---');
     var circle = new Circle$1();
     var redCircle = new RedShapeDecorator(new Circle$1());
@@ -679,7 +679,7 @@ var ShapeMaker = /** @class */ (function () {
     };
     return ShapeMaker;
 }());
-function run$c() {
+function run$d() {
     console.log('--- 外观模式 ---');
     var shapeMaker = new ShapeMaker();
     shapeMaker.drawRectangle();
@@ -743,7 +743,7 @@ var ShapeFactory$1 = /** @class */ (function () {
     };
     return ShapeFactory;
 }());
-function run$b() {
+function run$c() {
     console.log('--- 工厂模式 ---');
     var sf = new ShapeFactory$1();
     var shape = sf.getShape('CIRCLE');
@@ -795,7 +795,7 @@ var CriteriaFemale = /** @class */ (function () {
     };
     return CriteriaFemale;
 }());
-function run$a() {
+function run$b() {
     console.log('--- 过滤器模式 ---');
     var persons = [
         new Person('Robert', 'Male'),
@@ -852,7 +852,7 @@ var ShapeFactory = /** @class */ (function () {
     ShapeFactory.map = new Map();
     return ShapeFactory;
 }());
-function run$9() {
+function run$a() {
     console.log('--- 享元模式 ---');
     var colors = ['Red', 'Yellow', 'Blue'];
     function getRandomColor() {
@@ -915,7 +915,7 @@ var AndExpression = /** @class */ (function () {
     };
     return AndExpression;
 }());
-function run$8() {
+function run$9() {
     console.log('--- 解释器模式 ---');
     // 规则：Robert 和 John 是男性
     var robert = new TerminalExpression('Robert');
@@ -968,7 +968,7 @@ var NameRepository = /** @class */ (function () {
     };
     return NameRepository;
 }());
-function run$7() {
+function run$8() {
     console.log('--- 迭代器模式 ---');
     var namesRepository = new NameRepository();
     for (var iter = namesRepository.getIterator(); iter.hasNext();) {
@@ -1013,7 +1013,7 @@ var User = /** @class */ (function () {
     };
     return User;
 }());
-function run$6() {
+function run$7() {
     console.log('--- 中介者模式 ---');
     var robert = new User('Robert');
     var john = new User('John');
@@ -1077,7 +1077,7 @@ var CareTaker = /** @class */ (function () {
     };
     return CareTaker;
 }());
-function run$5() {
+function run$6() {
     console.log('--- 备忘录模式 ---');
     var originator = new Originator();
     var careTaker = new CareTaker();
@@ -1169,7 +1169,7 @@ var HexadecimalObserver = /** @class */ (function (_super) {
     };
     return HexadecimalObserver;
 }(Observer));
-function run$4() {
+function run$5() {
     console.log('--- 观察者模式 ---');
     var subject = new Subject();
     new HexadecimalObserver(subject);
@@ -1199,7 +1199,7 @@ function inherits(subClass, superClass) {
         constructor: { value: subClass, writable: true, configurable: true }
     });
 }
-function run$3() {
+function run$4() {
     console.log('--- 原型模式 ---');
     function People(name) {
         this.name = name;
@@ -1254,7 +1254,7 @@ var ProxyImage = /** @class */ (function () {
     };
     return ProxyImage;
 }());
-function run$2() {
+function run$3() {
     console.log('--- 代理模式 ---');
     var image = new ProxyImage('1.jpg');
     // 图像将从磁盘加载
@@ -1286,7 +1286,7 @@ var Singleton = /** @class */ (function () {
     Singleton.instance = new Singleton();
     return Singleton;
 }());
-function run$1() {
+function run$2() {
     // 类“Singleton”的构造函数是私有的，仅可在类声明中访问。
     // let single = new Singleton()
     console.log('--- 单例模式 ---');
@@ -1334,7 +1334,7 @@ var StopState = /** @class */ (function () {
     return StopState;
 }());
 // Context 是一个带有某个状态的类
-var Context = /** @class */ (function () {
+var Context$1 = /** @class */ (function () {
     function Context() {
     }
     Context.prototype.setState = function (state) {
@@ -1345,9 +1345,9 @@ var Context = /** @class */ (function () {
     };
     return Context;
 }());
-function run() {
+function run$1() {
     console.log('--- 状态模式 ---');
-    var context = new Context();
+    var context = new Context$1();
     var startState = new StartState();
     startState.doAction(context);
     console.log(context.getState().toString());
@@ -1358,6 +1358,65 @@ function run() {
     console.log('');
 }
 
+/**
+ * StrategyPattern 策略模式
+ * 意图：定义一系列的算法,把它们一个个封装起来, 并且使它们可相互替换。
+ * 主要解决：在有多种算法相似的情况下，使用 if...else 所带来的复杂和难以维护。
+ * 何时使用：一个系统有许多许多类，而区分它们的只是他们直接的行为。
+ * 如何解决：将这些算法封装成一个一个的类，任意地替换。
+ * 关键代码：实现同一个接口。
+ * 应用实例： 1、诸葛亮的锦囊妙计，每一个锦囊就是一个策略。 2、旅行的出游方式，选择骑自行车、坐汽车，每一种旅行方式都是一个策略。
+ * 优点： 1、算法可以自由切换。 2、避免使用多重条件判断。 3、扩展性良好。
+ * 缺点： 1、策略类会增多。 2、所有策略类都需要对外暴露。
+ * 使用场景： 1、如果在一个系统里面有许多类，它们之间的区别仅在于它们的行为，那么使用策略模式可以动态地让一个对象在许多行为中选择一种行为。 2、一个系统需要动态地在几种算法中选择一种。 3、如果一个对象有很多的行为，如果不用恰当的模式，这些行为就只好使用多重的条件选择语句来实现。
+ * 注意事项：如果一个系统的策略多于四个，就需要考虑使用混合模式，解决策略类膨胀的问题。
+ */
+var OperationAdd = /** @class */ (function () {
+    function OperationAdd() {
+    }
+    OperationAdd.prototype.doOperation = function (num1, num2) {
+        return num1 + num2;
+    };
+    return OperationAdd;
+}());
+var OperationSubtract = /** @class */ (function () {
+    function OperationSubtract() {
+    }
+    OperationSubtract.prototype.doOperation = function (num1, num2) {
+        return num1 - num2;
+    };
+    return OperationSubtract;
+}());
+var OperationMultiply = /** @class */ (function () {
+    function OperationMultiply() {
+    }
+    OperationMultiply.prototype.doOperation = function (num1, num2) {
+        return num1 * num2;
+    };
+    return OperationMultiply;
+}());
+var Context = /** @class */ (function () {
+    function Context(strategy) {
+        this.strategy = strategy;
+    }
+    Context.prototype.executeStrategy = function (num1, num2) {
+        return this.strategy.doOperation(num1, num2);
+    };
+    return Context;
+}());
+function run() {
+    console.log('--- 策略模式 ---');
+    var context = new Context(new OperationAdd());
+    console.log('10 + 5 = ' + context.executeStrategy(10, 5));
+    context = new Context(new OperationSubtract());
+    console.log('10 - 5 = ' + context.executeStrategy(10, 5));
+    context = new Context(new OperationMultiply());
+    console.log('10 * 5 = ' + context.executeStrategy(10, 5));
+    console.log('--- 策略模式 ---');
+    console.log('');
+}
+
+run$l();
 run$k();
 run$j();
 run$i();
