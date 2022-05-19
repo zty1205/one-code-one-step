@@ -137,7 +137,7 @@ var FactoryProducer = /** @class */ (function () {
     };
     return FactoryProducer;
 }());
-function run$l() {
+function run$m() {
     console.log('--- 抽象工厂模式 ---');
     var FP = new FactoryProducer();
     var sf = FP.getFactory('SHAPE');
@@ -223,7 +223,7 @@ var AudioPlayer = /** @class */ (function () {
     };
     return AudioPlayer;
 }());
-function run$k() {
+function run$l() {
     console.log('--- 适配器模式 ---');
     var audioPlayer = new AudioPlayer();
     audioPlayer.play('mp3', 'My Heart Will Go On.mp3');
@@ -280,7 +280,7 @@ var Circle$2 = /** @class */ (function (_super) {
     };
     return Circle;
 }(Shape));
-function run$j() {
+function run$k() {
     console.log('--- 桥接模式 ---');
     var redCircle = new Circle$2(100, 100, 10, new RedCircle());
     var greenCircle = new Circle$2(100, 100, 10, new GreenCircle());
@@ -375,7 +375,7 @@ var MealBuilder = /** @class */ (function () {
     };
     return MealBuilder;
 }());
-function run$i() {
+function run$j() {
     console.log('--- 建造者模式 ---');
     var mealBuilder = new MealBuilder();
     var bc = mealBuilder.burgerCombo();
@@ -455,7 +455,7 @@ var FileLogger = /** @class */ (function (_super) {
     };
     return FileLogger;
 }(AbstractLogger));
-function run$h() {
+function run$i() {
     console.log('--- 责任链模式 ---');
     var errorLogger = new ErrorLogger(AbstractLogger.ERROR);
     var fileLogger = new FileLogger(AbstractLogger.DEBUG);
@@ -531,7 +531,7 @@ var Broker = /** @class */ (function () {
     };
     return Broker;
 }());
-function run$g() {
+function run$h() {
     console.log('--- 命令模式 ---');
     var abcStock = new Stock();
     var buyStockOrder = new BuyStock(abcStock);
@@ -566,7 +566,7 @@ var Employee = /** @class */ (function () {
     };
     return Employee;
 }());
-function run$f() {
+function run$g() {
     console.log('--- 组合模式 ---');
     var CEO = new Employee('zty', 'CEO');
     var sale = new Employee('s-header', 'sale');
@@ -625,7 +625,7 @@ var RedShapeDecorator = /** @class */ (function (_super) {
     };
     return RedShapeDecorator;
 }(ShapeDecorator));
-function run$e() {
+function run$f() {
     console.log('--- 装饰器模式 ---');
     var circle = new Circle$1();
     var redCircle = new RedShapeDecorator(new Circle$1());
@@ -679,7 +679,7 @@ var ShapeMaker = /** @class */ (function () {
     };
     return ShapeMaker;
 }());
-function run$d() {
+function run$e() {
     console.log('--- 外观模式 ---');
     var shapeMaker = new ShapeMaker();
     shapeMaker.drawRectangle();
@@ -743,7 +743,7 @@ var ShapeFactory$1 = /** @class */ (function () {
     };
     return ShapeFactory;
 }());
-function run$c() {
+function run$d() {
     console.log('--- 工厂模式 ---');
     var sf = new ShapeFactory$1();
     var shape = sf.getShape('CIRCLE');
@@ -795,7 +795,7 @@ var CriteriaFemale = /** @class */ (function () {
     };
     return CriteriaFemale;
 }());
-function run$b() {
+function run$c() {
     console.log('--- 过滤器模式 ---');
     var persons = [
         new Person('Robert', 'Male'),
@@ -852,7 +852,7 @@ var ShapeFactory = /** @class */ (function () {
     ShapeFactory.map = new Map();
     return ShapeFactory;
 }());
-function run$a() {
+function run$b() {
     console.log('--- 享元模式 ---');
     var colors = ['Red', 'Yellow', 'Blue'];
     function getRandomColor() {
@@ -915,7 +915,7 @@ var AndExpression = /** @class */ (function () {
     };
     return AndExpression;
 }());
-function run$9() {
+function run$a() {
     console.log('--- 解释器模式 ---');
     // 规则：Robert 和 John 是男性
     var robert = new TerminalExpression('Robert');
@@ -968,7 +968,7 @@ var NameRepository = /** @class */ (function () {
     };
     return NameRepository;
 }());
-function run$8() {
+function run$9() {
     console.log('--- 迭代器模式 ---');
     var namesRepository = new NameRepository();
     for (var iter = namesRepository.getIterator(); iter.hasNext();) {
@@ -1013,7 +1013,7 @@ var User = /** @class */ (function () {
     };
     return User;
 }());
-function run$7() {
+function run$8() {
     console.log('--- 中介者模式 ---');
     var robert = new User('Robert');
     var john = new User('John');
@@ -1077,7 +1077,7 @@ var CareTaker = /** @class */ (function () {
     };
     return CareTaker;
 }());
-function run$6() {
+function run$7() {
     console.log('--- 备忘录模式 ---');
     var originator = new Originator();
     var careTaker = new CareTaker();
@@ -1169,7 +1169,7 @@ var HexadecimalObserver = /** @class */ (function (_super) {
     };
     return HexadecimalObserver;
 }(Observer));
-function run$5() {
+function run$6() {
     console.log('--- 观察者模式 ---');
     var subject = new Subject();
     new HexadecimalObserver(subject);
@@ -1199,7 +1199,7 @@ function inherits(subClass, superClass) {
         constructor: { value: subClass, writable: true, configurable: true }
     });
 }
-function run$4() {
+function run$5() {
     console.log('--- 原型模式 ---');
     function People(name) {
         this.name = name;
@@ -1254,7 +1254,7 @@ var ProxyImage = /** @class */ (function () {
     };
     return ProxyImage;
 }());
-function run$3() {
+function run$4() {
     console.log('--- 代理模式 ---');
     var image = new ProxyImage('1.jpg');
     // 图像将从磁盘加载
@@ -1286,7 +1286,7 @@ var Singleton = /** @class */ (function () {
     Singleton.instance = new Singleton();
     return Singleton;
 }());
-function run$2() {
+function run$3() {
     // 类“Singleton”的构造函数是私有的，仅可在类声明中访问。
     // let single = new Singleton()
     console.log('--- 单例模式 ---');
@@ -1345,7 +1345,7 @@ var Context$1 = /** @class */ (function () {
     };
     return Context;
 }());
-function run$1() {
+function run$2() {
     console.log('--- 状态模式 ---');
     var context = new Context$1();
     var startState = new StartState();
@@ -1404,7 +1404,7 @@ var Context = /** @class */ (function () {
     };
     return Context;
 }());
-function run() {
+function run$1() {
     console.log('--- 策略模式 ---');
     var context = new Context(new OperationAdd());
     console.log('10 + 5 = ' + context.executeStrategy(10, 5));
@@ -1416,6 +1416,78 @@ function run() {
     console.log('');
 }
 
+/**
+ * TemplatePattern 模板模式
+ * 意图：定义一个操作中的算法的骨架，而将一些步骤延迟到子类中。模板方法使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。
+ * 主要解决：一些方法通用，却在每一个子类都重新写了这一方法。
+ * 何时使用：有一些通用的方法。
+ * 如何解决：将这些通用算法抽象出来。
+ * 关键代码：在抽象类实现，其他步骤在子类实现。
+ * 应用实例： 1、在造房子的时候，地基、走线、水管都一样，只有在建筑的后期才有加壁橱加栅栏等差异。 2、西游记里面菩萨定好的 81 难，这就是一个顶层的逻辑骨架。 3、spring 中对 Hibernate 的支持，将一些已经定好的方法封装起来，比如开启事务、获取 Session、关闭 Session 等，程序员不重复写那些已经规范好的代码，直接丢一个实体就可以保存。
+ * 优点： 1、封装不变部分，扩展可变部分。 2、提取公共代码，便于维护。 3、行为由父类控制，子类实现。
+ * 缺点：每一个不同的实现都需要一个子类来实现，导致类的个数增加，使得系统更加庞大。
+ * 使用场景： 1、有多个子类共有的方法，且逻辑相同。 2、重要的、复杂的方法，可以考虑作为模板方法。
+ * 注意事项：为防止恶意操作，一般模板方法都加上 final 关键词。
+ */
+// 创建一个抽象类
+var Game = /** @class */ (function () {
+    function Game() {
+    }
+    //模板
+    Game.prototype.play = function () {
+        //初始化游戏
+        this.initialize();
+        //开始游戏
+        this.startPlay();
+        //结束游戏
+        this.endPlay();
+    };
+    return Game;
+}());
+var Cricket = /** @class */ (function (_super) {
+    __extends(Cricket, _super);
+    function Cricket() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Cricket.prototype.initialize = function () {
+        console.log('Cricket Game Initialized! Start playing.');
+    };
+    Cricket.prototype.startPlay = function () {
+        console.log('Cricket Game Started. Enjoy the game!');
+    };
+    Cricket.prototype.endPlay = function () {
+        console.log('Cricket Game Finished!');
+    };
+    return Cricket;
+}(Game));
+var Football = /** @class */ (function (_super) {
+    __extends(Football, _super);
+    function Football() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Football.prototype.initialize = function () {
+        console.log('Football Game Initialized! Start playing.');
+    };
+    Football.prototype.startPlay = function () {
+        console.log('Football Game Started. Enjoy the game!');
+    };
+    Football.prototype.endPlay = function () {
+        console.log('Football Game Finished!');
+    };
+    return Football;
+}(Game));
+function run() {
+    console.log('--- 模板模式 ---');
+    var game = new Cricket();
+    game.play();
+    console.log('');
+    game = new Football();
+    game.play();
+    console.log('--- 模板模式 ---');
+    console.log('');
+}
+
+run$m();
 run$l();
 run$k();
 run$j();

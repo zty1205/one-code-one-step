@@ -20,6 +20,7 @@ import * as ProxyPattern from './ProxyPattern';
 import * as SingletonPattern from './SingletonPattern';
 import * as StatePattern from './StatePattern';
 import * as StrategyPattern from './StrategyPattern';
+import * as TemplatePattern from './TemplatePattern';
 
 AbstractFactoryPattern.run();
 AdapterPattern.run();
@@ -43,3 +44,4 @@ ProxyPattern.run();
 SingletonPattern.run();
 StatePattern.run();
 StrategyPattern.run();
+TemplatePattern.run();
