@@ -137,7 +137,7 @@ var FactoryProducer = /** @class */ (function () {
     };
     return FactoryProducer;
 }());
-function run$m() {
+function run$n() {
     console.log('--- 抽象工厂模式 ---');
     var FP = new FactoryProducer();
     var sf = FP.getFactory('SHAPE');
@@ -223,7 +223,7 @@ var AudioPlayer = /** @class */ (function () {
     };
     return AudioPlayer;
 }());
-function run$l() {
+function run$m() {
     console.log('--- 适配器模式 ---');
     var audioPlayer = new AudioPlayer();
     audioPlayer.play('mp3', 'My Heart Will Go On.mp3');
@@ -280,7 +280,7 @@ var Circle$2 = /** @class */ (function (_super) {
     };
     return Circle;
 }(Shape));
-function run$k() {
+function run$l() {
     console.log('--- 桥接模式 ---');
     var redCircle = new Circle$2(100, 100, 10, new RedCircle());
     var greenCircle = new Circle$2(100, 100, 10, new GreenCircle());
@@ -375,7 +375,7 @@ var MealBuilder = /** @class */ (function () {
     };
     return MealBuilder;
 }());
-function run$j() {
+function run$k() {
     console.log('--- 建造者模式 ---');
     var mealBuilder = new MealBuilder();
     var bc = mealBuilder.burgerCombo();
@@ -455,7 +455,7 @@ var FileLogger = /** @class */ (function (_super) {
     };
     return FileLogger;
 }(AbstractLogger));
-function run$i() {
+function run$j() {
     console.log('--- 责任链模式 ---');
     var errorLogger = new ErrorLogger(AbstractLogger.ERROR);
     var fileLogger = new FileLogger(AbstractLogger.DEBUG);
@@ -531,7 +531,7 @@ var Broker = /** @class */ (function () {
     };
     return Broker;
 }());
-function run$h() {
+function run$i() {
     console.log('--- 命令模式 ---');
     var abcStock = new Stock();
     var buyStockOrder = new BuyStock(abcStock);
@@ -566,7 +566,7 @@ var Employee = /** @class */ (function () {
     };
     return Employee;
 }());
-function run$g() {
+function run$h() {
     console.log('--- 组合模式 ---');
     var CEO = new Employee('zty', 'CEO');
     var sale = new Employee('s-header', 'sale');
@@ -625,7 +625,7 @@ var RedShapeDecorator = /** @class */ (function (_super) {
     };
     return RedShapeDecorator;
 }(ShapeDecorator));
-function run$f() {
+function run$g() {
     console.log('--- 装饰器模式 ---');
     var circle = new Circle$1();
     var redCircle = new RedShapeDecorator(new Circle$1());
@@ -679,7 +679,7 @@ var ShapeMaker = /** @class */ (function () {
     };
     return ShapeMaker;
 }());
-function run$e() {
+function run$f() {
     console.log('--- 外观模式 ---');
     var shapeMaker = new ShapeMaker();
     shapeMaker.drawRectangle();
@@ -743,7 +743,7 @@ var ShapeFactory$1 = /** @class */ (function () {
     };
     return ShapeFactory;
 }());
-function run$d() {
+function run$e() {
     console.log('--- 工厂模式 ---');
     var sf = new ShapeFactory$1();
     var shape = sf.getShape('CIRCLE');
@@ -795,7 +795,7 @@ var CriteriaFemale = /** @class */ (function () {
     };
     return CriteriaFemale;
 }());
-function run$c() {
+function run$d() {
     console.log('--- 过滤器模式 ---');
     var persons = [
         new Person('Robert', 'Male'),
@@ -852,7 +852,7 @@ var ShapeFactory = /** @class */ (function () {
     ShapeFactory.map = new Map();
     return ShapeFactory;
 }());
-function run$b() {
+function run$c() {
     console.log('--- 享元模式 ---');
     var colors = ['Red', 'Yellow', 'Blue'];
     function getRandomColor() {
@@ -915,7 +915,7 @@ var AndExpression = /** @class */ (function () {
     };
     return AndExpression;
 }());
-function run$a() {
+function run$b() {
     console.log('--- 解释器模式 ---');
     // 规则：Robert 和 John 是男性
     var robert = new TerminalExpression('Robert');
@@ -968,7 +968,7 @@ var NameRepository = /** @class */ (function () {
     };
     return NameRepository;
 }());
-function run$9() {
+function run$a() {
     console.log('--- 迭代器模式 ---');
     var namesRepository = new NameRepository();
     for (var iter = namesRepository.getIterator(); iter.hasNext();) {
@@ -1013,7 +1013,7 @@ var User = /** @class */ (function () {
     };
     return User;
 }());
-function run$8() {
+function run$9() {
     console.log('--- 中介者模式 ---');
     var robert = new User('Robert');
     var john = new User('John');
@@ -1077,7 +1077,7 @@ var CareTaker = /** @class */ (function () {
     };
     return CareTaker;
 }());
-function run$7() {
+function run$8() {
     console.log('--- 备忘录模式 ---');
     var originator = new Originator();
     var careTaker = new CareTaker();
@@ -1169,7 +1169,7 @@ var HexadecimalObserver = /** @class */ (function (_super) {
     };
     return HexadecimalObserver;
 }(Observer));
-function run$6() {
+function run$7() {
     console.log('--- 观察者模式 ---');
     var subject = new Subject();
     new HexadecimalObserver(subject);
@@ -1199,7 +1199,7 @@ function inherits(subClass, superClass) {
         constructor: { value: subClass, writable: true, configurable: true }
     });
 }
-function run$5() {
+function run$6() {
     console.log('--- 原型模式 ---');
     function People(name) {
         this.name = name;
@@ -1254,7 +1254,7 @@ var ProxyImage = /** @class */ (function () {
     };
     return ProxyImage;
 }());
-function run$4() {
+function run$5() {
     console.log('--- 代理模式 ---');
     var image = new ProxyImage('1.jpg');
     // 图像将从磁盘加载
@@ -1286,7 +1286,7 @@ var Singleton = /** @class */ (function () {
     Singleton.instance = new Singleton();
     return Singleton;
 }());
-function run$3() {
+function run$4() {
     // 类“Singleton”的构造函数是私有的，仅可在类声明中访问。
     // let single = new Singleton()
     console.log('--- 单例模式 ---');
@@ -1345,7 +1345,7 @@ var Context$1 = /** @class */ (function () {
     };
     return Context;
 }());
-function run$2() {
+function run$3() {
     console.log('--- 状态模式 ---');
     var context = new Context$1();
     var startState = new StartState();
@@ -1404,7 +1404,7 @@ var Context = /** @class */ (function () {
     };
     return Context;
 }());
-function run$1() {
+function run$2() {
     console.log('--- 策略模式 ---');
     var context = new Context(new OperationAdd());
     console.log('10 + 5 = ' + context.executeStrategy(10, 5));
@@ -1476,7 +1476,7 @@ var Football = /** @class */ (function (_super) {
     };
     return Football;
 }(Game));
-function run() {
+function run$1() {
     console.log('--- 模板模式 ---');
     var game = new Cricket();
     game.play();
@@ -1487,6 +1487,99 @@ function run() {
     console.log('');
 }
 
+/**
+ * VisitorPattern 访问者模式
+ * 意图：主要将数据结构与数据操作分离。
+ * 主要解决：稳定的数据结构和易变的操作耦合问题。
+ * 何时使用：需要对一个对象结构中的对象进行很多不同的并且不相关的操作，而需要避免让这些操作"污染"这些对象的类，使用访问者模式将这些封装到类中。
+ * 如何解决：在被访问的类里面加一个对外提供接待访问者的接口。
+ * 关键代码：在数据基础类里面有一个方法接受访问者，将自身引用传入访问者。
+ * 应用实例：您在朋友家做客，您是访问者，朋友接受您的访问，您通过朋友的描述，然后对朋友的描述做出一个判断，这就是访问者模式。
+ * 优点： 1、符合单一职责原则。 2、优秀的扩展性。 3、灵活性。
+ * 缺点： 1、具体元素对访问者公布细节，违反了迪米特原则。 2、具体元素变更比较困难。 3、违反了依赖倒置原则，依赖了具体类，没有依赖抽象。
+ * 使用场景： 1、对象结构中对象对应的类很少改变，但经常需要在此对象结构上定义新的操作。 2、需要对一个对象结构中的对象进行很多不同的并且不相关的操作，而需要避免让这些操作"污染"这些对象的类，也不希望在增加新操作时修改这些类。
+ * 注意事项：访问者可以对功能进行统一，可以做报表、UI、拦截器与过滤器。
+ */
+var Keyboard = /** @class */ (function () {
+    function Keyboard() {
+    }
+    Keyboard.prototype.accept = function (computerPartVisitor) {
+        computerPartVisitor.visit(this);
+    };
+    return Keyboard;
+}());
+var Monitor = /** @class */ (function () {
+    function Monitor() {
+    }
+    Monitor.prototype.accept = function (computerPartVisitor) {
+        computerPartVisitor.visit(this);
+    };
+    return Monitor;
+}());
+var Mouse = /** @class */ (function () {
+    function Mouse() {
+    }
+    Mouse.prototype.accept = function (computerPartVisitor) {
+        computerPartVisitor.visit(this);
+    };
+    return Mouse;
+}());
+var Computer = /** @class */ (function () {
+    function Computer() {
+        this.parts = [];
+        this.parts = [new Mouse(), new Keyboard(), new Monitor()];
+    }
+    Computer.prototype.accept = function (computerPartVisitor) {
+        for (var _i = 0, _a = this.parts; _i < _a.length; _i++) {
+            var part = _a[_i];
+            part.accept(computerPartVisitor);
+        }
+        computerPartVisitor.visit(this);
+    };
+    return Computer;
+}());
+// 创建实现了上述类的实体访问者。
+// js 无法重载 这里用if代替
+var ComputerPartDisplayVisitor = /** @class */ (function () {
+    function ComputerPartDisplayVisitor() {
+    }
+    ComputerPartDisplayVisitor.prototype.visit = function (visitor) {
+        if (visitor instanceof Computer) {
+            this.visitComputer(visitor);
+        }
+        else if (visitor instanceof Mouse) {
+            this.visitMouse(visitor);
+        }
+        else if (visitor instanceof Keyboard) {
+            this.visitKeyboard(visitor);
+        }
+        else {
+            this.visitMonitor(visitor);
+        }
+    };
+    ComputerPartDisplayVisitor.prototype.visitComputer = function (computer) {
+        console.log('Displaying Computer.', computer);
+    };
+    ComputerPartDisplayVisitor.prototype.visitMouse = function (mouse) {
+        console.log('Displaying Mouse.', mouse);
+    };
+    ComputerPartDisplayVisitor.prototype.visitKeyboard = function (keyboard) {
+        console.log('Displaying Keyboard.', keyboard);
+    };
+    ComputerPartDisplayVisitor.prototype.visitMonitor = function (monitor) {
+        console.log('Displaying Monitor.', monitor);
+    };
+    return ComputerPartDisplayVisitor;
+}());
+function run() {
+    console.log('--- 访问者模式 ---');
+    var computer = new Computer();
+    computer.accept(new ComputerPartDisplayVisitor());
+    console.log('--- 访问者模式 ---');
+    console.log('');
+}
+
+run$n();
 run$m();
 run$l();
 run$k();

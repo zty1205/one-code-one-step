@@ -21,6 +21,7 @@ import * as SingletonPattern from './SingletonPattern';
 import * as StatePattern from './StatePattern';
 import * as StrategyPattern from './StrategyPattern';
 import * as TemplatePattern from './TemplatePattern';
+import * as VisitorPattern from './VisitorPattern';
 
 AbstractFactoryPattern.run();
 AdapterPattern.run();
@@ -45,3 +46,4 @@ SingletonPattern.run();
 StatePattern.run();
 StrategyPattern.run();
 TemplatePattern.run();
+VisitorPattern.run();
