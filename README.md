@@ -17,6 +17,7 @@
 - Programming 编程题
 - 剑指 offer 第二版
 - algorithm
+- designMode
 
 <br/>
 
@@ -493,7 +494,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## Algorithm
+## 六、Algorithm (9 道)
 
 <br/>
 
@@ -508,6 +509,35 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [滑动窗口算法-双指针.html](./algorithm/滑动窗口算法-双指针.html)
 
 <br/>
+
+## 七、DesignMode (24 道)
+
+- [FactoryPattern.ts](./designMode/FactoryPattern.ts)
+- [AbstractFactoryPattern.ts](./designMode/AbstractFactoryPattern.ts)
+- [SingletonPattern.ts](./designMode/SingletonPattern.ts)
+- [BuilderPattern.ts](./designMode/BuilderPattern.ts)
+- [PrototypePattern.ts](./designMode/PrototypePattern.ts)
+- [AdapterPattern.ts](./designMode/AdapterPattern.ts)
+- [BridgePattern.ts](./designMode/BridgePattern.ts)
+- [FilterPattern.ts](./designMode/FilterPattern.ts)
+- [CompositePattern.ts](./designMode/CompositePattern.ts)
+- [DecoratorPattern.ts](./designMode/DecoratorPattern.ts)
+- [FacadePattern.ts](./designMode/FacadePattern.ts)
+- [FlyweightPattern.ts](./designMode/FlyweightPattern.ts)
+- [ProxyPattern.ts](./designMode/ProxyPattern.ts)
+- [ChainOfResponsibilityPattern.ts](./designMode/ChainOfResponsibilityPattern.ts)
+- [CommandPattern.ts](./designMode/CommandPattern.ts)
+- [InterpreterPattern.ts](./designMode/InterpreterPattern.ts)
+- [IteratorPattern.ts](./designMode/IteratorPattern.ts)
+- [MediatorPattern.ts](./designMode/MediatorPattern.ts)
+- [MementoPattern.ts](./designMode/MementoPattern.ts)
+- [ObserverPattern.ts](./designMode/ObserverPattern.ts)
+- [StatePattern.ts](./designMode/StatePattern.ts)
+- [StrategyPattern.ts](./designMode/StrategyPattern.ts)
+- [TemplatePattern.ts](./designMode/TemplatePattern.ts)
+- [VisitorPattern.ts](./designMode/VisitorPattern.ts)
+
+<br>
 
 ## End
 

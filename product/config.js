@@ -23,10 +23,33 @@ const sql_template = `-- #htmlTitle#\n\n`;
 
 const sh_template = `# #htmlTitle#\n\n`;
 
+const js_template = `
+/** 
+ * #htmlTitle#
+*/
+`;
+
+const ts_template = `
+/** 
+ * #htmlTitle#
+*/
+
+export function run() {
+  console.log('--- ---')
+
+
+
+  console.log('--- ---')
+  console.log('')
+}
+`;
+
 const FILE_TEMPLATE = {
   html: html_template,
   sql: sql_template,
-  sh: sh_template
+  sh: sh_template,
+  js: js_template,
+  ts: ts_template
 };
 
 const WIN_GIT_HEADER = `
@@ -41,9 +64,15 @@ const DEPLOY_FILE_NAME = {
   MAC: 'deploy.sh'
 };
 
+const DM_FITTER_DIR_MAP = ['dist', 'index.ts'].reduce((pre, cur) => {
+  pre[cur] = true;
+  return pre;
+}, {});
+
 module.exports = {
   NO_CODE_DIR_MAP,
   FILE_TEMPLATE,
   WIN_GIT_HEADER,
-  DEPLOY_FILE_NAME
+  DEPLOY_FILE_NAME,
+  DM_FITTER_DIR_MAP
 };
