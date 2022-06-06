@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>617. 合并二叉树</title>
+  </head>
+  <body>
+    <script src="../helper/tree.js"></script>
+    <script>
+      // https://leetcode.cn/problems/merge-two-binary-trees/
+
+      // 给你两棵二叉树： root1 和 root2 。
+      // 想象一下，当你将其中一棵覆盖到另一棵之上时，两棵树上的一些节点将会重叠（而另一些不会）。你需要将这两棵树合并成一棵新二叉树。合并的规则是：如果两个节点重叠，那么将这两个节点的值相加作为合并后节点的新值；否则，不为 null 的节点将直接作为新二叉树的节点。
+      // 返回合并后的二叉树。
+      // 注意: 合并过程必须从两个树的根节点开始。
+      // 提示：
+      // 两棵树中的节点数目在范围 [0, 2000] 内
+      // -104 <= Node.val <= 104
+
+      /**
+       * Definition for a binary tree node.
+       * function TreeNode(val, left, right) {
+       *     this.val = (val===undefined ? 0 : val)
+       *     this.left = (left===undefined ? null : left)
+       *     this.right = (right===undefined ? null : right)
+       * }
+       */
+      /**
+       * @param {TreeNode} root1
+       * @param {TreeNode} root2
+       * @return {TreeNode}
+       */
+      var mergeTrees = function (root1, root2) {};
+
+      // --- answer-1 ---
+
+      // 按题意进行递归
+      // 时间，空间间复杂度：O(min(m,n))
+      var mergeTrees = function (root1, root2) {
+        if (!root1 && !root2) return null;
+        const root = new TreeNode((root1 ? root1.val : 0) + (root2 ? root2.val : 0));
+        root.left = mergeTrees(root1 && root1.left, root2 && root2.left);
+        root.right = mergeTrees(root1 && root1.right, root2 && root2.right);
+        return root;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 非递归版本 使用树的前序遍历
+      // 时间，空间间复杂度：O(min(m,n))
+      var mergeTrees = function (root1, root2) {
+        if (!root1 || !root2) return root1 || root2;
+        const root = new TreeNode(root1.val + root2.val);
+        const stack = [root],
+          st1 = [root1],
+          st2 = [root2];
+        while (st1.length && st2.length) {
+          let node = stack.pop(),
+            n1 = st1.pop(),
+            n2 = st2.pop();
+          let left1 = n1.left,
+            left2 = n2.left,
+            right1 = n1.right,
+            right2 = n2.right;
+
+          if (left1 && left2) {
+            const left = new TreeNode(left1.val + left2.val);
+            node.left = left;
+            stack.push(left);
+            st1.push(left1);
+            st2.push(left2);
+          } else {
+            node.left = left1 || left2 || null;
+          }
+
+          if (right1 && right2) {
+            const right = new TreeNode(right1.val + right2.val);
+            node.right = right;
+            stack.push(right);
+            st1.push(right1);
+            st2.push(right2);
+          } else {
+            node.right = right1 || right2 || null;
+          }
+        }
+        return root;
+      };
+
+      // --- answer-2 ---
+
+      var root1 = [1, 3, 2, 5],
+        root2 = [2, 1, 3, null, 4, null, 7];
+      var result = [3, 4, 5, 5, 4, null, 7];
+
+      // var root1 = [1], root2 = [1,2];
+      // var result = [2,2];
+
+      var tree1 = buildTreeByArray(root1);
+      var tree2 = buildTreeByArray(root2);
+      var mt = mergeTrees(tree1, tree2);
+
+      console.log('root1 = ', root1);
+      console.log('root2 = ', root2);
+      console.log('result = ', result);
+      console.log('result = ', buildArrayByTree(mt));
+      console.log('mergeTrees = ', mt);
+    </script>
+  </body>
+</html>
