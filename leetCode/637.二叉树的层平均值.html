@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>637. 二叉树的层平均值</title>
+  </head>
+  <body>
+    <script src="../helper/tree.js"></script>
+    <script>
+      // https://leetcode.cn/problems/average-of-levels-in-binary-tree/
+
+      // 给定一个非空二叉树的根节点 root , 以数组的形式返回每一层节点的平均值。与实际答案相差 10-5 以内的答案可以被接受。
+      // 提示：
+      // 树中节点数量在 [1, 104] 范围内
+      // -231 <= Node.val <= 231 - 1
+
+      /**
+       * Definition for a binary tree node.
+       * function TreeNode(val, left, right) {
+       *     this.val = (val===undefined ? 0 : val)
+       *     this.left = (left===undefined ? null : left)
+       *     this.right = (right===undefined ? null : right)
+       * }
+       */
+      /**
+       * @param {TreeNode} root
+       * @return {number[]}
+       */
+      var averageOfLevels = function (root) {};
+
+      // --- answer-1 ---
+
+      // 层次遍历
+      var averageOfLevels = function (root) {
+        if (!root) return [];
+        const res = [];
+        let queue = [root];
+        let nextQueue = [];
+        let sum = 0;
+        let num = 0;
+        while (queue.length) {
+          const node = queue.shift();
+          sum += node.val;
+          num += 1;
+
+          node.left && nextQueue.push(node.left);
+          node.right && nextQueue.push(node.right);
+          if (queue.length === 0) {
+            res.push(sum / num);
+            sum = 0;
+            num = 0;
+            queue = nextQueue;
+            nextQueue = [];
+          }
+        }
+        return res;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 层次遍历
+      var averageOfLevels = function (root) {
+        if (!root) return [];
+        const res = [];
+        const queue = [root];
+        while (queue.length) {
+          let sum = 0;
+          let num = queue.length;
+          for (let i = 0; i < num; i++) {
+            const node = queue.shift();
+            const { val, left, right } = node;
+            sum += val;
+            left !== null && queue.push(left);
+            right !== null && queue.push(right);
+          }
+          res.push(sum / num);
+        }
+        return res;
+      };
+
+      // --- answer-2 ---
+
+      // --- answer-3 ---
+
+      // 深度遍历
+
+      var averageOfLevels1 = function (root) {
+        // 每层的节点和 和 节点个数
+        const sum = [];
+        const count = [];
+
+        function dfs(node, level, sumArr, countArr) {
+          if (!node) return;
+          if (level < sumArr.length) {
+            sumArr[level] += node.val;
+            countArr[level] += 1;
+          } else {
+            // 该层的第一个节点（从左到右）
+            sumArr.push(node.val);
+            countArr.push(1);
+          }
+          dfs(node.left, level + 1, sumArr, countArr);
+          dfs(node.right, level + 1, sumArr, countArr);
+        }
+
+        dfs(root, 0, sum, count);
+        return sum.map((x, idx) => x / count[idx]);
+      };
+
+      // --- answer-3 ---
+
+      var root = [3, 9, 20, 15, 7];
+      var result = [3.0, 14.5, 11.0];
+
+      // var root = [3, 9, 20, null, null, 15, 7];
+      // var result = [3.0, 14.5, 11.0];
+      // 解释：第 0 层的平均值为 3,第 1 层的平均值为 14.5,第 2 层的平均值为 11 。
+
+      var tree = buildTreeByArray(root);
+
+      console.log('root = ', root);
+      console.log('tree = ', tree);
+      console.log('result = ', result);
+      console.log('averageOfLevels = ', averageOfLevels(tree));
+    </script>
+  </body>
+</html>
