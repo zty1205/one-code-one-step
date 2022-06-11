@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>628. 三个数的最大乘积</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/maximum-product-of-three-numbers/
+
+      // 给你一个整型数组 nums ，在数组中找出由三个数组成的最大乘积，并输出这个乘积。
+      // 提示：
+      // 3 <= nums.length <= 104
+      // -1000 <= nums[i] <= 1000
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var maximumProduct = function (nums) {};
+
+      // --- answer-1 ---
+
+      var maximumProduct = function (nums) {
+        // 存在负数；全正全负
+        nums.sort((a, b) => a - b);
+        const length = nums.length;
+        return Math.max(nums[0] * nums[1] * nums[length - 1], nums[length - 3] * nums[length - 2] * nums[length - 1]);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 依据方法1，我们只需找到，最大的三个值和最小的二个字
+      var maximumProduct = function (nums) {
+        let min_1 = (min_2 = 1001);
+        let max_1 = (max_2 = max_3 = -1001);
+        for (let n of nums) {
+          if (n < min_1) {
+            min_2 = min_1;
+            min_1 = n;
+          } else if (n < min_2) {
+            min_2 = n;
+          }
+
+          if (n > max_1) {
+            max_3 = max_2;
+            max_2 = max_1;
+            max_1 = n;
+          } else if (n > max_2) {
+            max_3 = max_2;
+            max_2 = n;
+          } else if (n > max_3) {
+            max_3 = n;
+          }
+        }
+        return Math.max(min_1 * min_2 * max_1, max_1 * max_2 * max_3);
+      };
+
+      // --- answer-2 ---
+
+      var nums = [1, 2, 3];
+      var result = 6;
+
+      var nums = [1, 2, 3, 4];
+      var result = 24;
+
+      var nums = [-1, -2, -3];
+      var result = -6;
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('maximumProduct = ', maximumProduct(nums));
+    </script>
+  </body>
+</html>
