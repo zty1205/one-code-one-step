@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (240 道)
+## 三、LeetCode (241 道)
 
 <br/>
 
@@ -391,6 +391,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [617.合并二叉树.html](./leetCode/617.合并二叉树.html)
 - [628.三个数的最大乘积.html](./leetCode/628.三个数的最大乘积.html)
 - [637.二叉树的层平均值.html](./leetCode/637.二叉树的层平均值.html)
+- [643.子数组最大平均数 I.html](./leetCode/643.子数组最大平均数I.html)
 - [678.有效的括号字符串.html](./leetCode/678.有效的括号字符串.html)
 - [873.最长的斐波那契子序列的长度.html](./leetCode/873.最长的斐波那契子序列的长度.html)
 
