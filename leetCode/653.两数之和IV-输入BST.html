@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>653. 两数之和 IV - 输入 BST</title>
+  </head>
+  <body>
+    <script src="../helper/tree.js"></script>
+    <script>
+      // https://leetcode.cn/problems/two-sum-iv-input-is-a-bst/
+
+      // 给定一个二叉搜索树 root 和一个目标结果 k，如果 BST 中存在两个元素且它们的和等于给定的目标结果，则返回 true。
+      // 提示：
+      // 二叉树的节点个数的范围是  [1, 104].
+      // -104 <= Node.val <= 104
+      // root 为二叉搜索树
+      // -105 <= k <= 105
+
+      /**
+       * Definition for a binary tree node.
+       * function TreeNode(val, left, right) {
+       *     this.val = (val===undefined ? 0 : val)
+       *     this.left = (left===undefined ? null : left)
+       *     this.right = (right===undefined ? null : right)
+       * }
+       */
+      /**
+       * @param {TreeNode} root
+       * @param {number} k
+       * @return {boolean}
+       */
+      var findTarget = function (root, k) {};
+
+      // --- answer-1 ---
+
+      // 深度遍历 + hash
+      var findTarget = function (root, k) {
+        let res = false;
+        const map = {};
+        function dfs(node, sum) {
+          if (!node) return;
+          dfs(node.left, sum);
+          if (map[sum - node.val]) {
+            res = true;
+            return;
+          }
+          map[node.val] = 1;
+          dfs(node.right, sum);
+        }
+        dfs(root, k);
+        return res;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 中序遍历转成数组，在使用双指针, 于题目164一致
+      var findTarget = function (root, k) {
+        const arr = [];
+        function dfs(node) {
+          if (!node) return;
+          dfs(node.left);
+          arr.push(node.val);
+          dfs(node.right);
+        }
+        dfs(root, k);
+        let start = 0,
+          end = arr.length - 1;
+        while (start < end) {
+          const sum = arr[start] + arr[end];
+          if (sum === k) {
+            return true;
+          } else if (sum < k) {
+            start++;
+          } else {
+            end--;
+          }
+        }
+        return false;
+      };
+
+      // --- answer-2 ---
+
+      var root = [5, 3, 6, 2, 4, null, 7],
+        k = 9;
+      var result = true;
+
+      var root = [5, 3, 6, 2, 4, null, 7],
+        k = 28;
+      var result = false;
+
+      var root = [5, 3, 9, 2, 4, null, 9],
+        k = 18;
+      var result = true;
+
+      // var root = [5, 3, 9, 2, 4, null, 10],
+      //   k = 18;
+      // var result = false;
+
+      var tree = buildTreeByArray(root);
+
+      console.log('tree = ', tree);
+      console.log('root = ', root);
+      console.log('k = ', k);
+      console.log('result = ', result);
+      console.log('findTarget = ', findTarget(tree, k));
+    </script>
+  </body>
+</html>
