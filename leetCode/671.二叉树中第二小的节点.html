@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>671. 二叉树中第二小的节点</title>
+  </head>
+  <body>
+    <script src="../helper/tree.js"></script>
+    <script>
+      // https://leetcode.cn/problems/second-minimum-node-in-a-binary-tree/
+
+      // 给定一个非空特殊的二叉树，每个节点都是正数，并且每个节点的子节点数量只能为 2 或 0。如果一个节点有两个子节点的话，那么该节点的值等于两个子节点中较小的一个。
+      // 更正式地说，即 root.val = min(root.left.val, root.right.val) 总成立。
+      // 给出这样的一个二叉树，你需要输出所有节点中的 第二小的值 。
+      // 如果第二小的值不存在的话，输出 -1 。
+      // 提示：
+      // 树中节点数目在范围 [1, 25] 内
+      // 1 <= Node.val <= 231 - 1
+      // 对于树中每个节点 root.val == min(root.left.val, root.right.val)
+
+      /**
+       * Definition for a binary tree node.
+       * function TreeNode(val, left, right) {
+       *     this.val = (val===undefined ? 0 : val)
+       *     this.left = (left===undefined ? null : left)
+       *     this.right = (right===undefined ? null : right)
+       * }
+       */
+      /**
+       * @param {TreeNode} root
+       * @return {number}
+       */
+      var findSecondMinimumValue = function (root) {};
+
+      // --- answer-1 ---
+
+      var findSecondMinimumValue = function (root) {
+        let m1 = Number.MAX_VALUE;
+        let m2 = Number.MAX_VALUE;
+        function compare(val) {
+          if (val >= m2 || val === m1) return;
+          if (val < m1) {
+            m2 = m1;
+            m1 = val;
+          } else if (val < m2) {
+            m2 = val;
+          }
+        }
+        function dfs(node) {
+          if (!node) return;
+          const { val, left, right } = node;
+          if (left && right) {
+            compare(Math.min.apply(Math, [val, left.val, right.val]));
+            dfs(node.left);
+            dfs(node.right);
+          } else {
+            compare(val);
+          }
+        }
+        dfs(root);
+        return m2 === Number.MAX_VALUE ? -1 : m2;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 方法一正确，但是题意解读成要用节点的最小去比较
+      // 根据题意 根节点是最小的值，那么我们只需找出大于root.val的最小
+      var findSecondMinimumValue = function (root) {
+        let res = -1;
+        const rootvalue = root.val;
+
+        function dfs(node) {
+          if (node === null) return;
+
+          if (res !== -1 && node.val >= res) return;
+
+          // 比root大且小于res
+          if (node.val > rootvalue) {
+            res = node.val;
+          }
+          dfs(node.left);
+          dfs(node.right);
+        }
+
+        dfs(root);
+        return res;
+      };
+
+      // --- answer-2 ---
+
+      var root = [2, 2, 5, null, null, 5, 7];
+      var result = 5;
+      // 解释：最小的值是 2 ，第二小的值是 5 。
+
+      var root = [2, 2, 2];
+      var result = -1;
+      // 解释：最小的值是 2, 但是不存在第二小的值。
+
+      var tree = buildTreeByArray(root);
+
+      console.log('tree = ', tree);
+      console.log('root = ', root);
+      console.log('result = ', result);
+      console.log('findSecondMinimumValue = ', findSecondMinimumValue(tree));
+    </script>
+  </body>
+</html>
