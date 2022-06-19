@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>680. 验证回文字符串 Ⅱ</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/valid-palindrome-ii/
+
+      // 给定一个非空字符串 s，最多删除一个字符。判断是否能成为回文字符串。
+      // 提示：
+      // 1 <= s.length <= 105
+      // s 由小写英文字母组成
+
+      /**
+       * @param {string} s
+       * @return {boolean}
+       */
+      var validPalindrome = function (s) {};
+
+      // --- answer-1 ---
+
+      // 从两边往中间比
+      var validPalindrome = function (s) {
+        let start = 0;
+        let end = s.length - 1;
+        function valid(s, low, high) {
+          for (let i = low, j = high; i < j; ++i, --j) {
+            if (s[i] !== s[j]) {
+              return false;
+            }
+          }
+          return true;
+        }
+        while (start < end) {
+          if (s[start] !== s[end]) {
+            // 可以去右边，可以去左边
+            return valid(s, start, end - 1) || valid(s, start + 1, end);
+          } else {
+            start += 1;
+            end -= 1;
+          }
+        }
+        return true;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var s = 'aba';
+      var result = true;
+
+      var s = 'abca'; // 解释: 你可以删除c字符。
+      var result = true;
+
+      var s = 'abc';
+      var result = false;
+
+      var s = 'abccbadda';
+      var result = false;
+
+      var s = 'eedede';
+      var result = true;
+
+      console.log('s = ', s);
+      console.log('result = ', result);
+      console.log('validPalindrome = ', validPalindrome(s));
+    </script>
+  </body>
+</html>
