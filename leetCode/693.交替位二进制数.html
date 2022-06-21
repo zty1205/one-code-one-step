@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>693. 交替位二进制数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/binary-number-with-alternating-bits/
+
+      // 给定一个正整数，检查它的二进制表示是否总是 0、1 交替出现：换句话说，就是二进制表示中相邻两位的数字永不相同。
+      // 提示：
+      // 1 <= n <= 231 - 1
+
+      /**
+       * @param {number} n
+       * @return {boolean}
+       */
+      var hasAlternatingBits = function (n) {};
+
+      // --- answer-1 ---
+
+      // 找规律
+      // 1(1) 5(101) 21(10101) 85(1010101)   pre * 4 + 1 = cur
+      // 2(10) 10(1010) 42(101010) 170(10101010) pre * 2 = cur
+      // 1和2是第一个值 可以用数的奇偶来判断
+      var hasAlternatingBits = function (n) {
+        let base = n & 1 ? 1 : 2;
+        while (n) {
+          n = n - base;
+          if (n % 4 !== 0) return false;
+          n = n / 4;
+        }
+        return true;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      var hasAlternatingBits = function (n) {
+        let bit = Number(n).toString(2);
+
+        for (let i = 1; i < bit.length; i += 2) {
+          if (bit[i] && bit[i] !== bit[0]) {
+            if (bit[i + 1] && bit[i + 1] !== bit[0]) {
+              return false;
+            }
+          } else {
+            return false;
+          }
+        }
+        return true;
+      };
+
+      // --- answer-2 ---
+
+      // --- answer-3 ---
+
+      // 位运算
+      var hasAlternatingBits = function (n) {
+        const a = n ^ (n >> 1);
+        return (a & (a + 1)) === 0;
+      };
+
+      // --- answer-3 ---
+
+      var n = 5;
+      var result = true;
+      // 解释：5 的二进制表示是：101
+
+      var n = 7;
+      var result = false;
+      // 解释：7 的二进制表示是：111.
+
+      var n = 11;
+      var result = false;
+      // 解释：11 的二进制表示是：1011.
+
+      console.log('n = ', n);
+      console.log('result = ', result);
+      console.log('hasAlternatingBits = ', hasAlternatingBits(n));
+    </script>
+  </body>
+</html>
