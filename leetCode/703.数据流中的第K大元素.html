@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>703. 数据流中的第 K 大元素</title>
+  </head>
+  <body>
+    <script src="../helper/command.js"></script>
+    <script>
+      // https://leetcode.cn/problems/kth-largest-element-in-a-stream/
+
+      // 设计一个找到数据流中第 k 大元素的类（class）。注意是排序后的第 k 大元素，不是第 k 个不同的元素。
+      // 请实现 KthLargest 类：
+      // 提示：
+      // KthLargest(int k, int[] nums) 使用整数 k 和整数流 nums 初始化对象。
+      // int add(int val) 将 val 插入数据流 nums 后，返回当前数据流中第 k 大的元素。
+      // 提示：
+      // 1 <= k <= 104
+      // 0 <= nums.length <= 104
+      // -104 <= nums[i] <= 104
+      // -104 <= val <= 104
+      // 最多调用 add 方法 104 次
+      // 题目数据保证，在查找第 k 大元素时，数组中至少有 k 个元素
+
+      /**
+       * @param {number} k
+       * @param {number[]} nums
+       */
+      var KthLargest = function (k, nums) {};
+      /**
+       * @param {number} val
+       * @return {number}
+       */
+      KthLargest.prototype.add = function (val) {};
+      /**
+       * Your KthLargest object will be instantiated and called as
+       * such:
+       * var obj = new KthLargest(k, nums)
+       * var param_1 = obj.add(val)
+       */
+
+      // --- answer-1 ---
+
+      var KthLargest = function (k, nums) {
+        this.k = k;
+        this.nums = nums.sort((a, b) => b - a);
+      };
+      // 插入排序
+      KthLargest.prototype.add = function (val) {
+        this.nums.push(val);
+        let i = this.nums.length - 1;
+        while (this.nums[i] > this.nums[i - 1] && i > 0) {
+          let tmp = this.nums[i - 1];
+          this.nums[i - 1] = this.nums[i];
+          this.nums[i] = tmp;
+          i--;
+        }
+        return this.nums[thisk - 1];
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var k = 3;
+      var cmds = ['KthLargest', 'add', 'add', 'add', 'add', 'add'];
+      var args = [[k, [4, 5, 8, 2]], [3], [5], [10], [9], [4]];
+      var res = [4, 5, 5, 8, 8];
+
+      console.log('k = ', k);
+      console.log('cmds = ', cmds);
+      console.log('args = ', args);
+      console.log('res = ', res);
+      classCommand(cmds, args);
+    </script>
+  </body>
+</html>
