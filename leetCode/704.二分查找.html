@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>704. 二分查找</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/binary-search/
+
+      // 给定一个 n 个元素有序的（升序）整型数组 nums 和一个目标值 target  ，写一个函数搜索 nums 中的 target，如果目标值存在返回下标，否则返回 -1。
+      // 提示：
+      // 你可以假设 nums 中的所有元素是不重复的。
+      // n 将在 [1, 10000]之间。
+      // nums 的每个元素都将在 [-9999, 9999]之间。
+
+      /**
+       * @param {number[]} nums
+       * @param {number} target
+       * @return {number}
+       */
+      var search = function (nums, target) {};
+
+      // --- answer-1 ---
+
+      // 遍历版本
+      var search = function (nums, target) {
+        let start = 0;
+        let end = nums.length - 1;
+        while (start <= end) {
+          let mid = (start + end) >> 1;
+          if (nums[mid] === target) {
+            return mid;
+          } else if (nums[mid] > target) {
+            end = mid - 1;
+          } else {
+            start = mid + 1;
+          }
+        }
+        return -1;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 递归版本
+      function midSearch(nums, target, start, end) {
+        if (start > end) return -1;
+        let mid = (start + end) >> 1;
+        if (nums[mid] === target) return mid;
+        return nums[mid] > target ? midSearch(nums, target, 0, mid - 1) : midSearch(nums, target, mid + 1, end);
+      }
+
+      var search = function (nums, target) {
+        return midSearch(nums, target, 0, nums.length - 1);
+      };
+
+      // --- answer-2 ---
+
+      var nums = [-1, 0, 3, 5, 9, 12],
+        target = 9;
+      var result = 4;
+      // 解释: 9 出现在 nums 中并且下标为 4
+
+      // var nums = [-1, 0, 3, 5, 9, 12],
+      //   target = 2;
+      // var result = -1;
+      // 解释: 2 不存在 nums 中因此返回 -1
+
+      console.log('nums = ', nums);
+      console.log('target = ', target);
+      console.log('result = ', result);
+      console.log('search = ', search(nums, target));
+    </script>
+  </body>
+</html>
