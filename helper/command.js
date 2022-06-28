@@ -5,7 +5,8 @@ function classCommand(cmds, args) {
   for (let i = 1; i < cmds.length; i++) {
     let cmd = cmds[i];
     let arg = args[i];
-    instance[cmd].apply(instance, arg);
+    let res = instance[cmd].apply(instance, arg);
+    console.log(`${cmd}, ${arg} : `, res);
   }
   return instance;
 }
