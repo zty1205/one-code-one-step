@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>抽奖</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * 抽奖
+       */
+
+      const AWRADS = [
+        {
+          name: '苹果',
+          num: 10
+        },
+        {
+          name: '香蕉',
+          num: 5
+        },
+        {
+          name: '橙子',
+          num: 60
+        },
+        {
+          name: '葡萄',
+          num: 10
+        },
+        {
+          name: '柚子',
+          num: 15
+        }
+      ];
+
+      // --- example-1 ---
+
+      function getRandom(base) {
+        return Math.floor(Math.random() * base);
+      }
+
+      // 区间计算 填满数组 根据下标获取结果
+      function lottery(awards = [], test) {
+        const lotArr = awards.reduce((pre, cur) => {
+          return pre.concat(new Array(cur.num).fill(cur.name));
+        }, []);
+        return lotArr[test || getRandom(lotArr.length)];
+      }
+
+      // --- example-1 ---
+
+      // --- example-2 ---
+
+      // 离散算法，对区间算法进行空间优化
+      // 转化成区间[10,15,75,85,100], 在二分查找
+      function lottery(awards = [], test) {
+        const lotArr = awards.reduce((pre, cur) => {
+          pre.push(cur.num + (pre[pre.length - 1] || 0));
+          return pre;
+        }, []);
+
+        let start = 0;
+        let end = lotArr.length - 1;
+        const awardIndex = test || getRandom(lotArr[end] + 1);
+
+        while (start <= end) {
+          let mid = (start + end) >> 1;
+          let midVal = lotArr[mid];
+          if (midVal === awardIndex) {
+            return awards[mid].name;
+          } else if (midVal > awardIndex) {
+            end = mid - 1;
+          } else {
+            start = mid + 1;
+          }
+        }
+        return awards[start].name;
+      }
+
+      // --- example-2 ---
+
+      const str = AWRADS.reduce((pre, cur) => {
+        pre = pre + `${cur.name}${cur.num}个; `;
+        return pre;
+      }, '现在有奖品：');
+      console.log(str);
+
+      var run = function (t) {
+        return lottery(AWRADS, t);
+      };
+      window.run = run;
+
+      const tests = [
+        { randomIdx: 1, award: '苹果' },
+        { randomIdx: 4, award: '苹果' },
+        { randomIdx: 11, award: '香蕉' },
+        { randomIdx: 29, award: '橙子' },
+        { randomIdx: 65, award: '橙子' },
+        { randomIdx: 75, award: '橙子' },
+        { randomIdx: 78, award: '葡萄' },
+        { randomIdx: 96, award: '柚子' },
+        { randomIdx: 100, award: '柚子' }
+      ];
+      tests.forEach((x) => console.log(`lottery ${x.randomIdx}, ${x.award} = `, lottery(AWRADS, x.randomIdx)));
+    </script>
+  </body>
+</html>
