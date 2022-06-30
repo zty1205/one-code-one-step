@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>706. 设计哈希映射</title>
+  </head>
+  <body>
+    <script src="../helper/command.js"></script>
+    <script>
+      // https://leetcode.cn/problems/design-hashmap/
+
+      // 不使用任何内建的哈希表库设计一个哈希映射（HashMap）。
+      // 实现 MyHashMap 类：
+      // 提示：
+      // MyHashMap() 用空映射初始化对象
+      // void put(int key, int value) 向 HashMap 插入一个键值对 (key, value) 。如果 key 已经存在于映射中，则更新其对应的值 value 。
+      // int get(int key) 返回特定的 key 所映射的 value ；如果映射中不包含 key 的映射，返回 -1 。
+      // void remove(key) 如果映射中存在 key 的映射，则移除 key 和它所对应的 value 。
+      // 提示：
+      // 0 <= key, value <= 106
+      // 最多调用 104 次 put、get 和 remove 方法
+
+      var MyHashMap = function () {};
+      /**
+       * @param {number} key
+       * @param {number} value
+       * @return {void}
+       */
+      MyHashMap.prototype.put = function (key, value) {};
+      /**
+       * @param {number} key
+       * @return {number}
+       */
+      MyHashMap.prototype.get = function (key) {};
+      /**
+       * @param {number} key
+       * @return {void}
+       */
+      MyHashMap.prototype.remove = function (key) {};
+
+      // --- answer-1 ---
+
+      // 超大数组存储，这里存储的是k
+      var MyHashMap = function () {
+        this.hash = [];
+      };
+      MyHashMap.prototype.put = function (key, value) {
+        this.hash[key] = value;
+      };
+      MyHashMap.prototype.get = function (key) {
+        let val = this.hash[key];
+        return val != undefined ? val : -1;
+      };
+      MyHashMap.prototype.remove = function (key) {
+        this.hash[key] = undefined;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 哈希散列+链地址, 这里存储的是k,v
+      var MyHashMap = function (base = 1000) {
+        this.base = base;
+        this.hash = Array.from({ length: base }, () => new Array());
+      };
+
+      MyHashMap.prototype.getHashCode = function (key) {
+        return key % this.base;
+      };
+
+      MyHashMap.prototype.put = function (key, value) {
+        let hs = this.getHashCode(key);
+        for (let i of this.hash[hs]) {
+          if (i[0] === key) {
+            i[1] = value;
+            return;
+          }
+        }
+        this.hash[hs].push([key, value]);
+      };
+
+      MyHashMap.prototype.get = function (key) {
+        let hs = this.getHashCode(key);
+        for (let i of this.hash[hs]) {
+          if (i[0] === key) return i[1];
+        }
+        return -1;
+      };
+
+      MyHashMap.prototype.remove = function (key) {
+        let hs = this.getHashCode(key);
+        for (let i = 0; i < this.hash[hs].length; i++) {
+          if (this.hash[hs][i][0] === key) {
+            this.hash[hs].splice(i, 1);
+            return;
+          }
+        }
+      };
+
+      // --- answer-2 ---
+
+      var cmds = ['MyHashMap', 'put', 'put', 'get', 'get', 'put', 'get', 'remove', 'get'];
+      var args = [[], [1, 1], [2, 2], [1], [3], [2, 1], [2], [2], [2]];
+
+      classCommand(cmds, args);
+    </script>
+  </body>
+</html>

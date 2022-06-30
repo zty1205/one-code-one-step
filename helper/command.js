@@ -8,5 +8,7 @@ function classCommand(cmds, args) {
     let res = instance[cmd].apply(instance, arg);
     console.log(`${cmd}, ${arg} : `, res);
   }
+  console.log('');
+  console.log(`${classFunc}: `, instance);
   return instance;
 }
