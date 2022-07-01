@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>709. 转换成小写字母</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/to-lower-case/
+
+      // 给你一个字符串 s ，将该字符串中的大写字母转换成相同的小写字母，返回新的字符串。
+      // 提示：
+      // 1 <= s.length <= 100
+      // s 由 ASCII 字符集中的可打印字符组成
+
+      /**
+       * @param {string} s
+       * @return {string}
+       */
+      var toLowerCase = function (s) {};
+
+      // --- answer-1 ---
+
+      var toLowerCase = function (s = '') {
+        return s.toLocaleLowerCase();
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      var toLowerCase = function (s) {
+        const sb = [];
+        for (let ch of s) {
+          if (ch.charCodeAt() >= 65 && ch.charCodeAt() <= 90) {
+            ch = String.fromCharCode(ch.charCodeAt() | 32);
+          }
+          sb.push(ch);
+        }
+        return sb.join('');
+      };
+
+      // --- answer-2 ---
+
+      var s = 'Hello';
+      var result = 'hello';
+
+      // var s = "here";
+      // var result = "here";
+
+      // var s = "LOVELY";
+      // var result = "lovely";
+
+      console.log('s = ', s);
+      console.log('result = ', result);
+      console.log('toLowerCase = ', toLowerCase(s));
+    </script>
+  </body>
+</html>
