@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>717. 1 比特与 2 比特字符</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/1-bit-and-2-bit-characters/
+
+      // 有两种特殊字符：
+      // 提示：
+      // 第一种字符可以用一比特 0 表示
+      // 第二种字符可以用两比特（10 或 11）表示
+      // 给你一个以 0 结尾的二进制数组 bits ，如果最后一个字符必须是一个一比特字符，则返回 true 。
+      // 提示：
+      // 1 <= bits.length <= 1000
+      // bits[i] 为 0 或 1
+
+      /**
+       * @param {number[]} bits
+       * @return {boolean}
+       */
+      var isOneBitCharacter = function (bits) {};
+
+      // --- answer-1 ---
+
+      // 动态规划
+      // f(n) = true 表示长度为n的数组能解析成2种字符的组合
+      // 有两种情况
+      // f(n-1) = true 且第n位是0
+      // f(n-2) = true 且第n-1位是1
+      var isOneBitCharacter = function (bits = []) {
+        let dp = [bits[0] === 0];
+        dp[-1] = true;
+        for (let i = 1; i < bits.length - 1; i++) {
+          dp[i] = (dp[i - 2] && bits[i - 1] === 1) || (dp[i - 1] && bits[i] === 0);
+        }
+        return dp[dp.length - 1];
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 遍历 遇到0一定是第一种 遇到1一定是第二种
+      var isOneBitCharacter = function (bits = []) {
+        let i = 0;
+        let len = bits.length;
+        while (i < len - 1) {
+          i += bits[i] + 1;
+        }
+        return i === len - 1;
+      };
+
+      // 倒序遍历 最高效的方法
+      // 根据题意，0 一定是一个字符的结尾。
+
+      // 我们可以找到bits 的倒数第二个 0 的位置，记作 i（不存在时定义为 -1−1），那么 ]bits[i+1] 一定是一个字符的开头，且从 bits[i+1] 到 bits[n−2] 的这 n-2-i 个比特均为 1。
+      // 比如1011110
+
+      // 如果 n-2-i 为偶数，则这些比特 1 组成了 (n-2-i)/2 个第二种字符，所以bits 的最后一个比特 0 一定组成了第一种字符。比如1011110
+      // 如果 n-2-i 为奇数，则这些比特 11 的前 n-3-i 个比特组成了 (n-3-i)/2 个第二种字符，多出的一个比特 1 和bits 的最后一个比特 0 组成第二种字符。 比如101110
+      // 由于 n-i 和 n-2-i 的奇偶性相同，我们可以通过判断 n-i 是否为偶数来判断最后一个字符是否为第一种字符，若为偶数则返回 true，否则返回 false。
+      var isOneBitCharacter = function (bits) {
+        const n = bits.length;
+        let i = n - 2;
+        while (i >= 0 && bits[i]) {
+          i--;
+        }
+        return (n - i) % 2 === 0;
+      };
+
+      // --- answer-2 ---
+
+      // --- answer-3 ---
+
+      // 正则
+      var isOneBitCharacter = function (bits = []) {
+        return /^(10|11|0)*0$/g.test(bits.join(''));
+      };
+
+      // --- answer-3 ---
+
+      var bits = [1, 0, 0];
+      var result = true;
+      // 解释: 唯一的解码方式是将其解析为一个两比特字符和一个一比特字符。
+
+      var bits = [1, 1, 1, 0];
+      var result = false;
+      // 解释：唯一的解码方式是将其解析为两比特字符和两比特字符。
+
+      console.log('bits = ', bits);
+      console.log('result = ', result);
+      console.log('isOneBitCharacter = ', isOneBitCharacter(bits));
+    </script>
+  </body>
+</html>
