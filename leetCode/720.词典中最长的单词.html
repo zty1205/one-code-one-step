@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>720. 词典中最长的单词</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/longest-word-in-dictionary/
+
+      // 给出一个字符串数组 words 组成的一本英语词典。返回 words 中最长的一个单词，该单词是由 words 词典中其他单词逐步添加一个字母组成。
+      // 若其中有多个可行的答案，则返回答案中字典序最小的单词。若无答案，则返回空字符串。
+      // 提示：
+      // 1 <= words.length <= 1000
+      // 1 <= words[i].length <= 30
+      // 所有输入的字符串 words[i] 都只包含小写字母。
+
+      /**
+       * @param {string[]} words
+       * @return {string}
+       */
+      var longestWord = function (words) {};
+
+      // --- answer-1 ---
+
+      // 排序后 进行遍历 通过hash来查找
+      var longestWord = function (words = []) {
+        words.sort((x, y) => {
+          if (x.length === y.length) {
+            return x < y ? 1 : -1;
+          } else {
+            return x.length - y.length;
+          }
+        });
+
+        const map = words.reduce((pre, cur) => {
+          pre[cur] = true;
+          return pre;
+        }, {});
+
+        let len = 0;
+        let res = '';
+
+        function valid(word = '') {
+          let s = word;
+          while (s) {
+            if (!(s in map)) return;
+            s = s.substr(0, s.length - 1);
+          }
+          len = word.length;
+          res = word;
+        }
+
+        for (let i = words.length - 1; i > 0; i--) {
+          let item = words[i];
+          if (len && item.length <= len) {
+            break;
+          } else {
+            valid(item);
+          }
+        }
+        return res;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 构造字典树
+      // {
+      //   a: {
+      //     p: {
+      //       p: {
+      //         l: {
+      //           y: {}
+      //           e: {}
+      //         }
+      //       }
+      //     }
+      //   }
+      // }
+      var longestWord = function (words) {
+        const trie = new Trie();
+        for (const word of words) {
+          trie.insert(word);
+        }
+        console.log('trie = ', trie);
+        let longest = '';
+        for (const word of words) {
+          if (trie.search(word)) {
+            if (word.length > longest.length || (word.length === longest.length && word.localeCompare(longest) < 0)) {
+              longest = word;
+            }
+          }
+        }
+        return longest;
+      };
+
+      class Node {
+        constructor() {
+          this.children = {};
+          this.isEnd = false;
+        }
+      }
+
+      class Trie {
+        constructor() {
+          this.children = new Node();
+          this.isEnd = false;
+          this.char = undefined;
+        }
+
+        insert(word) {
+          let node = this;
+          for (let i = 0; i < word.length; i++) {
+            const ch = word[i];
+            const index = ch.charCodeAt() - 'a'.charCodeAt();
+            if (!node.children[index]) {
+              node.children[index] = new Node();
+            }
+            node = node.children[index];
+            node.char = ch;
+          }
+          node.isEnd = true;
+        }
+
+        search(word) {
+          let node = this;
+          for (let i = 0; i < word.length; i++) {
+            const ch = word[i];
+            const index = ch.charCodeAt() - 'a'.charCodeAt();
+            if (!node.children[index] || !node.children[index].isEnd) {
+              return false;
+            }
+            node = node.children[index];
+          }
+          return node && node.isEnd;
+        }
+      }
+
+      // --- answer-2 ---
+
+      var words = ['w', 'wo', 'wor', 'worl', 'world'];
+      var result = 'world';
+      // 解释： 单词"world"可由"w", "wo", "wor", 和 "worl"逐步添加一个字母组成。
+
+      var words = ['a', 'banana', 'app', 'appl', 'ap', 'apply', 'apple'];
+      var result = 'apple';
+      // 解释："apply" 和 "apple" 都能由词典中的单词组成。但是 "apple" 的字典序小于 "apply"
+
+      console.log('words = ', words);
+      console.log('result = ', result);
+      console.log('longestWord = ', longestWord(words));
+    </script>
+  </body>
+</html>
