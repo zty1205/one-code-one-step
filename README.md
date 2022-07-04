@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (258 道)
+## 三、LeetCode (259 道)
 
 <br/>
 
@@ -410,6 +410,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [709.转换成小写字母.html](./leetCode/709.转换成小写字母.html)
 - [717.1 比特与 2 比特字符.html](./leetCode/717.1比特与2比特字符.html)
 - [720.词典中最长的单词.html](./leetCode/720.词典中最长的单词.html)
+- [724.寻找数组的中心下标.html](./leetCode/724.寻找数组的中心下标.html)
 - [873.最长的斐波那契子序列的长度.html](./leetCode/873.最长的斐波那契子序列的长度.html)
 
 <br/>

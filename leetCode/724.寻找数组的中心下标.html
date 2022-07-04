@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>724. 寻找数组的中心下标</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/find-pivot-index/
+
+      // 给你一个整数数组 nums ，请计算数组的 中心下标 。
+      // 数组 中心下标 是数组的一个下标，其左侧所有元素相加的和等于右侧所有元素相加的和。
+      // 如果中心下标位于数组最左端，那么左侧数之和视为 0 ，因为在下标的左侧不存在元素。这一点对于中心下标位于数组最右端同样适用。
+      // 如果数组有多个中心下标，应该返回 最靠近左边 的那一个。如果数组不存在中心下标，返回 -1 。
+      // 提示：
+      // 1 <= nums.length <= 104
+      // -1000 <= nums[i] <= 1000
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var pivotIndex = function (nums) {};
+
+      // --- answer-1 ---
+
+      // 分别计算左和 和 右和
+      var pivotIndex = function (nums = []) {
+        const length = nums.length;
+        let leftSum = 0,
+          left = [];
+        left[-1] = 0; // // 兼容边界
+        let rightSum = 0,
+          right = [];
+        right[length] = 0; // 兼容边界
+        for (let i = 0; i < length; i++) {
+          leftSum += nums[i];
+          left.push(leftSum);
+          left[i] = leftSum;
+        }
+        for (let i = length - 1; i >= 0; i--) {
+          rightSum += nums[i];
+          right[i] = rightSum;
+        }
+        for (let i = 0; i < length; i++) {
+          if (right[i + 1] === left[i - 1]) {
+            return i;
+          }
+        }
+        return -1;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 设总和为total, 左和为sum, 那么右和为 total - sum - num[i]
+      // 左右和相等 即 sum === total - sum - num[i]
+      // 可得 total === sum * 2 + num[i]
+      var pivotIndex = function (nums = []) {
+        const total = nums.reduce((pre, cur) => pre + cur, 0);
+        let sum = 0;
+        for (let i = 0; i < nums.length; i++) {
+          if (sum * 2 + nums[i] === total) {
+            return i;
+          }
+          sum += nums[i];
+        }
+        return -1;
+      };
+
+      // --- answer-2 ---
+
+      var nums = [1, 7, 3, 6, 5, 6];
+      var result = 3;
+      // 解释：
+
+      var nums = [1, 2, 3];
+      var result = -1;
+      // 解释：
+
+      var nums = [2, 1, -1];
+      var result = 0;
+      // 解释：
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('pivotIndex = ', pivotIndex(nums));
+    </script>
+  </body>
+</html>
