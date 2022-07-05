@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>728. 自除数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/self-dividing-numbers/
+
+      // 自除数 是指可以被它包含的每一位数整除的数。
+      // 提示：
+      // 例如，128 是一个 自除数 ，因为 128 % 1 == 0，128 % 2 == 0，128 % 8 == 0。
+      // 自除数 不允许包含 0 。
+      // 给定两个整数 left 和 right ，返回一个列表，列表的元素是范围 [left, right] 内所有的 自除数 。
+      // 提示：
+      // 1 <= left <= right <= 104
+
+      /**
+       * @param {number} left
+       * @param {number} right
+       * @return {number[]}
+       */
+      var selfDividingNumbers = function (left, right) {};
+
+      // --- answer-1 ---
+
+      var selfDividingNumbers = function (left, right) {
+        const res = [];
+        function fc(num) {
+          let str = String(num);
+          for (let c of str) {
+            if (num % +c !== 0) return;
+          }
+          res.push(num);
+        }
+        for (let i = left; i <= right; i++) {
+          fc(i);
+        }
+        return res;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 数据范围为1-10^4，可以预先求出所有的 自除数， 在查找left-right范围内的
+      // 求数的时候可以建立下标的索引，快速判断
+      var selfDividingNumbers = function (left, right) {
+        const res = [];
+        const hash = {};
+        function fc(num) {
+          let str = String(num);
+          for (let c of str) {
+            if (num % +c !== 0) return;
+          }
+          hash[num] = 1;
+        }
+        for (let i = 0; i <= 10000; i++) {
+          fc(i);
+        }
+        console.log('hash = ', hash);
+        for (let i = left; i <= right; i++) {
+          if (i in hash) res.push(i);
+        }
+        return res;
+      };
+
+      // --- answer-2 ---
+
+      var left = 1,
+        right = 22;
+      var result = [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 15, 22];
+
+      var left = 47,
+        right = 85;
+      var result = [48, 55, 66, 77];
+
+      var left = 1,
+        right = 100;
+      var result = [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 15, 22, 24, 33, 36, 44, 48, 55, 66, 77, 88, 99];
+
+      console.log('left = ', left);
+      console.log('right = ', right);
+      console.log('result = ', result);
+      console.log('selfDividingNumbers = ', selfDividingNumbers(left, right));
+    </script>
+  </body>
+</html>
