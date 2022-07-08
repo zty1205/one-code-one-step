@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (262 道)
+## 三、LeetCode (263 道)
 
 <br/>
 
@@ -414,6 +414,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [728.自除数.html](./leetCode/728.自除数.html)
 - [733.图像渲染.html](./leetCode/733.图像渲染.html)
 - [744.寻找比目标字母大的最小字母.html](./leetCode/744.寻找比目标字母大的最小字母.html)
+- [746.使用最小花费爬楼梯.html](./leetCode/746.使用最小花费爬楼梯.html)
 - [873.最长的斐波那契子序列的长度.html](./leetCode/873.最长的斐波那契子序列的长度.html)
 
 <br/>
