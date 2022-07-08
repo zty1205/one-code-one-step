@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>744. 寻找比目标字母大的最小字母</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/find-smallest-letter-greater-than-target/
+
+      // 给你一个排序后的字符列表 letters ，列表中只包含小写英文字母。另给出一个目标字母 target，请你寻找在这一有序列表里比目标字母大的最小字母。
+      // 在比较时，字母是依序循环出现的。举个例子：
+      // 提示：
+      // 如果目标字母 target = 'z' 并且字符列表为 letters = ['a', 'b']，则答案返回 'a'
+      // 提示：
+      // 2 <= letters.length <= 104
+      // letters[i] 是一个小写字母
+      // letters 按非递减顺序排序
+      // letters 最少包含两个不同的字母
+      // target 是一个小写字母
+
+      /**
+       * @param {character[]} letters
+       * @param {character} target
+       * @return {character}
+       */
+      var nextGreatestLetter = function (letters, target) {};
+
+      // --- answer-1 ---
+
+      // 顺序查找
+      var nextGreatestLetter = function (letter = [], target = '') {
+        for (let c of letters) {
+          if (c.charCodeAt() > target.charCodeAt()) {
+            return c;
+          }
+        }
+        return letters[0];
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 二分查找
+      var nextGreatestLetter = function (letters, target) {
+        if (target >= letters[letters.length - 1]) return letters[0];
+
+        let start = 0;
+        let end = letters.length - 1;
+        while (start < end) {
+          const mid = Math.floor((end - start) / 2) + start;
+          if (letters[mid] > target) {
+            end = mid;
+          } else {
+            start = mid + 1;
+          }
+        }
+        return letters[start];
+      };
+
+      // --- answer-2 ---
+
+      var letters = ['c', 'f', 'j'],
+        target = 'a';
+      var result = 'c';
+
+      // var letters = ['c', 'f', 'j'],
+      //   target = 'c';
+      // var result = 'f';
+
+      // var letters = ['c', 'f', 'j'],
+      //   target = 'd';
+      // var result = 'f';
+
+      var letters = ['c', 'f', 'j'],
+        target = 'j';
+      var result = 'c';
+
+      var letters = ['c', 'f', 'j'],
+        target = 'k';
+      var result = 'c';
+
+      console.log('letters = ', letters);
+      console.log('target = ', target);
+      console.log('result = ', result);
+      console.log('nextGreatestLetter = ', nextGreatestLetter(letters, target));
+    </script>
+  </body>
+</html>
