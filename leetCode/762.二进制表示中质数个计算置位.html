@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>762. 二进制表示中质数个计算置位</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/prime-number-of-set-bits-in-binary-representation/
+
+      // 给你两个整数 left 和 right ，在闭区间 [left, right] 范围内，统计并返回 计算置位位数为质数 的整数个数。
+      // 计算置位位数 就是二进制表示中 1 的个数。
+      // 提示：
+      // 例如， 21 的二进制表示 10101 有 3 个计算置位。
+      // 提示：
+      // 1 <= left <= right <= 106
+      // 0 <= right - left <= 104
+
+      /**
+       * @param {number} left
+       * @param {number} right
+       * @return {number}
+       */
+      var countPrimeSetBits = function (left, right) {};
+
+      // --- answer-1 ---
+
+      // 汉明重量 + 质数判断
+      var countPrimeSetBits = function (left, right) {
+        function hammingWeight(n) {
+          let res = 0;
+          while (n) {
+            n &= n - 1;
+            res++;
+          }
+          return res;
+        }
+        function isPrimeNumber(n) {
+          if (n === 1) return false;
+          if (n === 2 || n === 3) return true;
+          let sq = Math.sqrt(n);
+          for (let i = 2; i <= sq; i++) {
+            if (n % i === 0) return false;
+          }
+          return true;
+        }
+        let res = 0;
+        for (let i = left; i <= right; i++) {
+          if (isPrimeNumber(hammingWeight(i))) {
+            console.log('i = ', i);
+            res += 1;
+          }
+        }
+        return res;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 10^6 最多是20位二进制 20之内的质数有 2,3,5,7,11,13,17,19
+      // 那么，这里的质数是可以枚举的
+      // 2的11, 110, 1100, 11000, 110000,
+      // 3的111, 1110
+      // 用一个二进制数 mask=665772=10100010100010101100
+      var countPrimeSetBits = function (left, right) {
+        function hammingWeight(n) {
+          let res = 0;
+          while (n) {
+            n &= n - 1;
+            res++;
+          }
+          return res;
+        }
+
+        let ans = 0;
+        for (let i = left; i <= right; i++) {
+          if (((1 << hammingWeight(i)) & 665772) != 0) {
+            ans += 1;
+          }
+        }
+        return ans;
+      };
+
+      // --- answer-2 ---
+
+      var left = 6,
+        right = 10;
+      var result = 4;
+      // 解释：
+
+      var left = 10,
+        right = 15;
+      var result = 5;
+      // 解释：
+
+      console.log('left = ', left);
+      console.log('right = ', right);
+      console.log('result = ', result);
+      console.log('countPrimeSetBits = ', countPrimeSetBits(left, right));
+    </script>
+  </body>
+</html>
