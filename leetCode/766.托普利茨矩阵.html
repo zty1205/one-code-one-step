@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>766. 托普利茨矩阵</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/toeplitz-matrix/
+
+      // 给你一个 m x n 的矩阵 matrix 。如果这个矩阵是托普利茨矩阵，返回 true ；否则，返回 false 。
+      // 如果矩阵上每一条由左上到右下的对角线上的元素都相同，那么这个矩阵是 托普利茨矩阵 。
+      // 提示：
+      // m == matrix.length
+      // n == matrix[i].length
+      // 1 <= m, n <= 20
+      // 0 <= matrix[i][j] <= 99
+      // 提示：
+      // 如果矩阵存储在磁盘上，并且内存有限，以至于一次最多只能将矩阵的一行加载到内存中，该怎么办？
+      // 如果矩阵太大，以至于一次只能将不完整的一行加载到内存中，该怎么办？
+
+      /**
+       * @param {number[][]} matrix
+       * @return {boolean}
+       */
+      var isToeplitzMatrix = function (matrix) {};
+
+      // --- answer-1 ---
+      // 直接从边界斜着遍历
+      function valid(matrix, i, j, m, n, num) {
+        for (let k = 1; k < 21; k++) {
+          i += 1;
+          j += 1;
+          if (i >= m || j >= n) return true;
+          if (matrix[i][j] !== num) return false;
+        }
+      }
+
+      var isToeplitzMatrix = function (matrix = [[]]) {
+        const m = matrix.length;
+        const n = matrix[0].length;
+
+        for (let i = 0; i < m; i++) {
+          if (!valid(matrix, i, 0, m, n, matrix[i][0])) {
+            return false;
+          }
+        }
+        for (let j = 1; j < n; j++) {
+          if (!valid(matrix, 0, j, m, n, matrix[0][j])) {
+            return false;
+          }
+        }
+        return true;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 直接遍历
+      var isToeplitzMatrix = function (matrix) {
+        const m = matrix.length,
+          n = matrix[0].length;
+        for (let i = 1; i < m; i++) {
+          for (let j = 1; j < n; j++) {
+            if (matrix[i][j] != matrix[i - 1][j - 1]) {
+              return false;
+            }
+          }
+        }
+        return true;
+      };
+
+      // --- answer-2 ---
+
+      // --- answer-3 ---
+
+      // 按行比较 解决问题1 一次只能加载一行
+      // 比较 curRow[i] === preRow[i-1]
+      var isToeplitzMatrix = function (matrix = [[]]) {
+        const m = matrix.length;
+        let preRow = matrix[0];
+        for (let i = 1; i < m; i++) {
+          const curRow = matrix[i];
+          for (let j = 1; j < curRow.length; j++) {
+            if (curRow[j] !== preRow[j - 1]) return false;
+          }
+          preRow = curRow;
+        }
+        return true;
+      };
+
+      // --- answer-3 ---
+
+      // 问题2 那我就用列
+
+      var matrix = [
+        [1, 2, 3, 4],
+        [5, 1, 2, 3],
+        [9, 5, 1, 2]
+      ];
+      var result = true;
+      // 解释：
+
+      var matrix = [
+        [1, 2],
+        [2, 2]
+      ];
+      var result = false;
+      // 解释：
+
+      console.log('matrix = ', matrix);
+      console.log('result = ', result);
+      console.log('isToeplitzMatrix = ', isToeplitzMatrix(matrix));
+    </script>
+  </body>
+</html>
