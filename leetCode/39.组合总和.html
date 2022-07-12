@@ -43,6 +43,33 @@
         return res;
       };
 
+      var combinationSum = function (candidates, target) {
+        if (!candidates || !candidates.length) return [];
+
+        // 返回结果是个数组，定义ans为数组
+        let ans = [];
+        function track(arr, tar, idx) {
+          // arr为一个结果，tar则是判断结束条件, idx是下标用于寻找下一个节点
+          if (tar < 0) {
+            // 结束
+            return;
+          }
+          if (tar === 0) {
+            // 满足结果
+            ans.push([...arr]); // 数组是引用类型
+            return;
+          }
+          for (let i = idx; i < candidates.length; i++) {
+            arr.push(candidates[i]);
+            track(arr, tar - candidates[i], i); // 数字可以复用
+            arr.pop(); // 状态重置回溯
+          }
+        }
+
+        track([], target, 0);
+        return ans;
+      };
+
       let candidates = [2, 3, 6, 7],
         target = 7;
       let res = [[7], [2, 2, 3]];
