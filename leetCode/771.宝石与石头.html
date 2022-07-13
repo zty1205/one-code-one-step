@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>771. 宝石与石头</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/jewels-and-stones/
+
+      // 给你一个字符串 jewels 代表石头中宝石的类型，另有一个字符串 stones 代表你拥有的石头。 stones 中每个字符代表了一种你拥有的石头的类型，你想知道你拥有的石头中有多少是宝石。
+      // 字母区分大小写，因此 "a" 和 "A" 是不同类型的石头。
+      // 提示：
+      // 1 <= jewels.length, stones.length <= 50
+      // jewels 和 stones 仅由英文字母组成
+      // jewels 中的所有字符都是 唯一的
+
+      /**
+       * @param {string} jewels
+       * @param {string} stones
+       * @return {number}
+       */
+      var numJewelsInStones = function (jewels, stones) {};
+
+      // --- answer-1 ---
+
+      // hash
+      var numJewelsInStones = function (jewels = '', stones = '') {
+        const map = {}; // 用数组也行
+        for (let char of jewels) {
+          map[char] = 1;
+        }
+        let res = 0;
+        for (let ch of stones) {
+          if (ch in map) res += 1;
+        }
+        return res;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var jewels = 'aA',
+        stones = 'aAAbbbb';
+      var result = 3;
+
+      var jewels = 'z',
+        stones = 'ZZ';
+      var result = 0;
+
+      console.log('jewels = ', jewels);
+      console.log('stones = ', stones);
+      console.log('result = ', result);
+      console.log('numJewelsInStones = ', numJewelsInStones(jewels, stones));
+    </script>
+  </body>
+</html>
