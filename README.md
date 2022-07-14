@@ -445,7 +445,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 五、剑指第二版 (75 道)
+## 五、剑指第二版 (76 道)
 
 <br/>
 
@@ -524,6 +524,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [剑指 Offer67.把字符串转换成整数.html](./剑指第二版/剑指Offer67.把字符串转换成整数.html)
 - [剑指 Offer68-I.二叉搜索树的最近公共祖先.html](./剑指第二版/剑指Offer68-I.二叉搜索树的最近公共祖先.html)
 - [剑指 Offer68-II.二叉树的最近公共祖先.html](./剑指第二版/剑指Offer68-II.二叉树的最近公共祖先.html)
+- [JZ82 二叉树中和为某一值的路径一.html](./剑指第二版/JZ82二叉树中和为某一值的路径一.html)
 
 <br/>
 
