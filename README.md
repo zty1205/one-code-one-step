@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (268 道)
+## 三、LeetCode (269 道)
 
 <br/>
 
@@ -420,6 +420,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [762.二进制表示中质数个计算置位.html](./leetCode/762.二进制表示中质数个计算置位.html)
 - [766.托普利茨矩阵.html](./leetCode/766.托普利茨矩阵.html)
 - [771.宝石与石头.html](./leetCode/771.宝石与石头.html)
+- [783.二叉搜索树节点最小距离.html](./leetCode/783.二叉搜索树节点最小距离.html)
 - [873.最长的斐波那契子序列的长度.html](./leetCode/873.最长的斐波那契子序列的长度.html)
 
 <br/>
