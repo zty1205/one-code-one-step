@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>99. 恢复二叉搜索树</title>
+  </head>
+  <body>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/common.js"></script>
+    <script>
+      // https://leetcode.cn/problems/recover-binary-search-tree/
+
+      // 给你二叉搜索树的根节点 root ，该树中的 恰好 两个节点的值被错误地交换。请在不改变其结构的情况下，恢复这棵树 。
+      // 提示：
+      // 树上节点的数目在范围 [2, 1000] 内
+      // -231 <= Node.val <= 231 - 1
+
+      /**
+       * Definition for a binary tree node.
+       * function TreeNode(val, left, right) {
+       *     this.val = (val===undefined ? 0 : val)
+       *     this.left = (left===undefined ? null : left)
+       *     this.right = (right===undefined ? null : right)
+       * }
+       */
+      /**
+       * @param {TreeNode} root
+       * @return {void} Do not return anything, modify root in-place instead.
+       */
+      var recoverTree = function (root) {};
+
+      // --- answer-1 ---
+
+      // 中序遍历后， 从后往前找到节点小于前一下标的节点A
+      // 从前往后找到，第一个大于A的节点B
+      // AB节点交换
+
+      // --- answer-1 ---
+
+      var recoverTree = function (root) {
+        const arr = [];
+        let n1, n2;
+        function mid(root) {
+          if (!root) return;
+          mid(root.left);
+          arr.push(root);
+          mid(root.right);
+        }
+        mid(root);
+        console.log(
+          'arr = ',
+          arr.map((n1) => n1.val)
+        );
+        for (let i = arr.length - 1; i > 0; i--) {
+          if (arr[i].val < arr[i - 1].val) {
+            n2 = arr[i];
+            break;
+          }
+        }
+        for (let i = 0; i < arr.length; i++) {
+          if (arr[i].val > n2.val) {
+            n1 = arr[i];
+            break;
+          }
+        }
+        let tmp = n2.val;
+        n2.val = n1.val;
+        n1.val = tmp;
+      };
+
+      // --- answer-2 ---
+
+      // 不使用数组，存储中序上一个节点， 找到两个不满足大小关系的节点交换即可
+      var recoverTree = function (root) {
+        const stack = [];
+        let n1, n2, pre;
+
+        while (root || stack.length) {
+          if (root) {
+            stack.push(root);
+            root = root.left;
+          } else {
+            root = stack.pop();
+            if (pre && pre.val > root.val) {
+              n2 = root;
+              if (!n1) n1 = pre;
+            }
+            pre = root;
+            root = root.right;
+          }
+        }
+        let tmp = n2.val;
+        n2.val = n1.val;
+        n1.val = tmp;
+      };
+
+      // --- answer-2 ---
+
+      var root = [1, 3, null, null, 2];
+      var result = [3, 1, null, null, 2];
+      // 解释：3 不能是 1 的左孩子，因为 3 > 1 。交换 1 和 3 使二叉搜索树有效。
+
+      var root = [3, 1, 4, null, null, 2];
+      var result = [2, 1, 4, null, null, 3];
+      // 解释：2 不能在 3 的右子树中，因为 2 < 3 。交换 2 和 3 使二叉搜索树有效。
+
+      // var root = [2, 3, 1];
+      // var result = [2, 1, 3];\
+
+      var root = [0, 1];
+      var result = [1, 0];
+
+      var tree = buildTreeByArray(root);
+      recoverTree(tree);
+
+      console.log('root = ', root);
+      console.log('result = ', result);
+      console.log('result = ', buildArrayByTree(tree));
+      console.log('tree = ', deepClone(tree));
+      console.log('recoverTree = ', tree);
+    </script>
+  </body>
+</html>
