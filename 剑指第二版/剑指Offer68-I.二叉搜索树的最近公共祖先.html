@@ -36,7 +36,7 @@
 
       // 递归
       // 时间复杂度：O(logN) 空间复杂度：O(logN)
-      var lowestCommonAncestor1 = function (root, p, q) {
+      var lowestCommonAncestor = function (root, p, q) {
         if (p.val < root.val && q.val < root.val) {
           return lowestCommonAncestor(root.left, p, q);
         } else if (p.val > root.val && q.val > root.val) {
