@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>796. 旋转字符串</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/rotate-string/
+
+      // 给定两个字符串, s 和 goal。如果在若干次旋转操作之后，s 能变成 goal ，那么返回 true 。
+      // s 的 旋转操作 就是将 s 最左边的字符移动到最右边。
+      // 提示：
+      // 例如, 若 s = 'abcde'，在旋转一次之后结果就是'bcdea' 。
+      // 提示：
+      // 1 <= s.length, goal.length <= 100
+      // s 和 goal 由小写英文字母组成
+
+      /**
+       * @param {string} s
+       * @param {string} goal
+       * @return {boolean}
+       */
+      var rotateString = function (s, goal) {};
+
+      // --- answer-1 ---
+
+      // 暴力 字符串操作比较
+      var rotateString = function (s = '', goal = '') {
+        if (s.length !== goal.length) return;
+        for (let i = 1; i < s.length; i++) {
+          if (s.substr(i) + s.substring(0, i) === goal) return true;
+        }
+        return false;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // abcdeabcde
+      //   cdeab
+      // 检查goal 是不是s+s的子串
+      var rotateString = function (s = '', goal = '') {
+        return s.length === goal.length && (s + s).indexOf(goal) > -1;
+      };
+
+      // --- answer-2 ---
+
+      var s = 'abcde',
+        goal = 'cdeab';
+      var result = true;
+
+      console.log('s = ', s);
+      console.log('goal = ', goal);
+      console.log('result = ', result);
+      console.log('rotateString = ', rotateString(s, goal));
+    </script>
+  </body>
+</html>
