@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>804. 唯一摩尔斯密码词</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/unique-morse-code-words/
+
+      // 国际摩尔斯密码定义一种标准编码方式，将每个字母对应于一个由一系列点和短线组成的字符串， 比如:
+      // 提示：
+      // 'a' 对应 ".-" ，
+      // 'b' 对应 "-..." ，
+      // 'c' 对应 "-.-." ，以此类推。
+      // 为了方便，所有 26 个英文字母的摩尔斯密码表如下：
+      // [".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."]
+      // 给你一个字符串数组 words ，每个单词可以写成每个字母对应摩尔斯密码的组合。
+      // 提示：
+      // 例如，"cab" 可以写成 "-.-..--..." ，(即 "-.-." + ".-" + "-..." 字符串的结合)。我们将这样一个连接过程称作 单词翻译 。
+      // 对 words 中所有单词进行单词翻译，返回不同 单词翻译 的数量。
+      // 提示：
+      // 1 <= words.length <= 100
+      // 1 <= words[i].length <= 12
+      // words[i] 由小写英文字母组成
+
+      /**
+       * @param {string[]} words
+       * @return {number}
+       */
+      var uniqueMorseRepresentations = function (words) {};
+
+      // --- answer-1 ---
+
+      const CHAR = [
+        '.-',
+        '-...',
+        '-.-.',
+        '-..',
+        '.',
+        '..-.',
+        '--.',
+        '....',
+        '..',
+        '.---',
+        '-.-',
+        '.-..',
+        '--',
+        '-.',
+        '---',
+        '.--.',
+        '--.-',
+        '.-.',
+        '...',
+        '-',
+        '..-',
+        '...-',
+        '.--',
+        '-..-',
+        '-.--',
+        '--..'
+      ];
+
+      // --- answer-1 ---
+
+      function getMCode(char = '') {
+        const index = char.charCodeAt() - 97;
+        return CHAR[index];
+      }
+      function getStrMCode(str = '') {
+        let s = '';
+        for (let c of str) {
+          s += getMCode(c);
+        }
+        return s;
+      }
+
+      // hash表即可
+      var uniqueMorseRepresentations = function (words = []) {
+        let res = 0;
+        const map = {};
+        for (let str of words) {
+          const mc = getStrMCode(str);
+          if (!(mc in map)) {
+            res += 1;
+            map[mc] = 1;
+          }
+        }
+        return res;
+      };
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var words = ['gin', 'zen', 'gig', 'msg'];
+      var result = 2;
+      // 解释:
+
+      var words = ['a'];
+      var result = 1;
+
+      console.log('words = ', words);
+      console.log('result = ', result);
+      console.log('uniqueMorseRepresentations = ', uniqueMorseRepresentations(words));
+    </script>
+  </body>
+</html>
