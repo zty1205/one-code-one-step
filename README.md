@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (272 道)
+## 三、LeetCode (273 道)
 
 <br/>
 
@@ -424,6 +424,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [783.二叉搜索树节点最小距离.html](./leetCode/783.二叉搜索树节点最小距离.html)
 - [796.旋转字符串.html](./leetCode/796.旋转字符串.html)
 - [804.唯一摩尔斯密码词.html](./leetCode/804.唯一摩尔斯密码词.html)
+- [806.写字符串需要的行数.html](./leetCode/806.写字符串需要的行数.html)
 - [873.最长的斐波那契子序列的长度.html](./leetCode/873.最长的斐波那契子序列的长度.html)
 
 <br/>
