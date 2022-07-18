@@ -157,6 +157,27 @@
         return res;
       }
 
+      // 层次遍历分层
+      var level_traverse_tree__level = function (root) {
+        if (!root) return ret;
+
+        const ret = [];
+        const q = [];
+        q.push(root);
+        while (q.length !== 0) {
+          const currentLevelSize = q.length;
+          ret.push([]);
+          for (let i = 1; i <= currentLevelSize; ++i) {
+            const node = q.shift();
+            ret[ret.length - 1].push(node.val);
+            if (node.left) q.push(node.left);
+            if (node.right) q.push(node.right);
+          }
+        }
+
+        return ret;
+      };
+
       // 树的高度
       function height_tree(root) {
         return root === null ? 0 : Math.max(height_tree(root.left), height_tree(root.right)) + 1;
@@ -197,6 +218,10 @@
       console.log('');
       console.log('层次遍历：1234567');
       console.log('层次 = ', level_traverse_tree(root));
+
+      console.log('');
+      console.log('层次遍历分层：1,23,4567');
+      console.log('层次 = ', level_traverse_tree__level(root));
 
       console.log('');
       console.log('二叉树高度：3');
