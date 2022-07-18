@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>116. 填充每个节点的下一个右侧节点指针</title>
+  </head>
+  <body>
+    <script src="../helper/tree.js"></script>
+    <script>
+      // https://leetcode.cn/problems/populating-next-right-pointers-in-each-node/
+
+      // 给定一个 完美二叉树 ，其所有叶子节点都在同一层，每个父节点都有两个子节点。二叉树定义如下：
+      // struct Node {
+      //   int val;
+      //   Node *left;
+      //   Node *right;
+      //   Node *next;
+      // }
+      // 填充它的每个 next 指针，让这个指针指向其下一个右侧节点。如果找不到下一个右侧节点，则将 next 指针设置为 NULL。
+      // 初始状态下，所有 next 指针都被设置为 NULL。
+      // 提示：
+      // 树中节点的数量在 [0, 212 - 1] 范围内
+      // -1000 <= node.val <= 1000
+      // 提示：
+      // 你只能使用常量级额外空间。
+      // 使用递归解题也符合要求，本题中递归程序占用的栈空间不算做额外的空间复杂度。
+
+      /**
+       * // Definition for a Node.
+       * function Node(val, left, right, next) {
+       *    this.val = val === undefined ? null : val;
+       *    this.left = left === undefined ? null : left;
+       *    this.right = right === undefined ? null : right;
+       *    this.next = next === undefined ? null : next;
+       * };
+       */
+      /**
+       * @param {Node} root
+       * @return {Node}
+       */
+      var connect = function (root) {};
+
+      // --- answer-1 ---
+
+      // 题目提示 使用常数级空间 使用递归
+      // 注意是完美二叉树
+      var connect = function (root) {
+        if (!root) return root;
+        function cnt(n1, n2) {
+          if (!n1 || !n2) return;
+          // 连接
+          n1.next = n2;
+          cnt(n1.left, n1.right); // n1子节点
+          cnt(n2.left, n2.right); // n2子节点
+          cnt(n1.right, n2.left); // n1右子节点 和 n2 左子节点
+        }
+        cnt(root.left, root.right);
+        return root;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 层次遍历
+      var connect = function (root) {
+        if (!root) return root;
+
+        const queue = [root];
+        while (queue.length) {
+          const size = queue.length;
+
+          for (let i = 0; i < size; i++) {
+            const node = queue.shift();
+            if (i < size - 1) node.next = queue[0];
+            node.left && queue.push(node.left);
+            node.right && queue.push(node.right);
+          }
+        }
+        return root;
+      };
+
+      // --- answer-2 ---
+
+      // --- answer-3 ---
+
+      // 关键是连接 n1.right 和 n2.left
+      // 通过上一级next 可得 n.right.next = n.next.left
+      var connect = function (root) {
+        if (!root) return root;
+
+        let leLeft = root;
+        while (leLeft.left !== null) {
+          let head = leLeft;
+
+          while (head !== null) {
+            // 连接子树
+            head.left.next = head.right;
+
+            // 跨子树连接
+            if (head.next != null) {
+              head.right.next = head.next.left;
+            }
+            head = head.next;
+          }
+
+          // 从最左节点开始
+          leLeft = leLeft.left;
+        }
+        return root;
+      };
+
+      // --- answer-3 ---
+
+      var root = [1, 2, 3, 4, 5, 6, 7];
+      var result = [1, '#', 2, 3, '#', 4, 5, 6, 7, '#'];
+      // 解释：给定二叉树如图 A 所示，你的函数应该填充它的每个 next 指针，以指向其下一个右侧节点，如图 B 所示。序列化的输出按层序遍历排列，同一层节点由 next 指针连接，'#' 标志着每一层的结束。
+
+      // var root = [];
+      // var result = [];
+
+      var tree = buildTreeByArray(root);
+
+      console.log('root = ', root);
+      console.log('result = ', result);
+      console.log('connect = ', connect(tree));
+    </script>
+  </body>
+</html>
