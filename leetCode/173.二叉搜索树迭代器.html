@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>173. 二叉搜索树迭代器</title>
+  </head>
+  <body>
+    <script src="../helper/command.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script>
+      // https://leetcode.cn/problems/binary-search-tree-iterator/
+
+      // 你可以假设 next() 调用总是有效的，也就是说，当调用 next() 时，BST 的中序遍历中至少存在一个下一个数字。
+      // 提示：
+      // 树中节点的数目在范围 [1, 105] 内
+      // 0 <= Node.val <= 106
+      // 最多调用 105 次 hasNext 和 next 操作
+      // 提示：
+      // 你可以设计一个满足下述条件的解决方案吗？next() 和 hasNext() 操作均摊时间复杂度为 O(1) ，并使用 O(h) 内存。其中 h 是树的高度。
+
+      /**
+       * Definition for a binary tree node.
+       * function TreeNode(val, left, right) {
+       *     this.val = (val===undefined ? 0 : val)
+       *     this.left = (left===undefined ? null : left)
+       *     this.right = (right===undefined ? null : right)
+       * }
+       */
+      /**
+       * @param {TreeNode} root
+       */
+      var BSTIterator = function (root) {};
+      /**
+       * @return {number}
+       */
+      BSTIterator.prototype.next = function () {};
+      /**
+       * @return {boolean}
+       */
+      BSTIterator.prototype.hasNext = function () {};
+
+      // --- answer-1 ---
+
+      // 中序遍历
+      function midTree(root) {
+        const arr = [];
+        function mid(node) {
+          if (!node) return;
+          mid(node.left);
+          arr.push(node.val);
+          mid(node.right);
+        }
+        mid(root);
+        return arr;
+      }
+      var BSTIterator = function (root) {
+        this.index = -1;
+        this.list = midTree(root);
+      };
+
+      BSTIterator.prototype.next = function () {
+        if (this.index < this.list.length - 1) {
+          this.index += 1;
+          return this.list[this.index];
+        }
+        return;
+      };
+
+      BSTIterator.prototype.hasNext = function () {
+        return this.index < this.list.length - 1;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 使用迭代 使用中序遍历的迭代算法可满足进阶
+      var BSTIterator = function (root) {
+        this.node = root;
+        this.stack = [];
+      };
+
+      BSTIterator.prototype.next = function () {
+        while (this.node) {
+          this.stack.push(this.node);
+          this.node = this.node.left;
+        }
+        let node = this.stack.pop();
+        this.node = node.right;
+        return node.val;
+      };
+
+      BSTIterator.prototype.hasNext = function () {
+        return this.node || this.stack.length > 0;
+      };
+
+      // --- answer-2 ---
+
+      // 输入;
+      var cmds = ['BSTIterator', 'next', 'next', 'hasNext', 'next', 'hasNext', 'next', 'hasNext', 'next', 'hasNext'];
+      var args = [[[7, 3, 15, null, null, 9, 20]], [], [], [], [], [], [], [], [], []];
+      args[0][0] = buildTreeByArray(args[0][0]);
+
+      var result = [null, 3, 7, true, 9, true, 15, true, 20, false];
+
+      console.log('root = ', cmds);
+      console.log('args = ', args);
+      console.log('result = ', result);
+
+      classCommand(cmds, args);
+    </script>
+  </body>
+</html>
