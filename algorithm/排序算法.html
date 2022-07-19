@@ -146,9 +146,13 @@
           let r = end;
           let guard = arr[start];
           while (l < r) {
-            // 里面还需判断 l r 防止超标
+            // 里面还需判断 l r 防止超标 注意这里的顺序得先r 后l
             while (l < r && arr[r] >= guard) r--;
             while (l < r && arr[l] <= guard) l++;
+
+            // 从大到小
+            // while (l < r && arr[r] <= guard) r--;
+            // while (l < r && arr[l] >= guard) l++;
 
             [arr[l], arr[r]] = [arr[r], arr[l]]; // change
           }
