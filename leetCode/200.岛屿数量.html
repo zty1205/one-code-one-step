@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>200. 岛屿数量</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/number-of-islands/
+
+      // 给你一个由 '1'（陆地）和 '0'（水）组成的的二维网格，请你计算网格中岛屿的数量。
+      // 岛屿总是被水包围，并且每座岛屿只能由水平方向和/或竖直方向上相邻的陆地连接形成。
+      // 此外，你可以假设该网格的四条边均被水包围。
+      // 提示：
+      // m == grid.length
+      // n == grid[i].length
+      // 1 <= m, n <= 300
+      // grid[i][j] 的值为 '0' 或 '1'
+
+      /**
+       * @param {character[][]} grid
+       * @return {number}
+       */
+      var numIslands = function (grid) {};
+
+      // --- answer-1 ---
+
+      var numIslands = function (grid = [[]]) {
+        const m = grid.length,
+          n = grid[0].length;
+
+        // 已访问岛屿
+        const visited = Array.from({ length: m }, () => Array.from({ length: n }, () => false));
+
+        let count = 0;
+        // 连接相邻的岛屿
+        function join(r, l) {
+          if (r >= m || r < 0 || l >= n || l < 0) return;
+          if (visited[r][l]) return;
+          visited[r][l] = true;
+          if (grid[r][l] === '0') return;
+          join(r - 1, l);
+          join(r + 1, l);
+          join(r, l - 1);
+          join(r, l + 1);
+        }
+        for (let i = 0; i < m; i++) {
+          for (let j = 0; j < n; j++) {
+            if (!visited[i][j] && grid[i][j] === '1') {
+              count += 1;
+              join(i, j);
+            }
+          }
+        }
+
+        return count;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var grid = [
+        ['1', '1', '1', '1', '0'],
+        ['1', '1', '0', '1', '0'],
+        ['1', '1', '0', '0', '0'],
+        ['0', '0', '0', '0', '0']
+      ];
+
+      var result = 1;
+
+      // var grid = [
+      //   ['1', '1', '0', '0', '0'],
+      //   ['1', '1', '0', '0', '0'],
+      //   ['0', '0', '1', '0', '0'],
+      //   ['0', '0', '0', '1', '1']
+      // ];
+      // var result = 3;
+
+      console.log('grid = ', grid);
+      console.log('result = ', result);
+      console.log('numIslands = ', numIslands(grid));
+    </script>
+  </body>
+</html>
