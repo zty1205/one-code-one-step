@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>211. 添加与搜索单词 - 数据结构设计</title>
+  </head>
+  <body>
+    <script src="../helper/command.js"></script>
+    <script>
+      // https://leetcode.cn/problems/design-add-and-search-words-data-structure/
+
+      // 请你设计一个数据结构，支持 添加新单词 和 查找字符串是否与任何先前添加的字符串匹配 。
+      // 实现词典类 WordDictionary ：
+      // 提示：
+      // WordDictionary() 初始化词典对象
+      // void addWord(word) 将 word 添加到数据结构中，之后可以对它进行匹配
+      // bool search(word) 如果数据结构中存在字符串与 word 匹配，则返回 true ；否则，返回  false 。word 中可能包含一些 '.' ，每个 . 都可以表示任何一个字母。
+      // 提示：
+      // 1 <= word.length <= 25
+      // addWord 中的 word 由小写英文字母组成
+      // search 中的 word 由 '.' 或小写英文字母组成
+      // 最多调用 104 次 addWord 和 search
+
+      var WordDictionary = function () {};
+      /**
+       * @param {string} word
+       * @return {void}
+       */
+      WordDictionary.prototype.addWord = function (word) {};
+      /**
+       * @param {string} word
+       * @return {boolean}
+       */
+      WordDictionary.prototype.search = function (word) {};
+      /**
+       * Your WordDictionary object will be instantiated and called as such:
+       * var obj = new WordDictionary()
+       * obj.addWord(word)
+       * var param_2 = obj.search(word)
+       */
+
+      // --- answer-1 ---
+
+      // 使用内置函数 超时
+      var WordDictionary = function () {
+        this.list = [];
+      };
+
+      WordDictionary.prototype.addWord = function (word) {
+        this.list.push(word);
+      };
+
+      WordDictionary.prototype.search = function (word) {
+        return this.list.some((x) => new RegExp(`^${word}$`).test(x));
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 使用字典树试试
+      var WordDictionary = function () {
+        this.tree = {};
+      };
+
+      WordDictionary.prototype.addWord = function (word = '') {
+        let cur = this.tree;
+        for (let i = 0; i < word.length; i++) {
+          let char = word[i];
+          if (!(char in cur)) cur[char] = {};
+          cur = cur[char];
+          if (i === word.length - 1) {
+            // 标记叶子节点 区分abc abcd
+            cur.leaf = true;
+          }
+        }
+      };
+
+      function findTree(tree, words = '', idx) {
+        if (!tree || words.length < idx) return false;
+        if (tree.leaf && words.length === idx) return true;
+        const char = words[idx];
+
+        if (char === '.') {
+          for (let k in tree) {
+            if (k === 'leaf') continue;
+            if (findTree(tree[k], words, idx + 1)) return true;
+          }
+          return false;
+        }
+        if (!(char in tree)) return false;
+        return findTree(tree[char], words, idx + 1);
+      }
+
+      WordDictionary.prototype.search = function (word = '') {
+        return findTree(this.tree, word, 0);
+      };
+
+      // --- answer-2 ---
+
+      // var word = ;
+      var cmds = ['WordDictionary', 'addWord', 'addWord', 'addWord', 'search', 'search', 'search', 'search'];
+      var args = [[], ['bad'], ['dad'], ['mad'], ['pad'], ['bad'], ['.ad'], ['b..']];
+      var result = [null, null, null, false, true, true, true];
+
+      // var cmds = [
+      //   'WordDictionary',
+      //   'addWord',
+      //   'addWord',
+      //   'addWord',
+      //   'addWord',
+      //   'search',
+      //   'search',
+      //   'addWord',
+      //   'search',
+      //   'search',
+      //   'search',
+      //   'search',
+      //   'search',
+      //   'search'
+      // ];
+      // var args = [
+      //   [],
+      //   ['at'],
+      //   ['and'],
+      //   ['an'],
+      //   ['add'],
+      //   ['a'],
+      //   ['.at'],
+      //   ['bat'],
+      //   ['.at'],
+      //   ['an.'],
+      //   ['a.d.'],
+      //   ['b.'],
+      //   ['a.d'],
+      //   ['.']
+      // ];
+      // var result = [null, null, null, null, null, false, false, null, true, true, false, false, true, false];
+
+      // var cmds = ['WordDictionary', 'addWord', 'addWord', 'search', 'search', 'search', 'search', 'search', 'search'];
+      // var args = [[], ['a'], ['a'], ['.'], ['a'], ['aa'], ['a'], ['.a'], ['a.']];
+      // var result = [null, null, null, true, true, false, true, false, false];
+
+      console.log('word = ', cmds);
+      console.log('word = ', args);
+      console.log('result = ', result);
+
+      const instance = classCommand(cmds, args);
+
+      // console.log('sarch bad: true === ', instance.search('bad'));
+      // console.log('sarch bac: true === ', instance.search('bac'));
+      // console.log('sarch .ad: true === ', instance.search('.ad'));
+    </script>
+  </body>
+</html>
