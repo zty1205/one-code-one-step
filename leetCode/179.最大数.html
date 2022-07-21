@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>179. 最大数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/largest-number/
+
+      // 给定一组非负整数 nums，重新排列每个数的顺序（每个数不可拆分）使之组成一个最大的整数。
+      // 注意：输出结果可能非常大，所以你需要返回一个字符串而不是整数。
+      // 提示：
+      // 1 <= nums.length <= 100
+      // 0 <= nums[i] <= 109
+
+      /**
+       * @param {number[]} nums
+       * @return {string}
+       */
+      var largestNumber = function (nums) {};
+
+      // --- answer-1 ---
+
+      var largestNumber = function (nums = []) {
+        // 排序 ab > ba 那么a应该放在b的前面
+        let str = nums
+          .sort((a, b) => `${b}${a}` - `${a}${b}`)
+          .reduce((pre, cur) => {
+            pre = pre + cur;
+            return pre;
+          }, '');
+
+        // 去掉前面的0
+        let i = 0;
+        while (str[i] === '0') i++;
+
+        return str.substring(i) || '0';
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      // var nums = [10,2];
+      // var result = "210";
+
+      var nums = [3, 30, 34, 5, 9];
+      var result = '9534330';
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('largestNumber = ', largestNumber(nums));
+    </script>
+  </body>
+</html>

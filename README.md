@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (279 道)
+## 三、LeetCode (280 道)
 
 <br/>
 
@@ -290,6 +290,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [172.阶乘后的零.html](./leetCode/172.阶乘后的零.html)
 - [173.二叉搜索树迭代器.html](./leetCode/173.二叉搜索树迭代器.html)
 - [175.组合两个表.sql](./leetCode/175.组合两个表.sql)
+- [179.最大数.html](./leetCode/179.最大数.html)
 - [181.超过经理收入的员工.sql](./leetCode/181.超过经理收入的员工.sql)
 - [182.查找重复的电子邮箱.sql](./leetCode/182.查找重复的电子邮箱.sql)
 - [183.从不订购的客户.sql](./leetCode/183.从不订购的客户.sql)
