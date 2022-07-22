@@ -35,6 +35,16 @@
         return res;
       };
 
+      var majorityElement = function (nums = []) {
+        const map = {};
+        const mid = nums.length / 2;
+        for (let n of nums) {
+          const count = (map[n] || 0) + 1;
+          if (count > mid) return n;
+          else map[n] = count;
+        }
+      };
+
       // 官方 Boyer-Moore 投票算法
       var majorityElement1 = function (nums = []) {
         let count = 0;
