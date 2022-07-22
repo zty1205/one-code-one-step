@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>229. 多数元素 II</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/majority-element-ii/
+
+      // 给定一个大小为 n 的整数数组，找出其中所有出现超过 ⌊ n/3 ⌋ 次的元素。
+      // 提示：
+      // 1 <= nums.length <= 5 * 104
+      // -109 <= nums[i] <= 109
+
+      /**
+       * @param {number[]} nums
+       * @return {number[]}
+       */
+      var majorityElement = function (nums) {};
+
+      // --- answer-1 ---
+
+      // hash统计 时间O(n) 空间O(n)
+      var majorityElement = function (nums = []) {
+        const map = {};
+        const three = nums.length / 3;
+        const res = [];
+        for (let n of nums) {
+          map[n] = (map[n] || 0) + 1;
+        }
+        for (let k in map) {
+          if (map[k] > three) res.push(+k);
+        }
+        return res;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 摩尔投票算法 通过众数抵消非众数  时间O(n) 空间O(1)
+      var majorityElement = function (nums = []) {
+        let element1 = 0;
+        let element2 = 0;
+        let vote1 = 0;
+        let vote2 = 0;
+
+        for (const num of nums) {
+          if (vote1 > 0 && num === element1) {
+            vote1++;
+          } else if (vote2 > 0 && num === element2) {
+            vote2++;
+          } else if (vote1 === 0) {
+            // 第一个元素 作为众数1
+            element1 = num;
+            vote1++;
+          } else if (vote2 === 0) {
+            // 第二个元素 作为众数2
+            element2 = num;
+            vote2++;
+          } else {
+            // 抵消
+            vote1--;
+            vote2--;
+          }
+        }
+
+        let cnt1 = 0;
+        let cnt2 = 0;
+        for (const num of nums) {
+          if (vote1 > 0 && num === element1) {
+            cnt1++;
+          }
+          if (vote2 > 0 && num === element2) {
+            cnt2++;
+          }
+        }
+
+        const ans = [];
+        const three = nums.length / 3;
+        if (vote1 > 0 && cnt1 > three) {
+          ans.push(element1);
+        }
+        if (vote2 > 0 && cnt2 > three) {
+          ans.push(element2);
+        }
+
+        return ans;
+      };
+
+      // --- answer-2 ---
+
+      var nums = [3, 2, 3];
+      var result = [3];
+
+      var nums = [1];
+      var result = [1];
+
+      var nums = [1, 2];
+      var result = [1, 2];
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('majorityElement = ', majorityElement(nums));
+    </script>
+  </body>
+</html>

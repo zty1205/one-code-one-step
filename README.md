@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (280 道)
+## 三、LeetCode (281 道)
 
 <br/>
 
@@ -318,6 +318,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [225.用队列实现栈.html](./leetCode/225.用队列实现栈.html)
 - [226.翻转二叉树.html](./leetCode/226.翻转二叉树.html)
 - [228.汇总区间.html](./leetCode/228.汇总区间.html)
+- [229.多数元素 II.html](./leetCode/229.多数元素II.html)
 - [231.2 的幂.html](./leetCode/231.2的幂.html)
 - [232.用栈实现队列.html](./leetCode/232.用栈实现队列.html)
 - [233.数字 1 的个数.html](./leetCode/233.数字1的个数.html)
