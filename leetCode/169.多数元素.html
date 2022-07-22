@@ -35,18 +35,8 @@
         return res;
       };
 
-      var majorityElement = function (nums = []) {
-        const map = {};
-        const mid = nums.length / 2;
-        for (let n of nums) {
-          const count = (map[n] || 0) + 1;
-          if (count > mid) return n;
-          else map[n] = count;
-        }
-      };
-
       // 官方 Boyer-Moore 投票算法
-      var majorityElement1 = function (nums = []) {
+      var majorityElement = function (nums = []) {
         let count = 0;
         let candidate = null;
 
@@ -58,6 +48,33 @@
         });
 
         return candidate;
+      };
+
+      // 二分
+      function countNum(nums, l, r, num) {
+        let count = 0;
+        for (let i = l; i <= r; i++) {
+          if (nums[i] === num) count += 1;
+        }
+        return count;
+      }
+
+      function major(nums = [], left, right) {
+        console.log(left, right);
+        if (left === right) return nums[left];
+
+        const mid = Math.floor((right - left) / 2) + left;
+        const leftNum = major(nums, left, mid);
+        const rightNum = major(nums, mid + 1, right);
+        if (leftNum === rightNum) return leftNum;
+
+        let leftCount = countNum(nums, left, right, leftNum);
+        let rightCount = countNum(nums, left, right, rightNum);
+        return leftCount > rightCount ? leftNum : rightNum;
+      }
+
+      var majorityElement = function (nums = []) {
+        return major(nums, 0, nums.length - 1);
       };
 
       let nums = [3, 2, 3];
