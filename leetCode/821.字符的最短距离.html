@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>821. 字符的最短距离</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/shortest-distance-to-a-character/
+
+      // 给你一个字符串 s 和一个字符 c ，且 c 是 s 中出现过的字符。
+      // 返回一个整数数组 answer ，其中 answer.length == s.length 且 answer[i] 是 s 中从下标 i 到离它 最近 的字符 c 的 距离 。
+      // 两个下标 i 和 j 之间的 距离 为 abs(i - j) ，其中 abs 是绝对值函数。
+      // 提示：
+      // 1 <= s.length <= 104
+      // s[i] 和 c 均为小写英文字母
+      // 题目数据保证 c 在 s 中至少出现一次
+
+      /**
+       * @param {string} s
+       * @param {character} c
+       * @return {number[]}
+       */
+      var shortestToChar = function (s, c) {};
+
+      // --- answer-1 ---
+
+      // 只需关心最近的两个字符c 需要回来重写
+      var shortestToChar = function (s = '', c = '') {
+        let preCIndex; // 上一次c的下标
+        const result = [];
+        for (let i = 0; i < s.length; i++) {
+          if (s[i] === c) {
+            if (preCIndex !== undefined) {
+              // 如果有上一次的c下标 则取距离最小值
+              let j = i - 1;
+              while (s[j] !== c && j >= preCIndex) {
+                result[j] = Math.min(i - j, j - preCIndex);
+                j--;
+              }
+            } else {
+              let j = i - 1;
+              while (s[j] !== c && j >= 0) {
+                result[j] = i - j;
+                j--;
+              }
+            }
+            preCIndex = i;
+            result[i] = 0;
+          } else {
+            // 距离c的位置，会因下一个c的位置而重写
+            result[i] = i - (preCIndex || 0);
+          }
+        }
+        return result;
+      };
+
+      // 简化下写法
+      var shortestToChar = function (s = '', c = '') {
+        let preCIndex; // 上一次c的下标
+        const result = [];
+        for (let i = 0; i < s.length; i++) {
+          if (s[i] === c) {
+            let j = i - 1;
+            while (s[j] !== c && j >= (preCIndex || 0)) {
+              result[j] = preCIndex !== undefined ? Math.min(i - j, j - preCIndex) : i - j;
+              j--;
+            }
+            preCIndex = i;
+            result[i] = 0;
+          } else {
+            result[i] = i - (preCIndex || 0);
+          }
+        }
+        return result;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 先求出c的位置 和 解法1的局别是没有重写的步骤
+      var shortestToChar = function (s = '', c = '') {
+        const result = [];
+        const cIndexs = [];
+        const length = s.length;
+        for (let i = 0; i < length; i++) {
+          if (s[i] === c) {
+            result[i] = 0;
+            cIndexs.push(i);
+          }
+        }
+        let j = 0;
+        const cLen = cIndexs.length;
+
+        // 遍历两个字符c之间
+        while (j < cLen - 1) {
+          for (let i = cIndexs[j] + 1; i < cIndexs[j + 1]; i++) {
+            result[i] = Math.min(i - cIndexs[j], cIndexs[j + 1] - i);
+          }
+          j++;
+        }
+        // 边界处理
+        const firstCIndex = cIndexs[0],
+          lastCIndex = cIndexs[cLen - 1];
+        if (firstCIndex !== 0) {
+          for (let i = 0; i < firstCIndex; i++) {
+            result[i] = firstCIndex - i;
+          }
+        }
+        if (lastCIndex !== length - 1) {
+          for (let i = lastCIndex; i < length; i++) {
+            result[i] = i - lastCIndex;
+          }
+        }
+        return result;
+      };
+
+      // --- answer-2 ---
+
+      // --- answer-3 ---
+
+      // 从左遍历记录 右侧最近字符c的距离
+      // 从右遍历记录 左侧最近字符c的距离
+      // 取最小值
+      var shortestToChar = function (s, c) {
+        const length = s.length;
+        const result = new Array(length).fill(0);
+
+        for (let i = 0, idx = -length; i < length; ++i) {
+          if (s[i] === c) {
+            idx = i;
+          }
+          result[i] = i - idx;
+        }
+
+        for (let i = length - 1, idx = 2 * length; i >= 0; --i) {
+          if (s[i] == c) {
+            idx = i;
+          }
+          result[i] = Math.min(result[i], idx - i);
+        }
+        return result;
+      };
+
+      // --- answer-3 ---
+
+      var s = 'loveleetcode',
+        c = 'e';
+      var result = [3, 2, 1, 0, 1, 0, 0, 1, 2, 2, 1, 0];
+      // 解释：字符 'e' 出现在下标 3、5、6 和 11 处（下标从 0 开始计数）。
+
+      var s = 'aaab',
+        c = 'b';
+      var result = [3, 2, 1, 0];
+
+      var s = 'baaab',
+        c = 'b';
+      var result = [0, 1, 2, 1, 0];
+
+      var s = 'aaba';
+      var c = 'b';
+      var result = [2, 1, 0, 1];
+
+      console.log('s = ', s);
+      console.log('c = ', c);
+      console.log('result = ', result);
+      console.log('result = ', shortestToChar(s, c));
+    </script>
+  </body>
+</html>
