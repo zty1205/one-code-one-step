@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>824. 山羊拉丁文</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/goat-latin/
+
+      // 给你一个由若干单词组成的句子 sentence ，单词间由空格分隔。每个单词仅由大写和小写英文字母组成。
+      // 请你将句子转换为 “山羊拉丁文（Goat Latin）”（一种类似于 猪拉丁文 - Pig Latin 的虚构语言）。山羊拉丁文的规则如下：
+      // 提示：
+      // 如果单词以元音开头（'a', 'e', 'i', 'o', 'u'），在单词后添加"ma"。
+      // 例如，单词 "apple" 变为 "applema" 。
+      // 如果单词以辅音字母开头（即，非元音字母），移除第一个字符并将它放到末尾，之后再添加"ma"。
+      // 例如，单词 "goat" 变为 "oatgma" 。
+      // 根据单词在句子中的索引，在单词最后添加与索引相同数量的字母'a'，索引从 1 开始。
+      // 例如，在第一个单词后添加 "a" ，在第二个单词后添加 "aa" ，以此类推。
+      // 返回将 sentence 转换为山羊拉丁文后的句子。
+      // 提示：
+      // 1 <= sentence.length <= 150
+      // sentence 由英文字母和空格组成
+      // sentence 不含前导或尾随空格
+      // sentence 中的所有单词由单个空格分隔
+
+      /**
+       * @param {string} sentence
+       * @return {string}
+       */
+      var toGoatLatin = function (sentence) {};
+
+      // --- answer-1 ---
+
+      const VOWEL = {
+        a: undefined,
+        e: undefined,
+        i: undefined,
+        o: undefined,
+        u: undefined
+      };
+      function isVowel(c = '') {
+        c = c.toLocaleLowerCase();
+        return c in VOWEL;
+      }
+
+      // 分割后进行操作
+      var toGoatLatin = function (sentence = '') {
+        function handler(str = '', idx = 0) {
+          if (!str) return str;
+          if (!isVowel(str[0])) {
+            str = str.substring(1) + str[0];
+          }
+          str += 'ma' + new Array(idx + 1).fill('a').join('');
+          return str;
+        }
+        return sentence.split(/\s/).map(handler).join(' ');
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 遍历
+      var toGoatLatin = function (sentence) {
+        const n = sentence.length;
+        let i = 0,
+          wordIndex = 1;
+        let result = '';
+
+        while (i < n) {
+          let j = i;
+          // 找到当前的单词
+          while (j < n && sentence[j] !== ' ') {
+            ++j;
+          }
+
+          wordIndex += 1;
+          if (wordIndex !== 2) {
+            result += ' ';
+          }
+          if (isVowel(sentence[i])) {
+            result += sentence.substring(i, j);
+          } else {
+            result += sentence.slice(i + 1, j);
+            result += sentence[i];
+          }
+          result += 'm';
+          for (let k = 0; k < wordIndex; ++k) {
+            result += 'a';
+          }
+
+          i = j + 1;
+        }
+
+        return result;
+      };
+
+      // --- answer-2 ---
+
+      var sentence = 'I speak Goat Latin';
+      var result = 'Imaa peaksmaaa oatGmaaaa atinLmaaaaa';
+
+      var sentence = 'The quick brown fox jumped over the lazy dog';
+      var result =
+        'heTmaa uickqmaaa rownbmaaaa oxfmaaaaa umpedjmaaaaaa overmaaaaaaa hetmaaaaaaaa azylmaaaaaaaaa ogdmaaaaaaaaaa';
+
+      console.log('sentence = ', sentence);
+      console.log('result = ', result);
+      console.log('result = ', toGoatLatin(sentence));
+    </script>
+  </body>
+</html>
