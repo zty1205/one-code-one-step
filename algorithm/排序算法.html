@@ -407,9 +407,21 @@
         }, []);
       }
 
-      // 内部 大于10时 使用快拍， 小于10时 使用插入
+      // 内部使用TimSort 一种高效稳定的算法 平均复杂度O(logN) 最好的情况O(n)
+      // 该算法查找已经排序的数据的子序列，并使用该知识更有效地对其余部分进行排序。
+      // 是一个归并排序做了大量优化的版本
       function array_sort(arr) {
-        return arr.sort();
+        return arr.sort((a, b) => a - b);
+      }
+
+      // 利用js对象的快属性进行排序 局限于无重复元素的数组 且元素范围为 0 <= n < 2^32-1
+      function ObjkeysSort(arr = []) {
+        return Object.keys(
+          arr.reduce((pre, cur) => {
+            pre[cur] = 1;
+            return pre;
+          }, {})
+        ).map(Number);
       }
 
       console.log('bubble_sort = ', bubble_sort([...array]));
@@ -427,6 +439,7 @@
       console.log('bucketSort = ', bucketSort([...array]));
       console.log('countSort = ', countSort([...array]));
       console.log('array_sort = ', array_sort([...array]));
+      console.log('ObjkeysSort = ', ObjkeysSort([...array]));
     </script>
   </body>
 </html>
