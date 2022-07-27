@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>222. 完全二叉树的节点个数</title>
+  </head>
+  <body>
+    <script src="../helper/tree.js"></script>
+    <script>
+      // https://leetcode.cn/problems/count-complete-tree-nodes/
+
+      // 给你一棵 完全二叉树 的根节点 root ，求出该树的节点个数。
+      // 完全二叉树 的定义如下：在完全二叉树中，除了最底层节点可能没填满外，其余每层节点数都达到最大值，并且最下面一层的节点都集中在该层最左边的若干位置。若最底层为第 h 层，则该层包含 1~ 2h 个节点。
+      // 提示：
+      // 树中节点的数目范围是[0, 5 * 104]
+      // 0 <= Node.val <= 5 * 104
+      // 题目数据保证输入的树是 完全二叉树
+
+      /**
+       * Definition for a binary tree node.
+       * function TreeNode(val, left, right) {
+       *     this.val = (val===undefined ? 0 : val)
+       *     this.left = (left===undefined ? null : left)
+       *     this.right = (right===undefined ? null : right)
+       * }
+       */
+      /**
+       * @param {TreeNode} root
+       * @return {number}
+       */
+      var countNodes = function (root) {};
+
+      // --- answer-1 ---
+
+      // 任一遍历算法
+      var countNodes = function (root) {
+        if (!root) return 0;
+        let count = 0;
+        function traverse(root) {
+          if (!root) return;
+          traverse(root.left);
+          count += 1;
+          traverse(root.right);
+        }
+        traverse(root);
+        return count;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 直接遍历没有利用题目的性质
+      // 满二叉树 那么根节点到最左边叶子节点就是树的深度h 节点数2^h-1 ~ 2^h -1
+      // 使用二分法查 其中其中一个节点是否存在
+      // 时间复杂度：O(log^2 n)
+      function exists(root, level, k) {
+        let bits = 1 << (level - 1);
+        let node = root;
+        while (node !== null && bits > 0) {
+          node = bits & k ? node.right : node.left;
+          bits >>= 1;
+        }
+        return node !== null;
+      }
+
+      var countNodes = function (root) {
+        if (!root) return 0;
+
+        let level = 0; // 树的深度
+        let node = root;
+        while (node.left) {
+          level++;
+          node = node.left;
+        }
+
+        let low = 1 << level; // 2^(level-1)
+        let high = (1 << (level + 1)) - 1; // 2^level - 1
+        console.log('low ', low);
+        console.log('high ', high);
+        while (low < high) {
+          // 二分
+          const mid = Math.floor((high - low + 1) / 2) + low;
+          if (exists(root, level, mid)) {
+            low = mid;
+          } else {
+            high = mid - 1;
+          }
+        }
+        return low;
+      };
+
+      // --- answer-2 ---
+
+      var root = [1, 2, 3, 4, 5, 6];
+      var result = 6;
+
+      // var root = [];
+      // var result = 0;
+
+      // var root = [1];
+      // var result = 1;
+
+      var tree = buildTreeByArray(root);
+
+      console.log('root = ', root);
+      console.log('result = ', result);
+      console.log('countNodes = ', countNodes(tree));
+    </script>
+  </body>
+</html>
