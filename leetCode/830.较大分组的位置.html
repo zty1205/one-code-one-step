@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>830. 较大分组的位置</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/positions-of-large-groups/
+
+      // 在一个由小写字母构成的字符串 s 中，包含由一些连续的相同字符所构成的分组。
+      // 分组可以用区间 [start, end] 表示，其中 start 和 end 分别表示该分组的起始和终止位置的下标。上例中的 "xxxx" 分组用区间表示为 [3,6] 。
+      // 我们称所有包含大于或等于三个连续字符的分组为 较大分组 。
+      // 找到每一个 较大分组 的区间，按起始位置下标递增顺序排序后，返回结果。
+      // 提示：
+      // 1 <= s.length <= 1000
+      // s 仅含小写英文字母
+
+      /**
+       * @param {string} s
+       * @return {number[][]}
+       */
+      var largeGroupPositions = function (s) {};
+
+      // --- answer-1 ---
+
+      // 直接遍历 匹配不等于’自己‘的字母
+      var largeGroupPositions = function (s = '') {
+        const result = [];
+        const length = s.length;
+        let char = s[0];
+        let start = 0;
+        for (let i = 1; i < length; i++) {
+          let ch = s[i];
+          if (ch !== char) {
+            i - start >= 3 && result.push([start, i - 1]);
+            start = i;
+            char = ch;
+          }
+        }
+        // 字符串结尾也满足条件
+        if (s[length - 1] === char) {
+          length - start >= 3 && result.push([start, length - 1]);
+        }
+        return result;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 遍历 也可以用双指针
+      var largeGroupPositions = function (s) {
+        const result = [];
+        const length = s.length;
+        let count = 1;
+        for (let i = 0; i < length; i++) {
+          if (i === length - 1 || s[i] !== s[i + 1]) {
+            if (count >= 3) {
+              result.push([i - count + 1, i]);
+            }
+            count = 1;
+          } else {
+            count++;
+          }
+        }
+        return result;
+      };
+
+      // --- answer-2 ---
+
+      // --- answer-3 ---
+
+      // 正则  \1 表示捕获的第一个内容
+      var largeGroupPositions = function (s) {
+        return Array.from(s.matchAll(/(.)\1\1+/g), (v) => [v.index, v.index + v[0].length - 1]);
+      };
+
+      // --- answer-3 ---
+
+      // --- answer-4 ---
+
+      // 滑动窗口
+      var largeGroupPositions = function (s) {
+        let l = (r = 0);
+        const n = s.length;
+        const res = [];
+        while (l < n) {
+          while (r + 1 < n && s[r] === s[r + 1]) r++;
+          if (r - l > 1) res.push([l, r]);
+          l = ++r;
+        }
+        return res;
+      };
+
+      // --- answer-4 ---
+
+      var s = 'abbxxxxzzy';
+      var result = [[3, 6]];
+      // 解释："xxxx" 是一个起始于 3 且终止于 6 的较大分组。
+
+      var s = 'abc';
+      var result = [];
+      // 解释："a","b" 和 "c" 均不是符合要求的较大分组。
+
+      var s = 'abcdddeeeeaabbbcd';
+      var result = [
+        [3, 5],
+        [6, 9],
+        [12, 14]
+      ];
+      // 解释：较大分组为 "ddd", "eeee" 和 "bbb"
+
+      // var s = 'aaa';
+      // var result = [[0, 2]];
+
+      console.log('s = ', s);
+      console.log('match = ', Array.from(s.matchAll(/(.)\1\1+/g)));
+      console.log('result = ', result);
+      console.log('largeGroupPositions = ', largeGroupPositions(s));
+    </script>
+  </body>
+</html>
