@@ -547,7 +547,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 六、Algorithm (10 道)
+## 六、Algorithm (11 道)
 
 <br/>
 
@@ -561,6 +561,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [回溯算法.html](./algorithm/回溯算法.html)
 - [滑动窗口算法-双指针.html](./algorithm/滑动窗口算法-双指针.html)
 - [抽奖.html](./algorithm/抽奖.html)
+- [Kth 算法.html](./algorithm/Kth算法.html)
 
 <br/>
 
