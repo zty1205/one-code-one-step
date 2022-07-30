@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>832. 翻转图像</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script>
+      // https://leetcode.cn/problems/flipping-an-image/
+
+      // 给定一个 n x n 的二进制矩阵 image ，先 水平 翻转图像，然后 反转 图像并返回 结果 。
+      // 水平翻转图片就是将图片的每一行都进行翻转，即逆序。
+      // 提示：
+      // 例如，水平翻转 [1,1,0] 的结果是 [0,1,1]。
+      // 反转图片的意思是图片中的 0 全部被 1 替换， 1 全部被 0 替换。
+      // 提示：
+      // 例如，反转 [0,1,1] 的结果是 [1,0,0]。
+      // 提示：
+      // n == image.length
+      // n == image[i].length
+      // 1 <= n <= 20
+      // images[i][j] == 0 或 1.
+
+      /**
+       * @param {number[][]} image
+       * @return {number[][]}
+       */
+      var flipAndInvertImage = function (image) {};
+
+      // --- answer-1 ---
+
+      // 使用原生API 但生成了一个新数组
+      var flipAndInvertImage = function (image = [[]]) {
+        return image.map((arr) => {
+          return arr.reverse().map((x) => x ^ 1);
+        });
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // list[i] = list[length - i - 1] 的翻转值
+      var flipAndInvertImage = function (image = [[]]) {
+        let arr;
+        const col = image[0].length;
+        for (let list of image) {
+          arr = [...list];
+          for (let i = 0; i < col; i++) {
+            list[i] = arr[col - i - 1] ^ 1;
+          }
+        }
+        return image;
+      };
+
+      // --- answer-2 ---
+
+      // --- answer-3 ---
+
+      // 观察规律 如果 list[i] 和 list[length - i - 1] 相等才需要变换
+      // 可以只遍历一半
+      var flipAndInvertImage = function (image = [[]]) {
+        const end = image[0].length;
+        const mid = (end + 1) >> 1; // 奇数长度遍历一半+1， 偶数遍历一半
+        for (let list of image) {
+          for (let i = 0; i < mid; i++) {
+            if (i === end - i - 1) {
+              list[i] ^= 1;
+            } else if (list[i] === list[end - i - 1]) {
+              list[i] ^= 1;
+              list[end - i - 1] ^= 1;
+            }
+          }
+        }
+        return image;
+      };
+
+      // --- answer-3 ---
+
+      var image = [
+        [1, 1, 0],
+        [1, 0, 1],
+        [0, 0, 0]
+      ];
+      var result = [
+        [1, 0, 0],
+        [0, 1, 0],
+        [1, 1, 1]
+      ];
+      // 解释：首先翻转每一行: [[0,1,1],[1,0,1],[0,0,0]]；
+
+      var image = [
+        [1, 1, 0, 0],
+        [1, 0, 0, 1],
+        [0, 1, 1, 1],
+        [1, 0, 1, 0]
+      ];
+      var result = [
+        [1, 1, 0, 0],
+        [0, 1, 1, 0],
+        [0, 0, 0, 1],
+        [1, 0, 1, 0]
+      ];
+      // 解释：首先翻转每一行: [[0,0,1,1],[1,0,0,1],[1,1,1,0],[0,1,0,1]]；
+
+      console.log('image = ', image);
+      console.log('result = ', result);
+      console.log('flipAndInvertImage = ', flipAndInvertImage(deepClone(image)));
+    </script>
+  </body>
+</html>
