@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (289 道)
+## 三、LeetCode (291 道)
 
 <br/>
 
@@ -441,6 +441,8 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [830.较大分组的位置.html](./leetCode/830.较大分组的位置.html)
 - [832.翻转图像.html](./leetCode/832.翻转图像.html)
 - [836.矩形重叠.html](./leetCode/836.矩形重叠.html)
+- [844.比较含退格的字符串.html](./leetCode/844.比较含退格的字符串.html)
+- [844.比较含退格的字符串.html](./leetCode/844.比较含退格的字符串.html)
 - [873.最长的斐波那契子序列的长度.html](./leetCode/873.最长的斐波那契子序列的长度.html)
 
 <br/>

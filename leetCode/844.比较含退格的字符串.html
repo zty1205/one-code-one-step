@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>844. 比较含退格的字符串</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/backspace-string-compare/
+
+      // 给定 s 和 t 两个字符串，当它们分别被输入到空白的文本编辑器后，如果两者相等，返回 true 。# 代表退格字符。
+      // 注意：如果对空文本输入退格字符，文本继续为空。
+      // 提示：
+      // 1 <= s.length, t.length <= 200
+      // s 和 t 只含有小写字母以及字符 '#'
+      // 提示：
+      // 你可以用 O(n) 的时间复杂度和 O(1) 的空间复杂度解决该问题吗？
+
+      /**
+       * @param {string} s
+       * @param {string} t
+       * @return {boolean}
+       */
+      var backspaceCompare = function (s, t) {};
+
+      // --- answer-1 ---
+
+      // 辅助栈
+      var backspaceCompare = function (s = '', t = '') {
+        function backStr(str) {
+          if (!str) return;
+          const stack = [];
+          for (let i = 0; i < str.length; i++) {
+            if (str[i] === '#') {
+              stack.pop();
+            } else {
+              stack.push(str[i]);
+            }
+          }
+          return stack.join('');
+        }
+        return backStr(s) === backStr(t);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 结果只需要比较是否相等， 且需要满足空间复杂度，那么，想到的就是每个字符串一个指针，用来遍历比较
+      var backspaceCompare = function (s = '', t = '') {
+        let i = s.length - 1;
+        let j = t.length - 1;
+        let offsetI = 0;
+        let offsetJ = 0;
+        while (i >= 0 || j >= 0) {
+          // 找到右侧第一个字母 经过#退格的
+          while (i >= 0) {
+            if (s[i] === '#') {
+              i -= 1;
+              offsetI += 1;
+            } else if (offsetI > 0) {
+              offsetI--;
+              i -= 1;
+            } else {
+              break;
+            }
+          }
+          // 找到右侧第一个字母 经过#退格的
+          while (j >= 0) {
+            if (t[j] === '#') {
+              j -= 1;
+              offsetJ += 1;
+            } else if (offsetJ > 0) {
+              offsetJ--;
+              j -= 1;
+            } else {
+              break;
+            }
+          }
+          if (i >= 0 && j >= 0) {
+            if (s[i] !== t[j]) return false;
+          } else {
+            // 一个匹配了 另一个没有 也是错的
+            if (i >= 0 || j >= 0) return false;
+          }
+
+          i--;
+          j--;
+        }
+        return true;
+      };
+
+      // --- answer-2 ---
+
+      var s = 'ab#c',
+        t = 'ad#c';
+      var result = true;
+      // 解释：s 和 t 都会变成 "ac"。
+
+      var s = 'ab##',
+        t = 'c#d#';
+      var result = true;
+      // 解释：s 和 t 都会变成 ""。
+
+      // var s = 'a#c',
+      //   t = 'b';
+      // var result = false;
+      // 解释：s 会变成 "c"，但 t 仍然是 "b"。
+
+      // var s = 'a#bc',
+      //   t = 'bc';
+      // var result = true;
+
+      // var s = '';
+      // var t = '';
+      // var result = true;
+
+      // var s = '##';
+      // var t = '#####';
+      // var result = true;
+
+      console.log('s = ', s);
+      console.log('t = ', t);
+      console.log('result = ', result);
+      console.log('backspaceCompare = ', backspaceCompare(s, t));
+    </script>
+  </body>
+</html>
