@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>859. 亲密字符串</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/buddy-strings/
+
+      // 给你两个字符串 s 和 goal ，只要我们可以通过交换 s 中的两个字母得到与 goal 相等的结果，就返回 true ；否则返回 false 。
+      // 交换字母的定义是：取两个下标 i 和 j （下标从 0 开始）且满足 i != j ，接着交换 s[i] 和 s[j] 处的字符。
+      // 提示：
+      // 例如，在 "abcd" 中交换下标 0 和下标 2 的元素可以生成 "cbad" 。
+      // 提示：
+      // 1 <= s.length, goal.length <= 2 * 104
+      // s 和 goal 由小写英文字母组成
+
+      /**
+       * @param {string} s
+       * @param {string} goal
+       * @return {boolean}
+       */
+      var buddyStrings = function (s, goal) {};
+
+      // --- answer-1 ---
+
+      // s === goal 且 有重复字母
+      // s !== goal 那么就需要两个字母交换
+      var buddyStrings = function (s = '', goal = '') {
+        if (s.length !== goal.length) return false;
+        const sArr = []; // 存储相同下标但是字母不同
+        const gArr = [];
+        const map = {};
+        let same = false; // 有重复的字母 那么s === g 也能通过
+        for (let i = 0; i < s.length; i++) {
+          if (s[i] !== goal[i]) {
+            sArr.push(s[i]);
+            gArr.push(goal[i]);
+          }
+          if (sArr.length > 2) return false;
+          if (!same) {
+            const count = (map[s[i]] || 0) + 1;
+            map[s[i]] = count;
+            same = count === 2;
+          }
+        }
+        if (sArr.length === 0 && same) return true;
+        if (sArr.length < 2) return false;
+        return sArr[0] === gArr[1] && sArr[1] === gArr[0];
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 另一种写法
+      var buddyStrings = function (s, goal) {
+        if (s.length !== goal.length) return false;
+
+        if (s === goal) {
+          const map = {};
+          for (let i = 0; i < s.length; i++) {
+            const count = (map[s[i]] || 0) + 1;
+            if (count === 2) return true;
+            map[s[i]] = count;
+          }
+          return false;
+        } else {
+          let first = -1;
+          let second = -1;
+          for (let i = 0; i < s.length; i++) {
+            if (s[i] !== goal[i]) {
+              if (first === -1) first = i;
+              else if (second === -1) second = i;
+              else return false;
+            }
+          }
+
+          return second !== -1 && s[first] === goal[second] && s[second] === goal[first];
+        }
+      };
+
+      // --- answer-2 ---
+
+      var s = 'ab',
+        goal = 'ba';
+      var result = true;
+      // 解释：你可以交换 s[0] = 'a' 和 s[1] = 'b' 生成 "ba"，此时 s 和 goal 相等。
+
+      // var s = 'ab',
+      //   goal = 'ab';
+      // var result = false;
+      // 解释：你只能交换 s[0] = 'a' 和 s[1] = 'b' 生成 "ba"，此时 s 和 goal 不相等。
+
+      // var s = 'aa',
+      //   goal = 'aa';
+      // var result = true;
+      // 解释：你可以交换 s[0] = 'a' 和 s[1] = 'a' 生成 "aa"，此时 s 和 goal 相等。
+
+      console.log('s = ', s);
+      console.log('goal = ', goal);
+      console.log('result = ', result);
+      console.log('buddyStrings = ', buddyStrings(s, goal));
+    </script>
+  </body>
+</html>
