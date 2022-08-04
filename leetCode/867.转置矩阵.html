@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>867. 转置矩阵</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/transpose-matrix/
+
+      // 给你一个二维整数数组 matrix， 返回 matrix 的 转置矩阵 。
+      // 矩阵的 转置 是指将矩阵的主对角线翻转，交换矩阵的行索引与列索引。
+      // 提示：
+      // m == matrix.length
+      // n == matrix[i].length
+      // 1 <= m, n <= 1000
+      // 1 <= m * n <= 105
+      // -109 <= matrix[i][j] <= 109
+
+      /**
+       * @param {number[][]} matrix
+       * @return {number[][]}
+       */
+      var transpose = function (matrix) {};
+
+      // --- answer-1 ---
+
+      // result[i][j] === matrix[j][i]
+      var transpose = function (matrix = [[]]) {
+        const row = matrix.length;
+        const col = matrix[0].length;
+        const result = Array.from({ length: col }, () => Array.from({ length: row }));
+        for (let i = 0; i < row; i++) {
+          for (let j = 0; j < col; j++) {
+            result[j][i] = matrix[i][j];
+          }
+        }
+        return result;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var matrix = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9]
+      ];
+      var result = [
+        [1, 4, 7],
+        [2, 5, 8],
+        [3, 6, 9]
+      ];
+
+      // var matrix = [
+      //   [1, 2, 3],
+      //   [4, 5, 6]
+      // ];
+      // var result = [
+      //   [1, 4],
+      //   [2, 5],
+      //   [3, 6]
+      // ];
+
+      console.log('matrix = ', matrix);
+      console.log('result = ', result);
+      console.log('transpose = ', transpose(matrix));
+    </script>
+  </body>
+</html>
