@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>887. 鸡蛋掉落</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/super-egg-drop/
+
+      // 给你 k 枚相同的鸡蛋，并可以使用一栋从第 1 层到第 n 层共有 n 层楼的建筑。
+      // 已知存在楼层 f ，满足 0 <= f <= n ，任何从 高于 f 的楼层落下的鸡蛋都会碎，从 f 楼层或比它低的楼层落下的鸡蛋都不会破。
+      // 每次操作，你可以取一枚没有碎的鸡蛋并把它从任一楼层 x 扔下（满足 1 <= x <= n）。如果鸡蛋碎了，你就不能再次使用它。如果某枚鸡蛋扔下后没有摔碎，则可以在之后的操作中 重复使用 这枚鸡蛋。
+      // 请你计算并返回要确定 f 确切的值 的 最小操作次数 是多少？
+      // 提示：
+      // 1 <= k <= 100
+      // 1 <= n <= 104
+
+      /**
+       * @param {number} k
+       * @param {number} n
+       * @return {number}
+       */
+      var superEggDrop = function (k, n) {};
+
+      // --- answer-1 ---
+
+      // 类似 2颗鸡蛋使用动态规划
+      // dp[k][n] 表示最小操作数
+      // dp[k][n] === 1 +  dp[k-1][n-i] + dp[1][i] (i 从 0到n) 这里取最小值
+      var superEggDrop = function (k, n) {
+        // 初始化dp 初始值为1个鸡蛋1层层试的结果
+        const dp = Array.from({ length: k + 1 }, () => Array.from({ length: n + 1 }, (v, k) => k));
+        for (let i = 2; i <= k; i++) {
+          for (let j = 1; j <= n; j++) {
+            for (let idx = 1; idx < j; idx++) {
+              // 扔一次鸡蛋碎了 还需要 dp[i-1][idx - 1] 已经试过一层了所以-1
+              // 没碎 还需要 dp[i][j - idx]
+              dp[i][j] = Math.min(dp[i][j], 1 + Math.max(dp[i - 1][idx - 1], dp[i][j - idx]));
+            }
+          }
+        }
+        return dp[k][n];
+      };
+
+      // 时间复杂度达到了 kn^2超时
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 二分优化
+      // f(x) = dp[k][n] = 1 + min(max(dp[k-1][x-1], dp[k, n-x]))
+      // f1(x) = dp[k-1][x-1] 单调递增 f2(x) = dp[k, n-x] 单调递减 当两者相等时取到最小值/ f1(x) f2(x)是都大于0的离散函数
+      // 取整数值是的  x1 <= x <= x2 带入方程取最小。 用二分法求x1  x2 === x1+1
+      // 时间复杂度 O(knlogn)
+      var superEggDrop = function (k, n) {
+        // 带备忘录的dp
+        const map = new Map();
+
+        function drop(k, n) {
+          const hashK = `${n}_${k}`;
+          if (!map.has(hashK)) {
+            let res;
+            if (n === 0 || k === 1) {
+              res = n;
+            } else {
+              let low = 1;
+              let high = n;
+              while (low + 1 < high) {
+                let mid = Math.floor((low + high) / 2);
+                let d1 = drop(k - 1, mid - 1);
+                let d2 = drop(k, n - mid);
+                if (d1 < d2) {
+                  low = mid;
+                } else if (d1 > d2) {
+                  high = mid;
+                } else {
+                  low = mid;
+                  high = mid;
+                }
+              }
+              res =
+                1 +
+                Math.min(
+                  Math.max(drop(k - 1, low - 1), drop(k, n - low)),
+                  Math.max(drop(k - 1, high - 1), drop(k, n - high))
+                );
+            }
+            map.set(hashK, res);
+          }
+
+          return map.get(hashK);
+        }
+        return drop(k, n);
+      };
+
+      // --- answer-2 ---
+
+      // --- answer-3 ---
+
+      // f(t, k)表示 做t次操作， 在k个鸡蛋的前提下， 找到的最高的层数n 那么即就 f(t, k) >= n
+      // f(t,k) = 1 + f(t-1, k-1 ) + f(t-1, k)
+      // 从某一层扔下鸡蛋
+      // f(t-1, k-1 ) 表示扔了没碎 层的上方还有多少层
+      // f(t-1, k) 表示碎了 层的下方还有多少层
+      // 当 t≥1 的时候 f(t, 1) = t，当 k ≥1 时，f(1, k) = 1
+      // t <= n
+      var superEggDrop = function (k, n) {
+        if (n === 1) return 1;
+
+        const dp = Array.from({ length: n + 1 }, () => Array.from({ length: k + 1 }, () => 0));
+        for (let i = 1; i <= k; ++i) {
+          dp[1][i] = 1;
+        }
+
+        let res = -1;
+        for (let i = 2; i <= n; ++i) {
+          for (let j = 1; j <= k; ++j) {
+            dp[i][j] = 1 + dp[i - 1][j - 1] + dp[i - 1][j];
+          }
+          if (dp[i][k] >= n) {
+            console.log('i = ', i);
+            res = i;
+            break;
+          }
+        }
+        console.log('dp = ', dp);
+        return res;
+      };
+
+      // --- answer-3 ---
+
+      var k = 1,
+        n = 2;
+      var result = 2;
+      // 解释：
+
+      // var k = 2,
+      //   n = 6;
+      // var result = 3;
+
+      var k = 3,
+        n = 14;
+      var result = 4;
+
+      var k = 2,
+        n = 100;
+      var result = 14;
+
+      var k = 3,
+        n = 100;
+      var result = 9;
+
+      var k = 8,
+        n = 10000;
+      var result = 14;
+
+      console.log('k = ', k);
+      console.log('n = ', n);
+      console.log('result = ', result);
+      console.log('superEggDrop = ', superEggDrop(k, n));
+    </script>
+  </body>
+</html>
