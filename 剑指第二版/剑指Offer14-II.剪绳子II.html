@@ -29,29 +29,12 @@
         if (n <= 2) return 1;
         if (n === 3) return 2;
         if (n === 4) return 4;
-
-        let x = Math.floor(n / 3) - 1;
-        let y = n % 3;
-        // n -(3*x+y)  余下的可能是 3,4,5 对应余数0,1,2 对应长度积 *3,*4,*6
-
-        // 快速幂
-        let res = 1;
-        let a = 3;
-        while (x > 0) {
-          if (x % 2 === 1) {
-            // 奇数
-            res = (res * a) % 1000000007;
-          }
-          x = x >> 1;
-          // 这里的a会越变越大 a^2 a^4 ....就会越界
-          a = (a * a) % 1000000007;
+        res = 1;
+        while (n > 4) {
+          n -= 3;
+          res = (res * 3) % (1e9 + 7);
         }
-        let tmp = {
-          0: 3,
-          1: 4,
-          2: 6
-        };
-        return (res * tmp[y]) % 1000000007;
+        return (res * n) % (1e9 + 7);
       };
 
       // --- answer-1 ---
