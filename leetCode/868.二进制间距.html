@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>868. 二进制间距</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/binary-gap/
+
+      // 给定一个正整数 n，找到并返回 n 的二进制表示中两个 相邻 1 之间的 最长距离 。如果不存在两个相邻的 1，返回 0 。
+      // 如果只有 0 将两个 1 分隔开（可能不存在 0 ），则认为这两个 1 彼此 相邻 。两个 1 之间的距离是它们的二进制表示中位置的绝对差。例如，"1001" 中的两个 1 的距离为 3 。
+      // 提示：
+      // 1 <= n <= 109
+
+      /**
+       * @param {number} n
+       * @return {number}
+       */
+      var binaryGap = function (n) {};
+
+      // --- answer-1 ---
+
+      // 参考整数的汉明重量
+      // 去除二进制的最后一个1 当当为2的整数次幂时  n & (n-1) = 0
+      var hammingWeight = function (n) {
+        let ans = 0;
+        while (n) {
+          n = n & (n - 1);
+          ans++;
+        }
+        return ans;
+      };
+
+      var binaryGap = function (n) {
+        let result = 0;
+        let pre = undefined;
+        while (n) {
+          let nextN = n & (n - 1);
+          let space = Math.log2(n - nextN);
+          if (pre !== undefined) {
+            result = Math.max(space - pre, result);
+          }
+          pre = space;
+          n = nextN;
+        }
+        return result;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // num & -num 可以求出二进制字符串最后一个1的位置 如1100 则是4
+      var binaryGap = function (n) {
+        let result = 0;
+        let pre = undefined;
+        while (n) {
+          let del = n & -n;
+          let space = Math.log2(del);
+          if (pre !== undefined) {
+            result = Math.max(space - pre, result);
+          }
+          pre = space;
+          n = n - del;
+        }
+        return result;
+      };
+
+      // --- answer-2 ---
+
+      // 转二进制字符串计算也行
+
+      var n = 22;
+      var result = 2;
+      // 解释：22 的二进制是 "10110" 。
+
+      var n = 8;
+      var result = 0;
+      // 解释：8 的二进制是 "1000" 。
+
+      var n = 5;
+      var result = 2;
+      // 解释：5 的二进制是 "101" 。
+
+      console.log('n = ', n);
+      console.log('result = ', result);
+      console.log('binaryGap = ', binaryGap(n));
+    </script>
+  </body>
+</html>

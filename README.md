@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (294 道)
+## 三、LeetCode (295 道)
 
 <br/>
 
@@ -442,6 +442,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [832.翻转图像.html](./leetCode/832.翻转图像.html)
 - [836.矩形重叠.html](./leetCode/836.矩形重叠.html)
 - [844.比较含退格的字符串.html](./leetCode/844.比较含退格的字符串.html)
+- [868.二进制间距.html](./leetCode/868.二进制间距.html)
 - [867.转置矩阵.html](./leetCode/867.转置矩阵.html)
 - [860.柠檬水找零.html](./leetCode/860.柠檬水找零.html)
 - [859.亲密字符串.html](./leetCode/859.亲密字符串.html)
