@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>周赛305</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * 周赛305
+       * 3 分 - 算术三元组的数目 完成  6136 https://leetcode.cn/problems/number-of-arithmetic-triplets/ 简单
+       * 4 分 - 受限条件下可到达节点的数目 完成 6139 https://leetcode.cn/problems/reachable-nodes-with-restrictions/ 中等
+       * 5 分 - 检查数组是否存在有效划分 完成 6137 https://leetcode.cn/problems/check-if-there-is-a-valid-partition-for-the-array/ 中等
+       * 5 分 - 最长理想子序列 运行超时 6138 https://leetcode.cn/problems/longest-ideal-subsequence/ 中等
+       * 前三道花了.5h, 最后一题思路不对，直接game over
+       */
+
+      // --- example-1 ---
+
+      var arithmeticTriplets = function (nums = [], diff) {
+        let res = 0;
+        for (let i = 0; i < nums.length - 2; i++) {
+          for (let j = i + 1; j < nums.length - 1; j++) {
+            for (let k = j + 1; k < nums.length; k++) {
+              if (nums[k] - nums[j] === diff && nums[j] - nums[i] === diff) {
+                res += 1;
+              }
+            }
+          }
+        }
+        return res;
+      };
+
+      var nums = [0, 1, 4, 6, 7, 10],
+        diff = 3;
+      var result = 2;
+      console.log('arithmeticTriplets', arithmeticTriplets(nums, diff));
+
+      // --- example-1 ---
+
+      // --- example-2 ---
+
+      var reachableNodes = function (n, edges = [], restricted = []) {
+        // 保存可访问的节点
+        const reach = Array.from({ length: n }, () => new Set());
+        // 已访问的标志
+        const visited = Array.from({ length: n });
+        visited[0] = true;
+        const restrict = restricted.reduce((pre, cur) => {
+          pre[cur] = pre;
+          return pre;
+        }, {});
+        edges.forEach((arr) => {
+          const [a, b] = arr;
+          if (!reach[a].has(b)) reach[a].add(b);
+          if (!reach[b].has(a)) reach[b].add(a);
+        });
+
+        let res = 1;
+        function find(set = new Set()) {
+          set.forEach((v) => {
+            if (!(v in restrict)) {
+              if (!visited[v]) {
+                res += 1;
+                visited[v] = true;
+                find(reach[v]);
+              }
+            }
+          });
+        }
+        console.log('reach = ', reach);
+        find(reach[0]);
+        return res;
+      };
+
+      var n = 7,
+        edges = [
+          [0, 1],
+          [1, 2],
+          [3, 1],
+          [4, 0],
+          [0, 5],
+          [5, 6]
+        ],
+        restricted = [4, 5];
+      var result = 4;
+
+      var n = 7,
+        edges = [
+          [0, 1],
+          [0, 2],
+          [0, 5],
+          [0, 4],
+          [3, 2],
+          [6, 5]
+        ],
+        restricted = [4, 2, 1];
+      var result = 3;
+
+      var n = 2,
+        edges = [[0, 1]];
+      var result = 2;
+
+      console.log(`reachableNodes ${result} = `, reachableNodes(n, edges, restricted));
+
+      // --- example-2 ---
+
+      // --- example-3 ---
+
+      // 试试动态规划
+      // dp[i] === dp[i-2] + [x,x]
+      // dp[i] === dp[i-3] + [x,x,x]
+      // dp[i] === dp[i-3] + [x,x+1,x+2]
+      var validPartition = function (nums = []) {
+        const length = nums.length;
+        const dp = Array.from({ length });
+        dp[-1] = true;
+        dp[0] = false;
+        dp[1] = nums[0] === nums[1];
+        for (let i = 2; i < length; i++) {
+          const f1 = dp[i - 2] && nums[i] === nums[i - 1];
+          const f2 = dp[i - 3] && nums[i] === nums[i - 1] && nums[i - 2] === nums[i - 1];
+          const f3 = dp[i - 3] && nums[i] - nums[i - 1] === 1 && nums[i - 1] - nums[i - 2] === 1;
+          dp[i] = f1 || f2 || f3;
+        }
+        console.log('dp = ', dp);
+        return dp[length - 1];
+      };
+
+      var nums = [4, 4, 4, 5, 6];
+      var result = true;
+
+      var nums = [1, 1, 1, 2];
+      var result = false;
+
+      console.log(`validPartition nums = `, nums);
+      console.log(`validPartition ${result} = `, validPartition(nums));
+
+      // --- example-3 ---
+
+      // --- example-4 ---
+
+      // 试试回溯 然后变成了递归 超时
+      var longestIdealString = function (s = '', k) {
+        let res = 0;
+        const length = s.length;
+
+        function track(idx, count) {
+          res = Math.max(res, count);
+          //  [108, 107, 112, 107, 120, 99, 105, 103, 99, 115]
+          let num = s[idx].charCodeAt();
+          for (let i = idx + 1; i < length; i++) {
+            let num2 = s[i].charCodeAt();
+            if (Math.abs(num2 - num) <= k) {
+              track(i, count + 1);
+            }
+          }
+        }
+        for (let i = 0; i < length; i++) {
+          track(i, 1);
+        }
+        return res;
+      };
+
+      function valid(a, b, k) {
+        return Math.abs(a.charCodeAt() - b.charCodeAt()) <= k;
+      }
+
+      // dp[i-j] + 1 = dp[i]  && s[i] - s[i-j] <= k
+      // 方向不对
+      var longestIdealString = function (s = '', k) {
+        const length = s.length;
+
+        const dp = Array.from({ length }, () => 1);
+        for (let i = 1; i < length; i++) {
+          for (let j = i - 1; j > 0; j--) {
+            if (valid(s[i], s[i - j], k)) {
+              dp[i] = Math.max(dp[i - j] + 1, dp[i]);
+            }
+          }
+        }
+        console.log('dp = ', dp);
+        return Math.max.apply(Math, dp) + 1;
+      };
+
+      //  寻找以每个字母为结尾的最长理想子序列长度
+      // dp[i] = Math.max(dp[i - k] ~ dp[i + k])
+      // 正确
+      var longestIdealString = function (s = '', k) {
+        var hash = Array.from({ length: 26 }, () => 0);
+        let res = 0;
+
+        for (let i = 0; i < s.length; i++) {
+          let idx = s[i].charCodeAt() - 'a'.charCodeAt();
+          hash[idx] += 1;
+          res = Math.max(res, hash[idx]);
+          for (let j = 0; j < 26; j++) {
+            if (j != idx && Math.abs(j - idx) <= k && hash[idx] < hash[j] + 1) {
+              hash[idx] = hash[j] + 1;
+              res = Math.max(hash[idx], res);
+            }
+          }
+        }
+        return res;
+      };
+
+      var s = 'acfgbd',
+        k = 2;
+      var result = 4;
+
+      var s = 'abcd',
+        k = 3;
+      var result = 4;
+
+      var s = 'pvjcci',
+        k = 4;
+      var result = 2;
+
+      // var s = 'lkpkxcigcs',
+      //   k = 6;
+      // var result = 7;
+
+      // // 超时
+      var s = 'dyyonfvzsretqxucmavxegvlnnjubqnwrhwikmnnrpzdovjxqdsatwzpdjdsneyqvtvorlwbkb';
+      var k = 7;
+
+      console.log(`longestIdealString nums = `, s);
+      console.log(
+        `longestIdealString nums = `,
+        s.split('').map((s) => s.charCodeAt())
+      );
+      console.log(`longestIdealString ${result} = `, longestIdealString(s, k));
+
+      // --- example-4 ---
+    </script>
+  </body>
+</html>
