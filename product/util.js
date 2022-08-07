@@ -36,9 +36,11 @@ function getNumberByName(name) {
 
 // 找到上一个html的下标
 function findIndex(num, list = []) {
-  let res = 0;
-  while (num >= list[res]) res++;
-  return res ? res - 1 : 0;
+  let idx = list.length - 1;
+  while (idx > 0 && num < list[idx]) {
+    idx--;
+  }
+  return idx;
 }
 
 function buildMdLink(name, dist, ext) {
@@ -74,14 +76,17 @@ function writeMD(name, dist, ext) {
   const link = buildMdLink(name, dist, ext);
 
   if (!matchRes) {
-    const titleReg = new RegExp(`## (.*)${dist}`, 'gi');
+    const titleReg = new RegExp(`## (.*)${dist}.*`, 'gi');
     const matchTitleRes = mdContent.match(titleReg);
     if (!matchTitleRes) {
       throw new Error(`请先创建二级标题 ${dist}`);
     }
     curNum = 0;
     lastHtml = matchTitleRes[0];
-    newHtml = `${lastHtml}\n\n<br/>\n${link}` + '';
+    newHtml = `${lastHtml}\n\n\n<br/>\n${link}` + '';
+  } else if (link.indexOf('周赛') > -1) {
+    lastHtml = matchRes[0];
+    newHtml = `${link}\n${lastHtml}`;
   } else {
     const numList = matchRes.map(getNumberByName);
     curNum = getNumberByName(name);
@@ -90,7 +95,7 @@ function writeMD(name, dist, ext) {
     newHtml = `${lastHtml}\n${link}`;
   }
 
-  let newContent = mdContent.replace(lastHtml, `${lastHtml}\n${link}`);
+  let newContent = mdContent.replace(lastHtml, newHtml);
   newContent = writeMDCount(newContent);
 
   fs.writeFileSync(mdFile, newContent, { encoding: 'utf-8' });
@@ -105,6 +110,16 @@ function writeMD(name, dist, ext) {
   };
 }
 
+function getStep(namespace, link) {
+  if (namespace.toLocaleLowerCase() === 'leetcode') {
+    if (link.indexOf('周赛') > -1) {
+      return 4;
+    }
+    return 1;
+  }
+  return 1;
+}
+
 function writeMDCount(content) {
   let ms = content.match(/-\s\[.+\]\(.+\)/g);
   let countMap = {};
@@ -112,11 +127,7 @@ function writeMDCount(content) {
     let mat = link.match(/\.\/(.+)\//);
     if (mat) {
       let key = mat[1].toLocaleLowerCase();
-      if (key in countMap) {
-        countMap[key]++;
-      } else {
-        countMap[key] = 1;
-      }
+      countMap[key] = (countMap[key] || 0) + getStep(key, link);
     }
   });
 
