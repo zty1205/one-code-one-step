@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (302 道)
+## 三、LeetCode (303 道)
 
 <br/>
 
@@ -450,6 +450,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [859.亲密字符串.html](./leetCode/859.亲密字符串.html)
 - [844.比较含退格的字符串.html](./leetCode/844.比较含退格的字符串.html)
 - [873.最长的斐波那契子序列的长度.html](./leetCode/873.最长的斐波那契子序列的长度.html)
+- [876.链表的中间结点.html](./leetCode/876.链表的中间结点.html)
 - [884.两句话中的不常见单词.html](./leetCode/884.两句话中的不常见单词.html)
 - [887.鸡蛋掉落.html](./leetCode/887.鸡蛋掉落.html)
 
