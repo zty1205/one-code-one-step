@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>883. 三维形体投影面积</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/projection-area-of-3d-shapes/
+
+      // 在 n x n 的网格 grid 中，我们放置了一些与 x，y，z 三轴对齐的 1 x 1 x 1 立方体。
+      // 每个值 v = grid[i][j] 表示 v 个正方体叠放在单元格 (i, j) 上。
+      // 现在，我们查看这些立方体在 xy 、yz 和 zx 平面上的投影。
+      // 投影 就像影子，将 三维 形体映射到一个 二维 平面上。从顶部、前面和侧面看立方体时，我们会看到“影子”。
+      // 返回 所有三个投影的总面积 。
+      // 提示：
+      // n == grid.length == grid[i].length
+      // 1 <= n <= 50
+      // 0 <= grid[i][j] <= 50
+
+      /**
+       * @param {number[][]} grid
+       * @return {number}
+       */
+      var projectionArea = function (grid) {};
+
+      // --- answer-1 ---
+
+      // 顶部投影为 grid占据的格数
+      // 前面投影为 列的最大值相加
+      // 侧面投降为 行的最大值相加
+
+      function sum(array = []) {
+        return array.reduce((pre, cur) => (pre += cur), 0);
+      }
+      var projectionArea = function (grid = [[]]) {
+        const length = grid.length;
+        let res = 0;
+        let rowMax = new Array(length).fill(0);
+        let colMax = [...rowMax];
+
+        for (let i = 0; i < length; i++) {
+          for (let j = 0; j < length; j++) {
+            res += grid[i][j] ? 1 : 0;
+            rowMax[i] = Math.max(rowMax[i], grid[i][j]);
+            colMax[j] = Math.max(colMax[j], grid[i][j]);
+          }
+        }
+
+        return res + sum(rowMax) + sum(colMax);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 优化空间复杂度
+      var projectionArea = function (grid = [[]]) {
+        const length = grid.length;
+        let res = 0;
+
+        for (let i = 0; i < length; i++) {
+          let yzH = 0;
+          let zxH = 0;
+          for (let j = 0; j < length; j++) {
+            res += grid[i][j] ? 1 : 0;
+            yzH = Math.max(yzH, grid[j][i]);
+            zxH = Math.max(zxH, grid[i][j]);
+          }
+          res = res + yzH + zxH;
+        }
+
+        return res;
+      };
+
+      // --- answer-2 ---
+
+      var grid = [
+        [1, 2],
+        [3, 4]
+      ];
+      var result = 17;
+      // 解释：这里有该形体在三个轴对齐平面上的三个投影(“阴影部分”)。
+
+      var grid = [[2]];
+      var result = 5;
+
+      var grid = [
+        [1, 0],
+        [0, 2]
+      ];
+      var result = 8;
+
+      console.log('grid = ', grid);
+      console.log('result = ', result);
+      console.log('projectionArea = ', projectionArea(grid));
+    </script>
+  </body>
+</html>
