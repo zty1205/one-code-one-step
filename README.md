@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (304 道)
+## 三、LeetCode (305 道)
 
 <br/>
 
@@ -454,6 +454,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [883.三维形体投影面积.html](./leetCode/883.三维形体投影面积.html)
 - [884.两句话中的不常见单词.html](./leetCode/884.两句话中的不常见单词.html)
 - [887.鸡蛋掉落.html](./leetCode/887.鸡蛋掉落.html)
+- [888.公平的糖果交换.html](./leetCode/888.公平的糖果交换.html)
 
 <br/>
 

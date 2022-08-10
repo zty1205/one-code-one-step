@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>888. 公平的糖果交换</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/fair-candy-swap/
+
+      // 爱丽丝和鲍勃拥有不同总数量的糖果。给你两个数组 aliceSizes 和 bobSizes ，aliceSizes[i] 是爱丽丝拥有的第 i 盒糖果中的糖果数量，bobSizes[j] 是鲍勃拥有的第 j 盒糖果中的糖果数量。
+      // 两人想要互相交换一盒糖果，这样在交换之后，他们就可以拥有相同总数量的糖果。一个人拥有的糖果总数量是他们每盒糖果数量的总和。
+      // 返回一个整数数组 answer，其中 answer[0] 是爱丽丝必须交换的糖果盒中的糖果的数目，answer[1] 是鲍勃必须交换的糖果盒中的糖果的数目。如果存在多个答案，你可以返回其中 任何一个 。题目测试用例保证存在与输入对应的答案。
+      // 提示：
+      // 1 <= aliceSizes.length, bobSizes.length <= 104
+      // 1 <= aliceSizes[i], bobSizes[j] <= 105
+      // 爱丽丝和鲍勃的糖果总数量不同。
+      // 题目数据保证对于给定的输入至少存在一个有效答案。
+
+      /**
+       * @param {number[]} aliceSizes
+       * @param {number[]} bobSizes
+       * @return {number[]}
+       */
+      var fairCandySwap = function (aliceSizes, bobSizes) {};
+
+      // --- answer-1 ---
+
+      // A表示总和大的 需要给出去x个， B表示总和小的，需要给出去y个
+      // A - x = B - y
+      // A - x + y = mid
+      // y = mid - (A - x)
+      // 公式2可以直接计算，大的一定需要给出去，然后根据公式一遍历去套即可
+
+      function getSumAndSet(array = []) {
+        const set = new Set();
+        let sum = 0;
+        for (let i = 0; i < array.length; i++) {
+          sum += array[i];
+          set.add(array[i]);
+        }
+        return {
+          sum,
+          set
+        };
+      }
+
+      function swap(A = [], aSum, setB = new Set(), mid, aIdx, bIdx) {
+        const res = [];
+        for (let i = 0; i < A.length; i++) {
+          const y = mid - aSum + A[i];
+          if (setB.has(y)) {
+            res[bIdx] = y;
+            res[aIdx] = A[i];
+            break;
+          }
+        }
+        return res;
+      }
+
+      var fairCandySwap = function (aliceSizes = [], bobSizes = []) {
+        const { sum: aSum, set: aSet } = getSumAndSet(aliceSizes);
+        const { sum: bSum, set: bSet } = getSumAndSet(bobSizes);
+        const mid = (aSum + bSum) / 2;
+        return aSum > mid ? swap(aliceSizes, aSum, bSet, mid, 0, 1) : swap(bobSizes, bSum, aSet, mid, 1, 0);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var aliceSizes = [1, 1],
+        bobSizes = [2, 2];
+      var result = [1, 2];
+
+      var aliceSizes = [1, 2],
+        bobSizes = [2, 3];
+      var result = [1, 2];
+
+      var aliceSizes = [2],
+        bobSizes = [1, 3];
+      var result = [2, 3];
+
+      var aliceSizes = [1, 2, 5],
+        bobSizes = [2, 4];
+      var result = [5, 4];
+
+      console.log('aliceSizes = ', aliceSizes);
+      console.log('bobSizes = ', bobSizes);
+      console.log('result = ', result);
+      console.log('fairCandySwap = ', fairCandySwap(aliceSizes, bobSizes));
+    </script>
+  </body>
+</html>
