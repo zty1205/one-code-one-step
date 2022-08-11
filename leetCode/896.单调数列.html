@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>896. 单调数列</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/monotonic-array/
+
+      // 如果数组是单调递增或单调递减的，那么它是 单调 的。
+      // 如果对于所有 i <= j，nums[i] <= nums[j]，那么数组 nums 是单调递增的。 如果对于所有 i <= j，nums[i]> = nums[j]，那么数组 nums 是单调递减的。
+      // 当给定的数组 nums 是单调数组时返回 true，否则返回 false。
+      // 提示：
+      // 1 <= nums.length <= 105
+      // -105 <= nums[i] <= 105
+
+      /**
+       * @param {number[]} nums
+       * @return {boolean}
+       */
+      var isMonotonic = function (nums) {};
+
+      // --- answer-1 ---
+
+      // 比较函数工厂
+      function compareFactory(a, b) {
+        return a === b ? (n1, n2) => n1 === n2 : a < b ? (n1, n2) => n1 <= n2 : (n1, n2) => n1 >= n2;
+      }
+
+      var isMonotonic = function (nums) {
+        const length = nums.length;
+        if (length < 3) return true;
+        const compare = compareFactory(nums[0], nums[length - 1]);
+        for (let i = 1; i < length; i++) {
+          if (!compare(nums[i - 1], nums[i])) {
+            return false;
+          }
+        }
+        return true;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 直接比 判断递增还是递减
+      var isMonotonic = function (nums) {
+        let inc = true;
+        let dec = true;
+        const length = nums.length;
+        for (let i = 0; i < length - 1; ++i) {
+          if (nums[i] > nums[i + 1]) inc = false;
+
+          if (nums[i] < nums[i + 1]) dec = false;
+
+          if (!inc && !dec) return false;
+        }
+        return inc || dec;
+      };
+
+      // --- answer-2 ---
+
+      var nums = [1, 2, 2, 3];
+      var result = true;
+
+      var nums = [6, 5, 4, 4];
+      var result = true;
+
+      var nums = [1, 3, 2];
+      var result = false;
+
+      var nums = [1, 1, 1, 1, 2, 3];
+      var result = true;
+
+      var nums = [1, 1, 1, 1, 2, 3, 2];
+      var result = false;
+
+      var nums = [3, 1, 9];
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('isMonotonic = ', isMonotonic(nums));
+    </script>
+  </body>
+</html>
