@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>897. 递增顺序搜索树</title>
+  </head>
+  <body>
+    <script src="../helper/tree.js"></script>
+    <script>
+      // https://leetcode.cn/problems/increasing-order-search-tree/
+
+      // 给你一棵二叉搜索树的 root ，请你 按中序遍历 将其重新排列为一棵递增顺序搜索树，使树中最左边的节点成为树的根节点，并且每个节点没有左子节点，只有一个右子节点。
+      // 提示：
+      // 树中节点数的取值范围是 [1, 100]
+      // 0 <= Node.val <= 1000
+
+      /**
+       * Definition for a binary tree node.
+       * function TreeNode(val, left, right) {
+       *     this.val = (val===undefined ? 0 : val)
+       *     this.left = (left===undefined ? null : left)
+       *     this.right = (right===undefined ? null : right)
+       * }
+       */
+      /**
+       * @param {TreeNode} root
+       * @return {TreeNode}
+       */
+      var increasingBST = function (root) {};
+
+      // --- answer-1 ---
+
+      // 中序遍历的同时 改变指向
+      var increasingBST = function (root) {
+        if (!root) return null;
+        let h = { right: undefined };
+        const header = h;
+        function midTree(node) {
+          if (!node) return;
+          midTree(node.left);
+          node.left = null;
+          h.right = node;
+          h = h.right;
+          midTree(node.right);
+        }
+        midTree(root);
+        return header.right;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var root = [5, 3, 6, 2, 4, null, 8, 1, null, null, null, 7, 9];
+      var result = [1, null, 2, null, 3, null, 4, null, 5, null, 6, null, 7, null, 8, null, 9];
+
+      var root = [5, 1, 7];
+      var result = [1, null, 5, null, 7];
+
+      var tree = buildTreeByArray([...root]);
+      var increasingBST = increasingBST(buildTreeByArray([...root]));
+
+      console.log('root = ', root);
+      console.log('result = ', result);
+      console.log('result = ', increasingBST);
+    </script>
+  </body>
+</html>

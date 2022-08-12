@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (307 道)
+## 三、LeetCode (308 道)
 
 <br/>
 
@@ -457,6 +457,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [888.公平的糖果交换.html](./leetCode/888.公平的糖果交换.html)
 - [892.三维形体的表面积.html](./leetCode/892.三维形体的表面积.html)
 - [896.单调数列.html](./leetCode/896.单调数列.html)
+- [897.递增顺序搜索树.html](./leetCode/897.递增顺序搜索树.html)
 
 <br/>
 
