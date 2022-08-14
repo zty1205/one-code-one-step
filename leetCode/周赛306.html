@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>周赛306</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * 周赛306
+       * 6148. 矩阵中的局部最大值  https://leetcode.cn/problems/largest-local-values-in-a-matrix/ 简单 完成
+       * 6149. 边积分最高的节点 https://leetcode.cn/problems/node-with-highest-edge-score/ 中等 完成
+       * 6150. 根据模式串构造最小数字 https://leetcode.cn/problems/construct-smallest-number-from-di-string/ 中等 完成
+       * 6151. 统计特殊整数 https://leetcode.cn/problems/count-special-integers/ 困难 超时
+       * 前两道15分钟还行吧
+       * 第三道卡了下 重新用回溯法完成了
+       * 第四道用排列组合公式 把自己绕晕了...， 听说有原题，可恶啊
+       */
+
+      // --- example-1 ---
+
+      function findMax(grid, i, j) {
+        let max = 0;
+        for (let n = 0; n < 3; n++) {
+          for (let m = 0; m < 3; m++) {
+            max = Math.max(max, grid[i + n - 1][j + m - 1]);
+          }
+        }
+        return max;
+      }
+
+      // 按题意直接模拟， 题目描述有点饶人
+      var largestLocal = function (grid = [[]]) {
+        const n = grid.length;
+        const result = Array.from({ length: n - 2 }, () => Array.from({ length: n - 2 }));
+        for (let i = 1; i < n - 1; i++) {
+          for (let j = 1; j < n - 1; j++) {
+            result[i - 1][j - 1] = findMax(grid, i, j);
+          }
+        }
+        return result;
+      };
+
+      var grid = [
+        [9, 9, 8, 1],
+        [5, 6, 2, 6],
+        [8, 2, 6, 4],
+        [6, 2, 2, 2]
+      ];
+      var result = [
+        [9, 9],
+        [8, 6]
+      ];
+
+      var grid = [
+        [1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1],
+        [1, 1, 2, 1, 1],
+        [1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1]
+      ];
+      var result = [
+        [2, 2, 2],
+        [2, 2, 2],
+        [2, 2, 2]
+      ];
+
+      console.log('grid = ', grid);
+      console.log('result = ', result);
+      console.log('largestLocal = ', largestLocal(grid));
+
+      // --- example-1 ---
+
+      // --- example-2 ---
+
+      // 根据题意模拟下就可
+      var edgeScore = function (edges = []) {
+        const length = edges.length;
+        const scope = Array.from({ length }, () => 0);
+        for (let i = 0; i < length; i++) {
+          scope[edges[i]] += i;
+        }
+        let idx = 0;
+        let max = 0;
+        for (let i = 0; i < length; i++) {
+          if (scope[i] > max) {
+            max = scope[i];
+            idx = i;
+          }
+        }
+        return idx;
+      };
+
+      var edges = [1, 0, 0, 0, 0, 7, 7, 5];
+      var result = 7;
+
+      var edges = [2, 0, 0, 2];
+      var result = 0;
+
+      console.log('');
+      console.log('edges = ', edges);
+      console.log('result = ', result);
+      console.log('edgeScore = ', edgeScore(edges));
+
+      // --- example-2 ---
+
+      // --- example-3 ---
+
+      // 回溯法
+      var smallestNumber = function (pattern = '') {
+        let result = 9999999999;
+        const use = Array.from({ length: 10 }, () => false);
+        function track(i, num, len) {
+          if (use[i]) {
+            return;
+          }
+          use[i] = true;
+          num = num * 10 + i;
+          if (len === pattern.length + 1) {
+            result = Math.min(result, num);
+            return;
+          }
+          const start = pattern[len - 1] === 'I' ? i + 1 : 1;
+          const end = pattern[len - 1] === 'I' ? 10 : i;
+
+          for (let j = start; j < end; j++) {
+            if (!use[j]) {
+              track(j, num, len + 1);
+              use[j] = false;
+            }
+          }
+        }
+        for (let i = 1; i < 10; i++) {
+          track(i, 0, 1);
+          use[i] = false;
+        }
+
+        return String(result);
+      };
+
+      var pattern = 'IIIDIDDD';
+      var result = '123549876';
+
+      var pattern = 'DDD';
+      var result = '4321';
+
+      console.log('');
+      console.log('pattern = ', pattern);
+      console.log('result = ', result);
+      console.log('smallestNumber = ', smallestNumber(pattern));
+
+      // --- example-3 ---
+
+      // --- example-4 ---
+
+      function valid(n) {
+        if (n < 11) return true;
+        let use = new Array(10).fill(false);
+        let str = String(n);
+        for (i = 0; i < str.length; i++) {
+          if (use[str[i]]) return false;
+
+          use[str[i]] = true;
+        }
+        return true;
+      }
+
+      // 暴力法 到78350035 超时
+      var countSpecialNumbers = function (n) {
+        let res = 0;
+        for (let i = 1; i <= n; i++) {
+          if (valid(i)) {
+            console.log('i = ', i);
+            res += 1;
+          }
+        }
+        return res;
+      };
+
+      // 想用排列组合 结果把自己绕晕了
+      const XMAP = {};
+      function x(n) {
+        if (!(n in XMAP)) {
+          let num = 1;
+          for (let i = 2; i <= n; i++) {
+            num = num * i;
+          }
+          XMAP[n] = num;
+        }
+        return XMAP[n];
+      }
+
+      function C(a, b) {
+        return x(b) / (x(a) * x(b - a));
+      }
+
+      var countSpecialNumbers = function (n) {
+        if (n <= 10) return n;
+        let result = 9;
+        const length = String(n).length;
+        // C(2,9) + 有0的
+
+        for (let j = length; j > 0; j--) {
+          for (let i = 2; i < length; i++) {
+            result += C(i, 9) + C(i - 1, 9);
+          }
+        }
+        return result;
+      };
+
+      // 按位回溯解法 思路和上门一道差不多
+      var countSpecialNumbers = function (n) {
+        const use = Array.from({ length: 10 }, () => false);
+        let res = 0;
+        const ns = [];
+        function track(num) {
+          if (num > n) return;
+
+          res += 1;
+          ns.push(num);
+          for (let i = 0; i < 10; i++) {
+            if (!use[i]) {
+              use[i] = true;
+              track(num * 10 + i);
+              use[i] = false;
+            }
+          }
+        }
+        for (let i = 1; i < 10; i++) {
+          use[i] = true;
+          track(i);
+          use[i] = false;
+        }
+        return res;
+      };
+
+      // dp
+      // 总数- 有重复的数字
+      // https://leetcode.cn/problems/numbers-with-repeated-digits/solution/shu-wei-dp-by-bruceyuj/
+      // 情况1
+      // 4th 3th 2th 1th total
+      //  0   0   0  1-9 9*A(9,0)
+      //  0   0  1-9 0-9 9*A(9,1)
+      //  0  1-9 0-9 0-9 9*A(9,2)
+
+      // 情况2
+      // 4th 3th 2th 1th total
+      // 1-3 0-9 0-9 0-9 4*A(10-1,3)
+      //  4  0-4 0-9 0-9 5*A(10-2,2)
+      //  4   5  0-5 0-9 6*A(10-3,1)
+      //  4   5   6  0-6 7*A(10-4,0)
+      //  4   5   6   7  1
+
+      function A(i, j) {
+        return f(i) / f(i - j);
+      }
+
+      function f(i) {
+        if (i === 1 || i === 0) return 1;
+        return i * f(i - 1);
+      }
+
+      var countSpecialNumbers = function (N) {
+        let digits = [];
+        let N1 = N;
+        let total = 0;
+        let used = new Array(10).fill(0);
+        while (N1 > 0) {
+          digits.push(N1 % 10);
+          N1 = Math.floor(N1 / 10);
+        }
+
+        let k = digits.length;
+
+        for (let i = k - 1; i > 0; i--) {
+          // 情况 1
+          total += 9 * A(9, i - 1);
+        }
+
+        for (let i = k - 1; i >= 0; i--) {
+          // 情况 2
+          let num = digits[i];
+          for (let j = i === k - 1 ? 1 : 0; j < num; j++) {
+            if (used[j] > 0) continue;
+
+            total += A(10 - (k - i), i);
+          }
+          used[num]++;
+
+          if (used[num] > 1) break; // 去除第 i 位和前面已定的重复
+          if (i === 0) {
+            total++; // 所有位置都确定后仍然没有重复
+          }
+        }
+
+        return total;
+      };
+
+      var n = 135;
+      var result = 110;
+
+      var n = 2134;
+      var result = 1307;
+
+      console.log('');
+      console.log('n = ', n);
+      console.log('result = ', result);
+      console.log('countSpecialNumbers = ', countSpecialNumbers(n));
+
+      // --- example-4 ---
+    </script>
+  </body>
+</html>
