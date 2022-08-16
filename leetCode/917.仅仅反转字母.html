@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>917. 仅仅反转字母</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/reverse-only-letters/
+
+      // 给你一个字符串 s ，根据下述规则反转字符串：
+      // 提示：
+      // 所有非英文字母保留在原有位置。
+      // 所有英文字母（小写或大写）位置反转。
+      // 返回反转后的 s 。
+      // 提示：
+      // 1 <= s.length <= 100
+      // s 仅由 ASCII 值在范围 [33, 122] 的字符组成
+      // s 不含 '\"' 或 '\\'
+
+      /**
+       * @param {string} s
+       * @return {string}
+       */
+      var reverseOnlyLetters = function (s) {};
+
+      // --- answer-1 ---
+
+      // 双指针
+      function isLetter(char = '') {
+        return /^[a-zA-Z]+$/.test(char);
+      }
+      var reverseOnlyLetters = function (s = '') {
+        const list = s.split('');
+        let l = 0;
+        let r = list.length - 1;
+        while (l < r) {
+          while (l < r && !isLetter(list[r])) r--;
+          while (l < r && !isLetter(list[l])) l++;
+          [list[l], list[r]] = [list[r], list[l]];
+          r--;
+          l++;
+        }
+        return list.join('');
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var s = 'ab-cd';
+      var result = 'dc-ba';
+
+      var s = 'a-bC-dEf-ghIj';
+      var result = 'j-Ih-gfE-dCba';
+
+      var s = 'Test1ng-Leet=code-Q!';
+      var result = 'Qedo1ct-eeLg=ntse-T!';
+
+      var s = '7_28]';
+      var result = '7_28]';
+
+      console.log('s = ', s);
+      console.log('result = ', result);
+      console.log('reverseOnlyLetters = ', reverseOnlyLetters(s));
+    </script>
+  </body>
+</html>
