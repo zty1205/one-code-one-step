@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>922. 按奇偶排序数组 II</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/sort-array-by-parity-ii/
+
+      // 给定一个非负整数数组 nums，  nums 中一半整数是 奇数 ，一半整数是 偶数 。
+      // 对数组进行排序，以便当 nums[i] 为奇数时，i 也是 奇数 ；当 nums[i] 为偶数时， i 也是 偶数 。
+      // 你可以返回 任何满足上述条件的数组作为答案 。
+      // 提示：
+      // 2 <= nums.length <= 2 * 104
+      // nums.length 是偶数
+      // nums 中一半是偶数
+      // 0 <= nums[i] <= 1000
+
+      /**
+       * @param {number[]} nums
+       * @return {number[]}
+       */
+      var sortArrayByParityII = function (nums) {};
+
+      // --- answer-1 ---
+
+      // 构造新数组
+      var sortArrayByParityII = function (nums = []) {
+        let i = 0;
+        let j = 1;
+        const result = [];
+        for (let k = 0; k < nums.length; k++) {
+          const ele = nums[k];
+          if ((ele & 1) === 0) {
+            result[i] = ele;
+            i += 2;
+          } else {
+            result[j] = ele;
+            j += 2;
+          }
+        }
+        return result;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 双指针
+      var sortArrayByParityII = function (nums = []) {
+        let j = 1;
+        for (let i = 0; i < nums.length; i += 2) {
+          if ((nums[i] & 1) === 1) {
+            // 奇数
+            while ((nums[j] & 1) === 1) j += 2;
+
+            [nums[i], nums[j]] = [nums[j], nums[i]];
+          }
+        }
+        return nums;
+      };
+
+      // --- answer-2 ---
+
+      var nums = [4, 2, 5, 7];
+      var result = [4, 5, 2, 7];
+      // 解释：[4,7,2,5]，[2,5,4,7]，[2,7,4,5] 也会被接受。
+
+      var nums = [2, 3];
+      var result = [2, 3];
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('sortArrayByParityII = ', sortArrayByParityII(nums));
+    </script>
+  </body>
+</html>
