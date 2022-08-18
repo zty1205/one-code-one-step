@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>925. 长按键入</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/long-pressed-name/
+
+      // 你的朋友正在使用键盘输入他的名字 name。偶尔，在键入字符 c 时，按键可能会被长按，而字符可能被输入 1 次或多次。
+      // 你将会检查键盘输入的字符 typed。如果它对应的可能是你的朋友的名字（其中一些字符可能被长按），那么就返回 True。
+      // 提示：
+      // 1 <= name.length, typed.length <= 1000
+      // name 和 typed 的字符都是小写字母
+
+      /**
+       * @param {string} name
+       * @param {string} typed
+       * @return {boolean}
+       */
+      var isLongPressedName = function (name, typed) {};
+
+      // --- answer-1 ---
+
+      // 双指针
+      var isLongPressedName = function (name = '', typed = '') {
+        let len1 = name.length;
+        let len2 = typed.length;
+        if (len2 < len1) return false;
+
+        let i = 0;
+        let j = 0;
+        while (j < len2) {
+          if (i < len1 && name[i] === typed[j]) {
+            i++;
+            j++;
+          } else if (j > 0 && typed[j] === typed[j - 1]) {
+            // 重复键入
+            j++;
+          } else {
+            // 其他情况 错误
+            return false;
+          }
+        }
+        return i === len1;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var name = 'alex',
+        typed = 'aaleex';
+      var result = true;
+      // 解释：'alex' 中的 'a' 和 'e' 被长按。
+
+      var name = 'saeed',
+        typed = 'ssaaedd';
+      var result = false;
+      // 解释：'e' 一定需要被键入两次，但在 typed 的输出中不是这样。
+
+      // var name = 'laiden';
+      // var typed = 'laiden';
+      // var result = true;
+
+      var name = 'alex',
+        typed = 'aaleexa';
+      var result = false;
+
+      console.log('name = ', name);
+      console.log('typed = ', typed);
+      console.log('result = ', result);
+      console.log('isLongPressedName = ', isLongPressedName(name, typed));
+    </script>
+  </body>
+</html>

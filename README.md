@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (317 道)
+## 三、LeetCode (318 道)
 
 <br/>
 
@@ -464,6 +464,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [914.卡牌分组.html](./leetCode/914.卡牌分组.html)
 - [917.仅仅反转字母.html](./leetCode/917.仅仅反转字母.html)
 - [922.按奇偶排序数组 II.html](./leetCode/922.按奇偶排序数组II.html)
+- [925.长按键入.html](./leetCode/925.长按键入.html)
 
 <br/>
 
