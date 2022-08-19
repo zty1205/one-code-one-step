@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>933. 最近的请求次数</title>
+  </head>
+  <body>
+    <script src="../helper/command.js"></script>
+    <script>
+      // https://leetcode.cn/problems/number-of-recent-calls/
+
+      // 写一个 RecentCounter 类来计算特定时间范围内最近的请求。
+      // 请你实现 RecentCounter 类：
+      // 提示：
+      // RecentCounter() 初始化计数器，请求数为 0 。
+      // int ping(int t) 在时间 t 添加一个新请求，其中 t 表示以毫秒为单位的某个时间，并返回过去 3000 毫秒内发生的所有请求数（包括新请求）。确切地说，返回在 [t-3000, t] 内发生的请求数。
+      // 保证 每次对 ping 的调用都使用比之前更大的 t 值。
+      // 提示：
+      // 1 <= t <= 109
+      // 保证每次对 ping 调用所使用的 t 值都 严格递增
+      // 至多调用 ping 方法 104 次
+
+      var RecentCounter = function () {};
+      /**
+       * @param {number} t
+       * @return {number}
+       */
+      RecentCounter.prototype.ping = function (t) {};
+      /**
+       * Your RecentCounter object will be instantiated and called as such:
+       * var obj = new RecentCounter()
+       * var param_1 = obj.ping(t)
+       */
+
+      // --- answer-1 ---
+
+      // 返回当前的请求存活数 一个请求存活3s
+      // 考察数据结构设计
+
+      var RecentCounter = function () {
+        this.queue = [];
+      };
+
+      RecentCounter.prototype.ping = function (t) {
+        const min = t - 3000;
+        this.queue.push(t);
+        for (let i = 0; i < this.queue.length; i++) {
+          if (this.queue[i] < min) {
+            this.queue.shift();
+            // shift需要往回移
+            i -= 1;
+          } else {
+            break;
+          }
+        }
+        return this.queue.length;
+      };
+
+      RecentCounter.prototype.ping = function (t) {
+        this.queue.push(t);
+        while (this.queue[0] < t - 3000) {
+          this.queue.shift();
+        }
+        return this.queue.length;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var t = ['RecentCounter', 'ping', 'ping', 'ping', 'ping'],
+        args = [[], [1], [100], [3001], [3002]];
+      var result = [null, 1, 2, 3, 3];
+
+      var t = ['RecentCounter', 'ping', 'ping', 'ping', 'ping', 'ping'];
+      var args = [[], [642], [1849], [4921], [5936], [5957]];
+      var result = [null, 1, 2, 1, 2, 3];
+
+      classCommand(t, args);
+
+      console.log('result = ', result);
+    </script>
+  </body>
+</html>
