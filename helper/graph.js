@@ -8,7 +8,7 @@ function buildUndirectedGraphByArray(arr = []) {
 
   let map = {};
 
-  function getNode(val) {
+  function _getNode(val) {
     if (!(val in map)) {
       let n = new Node(val);
       map[val] = n;
@@ -18,8 +18,8 @@ function buildUndirectedGraphByArray(arr = []) {
 
   let head = null;
   for (let i = 0; i < arr.length; i++) {
-    let node = getNode(i + 1);
-    node.neighbors = arr[i].map((x) => getNode(x));
+    let node = _getNode(i + 1);
+    node.neighbors = arr[i].map((x) => _getNode(x));
     i === 0 && (head = node);
   }
   return {
@@ -35,8 +35,7 @@ function buildArrayByUndirectedGraph(node) {
 
   const ans = [];
 
-  function build(node) {
-    debugger;
+  function _build(node) {
     if (!node) return;
     if (map.has(node)) return map.get(node);
 
@@ -45,9 +44,9 @@ function buildArrayByUndirectedGraph(node) {
     ans[node.val - 1] = neighbors;
 
     for (let ne of node.neighbors) {
-      build(ne);
+      _build(ne);
     }
   }
-  build(node);
+  _build(node);
   return ans;
 }
