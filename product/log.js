@@ -43,5 +43,11 @@ module.exports = {
   },
   FormatFileEnd() {
     console.log(FgWhite, `--- 文件格式化完毕 ---`);
+  },
+  BuildHelperStart(file) {
+    console.log(FgYellow, `--- 开始构建helper-snippets ${file} ---`);
+  },
+  BuildHelperEnd() {
+    console.log(FgYellow, `--- snippets构建完毕 ---`);
   }
 };

@@ -30,7 +30,8 @@
     "test": "react-app-rewired test",
     "file": "node product/index.js",
     "deploy": "node product/deploy.js",
-    "dm": "node product/dm.js && rollup -c -w"
+    "dm": "node product/dm.js && rollup -c -w",
+    "build:helper": "node product/buildHelperSnippets.js"
   },
   "eslintConfig": {
     "extends": "react-app"

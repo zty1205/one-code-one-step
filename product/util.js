@@ -242,5 +242,6 @@ module.exports = {
   writeCodeFile,
   buildGitDelploy,
   getNPMBuildParams,
-  getExt
+  getExt,
+  prettierFile
 };
