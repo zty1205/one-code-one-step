@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (323 道)
+## 三、LeetCode (324 道)
 
 <br/>
 
@@ -470,6 +470,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [938.二叉搜索树的范围和.html](./leetCode/938.二叉搜索树的范围和.html)
 - [941.有效的山脉数组.html](./leetCode/941.有效的山脉数组.html)
 - [942.增减字符串匹配.html](./leetCode/942.增减字符串匹配.html)
+- [944.删列造序.html](./leetCode/944.删列造序.html)
 
 <br/>
 
