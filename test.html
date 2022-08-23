@@ -184,6 +184,16 @@
       console.log(stringZip('cccddecc'));
       console.log(stringZip('adef'));
       console.log(stringZip('aaaaa'));
+
+      function debounce(fn, t, content) {
+        let timer;
+        return function () {
+          clearTimeout(timer);
+          timer = setTimeout(() => {
+            fn.call(content);
+          }, t);
+        };
+      }
     </script>
   </body>
 </html>

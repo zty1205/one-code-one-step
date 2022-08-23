@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>953. 验证外星语词典</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/verifying-an-alien-dictionary/
+
+      // 某种外星语也使用英文小写字母，但可能顺序 order 不同。字母表的顺序（order）是一些小写字母的排列。
+      // 给定一组用外星语书写的单词 words，以及其字母表的顺序 order，只有当给定的单词在这种外星语中按字典序排列时，返回 true；否则，返回 false。
+      // 提示：
+      // 1 <= words.length <= 100
+      // 1 <= words[i].length <= 20
+      // order.length == 26
+      // 在 words[i] 和 order 中的所有字符都是英文小写字母。
+
+      /**
+       * @param {string[]} words
+       * @param {string} order
+       * @return {boolean}
+       */
+      var isAlienSorted = function (words, order) {};
+
+      // --- answer-1 ---
+
+      // 直接遍历
+      var isAlienSorted = function (words = [], order = '') {
+        const map = new Map();
+        for (let i = 0; i < order.length; i++) {
+          map.set(order[i], i + 1);
+        }
+        // 以0补全字符串的数字表示，再比较字符串的数字表示大小
+        // 如 ['apple', 'app'], order = 'aelp';
+        // 表示为 14432, 14400 降序 所以是错误的
+        for (let idx = 0; idx < words.length - 1; idx++) {
+          let cur = words[idx];
+          let next = words[idx + 1];
+          let i = 0;
+          let j = 0;
+          while ((i < cur.length || j < next.length) && cur[i] === next[j]) {
+            i++;
+            j++;
+          }
+
+          if ((map.get(cur[i]) || -1) > (map.get(next[j]) || -1)) {
+            return false;
+          }
+        }
+        return true;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var words = ['hello', 'leetcode'],
+        order = 'hlabcdefgijkmnopqrstuvwxyz';
+      var result = true;
+      // 解释：在该语言的字母表中，'h' 位于 'l' 之前，所以单词序列是按字典序排列的。
+
+      var words = ['word', 'world', 'row'],
+        order = 'worldabcefghijkmnpqstuvxyz';
+      var result = false;
+      // 解释：在该语言的字母表中，'d' 位于 'l' 之后，那么 words[0] > words[1]，因此单词序列不是按字典序排列的。
+
+      var words = ['apple', 'app'],
+        order = 'abcdefghijklmnopqrstuvwxyz';
+      var result = false;
+      // 解释：当前三个字符 "app" 匹配时，第二个字符串相对短一些，然后根据词典编纂规则 "apple" > "app"，因为 'l' > '∅'，其中 '∅' 是空白字符，定义为比任何其他字符都小（更多信息）。
+
+      var words = ['hello', 'hello'],
+        order = 'abcdefghijklmnopqrstuvwxyz';
+      var result = true;
+
+      var words = ['aa', 'a'],
+        order = 'abqwertyuioplkjhgfdszxcvnm';
+      var result = false;
+
+      console.log('words = ', words);
+      console.log('order = ', order);
+      console.log('result = ', result);
+      console.log('isAlienSorted = ', isAlienSorted(words, order));
+    </script>
+  </body>
+</html>
