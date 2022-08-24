@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>961. 在长度 2N 的数组中找出重复 N 次的元素</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/n-repeated-element-in-size-2n-array/
+
+      // 给你一个整数数组 nums ，该数组具有以下属性：
+      // 提示：
+      // 提示：
+      // 2 <= n <= 5000
+      // nums.length == 2 * n
+      // 0 <= nums[i] <= 104
+      // nums 由 n + 1 个 不同的 元素组成，且其中一个元素恰好重复 n 次
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var repeatedNTimes = function (nums) {};
+
+      // --- answer-1 ---
+
+      // 类似于选举，使用其相关的算法
+      // hash统计
+      var repeatedNTimes = function (nums = []) {
+        const count = nums.reduce((pre, cur) => {
+          pre[cur] = (pre[cur] || 0) + 1;
+          return pre;
+        }, {});
+        const mid = nums.length >> 1;
+        for (let k in count) {
+          if (count[k] === mid) {
+            return +k;
+          }
+        }
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 排序后 判断 nums[0], nums[n] nums[n-1], nums[2n]
+      var repeatedNTimes = function (nums = []) {
+        nums.sort((a, b) => a - b);
+
+        const length = nums.length;
+        const n = nums.length >> 1;
+
+        if (nums[n] === nums[n - 1]) return nums[n]; // 数排在了中间
+        if (nums[length - 1] === nums[n]) return nums[n]; // 数排在了后半部分
+        if (nums[0] === nums[n - 1]) return nums[0]; // 数排在了前半部分
+      };
+
+      // --- answer-2 ---
+
+      // --- answer-3 ---
+
+      // 因为其他元素都不相等， 那么，随机取两个如果相等，则返回
+      function rd(n) {
+        return Math.floor(Math.random() * n);
+      }
+      var repeatedNTimes = function (nums) {
+        const n = nums.length;
+
+        while (true) {
+          const x = rd(n);
+          const y = rd(n);
+          if (x !== y && nums[x] === nums[y]) {
+            return nums[x];
+          }
+        }
+      };
+
+      // --- answer-3 ---
+
+      // --- answer-4 ---
+
+      // 数学方法 相同的数 中间的空格不能超过2 仅长度为2时存在空格超过2的情况
+      var repeatedNTimes = function (nums) {
+        const n = nums.length;
+        for (let gap = 1; gap <= 3; gap++) {
+          for (let i = 0; i + gap < n; ++i) {
+            if (nums[i] === nums[i + gap]) {
+              return nums[i];
+            }
+          }
+        }
+      };
+      // --- answer-4 ---
+
+      var nums = [1, 2, 3, 3];
+      var result = 3;
+
+      // var nums = [2, 1, 2, 5, 3, 2];
+      // var result = 2;
+
+      var nums = [5, 1, 5, 2, 5, 3, 5, 4];
+      var result = 5;
+
+      var nums = [9, 5, 3, 3];
+      var result = 3;
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('repeatedNTimes = ', repeatedNTimes(nums));
+    </script>
+  </body>
+</html>

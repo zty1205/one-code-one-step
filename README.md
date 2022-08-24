@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (325 道)
+## 三、LeetCode (326 道)
 
 <br/>
 
@@ -472,6 +472,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [942.增减字符串匹配.html](./leetCode/942.增减字符串匹配.html)
 - [944.删列造序.html](./leetCode/944.删列造序.html)
 - [953.验证外星语词典.html](./leetCode/953.验证外星语词典.html)
+- [961.在长度 2N 的数组中找出重复 N 次的元素.html](./leetCode/961.在长度2N的数组中找出重复N次的元素.html)
 
 <br/>
 
