@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>965. 单值二叉树</title>
+  </head>
+  <body>
+    <script src="../helper/tree.js"></script>
+    <script>
+      // https://leetcode.cn/problems/univalued-binary-tree/
+
+      // 如果二叉树每个节点都具有相同的值，那么该二叉树就是单值二叉树。
+      // 只有给定的树是单值二叉树时，才返回 true；否则返回 false。
+      // 提示：
+      // 给定树的节点数范围是 [1, 100]。
+      // 每个节点的值都是整数，范围为 [0, 99] 。
+
+      /**
+       * Definition for a binary tree node.
+       * function TreeNode(val, left, right) {
+       *     this.val = (val===undefined ? 0 : val)
+       *     this.left = (left===undefined ? null : left)
+       *     this.right = (right===undefined ? null : right)
+       * }
+       */
+      /**
+       * @param {TreeNode} root
+       * @return {boolean}
+       */
+      var isUnivalTree = function (root) {};
+
+      // --- answer-1 ---
+
+      // 使用任一树遍历算法
+      var isUnivalTree = function (root) {
+        let result = true;
+        let val;
+        function dfs(node) {
+          if (!node) return;
+          if (!result) return;
+          if (!val) val = node.val;
+          if (node.val !== val) {
+            result = false;
+            return;
+          }
+          dfs(node.left);
+          dfs(node.right);
+        }
+        dfs(root);
+        return result;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 递归
+      var isUnivalTree = function (root) {
+        if (!root) {
+          return true;
+        }
+        if (root.left) {
+          if (root.val !== root.left.val || !isUnivalTree(root.left)) {
+            return false;
+          }
+        }
+        if (root.right) {
+          if (root.val !== root.right.val || !isUnivalTree(root.right)) {
+            return false;
+          }
+        }
+        return true;
+      };
+
+      // --- answer-2 ---
+
+      var root = [1, 1, 1, 1, 1, null, 1];
+      var result = true;
+
+      var root = [2, 2, 2, 5, 2];
+      var result = false;
+
+      var tree = buildTreeByArray(root);
+
+      console.log('root = ', root);
+      console.log('result = ', result);
+      console.log('isUnivalTree = ', isUnivalTree(tree));
+    </script>
+  </body>
+</html>
