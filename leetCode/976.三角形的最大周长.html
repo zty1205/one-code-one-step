@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>976. 三角形的最大周长</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/largest-perimeter-triangle/
+
+      // 给定由一些正数（代表长度）组成的数组 nums ，返回 由其中三个长度组成的、面积不为零的三角形的最大周长 。如果不能形成任何面积不为零的三角形，返回 0。
+      // 提示：
+      // 3 <= nums.length <= 104
+      // 1 <= nums[i] <= 106
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var largestPerimeter = function (nums) {};
+
+      // --- answer-1 ---
+
+      // 三角形 任意两边和大于第三边
+      // 排序后能确定大小关系 取a < b < c 能确定 a+c > b b+c > a 还需要确定  a+b > c
+      // 为了确保周长最大 让abc相邻 如果a+b不能大于c，那么更小的数也没希望
+      // 贪心
+      // 复杂度 排序的复杂度 NlogN
+      var largestPerimeter = function (nums = []) {
+        nums.sort((a, b) => b - a);
+        for (let i = 0; i < nums.length - 2; i++) {
+          if (nums[i] < nums[i + 1] + nums[i + 2]) {
+            return nums[i] + nums[i + 1] + nums[i + 2];
+          }
+        }
+        return 0;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var nums = [2, 1, 2];
+      var result = 5;
+
+      var nums = [1, 2, 1];
+      var result = 0;
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('largestPerimeter = ', largestPerimeter(nums));
+    </script>
+  </body>
+</html>
