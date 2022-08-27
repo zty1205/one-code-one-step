@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (328 道)
+## 三、LeetCode (329 道)
 
 <br/>
 
@@ -475,6 +475,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [961.在长度 2N 的数组中找出重复 N 次的元素.html](./leetCode/961.在长度2N的数组中找出重复N次的元素.html)
 - [965.单值二叉树.html](./leetCode/965.单值二叉树.html)
 - [976.三角形的最大周长.html](./leetCode/976.三角形的最大周长.html)
+- [977.有序数组的平方.html](./leetCode/977.有序数组的平方.html)
 
 <br/>
 

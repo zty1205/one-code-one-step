@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>977. 有序数组的平方</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/squares-of-a-sorted-array/
+
+      // 给你一个按 非递减顺序 排序的整数数组 nums，返回 每个数字的平方 组成的新数组，要求也按 非递减顺序 排序。
+      // 提示：
+      // 1 <= nums.length <= 104
+      // -104 <= nums[i] <= 104
+      // nums 已按 非递减顺序 排序
+      // 提示：
+      // 请你设计时间复杂度为 O(n) 的算法解决本问题
+
+      /**
+       * @param {number[]} nums
+       * @return {number[]}
+       */
+      var sortedSquares = function (nums) {};
+
+      // --- answer-1 ---
+
+      // 直接遍历
+      var sortedSquares = function (nums = []) {
+        return nums.map((x) => x * x).sort((a, b) => a - b);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 双指针
+      var sortedSquares = function (nums = []) {
+        let sorted = nums[0] >= 0;
+        for (let i = 0; i < nums.length; i++) {
+          nums[i] *= nums[i];
+        }
+        if (sorted) return nums;
+
+        const result = [];
+        let start = 0;
+        let end = nums.length - 1;
+        let idx = end;
+        // 每次取最大的
+        for (let i = end; i >= 0; i--) {
+          if (nums[end] > nums[start]) {
+            result[i] = nums[end];
+            end--;
+          } else {
+            result[i] = nums[start];
+            start++;
+          }
+        }
+
+        return result;
+      };
+
+      // --- answer-2 ---
+
+      var nums = [-4, -1, 0, 3, 10];
+      var result = [0, 1, 9, 16, 100];
+      // 解释：平方后，数组变为 [16,1,0,9,100]
+      // [9,1,0, 16, 100]
+      // [0,1,9, 16, 100]
+
+      // var nums = [-7, -3, 2, 3, 11];
+      // var result = [4, 9, 9, 49, 121];
+      // [9,-3,2,49,121]
+      // [4,9,9,49,121]
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('sortedSquares = ', sortedSquares(nums));
+    </script>
+  </body>
+</html>
