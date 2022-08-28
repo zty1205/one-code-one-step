@@ -149,10 +149,11 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (329 道)
+## 三、LeetCode (333 道)
 
 <br/>
 
+- [周赛 308.html](./leetCode/周赛308.html)
 - [周赛 306.html](./leetCode/周赛306.html)
 - [周赛 305.html](./leetCode/周赛305.html)
 - [1.两数之和.html](./leetCode/1.两数之和.html)
