@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (333 道)
+## 三、LeetCode (334 道)
 
 <br/>
 
@@ -477,6 +477,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [965.单值二叉树.html](./leetCode/965.单值二叉树.html)
 - [976.三角形的最大周长.html](./leetCode/976.三角形的最大周长.html)
 - [977.有序数组的平方.html](./leetCode/977.有序数组的平方.html)
+- [989.数组形式的整数加法.html](./leetCode/989.数组形式的整数加法.html)
 
 <br/>
 
