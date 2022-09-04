@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>993. 二叉树的堂兄弟节点</title>
+  </head>
+  <body>
+    <script src="../helper/tree.js"></script>
+    <script>
+      // https://leetcode.cn/problems/cousins-in-binary-tree/
+
+      // 在二叉树中，根节点位于深度 0 处，每个深度为 k 的节点的子节点位于深度 k+1 处。
+      // 如果二叉树的两个节点深度相同，但 父节点不同 ，则它们是一对堂兄弟节点。
+      // 我们给出了具有唯一值的二叉树的根节点 root ，以及树中两个不同节点的值 x 和 y 。
+      // 只有与值 x 和 y 对应的节点是堂兄弟节点时，才返回 true 。否则，返回 false。
+      // 提示：
+      // 二叉树的节点数介于 2 到 100 之间。
+      // 每个节点的值都是唯一的、范围为 1 到 100 的整数。
+
+      /**
+       * Definition for a binary tree node.
+       * function TreeNode(val, left, right) {
+       *     this.val = (val===undefined ? 0 : val)
+       *     this.left = (left===undefined ? null : left)
+       *     this.right = (right===undefined ? null : right)
+       * }
+       */
+      /**
+       * @param {TreeNode} root
+       * @param {number} x
+       * @param {number} y
+       * @return {boolean}
+       */
+      var isCousins = function (root, x, y) {};
+
+      // --- answer-1 ---
+
+      // 子节点映射父节点
+      function buildParentMap(root) {
+        const map = new Map();
+        function dfs(node) {
+          if (!node) return;
+          if (node.right) {
+            map.set(node.right.val, node.val);
+            dfs(node.right);
+          }
+          if (node.left) {
+            map.set(node.left.val, node.val);
+            dfs(node.left);
+          }
+        }
+        dfs(root);
+        return map;
+      }
+      // 根据上门的map得到节点的深度
+      function getDepth(num, map = new Map()) {
+        let dep = 0;
+        while (map.has(num)) {
+          dep += 1;
+          num = map.get(num);
+        }
+        return dep;
+      }
+      var isCousins = function (root, x, y) {
+        const hashMap = buildParentMap(root);
+        return hashMap.get(x) !== hashMap.get(y) && getDepth(x, hashMap) === getDepth(y, hashMap);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var root = [1, 2, 3, 4],
+        x = 4,
+        y = 3;
+      var result = false;
+
+      var root = [1, 2, 3, null, 4, null, 5],
+        x = 5,
+        y = 4;
+      var result = true;
+
+      var root = [1, 2, 3, null, 4],
+        x = 2,
+        y = 3;
+      var result = false;
+
+      var tree = buildTreeByArray(root);
+
+      console.log('tree = ', tree);
+      console.log('root = ', root);
+      console.log('x = ', x);
+      console.log('y = ', y);
+      console.log('result = ', result);
+      console.log('isCousins = ', isCousins(tree, x, y));
+    </script>
+  </body>
+</html>
