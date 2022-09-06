@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (335 道)
+## 三、LeetCode (336 道)
 
 <br/>
 
@@ -479,6 +479,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [977.有序数组的平方.html](./leetCode/977.有序数组的平方.html)
 - [989.数组形式的整数加法.html](./leetCode/989.数组形式的整数加法.html)
 - [993.二叉树的堂兄弟节点.html](./leetCode/993.二叉树的堂兄弟节点.html)
+- [997.找到小镇的法官.html](./leetCode/997.找到小镇的法官.html)
 
 <br/>
 
