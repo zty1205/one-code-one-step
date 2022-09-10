@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1002. 查找共用字符</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/find-common-characters/
+
+      // 提示：
+      // 1 <= words.length <= 100
+      // 1 <= words[i].length <= 100
+      // words[i] 由小写英文字母组成
+
+      /**
+       * @param {string[]} words
+       * @return {string[]}
+       */
+      var commonChars = function (words) {};
+
+      // --- answer-1 ---
+
+      // 分治法
+      // 找到左右两边的公用字符 在求交集
+      function getCom(l = [], r = []) {
+        const hash = new Array(26).fill(0);
+        const result = [];
+        for (let char of l) {
+          hash[char.charCodeAt() - 'a'.charCodeAt()] += 1;
+        }
+        for (let char of r) {
+          const idx = char.charCodeAt() - 'a'.charCodeAt();
+          hash[idx] -= 1;
+          if (hash[idx] >= 0) {
+            result.push(String.fromCharCode(idx + 'a'.charCodeAt()));
+          }
+        }
+        return result;
+      }
+      function common(words = [], left, right) {
+        if (left === right) return words[left].split('');
+        if (left + 1 === right) {
+          console.log(left, right);
+          return getCom(words[left].split(''), words[right].split(''));
+        }
+        let mid = (left + right) >> 1;
+        let l = common(words, left, mid);
+        let r = common(words, mid + 1, right);
+        return getCom(l, r);
+      }
+      var commonChars = function (words = []) {
+        return common(words, 0, words.length - 1);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 统计
+      var commonChars = function (words = []) {
+        const hash = new Array(26).fill(10000000);
+        for (let str of words) {
+          const count = new Array(26).fill(0);
+          for (let c of str) {
+            count[c.charCodeAt() - 'a'.charCodeAt()] += 1;
+          }
+          for (let i = 0; i < 26; i++) {
+            // 统计最小出现次数
+            hash[i] = Math.min(hash[i], count[i]);
+          }
+        }
+        const result = [];
+        for (let i = 0; i < 26; i++) {
+          for (let j = 0; j < hash[i]; j++) {
+            result.push(String.fromCharCode(i + 'a'.charCodeAt()));
+          }
+        }
+        return result;
+      };
+
+      // --- answer-2 ---
+
+      var words = ['bella', 'label', 'roller'];
+      var result = ['e', 'l', 'l'];
+
+      var words = ['cool', 'lock', 'cook'];
+      var result = ['c', 'o'];
+
+      console.log('words = ', words);
+      console.log('result = ', result);
+      console.log('commonChars = ', commonChars(words));
+    </script>
+  </body>
+</html>
