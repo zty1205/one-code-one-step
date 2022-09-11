@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1005. K 次取反后最大化的数组和</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/maximize-sum-of-array-after-k-negations/
+
+      // 给你一个整数数组 nums 和一个整数 k ，按以下方法修改该数组：
+      // 提示：
+      // 选择某个下标 i 并将 nums[i] 替换为 -nums[i] 。
+      // 重复这个过程恰好 k 次。可以多次选择同一个下标 i 。
+      // 以这种方式修改数组后，返回数组 可能的最大和 。
+      // 提示：
+      // 1 <= nums.length <= 104
+      // -100 <= nums[i] <= 100
+      // 1 <= k <= 104
+
+      /**
+       * @param {number[]} nums
+       * @param {number} k
+       * @return {number}
+       */
+      var largestSumAfterKNegations = function (nums, k) {};
+
+      // --- answer-1 ---
+
+      // 贪心 尽可能的将大负数变成正数
+      // 2次变更等于不变
+
+      var largestSumAfterKNegations = function (nums = [], k) {
+        nums.sort((a, b) => a - b);
+        let start = 0;
+        // 负数变正数
+        while (nums[start] < 0 && k > 0) {
+          nums[start] = -nums[start];
+          start++;
+          k--;
+        }
+
+        let sum = nums.reduce((pre, cur) => (pre += cur), 0);
+        k = k % 2;
+
+        function get(n) {
+          if (n < 0 || n > nums.length - 1) return 100000;
+          return nums[n];
+        }
+        // 变最小的
+        if (k === 1) {
+          sum -= 2 * Math.min.apply(Math, [get(start - 1), get(start), get(start + 1)]);
+        }
+
+        return sum;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 数的范围为-100到100 用数组进行排序
+
+      var largestSumAfterKNegations = function (nums = [], k) {
+        const hash = new Map();
+        for (let n of nums) {
+          hash.set(n, (hash.get(n) || 0) + 1);
+        }
+        let sum = nums.reduce((pre, cur) => (pre += cur), 0);
+
+        for (let i = -100; i < 0; i++) {
+          if (hash.has(i)) {
+            const optCont = Math.min(k, hash.get(i));
+            k -= optCont;
+            sum += -i * optCont * 2;
+            hash.set(i, hash.get(i) - optCont);
+            hash.set(-i, (hash.get(-i) || 0) + optCont);
+            if (k === 0) {
+              break;
+            }
+          }
+        }
+
+        k = k % 2;
+        if (k === 1) {
+          for (let i = 0; i <= 100; i++) {
+            if (hash.has(i)) {
+              sum -= i * 2;
+              break;
+            }
+          }
+        }
+        return sum;
+      };
+
+      // --- answer-2 ---
+
+      var nums = [4, 2, 3],
+        k = 1;
+      var result = 5;
+      // 解释：选择下标 1 ，nums 变为 [4,-2,3] 。
+
+      // var nums = [3, -1, 0, 2],
+      //   k = 3;
+      // var result = 6;
+      // 解释：选择下标 (1, 2, 2) ，nums 变为 [3,1,0,2] 。
+
+      // var nums = [2, -3, -1, 5, -4],
+      //   k = 2;
+      // var result = 13;
+      // 解释：选择下标 (1, 4) ，nums 变为 [2,3,-1,5,4] 。
+
+      // var nums = [-2, 5, 0, 2, -2];
+      // k = 3;
+      // var result = 11;
+
+      // var nums = [-4, -2, -3];
+      // var k = 4;
+      // var result = 5;
+
+      console.log('nums = ', nums);
+      console.log('k = ', k);
+      console.log('result = ', result);
+      console.log('largestSumAfterKNegations = ', largestSumAfterKNegations(nums, k));
+    </script>
+  </body>
+</html>

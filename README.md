@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (338 道)
+## 三、LeetCode (339 道)
 
 <br/>
 
@@ -482,6 +482,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [997.找到小镇的法官.html](./leetCode/997.找到小镇的法官.html)
 - [999.可以被一步捕获的棋子数.html](./leetCode/999.可以被一步捕获的棋子数.html)
 - [1002.查找共用字符.html](./leetCode/1002.查找共用字符.html)
+- [1005.K 次取反后最大化的数组和.html](./leetCode/1005.K次取反后最大化的数组和.html)
 
 <br/>
 
