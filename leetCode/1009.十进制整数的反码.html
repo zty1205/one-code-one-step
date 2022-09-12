@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1009. 十进制整数的反码</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/complement-of-base-10-integer/
+
+      // 每个非负整数 N 都有其二进制表示。例如， 5 可以被表示为二进制 "101"，11 可以用二进制 "1011" 表示，依此类推。注意，除 N = 0 外，任何二进制表示中都不含前导零。
+      // 二进制的反码表示是将每个 1 改为 0 且每个 0 变为 1。例如，二进制数 "101" 的二进制反码为 "010"。
+      // 给你一个十进制数 N，请你返回其二进制表示的反码所对应的十进制整数。
+      // 提示：
+      // 0 <= N < 10^9
+      // 本题与 476：https://leetcode-cn.com/problems/number-complement/ 相同
+
+      /**
+       * @param {number} n
+       * @return {number}
+       */
+      var bitwiseComplement = function (n) {};
+
+      // --- answer-1 ---
+
+      // 反码 = 2^k-1 - 原码
+      var bitwiseComplement = function (n) {
+        return 2 ** n.toString(2).length - 1 - n;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      // var n = 5;
+      // var result = 2;
+      // 解释：5 的二进制表示为 "101"，其二进制反码为 "010"，也就是十进制中的 2 。
+
+      // var n = 7;
+      // var result = 0;
+      // 解释：7 的二进制表示为 "111"，其二进制反码为 "000"，也就是十进制中的 0 。
+
+      // var n = 10;
+      // var result = 5;
+      // 解释：10 的二进制表示为 "1010"，其二进制反码为 "0101"，也就是十进制中的 5 。
+
+      console.log('n = ', n);
+      console.log('result = ', result);
+      console.log('bitwiseComplement = ', bitwiseComplement(n));
+    </script>
+  </body>
+</html>
