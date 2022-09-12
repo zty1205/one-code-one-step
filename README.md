@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (340 道)
+## 三、LeetCode (341 道)
 
 <br/>
 
@@ -484,6 +484,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1002.查找共用字符.html](./leetCode/1002.查找共用字符.html)
 - [1005.K 次取反后最大化的数组和.html](./leetCode/1005.K次取反后最大化的数组和.html)
 - [1009.十进制整数的反码.html](./leetCode/1009.十进制整数的反码.html)
+- [1013.将数组分成和相等的三个部分.html](./leetCode/1013.将数组分成和相等的三个部分.html)
 
 <br/>
 

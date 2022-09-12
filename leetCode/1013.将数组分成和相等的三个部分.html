@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1013. 将数组分成和相等的三个部分</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/partition-array-into-three-parts-with-equal-sum/
+
+      // 给你一个整数数组 arr，只有可以将其划分为三个和相等的 非空 部分时才返回 true，否则返回 false。
+      // 形式上，如果可以找出索引 i + 1 < j 且满足 (arr[0] + arr[1] + ... + arr[i] == arr[i + 1] + arr[i + 2] + ... + arr[j - 1] == arr[j] + arr[j + 1] + ... + arr[arr.length - 1]) 就可以将数组三等分。
+      // 提示：
+      // 3 <= arr.length <= 5 * 104
+      // -104 <= arr[i] <= 104
+
+      /**
+       * @param {number[]} arr
+       * @return {boolean}
+       */
+      var canThreePartsEqualSum = function (arr) {};
+
+      // --- answer-1 ---
+
+      // 求和，再进行加法
+      var canThreePartsEqualSum = function (arr = []) {
+        const section = 3;
+        const length = arr.length;
+
+        let sum = arr.reduce((pre, cur) => (pre += cur), 0);
+        console.log('sum = ', sum);
+        if (sum % section !== 0) return false;
+        sum = sum / section;
+
+        // 从0往后分割
+        let i = 0;
+        let curSum = 0;
+        for (; i < length; i++) {
+          curSum += arr[i];
+          if (curSum === sum) {
+            break;
+          }
+        }
+        if (i === length - 1 || curSum !== sum) return false;
+
+        // 从length往前分割
+        curSum = 0;
+        let j = length - 1;
+        for (; j > i; j--) {
+          curSum += arr[j];
+          if (curSum === sum) {
+            break;
+          }
+        }
+        if (j === i + 1 || curSum !== sum) return false;
+
+        // 计算中间部分
+        curSum = 0;
+        for (let k = i + 1; k < j; k++) {
+          curSum += arr[k];
+        }
+        console.log('i,j = ', i, j, sum);
+        return curSum === sum;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 修改原数组进行累加， 优化上面需要进行两次加法
+      var canThreePartsEqualSum = function (arr = []) {
+        const length = arr.length - 1;
+        const section = 3;
+        for (let i = 1; i < arr.length; i++) {
+          arr[i] += arr[i - 1];
+        }
+        let sum = arr[length];
+        if (sum % section !== 0) return false;
+        sum = sum / section;
+        let times = 1;
+        for (let i = 0; i < length && times < section; i++) {
+          if (arr[i] === times * sum) times++;
+        }
+        return times === section;
+      };
+
+      // --- answer-2 ---
+
+      var arr = [0, 2, 1, -6, 6, -7, 9, 1, 2, 0, 1];
+      var result = true;
+      // 解释：0 + 2 + 1 = -6 + 6 - 7 + 9 + 1 = 2 + 0 + 1
+
+      var arr = [0, 2, 1, -6, 6, 7, 9, -1, 2, 0, 1];
+      var result = false;
+
+      var arr = [3, 3, 6, 5, -2, 2, 5, 1, -9, 4];
+      var result = true;
+      // 解释：3 + 3 = 6 = 5 - 2 + 2 + 5 + 1 - 9 + 4
+
+      console.log('arr = ', arr);
+      console.log('result = ', result);
+      console.log('canThreePartsEqualSum = ', canThreePartsEqualSum(arr));
+    </script>
+  </body>
+</html>
