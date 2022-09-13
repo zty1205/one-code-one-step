@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1018. 可被 5 整除的二进制前缀</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/binary-prefix-divisible-by-5/
+
+      // 给定一个二进制数组 nums ( 索引从0开始 )。
+      // 我们将xi 定义为其二进制表示形式为子数组 nums[0..i] (从最高有效位到最低有效位)。
+      // 提示：
+      // 例如，如果 nums =[1,0,1] ，那么 x0 = 1, x1 = 2, 和 x2 = 5。
+      // 返回布尔值列表 answer，只有当 xi 可以被 5 整除时，答案 answer[i] 为 true，否则为 false。
+      // 提示：
+      // 1 <= nums.length <= 105
+      // nums[i] 仅为 0 或 1
+
+      /**
+       * @param {number[]} nums
+       * @return {boolean[]}
+       */
+      var prefixesDivBy5 = function (nums) {};
+
+      // --- answer-1 ---
+
+      var prefixesDivBy5 = function (nums = []) {
+        let cur = 0;
+        return nums.map((n) => {
+          cur = cur * 2 + nums[i];
+          return cur % 5 === 0;
+        });
+      };
+
+      // 因为数组很长，所以会溢出，需要考虑到溢出的情况
+      // 每次只保留一个小于5的数，判断是不是0就行了
+      var prefixesDivBy5 = function (nums = []) {
+        let remainder = 0;
+        return nums.map((n) => {
+          remainder = ((remainder << 1) + n) % 5;
+          return remainder === 0;
+        });
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var nums = [0, 1, 1];
+      var result = [true, false, false];
+      // 解释：
+
+      // var nums = [1, 1, 1];
+      // var result = [false, false, false];
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('prefixesDivBy5 = ', prefixesDivBy5(nums));
+    </script>
+  </body>
+</html>
