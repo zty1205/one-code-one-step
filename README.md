@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (342 道)
+## 三、LeetCode (343 道)
 
 <br/>
 
@@ -486,6 +486,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1009.十进制整数的反码.html](./leetCode/1009.十进制整数的反码.html)
 - [1013.将数组分成和相等的三个部分.html](./leetCode/1013.将数组分成和相等的三个部分.html)
 - [1018.可被 5 整除的二进制前缀.html](./leetCode/1018.可被5整除的二进制前缀.html)
+- [1021.删除最外层的括号.html](./leetCode/1021.删除最外层的括号.html)
 
 <br/>
 
