@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (344 道)
+## 三、LeetCode (345 道)
 
 <br/>
 
@@ -488,6 +488,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1018.可被 5 整除的二进制前缀.html](./leetCode/1018.可被5整除的二进制前缀.html)
 - [1021.删除最外层的括号.html](./leetCode/1021.删除最外层的括号.html)
 - [1022.从根到叶的二进制数之和.html](./leetCode/1022.从根到叶的二进制数之和.html)
+- [1025.除数博弈.html](./leetCode/1025.除数博弈.html)
 
 <br/>
 

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1025. 除数博弈</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/divisor-game/
+
+      // 爱丽丝和鲍勃一起玩游戏，他们轮流行动。爱丽丝先手开局。
+      // 最初，黑板上有一个数字 n 。在每个玩家的回合，玩家需要执行以下操作：
+      // 提示：
+      // 选出任一 x，满足 0 < x < n 且 n % x == 0 。
+      // 用 n - x 替换黑板上的数字 n 。
+      // 如果玩家无法执行这些操作，就会输掉游戏。
+      // 只有在爱丽丝在游戏中取得胜利时才返回 true 。假设两个玩家都以最佳状态参与游戏。
+      // 提示：
+      // 1 <= n <= 1000
+
+      /**
+       * @param {number} n
+       * @return {boolean}
+       */
+      var divisorGame = function (n) {};
+
+      // --- answer-1 ---
+
+      // n = 4的时候 爱丽丝选1 根据n=3的结果 爱丽丝赢
+      // 后一个问题依赖前面 使用动态规划
+      var divisorGame = function (n) {
+        const dp = new Array(n + 1).fill(false);
+        dp[1] = false;
+        dp[2] = true;
+        for (let i = 3; i <= n; i++) {
+          for (let j = 1; j < i; j++) {
+            // 赢
+            if (i % j === 0 && !dp[i - j]) {
+              dp[i] = true;
+              break;
+            }
+          }
+        }
+        return dp[n];
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 找规律 n 为奇数的时候 \text{Alice}Alice（先手）必败，nn 为偶数的时候 \text{Alice}Alice 必胜。
+      // 值永远趋向1 偶数的人可以一直保证自己是1
+      var divisorGame = function (n) {
+        return n % 2 === 0;
+      };
+
+      // --- answer-2 ---
+
+      // var n = 2;
+      // var result = true;
+      // 解释：爱丽丝选择 1，鲍勃无法进行操作。
+
+      var n = 3;
+      var result = false;
+      // 解释：爱丽丝选择 1，鲍勃也选择 1，然后爱丽丝无法进行操作。
+
+      var n = 13;
+      var result = false;
+
+      var n = 14;
+      var result = true;
+
+      console.log('n = ', n);
+      console.log('result = ', result);
+      console.log('divisorGame = ', divisorGame(n));
+    </script>
+  </body>
+</html>
