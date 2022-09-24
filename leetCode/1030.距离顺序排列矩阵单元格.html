@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1030. 距离顺序排列矩阵单元格</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/matrix-cells-in-distance-order/
+
+      // 给定四个整数 rows ,   cols ,  rCenter 和 cCenter 。有一个 rows x cols 的矩阵，你在单元格上的坐标是 (rCenter, cCenter) 。
+      // 返回矩阵中的所有单元格的坐标，并按与 (rCenter, cCenter) 的 距离 从最小到最大的顺序排。你可以按 任何 满足此条件的顺序返回答案。
+      // 单元格(r1, c1) 和 (r2, c2) 之间的距离为|r1 - r2| + |c1 - c2|。
+      // 提示：
+      // 1 <= rows, cols <= 100
+      // 0 <= rCenter < rows
+      // 0 <= cCenter < cols
+
+      /**
+       * @param {number} rows
+       * @param {number} cols
+       * @param {number} rCenter
+       * @param {number} cCenter
+       * @return {number[][]}
+       */
+      var allCellsDistOrder = function (rows, cols, rCenter, cCenter) {};
+
+      // --- answer-1 ---
+
+      // 从当前单元格往上下左右四个方向移动一格 则距离+1
+      var allCellsDistOrder = function (rows, cols, rCenter, cCenter) {
+        const visited = Array.from({ length: rows }, () => new Array(cols).fill(false));
+        const hash = Array.from({ length: rows + cols }, () => new Array());
+
+        function track(i, j) {
+          if (i < 0 || i >= rows || j < 0 || j >= cols) return;
+          if (visited[i][j]) return;
+
+          const dis = Math.abs(rCenter - i) + Math.abs(cCenter - j);
+          hash[dis].push([i, j]);
+          visited[i][j] = true;
+
+          track(i, j - 1);
+          track(i + 1, j);
+          track(i, j + 1);
+          track(i - 1, j);
+        }
+        track(rCenter, cCenter);
+
+        return hash.reduce((pre, cur) => {
+          pre = pre.concat(cur);
+          return pre;
+        }, []);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 直接遍历
+      var allCellsDistOrder = function (rows, cols, rCenter, cCenter) {
+        const hash = Array.from({ length: rows + cols }, () => new Array());
+
+        for (let i = 0; i < rows; i++) {
+          for (let j = 0; j < cols; j++) {
+            const dis = Math.abs(rCenter - i) + Math.abs(cCenter - j);
+            hash[dis].push([i, j]);
+          }
+        }
+
+        return hash.reduce((pre, cur) => {
+          pre = pre.concat(cur);
+          return pre;
+        }, []);
+      };
+
+      // --- answer-2 ---
+
+      var rows = 1,
+        cols = 2,
+        rCenter = 0,
+        cCenter = 0;
+      var result = [
+        [0, 0],
+        [0, 1]
+      ];
+      // 解释：从 (r0, c0) 到其他单元格的距离为：[0,1]
+
+      var rows = 2,
+        cols = 2,
+        rCenter = 0,
+        cCenter = 1;
+      var result = [
+        [0, 1],
+        [0, 0],
+        [1, 1],
+        [1, 0]
+      ];
+      // 解释：从 (r0, c0) 到其他单元格的距离为：[0,1,1,2]
+
+      var rows = 2,
+        cols = 3,
+        rCenter = 1,
+        cCenter = 2;
+      var result = [
+        [1, 2],
+        [0, 2],
+        [1, 1],
+        [0, 1],
+        [1, 0],
+        [0, 0]
+      ];
+      // 解释：从 (r0, c0) 到其他单元格的距离为：[0,1,1,2,2,3]
+
+      console.log('rows = ', rows);
+      console.log('cols = ', cols);
+      console.log('rCenter = ', rCenter);
+      console.log('cCenter = ', cCenter);
+      console.log('result = ', result);
+      console.log('allCellsDistOrder = ', allCellsDistOrder(rows, cols, rCenter, cCenter));
+    </script>
+  </body>
+</html>
