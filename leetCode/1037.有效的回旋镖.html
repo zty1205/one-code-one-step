@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1037. 有效的回旋镖</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/valid-boomerang/
+
+      // 给定一个数组 points ，其中 points[i] = [xi, yi] 表示 X-Y 平面上的一个点，如果这些点构成一个 回旋镖 则返回 true 。
+      // 回旋镖 定义为一组三个点，这些点 各不相同 且 不在一条直线上 。
+      // 提示：
+      // points.length == 3
+      // points[i].length == 2
+      // 0 <= xi, yi <= 100
+
+      /**
+       * @param {number[][]} points
+       * @return {boolean}
+       */
+      var isBoomerang = function (points) {};
+
+      // --- answer-1 ---
+
+      // 几何问题 向量的乘积不等于0
+      var isBoomerang = function (points) {
+        const a1 = points[1][0] - points[0][0];
+        const b1 = points[1][1] - points[0][1];
+        const a2 = points[2][0] - points[0][0];
+        const b2 = points[2][1] - points[0][1];
+        return a1 * b2 - b1 * a2 != 0;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var points = [
+        [1, 1],
+        [2, 3],
+        [3, 2]
+      ];
+      var result = true;
+
+      var points = [
+        [1, 1],
+        [2, 2],
+        [3, 3]
+      ];
+      var result = false;
+
+      console.log('points = ', points);
+      console.log('result = ', result);
+      console.log('isBoomerang = ', isBoomerang(points));
+    </script>
+  </body>
+</html>
