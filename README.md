@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (347 道)
+## 三、LeetCode (348 道)
 
 <br/>
 
@@ -491,6 +491,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1025.除数博弈.html](./leetCode/1025.除数博弈.html)
 - [1030.距离顺序排列矩阵单元格.html](./leetCode/1030.距离顺序排列矩阵单元格.html)
 - [1037.有效的回旋镖.html](./leetCode/1037.有效的回旋镖.html)
+- [1046.最后一块石头的重量.html](./leetCode/1046.最后一块石头的重量.html)
 
 <br/>
 

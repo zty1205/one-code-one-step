@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1046. 最后一块石头的重量</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/last-stone-weight/
+
+      // 有一堆石头，每块石头的重量都是正整数。
+      // 每一回合，从中选出两块 最重的 石头，然后将它们一起粉碎。假设石头的重量分别为 x 和 y，且 x <= y。那么粉碎的可能结果如下：
+      // 提示：
+      // 如果 x == y，那么两块石头都会被完全粉碎；
+      // 如果 x != y，那么重量为 x 的石头将会完全粉碎，而重量为 y 的石头新重量为 y-x。
+      // 最后，最多只会剩下一块石头。返回此石头的重量。如果没有石头剩下，就返回 0。
+      // 提示：
+      // 1 <= stones.length <= 30
+      // 1 <= stones[i] <= 1000
+
+      /**
+       * @param {number[]} stones
+       * @return {number}
+       */
+      var lastStoneWeight = function (stones) {};
+
+      // --- answer-1 ---
+
+      // 模拟 借鉴 插入排序
+
+      class InsertArray {
+        constructor() {
+          this.array = [];
+        }
+        push(n) {
+          this.array.push(n);
+          if (this.array.length > 0) {
+            for (let i = this.array.length - 1; i > 0; i--) {
+              if (this.array[i] > this.array[i - 1]) {
+                [this.array[i - 1], this.array[i]] = [this.array[i], this.array[i - 1]];
+              }
+            }
+          }
+        }
+        popTwo() {
+          const a = this.array.shift();
+          const b = this.array.shift();
+          const n = Math.abs(a - b);
+          this.push(n);
+        }
+        top() {
+          return this.array[0];
+        }
+        length() {
+          return this.array.length;
+        }
+      }
+
+      var lastStoneWeight = function (stones = []) {
+        const ia = new InsertArray();
+        for (let n of stones) {
+          ia.push(n);
+        }
+        while (ia.length() > 1) {
+          ia.popTwo();
+        }
+        return ia.top();
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var stones = [2, 7, 4, 1, 8, 1];
+      var result = 1;
+      // 解释：
+
+      console.log('stones = ', stones);
+      console.log('result = ', result);
+      console.log('lastStoneWeight = ', lastStoneWeight(stones));
+    </script>
+  </body>
+</html>
