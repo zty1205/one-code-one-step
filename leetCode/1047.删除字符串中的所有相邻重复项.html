@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1047. 删除字符串中的所有相邻重复项</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/remove-all-adjacent-duplicates-in-string/
+
+      // 给出由小写字母组成的字符串 S，重复项删除操作会选择两个相邻且相同的字母，并删除它们。
+      // 在 S 上反复执行重复项删除操作，直到无法继续删除。
+      // 在完成所有重复项删除操作后返回最终的字符串。答案保证唯一。
+      // 提示：
+      // 1 <= S.length <= 20000
+      // S 仅由小写英文字母组成。
+
+      /**
+       * @param {string} s
+       * @return {string}
+       */
+      var removeDuplicates = function (s) {};
+
+      // --- answer-1 ---
+
+      // 分割成数组 进行操作
+      var removeDuplicates = function (s) {
+        const arr = s.split('');
+        for (let i = 1; i < arr.length; i++) {
+          if (arr[i] === arr[i - 1]) {
+            arr.splice(i - 1, 2);
+            i = i - 2;
+          }
+        }
+        return arr.join('');
+      };
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 栈
+      var removeDuplicates = function (s) {
+        const stack = [];
+        for (let char of s) {
+          if (stack.length && stack[stack.length - 1] === char) {
+            stack.pop();
+          } else {
+            stack.push(char);
+          }
+        }
+        return stack.join('');
+      };
+
+      // --- answer-2 ---
+
+      var s = 'abbaca';
+      var result = 'ca';
+      // 解释：\
+      var s = 'abbbaca';
+      var result = 'abaca';
+
+      console.log('s = ', s);
+      console.log('result = ', result);
+      console.log('removeDuplicates = ', removeDuplicates(s));
+    </script>
+  </body>
+</html>
