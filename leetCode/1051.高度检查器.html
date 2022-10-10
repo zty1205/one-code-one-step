@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1051. 高度检查器</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/height-checker/
+
+      // 学校打算为全体学生拍一张年度纪念照。根据要求，学生需要按照 非递减 的高度顺序排成一行。
+      // 排序后的高度情况用整数数组 expected 表示，其中 expected[i] 是预计排在这一行中第 i 位的学生的高度（下标从 0 开始）。
+      // 给你一个整数数组 heights ，表示 当前学生站位 的高度情况。heights[i] 是这一行中第 i 位学生的高度（下标从 0 开始）。
+      // 返回满足 heights[i] != expected[i] 的 下标数量 。
+      // 提示：
+      // 1 <= heights.length <= 100
+      // 1 <= heights[i] <= 100
+
+      /**
+       * @param {number[]} heights
+       * @return {number}
+       */
+      var heightChecker = function (heights) {};
+
+      // --- answer-1 ---
+
+      // 排序后比较, 数值较小 可以使用计数排序
+      var heightChecker = function (heights = []) {
+        const arr = [...heights].sort((a, b) => a - b);
+        let res = 0;
+        for (let i = 0; i < arr.length; i++) {
+          if (arr[i] !== heights[i]) res += 1;
+        }
+        return res;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var heights = [1, 1, 4, 2, 1, 3];
+      var result = 3;
+      // 解释：
+
+      var heights = [5, 1, 2, 3, 4];
+      var result = 5;
+      // 解释：
+
+      var heights = [1, 2, 3, 4, 5];
+      var result = 0;
+      // 解释：
+
+      console.log('heights = ', heights);
+      console.log('result = ', result);
+      console.log('heightChecker = ', heightChecker(heights));
+    </script>
+  </body>
+</html>

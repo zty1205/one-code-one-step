@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (349 道)
+## 三、LeetCode (350 道)
 
 <br/>
 
@@ -493,6 +493,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1037.有效的回旋镖.html](./leetCode/1037.有效的回旋镖.html)
 - [1046.最后一块石头的重量.html](./leetCode/1046.最后一块石头的重量.html)
 - [1047.删除字符串中的所有相邻重复项.html](./leetCode/1047.删除字符串中的所有相邻重复项.html)
+- [1051.高度检查器.html](./leetCode/1051.高度检查器.html)
 
 <br/>
 
