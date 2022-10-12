@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>274. H 指数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/h-index/
+
+      // 给你一个整数数组 citations ，其中 citations[i] 表示研究者的第 i 篇论文被引用的次数。计算并返回该研究者的 h 指数。
+      // 根据维基百科上 h 指数的定义：h 代表“高引用次数”，一名科研人员的 h指数是指他（她）的 （n 篇论文中）总共有 h 篇论文分别被引用了至少 h 次。且其余的 n - h 篇论文每篇被引用次数 不超过 h 次。
+      // 如果 h 有多种可能的值，h 指数 是其中最大的那个。
+      // 提示：
+      // n == citations.length
+      // 1 <= n <= 5000
+      // 0 <= citations[i] <= 1000
+
+      /**
+       * @param {number[]} citations
+       * @return {number}
+       */
+      var hIndex = function (citations) {};
+
+      // --- answer-1 ---
+
+      // 排序 从后往前比
+      // 无法解决[0,0,4,4]
+      //
+      var hIndex = function (citations = []) {
+        citations.sort((a, b) => a - b);
+        const length = citations.length;
+        for (let i = length - 1; i > 0; i--) {
+          if (citations[i] <= length - i) {
+            return citations[i];
+          }
+        }
+        return Math.min(citations[0], length);
+      };
+      // 暴力最大值枚举可以，但显示有更好的办法
+      // 对比取得值和长度 取最小值
+      var hIndex = function (citations = []) {
+        citations.sort((a, b) => a - b);
+        const length = citations.length;
+        let h = 0;
+        for (let i = length - 1; i >= 0; i--) {
+          const item = citations[i];
+          h = Math.max(h, Math.min(item, length - i));
+        }
+        return h;
+      };
+
+      var hIndex = function (citations) {
+        citations.sort((a, b) => a - b);
+        let h = 0,
+          i = citations.length - 1;
+        while (i >= 0 && citations[i] > h) {
+          h++;
+          i--;
+        }
+        return h;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 计数排序 总共不能超过数组的长度 按引用次数计数
+      var hIndex = function (citations = []) {
+        const length = citations.length;
+        const counter = new Array(length + 1).fill(0);
+        for (let n of citations) {
+          counter[Math.min(length, n)]++;
+        }
+
+        let total = 0;
+        for (let i = length; i >= 0; i--) {
+          total += counter[i];
+          if (total >= i) return i;
+        }
+
+        return 0;
+      };
+
+      // --- answer-2 ---
+
+      var citations = [3, 0, 6, 1, 5];
+      var result = 3;
+      // counter  [1, 1, 0, 1, 0, 2]
+      // 解释：给定数组表示研究者总共有 5 篇论文，每篇论文相应的被引用了 3, 0, 6, 1, 5 次。
+
+      var citations = [1, 3, 1];
+      var result = 1;
+
+      var citations = [1];
+      var result = 1;
+
+      var citations = [100, 192];
+      var result = 2;
+
+      var citations = [0, 0, 4, 4];
+      var result = 2;
+      // counter  [2, 0, 0, 0, 2]
+
+      console.log('citations = ', citations);
+      console.log('result = ', result);
+      console.log('hIndex = ', hIndex(citations));
+    </script>
+  </body>
+</html>
