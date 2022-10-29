@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (353 道)
+## 三、LeetCode (354 道)
 
 <br/>
 
@@ -497,6 +497,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1047.删除字符串中的所有相邻重复项.html](./leetCode/1047.删除字符串中的所有相邻重复项.html)
 - [1050.合作过至少三次的演员和导演.sql](./leetCode/1050.合作过至少三次的演员和导演.sql)
 - [1051.高度检查器.html](./leetCode/1051.高度检查器.html)
+- [1078.Bigram 分词.html](./leetCode/1078.Bigram分词.html)
 
 <br/>
 
