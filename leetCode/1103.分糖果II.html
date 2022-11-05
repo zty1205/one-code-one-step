@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1103. 分糖果 II</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/distribute-candies-to-people/
+
+      // 排排坐，分糖果。
+      // 我们买了一些糖果 candies，打算把它们分给排好队的 n = num_people 个小朋友。
+      // 给第一个小朋友 1 颗糖果，第二个小朋友 2 颗，依此类推，直到给最后一个小朋友 n 颗糖果。
+      // 然后，我们再回到队伍的起点，给第一个小朋友 n + 1 颗糖果，第二个小朋友 n + 2 颗，依此类推，直到给最后一个小朋友 2 * n 颗糖果。
+      // 重复上述过程（每次都比上一次多给出一颗糖果，当到达队伍终点后再次从队伍起点开始），直到我们分完所有的糖果。注意，就算我们手中的剩下糖果数不够（不比前一次发出的糖果多），这些糖果也会全部发给当前的小朋友。
+      // 返回一个长度为 num_people、元素之和为 candies 的数组，以表示糖果的最终分发情况（即 ans[i] 表示第 i 个小朋友分到的糖果数）。
+      // 提示：
+      // 1 <= candies <= 10^9
+      // 1 <= num_people <= 1000
+
+      /**
+       * @param {number} candies
+       * @param {number} num_people
+       * @return {number[]}
+       */
+      var distributeCandies = function (candies, num_people) {};
+
+      // --- answer-1 ---
+
+      // 模拟
+      var distributeCandies = function (candies = 1, num_people = 1) {
+        const result = new Array(num_people).fill(0);
+        let sum = 0;
+        let n = 0;
+        while (sum < candies) {
+          n += 1;
+          sum += n;
+          result[(n - 1) % num_people] += sum > candies ? n - (sum - candies) : n;
+        }
+        return result;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 数学计算 等差数列
+
+      var distributeCandies = function (candies = 1, num_people = 1) {
+        const p = Math.floor(Math.sqrt(2 * candies + 0.25) - 0.5);
+        const remain = Math.floor(candies - (p + 1) * p * 0.5);
+        const result = new Array(num_people).fill(0);
+        const row = Math.floor(p / num_people),
+          col = p % num_people;
+        for (let i = 0; i < num_people; i++) {
+          result[i] = (i + 1) * row + Math.floor(row * (row - 1) * 0.5) * num_people;
+          if (i < col) {
+            result[i] += i + 1 + row * num_people;
+          }
+        }
+        result[col] += remain;
+        return result;
+      };
+
+      // --- answer-2 ---
+
+      var candies = 7,
+        num_people = 4;
+      var result = [1, 2, 3, 1];
+      // 解释：
+
+      var candies = 10,
+        num_people = 3;
+      var result = [5, 2, 3];
+      // 解释：
+
+      console.log('candies = ', candies);
+      console.log('num_people = ', num_people);
+      console.log('result = ', result);
+      console.log('distributeCandies = ', distributeCandies(candies, num_people));
+    </script>
+  </body>
+</html>
