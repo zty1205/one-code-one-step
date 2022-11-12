@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1128. 等价多米诺骨牌对的数量</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/number-of-equivalent-domino-pairs/
+
+      // 给你一个由一些多米诺骨牌组成的列表 dominoes。
+      // 如果其中某一张多米诺骨牌可以通过旋转 0 度或 180 度得到另一张多米诺骨牌，我们就认为这两张牌是等价的。
+      // 形式上，dominoes[i] = [a, b] 和 dominoes[j] = [c, d] 等价的前提是 a==c 且 b==d，或是 a==d 且 b==c。
+      // 在 0 <= i < j < dominoes.length 的前提下，找出满足 dominoes[i] 和 dominoes[j] 等价的骨牌对 (i, j) 的数量。
+      // 提示：
+      // 1 <= dominoes.length <= 40000
+      // 1 <= dominoes[i][j] <= 9
+
+      /**
+       * @param {number[][]} dominoes
+       * @return {number}
+       */
+      var numEquivDominoPairs = function (dominoes) {};
+
+      // --- answer-1 ---
+
+      function C2(num) {
+        if (num < 2) return 0;
+        if (num === 0 || num === 2) return 1;
+        return (num * (num - 1)) / 2;
+      }
+      // 计数 + 排列组合
+      var numEquivDominoPairs = function (dominoes = []) {
+        const count = dominoes.reduce((pre, cur) => {
+          const [a, b] = cur;
+          // 旋转的数组具有相同的key
+          const key = `${Math.min(a, b)}${Math.max(a, b)}`;
+          pre[key] = (pre[key] || 0) + 1;
+          return pre;
+        }, {});
+        let result = 0;
+        for (let k in count) {
+          result += C2(count[k]);
+        }
+        return result;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 优化 边统计边相加
+      var numEquivDominoPairs = function (dominoes = []) {
+        const hash = new Array(100).fill(0);
+        let result = 0;
+        for (let arr of dominoes) {
+          const key = arr[0] > arr[1] ? arr[1] * 10 + arr[0] : arr[0] * 10 + arr[1];
+          result += hash[key];
+          hash[key] += 1;
+        }
+        return result;
+      };
+
+      // --- answer-2 ---
+
+      var dominoes = [
+        [1, 2],
+        [2, 1],
+        [3, 4],
+        [5, 6]
+      ];
+      var result = 1;
+
+      var dominoes = [
+        [1, 2],
+        [2, 1],
+        [3, 4],
+        [5, 6],
+        [1, 2]
+      ];
+      var result = 3;
+
+      var dominoes = [
+        [1, 2],
+        [2, 1],
+        [3, 4],
+        [5, 6],
+        [1, 2],
+        [1, 2],
+        [6, 5]
+      ];
+      var result = 7;
+
+      var dominoes = [
+        [1, 2],
+        [2, 1],
+        [3, 4],
+        [5, 6],
+        [1, 2],
+        [1, 2],
+        [6, 5],
+        [1, 2],
+        [2, 1],
+        [3, 4],
+        [5, 6],
+        [1, 2],
+        [1, 2],
+        [6, 5]
+      ];
+      var result = 35;
+
+      console.log('dominoes = ', dominoes);
+      console.log('result = ', result);
+      console.log('numEquivDominoPairs = ', numEquivDominoPairs(dominoes));
+    </script>
+  </body>
+</html>
