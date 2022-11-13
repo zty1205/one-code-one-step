@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1137. 第 N 个泰波那契数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/n-th-tribonacci-number/
+
+      // 泰波那契序列 Tn 定义如下：
+      // T0 = 0, T1 = 1, T2 = 1, 且在 n >= 0 的条件下 Tn+3 = Tn + Tn+1 + Tn+2
+      // 给你整数 n，请返回第 n 个泰波那契数 Tn 的值。
+      // 提示：
+      // 0 <= n <= 37
+      // 答案保证是一个 32 位整数，即 answer <= 2^31 - 1。
+
+      /**
+       * @param {number} n
+       * @return {number}
+       */
+      var tribonacci = function (n) {};
+
+      // --- answer-1 ---
+
+      // 直译 但是很明显过大会溢出
+      var tribonacci = function (n) {
+        if (n === 0) return 0;
+        if (n === 1 || n === 2) return 1;
+        return tribonacci(n - 1) + tribonacci(n - 2) + tribonacci(n - 3);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 尾递归
+      var tribonacci = function (n) {
+        if (n === 0) return 0;
+        if (n === 1 || n === 2) return 1;
+        function track(p_pre, pre, cur, num) {
+          if (num === 0) return cur;
+          return track(pre, cur, p_pre + pre + cur, num - 1);
+        }
+        return track(0, 1, 1, n - 2);
+      };
+
+      // --- answer-2 ---
+
+      // --- answer-3 ---
+
+      // 矩阵 + 快速幂
+      var tribonacci = function (n) {
+        if (n === 0) {
+          return 0;
+        }
+        if (n <= 2) {
+          return 1;
+        }
+        const m = [
+          [1, 1, 1],
+          [1, 0, 0],
+          [0, 1, 0]
+        ];
+        const res = pow(m, n);
+        return res[0][2];
+      };
+
+      const pow = (a, n) => {
+        let ret = [
+          [1, 0, 0],
+          [0, 1, 0],
+          [0, 0, 1]
+        ];
+        while (n > 0) {
+          if ((n & 1) === 1) {
+            ret = multiply(ret, a);
+          }
+          n >>= 1;
+          a = multiply(a, a);
+        }
+        return ret;
+      };
+
+      const multiply = (a, b) => {
+        const c = new Array(3).fill(0).map(() => new Array(3).fill(0));
+        for (let i = 0; i < 3; i++) {
+          for (let j = 0; j < 3; j++) {
+            c[i][j] = a[i][0] * b[0][j] + a[i][1] * b[1][j] + a[i][2] * b[2][j];
+          }
+        }
+        return c;
+      };
+
+      // --- answer-3 ---
+
+      var n = 4;
+      var result = 4;
+      // 0 1 1 2 4
+      // 0 1 1
+      //   1 1 2
+      //     1 2 4
+      // 解释：
+
+      // var n = 25;
+      // var result = 1389537;
+
+      var n = 2;
+      var result = 1;
+
+      console.log('n = ', n);
+      console.log('result = ', result);
+      console.log('tribonacci = ', tribonacci(n));
+    </script>
+  </body>
+</html>
