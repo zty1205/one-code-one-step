@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1154. 一年中的第几天</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/day-of-the-year/
+
+      // 给你一个字符串 date ，按 YYYY-MM-DD 格式表示一个 现行公元纪年法 日期。返回该日期是当年的第几天。
+      // 提示：
+      // date.length == 10
+      // date[4] == date[7] == '-'，其他的 date[i] 都是数字
+      // date 表示的范围从 1900 年 1 月 1 日至 2019 年 12 月 31 日
+
+      /**
+       * @param {string} date
+       * @return {number}
+       */
+      var dayOfYear = function (date) {};
+
+      // --- answer-1 ---
+
+      // 时间函数
+      var dayOfYear = function (date) {
+        const d1 = new Date(date);
+        const d2 = new Date(`${d1.getFullYear()}-01-01`);
+        return (d1 - d2) / 1000 / 60 / 60 / 24 + 1;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 计算每个月
+      var dayOfYear = function (date) {
+        const year = +date.slice(0, 4);
+        const month = +date.slice(5, 7);
+        const day = +date.slice(8);
+
+        const mDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+        // 闰年
+        if (year % 400 === 0 || (year % 4 === 0 && year % 100 !== 0)) {
+          ++mDays[1];
+        }
+
+        let result = 0;
+        for (let i = 0; i < month - 1; ++i) {
+          result += mDays[i];
+        }
+        return result + day;
+      };
+
+      // --- answer-2 ---
+
+      var date = '2019-01-09';
+      var result = 9;
+      // 解释：给定日期是2019年的第九天。
+
+      var date = '2019-02-10';
+      var result = 41;
+
+      console.log('date = ', date);
+      console.log('result = ', result);
+      console.log('dayOfYear = ', dayOfYear(date));
+    </script>
+  </body>
+</html>
