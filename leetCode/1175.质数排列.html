@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1175. 质数排列</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/prime-arrangements/
+
+      // 请你帮忙给从 1 到 n 的数设计排列方案，使得所有的「质数」都应该被放在「质数索引」（索引从 1 开始）上；你需要返回可能的方案总数。
+      // 让我们一起来回顾一下「质数」：质数一定是大于 1 的，并且不能用两个小于它的正整数的乘积来表示。
+      // 由于答案可能会很大，所以请你返回答案 模 mod 10^9 + 7 之后的结果即可。
+      // 提示：
+      // 1 <= n <= 100
+
+      /**
+       * @param {number} n
+       * @return {number}
+       */
+      var numPrimeArrangements = function (n) {};
+
+      // --- answer-1 ---
+
+      // n内质数为a个 非质数为n-a个 设为b
+      // 放置方案为 a! b!
+      // 总的为a! * b!
+      var numPrimeArrangements = function (n) {
+        const MOD = 1e9 + 7;
+        const primes = [];
+        const count = [];
+        // 100以内的质数
+        for (let i = 2; i <= 100; i++) {
+          let flag = true;
+          for (let j = 2; j * j <= i; j++) {
+            if (i % j === 0) flag = false;
+          }
+          flag && primes.push(i);
+          count[i] = primes.length;
+        }
+
+        let a = count[n];
+        let b = n - a;
+
+        let result = 1;
+        for (let i = b; i > 1; i--) result = (result * i) % MOD;
+        for (let i = a; i > 1; i--) result = (result * i) % MOD;
+        return result;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var n = 5;
+      var result = 12;
+      // 解释：举个例子，[1,2,5,4,3] 是一个有效的排列，但 [5,2,3,4,1] 不是，因为在第二种情况里质数 5 被错误地放在索引为 1 的位置上。
+
+      var n = 100;
+      var result = 682289015;
+
+      console.log('n = ', n);
+      console.log('result = ', result);
+      console.log('numPrimeArrangements = ', numPrimeArrangements(n));
+    </script>
+  </body>
+</html>

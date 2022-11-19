@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (362 道)
+## 三、LeetCode (363 道)
 
 <br/>
 
@@ -506,6 +506,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1137.第 N 个泰波那契数.html](./leetCode/1137.第N个泰波那契数.html)
 - [1154.一年中的第几天.html](./leetCode/1154.一年中的第几天.html)
 - [1160.拼写单词.html](./leetCode/1160.拼写单词.html)
+- [1175.质数排列.html](./leetCode/1175.质数排列.html)
 
 <br/>
 
