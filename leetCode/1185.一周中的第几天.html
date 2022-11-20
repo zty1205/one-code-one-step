@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1185. 一周中的第几天</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/day-of-the-week/
+
+      // 给你一个日期，请你设计一个算法来判断它是对应一周中的哪一天。
+      // 输入为三个整数：day、month 和 year，分别表示日、月、年。
+      // 您返回的结果必须是这几个值中的一个 {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"}。
+      // 提示：
+      // 给出的日期一定是在 1971 到 2100 年之间的有效日期。
+
+      /**
+       * @param {number} day
+       * @param {number} month
+       * @param {number} year
+       * @return {string}
+       */
+      var dayOfTheWeek = function (day, month, year) {};
+
+      // --- answer-1 ---
+
+      const AM_DAY = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+      // 反手一个原生函数
+      var dayOfTheWeek = function (day, month, year) {
+        return AM_DAY[new Date(`${year}/${month}/${day}`).getDay()];
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      const DAY = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+      const MOUTH_DAY = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30];
+
+      var dayOfTheWeek = function (day, month, year) {
+        // Math.floor((year - 1969) / 4); 计算闰年数
+        let days = 365 * (year - 1971) + Math.floor((year - 1969) / 4);
+
+        for (let i = 0; i < month - 1; ++i) {
+          days += MOUTH_DAY[i];
+        }
+        if ((year % 400 === 0 || (year % 4 === 0 && year % 100 !== 0)) && month >= 3) {
+          days += 1;
+        }
+        days += day;
+        return DAY[(days + 3) % 7];
+      };
+
+      // --- answer-2 ---
+
+      var day = 31,
+        month = 8,
+        year = 2019;
+      var result = 'Saturday';
+
+      var day = 18,
+        month = 7,
+        year = 1999;
+      var result = 'Sunday';
+
+      var day = 15,
+        month = 8,
+        year = 1993;
+      var result = 'Sunday';
+
+      console.log('day = ', day);
+      console.log('month = ', month);
+      console.log('year = ', year);
+      console.log('result = ', result);
+      console.log('dayOfTheWeek = ', dayOfTheWeek(day, month, year));
+    </script>
+  </body>
+</html>
