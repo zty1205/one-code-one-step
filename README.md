@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (365 道)
+## 三、LeetCode (366 道)
 
 <br/>
 
@@ -509,6 +509,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1175.质数排列.html](./leetCode/1175.质数排列.html)
 - [1184.公交站间的距离.html](./leetCode/1184.公交站间的距离.html)
 - [1185.一周中的第几天.html](./leetCode/1185.一周中的第几天.html)
+- [1189.“气球”的最大数量.html](./leetCode/1189.“气球”的最大数量.html)
 
 <br/>
 
