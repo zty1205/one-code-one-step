@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1217. 玩筹码</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/minimum-cost-to-move-chips-to-the-same-position/
+
+      // 有 n 个筹码。第 i 个筹码的位置是 position[i] 。
+      // 我们需要把所有筹码移到同一个位置。在一步中，我们可以将第 i 个筹码的位置从 position[i] 改变为:
+      // 提示：
+      // position[i] + 2 或 position[i] - 2 ，此时 cost = 0
+      // position[i] + 1 或 position[i] - 1 ，此时 cost = 1
+      // 返回将所有筹码移动到同一位置上所需要的 最小代价 。
+      // 提示：
+      // 1 <= chips.length <= 100
+      // 1 <= chips[i] <= 10^9
+
+      /**
+       * @param {number[]} position
+       * @return {number}
+       */
+      var minCostToMoveChips = function (position) {};
+
+      // --- answer-1 ---
+
+      // 分析题意、
+      // 移动后位置的奇偶性不变则 cost = 0 ,否则为1
+      // 那么奇数的可以全部为1列 偶数的全部为一列， 计算奇数往偶数移动 和 偶数往奇数移动 的次数的最小值
+      var minCostToMoveChips = function (position = []) {
+        let odd = 0;
+        let even = 0;
+        for (let n of position) {
+          (n & 1) === 0 ? odd++ : even++;
+        }
+        return Math.min(odd, even);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var position = [1, 2, 3];
+      var result = 1;
+      // 解释：第一步:将位置3的筹码移动到位置1，成本为0。
+
+      var position = [2, 2, 2, 3, 3];
+      var result = 2;
+      // 解释：我们可以把位置3的两个筹码移到位置2。每一步的成本为1。总成本= 2。
+
+      var position = [1, 1000000000];
+      var result = 1;
+
+      console.log('position = ', position);
+      console.log('result = ', result);
+      console.log('minCostToMoveChips = ', minCostToMoveChips(position));
+    </script>
+  </body>
+</html>
