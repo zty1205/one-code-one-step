@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (369 道)
+## 三、LeetCode (370 道)
 
 <br/>
 
@@ -338,6 +338,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [274.H 指数.html](./leetCode/274.H指数.html)
 - [275.H 指数 II.html](./leetCode/275.H指数II.html)
 - [278.第一个错误的版本.html](./leetCode/278.第一个错误的版本.html)
+- [279.完全平方数.html](./leetCode/279.完全平方数.html)
 - [283.移动零.html](./leetCode/283.移动零.html)
 - [290.单词规律.html](./leetCode/290.单词规律.html)
 - [292.Nim 游戏.html](./leetCode/292.Nim游戏.html)

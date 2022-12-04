@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>279. 完全平方数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/perfect-squares/
+
+      // 给你一个整数 n ，返回 和为 n 的完全平方数的最少数量 。
+      // 完全平方数 是一个整数，其值等于另一个整数的平方；换句话说，其值等于一个整数自乘的积。例如，1、4、9 和 16 都是完全平方数，而 3 和 11 不是。
+      // 提示：
+      // 1 <= n <= 104
+
+      /**
+       * @param {number} n
+       * @return {number}
+       */
+      var numSquares = function (n) {};
+
+      // --- answer-1 ---
+
+      // 回溯 超时
+      var numSquares = function (n) {
+        const sq = Math.sqrt(n);
+        let res = 10000;
+        function track(num, count) {
+          if (num < 0) return;
+          if (count > res) return;
+
+          if (num === 0) {
+            res = Math.min(res, count);
+            return;
+          }
+          for (let i = Math.floor(Math.sqrt(num)); i > 0; i--) {
+            track(num - i * i, count + 1);
+          }
+        }
+        track(n, 0);
+        return res;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 动态规划
+      // dp[n] = dp[n-i*i] + 1 取最小
+      var numSquares = function (n) {
+        const dp = new Array(n + 1).fill(0);
+        for (let i = 1; i <= n; i++) {
+          let minn = Number.MAX_VALUE;
+          for (let j = 1; j * j <= i; j++) {
+            minn = Math.min(minn, dp[i - j * j]);
+          }
+          dp[i] = minn + 1;
+        }
+        return dp[n];
+      };
+
+      // --- answer-2 ---
+
+      var n = 12;
+      var result = 3;
+      // 解释：12 = 4 + 4 + 4
+
+      var n = 13;
+      var result = 2;
+      // 解释：13 = 4 + 9
+
+      var n = 879;
+      var result = 4;
+
+      var n = 4703;
+
+      console.log('n = ', n);
+      console.log('result = ', result);
+      console.log('numSquares = ', numSquares(n));
+    </script>
+  </body>
+</html>
