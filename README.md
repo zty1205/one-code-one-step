@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (370 道)
+## 三、LeetCode (371 道)
 
 <br/>
 
@@ -514,6 +514,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1200.最小绝对差.html](./leetCode/1200.最小绝对差.html)
 - [1207.独一无二的出现次数.html](./leetCode/1207.独一无二的出现次数.html)
 - [1217.玩筹码.html](./leetCode/1217.玩筹码.html)
+- [1232.缀点成线.html](./leetCode/1232.缀点成线.html)
 
 <br/>
 
