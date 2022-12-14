@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (371 道)
+## 三、LeetCode (372 道)
 
 <br/>
 
@@ -515,6 +515,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1207.独一无二的出现次数.html](./leetCode/1207.独一无二的出现次数.html)
 - [1217.玩筹码.html](./leetCode/1217.玩筹码.html)
 - [1232.缀点成线.html](./leetCode/1232.缀点成线.html)
+- [1252.奇数值单元格的数目.html](./leetCode/1252.奇数值单元格的数目.html)
 
 <br/>
 

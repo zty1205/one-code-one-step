@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1252. 奇数值单元格的数目</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/cells-with-odd-values-in-a-matrix/
+
+      // 给你一个 m x n 的矩阵，最开始的时候，每个单元格中的值都是 0。
+      // 另有一个二维索引数组 indices，indices[i] = [ri, ci] 指向矩阵中的某个位置，其中 ri 和 ci 分别表示指定的行和列（从 0 开始编号）。
+      // 对 indices[i] 所指向的每个位置，应同时执行下述增量操作：
+      // 提示：
+      // ri 行上的所有单元格，加 1 。
+      // ci 列上的所有单元格，加 1 。
+      // 给你 m、n 和 indices 。请你在执行完所有 indices 指定的增量操作后，返回矩阵中 奇数值单元格 的数目。
+      // 提示：
+      // 1 <= m, n <= 50
+      // 1 <= indices.length <= 100
+      // 0 <= ri < m
+      // 0 <= ci < n
+
+      /**
+       * @param {number} m
+       * @param {number} n
+       * @param {number[][]} indices
+       * @return {number}
+       */
+      var oddCells = function (m, n, indices) {};
+
+      // --- answer-1 ---
+
+      function setRow(row, array) {
+        for (let i = 0; i < array[row].length; i++) {
+          array[row][i] += 1;
+        }
+      }
+
+      function setCol(col, array) {
+        for (let i = 0; i < array.length; i++) {
+          array[i][col] += 1;
+        }
+      }
+
+      // 模拟
+      var oddCells = function (m, n, indices) {
+        const arr = Array.from({ length: m }, () => Array.from({ length: n }, () => 0));
+        for (let [row, col] of indices) {
+          setRow(row, arr);
+          setCol(col, arr);
+        }
+        let count = 0;
+        for (let i = 0; i < m; i++) {
+          for (let j = 0; j < n; j++) {
+            if ((arr[i][j] & 1) === 1) {
+              count++;
+            }
+          }
+        }
+        return count;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 优化方法一 存储空间
+      var oddCells = function (m, n, indices) {
+        const rows = new Array(m).fill(0);
+        const cols = new Array(n).fill(0);
+        for (const [row, col] of indices) {
+          rows[row]++;
+          cols[col]++;
+        }
+        let res = 0;
+        for (let i = 0; i < m; i++) {
+          for (let j = 0; j < n; j++) {
+            if (((rows[i] + cols[j]) & 1) !== 0) {
+              res++;
+            }
+          }
+        }
+        return res;
+      };
+
+      // --- answer-2 ---
+
+      var m = 2,
+        n = 3,
+        indices = [
+          [0, 1],
+          [1, 1]
+        ];
+      var result = 6;
+      // 解释：最开始的矩阵是 [[0,0,0],[0,0,0]]。
+
+      var m = 2,
+        n = 2,
+        indices = [
+          [1, 1],
+          [0, 0]
+        ];
+      var result = 0;
+      // 解释：最后的矩阵是 [[2,2],[2,2]]，里面没有奇数。
+
+      console.log('m = ', m);
+      console.log('n = ', n);
+      console.log('indices = ', indices);
+      console.log('result = ', result);
+      console.log('oddCells = ', oddCells(m, n, indices));
+
+      oddCells2(m, n, indices);
+    </script>
+  </body>
+</html>
