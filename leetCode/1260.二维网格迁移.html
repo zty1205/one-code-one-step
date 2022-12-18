@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1260. 二维网格迁移</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/shift-2d-grid/
+
+      // 给你一个 m 行 n 列的二维网格 grid 和一个整数 k。你需要将 grid 迁移 k 次。
+      // 每次「迁移」操作将会引发下述活动：
+      // 提示：
+      // 位于 grid[i][j] 的元素将会移动到 grid[i][j + 1]。
+      // 位于 grid[i][n - 1] 的元素将会移动到 grid[i + 1][0]。
+      // 位于 grid[m - 1][n - 1] 的元素将会移动到 grid[0][0]。
+      // 请你返回 k 次迁移操作后最终得到的 二维网格。
+      // 提示：
+      // m == grid.length
+      // n == grid[i].length
+      // 1 <= m <= 50
+      // 1 <= n <= 50
+      // -1000 <= grid[i][j] <= 1000
+      // 0 <= k <= 100
+
+      /**
+       * @param {number[][]} grid
+       * @param {number} k
+       * @return {number[][]}
+       */
+      var shiftGrid = function (grid, k) {};
+
+      // --- answer-1 ---
+
+      // 找规律 m*n 为一次循环
+      // 每n次 列不变 但列中的数交换一次
+      var shiftGrid = function (grid, k) {
+        const m = grid.length;
+        const n = grid[0].length;
+        const gd = Array.from({ length: m }, () => Array.from({ length: n }));
+        for (let i = 0; i < m; i++) {
+          for (let j = 0; j < n; j++) {
+            const index = (i * n + j + k) % (m * n);
+            gd[Math.floor(index / n)][index % n] = grid[i][j];
+          }
+        }
+        return gd;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var grid = [
+          [1, 2, 3],
+          [4, 5, 6],
+          [7, 8, 9]
+        ],
+        k = 1;
+      var result = [
+        [9, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8]
+      ];
+
+      var grid = [
+          [3, 8, 1, 9],
+          [19, 7, 2, 5],
+          [4, 6, 11, 10],
+          [12, 0, 21, 13]
+        ],
+        k = 4;
+      var result = [
+        [12, 0, 21, 13],
+        [3, 8, 1, 9],
+        [19, 7, 2, 5],
+        [4, 6, 11, 10]
+      ];
+
+      var grid = [
+          [1, 2, 3],
+          [4, 5, 6],
+          [7, 8, 9]
+        ],
+        k = 9;
+      var result = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9]
+      ];
+
+      console.log('grid = ', grid);
+      console.log('k = ', k);
+      console.log('result = ', result);
+      console.log('shiftGrid = ', shiftGrid(grid, k));
+    </script>
+  </body>
+</html>
