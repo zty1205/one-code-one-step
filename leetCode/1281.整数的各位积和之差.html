@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1281. 整数的各位积和之差</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/subtract-the-product-and-sum-of-digits-of-an-integer/
+
+      // 给你一个整数 n，请你帮忙计算并返回该整数「各位数字之积」与「各位数字之和」的差。
+      // 提示：
+      // 1 <= n <= 10^5
+
+      /**
+       * @param {number} n
+       * @return {number}
+       */
+      var subtractProductAndSum = function (n) {};
+
+      // --- answer-1 ---
+
+      // 按题意
+      var subtractProductAndSum = function (n) {
+        let product = 1;
+        let sum = 0;
+        while (n) {
+          let num = n % 10;
+          product *= num;
+          sum += num;
+          n = (n - num) / 10;
+        }
+        return product - sum;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 字符串
+      var subtractProductAndSum = function (n) {
+        const arr = String(n).split('');
+        const product = arr.reduce((pre, cur) => (pre *= cur), 1);
+        const sum = arr.reduce((pre, cur) => (pre += +cur), 0);
+        return product - sum;
+      };
+
+      // --- answer-2 ---
+
+      var n = 234;
+      var result = 15;
+      // 解释：
+
+      // var n = 4421;
+      // var result = 21;
+      // 解释：
+
+      console.log('n = ', n);
+      console.log('result = ', result);
+      console.log('subtractProductAndSum = ', subtractProductAndSum(n));
+    </script>
+  </body>
+</html>
