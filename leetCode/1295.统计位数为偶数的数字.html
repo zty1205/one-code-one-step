@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1295. 统计位数为偶数的数字</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/find-numbers-with-even-number-of-digits/
+
+      // 给你一个整数数组 nums，请你返回其中位数为 偶数 的数字的个数。
+      // 提示：
+      // 1 <= nums.length <= 500
+      // 1 <= nums[i] <= 10^5
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var findNumbers = function (nums) {};
+
+      // --- answer-1 ---
+
+      // 使用字符串
+      var findNumbers = function (nums = []) {
+        return nums.filter((num) => (String(num).length & 1) === 0).length;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 数学
+      function numLen(num) {
+        let res = 0;
+        while (num) {
+          num = Math.floor(num / 10);
+          res += 1;
+        }
+        return res;
+      }
+      function numLen(num) {
+        return Math.floor(Math.log10(num)) + 1;
+      }
+      var findNumbers = function (nums = []) {
+        let res = 0;
+        for (let n of nums) {
+          const len = numLen(n);
+          if ((len & 1) === 0) res += 1;
+        }
+        return res;
+      };
+
+      // --- answer-2 ---
+
+      var nums = [12, 345, 2, 6, 7896];
+      var result = 2;
+      // 解释：
+
+      var nums = [555, 901, 482, 1771];
+      var result = 1;
+      // 解释：
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('findNumbers = ', findNumbers(nums));
+    </script>
+  </body>
+</html>
