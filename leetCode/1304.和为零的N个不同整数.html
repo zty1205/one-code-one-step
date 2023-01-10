@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1304. 和为零的 N 个不同整数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/find-n-unique-integers-sum-up-to-zero/
+
+      // 给你一个整数 n，请你返回 任意 一个由 n 个 各不相同 的整数组成的数组，并且这 n 个数相加和为 0 。
+      // 提示：
+      // 1 <= n <= 1000
+
+      /**
+       * @param {number} n
+       * @return {number[]}
+       */
+      var sumZero = function (n) {};
+
+      // --- answer-1 ---
+
+      // 一次push相反的两个数
+      var sumZero = function (n) {
+        const result = [];
+        for (let i = 1; i <= Math.floor(n / 2); i++) {
+          result.push(i);
+          result.push(-i);
+        }
+        if (n & (1 === 1)) {
+          result.push(0);
+        }
+        return result;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var n = 5;
+      var result = [-7, -1, 1, 3, 4];
+      // 解释：这些数组也是正确的 [-5,-1,1,2,3]，[-3,-1,2,-2,4]。
+
+      var n = 3;
+      var result = [-1, 0, 1];
+
+      var n = 1;
+      var result = [0];
+
+      console.log('n = ', n);
+      console.log('result = ', result);
+      console.log('sumZero = ', sumZero(n));
+    </script>
+  </body>
+</html>
