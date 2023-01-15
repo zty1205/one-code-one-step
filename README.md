@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (379 道)
+## 三、LeetCode (380 道)
 
 <br/>
 
@@ -523,6 +523,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1295.统计位数为偶数的数字.html](./leetCode/1295.统计位数为偶数的数字.html)
 - [1299.将每个元素替换为右侧最大元素.html](./leetCode/1299.将每个元素替换为右侧最大元素.html)
 - [1304.和为零的 N 个不同整数.html](./leetCode/1304.和为零的N个不同整数.html)
+- [1309.解码字母到整数映射.html](./leetCode/1309.解码字母到整数映射.html)
 
 <br/>
 

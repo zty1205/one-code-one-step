@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1309. 解码字母到整数映射</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/decrypt-string-from-alphabet-to-integer-mapping/
+
+      // 给你一个字符串 s，它由数字（'0' - '9'）和 '#' 组成。我们希望按下述规则将 s 映射为一些小写英文字符：
+      // 提示：
+      // 字符（'a' - 'i'）分别用（'1' - '9'）表示。
+      // 字符（'j' - 'z'）分别用（'10#' - '26#'）表示。
+      // 返回映射之后形成的新字符串。
+      // 题目数据保证映射始终唯一。
+      // 提示：
+      // 1 <= s.length <= 1000
+      // s[i] 只包含数字（'0'-'9'）和 '#' 字符。
+      // s 是映射始终存在的有效字符串。
+
+      /**
+       * @param {string} s
+       * @return {string}
+       */
+      var freqAlphabets = function (s) {};
+
+      // --- answer-1 ---
+
+      const map = {};
+      for (let i = 1; i <= 26; i++) {
+        map[i] = String.fromCharCode('a'.charCodeAt() - 1 + i);
+      }
+      console.log('map = ', JSON.stringify(map));
+
+      // --- answer-1 ---
+
+      const dict = {
+        1: 'a',
+        2: 'b',
+        3: 'c',
+        4: 'd',
+        5: 'e',
+        6: 'f',
+        7: 'g',
+        8: 'h',
+        9: 'i',
+        10: 'j',
+        11: 'k',
+        12: 'l',
+        13: 'm',
+        14: 'n',
+        15: 'o',
+        16: 'p',
+        17: 'q',
+        18: 'r',
+        19: 's',
+        20: 't',
+        21: 'u',
+        22: 'v',
+        23: 'w',
+        24: 'x',
+        25: 'y',
+        26: 'z'
+      };
+
+      // 字典
+      // 从后往前遍历 一个#号 前面必带两个数字
+      var freqAlphabets = function (s = '') {
+        let res = '';
+        for (let i = s.length - 1; i >= 0; i--) {
+          if (s[i] === '#') {
+            res = dict[s[i - 2] + s[i - 1]] + res;
+            i -= 2;
+          } else {
+            res = dict[s[i]] + res;
+          }
+        }
+        return res;
+      };
+
+      // --- answer-2 ---
+
+      // 暴力替换
+      var freqAlphabets = function (s = '') {
+        let replace = '';
+        replace = s.replace(/10#/g, 'j');
+        replace = replace.replace(/11#/g, 'k');
+        replace = replace.replace(/12#/g, 'l');
+        replace = replace.replace(/13#/g, 'm');
+        replace = replace.replace(/14#/g, 'n');
+        replace = replace.replace(/15#/g, 'o');
+        replace = replace.replace(/16#/g, 'p');
+        replace = replace.replace(/17#/g, 'q');
+        replace = replace.replace(/18#/g, 'r');
+        replace = replace.replace(/19#/g, 's');
+        replace = replace.replace(/20#/g, 't');
+        replace = replace.replace(/21#/g, 'u');
+        replace = replace.replace(/22#/g, 'v');
+        replace = replace.replace(/23#/g, 'w');
+        replace = replace.replace(/24#/g, 'x');
+        replace = replace.replace(/25#/g, 'y');
+        replace = replace.replace(/26#/g, 'z');
+
+        replace = replace.replace(/1/g, 'a');
+        replace = replace.replace(/2/g, 'b');
+        replace = replace.replace(/3/g, 'c');
+        replace = replace.replace(/4/g, 'd');
+        replace = replace.replace(/5/g, 'e');
+        replace = replace.replace(/6/g, 'f');
+        replace = replace.replace(/7/g, 'g');
+        replace = replace.replace(/8/g, 'h');
+        replace = replace.replace(/9/g, 'i');
+
+        return replace;
+      };
+
+      // --- answer-2 ---
+
+      var s = '10#11#12';
+      var result = 'jkab';
+      // 解释："j" -> "10#" , "k" -> "11#" , "a" -> "1" , "b" -> "2".
+
+      var s = '1326#';
+      var result = 'acz';
+
+      var s = '123';
+      var result = 'abc';
+
+      var s = '824#15#826#';
+      var result = 'hxohz';
+
+      console.log('s = ', s);
+      console.log('result = ', result);
+      console.log('freqAlphabets = ', freqAlphabets(s));
+    </script>
+  </body>
+</html>
