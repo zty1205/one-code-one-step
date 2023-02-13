@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1331. 数组序号转换</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/rank-transform-of-an-array/
+
+      // 给你一个整数数组 arr ，请你将数组中的每个元素替换为它们排序后的序号。
+      // 序号代表了一个元素有多大。序号编号的规则如下：
+      // 提示：
+      // 序号从 1 开始编号。
+      // 一个元素越大，那么序号越大。如果两个元素相等，那么它们的序号相同。
+      // 每个数字的序号都应该尽可能地小。
+      // 提示：
+      // 0 <= arr.length <= 105
+      // -109 <= arr[i] <= 109
+
+      /**
+       * @param {number[]} arr
+       * @return {number[]}
+       */
+      var arrayRankTransform = function (arr) {};
+
+      // --- answer-1 ---
+
+      // 排序
+      // hash 元素对应下标
+      var arrayRankTransform = function (arr = []) {
+        const newArr = arr.slice(0);
+        newArr.sort((a, b) => a - b);
+        // console.log('newArr = ', newArr);
+        let idx = 0;
+        const map = newArr.reduce((map, n) => {
+          if (!map.has(n)) {
+            idx += 1;
+            map.set(n, idx);
+          }
+          return map;
+        }, new Map());
+        // console.log('map = ', map);
+        return arr.map((x) => map.get(x));
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var arr = [40, 10, 20, 30];
+      var result = [4, 1, 2, 3];
+      // 解释：40 是最大的元素。 10 是最小的元素。 20 是第二小的数字。 30 是第三小的数字。
+
+      // var arr = [100, 100, 100];
+      // var result = [1, 1, 1];
+      // 解释：所有元素有相同的序号。
+
+      // var arr = [37, 12, 28, 9, 100, 56, 80, 5, 12];
+      // var result = [5, 3, 4, 2, 8, 6, 7, 1, 3];
+
+      console.log('arr = ', arr);
+      console.log('result = ', result);
+      console.log('arrayRankTransform = ', arrayRankTransform(arr));
+    </script>
+  </body>
+</html>
