@@ -33,7 +33,6 @@
       var arrayRankTransform = function (arr = []) {
         const newArr = arr.slice(0);
         newArr.sort((a, b) => a - b);
-        // console.log('newArr = ', newArr);
         let idx = 0;
         const map = newArr.reduce((map, n) => {
           if (!map.has(n)) {
@@ -42,7 +41,6 @@
           }
           return map;
         }, new Map());
-        // console.log('map = ', map);
         return arr.map((x) => map.get(x));
       };
 
@@ -56,12 +54,12 @@
       var result = [4, 1, 2, 3];
       // 解释：40 是最大的元素。 10 是最小的元素。 20 是第二小的数字。 30 是第三小的数字。
 
-      // var arr = [100, 100, 100];
-      // var result = [1, 1, 1];
+      var arr = [100, 100, 100];
+      var result = [1, 1, 1];
       // 解释：所有元素有相同的序号。
 
-      // var arr = [37, 12, 28, 9, 100, 56, 80, 5, 12];
-      // var result = [5, 3, 4, 2, 8, 6, 7, 1, 3];
+      var arr = [37, 12, 28, 9, 100, 56, 80, 5, 12];
+      var result = [5, 3, 4, 2, 8, 6, 7, 1, 3];
 
       console.log('arr = ', arr);
       console.log('result = ', result);
