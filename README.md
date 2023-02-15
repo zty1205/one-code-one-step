@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (383 道)
+## 三、LeetCode (384 道)
 
 <br/>
 
@@ -527,6 +527,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1313.解压缩编码列表.html](./leetCode/1313.解压缩编码列表.html)
 - [1323.6 和 9 组成的最大数字.html](./leetCode/1323.6和9组成的最大数字.html)
 - [1331.数组序号转换.html](./leetCode/1331.数组序号转换.html)
+- [1332.删除回文子序列.html](./leetCode/1332.删除回文子序列.html)
 
 <br/>
 
