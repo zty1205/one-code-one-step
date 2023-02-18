@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1342. 将数字变成 0 的操作次数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/number-of-steps-to-reduce-a-number-to-zero/
+
+      // 给你一个非负整数 num ，请你返回将它变成 0 所需要的步数。 如果当前数字是偶数，你需要把它除以 2 ；否则，减去 1 。
+      // 提示：
+      // 0 <= num <= 10^6
+
+      /**
+       * @param {number} num
+       * @return {number}
+       */
+      var numberOfSteps = function (num) {};
+
+      // --- answer-1 ---
+
+      // 模拟计算
+      var numberOfSteps = function (num) {
+        let i = 0;
+        while (num) {
+          num = num & 1 ? num - 1 : num / 2;
+          i += 1;
+        }
+        return i;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 二进制计算
+      // 总次数等于 二进制1个数字 （首位为1时 为奇数需要-1） + 二进制的长度 - 1
+      var numberOfSteps = function (num) {
+        const bit = Number(num).toString(2).split('');
+        return bit.length - 1 + bit.filter((x) => x === '1').length;
+      };
+
+      function length(num) {
+        let len = 0;
+        if (num >> 16 == 0) {
+          len += 16;
+          num <<= 16;
+        }
+        if (num >> 24 == 0) {
+          len += 8;
+          num <<= 8;
+        }
+        if (num >> 28 == 0) {
+          len += 4;
+          num <<= 4;
+        }
+        if (num >> 30 == 0) {
+          len += 2;
+          num <<= 2;
+        }
+        if (num >> 31 == 0) {
+          len += 1;
+        }
+        return 32 - len;
+      }
+
+      function count(num) {
+        num = (num & 0x55555555) + ((num >> 1) & 0x55555555);
+        num = (num & 0x33333333) + ((num >> 2) & 0x33333333);
+        num = (num & 0x0f0f0f0f) + ((num >> 4) & 0x0f0f0f0f);
+        num = (num & 0x00ff00ff) + ((num >> 8) & 0x00ff00ff);
+        num = (num & 0x0000ffff) + ((num >> 16) & 0x0000ffff);
+        return num;
+      }
+
+      // 位运算
+      var numberOfSteps = function (num) {
+        return length(num) - 1 + count(num);
+      };
+
+      // --- answer-2 ---
+
+      var num = 14;
+      var result = 6;
+      // 解释：
+
+      var num = 8;
+      var result = 4;
+      // 解释：
+
+      var num = 123;
+      var result = 12;
+
+      console.log('num = ', num);
+      console.log('result = ', result);
+      console.log('numberOfSteps = ', numberOfSteps(num));
+    </script>
+  </body>
+</html>
