@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (385 道)
+## 三、LeetCode (386 道)
 
 <br/>
 
@@ -529,6 +529,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1331.数组序号转换.html](./leetCode/1331.数组序号转换.html)
 - [1332.删除回文子序列.html](./leetCode/1332.删除回文子序列.html)
 - [1342.将数字变成 0 的操作次数.html](./leetCode/1342.将数字变成0的操作次数.html)
+- [1346.检查整数及其两倍数是否存在.html](./leetCode/1346.检查整数及其两倍数是否存在.html)
 
 <br/>
 

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1346. 检查整数及其两倍数是否存在</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/check-if-n-and-its-double-exist/
+
+      // 给你一个整数数组 arr，请你检查是否存在两个整数 N 和 M，满足 N 是 M 的两倍（即，N = 2 * M）。
+      // 更正式地，检查是否存在两个下标 i 和 j 满足：
+      // 提示：
+      // i != j
+      // 0 <= i, j < arr.length
+      // arr[i] == 2 * arr[j]
+      // 提示：
+      // 2 <= arr.length <= 500
+      // -10^3 <= arr[i] <= 10^3
+
+      /**
+       * @param {number[]} arr
+       * @return {boolean}
+       */
+      var checkIfExist = function (arr) {};
+
+      // --- answer-1 ---
+
+      // 类似两数之和，记录下需求
+      var checkIfExist = function (arr) {
+        const map = new Map();
+        for (let n of arr) {
+          if (map.has(n)) {
+            return true;
+          }
+          map.set(n * 2, n);
+          map.set(n / 2, n);
+        }
+        return false;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var arr = [10, 2, 5, 3];
+      var result = true;
+      // 解释：N = 10 是 M = 5 的两倍，即 10 = 2 * 5 。
+
+      var arr = [7, 1, 14, 11];
+      var result = true;
+      // 解释：N = 14 是 M = 7 的两倍，即 14 = 2 * 7 。
+
+      var arr = [3, 1, 7, 11];
+      var result = false;
+      // 解释：在该情况下不存在 N 和 M 满足 N = 2 * M 。
+
+      console.log('arr = ', arr);
+      console.log('result = ', result);
+      console.log('checkIfExist = ', checkIfExist(arr));
+    </script>
+  </body>
+</html>
