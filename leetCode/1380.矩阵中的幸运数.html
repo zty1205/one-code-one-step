@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1380. 矩阵中的幸运数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/lucky-numbers-in-a-matrix/
+
+      // 给你一个 m * n 的矩阵，矩阵中的数字 各不相同 。请你按 任意 顺序返回矩阵中的所有幸运数。
+      // 幸运数 是指矩阵中满足同时下列两个条件的元素：
+      // 提示：
+      // 在同一行的所有元素中最小
+      // 在同一列的所有元素中最大
+      // 提示：
+      // m == mat.length
+      // n == mat[i].length
+      // 1 <= n, m <= 50
+      // 1 <= matrix[i][j] <= 10^5
+      // 矩阵中的所有元素都是不同的
+
+      /**
+       * @param {number[][]} matrix
+       * @return {number[]}
+       */
+      var luckyNumbers = function (matrix) {};
+
+      // --- answer-1 ---
+
+      // 每个数都不重复
+      // 每行的最小值和每列的最大值的都出现的元素就是结果
+      var luckyNumbers = function (matrix) {
+        const m = matrix.length;
+        const n = matrix[0].length;
+        const minRow = new Array(m).fill(Number.MAX_SAFE_INTEGER);
+        const maxCol = new Array(n).fill(0);
+        for (let i = 0; i < m; i++) {
+          for (let j = 0; j < n; j++) {
+            minRow[i] = Math.min(minRow[i], matrix[i][j]);
+            maxCol[j] = Math.max(maxCol[j], matrix[i][j]);
+          }
+        }
+        const res = [];
+        for (let i = 0; i < m; i++) {
+          for (let j = 0; j < n; j++) {
+            if (matrix[i][j] === minRow[i] && matrix[i][j] === maxCol[j]) {
+              res.push(matrix[i][j]);
+            }
+          }
+        }
+        return res;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var matrix = [
+        [3, 7, 8],
+        [9, 11, 13],
+        [15, 16, 17]
+      ];
+      var result = [15];
+      // 解释：15 是唯一的幸运数，因为它是其所在行中的最小值，也是所在列中的最大值。
+
+      var matrix = [
+        [1, 10, 4, 2],
+        [9, 3, 8, 7],
+        [15, 16, 17, 12]
+      ];
+      var result = [12];
+      // 解释：12 是唯一的幸运数，因为它是其所在行中的最小值，也是所在列中的最大值。
+
+      var matrix = [
+        [7, 8],
+        [1, 2]
+      ];
+      var result = [7];
+      // 解释：7是唯一的幸运数字，因为它是行中的最小值，列中的最大值。
+
+      console.log('matrix = ', matrix);
+      console.log('result = ', result);
+      console.log('luckyNumbers  = ', luckyNumbers(matrix));
+    </script>
+  </body>
+</html>
