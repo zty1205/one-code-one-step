@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1417. 重新格式化字符串</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/reformat-the-string/
+
+      // 给你一个混合了数字和字母的字符串 s，其中的字母均为小写英文字母。
+      // 请你将该字符串重新格式化，使得任意两个相邻字符的类型都不同。也就是说，字母后面应该跟着数字，而数字后面应该跟着字母。
+      // 请你返回 重新格式化后 的字符串；如果无法按要求重新格式化，则返回一个 空字符串 。
+      // 提示：
+      // 1 <= s.length <= 500
+      // s 仅由小写英文字母和/或数字组成。
+
+      /**
+       * @param {string} s
+       * @return {string}
+       */
+      var reformat = function (s) {};
+
+      // --- answer-1 ---
+
+      function join(arr1 = [], arr2 = []) {
+        let res = '';
+        for (let i = 0; i < arr1.length; i++) {
+          res += arr1[i];
+          res += arr2[i] || '';
+        }
+        return res;
+      }
+
+      // 分成两个数组 或者使用双指针
+      var reformat = function (s = '') {
+        const char = [];
+        const num = [];
+        for (let ch of s) {
+          if (/\d/.test(ch)) {
+            num.push(ch);
+          } else {
+            char.push(ch);
+          }
+        }
+        if (Math.abs(char.length - num.length) > 1) return '';
+        return char.length < num.length ? join(num, char) : join(char, num);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var s = 'a0b1c2';
+      var result = '0a1b2c';
+      // 解释："0a1b2c" 中任意两个相邻字符的类型都不同。 "a0b1c2", "0a1b2c", "0c2a1b" 也是满足题目要求的答案。
+
+      var s = 'leetcode';
+      var result = '';
+      // 解释："leetcode" 中只有字母，所以无法满足重新格式化的条件。
+
+      var s = '1229857369';
+      var result = '';
+      // 解释："1229857369" 中只有数字，所以无法满足重新格式化的条件。
+
+      var s = 'covid2019';
+      var result = 'c2o0v1i9d';
+
+      // var s = 'ab123';
+      // var result = '1a2b3';
+
+      console.log('s = ', s);
+      console.log('result = ', result);
+      console.log('reformat = ', reformat(s));
+    </script>
+  </body>
+</html>

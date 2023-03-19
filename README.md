@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (392 道)
+## 三、LeetCode (393 道)
 
 <br/>
 
@@ -536,6 +536,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1380.矩阵中的幸运数.html](./leetCode/1380.矩阵中的幸运数.html)
 - [1394.找出数组中的幸运数.html](./leetCode/1394.找出数组中的幸运数.html)
 - [1413.逐步求和得到正数的最小值.html](./leetCode/1413.逐步求和得到正数的最小值.html)
+- [1417.重新格式化字符串.html](./leetCode/1417.重新格式化字符串.html)
 
 <br/>
 
