@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1385. 两个数组间的距离值</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/find-the-distance-value-between-two-arrays/
+
+      // 给你两个整数数组 arr1 ， arr2 和一个整数 d ，请你返回两个数组之间的 距离值 。
+      // 「距离值」 定义为符合此距离要求的元素数目：对于元素 arr1[i] ，不存在任何元素 arr2[j] 满足 |arr1[i]-arr2[j]| <= d 。
+      // 提示：
+      // 1 <= arr1.length, arr2.length <= 500
+      // -10^3 <= arr1[i], arr2[j] <= 10^3
+      // 0 <= d <= 100
+
+      /**
+       * @param {number[]} arr1
+       * @param {number[]} arr2
+       * @param {number} d
+       * @return {number}
+       */
+      var findTheDistanceValue = function (arr1, arr2, d) {};
+
+      // --- answer-1 ---
+
+      // 暴力直接循环
+      var findTheDistanceValue = function (arr1 = [], arr2 = [], d) {
+        let ret = 0;
+        for (let n1 of arr1) {
+          let flag = true;
+          for (let n2 of arr2) {
+            if (Math.abs(n1 - n2) <= d) {
+              flag = false;
+            }
+          }
+          if (flag) ret += 1;
+        }
+        return ret;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      function midF(arr2, i) {
+        let left = 0;
+        let right = arr2.length - 1;
+        while (left <= right) {
+          let mid = left + Math.floor((right - left) >> 1);
+          if (arr2[mid] < i) {
+            left = mid + 1;
+          } else {
+            right = mid - 1;
+          }
+        }
+        return left;
+      }
+
+      // 数组排序后，再用二分找到 -d 和 +d
+      var findTheDistanceValue = function (arr1, arr2, d) {
+        arr2.sort((a, b) => a - b);
+        let ret = 0;
+
+        for (let i = 0; i < arr1.length; i++) {
+          let flag = true;
+          let index = midF(arr2, arr1[i]);
+
+          if (index - 1 >= 0) {
+            flag = flag & (Math.abs(arr1[i] - arr2[index - 1]) > d);
+          }
+
+          if (index < arr2.length) {
+            flag = flag & (Math.abs(arr1[i] - arr2[index]) > d);
+          }
+
+          if (flag) ret += 1;
+        }
+
+        return ret;
+      };
+
+      // --- answer-2 ---
+
+      var arr1 = [4, 5, 8],
+        arr2 = [10, 9, 1, 8],
+        d = 2;
+      var result = 2;
+      // 解释：
+
+      var arr1 = [1, 4, 2, 3],
+        arr2 = [-4, -3, 6, 10, 20, 30],
+        d = 3;
+      var result = 2;
+
+      var arr1 = [2, 1, 100, 3],
+        arr2 = [-5, -2, 10, -3, 7],
+        d = 6;
+      var result = 1;
+
+      console.log('arr1 = ', arr1);
+      console.log('arr2 = ', arr2);
+      console.log('d = ', d);
+      console.log('result = ', result);
+      console.log('findTheDistanceValue = ', findTheDistanceValue(arr1, arr2, d));
+    </script>
+  </body>
+</html>
