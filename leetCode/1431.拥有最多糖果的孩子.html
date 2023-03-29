@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1431. 拥有最多糖果的孩子</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/kids-with-the-greatest-number-of-candies/
+
+      // 给你一个数组 candies 和一个整数 extraCandies ，其中 candies[i] 代表第 i 个孩子拥有的糖果数目。
+      // 对每一个孩子，检查是否存在一种方案，将额外的 extraCandies 个糖果分配给孩子们之后，此孩子有 最多 的糖果。注意，允许有多个孩子同时拥有 最多 的糖果数目。
+      // 提示：
+      // 2 <= candies.length <= 100
+      // 1 <= candies[i] <= 100
+      // 1 <= extraCandies <= 50
+
+      /**
+       * @param {number[]} candies
+       * @param {number} extraCandies
+       * @return {boolean[]}
+       */
+      var kidsWithCandies = function (candies, extraCandies) {};
+
+      // --- answer-1 ---
+
+      // 找到最大的 然后遍历
+      var kidsWithCandies = function (candies = [], extraCandies = 1) {
+        const max = Math.max.apply(Math, candies);
+        return candies.map((num) => num + extraCandies >= max);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var candies = [2, 3, 5, 1, 3],
+        extraCandies = 3;
+      var result = [true, true, true, false, true];
+      // 解释：
+
+      var candies = [4, 2, 1, 1, 2],
+        extraCandies = 1;
+      var result = [true, false, false, false, false];
+      // 解释：只有 1 个额外糖果，所以不管额外糖果给谁，只有孩子 1 可以成为拥有糖果最多的孩子。
+
+      var candies = [12, 1, 12],
+        extraCandies = 10;
+      var result = [true, false, true];
+
+      console.log('candies = ', candies);
+      console.log('extraCandies = ', extraCandies);
+      console.log('result = ', result);
+      console.log('kidsWithCandies = ', kidsWithCandies(candies, extraCandies));
+    </script>
+  </body>
+</html>
