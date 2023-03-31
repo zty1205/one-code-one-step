@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1446. 连续字符</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/consecutive-characters/
+
+      // 给你一个字符串 s ，字符串的「能量」定义为：只包含一种字符的最长非空子字符串的长度。
+      // 请你返回字符串 s 的 能量。
+      // 提示：
+      // 1 <= s.length <= 500
+      // s 只包含小写英文字母。
+
+      /**
+       * @param {string} s
+       * @return {number}
+       */
+      var maxPower = function (s) {};
+
+      // --- answer-1 ---
+
+      // 直接遍历
+      var maxPower = function (s = '') {
+        let max = 1;
+        let cur = 1;
+        for (let i = 1; i < s.length; i++) {
+          if (s[i] === s[i - 1]) {
+            cur += 1;
+          } else {
+            max = Math.max(cur, max);
+            cur = 1;
+          }
+        }
+        return Math.max(cur, max);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 使用正则
+      var maxPower = function (s = '') {
+        const mt = s.match(/([a-z])\1+/g);
+        return mt
+          ? Math.max.apply(
+              Math,
+              mt.map((x) => x.length)
+            )
+          : 1;
+      };
+
+      // --- answer-2 ---
+
+      var s = 'leetcode';
+      var result = 2;
+      // 解释：子字符串 "ee" 长度为 2 ，只包含字符 'e' 。
+
+      // var s = 'abbcccddddeeeeedcba';
+      // var result = 5;
+      // 解释：子字符串 "eeeee" 长度为 5 ，只包含字符 'e' 。
+
+      var s = 'aa';
+      var result = 2;
+
+      var s = 's';
+      var result = 1;
+
+      console.log('s = ', s);
+      console.log('result = ', result);
+      console.log('maxPower = ', maxPower(s));
+    </script>
+  </body>
+</html>
