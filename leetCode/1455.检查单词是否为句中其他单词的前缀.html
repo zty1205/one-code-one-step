@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1455. 检查单词是否为句中其他单词的前缀</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/check-if-a-word-occurs-as-a-prefix-of-any-word-in-a-sentence/
+
+      // 给你一个字符串 sentence 作为句子并指定检索词为 searchWord ，其中句子由若干用 单个空格 分隔的单词组成。请你检查检索词 searchWord 是否为句子 sentence 中任意单词的前缀。
+      // 如果 searchWord 是某一个单词的前缀，则返回句子 sentence 中该单词所对应的下标（下标从 1 开始）。如果 searchWord 是多个单词的前缀，则返回匹配的第一个单词的下标（最小下标）。如果 searchWord 不是任何单词的前缀，则返回 -1 。
+      // 字符串 s 的 前缀 是 s 的任何前导连续子字符串。
+      // 提示：
+      // 1 <= sentence.length <= 100
+      // 1 <= searchWord.length <= 10
+      // sentence 由小写英文字母和空格组成。
+      // searchWord 由小写英文字母组成。
+
+      /**
+       * @param {string} sentence
+       * @param {string} searchWord
+       * @return {number}
+       */
+      var isPrefixOfWord = function (sentence, searchWord) {};
+
+      // --- answer-1 ---
+
+      // 使用正则
+      var isPrefixOfWord = function (sentence = '', searchWord = '') {
+        const reg = new RegExp(`\^${searchWord}`);
+        const idx = sentence.split(' ').findIndex((str) => reg.test(str));
+        return idx !== -1 ? idx + 1 : -1;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 字符串原生方法
+      var isPrefixOfWord = function (sentence = '', searchWord = '') {
+        const idx = sentence.split(' ').findIndex((str = '') => str.startsWith(searchWord));
+        return idx !== -1 ? idx + 1 : -1;
+      };
+
+      // --- answer-2 ---
+
+      var sentence = 'i love eating burger',
+        searchWord = 'burg';
+      var result = 4;
+      // 解释："burg" 是 "burger" 的前缀，而 "burger" 是句子中第 4 个单词。
+
+      var sentence = 'this problem is an easy problem',
+        searchWord = 'pro';
+      var result = 2;
+      // 解释："pro" 是 "problem" 的前缀，而 "problem" 是句子中第 2 个也是第 6 个单词，但是应该返回最小下标 2 。
+
+      var sentence = 'i am tired',
+        searchWord = 'you';
+      var result = -1;
+      // 解释："you" 不是句子中任何单词的前缀。
+
+      console.log('sentence = ', sentence);
+      console.log('searchWord = ', searchWord);
+      console.log('result = ', result);
+      console.log('isPrefixOfWord = ', isPrefixOfWord(sentence, searchWord));
+    </script>
+  </body>
+</html>
