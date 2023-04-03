@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1460. 通过翻转子数组使两个数组相等</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/make-two-arrays-equal-by-reversing-subarrays/
+
+      // 给你两个长度相同的整数数组 target 和 arr 。每一步中，你可以选择 arr 的任意 非空子数组 并将它翻转。你可以执行此过程任意次。
+      // 如果你能让 arr 变得与 target 相同，返回 True；否则，返回 False 。
+      // 提示：
+      // target.length == arr.length
+      // 1 <= target.length <= 1000
+      // 1 <= target[i] <= 1000
+      // 1 <= arr[i] <= 1000
+
+      /**
+       * @param {number[]} target
+       * @param {number[]} arr
+       * @return {boolean}
+       */
+      var canBeEqual = function (target, arr) {};
+
+      // --- answer-1 ---
+
+      // 由于可以翻转无数次 那么只要数组里的数完全相等即可
+
+      // 排序后 使用字符串
+      var canBeEqual = function (target = [], arr = []) {
+        return (
+          target.length === arr.length &&
+          target.sort((a, b) => a - b).toString() === arr.sort((a, b) => a - b).toString()
+        );
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 计数
+      function count(array = []) {
+        return array.reduce((pre, cur) => {
+          pre[cur] = (pre[cur] || 0) + 1;
+          return pre;
+        }, {});
+      }
+
+      var canBeEqual = function (target = [], arr = []) {
+        if (target.length !== arr.length) return false;
+        const hash1 = count(target);
+        const hash2 = count(arr);
+        for (let k in hash1) {
+          if (hash1[k] !== hash2[k]) {
+            return false;
+          }
+        }
+        return true;
+      };
+
+      // --- answer-2 ---
+
+      var target = [1, 2, 3, 4],
+        arr = [2, 4, 1, 3];
+      var result = true;
+      // 解释：你可以按照如下步骤使 arr 变成 target：
+
+      var target = [7],
+        arr = [7];
+      var result = true;
+      // 解释：arr 不需要做任何翻转已经与 target 相等。
+
+      var target = [3, 7, 9],
+        arr = [3, 7, 11];
+      var result = false;
+      // 解释：arr 没有数字 9 ，所以无论如何也无法变成 target 。
+
+      console.log('target = ', target);
+      console.log('arr = ', arr);
+      console.log('result = ', result);
+      console.log('canBeEqual = ', canBeEqual(target, arr));
+    </script>
+  </body>
+</html>
