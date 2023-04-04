@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1464. 数组中两元素的最大乘积</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/maximum-product-of-two-elements-in-an-array/
+
+      // 给你一个整数数组 nums，请你选择数组的两个不同下标 i 和 j，使 (nums[i]-1)*(nums[j]-1) 取得最大值。
+      // 请你计算并返回该式的最大值。
+      // 提示：
+      // 2 <= nums.length <= 500
+      // 1 <= nums[i] <= 10^3
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var maxProduct = function (nums) {};
+
+      // --- answer-1 ---
+
+      // 排序后 取最大的两个值
+      var maxProduct = function (nums = []) {
+        nums.sort((a, b) => a - b);
+        const length = nums.length;
+        return (nums[length - 1] - 1) * (nums[length - 2] - 1);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 遍历
+      var maxProduct = function (nums) {
+        let a = Math.max(nums[0], nums[1]);
+        let b = Math.min(nums[0], nums[1]);
+        for (let i = 2; i < nums.length; i++) {
+          if (nums[i] > a) {
+            b = a;
+            a = nums[i];
+          } else if (nums[i] > b) {
+            b = nums[i];
+          }
+        }
+        return (a - 1) * (b - 1);
+      };
+
+      // --- answer-2 ---
+
+      var nums = [3, 4, 5, 2];
+      var result = 12;
+      // 解释：如果选择下标 i=1 和 j=2（下标从 0 开始），则可以获得最大值，(nums[1]-1)*(nums[2]-1) = (4-1)*(5-1) = 3*4 = 12 。
+
+      var nums = [1, 5, 4, 5];
+      var result = 16;
+      // 解释：选择下标 i=1 和 j=3（下标从 0 开始），则可以获得最大值 (5-1)*(5-1) = 16 。
+
+      var nums = [3, 7];
+      var result = 12;
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('maxProduct = ', maxProduct(nums));
+    </script>
+  </body>
+</html>
