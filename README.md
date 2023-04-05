@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (404 道)
+## 三、LeetCode (405 道)
 
 <br/>
 
@@ -548,6 +548,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1460.通过翻转子数组使两个数组相等.html](./leetCode/1460.通过翻转子数组使两个数组相等.html)
 - [1464.数组中两元素的最大乘积.html](./leetCode/1464.数组中两元素的最大乘积.html)
 - [1470.重新排列数组.html](./leetCode/1470.重新排列数组.html)
+- [1480.一维数组的动态和.html](./leetCode/1480.一维数组的动态和.html)
 
 <br/>
 
