@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (407 道)
+## 三、LeetCode (408 道)
 
 <br/>
 
@@ -551,6 +551,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1480.一维数组的动态和.html](./leetCode/1480.一维数组的动态和.html)
 - [1486.数组异或操作.html](./leetCode/1486.数组异或操作.html)
 - [1496.判断路径是否相交.html](./leetCode/1496.判断路径是否相交.html)
+- [1502.判断能否形成等差数列.html](./leetCode/1502.判断能否形成等差数列.html)
 
 <br/>
 
