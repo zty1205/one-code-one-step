@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1512. 好数对的数目</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/number-of-good-pairs/
+
+      // 给你一个整数数组 nums 。
+      // 如果一组数字 (i,j) 满足 nums[i] == nums[j] 且 i < j ，就可以认为这是一组 好数对 。
+      // 返回好数对的数目。
+      // 提示：
+      // 1 <= nums.length <= 100
+      // 1 <= nums[i] <= 100
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var numIdenticalPairs = function (nums) {};
+
+      // --- answer-1 ---
+
+      // --- answer-1 ---
+
+      // 统计数的个数
+      var numIdenticalPairs = function (nums) {
+        if (!nums.length) return 0;
+        let count = 0;
+        let j = 0;
+        for (let i = 0; i < nums.length; j++) {
+          if (j === nums.length) {
+            i++;
+            j = 0;
+          }
+          if (i < j && nums[j] === nums[i]) {
+            count++;
+          }
+        }
+        return count;
+      };
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      // var nums = [1,2,3,1,1,3];
+      // var result = 4;
+      // 解释：有 4 组好数对，分别是 (0,3), (0,4), (3,4), (2,5) ，下标从 0 开始
+
+      // var nums = [1,1,1,1];
+      // var result = 6;
+      // 解释：数组中的每组数字都是好数对
+
+      // var nums = [1,2,3];
+      // var result = 0;
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('numIdenticalPairs = ', numIdenticalPairs(nums));
+    </script>
+  </body>
+</html>
