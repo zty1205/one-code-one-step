@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1518. 换水问题</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/water-bottles/
+
+      // 超市正在促销，你可以用 numExchange 个空水瓶从超市兑换一瓶水。最开始，你一共购入了 numBottles 瓶水。
+      // 如果喝掉了水瓶中的水，那么水瓶就会变成空的。
+      // 给你两个整数 numBottles 和 numExchange ，返回你 最多 可以喝到多少瓶水。
+      // 提示：
+      // 1 <= numBottles <= 100
+      // 2 <= numExchange <= 100
+
+      /**
+       * @param {number} numBottles
+       * @param {number} numExchange
+       * @return {number}
+       */
+      var numWaterBottles = function (numBottles, numExchange) {};
+
+      // --- answer-1 ---
+
+      // 按题目意思直接模拟计算
+      var numWaterBottles = function (numBottles = 0, numExchange = 0) {
+        let ret = numBottles;
+        while (numBottles >= numExchange) {
+          const a = Math.floor(numBottles / numExchange);
+          const b = numBottles % numExchange;
+          ret += a;
+          numBottles = b + a;
+        }
+        return ret;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 数学计算
+      var numWaterBottles = function (numBottles, numExchange) {
+        return numBottles >= numExchange
+          ? Math.floor((numBottles - numExchange) / (numExchange - 1)) + 1 + numBottles
+          : numBottles;
+      };
+
+      // --- answer-2 ---
+
+      var numBottles = 9,
+        numExchange = 3;
+      var result = 13;
+      // 解释：你可以用 3 个空瓶兑换 1 瓶水。
+
+      var numBottles = 15,
+        numExchange = 4;
+      var result = 19;
+      // 解释：你可以用 4 个空瓶兑换 1 瓶水。
+
+      console.log('numBottles = ', numBottles);
+      console.log('numExchange = ', numExchange);
+      console.log('result = ', result);
+      console.log('numWaterBottles = ', numWaterBottles(numBottles, numExchange));
+    </script>
+  </body>
+</html>
