@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1523. 在区间范围内统计奇数数目</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/count-odd-numbers-in-an-interval-range/
+
+      // 给你两个非负整数 low 和 high 。请你返回 low 和 high 之间（包括二者）奇数的数目。
+      // 提示：
+      // 0 <= low <= high <= 10^9
+
+      /**
+       * @param {number} low
+       * @param {number} high
+       * @return {number}
+       */
+      var countOdds = function (low, high) {};
+
+      // --- answer-1 ---
+
+      // 数学计算
+      // 2位必有一位  0-X的奇数 wei n+1的一半
+      var countOdds = function (low, high) {
+        const count = (n) => Math.floor((n + 1) / 2);
+        return count(high) - count(low - 1);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var low = 3,
+        high = 7;
+      var result = 3;
+      // 解释：3 到 7 之间奇数数字为 [3,5,7] 。
+
+      // var low = 8,
+      //   high = 10;
+      // var result = 1;
+      // 解释：8 到 10 之间奇数数字为 [9] 。
+
+      console.log('low = ', low);
+      console.log('high = ', high);
+      console.log('result = ', result);
+      console.log('countOdds = ', countOdds(low, high));
+    </script>
+  </body>
+</html>
