@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (412 道)
+## 三、LeetCode (413 道)
 
 <br/>
 
@@ -556,6 +556,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1512.好数对的数目.html](./leetCode/1512.好数对的数目.html)
 - [1518.换水问题.html](./leetCode/1518.换水问题.html)
 - [1523.在区间范围内统计奇数数目.html](./leetCode/1523.在区间范围内统计奇数数目.html)
+- [1528.重新排列字符串.html](./leetCode/1528.重新排列字符串.html)
 
 <br/>
 
