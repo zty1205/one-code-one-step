@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (415 道)
+## 三、LeetCode (416 道)
 
 <br/>
 
@@ -559,6 +559,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1528.重新排列字符串.html](./leetCode/1528.重新排列字符串.html)
 - [1534.统计好三元组.html](./leetCode/1534.统计好三元组.html)
 - [1539.第 k 个缺失的正整数.html](./leetCode/1539.第k个缺失的正整数.html)
+- [1544.整理字符串.html](./leetCode/1544.整理字符串.html)
 
 <br/>
 
