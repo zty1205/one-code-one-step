@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (417 道)
+## 三、LeetCode (418 道)
 
 <br/>
 
@@ -561,6 +561,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1539.第 k 个缺失的正整数.html](./leetCode/1539.第k个缺失的正整数.html)
 - [1544.整理字符串.html](./leetCode/1544.整理字符串.html)
 - [1550.存在连续三个奇数的数组.html](./leetCode/1550.存在连续三个奇数的数组.html)
+- [1556.千位分隔数.html](./leetCode/1556.千位分隔数.html)
 
 <br/>
 

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1556. 千位分隔数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/thousand-separator/
+
+      // 给你一个整数 n，请你每隔三位添加点（即 "." 符号）作为千位分隔符，并将结果以字符串格式返回。
+      // 提示：
+      // 0 <= n < 2^31
+
+      /**
+       * @param {number} n
+       * @return {string}
+       */
+      var thousandSeparator = function (n) {};
+
+      // --- answer-1 ---
+
+      var thousandSeparator = function (n) {
+        let count = 0;
+        let ans = '';
+        do {
+          let cur = n % 10;
+          n = Math.floor(n / 10);
+          ans += cur.toString();
+          ++count;
+          if (count % 3 == 0 && n) {
+            ans += '.';
+          }
+        } while (n);
+        return ans.split('').reverse().join('');
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 正则
+      var thousandSeparator = function (n) {
+        return n.toLocaleString().replace(/\,/g, '.');
+      };
+
+      var thousandSeparator = function (n) {
+        return String(n).replace(/(?!^)(?=(\d{3})+$)/g, '.');
+      };
+
+      // --- answer-2 ---
+
+      // var n = 987;
+      // var result = "987";
+
+      // var n = 1234;
+      // var result = "1.234";
+
+      // var n = 123456789;
+      // var result = "123.456.789";
+
+      // var n = 0;
+      // var result = "0";
+
+      console.log('n = ', n);
+      console.log('result = ', result);
+      console.log('thousandSeparator = ', thousandSeparator(n));
+    </script>
+  </body>
+</html>
