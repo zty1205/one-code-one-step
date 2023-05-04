@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1560. 圆形赛道上经过次数最多的扇区</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/most-visited-sector-in-a-circular-track/
+
+      // 给你一个整数 n 和一个整数数组 rounds 。有一条圆形赛道由 n 个扇区组成，扇区编号从 1 到 n 。现将在这条赛道上举办一场马拉松比赛，该马拉松全程由 m 个阶段组成。其中，第 i 个阶段将会从扇区 rounds[i - 1] 开始，到扇区 rounds[i] 结束。举例来说，第 1 阶段从 rounds[0] 开始，到 rounds[1] 结束。
+      // 请你以数组形式返回经过次数最多的那几个扇区，按扇区编号 升序 排列。
+      // 提示：
+      // 2 <= n <= 100
+      // 1 <= m <= 100
+      // rounds.length == m + 1
+      // 1 <= rounds[i] <= n
+      // rounds[i] != rounds[i + 1] ，其中 0 <= i < m
+
+      /**
+       * @param {number} n
+       * @param {number[]} rounds
+       * @return {number[]}
+       */
+      var mostVisited = function (n, rounds) {};
+
+      // --- answer-1 ---
+
+      // 由于是圆形所以每一圈访问的扇区次数都是一样的 所以我们只需要考虑收尾即可
+      // 可以理解成就跑开头和结尾
+      var mostVisited = function (n, rounds = []) {
+        const start = rounds[0];
+        const end = rounds[rounds.length - 1];
+        const res = [];
+        if (start <= end) {
+          for (let i = start; i <= end; i++) {
+            res.push(i);
+          }
+        } else {
+          // 答案需要升序
+          for (let i = 1; i <= end; i++) {
+            res.push(i);
+          }
+          for (let i = start; i <= n; i++) {
+            res.push(i);
+          }
+        }
+        return res;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var n = 4,
+        rounds = [1, 3, 1, 2];
+      var result = [1, 2];
+      // 解释：本场马拉松比赛从扇区 1 开始。经过各个扇区的次序如下所示：
+
+      var n = 2,
+        rounds = [2, 1, 2, 1, 2, 1, 2, 1, 2];
+      var result = [2];
+
+      var n = 7,
+        rounds = [1, 3, 5, 7];
+      var result = [1, 2, 3, 4, 5, 6, 7];
+
+      var n = 7,
+        rounds = [4, 1, 3, 5, 7, 1];
+      var result = [4, 5, 6, 7, 1];
+
+      console.log('n = ', n);
+      console.log('rounds = ', rounds);
+      console.log('result = ', result);
+      console.log('mostVisited = ', mostVisited(n, rounds));
+    </script>
+  </body>
+</html>
