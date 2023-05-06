@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1582. 二进制矩阵中的特殊位置</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/special-positions-in-a-binary-matrix/
+
+      // 给你一个大小为 rows x cols 的矩阵 mat，其中 mat[i][j] 是 0 或 1，请返回 矩阵 mat 中特殊位置的数目 。
+      // 特殊位置 定义：如果 mat[i][j] == 1 并且第 i 行和第 j 列中的所有其他元素均为 0（行和列的下标均 从 0 开始 ），则位置 (i, j) 被称为特殊位置。
+      // 提示：
+      // rows == mat.length
+      // cols == mat[i].length
+      // 1 <= rows, cols <= 100
+      // mat[i][j] 是 0 或 1
+
+      /**
+       * @param {number[][]} mat
+       * @return {number}
+       */
+      var numSpecial = function (mat) {};
+
+      // --- answer-1 ---
+
+      // 统计横向纵向1的个数
+      var numSpecial = function (mat = [[]]) {
+        const rows = mat.length;
+        const cols = mat[0].length;
+        const rowCount = new Array(rows).fill(0);
+        const colCount = new Array(cols).fill(0);
+        for (let i = 0; i < rows; i++) {
+          for (let j = 0; j < cols; j++) {
+            if (mat[i][j] === 1) {
+              rowCount[i] += 1;
+              colCount[j] += 1;
+            }
+          }
+        }
+        console.log('rowCount = ', rowCount);
+        console.log('colCount = ', colCount);
+        let res = 0;
+        for (let i = 0; i < rows; i++) {
+          for (let j = 0; j < cols; j++) {
+            if (mat[i][j] === 1 && rowCount[i] === 1 && colCount[j] === 1) {
+              res += 1;
+            }
+          }
+        }
+        return res;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var mat = [
+        [1, 0, 0],
+        [0, 0, 1],
+        [1, 0, 0]
+      ];
+      var result = 1;
+
+      var mat = [
+        [1, 0, 0],
+        [0, 1, 0],
+        [0, 0, 1]
+      ];
+
+      var result = 3;
+
+      var mat = [
+        [0, 0, 0, 1],
+        [1, 0, 0, 0],
+        [0, 1, 1, 0]
+      ];
+      var result = 2;
+
+      var mat = [
+        [0, 0, 0, 0, 0],
+        [1, 0, 0, 0, 0],
+        [0, 1, 0, 0, 0],
+        [0, 0, 1, 0, 0],
+        [0, 0, 0, 1, 1]
+      ];
+      var result = 3;
+
+      console.log('mat = ', mat);
+      console.log('result = ', result);
+      console.log('numSpecial = ', numSpecial(mat));
+    </script>
+  </body>
+</html>

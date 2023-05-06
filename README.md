@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (420 道)
+## 三、LeetCode (421 道)
 
 <br/>
 
@@ -564,6 +564,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1556.千位分隔数.html](./leetCode/1556.千位分隔数.html)
 - [1560.圆形赛道上经过次数最多的扇区.html](./leetCode/1560.圆形赛道上经过次数最多的扇区.html)
 - [1576.替换所有的问号.html](./leetCode/1576.替换所有的问号.html)
+- [1582.二进制矩阵中的特殊位置.html](./leetCode/1582.二进制矩阵中的特殊位置.html)
 
 <br/>
 
