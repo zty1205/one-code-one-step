@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (421 道)
+## 三、LeetCode (422 道)
 
 <br/>
 
@@ -565,6 +565,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1560.圆形赛道上经过次数最多的扇区.html](./leetCode/1560.圆形赛道上经过次数最多的扇区.html)
 - [1576.替换所有的问号.html](./leetCode/1576.替换所有的问号.html)
 - [1582.二进制矩阵中的特殊位置.html](./leetCode/1582.二进制矩阵中的特殊位置.html)
+- [1588.所有奇数长度子数组的和.html](./leetCode/1588.所有奇数长度子数组的和.html)
 
 <br/>
 

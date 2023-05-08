@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1588. 所有奇数长度子数组的和</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/sum-of-all-odd-length-subarrays/
+
+      // 给你一个正整数数组 arr ，请你计算所有可能的奇数长度子数组的和。
+      // 子数组 定义为原数组中的一个连续子序列。
+      // 请你返回 arr 中 所有奇数长度子数组的和 。
+      // 提示：
+      // 1 <= arr.length <= 100
+      // 1 <= arr[i] <= 1000
+
+      /**
+       * @param {number[]} arr
+       * @return {number}
+       */
+      var sumOddLengthSubarrays = function (arr) {};
+
+      // --- answer-1 ---
+
+      // 前缀和
+      var sumOddLengthSubarrays = function (arr = []) {
+        const len = arr.length;
+        const prefixSums = new Array(len + 1).fill(0);
+        for (let i = 0; i < len; i++) {
+          prefixSums[i + 1] = prefixSums[i] + arr[i];
+        }
+        let sum = 0;
+        for (let start = 0; start < len; start++) {
+          for (let length = 1; start + length <= len; length += 2) {
+            const end = start + length - 1;
+            sum += prefixSums[end + 1] - prefixSums[start];
+          }
+        }
+        return sum;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 数学方法 统计出现的次数
+      var sumOddLengthSubarrays = function (arr) {
+        let sum = 0;
+        const n = arr.length;
+        for (let i = 0; i < n; i++) {
+          const leftCount = i,
+            rightCount = n - i - 1;
+          const leftOdd = Math.floor((leftCount + 1) / 2);
+          const rightOdd = Math.floor((rightCount + 1) / 2);
+          const leftEven = Math.floor(leftCount / 2) + 1;
+          const rightEven = Math.floor(rightCount / 2) + 1;
+          sum += arr[i] * (leftOdd * rightOdd + leftEven * rightEven);
+        }
+        return sum;
+      };
+
+      // --- answer-2 ---
+
+      var arr = [1, 4, 2, 5, 3];
+      var result = 58;
+      // 解释：所有奇数长度子数组和它们的和为：
+
+      var arr = [1, 2];
+      var result = 3;
+      // 解释：总共只有 2 个长度为奇数的子数组，[1] 和 [2]。它们的和为 3 。
+
+      var arr = [10, 11, 12];
+      var result = 66;
+
+      console.log('arr = ', arr);
+      console.log('result = ', result);
+      console.log('sumOddLengthSubarrays = ', sumOddLengthSubarrays(arr));
+    </script>
+  </body>
+</html>
