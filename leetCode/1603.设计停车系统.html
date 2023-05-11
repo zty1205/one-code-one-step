@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1603. 设计停车系统</title>
+  </head>
+  <body>
+    <script src="../helper/command.js"></script>
+    <script>
+      // https://leetcode.cn/problems/design-parking-system/
+
+      // 请你给一个停车场设计一个停车系统。停车场总共有三种不同大小的车位：大，中和小，每种尺寸分别有固定数目的车位。
+      // 请你实现 ParkingSystem 类：
+      // 提示：
+      // ParkingSystem(int big, int medium, int small) 初始化 ParkingSystem 类，三个参数分别对应每种停车位的数目。
+      // bool addCar(int carType) 检查是否有 carType 对应的停车位。 carType 有三种类型：大，中，小，分别用数字 1， 2 和 3 表示。一辆车只能停在  carType 对应尺寸的停车位中。如果没有空车位，请返回 false ，否则将该车停入车位并返回 true 。
+      // 提示：
+      // 0 <= big, medium, small <= 1000
+      // carType 取值为 1， 2 或 3
+      // 最多会调用 addCar 函数 1000 次
+
+      /**
+       * @param {number} big
+       * @param {number} medium
+       * @param {number} small
+       */
+      var ParkingSystem = function (big, medium, small) {};
+      /**
+       * @param {number} carType
+       * @return {boolean}
+       */
+      ParkingSystem.prototype.addCar = function (carType) {};
+      /**
+       * Your ParkingSystem object will be instantiated and called as such:
+       * var obj = new ParkingSystem(big, medium, small)
+       * var param_1 = obj.addCar(carType)
+       */
+
+      // --- answer-1 ---
+
+      // 使用map 或数组 或 直接三个变量
+      var ParkingSystem = function (big, medium, small) {
+        const map = new Map();
+        map.set(1, big);
+        map.set(2, medium);
+        map.set(3, small);
+        this.map = map;
+      };
+      ParkingSystem.prototype.addCar = function (carType) {
+        let num = this.map.get(carType);
+        if (num === 0) return false;
+        this.map.set(carType, num - 1);
+        return true;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var cmds = ['ParkingSystem', 'addCar', 'addCar', 'addCar', 'addCar'];
+      var args = [[1, 1, 0], [1], [2], [3], [1]];
+      var result = [null, true, true, false, false];
+
+      console.log('cmds = ', cmds);
+      console.log('args = ', args);
+      console.log('result = ', result);
+
+      classCommand(cmds, args);
+    </script>
+  </body>
+</html>

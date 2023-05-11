@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (424 道)
+## 三、LeetCode (425 道)
 
 <br/>
 
@@ -568,6 +568,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1588.所有奇数长度子数组的和.html](./leetCode/1588.所有奇数长度子数组的和.html)
 - [1592.重新排列单词间的空格.html](./leetCode/1592.重新排列单词间的空格.html)
 - [1598.文件夹操作日志搜集器.html](./leetCode/1598.文件夹操作日志搜集器.html)
+- [1603.设计停车系统.html](./leetCode/1603.设计停车系统.html)
 
 <br/>
 
