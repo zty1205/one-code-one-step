@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1608. 特殊数组的特征值</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/special-array-with-x-elements-greater-than-or-equal-x/
+
+      // 给你一个非负整数数组 nums 。如果存在一个数 x ，使得 nums 中恰好有 x 个元素 大于或者等于 x ，那么就称 nums 是一个 特殊数组 ，而 x 是该数组的 特征值 。
+      // 注意： x 不必 是 nums 的中的元素。
+      // 如果数组 nums 是一个 特殊数组 ，请返回它的特征值 x 。否则，返回 -1 。可以证明的是，如果 nums 是特殊数组，那么其特征值 x 是 唯一的 。
+      // 提示：
+      // 1 <= nums.length <= 100
+      // 0 <= nums[i] <= 1000
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var specialArray = function (nums) {};
+
+      // --- answer-1 ---
+
+      // 排序后 遍历
+      var specialArray = function (nums = []) {
+        nums.sort((a, b) => a - b);
+        for (let i = 0, j = n - 1; i < j; i++, j--) {
+          const temp = nums[i];
+          nums[i] = nums[j];
+          nums[j] = temp;
+        }
+        for (let i = 1; i <= n; ++i) {
+          if (nums[i - 1] >= i && (i === n || nums[i] < i)) {
+            return i;
+          }
+        }
+        return -1;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var nums = [3, 5];
+      var result = 2;
+      // 解释：有 2 个元素（3 和 5）大于或等于 2 。
+
+      var nums = [0, 0];
+      var result = -1;
+      // 解释：没有满足题目要求的特殊数组，故而也不存在特征值 x 。
+
+      var nums = [0, 4, 3, 0, 4];
+      var result = 3;
+      // 解释：有 3 个元素大于或等于 3 。
+
+      var nums = [3, 6, 7, 7, 0];
+      var result = -1;
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('specialArray = ', specialArray(nums));
+    </script>
+  </body>
+</html>
