@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1624. 两个相同字符之间的最长子字符串</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/largest-substring-between-two-equal-characters/
+
+      // 给你一个字符串 s，请你返回 两个相同字符之间的最长子字符串的长度 ，计算长度时不含这两个字符。如果不存在这样的子字符串，返回 -1 。
+      // 子字符串 是字符串中的一个连续字符序列。
+      // 提示：
+      // 1 <= s.length <= 300
+      // s 只含小写英文字母
+
+      /**
+       * @param {string} s
+       * @return {number}
+       */
+      var maxLengthBetweenEqualCharacters = function (s) {};
+
+      // --- answer-1 ---
+
+      // 哈希
+      var maxLengthBetweenEqualCharacters = function (s = '') {
+        let res = -1;
+        const map = new Map();
+        for (let i = 0; i < s.length; i++) {
+          const ch = s[i];
+          if (map.has(ch)) {
+            res = Math.max(res, i - map.get(ch) - 1);
+          } else {
+            map.set(ch, i);
+          }
+        }
+        return res;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var s = 'aa';
+      var result = 0;
+      // 解释：最优的子字符串是两个 'a' 之间的空子字符串。
+
+      var s = 'abca';
+      var result = 2;
+      // 解释：最优的子字符串是 "bc" 。
+
+      var s = 'cbzxy';
+      var result = -1;
+      // 解释：s 中不存在出现出现两次的字符，所以返回 -1 。
+
+      var s = 'cabbac';
+      var result = 4;
+      // 解释：最优的子字符串是 "abba" ，其他的非最优解包括 "bb" 和 "" 。
+
+      console.log('s = ', s);
+      console.log('result = ', result);
+      console.log('maxLengthBetweenEqualCharacters = ', maxLengthBetweenEqualCharacters(s));
+    </script>
+  </body>
+</html>

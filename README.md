@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (428 道)
+## 三、LeetCode (429 道)
 
 <br/>
 
@@ -572,6 +572,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1608.特殊数组的特征值.html](./leetCode/1608.特殊数组的特征值.html)
 - [1614.括号的最大嵌套深度.html](./leetCode/1614.括号的最大嵌套深度.html)
 - [1619.删除某些元素后的数组均值.html](./leetCode/1619.删除某些元素后的数组均值.html)
+- [1624.两个相同字符之间的最长子字符串.html](./leetCode/1624.两个相同字符之间的最长子字符串.html)
 
 <br/>
 
