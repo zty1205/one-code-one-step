@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1640. 能否连接形成数组</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/check-array-formation-through-concatenation/
+
+      // 给你一个整数数组 arr ，数组中的每个整数 互不相同 。另有一个由整数数组构成的数组 pieces，其中的整数也 互不相同 。请你以 任意顺序 连接 pieces 中的数组以形成 arr 。但是，不允许 对每个数组 pieces[i] 中的整数重新排序。
+      // 如果可以连接 pieces 中的数组形成 arr ，返回 true ；否则，返回 false 。
+      // 提示：
+      // 1 <= pieces.length <= arr.length <= 100
+      // sum(pieces[i].length) == arr.length
+      // 1 <= pieces[i].length <= arr.length
+      // 1 <= arr[i], pieces[i][j] <= 100
+      // arr 中的整数 互不相同
+      // pieces 中的整数 互不相同（也就是说，如果将 pieces 扁平化成一维数组，数组中的所有整数互不相同）
+
+      /**
+       * @param {number[]} arr
+       * @param {number[][]} pieces
+       * @return {boolean}
+       */
+      var canFormArray = function (arr, pieces) {};
+
+      // --- answer-1 ---
+
+      // 整数互不相同 所以数字可以定位下标
+      // 然后根据顺序遍历
+      var canFormArray = function (arr = [], pieces = [[]]) {
+        const map = arr.reduce((mp, cur, i) => {
+          mp.set(cur, i);
+          return mp;
+        }, new Map());
+
+        for (let list of pieces) {
+          const idx = map.get(list[0]);
+          for (let i = 0; i < list.length; i++) {
+            if (list[i] !== arr[idx + i]) {
+              return false;
+            }
+          }
+        }
+        return true;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var arr = [15, 88],
+        pieces = [[88], [15]];
+      var result = true;
+      // 解释：依次连接 [15] 和 [88]
+
+      var arr = [49, 18, 16],
+        pieces = [[16, 18, 49]];
+      var result = false;
+      // 解释：即便数字相符，也不能重新排列 pieces[0]
+
+      var arr = [91, 4, 64, 78],
+        pieces = [[78], [4, 64], [91]];
+      var result = true;
+      // 解释：依次连接 [91]、[4,64] 和 [78]
+
+      console.log('arr = ', arr);
+      console.log('pieces = ', pieces);
+      console.log('result = ', result);
+      console.log('canFormArray = ', canFormArray(arr, pieces));
+    </script>
+  </body>
+</html>
