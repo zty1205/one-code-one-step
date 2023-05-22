@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (431 道)
+## 三、LeetCode (432 道)
 
 <br/>
 
@@ -575,6 +575,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1624.两个相同字符之间的最长子字符串.html](./leetCode/1624.两个相同字符之间的最长子字符串.html)
 - [1636.按照频率将数组升序排序.html](./leetCode/1636.按照频率将数组升序排序.html)
 - [1640.能否连接形成数组.html](./leetCode/1640.能否连接形成数组.html)
+- [1646.获取生成数组中的最大值.html](./leetCode/1646.获取生成数组中的最大值.html)
 
 <br/>
 

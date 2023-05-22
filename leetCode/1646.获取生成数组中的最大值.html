@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1646. 获取生成数组中的最大值</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/get-maximum-in-generated-array/
+
+      // 给你一个整数 n 。按下述规则生成一个长度为 n + 1 的数组 nums ：
+      // 提示：
+      // nums[0] = 0
+      // nums[1] = 1
+      // 当 2 <= 2 * i <= n 时，nums[2 * i] = nums[i]
+      // 当 2 <= 2 * i + 1 <= n 时，nums[2 * i + 1] = nums[i] + nums[i + 1]
+      // 返回生成数组 nums 中的 最大 值。
+      // 提示：
+      // 0 <= n <= 100
+
+      /**
+       * @param {number} n
+       * @return {number}
+       */
+      var getMaximumGenerated = function (n) {};
+
+      // --- answer-1 ---
+
+      // 模拟
+      var getMaximumGenerated = function (n = 0) {
+        const dp = [0, 1];
+        if (n < 2) return n;
+        let max = 1;
+        for (let i = 2; i <= n; i++) {
+          const cur = (i & 1) === 1 ? dp[i >> 1] + dp[(i >> 1) + 1] : dp[i >> 1];
+          max = Math.max(cur, max);
+          dp.push(cur);
+        }
+        return max;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var n = 7;
+      var result = 3;
+      // 解释：根据规则：
+
+      // var n = 2;
+      // var result = 1;
+      // 解释：根据规则，nums[0]、nums[1] 和 nums[2] 之中的最大值是 1
+
+      // var n = 3;
+      // var result = 2;
+      // 解释：根据规则，nums[0]、nums[1]、nums[2] 和 nums[3] 之中的最大值是 2
+
+      var n = 25;
+      var result = 8;
+
+      console.log('n = ', n);
+      console.log('result = ', result);
+      console.log('getMaximumGenerated = ', getMaximumGenerated(n));
+    </script>
+  </body>
+</html>
