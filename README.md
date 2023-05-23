@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (432 道)
+## 三、LeetCode (433 道)
 
 <br/>
 
@@ -576,6 +576,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1636.按照频率将数组升序排序.html](./leetCode/1636.按照频率将数组升序排序.html)
 - [1640.能否连接形成数组.html](./leetCode/1640.能否连接形成数组.html)
 - [1646.获取生成数组中的最大值.html](./leetCode/1646.获取生成数组中的最大值.html)
+- [1652.拆炸弹.html](./leetCode/1652.拆炸弹.html)
 
 <br/>
 
