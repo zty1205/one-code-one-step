@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1684. 统计一致字符串的数目</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/count-the-number-of-consistent-strings/
+
+      // 给你一个由不同字符组成的字符串 allowed 和一个字符串数组 words 。如果一个字符串的每一个字符都在 allowed 中，就称这个字符串是 一致字符串 。
+      // 请你返回 words 数组中 一致字符串 的数目。
+      // 提示：
+      // 1 <= words.length <= 104
+      // 1 <= allowed.length <= 26
+      // 1 <= words[i].length <= 10
+      // allowed 中的字符 互不相同 。
+      // words[i] 和 allowed 只包含小写英文字母。
+
+      /**
+       * @param {string} allowed
+       * @param {string[]} words
+       * @return {number}
+       */
+      var countConsistentStrings = function (allowed, words) {};
+
+      // --- answer-1 ---
+
+      var countConsistentStrings = function (allowed = '', words = []) {
+        const map = new Map();
+        for (let ch of allowed) {
+          map.set(ch);
+        }
+
+        return words.filter((str) => {
+          for (let char of str) {
+            if (!map.has(char)) return false;
+          }
+          return true;
+        }).length;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var allowed = 'ab',
+        words = ['ad', 'bd', 'aaab', 'baa', 'badab'];
+      var result = 2;
+      // 解释：字符串 "aaab" 和 "baa" 都是一致字符串，因为它们只包含字符 'a' 和 'b' 。
+
+      var allowed = 'abc',
+        words = ['a', 'b', 'c', 'ab', 'ac', 'bc', 'abc'];
+      var result = 7;
+      // 解释：所有字符串都是一致的。
+
+      var allowed = 'cad',
+        words = ['cc', 'acd', 'b', 'ba', 'bac', 'bad', 'ac', 'd'];
+      var result = 4;
+      // 解释：字符串 "cc"，"acd"，"ac" 和 "d" 是一致字符串。
+
+      console.log('allowed = ', allowed);
+      console.log('words = ', words);
+      console.log('result = ', result);
+      console.log('countConsistentStrings = ', countConsistentStrings(allowed, words));
+    </script>
+  </body>
+</html>
