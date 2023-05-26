@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (435 道)
+## 三、LeetCode (436 道)
 
 <br/>
 
@@ -578,6 +578,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1646.获取生成数组中的最大值.html](./leetCode/1646.获取生成数组中的最大值.html)
 - [1652.拆炸弹.html](./leetCode/1652.拆炸弹.html)
 - [1656.设计有序流.html](./leetCode/1656.设计有序流.html)
+- [1662.检查两个字符串数组是否相等.html](./leetCode/1662.检查两个字符串数组是否相等.html)
 - [1684.统计一致字符串的数目.html](./leetCode/1684.统计一致字符串的数目.html)
 
 <br/>
