@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1678. 设计 Goal 解析器</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/goal-parser-interpretation/
+
+      // 请你设计一个可以解释字符串 command 的 Goal 解析器 。command 由 "G"、"()" 和/或 "(al)" 按某种顺序组成。Goal 解析器会将 "G" 解释为字符串 "G"、"()" 解释为字符串 "o" ，"(al)" 解释为字符串 "al" 。然后，按原顺序将经解释得到的字符串连接成一个字符串。
+      // 给你字符串 command ，返回 Goal 解析器 对 command 的解释结果。
+      // 提示：
+      // 1 <= command.length <= 100
+      // command 由 "G"、"()" 和/或 "(al)" 按某种顺序组成
+
+      /**
+       * @param {string} command
+       * @return {string}
+       */
+      var interpret = function (command) {};
+
+      // --- answer-1 ---
+
+      // 正则替换
+      var interpret = function (command = '') {
+        return command.replace(/\(\)/g, 'o').replace(/[\(\)]/g, '');
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 遍历 固定的三个字符串组合
+      var interpret = function (command) {
+        let res = '';
+        for (let i = 0; i < command.length; i++) {
+          if (command[i] === 'G') {
+            res += 'G';
+          } else if (command[i] === '(') {
+            if (command[i + 1] === ')') {
+              res += 'o';
+            } else {
+              res += 'al';
+            }
+          }
+        }
+        return res;
+      };
+
+      // --- answer-2 ---
+
+      var command = 'G()(al)';
+      var result = 'Goal';
+      // 解释：Goal 解析器解释命令的步骤如下所示：
+
+      var command = 'G()()()()(al)';
+      var result = 'Gooooal';
+
+      var command = '(al)G(al)()()G';
+      var result = 'alGalooG';
+
+      console.log('command = ', command);
+      console.log('result = ', result);
+      console.log('interpret = ', interpret(command));
+    </script>
+  </body>
+</html>
