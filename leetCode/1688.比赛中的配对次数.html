@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1688. 比赛中的配对次数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/count-of-matches-in-tournament/
+
+      // 给你一个整数 n ，表示比赛中的队伍数。比赛遵循一种独特的赛制：
+      // 提示：
+      // 如果当前队伍数是 偶数 ，那么每支队伍都会与另一支队伍配对。总共进行 n / 2 场比赛，且产生 n / 2 支队伍进入下一轮。
+      // 如果当前队伍数为 奇数 ，那么将会随机轮空并晋级一支队伍，其余的队伍配对。总共进行 (n - 1) / 2 场比赛，且产生 (n - 1) / 2 + 1 支队伍进入下一轮。
+      // 返回在比赛中进行的配对次数，直到决出获胜队伍为止。
+      // 提示：
+      // 1 <= n <= 200
+
+      /**
+       * @param {number} n
+       * @return {number}
+       */
+      var numberOfMatches = function (n) {};
+
+      // --- answer-1 ---
+
+      var numberOfMatches = function (n = 0) {
+        let res = 0;
+        while (n > 1) {
+          if (n % 2 === 0) {
+            res += Math.floor(n / 2);
+            n /= 2;
+          } else {
+            res += Math.floor((n - 1) / 2);
+            n = Math.floor((n - 1) / 2) + 1;
+          }
+        }
+        return res;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 数学 规律
+      var numberOfMatches = function (n = 0) {
+        return n - 1;
+      };
+
+      // --- answer-2 ---
+
+      var n = 7;
+      var result = 6;
+      // 解释：比赛详情：
+
+      var n = 14;
+      var result = 13;
+      // 解释：比赛详情：
+
+      var n = 18; // 9 5 3 2 1
+      var result = 17;
+
+      console.log('n = ', n);
+      console.log('result = ', result);
+      console.log('numberOfMatches = ', numberOfMatches(n));
+    </script>
+  </body>
+</html>
