@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>js四则混合运算字符串</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * js四则混合运算字符串
+       */
+
+      // 定义函数，用于计算两个操作数（可进行四则运算和取模运算）
+      function calculate(a, b, operator) {
+        switch (operator) {
+          case '+':
+            return a + b;
+          case '-':
+            return a - b;
+          case '*':
+            return a * b;
+          case '/':
+            return a / b;
+          case '%':
+            return a % b;
+        }
+      }
+
+      function evaluateExpression(expression) {
+        // 去除空格
+        expression = expression.replace(/\s+/g, '');
+
+        // 定义运算符优先级
+        const precedences = { '+': 1, '-': 1, '*': 2, '/': 2 };
+
+        // 定义辅助栈和结果栈
+        const operatorStack = [];
+        const valueStack = [];
+
+        // 遍历表达式中的每一个字符
+        let i = 0;
+        while (i < expression.length) {
+          const currentChar = expression[i];
+
+          // 如果当前字符是一个数字，那么读取完整的数字，并将其入栈
+          if (/^\d$/.test(currentChar)) {
+            let j = i;
+            while (j < expression.length && /^\d$/.test(expression[j])) j++;
+            const number = Number(expression.slice(i, j));
+            valueStack.push(number);
+            i = j;
+            continue;
+          }
+
+          // 如果当前字符是一个左括号，那么将其入栈
+          if (currentChar === '(') {
+            operatorStack.push(currentChar);
+            i++;
+            continue;
+          }
+
+          // 如果当前字符是一个右括号，那么将其之前的所有操作符出栈，并计算结果
+          if (currentChar === ')') {
+            while (operatorStack.length > 0 && operatorStack[operatorStack.length - 1] !== '(') {
+              const operator = operatorStack.pop();
+              const b = valueStack.pop();
+              const a = valueStack.pop();
+              const result = calculate(a, b, operator);
+              valueStack.push(result);
+            }
+            operatorStack.pop(); // 弹出左括号
+            i++;
+            continue;
+          }
+
+          // 如果当前字符是一个操作符，那么将其与栈顶操作符比较优先级
+          const currentPrecedence = precedences[currentChar] || 0;
+          while (
+            operatorStack.length > 0 &&
+            operatorStack[operatorStack.length - 1] !== '(' &&
+            currentPrecedence <= precedences[operatorStack[operatorStack.length - 1]]
+          ) {
+            const operator = operatorStack.pop();
+            const b = valueStack.pop();
+            const a = valueStack.pop();
+            const result = calculate(a, b, operator);
+            valueStack.push(result);
+          }
+          operatorStack.push(currentChar);
+          i++;
+        }
+
+        // 处理剩余的操作符
+        while (operatorStack.length > 0) {
+          const operator = operatorStack.pop();
+          const b = valueStack.pop();
+          const a = valueStack.pop();
+          const result = calculate(a, b, operator);
+          valueStack.push(result);
+        }
+
+        // 返回最后的结果
+        return valueStack.pop() || 0;
+      }
+
+      console.log('1 + 2 * 3 = ', evaluateExpression('1 + 2 * 3')); // 输出 7
+      console.log('(1 + 2) * 3 = ', evaluateExpression('(1 + 2) * 3')); // 输出 9
+    </script>
+  </body>
+</html>

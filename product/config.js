@@ -1,7 +1,10 @@
-const NO_CODE_DIR_MAP = ['.git', 'node_modules', 'img', 'product', 'public', 'src', 'helper'].reduce((pre, cur) => {
-  pre[cur] = true;
-  return pre;
-}, {});
+const NO_CODE_DIR_MAP = ['.vscode', '.git', 'node_modules', 'img', 'product', 'public', 'src', 'helper'].reduce(
+  (pre, cur) => {
+    pre[cur] = true;
+    return pre;
+  },
+  {}
+);
 
 const html_template = `<!DOCTYPE html>
 <html lang="en">
