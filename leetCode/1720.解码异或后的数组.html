@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1720. 解码异或后的数组</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/decode-xored-array/
+
+      // 未知 整数数组 arr 由 n 个非负整数组成。
+      // 经编码后变为长度为 n - 1 的另一个整数数组 encoded ，其中 encoded[i] = arr[i] XOR arr[i + 1] 。例如，arr = [1,0,2,1] 经编码后得到 encoded = [1,2,3] 。
+      // 给你编码后的数组 encoded 和原数组 arr 的第一个元素 first（arr[0]）。
+      // 请解码返回原数组 arr 。可以证明答案存在并且是唯一的。
+      // 提示：
+      // 2 <= n <= 104
+      // encoded.length == n - 1
+      // 0 <= encoded[i] <= 105
+      // 0 <= first <= 105
+
+      /**
+       * @param {number[]} encoded
+       * @param {number} first
+       * @return {number[]}
+       */
+      var decode = function (encoded, first) {};
+
+      // --- answer-1 ---
+
+      var decode = function (encoded, first) {
+        const len = encoded.length + 1;
+        const arr = new Array(len).fill(0);
+        arr[0] = first;
+        for (let i = 1; i < len; i++) {
+          arr[i] = arr[i - 1] ^ encoded[i - 1];
+        }
+        return arr;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var encoded = [1, 2, 3],
+        first = 1;
+      var result = [1, 0, 2, 1];
+      // 解释：若 arr = [1,0,2,1] ，那么 first = 1 且 encoded = [1 XOR 0, 0 XOR 2, 2 XOR 1] = [1,2,3]
+
+      var encoded = [6, 2, 7, 3],
+        first = 4;
+      var result = [4, 2, 0, 7, 4];
+
+      console.log('encoded = ', encoded);
+      console.log('first = ', first);
+      console.log('result = ', result);
+      console.log('decode = ', decode(encoded, first));
+    </script>
+  </body>
+</html>
