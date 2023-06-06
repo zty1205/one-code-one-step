@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (444 道)
+## 三、LeetCode (445 道)
 
 <br/>
 
@@ -588,6 +588,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1716.计算力扣银行的钱.html](./leetCode/1716.计算力扣银行的钱.html)
 - [1720.解码异或后的数组.html](./leetCode/1720.解码异或后的数组.html)
 - [1725.可以形成最大正方形的矩形数目.html](./leetCode/1725.可以形成最大正方形的矩形数目.html)
+- [1732.找到最高海拔.html](./leetCode/1732.找到最高海拔.html)
 
 <br/>
 
