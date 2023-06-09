@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (447 道)
+## 三、LeetCode (448 道)
 
 <br/>
 
@@ -591,6 +591,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1732.找到最高海拔.html](./leetCode/1732.找到最高海拔.html)
 - [1736.替换隐藏数字得到的最晚时间.html](./leetCode/1736.替换隐藏数字得到的最晚时间.html)
 - [1742.盒子中小球的最大数量.html](./leetCode/1742.盒子中小球的最大数量.html)
+- [1748.唯一元素的和.html](./leetCode/1748.唯一元素的和.html)
 
 <br/>
 
