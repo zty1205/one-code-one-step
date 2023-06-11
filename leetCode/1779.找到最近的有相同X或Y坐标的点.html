@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1779. 找到最近的有相同 X 或 Y 坐标的点</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/find-nearest-point-that-has-the-same-x-or-y-coordinate/
+
+      // 给你两个整数 x 和 y ，表示你在一个笛卡尔坐标系下的 (x, y) 处。同时，在同一个坐标系下给你一个数组 points ，其中 points[i] = [ai, bi] 表示在 (ai, bi) 处有一个点。当一个点与你所在的位置有相同的 x 坐标或者相同的 y 坐标时，我们称这个点是 有效的 。
+      // 请返回距离你当前位置 曼哈顿距离 最近的 有效 点的下标（下标从 0 开始）。如果有多个最近的有效点，请返回下标 最小 的一个。如果没有有效点，请返回 -1 。
+      // 两个点 (x1, y1) 和 (x2, y2) 之间的 曼哈顿距离 为 abs(x1 - x2) + abs(y1 - y2) 。
+      // 提示：
+      // 1 <= points.length <= 104
+      // points[i].length == 2
+      // 1 <= x, y, ai, bi <= 104
+
+      /**
+       * @param {number} x
+       * @param {number} y
+       * @param {number[][]} points
+       * @return {number}
+       */
+      var nearestValidPoint = function (x, y, points) {};
+
+      // --- answer-1 ---
+
+      // 按题意遍历
+      var nearestValidPoint = function (x = 0, y = 0, points = [[]]) {
+        let res = -1;
+        let dis = Number.MAX_SAFE_INTEGER;
+        for (let i = 0; i < points.length; i++) {
+          const [a, b] = points[i];
+          if (a === x && b === y) {
+            return i;
+          } else if (a === x) {
+            const newDis = Math.abs(b - y);
+            if (newDis < dis) {
+              dis = newDis;
+              res = i;
+            }
+          } else if (b === y) {
+            const newDis = Math.abs(a - x);
+            if (newDis < dis) {
+              dis = newDis;
+              res = i;
+            }
+          }
+        }
+        return res;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var x = 3,
+        y = 4,
+        points = [
+          [1, 2],
+          [3, 1],
+          [2, 4],
+          [2, 3],
+          [4, 4]
+        ];
+      var result = 2;
+      // 解释：所有点中，[3,1]，[2,4] 和 [4,4] 是有效点。有效点中，[2,4] 和 [4,4] 距离你当前位置的曼哈顿距离最小，都为 1 。[2,4] 的下标最小，所以返回 2 。
+
+      var x = 3,
+        y = 4,
+        points = [[3, 4]];
+      var result = 0;
+      // 提示：答案可以与你当前所在位置坐标相同。
+
+      var x = 3,
+        y = 4,
+        points = [[2, 3]];
+      var result = -1;
+      // 解释：没有 有效点。
+
+      var x = 1,
+        y = 1,
+        points = [
+          [1, 2],
+          [2, 1],
+          [1, 2],
+          [1, 1],
+          [1, 1],
+          [1, 1],
+          [1, 2],
+          [2, 1],
+          [2, 1],
+          [2, 1],
+          [2, 1],
+          [2, 2],
+          [2, 2],
+          [2, 1],
+          [2, 2],
+          [2, 2],
+          [2, 1],
+          [2, 2],
+          [2, 1],
+          [2, 1],
+          [1, 1],
+          [2, 1],
+          [1, 2],
+          [1, 1],
+          [1, 1],
+          [2, 2],
+          [2, 2],
+          [2, 2],
+          [1, 1],
+          [2, 1],
+          [2, 1],
+          [2, 1],
+          [2, 2],
+          [1, 2],
+          [1, 2],
+          [1, 1],
+          [1, 2],
+          [1, 2]
+        ];
+
+      var result = 3;
+
+      console.log('x = ', x);
+      console.log('y = ', y);
+      console.log('points = ', points);
+      console.log('result = ', result);
+      console.log('nearestValidPoint = ', nearestValidPoint(x, y, points));
+    </script>
+  </body>
+</html>
