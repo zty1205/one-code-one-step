@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1784. 检查二进制字符串字段</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/check-if-binary-string-has-at-most-one-segment-of-ones/
+
+      // 给你一个二进制字符串 s ，该字符串 不含前导零 。
+      // 如果 s 包含 零个或一个由连续的 '1' 组成的字段 ，返回 true​​​ 。否则，返回 false 。
+      // 提示：
+      // 1 <= s.length <= 100
+      // s[i]​​​​ 为 '0' 或 '1'
+      // s[0] 为 '1'
+
+      /**
+       * @param {string} s
+       * @return {boolean}
+       */
+      var checkOnesSegment = function (s) {};
+
+      // --- answer-1 ---
+
+      // 不能含有01
+      var checkOnesSegment = function (s) {
+        return s.indexOf('01') === -1;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var s = '1001';
+      var result = false;
+      // 解释：由连续若干个 '1' 组成的字段数量为 2，返回 false
+
+      var s = '110';
+      var result = true;
+
+      console.log('s = ', s);
+      console.log('result = ', result);
+      console.log('checkOnesSegment = ', checkOnesSegment(s));
+    </script>
+  </body>
+</html>
