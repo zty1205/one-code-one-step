@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1791. 找出星型图的中心节点</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/find-center-of-star-graph/
+
+      // 有一个无向的 星型 图，由 n 个编号从 1 到 n 的节点组成。星型图有一个 中心 节点，并且恰有 n - 1 条边将中心节点与其他每个节点连接起来。
+      // 给你一个二维整数数组 edges ，其中 edges[i] = [ui, vi] 表示在节点 ui 和 vi 之间存在一条边。请你找出并返回 edges 所表示星型图的中心节点。
+      // 提示：
+      // 3 <= n <= 105
+      // edges.length == n - 1
+      // edges[i].length == 2
+      // 1 <= ui, vi <= n
+      // ui != vi
+      // 题目数据给出的 edges 表示一个有效的星型图
+
+      /**
+       * @param {number[][]} edges
+       * @return {number}
+       */
+      var findCenter = function (edges) {};
+
+      // --- answer-1 ---
+
+      // 统计节点的边数
+      var findCenter = function (edges = [[]]) {
+        const map = new Map();
+        let max = 0;
+        let point = 0;
+        for (const [u, v] of edges) {
+          const uCnt = (map.get(u) || 0) + 1;
+          const vCnt = (map.get(v) || 0) + 1;
+          map.set(u, uCnt);
+          map.set(v, vCnt);
+          console.log(uCnt, vCnt);
+          if (uCnt > max) {
+            max = uCnt;
+            point = u;
+          }
+          if (vCnt > max) {
+            max = vCnt;
+            point = v;
+          }
+        }
+        return point;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 因为题目保证是星星图
+      // 任意两组必有中心
+      var findCenter = function (edges) {
+        return edges[0][0] === edges[1][0] || edges[0][0] === edges[1][1] ? edges[0][0] : edges[0][1];
+      };
+
+      // --- answer-2 ---
+
+      var edges = [
+        [1, 2],
+        [2, 3],
+        [4, 2]
+      ];
+      var result = 2;
+      // 解释：如上图所示，节点 2 与其他每个节点都相连，所以节点 2 是中心节点。
+
+      var edges = [
+        [1, 2],
+        [5, 1],
+        [1, 3],
+        [1, 4]
+      ];
+      var result = 1;
+
+      console.log('edges = ', edges);
+      console.log('result = ', result);
+      console.log('findCenter = ', findCenter(edges));
+    </script>
+  </body>
+</html>
