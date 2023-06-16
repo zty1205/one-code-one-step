@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1800. 最大升序子数组和</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/maximum-ascending-subarray-sum/
+
+      // 给你一个正整数组成的数组 nums ，返回 nums 中一个 升序 子数组的最大可能元素和。
+      // 子数组是数组中的一个连续数字序列。
+      // 已知子数组 [numsl, numsl+1, ..., numsr-1, numsr] ，若对所有 i（l <= i < r），numsi < numsi+1 都成立，则称这一子数组为 升序 子数组。注意，大小为 1 的子数组也视作 升序 子数组。
+      // 提示：
+      // 1 <= nums.length <= 100
+      // 1 <= nums[i] <= 100
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var maxAscendingSum = function (nums) {};
+
+      // --- answer-1 ---
+
+      // 遍历
+      var maxAscendingSum = function (nums = []) {
+        let max = nums[0];
+        let sum = nums[0];
+        for (let i = 1; i < nums.length; i++) {
+          if (nums[i] > nums[i - 1]) {
+            sum += nums[i];
+          } else {
+            max = Math.max(max, sum);
+            sum = nums[i];
+          }
+        }
+
+        return Math.max(max, sum);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 动态规划
+      var maxAscendingSum = function (nums) {
+        let res = 0;
+        let l = 0;
+        while (l < nums.length) {
+          let cursum = nums[l++];
+          while (l < nums.length && nums[l] > nums[l - 1]) {
+            cursum += nums[l++];
+          }
+          res = Math.max(res, cursum);
+        }
+        return res;
+      };
+      // --- answer-2 ---
+
+      var nums = [10, 20, 30, 5, 10, 50];
+      var result = 65;
+      // 解释：[5,10,50] 是元素和最大的升序子数组，最大元素和为 65 。
+
+      var nums = [10, 20, 30, 40, 50];
+      var result = 150;
+      // 解释：[10,20,30,40,50] 是元素和最大的升序子数组，最大元素和为 150 。
+
+      var nums = [12, 17, 15, 13, 10, 11, 12];
+      var result = 33;
+      // 解释：[10,11,12] 是元素和最大的升序子数组，最大元素和为 33 。
+
+      var nums = [100, 10, 1];
+      var result = 100;
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('maxAscendingSum = ', maxAscendingSum(nums));
+    </script>
+  </body>
+</html>
