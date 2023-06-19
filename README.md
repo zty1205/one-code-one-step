@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (455 道)
+## 三、LeetCode (456 道)
 
 <br/>
 
@@ -599,6 +599,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1791.找出星型图的中心节点.html](./leetCode/1791.找出星型图的中心节点.html)
 - [1796.字符串中第二大的数字.html](./leetCode/1796.字符串中第二大的数字.html)
 - [1800.最大升序子数组和.html](./leetCode/1800.最大升序子数组和.html)
+- [1805.字符串中不同整数的数目.html](./leetCode/1805.字符串中不同整数的数目.html)
 
 <br/>
 

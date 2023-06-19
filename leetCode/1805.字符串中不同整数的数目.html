@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1805. 字符串中不同整数的数目</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/number-of-different-integers-in-a-string/
+
+      // 给你一个字符串 word ，该字符串由数字和小写英文字母组成。
+      // 请你用空格替换每个不是数字的字符。例如，"a123bc34d8ef34" 将会变成 " 123  34 8  34" 。注意，剩下的这些整数为（相邻彼此至少有一个空格隔开）："123"、"34"、"8" 和 "34" 。
+      // 返回对 word 完成替换后形成的 不同 整数的数目。
+      // 只有当两个整数的 不含前导零 的十进制表示不同， 才认为这两个整数也不同。
+      // 提示：
+      // 1 <= word.length <= 1000
+      // word 由数字和小写英文字母组成
+
+      /**
+       * @param {string} word
+       * @return {number}
+       */
+      var numDifferentIntegers = function (word) {};
+
+      // --- answer-1 ---
+
+      // 正则 + Set
+      function numDifferentIntegers(word) {
+        return new Set(
+          word
+            .split(/[^\d]+/)
+            .filter(Boolean)
+            .map(BigInt)
+        ).size;
+      }
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var word = 'a123bc34d8ef34';
+      var result = 3;
+      // 解释：不同的整数有 "123"、"34" 和 "8" 。注意，"34" 只计数一次。
+
+      var word = 'leet1234code234';
+      var result = 2;
+
+      var word = 'a1b01c001';
+      var result = 1;
+      // 解释："1"、"01" 和 "001" 视为同一个整数的十进制表示，因为在比较十进制值时会忽略前导零的存在。
+
+      var word =
+        '2393706880236110407059624696967828762752651982730115221690437821508229419410771541532394006597463715513741725852432559057224478815116557380260390432211227579663571046845842281704281749571110076974264971989893607137140456254346955633455446057823738757323149856858154529105301197388177242583658641529908583934918768953462557716z97438020429952944646288084173334701047574188936201324845149110176716130267041674438237608038734431519439828191344238609567530399189316846359766256507371240530620697102864238792350289978450509162697068948604722646739174590530336510475061521094503850598453536706982695212493902968251702853203929616930291257062173c79487281900662343830648295410';
+      var result = 3;
+
+      console.log('word = ', word);
+      console.log('result = ', result);
+      console.log('numDifferentIntegers = ', numDifferentIntegers(word));
+    </script>
+  </body>
+</html>
