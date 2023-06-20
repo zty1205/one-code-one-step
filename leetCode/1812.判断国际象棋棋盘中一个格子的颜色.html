@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1812. 判断国际象棋棋盘中一个格子的颜色</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/determine-color-of-a-chessboard-square/
+
+      // 给你一个坐标 coordinates ，它是一个字符串，表示国际象棋棋盘中一个格子的坐标。下图是国际象棋棋盘示意图。
+      // 如果所给格子的颜色是白色，请你返回 true，如果是黑色，请返回 false 。
+      // 给定坐标一定代表国际象棋棋盘上一个存在的格子。坐标第一个字符是字母，第二个字符是数字。
+      // 提示：
+      // coordinates.length == 2
+      // 'a' <= coordinates[0] <= 'h'
+      // '1' <= coordinates[1] <= '8'
+
+      /**
+       * @param {string} coordinates
+       * @return {boolean}
+       */
+      var squareIsWhite = function (coordinates) {};
+
+      // --- answer-1 ---
+
+      // 将ah换成1-8就会发现 相加为偶数即为黑格子
+      var squareIsWhite = function (coordinates = '') {
+        return (
+          (coordinates[0].charCodeAt() - 'a'.charCodeAt() + 1 + (coordinates[1].charCodeAt() - '0'.charCodeAt())) %
+            2 ===
+          1
+        );
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      // var coordinates = "a1";
+      // var result = false;
+      // 解释：如上图棋盘所示，"a1" 坐标的格子是黑色的，所以返回 false 。
+
+      // var coordinates = "h3";
+      // var result = true;
+      // 解释：如上图棋盘所示，"h3" 坐标的格子是白色的，所以返回 true 。
+
+      // var coordinates = "c7";
+      // var result = false;
+
+      console.log('coordinates = ', coordinates);
+      console.log('result = ', result);
+      console.log('squareIsWhite = ', squareIsWhite(coordinates));
+    </script>
+  </body>
+</html>
