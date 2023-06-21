@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1816. 截断句子</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/truncate-sentence/
+
+      // 句子 是一个单词列表，列表中的单词之间用单个空格隔开，且不存在前导或尾随空格。每个单词仅由大小写英文字母组成（不含标点符号）。
+      // 提示：
+      // 例如，"Hello World"、"HELLO" 和 "hello world hello world" 都是句子。
+      // 给你一个句子 s​​​​​​ 和一个整数 k​​​​​​ ，请你将 s​​ 截断 ​，​​​使截断后的句子仅含 前 k​​​​​​ 个单词。返回 截断 s​​​​​​ 后得到的句子。
+      // 提示：
+      // 1 <= s.length <= 500
+      // k 的取值范围是 [1,  s 中单词的数目]
+      // s 仅由大小写英文字母和空格组成
+      // s 中的单词之间由单个空格隔开
+      // 不存在前导或尾随空格
+
+      /**
+       * @param {string} s
+       * @param {number} k
+       * @return {string}
+       */
+      var truncateSentence = function (s, k) {};
+
+      // --- answer-1 ---
+
+      // 字符串数组操作
+      var truncateSentence = function (s = '', k = 0) {
+        return s.split(' ').slice(0, k).join(' ');
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var s = 'Hello how are you Contestant',
+        k = 4;
+      var result = 'Hello how are you';
+      // 解释：
+
+      // var s = "What is the solution to this problem", k = 4;
+      // var result = "What is the solution";
+      // 解释：
+
+      // var s = "chopper is not a tanuki", k = 5;
+      // var result = "chopper is not a tanuki";
+
+      console.log('s = ', s);
+      console.log('k = ', k);
+      console.log('result = ', result);
+      console.log('truncateSentence = ', truncateSentence(s, k));
+    </script>
+  </body>
+</html>
