@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1832. 判断句子是否为全字母句</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/check-if-the-sentence-is-pangram/
+
+      // 全字母句 指包含英语字母表中每个字母至少一次的句子。
+      // 给你一个仅由小写英文字母组成的字符串 sentence ，请你判断 sentence 是否为 全字母句 。
+      // 如果是，返回 true ；否则，返回 false 。
+      // 提示：
+      // 1 <= sentence.length <= 1000
+      // sentence 由小写英语字母组成
+
+      /**
+       * @param {string} sentence
+       * @return {boolean}
+       */
+      var checkIfPangram = function (sentence) {};
+
+      // --- answer-1 ---
+
+      // 统计
+      var checkIfPangram = function (sentence = '') {
+        if (sentence.length < 26) return false;
+        const arr = new Array(26).fill(0);
+        for (let char of sentence) {
+          arr[char.charCodeAt() - 'a'.charCodeAt()] += 1;
+        }
+        return arr.every((num) => num > 0);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 位运算
+      var checkIfPangram = function (sentence) {
+        let state = 0;
+        for (let i = 0; i < sentence.length; i++) {
+          const c = sentence[i];
+          state |= 1 << (c.charCodeAt() - 'a'.charCodeAt());
+        }
+        return state == (1 << 26) - 1;
+      };
+      // --- answer-2 ---
+
+      var sentence = 'thequickbrownfoxjumpsoverthelazydog';
+      var result = true;
+      // 解释：sentence 包含英语字母表中每个字母至少一次。
+
+      // var sentence = "leetcode";
+      // var result = false;
+
+      console.log('sentence = ', sentence);
+      console.log('result = ', result);
+      console.log('checkIfPangram = ', checkIfPangram(sentence));
+    </script>
+  </body>
+</html>
