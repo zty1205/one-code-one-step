@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (460 道)
+## 三、LeetCode (461 道)
 
 <br/>
 
@@ -604,6 +604,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1816.截断句子.html](./leetCode/1816.截断句子.html)
 - [1822.数组元素积的符号.html](./leetCode/1822.数组元素积的符号.html)
 - [1832.判断句子是否为全字母句.html](./leetCode/1832.判断句子是否为全字母句.html)
+- [1844.将所有数字用字符替换.html](./leetCode/1844.将所有数字用字符替换.html)
 
 <br/>
 
