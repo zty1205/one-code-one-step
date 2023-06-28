@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1903. 字符串中的最大奇数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/largest-odd-number-in-string/
+
+      // 给你一个字符串 num ，表示一个大整数。请你在字符串 num 的所有 非空子字符串 中找出 值最大的奇数 ，并以字符串形式返回。如果不存在奇数，则返回一个空字符串 "" 。
+      // 子字符串 是字符串中的一个连续的字符序列。
+      // 提示：
+      // 1 <= num.length <= 105
+      // num 仅由数字组成且不含前导零
+
+      /**
+       * @param {string} num
+       * @return {string}
+       */
+      var largestOddNumber = function (num) {};
+
+      // --- answer-1 ---
+
+      // 找末尾第一个为奇数的数字
+      var largestOddNumber = function (num) {
+        let l = num.length;
+        for (let i = l - 1; i >= 0; i--) {
+          if (+num[i] % 2 === 1) {
+            return num.slice(0, i + 1);
+          }
+        }
+        return '';
+      };
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      // var num = "52";
+      // var result = "5";
+      // 解释：非空子字符串仅有 "5"、"2" 和 "52" 。"5" 是其中唯一的奇数。
+
+      // var num = "4206";
+      // var result = "";
+      // 解释：在 "4206" 中不存在奇数。
+
+      // var num = "35427";
+      // var result = "35427";
+      // 解释："35427" 本身就是一个奇数。
+
+      console.log('num = ', num);
+      console.log('result = ', result);
+      console.log('largestOddNumber = ', largestOddNumber(num));
+    </script>
+  </body>
+</html>
