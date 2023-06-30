@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (464 道)
+## 三、LeetCode (465 道)
 
 <br/>
 
@@ -608,6 +608,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1848.到目标元素的最小距离.html](./leetCode/1848.到目标元素的最小距离.html)
 - [1859.将句子排序.html](./leetCode/1859.将句子排序.html)
 - [1903.字符串中的最大奇数.html](./leetCode/1903.字符串中的最大奇数.html)
+- [1929.数组串联.html](./leetCode/1929.数组串联.html)
 
 <br/>
 
