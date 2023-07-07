@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1979. 找出数组的最大公约数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/find-greatest-common-divisor-of-array/
+
+      // 给你一个整数数组 nums ，返回数组中最大数和最小数的 最大公约数 。
+      // 两个数的 最大公约数 是能够被两个数整除的最大正整数。
+      // 提示：
+      // 2 <= nums.length <= 1000
+      // 1 <= nums[i] <= 1000
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var findGCD = function (nums) {};
+
+      // --- answer-1 ---
+
+      var findGCD = function (nums) {
+        let max = Math.max(...nums);
+        let min = Math.min(...nums);
+        // console.log(min, max);
+        // 辗转相除法 求 最大公约数
+        function gcd(a, b) {
+          let r = a % b; // 余数
+          return b === 0 ? a : gcd(b, r);
+        }
+        return gcd(min, max);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var nums = [2, 5, 6, 9, 10];
+      var result = 2;
+      // 解释：
+
+      var nums = [7, 5, 6, 8, 3];
+      var result = 1;
+      // 解释：
+
+      var nums = [3, 3];
+      var result = 3;
+      // 解释：
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('findGCD = ', findGCD(nums));
+    </script>
+  </body>
+</html>
