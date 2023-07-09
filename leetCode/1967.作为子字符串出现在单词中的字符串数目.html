@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1967. 作为子字符串出现在单词中的字符串数目</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/number-of-strings-that-appear-as-substrings-in-word/
+
+      // 给你一个字符串数组 patterns 和一个字符串 word ，统计 patterns 中有多少个字符串是 word 的子字符串。返回字符串数目。
+      // 子字符串 是字符串中的一个连续字符序列。
+      // 提示：
+      // 1 <= patterns.length <= 100
+      // 1 <= patterns[i].length <= 100
+      // 1 <= word.length <= 100
+      // patterns[i] 和 word 由小写英文字母组成
+
+      /**
+       * @param {string[]} patterns
+       * @param {string} word
+       * @return {number}
+       */
+      var numOfStrings = function (patterns, word) {};
+
+      // --- answer-1 ---
+
+      // 原生
+      var numOfStrings = function (patterns = [], word = '') {
+        return patterns.filter((x) => word.includes(x)).length;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var patterns = ['a', 'abc', 'bc', 'd'],
+        word = 'abc';
+      var result = 3;
+      // 解释：
+
+      var patterns = ['a', 'b', 'c'],
+        word = 'aaaaabbbbb';
+      var result = 2;
+      // 解释：
+
+      // var patterns = ["a","a","a"], word = "ab";
+      // var result = 3;
+      // 解释：patterns 中的每个字符串都作为子字符串出现在 word "ab" 中。
+
+      console.log('patterns = ', patterns);
+      console.log('word = ', word);
+      console.log('result = ', result);
+      console.log('numOfStrings = ', numOfStrings(patterns, word));
+    </script>
+  </body>
+</html>
