@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1961. 检查字符串是否为数组前缀</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/check-if-string-is-a-prefix-of-array/
+
+      // 给你一个字符串 s 和一个字符串数组 words ，请你判断 s 是否为 words 的 前缀字符串 。
+      // 字符串 s 要成为 words 的 前缀字符串 ，需要满足：s 可以由 words 中的前 k（k 为 正数 ）个字符串按顺序相连得到，且 k 不超过 words.length 。
+      // 如果 s 是 words 的 前缀字符串 ，返回 true ；否则，返回 false 。
+      // 提示：
+      // 1 <= words.length <= 100
+      // 1 <= words[i].length <= 20
+      // 1 <= s.length <= 1000
+      // words[i] 和 s 仅由小写英文字母组成
+
+      /**
+       * @param {string} s
+       * @param {string[]} words
+       * @return {boolean}
+       */
+      var isPrefixString = function (s, words) {};
+
+      // --- answer-1 ---
+
+      // 直接遍历 字符串相等
+      var isPrefixString = function (s = '', words = []) {
+        let w = '';
+        for (let ch of words) {
+          w += ch;
+          if (w.length === s.length) {
+            // 或者逐个字符串比较
+            return w === s;
+          }
+          if (w.length > s.length) {
+            return false;
+          }
+        }
+        return false;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var s = 'iloveleetcode',
+        words = ['i', 'love', 'leetcode', 'apples'];
+      var result = true;
+      // 解释：
+
+      var s = 'iloveleetcode',
+        words = ['apples', 'i', 'love', 'leetcode'];
+      var result = false;
+      // 解释：
+
+      console.log('s = ', s);
+      console.log('words = ', words);
+      console.log('result = ', result);
+      console.log('isPrefixString = ', isPrefixString(s, words));
+    </script>
+  </body>
+</html>
