@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (470 道)
+## 三、LeetCode (471 道)
 
 <br/>
 
@@ -607,6 +607,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1844.将所有数字用字符替换.html](./leetCode/1844.将所有数字用字符替换.html)
 - [1848.到目标元素的最小距离.html](./leetCode/1848.到目标元素的最小距离.html)
 - [1859.将句子排序.html](./leetCode/1859.将句子排序.html)
+- [1897.重新分配字符使所有字符串都相等.html](./leetCode/1897.重新分配字符使所有字符串都相等.html)
 - [1903.字符串中的最大奇数.html](./leetCode/1903.字符串中的最大奇数.html)
 - [1929.数组串联.html](./leetCode/1929.数组串联.html)
 - [1961.检查字符串是否为数组前缀.html](./leetCode/1961.检查字符串是否为数组前缀.html)

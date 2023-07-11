@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1897. 重新分配字符使所有字符串都相等</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/redistribute-characters-to-make-all-strings-equal/
+
+      // 给你一个字符串数组 words（下标 从 0 开始 计数）。
+      // 在一步操作中，需先选出两个 不同 下标 i 和 j，其中 words[i] 是一个非空字符串，接着将 words[i] 中的 任一 字符移动到 words[j] 中的 任一 位置上。
+      // 如果执行任意步操作可以使 words 中的每个字符串都相等，返回 true ；否则，返回 false 。
+      // 提示：
+      // 1 <= words.length <= 100
+      // 1 <= words[i].length <= 100
+      // words[i] 由小写英文字母组成
+
+      /**
+       * @param {string[]} words
+       * @return {boolean}
+       */
+      var makeEqual = function (words) {};
+
+      // --- answer-1 ---
+
+      // 统计
+      var makeEqual = function (words = []) {
+        const length = words.length;
+        const arr = new Array(26).fill(0);
+        for (let wd of words) {
+          for (let c of wd) {
+            arr[c.charCodeAt() - 'a'.charCodeAt()] += 1;
+          }
+        }
+        console.log('ar = ', arr);
+        return arr.every((x) => x === 0 || x % length === 0);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var words = ['abc', 'aabc', 'bc'];
+      var result = true;
+      // 解释：将 words[1] 中的第一个 'a' 移动到 words[2] 的最前面。
+
+      var words = ['ab', 'a'];
+      var result = false;
+      // 解释：执行操作无法使所有字符串都相等。
+
+      console.log('words = ', words);
+      console.log('result = ', result);
+      console.log('makeEqual = ', makeEqual(words));
+    </script>
+  </body>
+</html>
