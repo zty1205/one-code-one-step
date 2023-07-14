@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1941. 检查是否所有字符出现次数相同</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/check-if-all-characters-have-equal-number-of-occurrences/
+
+      // 给你一个字符串 s ，如果 s 是一个 好 字符串，请你返回 true ，否则请返回 false 。
+      // 如果 s 中出现过的 所有 字符的出现次数 相同 ，那么我们称字符串 s 是 好 字符串。
+      // 提示：
+      // 1 <= s.length <= 1000
+      // s 只包含小写英文字母。
+
+      /**
+       * @param {string} s
+       * @return {boolean}
+       */
+      var areOccurrencesEqual = function (s) {};
+
+      // --- answer-1 ---
+
+      // 字符串统计
+      var areOccurrencesEqual = function (s = '') {
+        const arr = new Array(26).fill(0);
+        for (let char of s) {
+          arr[char.charCodeAt() - 'a'.charCodeAt()] += 1;
+        }
+        let common;
+        for (let n of arr) {
+          if (n === 0) continue;
+          if (!common) common = n;
+          if (n !== common) return false;
+        }
+        return true;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 使用原生api
+      function areOccurrencesEqual(s) {
+        let map = new Map();
+        for (let i of s) map.set(i, (map.get(i) || 0) + 1);
+        return new Set(map.values()).size === 1;
+      }
+
+      // --- answer-2 ---
+
+      var s = 'abacbc';
+      var result = true;
+      // 解释：s 中出现过的字符为 'a'，'b' 和 'c' 。s 中所有字符均出现 2 次。
+
+      var s = 'aaabb';
+      var result = false;
+      // 解释：s 中出现过的字符为 'a' 和 'b' 。
+
+      console.log('s = ', s);
+      console.log('result = ', result);
+      console.log('areOccurrencesEqual = ', areOccurrencesEqual(s));
+    </script>
+  </body>
+</html>
