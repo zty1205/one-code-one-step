@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1952. 三除数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/three-divisors/
+
+      // 给你一个整数 n 。如果 n 恰好有三个正除数 ，返回 true ；否则，返回 false 。
+      // 如果存在整数 k ，满足 n = k * m ，那么整数 m 就是 n 的一个 除数 。
+      // 提示：
+      // 1 <= n <= 104
+
+      /**
+       * @param {number} n
+       * @return {boolean}
+       */
+      var isThree = function (n) {};
+
+      // --- answer-1 ---
+
+      // 暴力法 遍历到平方数
+      // 1 和 本身 那么剩下一个除数只能是相等的 即该数是完全平方数 且因子是素数
+      function isPrime(num) {
+        for (let i = 2; i * i <= num; i++) {
+          if (num % i === 0) return false;
+        }
+        return true;
+      }
+
+      var isThree = function (n) {
+        if (n === 1) return false;
+        const sq = Math.sqrt(n);
+        return Number.isInteger(sq) && isPrime(sq);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var n = 2;
+      var result = false;
+      // 解释：2 只有两个除数：1 和 2 。
+
+      var n = 4;
+      var result = true;
+      // 解释：4 有三个除数：1、2 和 4 。
+
+      console.log('n = ', n);
+      console.log('result = ', result);
+      console.log('isThree = ', isThree(n));
+    </script>
+  </body>
+</html>
