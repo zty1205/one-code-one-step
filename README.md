@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (476 道)
+## 三、LeetCode (477 道)
 
 <br/>
 
@@ -609,6 +609,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1859.将句子排序.html](./leetCode/1859.将句子排序.html)
 - [1869.哪种连续子字符串更长.html](./leetCode/1869.哪种连续子字符串更长.html)
 - [1876.长度为三且各字符不同的子字符串.html](./leetCode/1876.长度为三且各字符不同的子字符串.html)
+- [1880.检查某单词是否等于两单词之和.html](./leetCode/1880.检查某单词是否等于两单词之和.html)
 - [1897.重新分配字符使所有字符串都相等.html](./leetCode/1897.重新分配字符使所有字符串都相等.html)
 - [1903.字符串中的最大奇数.html](./leetCode/1903.字符串中的最大奇数.html)
 - [1909.删除一个元素使数组严格递增.html](./leetCode/1909.删除一个元素使数组严格递增.html)
