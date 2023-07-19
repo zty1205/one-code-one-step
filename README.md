@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (477 道)
+## 三、LeetCode (478 道)
 
 <br/>
 
@@ -613,6 +613,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1897.重新分配字符使所有字符串都相等.html](./leetCode/1897.重新分配字符使所有字符串都相等.html)
 - [1903.字符串中的最大奇数.html](./leetCode/1903.字符串中的最大奇数.html)
 - [1909.删除一个元素使数组严格递增.html](./leetCode/1909.删除一个元素使数组严格递增.html)
+- [1925.统计平方和三元组的数目.html](./leetCode/1925.统计平方和三元组的数目.html)
 - [1929.数组串联.html](./leetCode/1929.数组串联.html)
 - [1941.检查是否所有字符出现次数相同.html](./leetCode/1941.检查是否所有字符出现次数相同.html)
 - [1952.三除数.html](./leetCode/1952.三除数.html)

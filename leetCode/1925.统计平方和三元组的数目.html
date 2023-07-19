@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1925. 统计平方和三元组的数目</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/count-square-sum-triples/
+
+      // 一个 平方和三元组 (a,b,c) 指的是满足 a2 + b2 = c2 的 整数 三元组 a，b 和 c 。
+      // 给你一个整数 n ，请你返回满足 1 <= a, b, c <= n 的 平方和三元组 的数目。
+      // 提示：
+      // 1 <= n <= 250
+
+      /**
+       * @param {number} n
+       * @return {number}
+       */
+      var countTriples = function (n) {};
+
+      // --- answer-1 ---
+
+      var countTriples = function (n) {
+        let r = 0;
+        for (let i = 3; i <= n; i++) {
+          for (let j = 3; j < i; j++) {
+            let s = i ** 2 - j ** 2;
+            if (Math.sqrt(s) % 1 === 0) {
+              r += 1;
+            }
+          }
+        }
+        return r;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var n = 5;
+      var result = 2;
+      // 解释：平方和三元组为 (3,4,5) 和 (4,3,5) 。
+
+      var n = 10;
+      var result = 4;
+      // 解释：平方和三元组为 (3,4,5)，(4,3,5)，(6,8,10) 和 (8,6,10) 。
+
+      console.log('n = ', n);
+      console.log('result = ', result);
+      console.log('countTriples = ', countTriples(n));
+    </script>
+  </body>
+</html>
