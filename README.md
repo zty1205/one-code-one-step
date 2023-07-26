@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (482 道)
+## 三、LeetCode (483 道)
 
 <br/>
 
@@ -618,6 +618,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1913.两个数对之间的最大乘积差.html](./leetCode/1913.两个数对之间的最大乘积差.html)
 - [1920.基于排列构建数组.html](./leetCode/1920.基于排列构建数组.html)
 - [1925.统计平方和三元组的数目.html](./leetCode/1925.统计平方和三元组的数目.html)
+- [1929.数组串联.html](./leetCode/1929.数组串联.html)
 - [1929.数组串联.html](./leetCode/1929.数组串联.html)
 - [1941.检查是否所有字符出现次数相同.html](./leetCode/1941.检查是否所有字符出现次数相同.html)
 - [1952.三除数.html](./leetCode/1952.三除数.html)
