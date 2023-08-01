@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (483 道)
+## 三、LeetCode (484 道)
 
 <br/>
 
@@ -621,6 +621,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1929.数组串联.html](./leetCode/1929.数组串联.html)
 - [1929.数组串联.html](./leetCode/1929.数组串联.html)
 - [1941.检查是否所有字符出现次数相同.html](./leetCode/1941.检查是否所有字符出现次数相同.html)
+- [1945.字符串转化后的各位数字之和.html](./leetCode/1945.字符串转化后的各位数字之和.html)
 - [1952.三除数.html](./leetCode/1952.三除数.html)
 - [1961.检查字符串是否为数组前缀.html](./leetCode/1961.检查字符串是否为数组前缀.html)
 - [1967.作为子字符串出现在单词中的字符串数目.html](./leetCode/1967.作为子字符串出现在单词中的字符串数目.html)
