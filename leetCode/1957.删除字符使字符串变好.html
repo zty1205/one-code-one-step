@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1957. 删除字符使字符串变好</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/delete-characters-to-make-fancy-string/
+
+      // 一个字符串如果没有 三个连续 相同字符，那么它就是一个 好字符串 。
+      // 给你一个字符串 s ，请你从 s 删除 最少 的字符，使它变成一个 好字符串 。
+      // 请你返回删除后的字符串。题目数据保证答案总是 唯一的 。
+      // 提示：
+      // 1 <= s.length <= 105
+      // s 只包含小写英文字母。
+
+      /**
+       * @param {string} s
+       * @return {string}
+       */
+      var makeFancyString = function (s) {};
+
+      // --- answer-1 ---
+
+      // 删除连续超过3个相同字符
+      var makeFancyString = function (s = '') {
+        let res = s[0];
+        let pre = s[0];
+        let count = 1;
+        for (let i = 1; i < s.length; i++) {
+          const cur = s[i];
+          if (cur === pre) {
+            count += 1;
+            if (count < 3) res += cur;
+          } else {
+            pre = cur;
+            count = 1;
+            res += cur;
+          }
+        }
+        return res;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var s = 'leeetcode';
+      var result = 'leetcode';
+      // 解释：
+
+      var s = 'aaabaaaa';
+      var result = 'aabaa';
+      // 解释：
+
+      var s = 'aab';
+      var result = 'aab';
+      // 解释：没有连续三个相同字符，所以返回 "aab" 。
+
+      var s = 'aaabaaa';
+      var result = 'aabaa';
+
+      console.log('s = ', s);
+      console.log('result = ', result);
+      console.log('makeFancyString = ', makeFancyString(s));
+    </script>
+  </body>
+</html>
