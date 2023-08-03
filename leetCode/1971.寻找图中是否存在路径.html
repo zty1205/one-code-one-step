@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1971. 寻找图中是否存在路径</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/find-if-path-exists-in-graph/
+
+      // 有一个具有 n 个顶点的 双向 图，其中每个顶点标记从 0 到 n - 1（包含 0 和 n - 1）。图中的边用一个二维整数数组 edges 表示，其中 edges[i] = [ui, vi] 表示顶点 ui 和顶点 vi 之间的双向边。 每个顶点对由 最多一条 边连接，并且没有顶点存在与自身相连的边。
+      // 请你确定是否存在从顶点 source 开始，到顶点 destination 结束的 有效路径 。
+      // 给你数组 edges 和整数 n、source 和 destination，如果从 source 到 destination 存在 有效路径 ，则返回 true，否则返回 false 。
+      // 提示：
+      // 1 <= n <= 2 * 105
+      // 0 <= edges.length <= 2 * 105
+      // edges[i].length == 2
+      // 0 <= ui, vi <= n - 1
+      // ui != vi
+      // 0 <= source, destination <= n - 1
+      // 不存在重复边
+      // 不存在指向顶点自身的边
+
+      /**
+       * @param {number} n
+       * @param {number[][]} edges
+       * @param {number} source
+       * @param {number} destination
+       * @return {boolean}
+       */
+      var validPath = function (n, edges, source, destination) {};
+
+      // --- answer-1 ---
+
+      // 广度遍历 找到所有source出发所有能访问到的节点
+      var validPath = function (n, edges, source, destination) {
+        const hash = Array.from({ length: n }, () => new Array());
+        for (const [x, y] of edges) {
+          hash[x].push(y);
+          hash[y].push(x);
+        }
+        const visited = new Array(n).fill(false);
+        const queue = [source];
+        visited[source] = true;
+        while (queue.length) {
+          const vertex = queue.shift();
+          if (vertex === destination) {
+            break;
+          }
+          for (const next of hash[vertex]) {
+            if (!visited[next]) {
+              queue.push(next);
+              visited[next] = true;
+            }
+          }
+        }
+        return visited[destination];
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 深度遍历
+      var validPath = function (n, edges, source, destination) {
+        const hash = new Array(n).fill(0).map(() => new Array());
+        for (const [x, y] of edges) {
+          hash[x].push(y);
+          hash[y].push(x);
+        }
+        const visited = new Array(n).fill(0);
+        return dfs(source, destination, hash, visited);
+      };
+
+      const dfs = (source, destination, hash, visited) => {
+        if (source === destination) {
+          return true;
+        }
+        visited[source] = true;
+        for (const next of hash[source]) {
+          if (!visited[next] && dfs(next, destination, hash, visited)) {
+            return true;
+          }
+        }
+        return false;
+      };
+
+      // --- answer-2 ---
+
+      var validPath = function (n, edges, source, destination) {
+        if (source === destination) {
+          return true;
+        }
+        const uf = new UnionFind(n);
+        for (const edge of edges) {
+          uf.uni(edge[0], edge[1]);
+        }
+        console.log(uf);
+        return uf.connect(source, destination);
+      };
+
+      class UnionFind {
+        constructor(n) {
+          this.parent = new Array(n).fill(0).map((_, i) => i);
+          this.rank = new Array(n).fill(0);
+        }
+
+        uni(x, y) {
+          const rootx = this.find(x);
+          const rooty = this.find(y);
+          if (rootx !== rooty) {
+            if (this.rank[rootx] > this.rank[rooty]) {
+              this.parent[rooty] = rootx;
+            } else if (this.rank[rootx] < this.rank[rooty]) {
+              this.parent[rootx] = rooty;
+            } else {
+              this.parent[rooty] = rootx;
+              this.rank[rootx]++;
+            }
+          }
+        }
+
+        find(x) {
+          if (this.parent[x] !== x) {
+            this.parent[x] = this.find(this.parent[x]);
+          }
+          return this.parent[x];
+        }
+
+        connect(x, y) {
+          return this.find(x) === this.find(y);
+        }
+      }
+
+      var n = 3,
+        edges = [
+          [0, 1],
+          [1, 2],
+          [2, 0]
+        ],
+        source = 0,
+        destination = 2;
+      var result = true;
+      // 解释：存在由顶点 0 到顶点 2 的路径:
+
+      var n = 6,
+        edges = [
+          [0, 1],
+          [0, 2],
+          [3, 5],
+          [5, 4],
+          [4, 3]
+        ],
+        source = 0,
+        destination = 5;
+      var result = false;
+      // 解释：不存在由顶点 0 到顶点 5 的路径.
+
+      var n = 10,
+        edges = [
+          [4, 3],
+          [1, 4],
+          [4, 8],
+          [1, 7],
+          [6, 4],
+          [4, 2],
+          [7, 4],
+          [4, 0],
+          [0, 9],
+          [5, 4]
+        ],
+        source = 5,
+        destination = 9;
+      var result = true;
+
+      console.log('n = ', n);
+      console.log('edges = ', edges);
+      console.log('source = ', source);
+      console.log('destination = ', destination);
+      console.log('result = ', result);
+      console.log('validPath = ', validPath(n, edges, source, destination));
+    </script>
+  </body>
+</html>
