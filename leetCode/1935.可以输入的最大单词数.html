@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1935. 可以输入的最大单词数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/maximum-number-of-words-you-can-type/
+
+      // 键盘出现了一些故障，有些字母键无法正常工作。而键盘上所有其他键都能够正常工作。
+      // 给你一个由若干单词组成的字符串 text ，单词间由单个空格组成（不含前导和尾随空格）；另有一个字符串 brokenLetters ，由所有已损坏的不同字母键组成，返回你可以使用此键盘完全输入的 text 中单词的数目。
+      // 提示：
+      // 1 <= text.length <= 104
+      // 0 <= brokenLetters.length <= 26
+      // text 由若干用单个空格分隔的单词组成，且不含任何前导和尾随空格
+      // 每个单词仅由小写英文字母组成
+      // brokenLetters 由 互不相同 的小写英文字母组成
+
+      /**
+       * @param {string} text
+       * @param {string} brokenLetters
+       * @return {number}
+       */
+      var canBeTypedWords = function (text, brokenLetters) {};
+
+      // --- answer-1 ---
+
+      var canBeTypedWords = function (text = '', brokenLetters = '') {
+        const map = new Map();
+        for (let c of brokenLetters) {
+          map.set(c, true);
+        }
+        return text.split(' ').filter((word) => {
+          for (let ch of word) {
+            if (map.has(ch)) return false;
+          }
+          return true;
+        }).length;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var text = 'hello world',
+        brokenLetters = 'ad';
+      var result = 1;
+      // 解释：无法输入 "world" ，因为字母键 'd' 已损坏。
+
+      var text = 'leet code',
+        brokenLetters = 'lt';
+      var result = 1;
+      // 解释：无法输入 "leet" ，因为字母键 'l' 和 't' 已损坏。
+
+      var text = 'leet code',
+        brokenLetters = 'e';
+      var result = 0;
+      // 解释：无法输入任何单词，因为字母键 'e' 已损坏。
+
+      console.log('text = ', text);
+      console.log('brokenLetters = ', brokenLetters);
+      console.log('result = ', result);
+      console.log('canBeTypedWords = ', canBeTypedWords(text, brokenLetters));
+    </script>
+  </body>
+</html>
