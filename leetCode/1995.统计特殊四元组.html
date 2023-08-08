@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1995. 统计特殊四元组</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/count-special-quadruplets/
+
+      // 给你一个 下标从 0 开始 的整数数组 nums ，返回满足下述条件的 不同 四元组 (a, b, c, d) 的 数目 ：
+      // 提示：
+      // nums[a] + nums[b] + nums[c] == nums[d] ，且
+      // a < b < c < d
+      // 提示：
+      // 4 <= nums.length <= 50
+      // 1 <= nums[i] <= 100
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var countQuadruplets = function (nums) {};
+
+      // --- answer-1 ---
+
+      // 暴力
+      var countQuadruplets = function (nums = []) {
+        const length = nums.length;
+        let res = 0;
+        for (let i = 0; i < length; i++) {
+          for (let j = i + 1; j < length; j++) {
+            for (let k = j + 1; k < length; k++) {
+              for (let m = k + 1; m < length; m++) {
+                if (nums[i] + nums[j] + nums[k] === nums[m]) {
+                  res += 1;
+                }
+              }
+            }
+          }
+        }
+        return res;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // HASH
+      // 统计 a+b=d-c
+      var countQuadruplets = function (nums = []) {
+        const length = nums.length;
+        const map = new Map();
+
+        let res = 0;
+        for (let b = length - 3; b >= 1; --b) {
+          for (let d = b + 2; d < length; ++d) {
+            const key = nums[d] - nums[b + 1];
+            map.set(key, (map.get(key) || 0) + 1);
+          }
+          for (let a = 0; a < b; ++a) {
+            res += map.get(nums[a] + nums[b]) || 0;
+          }
+        }
+        return res;
+      };
+
+      // --- answer-2 ---
+
+      var nums = [1, 2, 3, 6];
+      var result = 1;
+      // 解释：满足要求的唯一一个四元组是 (0, 1, 2, 3) 因为 1 + 2 + 3 == 6 。
+
+      var nums = [3, 3, 6, 4, 5];
+      var result = 0;
+      // 解释：[3,3,6,4,5] 中不存在满足要求的四元组。
+
+      var nums = [1, 1, 1, 3, 5];
+      var result = 4;
+      // 解释：满足要求的 4 个四元组如下：
+
+      var nums = [9, 6, 8, 23, 39, 23];
+      var result = 2;
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('countQuadruplets = ', countQuadruplets(nums));
+    </script>
+  </body>
+</html>

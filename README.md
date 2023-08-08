@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (487 道)
+## 三、LeetCode (488 道)
 
 <br/>
 
@@ -631,6 +631,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1979.找出数组的最大公约数.html](./leetCode/1979.找出数组的最大公约数.html)
 - [1984.学生分数的最小差值.html](./leetCode/1984.学生分数的最小差值.html)
 - [1991.找到数组的中间位置.html](./leetCode/1991.找到数组的中间位置.html)
+- [1995.统计特殊四元组.html](./leetCode/1995.统计特殊四元组.html)
 
 <br/>
 
