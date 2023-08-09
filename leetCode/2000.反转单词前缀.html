@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2000. 反转单词前缀</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/reverse-prefix-of-word/
+
+      // 给你一个下标从 0 开始的字符串 word 和一个字符 ch 。找出 ch 第一次出现的下标 i ，反转 word 中从下标 0 开始、直到下标 i 结束（含下标 i ）的那段字符。如果 word 中不存在字符 ch ，则无需进行任何操作。
+      // 提示：
+      // 例如，如果 word = "abcdefd" 且 ch = "d" ，那么你应该 反转 从下标 0 开始、直到下标 3 结束（含下标 3 ）。结果字符串将会是 "dcbaefd" 。
+      // 返回 结果字符串 。
+      // 提示：
+      // 1 <= word.length <= 250
+      // word 由小写英文字母组成
+      // ch 是一个小写英文字母
+
+      /**
+       * @param {string} word
+       * @param {character} ch
+       * @return {string}
+       */
+      var reversePrefix = function (word, ch) {};
+
+      // --- answer-1 ---
+
+      // 循环+数组辅助
+      var reversePrefix = function (word = '', ch = '') {
+        let flag = false;
+        const arr = [];
+
+        for (let c of word) {
+          arr.push(c);
+          if (c === ch && !flag) {
+            arr.reverse();
+            flag = true;
+          }
+        }
+        return arr.join('');
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 使用原生api
+      var reversePrefix = function (word = '', ch = '') {
+        const index = word.indexOf(ch);
+        if (index === -1) return word;
+        return [...word.slice(0, index + 1)].reverse().join('') + word.slice(index + 1);
+      };
+
+      // --- answer-2 ---
+
+      var word = 'abcdefd',
+        ch = 'd';
+      var result = 'dcbaefd';
+      // 解释："d" 第一次出现在下标 3 。
+
+      var word = 'xyxzxe',
+        ch = 'z';
+      var result = 'zxyxxe';
+      // 解释："z" 第一次也是唯一一次出现是在下标 3 。
+
+      var word = 'abcd',
+        ch = 'z';
+      var result = 'abcd';
+      // 解释："z" 不存在于 word 中。;
+
+      console.log('word = ', word);
+      console.log('ch = ', ch);
+      console.log('result = ', result);
+      console.log('reversePrefix = ', reversePrefix(word, ch));
+    </script>
+  </body>
+</html>
