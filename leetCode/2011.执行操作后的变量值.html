@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2011.执行操作后的变量值</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/final-value-of-variable-after-performing-operations/
+
+      // 存在一种仅支持 4 种操作和 1 个变量 X 的编程语言：
+
+      // ++X 和 X++ 使变量 X 的值 加 1
+      // --X 和 X-- 使变量 X 的值 减 1
+      // 最初，X 的值是 0
+
+      // 给你一个字符串数组 operations ，这是由操作组成的一个列表，返回执行所有操作后， X 的 最终值 。
+
+      // 提示：
+
+      // 1 <= operations.length <= 100
+      // operations[i] 将会是 "++X"、"X++"、"--X" 或 "X--"
+
+      /**
+       * @param {string[]} operations
+       * @return {number}
+       */
+      var finalValueAfterOperations = function (operations) {};
+
+      // --- answer-1 ---
+
+      var finalValueAfterOperations = function (operations = []) {
+        return operations.reduce((pre, cur) => {
+          if (cur === 'X++' || cur === '++X') {
+            pre += 1;
+          } else {
+            pre -= 1;
+          }
+          return pre;
+        }, 0);
+      };
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var operations = ['--X', 'X++', 'X++'];
+      var result = 1;
+      // 解释：操作按下述步骤执行：
+
+      var operations = ['++X', '++X', 'X++'];
+      var result = 3;
+      // 解释：操作按下述步骤执行：
+
+      var operations = ['X++', '++X', '--X', 'X--'];
+      var result = 0;
+      // 解释：操作按下述步骤执行：
+
+      console.log('nums = ', operations);
+      console.log('result = ', result);
+      console.log('countKDifference = ', finalValueAfterOperations(operations));
+    </script>
+  </body>
+</html>
