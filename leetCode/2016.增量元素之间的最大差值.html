@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2016.增量元素之间的最大差值</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/maximum-difference-between-increasing-elements/
+
+      // 给你一个下标从 0 开始的整数数组 nums ，该数组的大小为 n ，请你计算 nums[j] - nums[i] 能求得的 最大差值 ，其中 0 <= i < j < n 且 nums[i] < nums[j] 。
+
+      // 返回 最大差值 。如果不存在满足要求的 i 和 j ，返回 -1 。
+
+      // 提示：
+
+      // n == nums.length
+      // 2 <= n <= 1000
+      // 1 <= nums[i] <= 109
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var maximumDifference = function (nums) {};
+
+      // --- answer-1 ---
+
+      // 暴力而循环
+      var maximumDifference = function (nums = []) {};
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 预先求最大值
+      var maximumDifference = function (nums = []) {
+        const maxArr = [];
+        const length = nums.length;
+        let max = -1;
+        for (let i = length - 1; i >= 0; i--) {
+          max = Math.max(max, nums[i]);
+          maxArr.push(max);
+        }
+        maxArr.reverse();
+        max = 0;
+        for (let i = 0; i < nums.length; i++) {
+          max = Math.max(maxArr[i] - nums[i], max);
+        }
+        return max || -1;
+      };
+
+      // 反过来求前缀最小
+      var maximumDifference = function (nums) {
+        let max = -1;
+        let premin = nums[0];
+        for (let i = 1; i < nums.length; ++i) {
+          if (nums[i] > premin) {
+            max = Math.max(max, nums[i] - premin);
+          } else {
+            premin = nums[i];
+          }
+        }
+        return max;
+      };
+
+      // --- answer-2 ---
+
+      var nums = [7, 1, 5, 4];
+      var result = 4;
+
+      var nums = [9, 4, 3, 2];
+      var result = -1;
+
+      var nums = [1, 5, 2, 10];
+      var result = 9;
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('maximumDifference = ', maximumDifference(nums));
+    </script>
+  </body>
+</html>
