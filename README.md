@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (492 道)
+## 三、LeetCode (493 道)
 
 <br/>
 
@@ -636,6 +636,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2006.差的绝对值为 K 的数对数目](./leetCode/2006.差的绝对值为K的数对数目.html)
 - [2011.执行操作后的变量值](./leetCode/2011.执行操作后的变量值.html)
 - [2016.增量元素之间的最大差值](./leetCode/2016.增量元素之间的最大差值.html)
+- [2022.将一维数组转变成二维数组.html](./leetCode/2022.将一维数组转变成二维数组.html)
 
 <br/>
 
