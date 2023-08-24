@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2027.转换字符串的最少操作次数</title>
+  </head>
+  <body>
+    <script>
+      // 给你一个字符串 s ，由 n 个字符组成，每个字符不是 'X' 就是 'O' 。
+      // 一次 操作 定义为从 s 中选出 三个连续字符 并将选中的每个字符都转换为 'O' 。注意，如果字符已经是 'O' ，只需要保持 不变 。
+      // 返回将 s 中所有字符均转换为 'O' 需要执行的 最少 操作次数。
+
+      // 提示：
+
+      // 3 <= s.length <= 1000
+      // s[i] 为 'X' 或 'O'
+      /**
+       * @param {string} s
+       * @return {number}
+       */
+      var minimumMoves = function (s) {};
+
+      // --- answer-1 ---
+
+      // 模拟 如果当前为X 那么后面2个是什么都没关系
+      var minimumMoves = function (s = '') {
+        let res = 0;
+        for (let i = 0; i < s.length; i++) {
+          if (s[i] === 'X') {
+            res += 1;
+            i += 2;
+          }
+        }
+        return res;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var s = 'XXX',
+        result = 1;
+
+      var s = 'XXOX',
+        result = 2;
+
+      var s = 'OOOO',
+        result = 0;
+
+      console.log('s = ', s);
+      console.log('result = ', result);
+      console.log('minimumMoves = ', minimumMoves(s));
+    </script>
+  </body>
+</html>
