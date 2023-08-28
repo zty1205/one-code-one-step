@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2032.至少在两个数组中出现的值</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * 2032.至少在两个数组中出现的值
+       */
+
+      //  给你三个整数数组 nums1、nums2 和 nums3 ，请你构造并返回一个 元素各不相同的 数组，且由 至少 在 两个 数组中出现的所有值组成。数组中的元素可以按 任意 顺序排列。
+
+      /**
+       * @param {number[]} nums1
+       * @param {number[]} nums2
+       * @param {number[]} nums3
+       * @return {number[]}
+       */
+      var twoOutOfThree = function (nums1, nums2, nums3) {};
+
+      // --- answer-1 ---
+
+      // hash map
+      function buildMap(arr = []) {
+        return arr.reduce((map, cur) => {
+          map.set(cur, 1);
+          return map;
+        }, new Map());
+      }
+      // 如果再多可以使用数组
+      function having(nums = [], map1 = new Map(), map2 = new Map()) {
+        return nums.filter((x) => map1.has(x) || map2.has(x));
+      }
+      var twoOutOfThree = function (nums1 = [], nums2 = [], nums3 = []) {
+        const n1 = buildMap(nums1);
+        const n2 = buildMap(nums2);
+        const n3 = buildMap(nums3);
+        const h1 = having(nums1, n2, n3);
+        const h2 = having(nums2, n1, n3);
+        const h3 = having(nums3, n1, n2);
+        return [...new Set(h1.concat(h2).concat(h3))];
+        // return h1.concat(h2).concat(h3);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 一个整数的最低三个二进制位来标记某一个数在哪几个数组中，
+      // 111 表示该数在对应的数组中的，反之 000 表示不在。
+      // 最后我们只需要判断每一个数对应的标记数字中二进制位个数是否大于 111 即可
+      // | 按位或
+      var twoOutOfThree = function (nums1, nums2, nums3) {
+        const map = new Map();
+        for (const i of nums1) {
+          map.set(i, 1); // 001
+        }
+        for (const i of nums2) {
+          map.set(i, (map.get(i) || 0) | 2); // 010
+        }
+        for (const i of nums3) {
+          map.set(i, (map.get(i) || 0) | 4); // 111
+        }
+        const res = [];
+        for (const [k, v] of map.entries()) {
+          if ((v & (v - 1)) !== 0) {
+            res.push(k);
+          }
+        }
+        return res;
+      };
+
+      // --- answer-2 ---
+
+      var nums1 = [1, 1, 3, 2],
+        nums2 = [2, 3],
+        nums3 = [3];
+      var result = [3, 2];
+
+      var nums1 = [3, 1],
+        nums2 = [2, 3],
+        nums3 = [1, 2];
+      var result = [2, 3, 1];
+
+      var nums1 = [1, 2, 2],
+        nums2 = [4, 3, 3],
+        nums3 = [5];
+      var result = [];
+
+      console.log('nums1 = ', nums1);
+      console.log('nums2 = ', nums2);
+      console.log('nums3 = ', nums3);
+      console.log('result = ', result);
+      console.log('minimumMoves = ', twoOutOfThree(nums1, nums2, nums3));
+    </script>
+  </body>
+</html>

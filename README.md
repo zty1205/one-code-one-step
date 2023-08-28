@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (494 道)
+## 三、LeetCode (495 道)
 
 <br/>
 
@@ -638,6 +638,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2016.增量元素之间的最大差值](./leetCode/2016.增量元素之间的最大差值.html)
 - [2022.将一维数组转变成二维数组.html](./leetCode/2022.将一维数组转变成二维数组.html)
 - [2027.转换字符串的最少操作次数.html](./leetCode/2027.转换字符串的最少操作次数.html)
+- [2032.至少在两个数组中出现的值.html](./leetCode/2032.至少在两个数组中出现的值.html)
 
 <br/>
 
