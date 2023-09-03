@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (495 道)
+## 三、LeetCode (496 道)
 
 <br/>
 
@@ -639,6 +639,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2022.将一维数组转变成二维数组.html](./leetCode/2022.将一维数组转变成二维数组.html)
 - [2027.转换字符串的最少操作次数.html](./leetCode/2027.转换字符串的最少操作次数.html)
 - [2032.至少在两个数组中出现的值.html](./leetCode/2032.至少在两个数组中出现的值.html)
+- [2042.检查句子中的数字是否递增.html](./leetCode/2042.检查句子中的数字是否递增.html)
 
 <br/>
 
