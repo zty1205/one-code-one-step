@@ -1,7 +1,7 @@
 const open = require('open');
 const inquiry = require('./inquirer');
 const buildByName = require('./buildByName');
-const { buildByUrl } = require('./buildByUrl');
+const { buildByUrl } = require('./buildByUrl2');
 const { buildGitDelploy, getNPMBuildParams } = require('./util');
 const Log = require('./log');
 
