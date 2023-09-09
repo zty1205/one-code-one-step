@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (497 道)
+## 三、LeetCode (498 道)
 
 <br/>
 
@@ -641,6 +641,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2032.至少在两个数组中出现的值.html](./leetCode/2032.至少在两个数组中出现的值.html)
 - [2042.检查句子中的数字是否递增.html](./leetCode/2042.检查句子中的数字是否递增.html)
 - [2047.句子中的有效单词数.html](./leetCode/2047.句子中的有效单词数.html)
+- [2053.数组中第 K 个独一无二的字符串.html](./leetCode/2053.数组中第K个独一无二的字符串.html)
 
 <br/>
 
