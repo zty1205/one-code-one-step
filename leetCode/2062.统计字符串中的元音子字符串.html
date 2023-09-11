@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2062. 统计字符串中的元音子字符串</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/count-vowel-substrings-of-a-string/
+
+      // 子字符串 是字符串中的一个连续（非空）的字符序列。
+      // 元音子字符串 是 仅 由元音（'a'、'e'、'i'、'o' 和 'u'）组成的一个子字符串，且必须包含 全部五种 元音。
+      // 给你一个字符串 word ，统计并返回 word 中 元音子字符串的数目 。
+      //
+      // 提示：
+      // 1 <= word.length <= 100
+      // word 仅由小写英文字母组成
+
+      /**
+       * @param {string} word
+       * @return {number}
+       */
+      var countVowelSubstrings = function (word) {};
+
+      // --- answer-1 ---
+
+      // 找出连续的元音字符串，同时判断
+
+      var countVowelSubstrings = function (word = '') {
+        const length = word.length;
+        const vowels = ['a', 'e', 'i', 'o', 'u'];
+        const vLength = vowels.length;
+
+        if (length < vLength) return 0;
+
+        const map = new Map(vowels.map((x) => [x, 0]));
+
+        let start = 0;
+        let end = 0;
+        let result = 0;
+        let count = 0;
+        let wd = '';
+
+        function isVowel(ch = '') {
+          return map.has(ch);
+        }
+
+        function calc() {
+          return [...map.values()].reduce((pre, cur) => (pre += cur), 0);
+        }
+
+        function reset() {
+          count = 0;
+          wd = '';
+          for (let ch of vowels) {
+            map.set(ch, 0);
+          }
+        }
+
+        while (end < length) {
+          while (start < length && !isVowel(word[start])) {
+            start++;
+          }
+          end = start;
+          while (end < length && isVowel(word[end])) {
+            wd += word[end];
+            count += 1;
+            map.set(word[end], 1);
+            end++;
+          }
+          if (count >= vLength) {
+            // 连续的元音字母字符串
+            // 这里可能有更好的解法
+            result += countVowelSubstrings1(wd);
+          }
+          reset();
+          start = end;
+        }
+        return result;
+      };
+
+      function equals(s1 = new Set(), s2 = new Set()) {
+        if (s1.size !== s2.size) return false;
+        return [...s1].sort().join() === [...s2].sort().join();
+      }
+
+      // 这个本身是一个解法
+      // 直接双层循环
+      var countVowelSubstrings1 = function (word = '') {
+        const length = word.length;
+        const vowels = ['a', 'e', 'i', 'o', 'u'];
+
+        if (length < vowels.length) return 0;
+
+        const s1 = new Set(vowels);
+        let result = 0;
+        for (let i = 0; i < length; i++) {
+          const s2 = new Set();
+          for (let j = i; j < length; j++) {
+            s2.add(word[j]);
+            if (equals(s1, s2)) {
+              result += 1;
+            }
+          }
+        }
+        return result;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var word = 'aeiouu';
+      var result = 2;
+      // 解释：下面列出 word 中的元音子字符串（斜体加粗部分）：
+
+      var word = 'unicornarihan';
+      var result = 0;
+      // 解释：word 中不含 5 种元音，所以也不会存在元音子字符串。
+
+      var word = 'cuaieuouac';
+      var result = 7;
+      // 解释：下面列出 word 中的元音子字符串（斜体加粗部分）：
+
+      var word = 'bbaeixoubb';
+      var result = 0;
+      // 解释：所有包含全部五种元音的子字符串都含有辅音，所以不存在元音子字符串。
+
+      console.log('word = ', word);
+      console.log('result = ', result);
+      console.log('countVowelSubstrings = ', countVowelSubstrings(word));
+    </script>
+  </body>
+</html>

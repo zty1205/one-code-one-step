@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (499 道)
+## 三、LeetCode (500 道)
 
 <br/>
 
@@ -643,6 +643,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2047.句子中的有效单词数.html](./leetCode/2047.句子中的有效单词数.html)
 - [2053.数组中第 K 个独一无二的字符串.html](./leetCode/2053.数组中第K个独一无二的字符串.html)
 - [2057.值相等的最小索引.html](./leetCode/2057.值相等的最小索引.html)
+- [2062.统计字符串中的元音子字符串.html](./leetCode/2062.统计字符串中的元音子字符串.html)
 
 <br/>
 
