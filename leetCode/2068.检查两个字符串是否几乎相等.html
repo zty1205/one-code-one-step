@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2068. 检查两个字符串是否几乎相等</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/check-whether-two-strings-are-almost-equivalent/
+
+      // 如果两个字符串 word1 和 word2 中从 'a' 到 'z' 每一个字母出现频率之差都 不超过 3 ，那么我们称这两个字符串 word1 和 word2 几乎相等 。
+      // 给你两个长度都为 n 的字符串 word1 和 word2 ，如果 word1 和 word2 几乎相等 ，请你返回 true ，否则返回 false 。
+      // 一个字母 x 的出现 频率 指的是它在字符串中出现的次数。
+      //
+      // 提示：
+      // n == word1.length == word2.length
+      // 1 <= n <= 100
+      // word1 和 word2 都只包含小写英文字母。
+
+      /**
+       * @param {string} word1
+       * @param {string} word2
+       * @return {boolean}
+       */
+      var checkAlmostEquivalent = function (word1, word2) {};
+
+      // --- answer-1 ---
+
+      // 计数
+      var checkAlmostEquivalent = function (word1 = '', word2 = '') {
+        const arr1 = new Array(26).fill(0);
+        const arr2 = new Array(26).fill(0);
+        const aCode = 'a'.charCodeAt();
+        for (let ch of word1) {
+          arr1[ch.charCodeAt() - aCode] += 1;
+        }
+        for (let ch of word2) {
+          arr2[ch.charCodeAt() - aCode] += 1;
+        }
+        console.log(arr1);
+        console.log(arr2);
+        for (let i = 0; i < 26; i++) {
+          if (Math.abs(arr1[i] - arr2[i]) > 3) {
+            return false;
+          }
+        }
+        return true;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 优化空间复杂度
+      var checkAlmostEquivalent = function (word1 = '', word2 = '') {
+        const count = new Array(26).fill(0);
+        const aCode = 'a'.charCodeAt();
+        for (let ch of word1) {
+          count[ch.charCodeAt() - aCode] += 1;
+        }
+        for (let ch of word2) {
+          count[ch.charCodeAt() - aCode] -= 1;
+        }
+        return count.every((n) => Math.abs(n) <= 3);
+      };
+
+      // --- answer-2 ---
+
+      var word1 = 'aaaa',
+        word2 = 'bccb';
+      var result = false;
+      // 解释：字符串 "aaaa" 中有 4 个 'a' ，但是 "bccb" 中有 0 个 'a' 。
+
+      var word1 = 'abcdeef',
+        word2 = 'abaaacc';
+      var result = true;
+      // 解释：word1 和 word2 中每个字母出现频率之差至多为 3 ：
+
+      // var word1 = "cccddabba", word2 = "babababab";
+      // var result = true;
+      // 解释：word1 和 word2 中每个字母出现频率之差至多为 3 ：
+
+      console.log('word1 = ', word1);
+      console.log('word2 = ', word2);
+      console.log('result = ', result);
+      console.log('checkAlmostEquivalent = ', checkAlmostEquivalent(word1, word2));
+    </script>
+  </body>
+</html>
