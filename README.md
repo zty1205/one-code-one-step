@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (502 道)
+## 三、LeetCode (503 道)
 
 <br/>
 
@@ -646,6 +646,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2062.统计字符串中的元音子字符串.html](./leetCode/2062.统计字符串中的元音子字符串.html)
 - [2068.检查两个字符串是否几乎相等.html](./leetCode/2068.检查两个字符串是否几乎相等.html)
 - [2073.买票需要的时间.html](./leetCode/2073.买票需要的时间.html)
+- [2078.两栋颜色不同且距离最远的房子.html](./leetCode/2078.两栋颜色不同且距离最远的房子.html)
 
 <br/>
 
