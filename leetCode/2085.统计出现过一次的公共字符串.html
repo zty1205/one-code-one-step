@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2085. 统计出现过一次的公共字符串</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/count-common-words-with-one-occurrence/
+
+      // 给你两个字符串数组 words1 和 words2 ，请你返回在两个字符串数组中 都恰好出现一次 的字符串的数目。
+      //
+      // 提示：
+      // 1 <= words1.length, words2.length <= 1000
+      // 1 <= words1[i].length, words2[j].length <= 30
+      // words1[i] 和 words2[j] 都只包含小写英文字母。
+
+      /**
+       * @param {string[]} words1
+       * @param {string[]} words2
+       * @return {number}
+       */
+      var countWords = function (words1, words2) {};
+
+      // --- answer-1 ---
+
+      function countMap(words = []) {
+        return words.reduce((pre, cur) => {
+          pre.set(cur, (pre.get(cur) || 0) + 1);
+          return pre;
+        }, new Map());
+      }
+      // 计数
+      var countWords = function (words1 = [], words2 = []) {
+        const m1 = countMap(words1);
+        const m2 = countMap(words2);
+        let result = 0;
+        for (let wd of words1) {
+          if (m1.get(wd) === 1 && m2.get(wd) === 1) {
+            result += 1;
+          }
+        }
+        return result;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var words1 = ['leetcode', 'is', 'amazing', 'as', 'is'],
+        words2 = ['amazing', 'leetcode', 'is'];
+      var result = 2;
+      // 解释：
+
+      var words1 = ['b', 'bb', 'bbb'],
+        words2 = ['a', 'aa', 'aaa'];
+      var result = 0;
+      // 解释：没有字符串在两个数组中都恰好出现一次。
+
+      var words1 = ['a', 'ab'],
+        words2 = ['a', 'a', 'a', 'ab'];
+      var result = 1;
+      // 解释：唯一在两个数组中都出现一次的字符串是 "ab" 。
+
+      console.log('words1 = ', words1);
+      console.log('words2 = ', words2);
+      console.log('result = ', result);
+      console.log('countWords = ', countWords(words1, words2));
+    </script>
+  </body>
+</html>
