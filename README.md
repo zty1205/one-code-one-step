@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (504 道)
+## 三、LeetCode (505 道)
 
 <br/>
 
@@ -648,6 +648,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2073.买票需要的时间.html](./leetCode/2073.买票需要的时间.html)
 - [2078.两栋颜色不同且距离最远的房子.html](./leetCode/2078.两栋颜色不同且距离最远的房子.html)
 - [2085.统计出现过一次的公共字符串.html](./leetCode/2085.统计出现过一次的公共字符串.html)
+- [2089.找出数组排序后的目标下标.html](./leetCode/2089.找出数组排序后的目标下标.html)
 
 <br/>
 

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2089. 找出数组排序后的目标下标</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/find-target-indices-after-sorting-array/
+
+      // 给你一个下标从 0 开始的整数数组 nums 以及一个目标元素 target 。
+      // 目标下标 是一个满足 nums[i] == target 的下标 i 。
+      // 将 nums 按 非递减 顺序排序后，返回由 nums 中目标下标组成的列表。如果不存在目标下标，返回一个 空 列表。返回的列表必须按 递增 顺序排列。
+      //
+      // 提示：
+      // 1 <= nums.length <= 100
+      // 1 <= nums[i], target <= 100
+
+      /**
+       * @param {number[]} nums
+       * @param {number} target
+       * @return {number[]}
+       */
+      var targetIndices = function (nums, target) {};
+
+      // --- answer-1 ---
+
+      // 排序后 获取下标
+      var targetIndices = function (nums = [], target = 1) {
+        nums.sort((a, b) => a - b);
+        const result = [];
+        for (let i = 0; i < nums.length; i++) {
+          const n = nums[i];
+          if (n > target) {
+            return result;
+          }
+          if (n === target) {
+            result.push(i);
+          }
+        }
+        return result;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 统计数量
+      var targetIndices = function (nums = [], target = 1) {
+        let low = 0;
+        let equal = 0;
+        for (let n of nums) {
+          if (n === target) {
+            equal += 1;
+          }
+          if (n < target) {
+            low += 1;
+          }
+        }
+        return Array.from({ length: equal }, (v, k) => low + k);
+      };
+
+      // --- answer-2 ---
+
+      var nums = [1, 2, 5, 2, 3],
+        target = 2;
+      var result = [1, 2];
+      // 解释：排序后，nums 变为 [1,2,2,3,5] 。
+
+      var nums = [1, 2, 5, 2, 3],
+        target = 3;
+      var result = [3];
+      // 解释：排序后，nums 变为 [1,2,2,3,5] 。
+
+      var nums = [1, 2, 5, 2, 3],
+        target = 5;
+      var result = [4];
+      // 解释：排序后，nums 变为 [1,2,2,3,5] 。
+
+      // var nums = [1, 2, 5, 2, 3],
+      //   target = 4;
+      // var result = [];
+      // 解释：nums 中不含值为 4 的元素。
+
+      console.log('nums = ', nums);
+      console.log('target = ', target);
+      console.log('result = ', result);
+      console.log('targetIndices = ', targetIndices(nums, target));
+    </script>
+  </body>
+</html>
