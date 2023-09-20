@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2099. 找到和最大的长度为 K 的子序列</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/find-subsequence-of-length-k-with-the-largest-sum/
+
+      // 给你一个整数数组 nums 和一个整数 k 。你需要找到 nums 中长度为 k 的 子序列 ，且这个子序列的 和最大 。
+      // 请你返回 任意 一个长度为 k 的整数子序列。
+      // 子序列 定义为从一个数组里删除一些元素后，不改变剩下元素的顺序得到的数组。
+      //
+      // 提示：
+      // 1 <= nums.length <= 1000
+      // -105 <= nums[i] <= 105
+      // 1 <= k <= nums.length
+
+      /**
+       * @param {number[]} nums
+       * @param {number} k
+       * @return {number[]}
+       */
+      var maxSubsequence = function (nums, k) {};
+
+      // --- answer-1 ---
+
+      // 构造辅助对象， 排序
+      // 先比较大小 再比较下标
+      var maxSubsequence = function (nums = [], k = 1) {
+        return nums
+          .map((n, i) => ({ n, i }))
+          .sort((a, b) => b.n - a.n)
+          .slice(0, k)
+          .sort((a, b) => a.i - b.i)
+          .map((x) => x.n);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      // var nums = [2,1,3,3], k = 2;
+      // var result = [3,3];
+      // 解释：
+
+      var nums = [-1, -2, 3, 4],
+        k = 3;
+      var result = [-1, 3, 4];
+      // 解释：
+
+      // var nums = [3,4,3,3], k = 2;
+      // var result = [3,4];
+      // 解释：
+
+      console.log('nums = ', nums);
+      console.log('k = ', k);
+      console.log('result = ', result);
+      console.log('maxSubsequence = ', maxSubsequence(nums, k));
+    </script>
+  </body>
+</html>
