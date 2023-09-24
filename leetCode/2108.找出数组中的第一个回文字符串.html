@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2108. 找出数组中的第一个回文字符串</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/find-first-palindromic-string-in-the-array/
+
+      // 给你一个字符串数组 words ，找出并返回数组中的 第一个回文字符串 。如果不存在满足要求的字符串，返回一个 空字符串 "" 。
+      // 回文字符串 的定义为：如果一个字符串正着读和反着读一样，那么该字符串就是一个 回文字符串 。
+      //
+      // 提示：
+      // 1 <= words.length <= 100
+      // 1 <= words[i].length <= 100
+      // words[i] 仅由小写英文字母组成
+
+      /**
+       * @param {string[]} words
+       * @return {string}
+       */
+      var firstPalindrome = function (words) {};
+
+      // --- answer-1 ---
+
+      var isPalindrome = function (s = '') {
+        let start = 0;
+        let end = s.length - 1;
+        while (start < end) {
+          if (s[start] !== s[end]) {
+            return false;
+          }
+          start++;
+          end--;
+        }
+        return true;
+      };
+
+      // 循环判断回文数
+      var firstPalindrome = function (words = []) {
+        for (let word of words) {
+          if (isPalindrome(word)) {
+            return word;
+          }
+        }
+        return '';
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var words = ['abc', 'car', 'ada', 'racecar', 'cool'];
+      var result = 'ada';
+      // 解释：第一个回文字符串是 "ada" 。
+
+      var words = ['notapalindrome', 'racecar'];
+      var result = 'racecar';
+      // 解释：第一个也是唯一一个回文字符串是 "racecar" 。
+
+      var words = ['def', 'ghi'];
+      var result = '';
+      // 解释：不存在回文字符串，所以返回一个空字符串。
+
+      console.log('words = ', words);
+      console.log('result = ', result);
+      console.log('firstPalindrome = ', firstPalindrome(words));
+    </script>
+  </body>
+</html>
