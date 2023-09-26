@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2114. 句子中的最多单词数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/maximum-number-of-words-found-in-sentences/
+
+      // 一个 句子 由一些 单词 以及它们之间的单个空格组成，句子的开头和结尾不会有多余空格。
+      // 给你一个字符串数组 sentences ，其中 sentences[i] 表示单个 句子 。
+      // 请你返回单个句子里 单词的最多数目 。
+      //
+      // 提示：
+      // 1 <= sentences.length <= 100
+      // 1 <= sentences[i].length <= 100
+      // sentences[i] 只包含小写英文字母和 ' ' 。
+      // sentences[i] 的开头和结尾都没有空格。
+      // sentences[i] 中所有单词由单个空格隔开。
+
+      /**
+       * @param {string[]} sentences
+       * @return {number}
+       */
+      var mostWordsFound = function (sentences) {};
+
+      // --- answer-1 ---
+
+      var mostWordsFound = function (sentences = []) {
+        return Math.max.apply(
+          Math,
+          sentences.map((x) => x.split(' ').length)
+        );
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var sentences = ['alice and bob love leetcode', 'i think so too', 'this is great thanks very much'];
+      var result = 6;
+      // 解释：
+
+      // var sentences = ["please wait", "continue to fight", "continue to win"];
+      // var result = 3;
+      // 解释：可能有多个句子有相同单词数。
+
+      console.log('sentences = ', sentences);
+      console.log('result = ', result);
+      console.log('mostWordsFound = ', mostWordsFound(sentences));
+    </script>
+  </body>
+</html>
