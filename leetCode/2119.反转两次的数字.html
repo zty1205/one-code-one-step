@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2119. 反转两次的数字</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/a-number-after-a-double-reversal/
+
+      // 反转 一个整数意味着倒置它的所有位。
+      //
+      // 提示：
+      // 例如，反转 2021 得到 1202 。反转 12300 得到 321 ，不保留前导零 。
+      // 给你一个整数 num ，反转 num 得到 reversed1 ，接着反转 reversed1 得到 reversed2 。如果 reversed2 等于 num ，返回 true ；否则，返回 false 。
+      //
+      // 提示：
+      // 0 <= num <= 106
+
+      /**
+       * @param {number} num
+       * @return {boolean}
+       */
+      var isSameAfterReversals = function (num) {};
+
+      // --- answer-1 ---
+
+      // 有后导0 就会在第一次倒置改变
+      var isSameAfterReversals = function (num = 0) {
+        if (num === 0) return true;
+        return num % 10 !== 0;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var num = 526;
+      var result = true;
+      // 解释：反转 num 得到 625 ，接着反转 625 得到 526 ，等于 num 。
+
+      var num = 1800;
+      var result = false;
+      // 解释：反转 num 得到 81 ，接着反转 81 得到 18 ，不等于 num 。
+
+      var num = 0;
+      var result = true;
+      // 解释：反转 num 得到 0 ，接着反转 0 得到 0 ，等于 num 。
+
+      console.log('num = ', num);
+      console.log('result = ', result);
+      console.log('isSameAfterReversals = ', isSameAfterReversals(num));
+    </script>
+  </body>
+</html>
