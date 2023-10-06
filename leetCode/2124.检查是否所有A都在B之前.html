@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2124. 检查是否所有 A 都在 B 之前</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/check-if-all-as-appears-before-all-bs/
+
+      // 给你一个 仅 由字符 'a' 和 'b' 组成的字符串  s 。如果字符串中 每个 'a' 都出现在 每个 'b' 之前，返回 true ；否则，返回 false 。
+      //
+      // 提示：
+      // 1 <= s.length <= 100
+      // s[i] 为 'a' 或 'b'
+
+      /**
+       * @param {string} s
+       * @return {boolean}
+       */
+      var checkString = function (s) {};
+
+      // --- answer-1 ---
+
+      // 即第一个b后面不能有a
+      var checkString = function (s = '') {
+        let hasB = false;
+        for (let ch of s) {
+          if (ch === 'a') {
+            if (hasB) return false;
+          } else {
+            hasB = true;
+          }
+        }
+        return true;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 查找ba
+      var checkString = function (s = '') {
+        return s.indexOf('ba') === '-1';
+      };
+
+      // --- answer-2 ---
+
+      var s = 'aaabbb';
+      var result = true;
+      // 解释：
+
+      var s = 'abab';
+      var result = false;
+      // 解释：
+
+      var s = 'bbb';
+      var result = true;
+      // 解释：
+
+      console.log('s = ', s);
+      console.log('result = ', result);
+      console.log('checkString = ', checkString(s));
+    </script>
+  </body>
+</html>
