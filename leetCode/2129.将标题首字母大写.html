@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2129. 将标题首字母大写</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/capitalize-the-title/
+
+      // 给你一个字符串 title ，它由单个空格连接一个或多个单词组成，每个单词都只包含英文字母。请你按以下规则将每个单词的首字母 大写 ：
+      //
+      // 提示：
+      // 如果单词的长度为 1 或者 2 ，所有字母变成小写。
+      // 否则，将单词首字母大写，剩余字母变成小写。
+      // 请你返回 大写后 的 title 。
+      //
+      // 提示：
+      // 1 <= title.length <= 100
+      // title 由单个空格隔开的单词组成，且不含有任何前导或后缀空格。
+      // 每个单词由大写和小写英文字母组成，且都是 非空 的。
+
+      /**
+       * @param {string} title
+       * @return {string}
+       */
+      var capitalizeTitle = function (title) {};
+
+      // --- answer-1 ---
+
+      function capitalize(str = '', cap = false) {
+        let res = str.toLowerCase();
+        if (cap) {
+          return res[0].toUpperCase() + res.slice(1);
+        }
+        return res;
+      }
+      // 拆成数组操作
+      var capitalizeTitle = function (title = '') {
+        return title
+          .split(' ')
+          .map((x) => {
+            return capitalize(x, x.length > 2);
+          })
+          .join(' ');
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var title = 'capiTalIze tHe titLe';
+      var result = 'Capitalize The Title';
+      // 解释：
+
+      var title = 'First leTTeR of EACH Word';
+      var result = 'First Letter of Each Word';
+      // 解释：
+
+      var title = 'i lOve leetcode';
+      var result = 'i Love Leetcode';
+      // 解释：
+
+      console.log('title = ', title);
+      console.log('result = ', result);
+      console.log('capitalizeTitle = ', capitalizeTitle(title));
+    </script>
+  </body>
+</html>

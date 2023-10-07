@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (511 道)
+## 三、LeetCode (512 道)
 
 <br/>
 
@@ -655,6 +655,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2114.句子中的最多单词数.html](./leetCode/2114.句子中的最多单词数.html)
 - [2119.反转两次的数字.html](./leetCode/2119.反转两次的数字.html)
 - [2124.检查是否所有 A 都在 B 之前.html](./leetCode/2124.检查是否所有A都在B之前.html)
+- [2129.将标题首字母大写.html](./leetCode/2129.将标题首字母大写.html)
 
 <br/>
 
