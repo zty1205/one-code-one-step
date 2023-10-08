@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2133. 检查是否每一行每一列都包含全部整数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/check-if-every-row-and-column-contains-all-numbers/
+
+      // 对一个大小为 n x n 的矩阵而言，如果其每一行和每一列都包含从 1 到 n 的 全部 整数（含 1 和 n），则认为该矩阵是一个 有效 矩阵。
+      // 给你一个大小为 n x n 的整数矩阵 matrix ，请你判断矩阵是否为一个有效矩阵：如果是，返回 true ；否则，返回 false 。
+      //
+      // 提示：
+      // n == matrix.length == matrix[i].length
+      // 1 <= n <= 100
+      // 1 <= matrix[i][j] <= n
+
+      /**
+       * @param {number[][]} matrix
+       * @return {boolean}
+       */
+      var checkValid = function (matrix) {};
+
+      // --- answer-1 ---
+
+      // 由于限制了数的大小 所以只需要判断数字不能有重复即可
+      // hash表判断不能重复
+      var checkValid = function (matrix = [[]]) {
+        const n = matrix.length;
+        const iMap = Array.from({ length: n }, () => new Map());
+        const jMap = Array.from({ length: n }, () => new Map());
+        for (let i = 0; i < n; i++) {
+          for (let j = 0; j < n; j++) {
+            const map1 = iMap[i];
+            const map2 = jMap[j];
+            const num = matrix[i][j];
+            if (map1.has(num)) return false;
+            map1.set(num, true);
+            if (map2.has(num)) return false;
+            map2.set(num, true);
+          }
+        }
+        console.log('imap = ', iMap);
+        console.log('jmap = ', jMap);
+        return true;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var matrix = [
+        [1, 2, 3],
+        [3, 1, 2],
+        [2, 3, 1]
+      ];
+      var result = true;
+      // 解释：在此例中，n = 3 ，每一行和每一列都包含数字 1、2、3 。
+
+      var matrix = [
+        [1, 1, 1],
+        [1, 2, 3],
+        [1, 2, 3]
+      ];
+      var result = false;
+      // 解释：在此例中，n = 3 ，但第一行和第一列不包含数字 2 和 3 。
+
+      console.log('matrix = ', matrix);
+      console.log('result = ', result);
+      console.log('checkValid = ', checkValid(matrix));
+    </script>
+  </body>
+</html>
