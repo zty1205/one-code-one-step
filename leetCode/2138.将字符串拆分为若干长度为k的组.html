@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2138. 将字符串拆分为若干长度为 k 的组</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/divide-a-string-into-groups-of-size-k/
+
+      // 字符串 s 可以按下述步骤划分为若干长度为 k 的组：
+      //
+      // 提示：
+      // 第一组由字符串中的前 k 个字符组成，第二组由接下来的 k 个字符串组成，依此类推。每个字符都能够成为 某一个 组的一部分。
+      // 对于最后一组，如果字符串剩下的字符 不足 k 个，需使用字符 fill 来补全这一组字符。
+      // 注意，在去除最后一个组的填充字符 fill（如果存在的话）并按顺序连接所有的组后，所得到的字符串应该是 s 。
+      // 给你一个字符串 s ，以及每组的长度 k 和一个用于填充的字符 fill ，按上述步骤处理之后，返回一个字符串数组，该数组表示 s 分组后 每个组的组成情况 。
+      //
+      // 提示：
+      // 1 <= s.length <= 100
+      // s 仅由小写英文字母组成
+      // 1 <= k <= 100
+      // fill 是一个小写英文字母
+
+      /**
+       * @param {string} s
+       * @param {number} k
+       * @param {character} fill
+       * @return {string[]}
+       */
+      var divideString = function (s, k, fill) {};
+
+      // --- answer-1 ---
+
+      // 切割
+      var divideString = function (s = '', k = 0, fill = '') {
+        const length = s.length;
+        const num = length % k;
+        if (num !== 0) {
+          for (let i = 0; i < k - num; i++) {
+            s = s + fill;
+          }
+        }
+
+        const result = [];
+        for (let i = 0; i < s.length; i += k) {
+          result.push(s.slice(i, i + k));
+        }
+        return result;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      // var s = "abcdefghi", k = 3, fill = "x";
+      // var result = ["abc","def","ghi"];
+      // 解释：
+
+      var s = 'abcdefghij',
+        k = 3,
+        fill = 'x';
+      var result = ['abc', 'def', 'ghi', 'jxx'];
+      // 解释：
+
+      console.log('s = ', s);
+      console.log('k = ', k);
+      console.log('fill = ', fill);
+      console.log('result = ', result);
+      console.log('divideString = ', divideString(s, k, fill));
+    </script>
+  </body>
+</html>

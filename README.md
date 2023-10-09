@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (513 道)
+## 三、LeetCode (514 道)
 
 <br/>
 
@@ -657,6 +657,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2124.检查是否所有 A 都在 B 之前.html](./leetCode/2124.检查是否所有A都在B之前.html)
 - [2129.将标题首字母大写.html](./leetCode/2129.将标题首字母大写.html)
 - [2133.检查是否每一行每一列都包含全部整数.html](./leetCode/2133.检查是否每一行每一列都包含全部整数.html)
+- [2138.将字符串拆分为若干长度为 k 的组.html](./leetCode/2138.将字符串拆分为若干长度为k的组.html)
 
 <br/>
 
