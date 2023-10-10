@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2144. 打折购买糖果的最小开销</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/minimum-cost-of-buying-candies-with-discount/
+
+      // 一家商店正在打折销售糖果。每购买 两个 糖果，商店会 免费 送一个糖果。
+      // 免费送的糖果唯一的限制是：它的价格需要小于等于购买的两个糖果价格的 较小值 。
+      //
+      // 提示：
+      // 比方说，总共有 4 个糖果，价格分别为 1 ，2 ，3 和 4 ，一位顾客买了价格为 2 和 3 的糖果，那么他可以免费获得价格为 1 的糖果，但不能获得价格为 4 的糖果。
+      // 给你一个下标从 0 开始的整数数组 cost ，其中 cost[i] 表示第 i 个糖果的价格，请你返回获得 所有 糖果的 最小 总开销。
+      //
+      // 提示：
+      // 1 <= cost.length <= 100
+      // 1 <= cost[i] <= 100
+
+      /**
+       * @param {number[]} cost
+       * @return {number}
+       */
+      var minimumCost = function (cost) {};
+
+      // --- answer-1 ---
+
+      // 贪心 尽可能免费获取大的价格
+      var minimumCost = function (cost = []) {
+        cost.sort((a, b) => b - a);
+        let result = 0;
+        for (let i = 0; i < cost.length; i++) {
+          result += (i + 1) % 3 === 0 ? 0 : cost[i];
+        }
+        return result;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var cost = [1, 2, 3];
+      var result = 5;
+      // 解释：我们购买价格为 2 和 3 的糖果，然后免费获得价格为 1 的糖果。
+
+      var cost = [6, 5, 7, 9, 2, 2];
+      var result = 23;
+      // 解释：最小总开销购买糖果方案为：
+
+      var cost = [5, 5];
+      var result = 10;
+      // 解释：由于只有 2 个糖果，我们需要将它们都购买，而且没有免费糖果。
+
+      console.log('cost = ', cost);
+      console.log('result = ', result);
+      console.log('minimumCost = ', minimumCost(cost));
+    </script>
+  </body>
+</html>

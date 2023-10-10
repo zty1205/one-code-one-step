@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (514 道)
+## 三、LeetCode (515 道)
 
 <br/>
 
@@ -658,6 +658,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2129.将标题首字母大写.html](./leetCode/2129.将标题首字母大写.html)
 - [2133.检查是否每一行每一列都包含全部整数.html](./leetCode/2133.检查是否每一行每一列都包含全部整数.html)
 - [2138.将字符串拆分为若干长度为 k 的组.html](./leetCode/2138.将字符串拆分为若干长度为k的组.html)
+- [2144.打折购买糖果的最小开销.html](./leetCode/2144.打折购买糖果的最小开销.html)
 
 <br/>
 
