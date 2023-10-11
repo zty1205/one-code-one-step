@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2154. 将找到的值乘以 2</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/keep-multiplying-found-values-by-two/
+
+      // 给你一个整数数组 nums ，另给你一个整数 original ，这是需要在 nums 中搜索的第一个数字。
+      // 接下来，你需要按下述步骤操作：
+      //
+      // 提示：
+      // 如果在 nums 中找到 original ，将 original 乘以 2 ，得到新 original（即，令 original = 2 * original）。
+      // 否则，停止这一过程。
+      // 只要能在数组中找到新 original ，就对新 original 继续 重复 这一过程。
+      // 返回 original 的 最终 值。
+      //
+      // 提示：
+      // 1 <= nums.length <= 1000
+      // 1 <= nums[i], original <= 1000
+
+      /**
+       * @param {number[]} nums
+       * @param {number} original
+       * @return {number}
+       */
+      var findFinalValue = function (nums, original) {};
+
+      // --- answer-1 ---
+
+      // hash散列
+      var findFinalValue = function (nums = [], original = 1) {
+        const map = nums.reduce((mp, cur) => {
+          mp.set(cur, 1);
+          return mp;
+        }, new Map());
+        while (map.has(original)) {
+          original *= 2;
+        }
+        return original;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var nums = [5, 3, 6, 1, 12],
+        original = 3;
+      var result = 24;
+      // 解释：
+
+      var nums = [2, 7, 9],
+        original = 4;
+      var result = 4;
+      // 解释：
+
+      console.log('nums = ', nums);
+      console.log('original = ', original);
+      console.log('result = ', result);
+      console.log('findFinalValue = ', findFinalValue(nums, original));
+    </script>
+  </body>
+</html>
