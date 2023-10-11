@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2148. 元素计数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/count-elements-with-strictly-smaller-and-greater-elements/
+
+      // 给你一个整数数组 nums ，统计并返回在 nums 中同时至少具有一个严格较小元素和一个严格较大元素的元素数目。
+      //
+      // 提示：
+      // 1 <= nums.length <= 100
+      // -105 <= nums[i] <= 105
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var countElements = function (nums) {};
+
+      // --- answer-1 ---
+
+      var countElements = function (nums) {
+        const min = Math.min.apply(Math, nums);
+        const max = Math.max.apply(Math, nums);
+        return nums.filter((x) => x > min && x < max).length;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      // var nums = [11,7,2,15];
+      // var result = 2;
+      // 解释：元素 7 ：严格较小元素是元素 2 ，严格较大元素是元素 11 。
+
+      // var nums = [-3,3,3,90];
+      // var result = 2;
+      // 解释：元素 3 ：严格较小元素是元素 -3 ，严格较大元素是元素 90 。
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('countElements = ', countElements(nums));
+    </script>
+  </body>
+</html>
