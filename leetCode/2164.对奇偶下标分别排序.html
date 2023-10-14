@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2164. 对奇偶下标分别排序</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/sort-even-and-odd-indices-independently/
+
+      // 给你一个下标从 0 开始的整数数组 nums 。根据下述规则重排 nums 中的值：
+      //
+      // 提示：
+      // 按 非递增 顺序排列 nums 奇数下标 上的所有值。
+      // 举个例子，如果排序前 nums = [4,1,2,3] ，对奇数下标的值排序后变为 [4,3,2,1] 。奇数下标 1 和 3 的值按照非递增顺序重排。
+      // 按 非递减 顺序排列 nums 偶数下标 上的所有值。
+      // 举个例子，如果排序前 nums = [4,1,2,3] ，对偶数下标的值排序后变为 [2,1,4,3] 。偶数下标 0 和 2 的值按照非递减顺序重排。
+      // 返回重排 nums 的值之后形成的数组。
+      //
+      // 提示：
+      // 1 <= nums.length <= 100
+      // 1 <= nums[i] <= 100
+
+      /**
+       * @param {number[]} nums
+       * @return {number[]}
+       */
+      var sortEvenOdd = function (nums) {};
+
+      // --- answer-1 ---
+
+      // 拆分后分别排序 或者使用两次排序算法
+      var sortEvenOdd = function (nums = []) {
+        const odd = [];
+        const even = [];
+        const length = nums.length;
+        for (let i = 0; i < length; i++) {
+          if (i % 2 === 0) {
+            even.push(nums[i]);
+          } else {
+            odd.push(nums[i]);
+          }
+        }
+        odd.sort((a, b) => b - a);
+        even.sort((a, b) => a - b);
+        const result = [];
+        for (let i = 0; i < length; i++) {
+          if (i % 2 === 0) {
+            result.push(even[i / 2]);
+          } else {
+            result.push(odd[(i - 1) / 2]);
+          }
+        }
+        return result;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var nums = [4, 1, 2, 3];
+      var result = [2, 3, 4, 1];
+      // 解释：
+
+      var nums = [2, 1];
+      var result = [2, 1];
+      // 解释：
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('sortEvenOdd = ', sortEvenOdd(nums));
+    </script>
+  </body>
+</html>
