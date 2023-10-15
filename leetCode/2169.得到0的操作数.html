@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2169. 得到 0 的操作数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/count-operations-to-obtain-zero/
+
+      // 给你两个 非负 整数 num1 和 num2 。
+      // 每一步 操作 中，如果 num1 >= num2 ，你必须用 num1 减 num2 ；否则，你必须用 num2 减 num1 。
+      //
+      // 提示：
+      // 例如，num1 = 5 且 num2 = 4 ，应该用 num1 减 num2 ，因此，得到 num1 = 1 和 num2 = 4 。然而，如果 num1 = 4且 num2 = 5 ，一步操作后，得到 num1 = 4 和 num2 = 1 。
+      // 返回使 num1 = 0 或 num2 = 0 的 操作数 。
+      //
+      // 提示：
+      // 0 <= num1, num2 <= 105
+
+      /**
+       * @param {number} num1
+       * @param {number} num2
+       * @return {number}
+       */
+      var countOperations = function (num1, num2) {};
+
+      // --- answer-1 ---
+
+      // 模拟 or 辗转相除
+      var countOperations = function (num1 = 0, num2 = 0) {
+        let result = 0;
+        while (num1 !== 0 && num2 !== 0) {
+          if (num1 > num2) {
+            num1 -= num2;
+          } else {
+            num2 -= num1;
+          }
+          result += 1;
+        }
+        return result;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var num1 = 2,
+        num2 = 3;
+      var result = 3;
+      // 解释：
+
+      var num1 = 10,
+        num2 = 10;
+      var result = 1;
+      // 解释：
+
+      console.log('num1 = ', num1);
+      console.log('num2 = ', num2);
+      console.log('result = ', result);
+      console.log('countOperations = ', countOperations(num1, num2));
+    </script>
+  </body>
+</html>
