@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (520 道)
+## 三、LeetCode (521 道)
 
 <br/>
 
@@ -664,6 +664,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2160.拆分数位后四位数字的最小和.html](./leetCode/2160.拆分数位后四位数字的最小和.html)
 - [2164.对奇偶下标分别排序.html](./leetCode/2164.对奇偶下标分别排序.html)
 - [2169.得到 0 的操作数.html](./leetCode/2169.得到0的操作数.html)
+- [2176.统计数组中相等且可以被整除的数对.html](./leetCode/2176.统计数组中相等且可以被整除的数对.html)
 
 <br/>
 
