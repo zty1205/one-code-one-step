@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2185. 统计包含给定前缀的字符串</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/counting-words-with-a-given-prefix/
+
+      // 给你一个字符串数组 words 和一个字符串 pref 。
+      // 返回 words 中以 pref 作为 前缀 的字符串的数目。
+      // 字符串 s 的 前缀 就是  s 的任一前导连续字符串。
+      //
+      // 提示：
+      // 1 <= words.length <= 100
+      // 1 <= words[i].length, pref.length <= 100
+      // words[i] 和 pref 由小写英文字母组成
+
+      /**
+       * @param {string[]} words
+       * @param {string} pref
+       * @return {number}
+       */
+      var prefixCount = function (words, pref) {};
+
+      // --- answer-1 ---
+
+      // 使用原生api 或者 手动对比
+      var prefixCount = function (words = [], pref = '') {
+        return words.filter((s) => s.startsWith(pref)).length;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var words = ['pay', 'attention', 'practice', 'attend'],
+        pref = 'at';
+      var result = 2;
+      // 解释：以 "at" 作为前缀的字符串有两个，分别是："attention" 和 "attend" 。
+
+      var words = ['leetcode', 'win', 'loops', 'success'],
+        pref = 'code';
+      var result = 0;
+      // 解释：不存在以 "code" 作为前缀的字符串。
+
+      console.log('words = ', words);
+      console.log('pref = ', pref);
+      console.log('result = ', result);
+      console.log('prefixCount = ', prefixCount(words, pref));
+    </script>
+  </body>
+</html>
