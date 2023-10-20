@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2200. 找出数组中的所有 K 近邻下标</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/find-all-k-distant-indices-in-an-array/description/
+
+      // 给你一个下标从 0 开始的整数数组 nums 和两个整数 key 和 k 。K 近邻下标 是 nums 中的一个下标 i ，并满足至少存在一个下标 j 使得 |i - j| <= k 且 nums[j] == key 。
+      // 以列表形式返回按 递增顺序 排序的所有 K 近邻下标。
+      //
+      // 提示：
+      // 1 <= nums.length <= 1000
+      // 1 <= nums[i] <= 1000
+      // key 是数组 nums 中的一个整数
+      // 1 <= k <= nums.length
+
+      /**
+       * @param {number[]} nums
+       * @param {number} key
+       * @param {number} k
+       * @return {number[]}
+       */
+      var findKDistantIndices = function (nums, key, k) {};
+
+      // --- answer-1 ---
+
+      // 先找到key 在把下标放入
+      var findKDistantIndices = function (nums, key, k) {
+        const set = new Set();
+        const l = nums.length - 1;
+        nums.forEach((item, idx) => {
+          if (item === key) {
+            for (let i = Math.max(0, idx - k); i <= Math.min(idx + k, l); i++) set.add(i);
+          }
+        });
+        return [...set];
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var nums = [3, 4, 9, 1, 3, 9, 5],
+        key = 9,
+        k = 1;
+      var result = [1, 2, 3, 4, 5, 6];
+      // 解释：因此，nums[2] == key 且 nums[5] == key 。
+
+      var nums = [2, 2, 2, 2, 2],
+        key = 2,
+        k = 2;
+      var result = [0, 1, 2, 3, 4];
+      // 解释：对 nums 的所有下标 i ，总存在某个下标 j 使得 |i - j| <= k 且 nums[j] == key ，所以每个下标都是一个 K 近邻下标。
+
+      console.log('nums = ', nums);
+      console.log('key = ', key);
+      console.log('k = ', k);
+      console.log('result = ', result);
+      console.log('findKDistantIndices = ', findKDistantIndices(nums, key, k));
+    </script>
+  </body>
+</html>
