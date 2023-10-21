@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (525 道)
+## 三、LeetCode (526 道)
 
 <br/>
 
@@ -669,6 +669,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2185.统计包含给定前缀的字符串.html](./leetCode/2185.统计包含给定前缀的字符串.html)
 - [2190.数组中紧跟 key 之后出现最频繁的数字.html](./leetCode/2190.数组中紧跟key之后出现最频繁的数字.html)
 - [2200.找出数组中的所有 K 近邻下标.html](./leetCode/2200.找出数组中的所有K近邻下标.html)
+- [2206.将数组划分成相等数对.html](./leetCode/2206.将数组划分成相等数对.html)
 
 <br/>
 

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2206. 将数组划分成相等数对</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/divide-array-into-equal-pairs/
+
+      // 给你一个整数数组 nums ，它包含 2 * n 个整数。
+      // 你需要将 nums 划分成 n 个数对，满足：
+      //
+      // 提示：
+      // 每个元素 只属于一个 数对。
+      // 同一数对中的元素 相等 。
+      // 如果可以将 nums 划分成 n 个数对，请你返回 true ，否则返回 false 。
+      //
+      // 提示：
+      // nums.length == 2 * n
+      // 1 <= n <= 500
+      // 1 <= nums[i] <= 500
+
+      /**
+       * @param {number[]} nums
+       * @return {boolean}
+       */
+      var divideArray = function (nums) {};
+
+      // --- answer-1 ---
+
+      // 计数
+      var divideArray = function (nums = []) {
+        const map = nums.reduce((pre, cur) => {
+          pre.set(cur, (pre.get(cur) || 0) + 1);
+          return pre;
+        }, new Map());
+        const counts = [...map.entries()];
+        for (let item of counts) {
+          if (item[1] % 2 !== 0) {
+            return false;
+          }
+        }
+        return true;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 消消乐
+      var divideArray = function (nums) {
+        const set = new Set();
+        nums.forEach((item) => {
+          if (set.has(item)) {
+            set.delete(item);
+          } else {
+            set.add(item);
+          }
+        });
+        return set.size === 0;
+      };
+
+      // --- answer-2 ---
+
+      var nums = [3, 2, 3, 2, 2, 2];
+      var result = true;
+      // 解释：
+
+      var nums = [1, 2, 3, 4];
+      var result = false;
+      // 解释：
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('divideArray = ', divideArray(nums));
+    </script>
+  </body>
+</html>
