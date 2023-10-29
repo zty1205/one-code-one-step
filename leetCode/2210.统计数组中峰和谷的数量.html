@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2210. 统计数组中峰和谷的数量</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/count-hills-and-valleys-in-an-array/
+
+      // 给你一个下标从 0 开始的整数数组 nums 。如果两侧距 i 最近的不相等邻居的值均小于 nums[i] ，则下标 i 是 nums 中，某个峰的一部分。类似地，如果两侧距 i 最近的不相等邻居的值均大于 nums[i] ，则下标 i 是 nums 中某个谷的一部分。对于相邻下标 i 和 j ，如果 nums[i] == nums[j] ， 则认为这两下标属于 同一个 峰或谷。
+      // 注意，要使某个下标所做峰或谷的一部分，那么它左右两侧必须 都 存在不相等邻居。
+      // 返回 nums 中峰和谷的数量。
+      //
+      // 提示：
+      // 3 <= nums.length <= 100
+      // 1 <= nums[i] <= 100
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var countHillValley = function (nums) {};
+
+      // --- answer-1 ---
+
+      // 模拟 注意不相等
+      var countHillValley = function (nums = []) {
+        const length = nums.length;
+        let result = 0;
+        for (let i = 1; i < length - 1; i++) {
+          if (nums[i] === nums[i - 1]) {
+            continue;
+          }
+          let j = i + 1;
+          while (j < length && nums[j] === nums[i]) {
+            j++;
+          }
+          if (nums[i] > nums[i - 1] && nums[i] > nums[j]) {
+            result += 1;
+          }
+          if (nums[i] < nums[i - 1] && nums[i] < nums[j]) {
+            result += 1;
+          }
+        }
+        return result;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var nums = [2, 4, 1, 1, 6, 5];
+      var result = 3;
+      // 解释：
+
+      var nums = [6, 6, 5, 5, 4, 1];
+      var result = 0;
+      // 解释：
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('countHillValley = ', countHillValley(nums));
+    </script>
+  </body>
+</html>
