@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2220. 转换数字的最少位翻转次数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/minimum-bit-flips-to-convert-number/
+
+      // 一次 位翻转 定义为将数字 x 二进制中的一个位进行 翻转 操作，即将 0 变成 1 ，或者将 1 变成 0 。
+      //
+      // 提示：
+      // 比方说，x = 7 ，二进制表示为 111 ，我们可以选择任意一个位（包含没有显示的前导 0 ）并进行翻转。比方说我们可以翻转最右边一位得到 110 ，或者翻转右边起第二位得到 101 ，或者翻转右边起第五位（这一位是前导 0 ）得到 10111 等等。
+      // 给你两个整数 start 和 goal ，请你返回将 start 转变成 goal 的 最少位翻转 次数。
+      //
+      // 提示：
+      // 0 <= start, goal <= 109
+
+      /**
+       * @param {number} start
+       * @param {number} goal
+       * @return {number}
+       */
+      var minBitFlips = function (start, goal) {};
+
+      // --- answer-1 ---
+
+      // 转二进制字符串比较
+      var minBitFlips = function (start = 1, goal = 1) {
+        if (start === goal) return 0;
+        let ss = start.toString(2);
+        let sg = goal.toString(2);
+
+        console.log(ss, sg);
+
+        const max = Math.max(ss.length, sg.length);
+        ss = new Array(max - ss.length).fill(0).join('') + ss;
+        sg = new Array(max - sg.length).fill(0).join('') + sg;
+
+        console.log(ss, sg);
+        let result = 0;
+        for (let i = 0; i < max; i++) {
+          if (ss[i] !== sg[i]) {
+            result += 1;
+          }
+        }
+        return result;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 位运算 不同则需要翻转 那么就是统计异或中1的个数
+      var minBitFlips = function (start = 1, goal = 1) {
+        let result = 0;
+        let tmp = start ^ goal;
+        while (tmp) {
+          result += tmp & 1;
+          tmp >>= 1;
+        }
+        return result;
+      };
+
+      // --- answer-2 ---
+
+      // var start = 10,
+      //   goal = 7;
+      // var result = 3;
+      // 解释：10 和 7 的二进制表示分别为 1010 和 0111 。我们可以通过 3 步将 10 转变成 7 ：
+
+      var start = 3,
+        goal = 4;
+      var result = 3;
+      // 解释：3 和 4 的二进制表示分别为 011 和 100 。我们可以通过 3 步将 3 转变成 4 ：
+
+      console.log('start = ', start);
+      console.log('goal = ', goal);
+      console.log('result = ', result);
+      console.log('minBitFlips = ', minBitFlips(start, goal));
+    </script>
+  </body>
+</html>

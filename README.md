@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (528 道)
+## 三、LeetCode (529 道)
 
 <br/>
 
@@ -672,6 +672,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2206.将数组划分成相等数对.html](./leetCode/2206.将数组划分成相等数对.html)
 - [2210.统计数组中峰和谷的数量.html](./leetCode/2210.统计数组中峰和谷的数量.html)
 - [2215.找出两数组的不同.html](./leetCode/2215.找出两数组的不同.html)
+- [2220.转换数字的最少位翻转次数.html](./leetCode/2220.转换数字的最少位翻转次数.html)
 
 <br/>
 
