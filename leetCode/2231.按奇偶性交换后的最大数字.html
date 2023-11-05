@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2231. 按奇偶性交换后的最大数字</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/largest-number-after-digit-swaps-by-parity/
+
+      // 给你一个正整数 num 。你可以交换 num 中 奇偶性 相同的任意两位数字（即，都是奇数或者偶数）。
+      // 返回交换 任意 次之后 num 的 最大 可能值。
+      //
+      // 提示：
+      // 1 <= num <= 109
+
+      /**
+       * @param {number} num
+       * @return {number}
+       */
+      var largestInteger = function (num) {};
+
+      // --- answer-1 ---
+
+      // 奇偶排序
+      // Y也可以转化成字符串 - 数组然后排序
+      var largestInteger = function (num = 1) {
+        const odd = [];
+        const even = [];
+        const tmp = [];
+        while (num) {
+          const n = num % 10;
+          if (n % 2 === 1) {
+            odd.push(n);
+            tmp.push(1);
+          } else {
+            even.push(n);
+            tmp.push(2);
+          }
+          num = (num - n) / 10;
+        }
+        odd.sort((a, b) => a - b);
+        even.sort((a, b) => a - b);
+        let result = 0;
+        for (let i = tmp.length - 1; i >= 0; i--) {
+          if (tmp[i] === 1) {
+            result = result * 10 + odd.pop();
+          } else {
+            result = result * 10 + even.pop();
+          }
+        }
+        return result;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var num = 1234;
+      var result = 3412;
+      // 解释：交换数字 3 和数字 1 ，结果得到 3214 。
+
+      var num = 65875;
+      var result = 87655;
+      // 解释：交换数字 8 和数字 6 ，结果得到 85675 。
+
+      console.log('num = ', num);
+      console.log('result = ', result);
+      console.log('largestInteger = ', largestInteger(num));
+    </script>
+  </body>
+</html>
