@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2236. 判断根结点是否等于子结点之和</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/root-equals-sum-of-children/
+
+      // 给你一个 二叉树 的根结点 root，该二叉树由恰好 3 个结点组成：根结点、左子结点和右子结点。
+      // 如果根结点值等于两个子结点值之和，返回 true ，否则返回 false 。
+      //
+      // 提示：
+      // 树只包含根结点、左子结点和右子结点
+      // -100 <= Node.val <= 100
+
+      /**
+       * Definition for a binary tree node.
+       * function TreeNode(val, left, right) {
+       *     this.val = (val===undefined ? 0 : val)
+       *     this.left = (left===undefined ? null : left)
+       *     this.right = (right===undefined ? null : right)
+       * }
+       */
+      /**
+       * @param {TreeNode} root
+       * @return {boolean}
+       */
+      var checkTree = function (root) {};
+
+      // --- answer-1 ---
+
+      // 无语题目2
+      var checkTree = function (root) {
+        return root.val === root.left.val + root.right.val;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      // var root = [10,4,6];
+      // var result = true;
+      // 解释：根结点、左子结点和右子结点的值分别是 10 、4 和 6 。
+
+      // var root = [5,3,1];
+      // var result = false;
+      // 解释：根结点、左子结点和右子结点的值分别是 5 、3 和 1 。
+
+      console.log('root = ', root);
+      console.log('result = ', result);
+      console.log('checkTree = ', checkTree(root));
+    </script>
+  </body>
+</html>

@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (531 道)
+## 三、LeetCode (532 道)
 
 <br/>
 
@@ -675,6 +675,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2220.转换数字的最少位翻转次数.html](./leetCode/2220.转换数字的最少位翻转次数.html)
 - [2231.按奇偶性交换后的最大数字.html](./leetCode/2231.按奇偶性交换后的最大数字.html)
 - [2235.两整数相加.html](./leetCode/2235.两整数相加.html)
+- [2236.判断根结点是否等于子结点之和.html](./leetCode/2236.判断根结点是否等于子结点之和.html)
 
 <br/>
 
