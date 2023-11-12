@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (534 道)
+## 三、LeetCode (535 道)
 
 <br/>
 
@@ -678,6 +678,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2236.判断根结点是否等于子结点之和.html](./leetCode/2236.判断根结点是否等于子结点之和.html)
 - [2239.找到最接近 0 的数字.html](./leetCode/2239.找到最接近0的数字.html)
 - [2243.计算字符串的数字和.html](./leetCode/2243.计算字符串的数字和.html)
+- [2248.多个数组求交集.html](./leetCode/2248.多个数组求交集.html)
 
 <br/>
 

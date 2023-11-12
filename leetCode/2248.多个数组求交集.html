@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2248. 多个数组求交集</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/intersection-of-multiple-arrays/
+
+      // 给你一个二维整数数组 nums ，其中 nums[i] 是由 不同 正整数组成的一个非空数组，按 升序排列 返回一个数组，数组中的每个元素在 nums 所有数组 中都出现过。
+      //
+      // 提示：
+      // 1 <= nums.length <= 1000
+      // 1 <= sum(nums[i].length) <= 1000
+      // 1 <= nums[i][j] <= 1000
+      // nums[i] 中的所有值 互不相同
+
+      /**
+       * @param {number[][]} nums
+       * @return {number[]}
+       */
+      var intersection = function (nums) {};
+
+      // --- answer-1 ---
+
+      // 循环取交集
+      var inter = function (a1 = [], a2 = []) {
+        if (!a2.length) return a1;
+        const map = a1.reduce((pre, cur) => {
+          pre.set(cur, 1);
+          return pre;
+        }, new Map());
+        return a2.filter((x) => map.has(x));
+      };
+      var intersection = function (nums = []) {
+        let result = inter(nums[0], nums[1]);
+        for (let i = 2; i < nums.length; i++) {
+          result = inter(result, nums[i]);
+        }
+        return result.sort((a, b) => a - b);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 出现的是不同的整数 所以 数字出现的次数一定是数组的长度
+      var intersection = function (nums = []) {
+        const count = [];
+        for (const arr of nums) {
+          for (const n of arr) {
+            count[n] = (count[n] || 0) + 1;
+          }
+        }
+        const result = [];
+        const size = nums.length;
+        for (let i = 0; i < count.length; i++) {
+          if (count[i] === size) {
+            result.push(i);
+          }
+        }
+        return result;
+      };
+
+      // --- answer-2 ---
+
+      var nums = [
+        [3, 1, 2, 4, 5],
+        [1, 2, 3, 4],
+        [3, 4, 5, 6]
+      ];
+      var result = [3, 4];
+      // 解释：
+
+      var nums = [
+        [1, 2, 3],
+        [4, 5, 6]
+      ];
+      var result = [];
+      // 解释：
+
+      var nums = [[1, 2, 3]];
+      var result = [1, 2, 3];
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('intersection = ', intersection(nums));
+    </script>
+  </body>
+</html>
