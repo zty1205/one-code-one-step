@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2255. 统计是给定字符串前缀的字符串数目</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/count-prefixes-of-a-given-string/
+
+      // 给你一个字符串数组 words 和一个字符串 s ，其中 words[i] 和 s 只包含 小写英文字母 。
+      // 请你返回 words 中是字符串 s 前缀 的 字符串数目 。
+      // 一个字符串的 前缀 是出现在字符串开头的子字符串。子字符串 是一个字符串中的连续一段字符序列。
+      //
+      // 提示：
+      // 1 <= words.length <= 1000
+      // 1 <= words[i].length, s.length <= 10
+      // words[i] 和 s 只 包含小写英文字母。
+
+      /**
+       * @param {string[]} words
+       * @param {string} s
+       * @return {number}
+       */
+      var countPrefixes = function (words, s) {};
+
+      // --- answer-1 ---
+
+      // 原生api
+      var countPrefixes = function (words = [], s = '') {
+        return words.filter((str) => s.indexOf(str) === 0).length;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var words = ['a', 'b', 'c', 'ab', 'bc', 'abc'],
+        s = 'abc';
+      var result = 3;
+      // 解释：
+
+      var words = ['a', 'a'],
+        s = 'aa';
+      var result = 2;
+      // 解释：
+
+      console.log('words = ', words);
+      console.log('s = ', s);
+      console.log('result = ', result);
+      console.log('countPrefixes = ', countPrefixes(words, s));
+    </script>
+  </body>
+</html>
