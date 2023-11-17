@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2264. 字符串中最大的 3 位相同数字</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/largest-3-same-digit-number-in-string/
+
+      // 给你一个字符串 num ，表示一个大整数。如果一个整数满足下述所有条件，则认为该整数是一个 优质整数 ：
+      //
+      // 提示：
+      // 该整数是 num 的一个长度为 3 的 子字符串 。
+      // 该整数由唯一一个数字重复 3 次组成。
+      // 以字符串形式返回 最大的优质整数 。如果不存在满足要求的整数，则返回一个空字符串 "" 。
+      // 注意：
+      //
+      // 提示：
+      // 子字符串 是字符串中的一个连续字符序列。
+      // num 或优质整数中可能存在 前导零 。
+      //
+      // 提示：
+      // 3 <= num.length <= 1000
+      // num 仅由数字（0 - 9）组成
+
+      /**
+       * @param {string} num
+       * @return {string}
+       */
+      var largestGoodInteger = function (num) {};
+
+      // --- answer-1 ---
+
+      // 模拟
+      var largestGoodInteger = function (num = '') {
+        let result = '';
+        const length = num.length;
+        for (let i = 1; i < length - 1; i++) {
+          if (num[i] === num[i - 1] && num[i] === num[i + 1]) {
+            if ((result && +num[i] > +result[0]) || !result) {
+              result = num[i] + num[i] + num[i];
+            }
+          }
+        }
+        return result;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var num = '6777133339';
+      var result = '777';
+      // 解释：num 中存在两个优质整数："777" 和 "333" 。
+
+      var num = '2300019';
+      var result = '000';
+      // 解释："000" 是唯一一个优质整数。
+
+      var num = '42352338';
+      var result = '';
+      // 解释：不存在长度为 3 且仅由一个唯一数字组成的整数。因此，不存在优质整数。
+
+      console.log('num = ', num);
+      console.log('result = ', result);
+      console.log('largestGoodInteger = ', largestGoodInteger(num));
+    </script>
+  </body>
+</html>
