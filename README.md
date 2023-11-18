@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (538 道)
+## 三、LeetCode (539 道)
 
 <br/>
 
@@ -682,6 +682,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2255.统计是给定字符串前缀的字符串数目.html](./leetCode/2255.统计是给定字符串前缀的字符串数目.html)
 - [2259.移除指定数字得到的最大结果.html](./leetCode/2259.移除指定数字得到的最大结果.html)
 - [2264.字符串中最大的 3 位相同数字.html](./leetCode/2264.字符串中最大的3位相同数字.html)
+- [2269.找到一个数字的 K 美丽值.html](./leetCode/2269.找到一个数字的K美丽值.html)
 
 <br/>
 

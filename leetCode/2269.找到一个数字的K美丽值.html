@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2269. 找到一个数字的 K 美丽值</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/find-the-k-beauty-of-a-number/
+
+      // 一个整数 num 的 k 美丽值定义为 num 中符合以下条件的 子字符串 数目：
+      //
+      // 提示：
+      // 子字符串长度为 k 。
+      // 子字符串能整除 num 。
+      // 给你整数 num 和 k ，请你返回 num 的 k 美丽值。
+      // 注意：
+      //
+      // 提示：
+      // 允许有 前缀 0 。
+      // 0 不能整除任何值。
+      // 一个 子字符串 是一个字符串里的连续一段字符序列。
+      //
+      // 提示：
+      // 1 <= num <= 109
+      // 1 <= k <= num.length （将 num 视为字符串）
+
+      /**
+       * @param {number} num
+       * @param {number} k
+       * @return {number}
+       */
+      var divisorSubstrings = function (num, k) {};
+
+      // --- answer-1 ---
+
+      // 按题意截取判断
+      var divisorSubstrings = function (num = 1, k = 1) {
+        let result = 0;
+        const numStr = String(num);
+        const length = numStr.length;
+        for (let i = 0; i <= length - k; i++) {
+          const n = numStr.slice(i, i + k);
+          if (num % Number(n) === 0) {
+            result += 1;
+          }
+        }
+        return result;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var num = 240,
+        k = 2;
+      var result = 2;
+      // 解释：以下是 num 里长度为 k 的子字符串：
+
+      var num = 430043,
+        k = 2;
+      var result = 2;
+      // 解释：以下是 num 里长度为 k 的子字符串：
+
+      var num = 1000200,
+        k = 3;
+      var result = 4;
+
+      console.log('num = ', num);
+      console.log('k = ', k);
+      console.log('result = ', result);
+      console.log('divisorSubstrings = ', divisorSubstrings(num, k));
+    </script>
+  </body>
+</html>
