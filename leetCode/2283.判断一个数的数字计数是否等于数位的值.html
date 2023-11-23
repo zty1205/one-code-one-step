@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2283. 判断一个数的数字计数是否等于数位的值</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/check-if-number-has-equal-digit-count-and-digit-value/
+
+      // 给你一个下标从 0 开始长度为 n 的字符串 num ，它只包含数字。
+      // 如果对于 每个 0 <= i < n 的下标 i ，都满足数位 i 在 num 中出现了 num[i]次，那么请你返回 true ，否则返回 false 。
+      //
+      // 提示：
+      // n == num.length
+      // 1 <= n <= 10
+      // num 只包含数字。
+
+      /**
+       * @param {string} num
+       * @return {boolean}
+       */
+      var digitCount = function (num) {};
+
+      // --- answer-1 ---
+
+      // 计数
+      var digitCount = function (num = '') {
+        const map = new Map();
+        for (const ch of num) {
+          map.set(ch, (map.get(ch) || 0) + 1);
+        }
+
+        for (let i = 0; i < num.length; i++) {
+          if ((map.get(String(i)) || 0) !== +num[i]) {
+            return false;
+          }
+        }
+        return true;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var num = '1210';
+      var result = true;
+      // 解释：
+
+      var num = '030';
+      var result = false;
+      // 解释：
+
+      console.log('num = ', num);
+      console.log('result = ', result);
+      console.log('digitCount = ', digitCount(num));
+    </script>
+  </body>
+</html>
