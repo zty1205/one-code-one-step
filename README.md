@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (541 道)
+## 三、LeetCode (542 道)
 
 <br/>
 
@@ -685,6 +685,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2269.找到一个数字的 K 美丽值.html](./leetCode/2269.找到一个数字的K美丽值.html)
 - [2278.字母在字符串中的百分比.html](./leetCode/2278.字母在字符串中的百分比.html)
 - [2283.判断一个数的数字计数是否等于数位的值.html](./leetCode/2283.判断一个数的数字计数是否等于数位的值.html)
+- [2287.重排字符形成目标字符串.html](./leetCode/2287.重排字符形成目标字符串.html)
 
 <br/>
 

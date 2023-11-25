@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2287. 重排字符形成目标字符串</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/rearrange-characters-to-make-target-string/
+
+      // 给你两个下标从 0 开始的字符串 s 和 target 。你可以从 s 取出一些字符并将其重排，得到若干新的字符串。
+      // 从 s 中取出字符并重新排列，返回可以形成 target 的 最大 副本数。
+      //
+      // 提示：
+      // 1 <= s.length <= 100
+      // 1 <= target.length <= 10
+      // s 和 target 由小写英文字母组成
+
+      /**
+       * @param {string} s
+       * @param {string} target
+       * @return {number}
+       */
+      var rearrangeCharacters = function (s, target) {};
+
+      // --- answer-1 ---
+
+      var genMap = function (s = '') {
+        const map = new Map();
+        for (const ch of s) {
+          map.set(ch, (map.get(ch) || 0) + 1);
+        }
+        return map;
+      };
+
+      // 计数 求字母的整数倍的最小值
+      var rearrangeCharacters = function (s = '', target = '') {
+        const map1 = genMap(s);
+        const map2 = genMap(target);
+        const keys = map2.keys();
+        let current = keys.next();
+        let result = 999;
+        while (current && !current.done) {
+          const n = Math.floor((map1.get(current.value) || 0) / map2.get(current.value));
+          result = Math.min(result, n);
+          current = keys.next();
+        }
+        return result;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var s = 'ilovecodingonleetcode',
+        target = 'code';
+      var result = 2;
+      // 解释：
+
+      var s = 'abcba',
+        target = 'abc';
+      var result = 1;
+      // 解释：
+
+      var s = 'abbaccaddaeea',
+        target = 'aaaaa';
+      var result = 1;
+      // 解释：
+
+      console.log('s = ', s);
+      console.log('target = ', target);
+      console.log('result = ', result);
+      console.log('rearrangeCharacters = ', rearrangeCharacters(s, target));
+    </script>
+  </body>
+</html>
