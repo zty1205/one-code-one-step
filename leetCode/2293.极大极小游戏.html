@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2293. 极大极小游戏</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/min-max-game/
+
+      // 给你一个下标从 0 开始的整数数组 nums ，其长度是 2 的幂。
+      // 对 nums 执行下述算法：
+      //
+      // 提示：
+      // 设 n 等于 nums 的长度，如果 n == 1 ，终止 算法过程。否则，创建 一个新的整数数组 newNums ，新数组长度为 n / 2 ，下标从 0 开始。
+      // 对于满足 0 <= i < n / 2 的每个 偶数 下标 i ，将 newNums[i] 赋值 为 min(nums[2 * i], nums[2 * i + 1]) 。
+      // 对于满足 0 <= i < n / 2 的每个 奇数 下标 i ，将 newNums[i] 赋值 为 max(nums[2 * i], nums[2 * i + 1]) 。
+      // 用 newNums 替换 nums 。
+      // 从步骤 1 开始 重复 整个过程。
+      // 执行算法后，返回 nums 中剩下的那个数字。
+      //
+      // 提示：
+      // 1 <= nums.length <= 1024
+      // 1 <= nums[i] <= 109
+      // nums.length 是 2 的幂
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var minMaxGame = function (nums) {};
+
+      // --- answer-1 ---
+
+      // 按题意递归 也可以使用while循环
+      var minMaxGame = function (nums = []) {
+        if (nums.length <= 1) {
+          return nums[0];
+        }
+        const newNums = [];
+        for (let i = 0; i < nums.length; i += 2) {
+          const fun = (i / 2) % 2 === 0 ? Math.min : Math.max;
+          newNums.push(fun(nums[i], nums[i + 1]));
+        }
+        console.log(nums);
+        return minMaxGame(newNums);
+      };
+
+      var minMaxGame = function (nums = []) {
+        if (nums.length === 2) {
+          return Math.min(nums[0], nums[1]);
+        }
+        if (nums.length <= 1) {
+          return nums[0];
+        }
+        const newNums = [];
+        for (let i = 0; i < nums.length; i += 4) {
+          newNums.push(Math.min(nums[i], nums[i + 1]));
+          newNums.push(Math.max(nums[i + 2], nums[i + 3]));
+        }
+        console.log(nums);
+        return minMaxGame(newNums);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var nums = [1, 3, 5, 2, 4, 8, 2, 2];
+      var result = 1;
+      // 解释：重复执行算法会得到下述数组。
+
+      var nums = [3];
+      var result = 3;
+      // 解释：3 就是最后剩下的数字，返回 3 。
+
+      var nums = [70, 38, 21, 22];
+      var result = 22;
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('minMaxGame = ', minMaxGame(nums));
+    </script>
+  </body>
+</html>
