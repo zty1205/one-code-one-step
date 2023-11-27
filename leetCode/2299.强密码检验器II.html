@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2299. 强密码检验器 II</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/strong-password-checker-ii/
+
+      // 如果一个密码满足以下所有条件，我们称它是一个 强 密码：
+      //
+      // 提示：
+      // 它有至少 8 个字符。
+      // 至少包含 一个小写英文 字母。
+      // 至少包含 一个大写英文 字母。
+      // 至少包含 一个数字 。
+      // 至少包含 一个特殊字符 。特殊字符为："!@#$%^&*()-+" 中的一个。
+      // 它 不 包含 2 个连续相同的字符（比方说 "aab" 不符合该条件，但是 "aba" 符合该条件）。
+      // 给你一个字符串 password ，如果它是一个 强 密码，返回 true，否则返回 false 。
+      //
+      // 提示：
+      // 1 <= password.length <= 100
+      // password 包含字母，数字和 "!@#$%^&*()-+" 这些特殊字符。
+
+      /**
+       * @param {string} password
+       * @return {boolean}
+       */
+      var strongPasswordCheckerII = function (password) {};
+
+      // --- answer-1 ---
+
+      // 模拟 循环遍历
+      var strongPasswordCheckerII = function (password = '') {
+        const arr = password.split('');
+        const length = arr.length;
+        if (length < 8) return false;
+        let low = false;
+        let sup = false;
+        let num = false;
+        let spe = false;
+        for (let i = 0; i < length; i++) {
+          if (arr[i] === arr[i + 1]) return false;
+          const ch = arr[i];
+          if (/[a-z]/.test(ch)) {
+            low = true;
+          } else if (/[A-Z]/.test(ch)) {
+            sup = true;
+          } else if (/\d/.test(ch)) {
+            num = true;
+          } else if (/[\!@#\$%\^&\*\(\)\-\+]/.test(ch)) {
+            spe = true;
+          }
+        }
+        return low && sup && num && spe;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var password = 'IloveLe3tcode!';
+      var result = true;
+      // 解释：密码满足所有的要求，所以我们返回 true 。
+
+      var password = 'Me+You--IsMyDream';
+      var result = false;
+      // 解释：密码不包含数字，且包含 2 个连续相同的字符。所以我们返回 false 。
+
+      var password = '1aB!';
+      var result = false;
+      // 解释：密码不符合长度要求。所以我们返回 false 。
+
+      var password = 'IloveLe3tcode!aseqwedqwdfddasda';
+      var result = false;
+
+      console.log('password = ', password);
+      console.log('result = ', result);
+      console.log('strongPasswordCheckerII = ', strongPasswordCheckerII(password));
+    </script>
+  </body>
+</html>
