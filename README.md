@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (544 道)
+## 三、LeetCode (545 道)
 
 <br/>
 
@@ -688,6 +688,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2287.重排字符形成目标字符串.html](./leetCode/2287.重排字符形成目标字符串.html)
 - [2293.极大极小游戏.html](./leetCode/2293.极大极小游戏.html)
 - [2299.强密码检验器 II.html](./leetCode/2299.强密码检验器II.html)
+- [2303.计算应缴税款总额.html](./leetCode/2303.计算应缴税款总额.html)
 
 <br/>
 
