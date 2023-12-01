@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (546 道)
+## 三、LeetCode (547 道)
 
 <br/>
 
@@ -690,6 +690,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2299.强密码检验器 II.html](./leetCode/2299.强密码检验器II.html)
 - [2303.计算应缴税款总额.html](./leetCode/2303.计算应缴税款总额.html)
 - [2309.兼具大小写的最好英文字母.html](./leetCode/2309.兼具大小写的最好英文字母.html)
+- [2315.统计星号.html](./leetCode/2315.统计星号.html)
 
 <br/>
 
