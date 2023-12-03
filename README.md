@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (548 道)
+## 三、LeetCode (549 道)
 
 <br/>
 
@@ -692,6 +692,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2309.兼具大小写的最好英文字母.html](./leetCode/2309.兼具大小写的最好英文字母.html)
 - [2315.统计星号.html](./leetCode/2315.统计星号.html)
 - [2319.判断矩阵是否是一个 X 矩阵.html](./leetCode/2319.判断矩阵是否是一个X矩阵.html)
+- [2325.解密消息.html](./leetCode/2325.解密消息.html)
 
 <br/>
 

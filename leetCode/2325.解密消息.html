@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2325. 解密消息</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/decode-the-message/
+
+      // 给你字符串 key 和 message ，分别表示一个加密密钥和一段加密消息。解密 message 的步骤如下：
+      //
+      // 提示：
+      // 使用 key 中 26 个英文小写字母第一次出现的顺序作为替换表中的字母 顺序 。
+      // 将替换表与普通英文字母表对齐，形成对照表。
+      // 按照对照表 替换 message 中的每个字母。
+      // 空格 ' ' 保持不变。
+      //
+      // 提示：
+      // 例如，key = "happy boy"（实际的加密密钥会包含字母表中每个字母 至少一次），据此，可以得到部分对照表（'h' -> 'a'、'a' -> 'b'、'p' -> 'c'、'y' -> 'd'、'b' -> 'e'、'o' -> 'f'）。
+      // 返回解密后的消息。
+      //
+      // 提示：
+      // 26 <= key.length <= 2000
+      // key 由小写英文字母及 ' ' 组成
+      // key 包含英文字母表中每个字符（'a' 到 'z'）至少一次
+      // 1 <= message.length <= 2000
+      // message 由小写英文字母和 ' ' 组成
+
+      /**
+       * @param {string} key
+       * @param {string} message
+       * @return {string}
+       */
+      var decodeMessage = function (key, message) {};
+
+      // --- answer-1 ---
+
+      // a 97 z 122
+      // 先构造映射关系 再解密
+      var decodeMessage = function (key = '', message = '') {
+        const exits = new Map();
+        const map = new Map();
+        let start = 97;
+        for (let i = 0; i < key.length && start <= 122; i++) {
+          const item = key[i];
+          if (item !== ' ' && !exits.has(item)) {
+            map.set(item, String.fromCharCode(start));
+            start += 1;
+            exits.set(item, true);
+          }
+        }
+        let result = '';
+        for (const ch of message) {
+          result += map.get(ch) || ch;
+        }
+        return result;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var key = 'the quick brown fox jumps over the lazy dog',
+        message = 'vkbs bs t suepuv';
+      var result = 'this is a secret';
+      // 解释：对照表如上图所示。
+
+      var key = 'eljuxhpwnyrdgtqkviszcfmabo',
+        message = 'zwx hnfx lqantp mnoeius ycgk vcnjrdb';
+      var result = 'the five boxing wizards jump quickly';
+      // 解释：对照表如上图所示。
+
+      console.log('key = ', key);
+      console.log('message = ', message);
+      console.log('result = ', result);
+      console.log('decodeMessage = ', decodeMessage(key, message));
+    </script>
+  </body>
+</html>
