@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2335. 装满杯子需要的最短总时长</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/minimum-amount-of-time-to-fill-cups/
+
+      // 现有一台饮水机，可以制备冷水、温水和热水。每秒钟，可以装满 2 杯 不同 类型的水或者 1 杯任意类型的水。
+      // 给你一个下标从 0 开始、长度为 3 的整数数组 amount ，其中 amount[0]、amount[1] 和 amount[2] 分别表示需要装满冷水、温水和热水的杯子数量。返回装满所有杯子所需的 最少 秒数。
+      //
+      // 提示：
+      // amount.length == 3
+      // 0 <= amount[i] <= 100
+
+      /**
+       * @param {number[]} amount
+       * @return {number}
+       */
+      var fillCups = function (amount) {};
+
+      // --- answer-1 ---
+
+      var sort = function (arr = []) {
+        let a = -1;
+        let b = -1;
+        let c = -1;
+        for (const n of arr) {
+          if (n > c) {
+            a = b;
+            b = c;
+            c = n;
+          } else if (n > b) {
+            a = b;
+            b = n;
+          } else {
+            a = n;
+          }
+        }
+        return { a, b, c };
+      };
+      // 刚开始想的时候使用 最小的两个值 取消最大的值 但是后来发现了 下面的规律
+      // 即最小的两个数相加小于c的时候 c最后都要一次一次的来 所以需要次数c
+      // a+b>c的时候 尽可能的一次消除2个 那么消完必定是向上取整的 a+b+c的一半
+      var fillCups = function (amount = []) {
+        const { a, b, c } = sort(amount);
+        console.log(a, b, c);
+        if (a + b <= c) return c;
+        return Math.ceil((a + b + c) / 2);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var amount = [1, 4, 2];
+      var result = 4;
+      // 解释：下面给出一种方案：
+
+      // var amount = [5, 4, 4];
+      // var result = 7;
+      // 解释：下面给出一种方案：
+
+      // var amount = [5, 0, 0];
+      // var result = 5;
+      // 解释：每秒装满一杯冷水。
+
+      var amount = [5, 9, 12];
+      var result = 13;
+
+      console.log('amount = ', amount);
+      console.log('result = ', result);
+      console.log('fillCups = ', fillCups(amount));
+    </script>
+  </body>
+</html>
