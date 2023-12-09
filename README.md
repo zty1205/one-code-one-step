@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (552 道)
+## 三、LeetCode (553 道)
 
 <br/>
 
@@ -696,6 +696,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2331.计算布尔二叉树的值.html](./leetCode/2331.计算布尔二叉树的值.html)
 - [2335.装满杯子需要的最短总时长.html](./leetCode/2335.装满杯子需要的最短总时长.html)
 - [2341.数组能形成多少数对.html](./leetCode/2341.数组能形成多少数对.html)
+- [2347.最好的扑克手牌.html](./leetCode/2347.最好的扑克手牌.html)
 
 <br/>
 
