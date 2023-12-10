@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2357. 使数组中所有元素都等于零</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/make-array-zero-by-subtracting-equal-amounts/
+
+      // 给你一个非负整数数组 nums 。在一步操作中，你必须：
+      //
+      // 提示：
+      // 选出一个正整数 x ，x 需要小于或等于 nums 中 最小 的 非零 元素。
+      // nums 中的每个正整数都减去 x。
+      // 返回使 nums 中所有元素都等于 0 需要的 最少 操作数。
+      //
+      // 提示：
+      // 1 <= nums.length <= 100
+      // 0 <= nums[i] <= 100
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var minimumOperations = function (nums) {};
+
+      // --- answer-1 ---
+
+      // 排序后模拟
+      var minimumOperations = function (nums = []) {
+        const length = nums.length;
+
+        let res = 0;
+
+        nums.sort((a, b) => a - b);
+        for (let i = 0; i < length; i++) {
+          let n = nums[i];
+          if (n === 0) {
+            continue;
+          }
+          for (let j = i; j < length; j++) {
+            nums[j] = nums[j] - n;
+          }
+          res += 1;
+          if (nums[length - 1] === 0) {
+            return res;
+          }
+        }
+        return res;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 不相等数的个数 如果相等则同一次循环内一起被删除
+      var minimumOperations = function (nums = []) {
+        const set = new Set();
+        for (const n of nums) {
+          if (n > 0) {
+            set.add(n);
+          }
+        }
+        return set.size;
+      };
+
+      // --- answer-2 ---
+
+      var nums = [1, 5, 0, 3, 5];
+      var result = 3;
+      // 解释：
+
+      var nums = [0];
+      var result = 0;
+      // 解释：nums 中的每个元素都已经是 0 ，所以不需要执行任何操作。
+
+      var nums = [1, 52, 23, 21, 44, 2, 34, 23];
+      var result = 7;
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('minimumOperations = ', minimumOperations(nums));
+    </script>
+  </body>
+</html>
