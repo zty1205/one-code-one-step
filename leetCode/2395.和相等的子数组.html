@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2395. 和相等的子数组</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/find-subarrays-with-equal-sum/
+
+      // 给你一个下标从 0 开始的整数数组 nums ，判断是否存在 两个 长度为 2 的子数组且它们的 和 相等。注意，这两个子数组起始位置的下标必须 不相同 。
+      // 如果这样的子数组存在，请返回 true，否则返回 false 。
+      // 子数组 是一个数组中一段连续非空的元素组成的序列。
+      //
+      // 提示：
+      // 2 <= nums.length <= 1000
+      // -109 <= nums[i] <= 109
+
+      /**
+       * @param {number[]} nums
+       * @return {boolean}
+       */
+      var findSubarrays = function (nums) {};
+
+      // --- answer-1 ---
+
+      // 顺序求两个和 判断是否有重复
+      var findSubarrays = function (nums = []) {
+        const map = new Map();
+        for (let i = 0; i < nums.length - 1; i++) {
+          const sum = nums[i] + nums[i + 1];
+          if (map.has(sum)) {
+            return true;
+          }
+          map.set(sum, 1);
+        }
+        return false;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var nums = [4, 2, 4];
+      var result = true;
+      // 解释：元素为 [4,2] 和 [2,4] 的子数组有相同的和 6 。
+
+      var nums = [1, 2, 3, 4, 5];
+      var result = false;
+      // 解释：没有长度为 2 的两个子数组和相等。
+
+      var nums = [0, 0, 0];
+      var result = true;
+      // 解释：子数组 [nums[0],nums[1]] 和 [nums[1],nums[2]] 的和相等，都为 0 。
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('findSubarrays = ', findSubarrays(nums));
+    </script>
+  </body>
+</html>
