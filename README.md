@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (556 道)
+## 三、LeetCode (557 道)
 
 <br/>
 
@@ -700,6 +700,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2351.第一个出现两次的字母.html](./leetCode/2351.第一个出现两次的字母.html)
 - [2357.使数组中所有元素都等于零.html](./leetCode/2357.使数组中所有元素都等于零.html)
 - [2395.和相等的子数组.html](./leetCode/2395.和相等的子数组.html)
+- [2399.检查相同字母间的距离.html](./leetCode/2399.检查相同字母间的距离.html)
 
 <br/>
 
