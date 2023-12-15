@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2404. 出现最频繁的偶数元素</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/most-frequent-even-element/
+
+      // 给你一个整数数组 nums ，返回出现最频繁的偶数元素。
+      // 如果存在多个满足条件的元素，只需要返回 最小 的一个。如果不存在这样的元素，返回 -1 。
+      //
+      // 提示：
+      // 1 <= nums.length <= 2000
+      // 0 <= nums[i] <= 105
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var mostFrequentEven = function (nums) {};
+
+      // --- answer-1 ---
+
+      // 计数
+      var mostFrequentEven = function (nums = []) {
+        const map = new Map();
+        let n = -1;
+        let max = 0;
+        for (const num of nums) {
+          if (num % 2 === 0) {
+            const count = (map.get(num) || 0) + 1;
+            map.set(num, count);
+            if (count > max) {
+              max = count;
+              n = num;
+            } else if (count === max) {
+              n = Math.min(n, num);
+            }
+          }
+        }
+        return n;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var nums = [0, 1, 2, 2, 4, 4, 1];
+      var result = 2;
+      // 解释：
+
+      var nums = [4, 4, 4, 9, 2, 4];
+      var result = 4;
+      // 解释：4 是出现最频繁的偶数元素。
+
+      var nums = [29, 47, 21, 41, 13, 37, 25, 7];
+      var result = -1;
+      // 解释：不存在偶数元素。
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('mostFrequentEven = ', mostFrequentEven(nums));
+    </script>
+  </body>
+</html>
