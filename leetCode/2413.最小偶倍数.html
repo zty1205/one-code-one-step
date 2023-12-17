@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2413. 最小偶倍数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/smallest-even-multiple/
+
+      //
+      // 提示：
+      // 1 <= n <= 150
+
+      /**
+       * @param {number} n
+       * @return {number}
+       */
+      var smallestEvenMultiple = function (n) {};
+
+      // --- answer-1 ---
+
+      // 一言难尽
+      var smallestEvenMultiple = function (n = 1) {
+        return n % 2 === 0 ? n : n * 2;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var n = 5;
+      var result = 10;
+      // 解释：5 和 2 的最小公倍数是 10 。
+
+      var n = 6;
+      var result = 6;
+      // 解释：6 和 2 的最小公倍数是 6 。注意数字会是它自身的倍数。
+
+      console.log('n = ', n);
+      console.log('result = ', result);
+      console.log('smallestEvenMultiple = ', smallestEvenMultiple(n));
+    </script>
+  </body>
+</html>
