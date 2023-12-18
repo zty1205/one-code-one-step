@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2423. 删除字符使频率相同</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/remove-letter-to-equalize-frequency/
+
+      // 给你一个下标从 0 开始的字符串 word ，字符串只包含小写英文字母。你需要选择 一个 下标并 删除 下标处的字符，使得 word 中剩余每个字母出现 频率 相同。
+      // 如果删除一个字母后，word 中剩余所有字母的出现频率都相同，那么返回 true ，否则返回 false 。
+      // 注意：
+      //
+      // 提示：
+      // 字母 x 的 频率 是这个字母在字符串中出现的次数。
+      // 你 必须 恰好删除一个字母，不能一个字母都不删除。
+      //
+      // 提示：
+      // 2 <= word.length <= 100
+      // word 只包含小写英文字母。
+
+      /**
+       * @param {string} word
+       * @return {boolean}
+       */
+      var equalFrequency = function (word) {};
+
+      // --- answer-1 ---
+
+      // 暴力 逻辑清晰
+      // 计算需要考虑的场景多 容易漏
+      var equalFrequency = function (word) {
+        for (let i = 0, n = word.length; i < n; i++) {
+          let ans = word.replace(word[i], '');
+          let map = new Map();
+          for (let a of ans) {
+            map.set(a, (map.get(a) || 0) + 1);
+          }
+          let values = [...map.values()];
+          if (values.every((e) => e === values[0])) {
+            return true;
+          }
+        }
+        return false;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var word = 'abcc';
+      var result = true;
+      // 解释：选择下标 3 并删除该字母：word 变成 "abc" 且每个字母出现频率都为 1 。
+
+      var word = 'aazz';
+      var result = false;
+      // 解释：我们必须删除一个字母，所以要么 "a" 的频率变为 1 且 "z" 的频率为 2 ，要么两个字母频率反过来。所以不可能让剩余所有字母出现频率相同。
+
+      var word = 'bac';
+      var result = true;
+
+      var word = 'aaaa';
+      var result = true;
+
+      // var word = 'aca';
+      // var result = true;
+
+      var word = 'acb';
+      var result = true;
+
+      console.log('word = ', word);
+      console.log('result = ', result);
+      console.log('equalFrequency = ', equalFrequency(word));
+    </script>
+  </body>
+</html>
