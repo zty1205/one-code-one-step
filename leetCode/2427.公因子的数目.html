@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2427. 公因子的数目</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/number-of-common-factors/
+
+      // 给你两个正整数 a 和 b ，返回 a 和 b 的 公 因子的数目。
+      // 如果 x 可以同时整除 a 和 b ，则认为 x 是 a 和 b 的一个 公因子 。
+      //
+      // 提示：
+      // 1 <= a, b <= 1000
+
+      /**
+       * @param {number} a
+       * @param {number} b
+       * @return {number}
+       */
+      var commonFactors = function (a, b) {};
+
+      // --- answer-1 ---
+
+      // 暴力枚举
+      var commonFactors = function (a = 1, b = 1) {
+        const min = Math.min(a, b);
+        let result = 1;
+        for (let i = 2; i <= min; i++) {
+          if (a % i === 0 && b % i === 0) {
+            result += 1;
+          }
+        }
+        return result;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 先求最大公约数 在循环
+      var commonFactors = function (a, b) {
+        let c = gcd(a, b),
+          ans = 0;
+        for (let x = 1; x * x <= c; ++x) {
+          if (c % x === 0) {
+            ++ans;
+            if (x * x !== c) {
+              ++ans;
+            }
+          }
+        }
+        return ans;
+      };
+
+      const gcd = (a, b) => {
+        while (b !== 0) {
+          a %= b;
+          a ^= b;
+          b ^= a;
+          a ^= b;
+        }
+        return a;
+      };
+
+      // --- answer-2 ---
+
+      var a = 12,
+        b = 6;
+      var result = 4;
+      // 解释：12 和 6 的公因子是 1、2、3、6 。
+
+      var a = 25,
+        b = 30;
+      var result = 2;
+      // 解释：25 和 30 的公因子是 1、5 。
+
+      console.log('a = ', a);
+      console.log('b = ', b);
+      console.log('result = ', result);
+      console.log('commonFactors = ', commonFactors(a, b));
+    </script>
+  </body>
+</html>
