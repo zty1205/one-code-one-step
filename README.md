@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (563 道)
+## 三、LeetCode (564 道)
 
 <br/>
 
@@ -707,6 +707,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2418.按身高排序.html](./leetCode/2418.按身高排序.html)
 - [2423.删除字符使频率相同.html](./leetCode/2423.删除字符使频率相同.html)
 - [2427.公因子的数目.html](./leetCode/2427.公因子的数目.html)
+- [2432.处理用时最长的那个任务的员工.html](./leetCode/2432.处理用时最长的那个任务的员工.html)
 
 <br/>
 

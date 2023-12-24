@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2432. 处理用时最长的那个任务的员工</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/the-employee-that-worked-on-the-longest-task/
+
+      // 共有 n 位员工，每位员工都有一个从 0 到 n - 1 的唯一 id 。
+      // 给你一个二维整数数组 logs ，其中 logs[i] = [idi, leaveTimei] ：
+      //
+      // 提示：
+      // idi 是处理第 i 个任务的员工的 id ，且
+      // leaveTimei 是员工完成第 i 个任务的时刻。所有 leaveTimei 的值都是 唯一 的。
+      // 注意，第 i 个任务在第 (i - 1) 个任务结束后立即开始，且第 0 个任务从时刻 0 开始。
+      // 返回处理用时最长的那个任务的员工的 id 。如果存在两个或多个员工同时满足，则返回几人中 最小 的 id 。
+      //
+      // 提示：
+      // 2 <= n <= 500
+      // 1 <= logs.length <= 500
+      // logs[i].length == 2
+      // 0 <= idi <= n - 1
+      // 1 <= leaveTimei <= 500
+      // idi != idi + 1
+      // leaveTimei 按严格递增顺序排列
+
+      /**
+       * @param {number} n
+       * @param {number[][]} logs
+       * @return {number}
+       */
+      var hardestWorker = function (n, logs) {};
+
+      // --- answer-1 ---
+
+      // 直接遍历
+      var hardestWorker = function (n = 1, logs = []) {
+        let maxId = 0;
+        let maxTask = 0;
+        let preTask = 0;
+        for (const [id, task] of logs) {
+          let spend = task - preTask;
+          preTask = task;
+          if (spend > maxTask) {
+            maxId = id;
+            maxTask = spend;
+          } else if (spend === maxTask) {
+            maxId = Math.min(maxId, id);
+          }
+        }
+        return maxId;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var n = 10,
+        logs = [
+          [0, 3],
+          [2, 5],
+          [0, 9],
+          [1, 15]
+        ];
+      var result = 1;
+      // 解释：
+
+      var n = 26,
+        logs = [
+          [1, 1],
+          [3, 7],
+          [2, 12],
+          [7, 17]
+        ];
+      var result = 3;
+      // 解释：
+
+      var n = 2,
+        logs = [
+          [0, 10],
+          [1, 20]
+        ];
+      var result = 0;
+      // 解释：
+
+      console.log('n = ', n);
+      console.log('logs = ', logs);
+      console.log('result = ', result);
+      console.log('hardestWorker = ', hardestWorker(n, logs));
+    </script>
+  </body>
+</html>
