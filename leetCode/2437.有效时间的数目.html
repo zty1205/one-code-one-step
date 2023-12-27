@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2437. 有效时间的数目</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/number-of-valid-clock-times/
+
+      // 给你一个长度为 5 的字符串 time ，表示一个电子时钟当前的时间，格式为 "hh:mm" 。最早 可能的时间是 "00:00" ，最晚 可能的时间是 "23:59" 。
+      // 在字符串 time 中，被字符 ? 替换掉的数位是 未知的 ，被替换的数字可能是 0 到 9 中的任何一个。
+      // 请你返回一个整数 answer ，将每一个 ? 都用 0 到 9 中一个数字替换后，可以得到的有效时间的数目。
+      //
+      // 提示：
+      // time 是一个长度为 5 的有效字符串，格式为 "hh:mm" 。
+      // "00" <= hh <= "23"
+      // "00" <= mm <= "59"
+      // 字符串中有的数位是 '?' ，需要用 0 到 9 之间的数字替换。
+
+      /**
+       * @param {string} time
+       * @return {number}
+       */
+      var countTime = function (time) {};
+
+      // --- answer-1 ---
+
+      // 直接穷举
+      var countTime = function (time = '') {
+        let hour = 1;
+        let minute = 1;
+
+        if (time[0] == '?' && time[1] == '?') hour = 24;
+        else if (time[0] == '?') hour = time[1] <= '3' ? 3 : 2;
+        else if (time[1] == '?') hour = time[0] <= '1' ? 10 : 4;
+
+        if (time[3] == '?' && time[4] == '?') minute = 60;
+        else if (time[3] == '?') minute = 6;
+        else if (time[4] == '?') minute = 10;
+        console.log(hour, minute);
+        return hour * minute;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var time = '?5:00';
+      var result = 2;
+      // 解释：我们可以将 ? 替换成 0 或 1 ，得到 "05:00" 或者 "15:00" 。注意我们不能替换成 2 ，因为时间 "25:00" 是无效时间。所以我们有两个选择。
+
+      var time = '0?:0?';
+      var result = 100;
+      // 解释：两个 ? 都可以被 0 到 9 之间的任意数字替换，所以我们总共有 100 种选择。
+
+      var time = '??:??';
+      var result = 1440;
+      // 解释：小时总共有 24 种选择，分钟总共有 60 种选择。所以总共有 24 * 60 = 1440 种选择。
+
+      var time = '07:?3';
+      var result = 6;
+
+      console.log('time = ', time);
+      console.log('result = ', result);
+      console.log('countTime = ', countTime(time));
+    </script>
+  </body>
+</html>
