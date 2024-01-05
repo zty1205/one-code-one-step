@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (570 道)
+## 三、LeetCode (571 道)
 
 <br/>
 
@@ -714,6 +714,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2451.差值数组不同的字符串.html](./leetCode/2451.差值数组不同的字符串.html)
 - [2455.可被三整除的偶数的平均值.html](./leetCode/2455.可被三整除的偶数的平均值.html)
 - [2460.对数组执行操作.html](./leetCode/2460.对数组执行操作.html)
+- [2465.不同的平均值数目.html](./leetCode/2465.不同的平均值数目.html)
 
 <br/>
 
