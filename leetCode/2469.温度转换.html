@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/convert-the-temperature/
+
+      // 给你一个四舍五入到两位小数的非负浮点数 celsius 来表示温度，以 摄氏度（Celsius）为单位。
+      // 你需要将摄氏度转换为 开氏度（Kelvin）和 华氏度（Fahrenheit），并以数组 ans = [kelvin, fahrenheit] 的形式返回结果。
+      // 返回数组 ans 。与实际答案误差不超过 10-5 的会视为正确答案。
+      // 注意：
+      //
+      // 提示：
+      // 开氏度 = 摄氏度 + 273.15
+      // 华氏度 = 摄氏度 * 1.80 + 32.00
+      //
+      // 提示：
+      // 0 <= celsius <= 1000
+
+      /**
+       * @param {number} celsius
+       * @return {number[]}
+       */
+      var convertTemperature = function (celsius = 1) {
+        return [celsius + 273.15, celsius * 1.8 + 32];
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var celsius = 36.5;
+      var result = [309.65, 97.7];
+      // 解释：36.50 摄氏度：转换为开氏度是 309.65 ，转换为华氏度是 97.70 。
+
+      var celsius = 122.11;
+      var result = [395.26, 251.798];
+      // 解释：122.11 摄氏度：转换为开氏度是 395.26 ，转换为华氏度是 251.798 。
+
+      console.log('celsius = ', celsius);
+      console.log('result = ', result);
+      console.log('convertTemperature = ', convertTemperature(celsius));
+    </script>
+  </body>
+</html>
