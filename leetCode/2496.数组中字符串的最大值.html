@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2496.数组中字符串的最大值</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/maximum-value-of-a-string-in-an-array/
+
+      // 一个由字母和数字组成的字符串的 值 定义如下：
+      //
+      // 提示：
+      // 如果字符串 只 包含数字，那么值为该字符串在 10 进制下的所表示的数字。
+      // 否则，值为字符串的 长度 。
+      // 给你一个字符串数组 strs ，每个字符串都只由字母和数字组成，请你返回 strs 中字符串的 最大值 。
+      //
+      // 提示：
+      // 1 <= strs.length <= 100
+      // 1 <= strs[i].length <= 9
+      // strs[i] 只包含小写英文字母和数字。
+
+      /**
+       * @param {string[]} strs
+       * @return {number}
+       */
+      var maximumValue = function (strs) {};
+
+      // --- answer-1 ---
+
+      var maximumValue = function (strs = []) {
+        return Math.max.apply(
+          Math,
+          strs.map((x) => (Number.isNaN(+x) ? x.length : +x))
+        );
+      };
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var strs = ['alic3', 'bob', '3', '4', '00000'];
+      var result = 5;
+      // 解释：
+
+      var strs = ['1', '01', '001', '0001'];
+      var result = 1;
+      // 解释：
+
+      console.log('strs = ', strs);
+      console.log('result = ', result);
+      console.log('maximumValue = ', maximumValue(strs));
+    </script>
+  </body>
+</html>
