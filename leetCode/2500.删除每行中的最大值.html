@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2500.删除每行中的最大值</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/delete-greatest-value-in-each-row/
+
+      // 给你一个 m x n 大小的矩阵 grid ，由若干正整数组成。
+      // 执行下述操作，直到 grid 变为空矩阵：
+      //
+      // 提示：
+      // 从每一行删除值最大的元素。如果存在多个这样的值，删除其中任何一个。
+      // 将删除元素中的最大值与答案相加。
+      // 注意 每执行一次操作，矩阵中列的数据就会减 1 。
+      // 返回执行上述操作后的答案。
+      //
+      // 提示：
+      // m == grid.length
+      // n == grid[i].length
+      // 1 <= m, n <= 50
+      // 1 <= grid[i][j] <= 100
+
+      /**
+       * @param {number[][]} grid
+       * @return {number}
+       */
+      var deleteGreatestValue = function (grid) {};
+
+      // --- answer-1 ---
+
+      // 排序后 每列的最大值
+      var deleteGreatestValue = function (grid = [[]]) {
+        grid.forEach((arr) => {
+          arr.sort((a, b) => a - b);
+        });
+        const m = grid.length;
+        const n = grid[0].length;
+        const sum = new Array(n).fill(0);
+        for (let i = 0; i < m; i++) {
+          for (let j = 0; j < n; j++) {
+            sum[j] = Math.max(sum[j], grid[i][j]);
+          }
+        }
+        return sum.reduce((pre, cur) => (pre += cur), 0);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var grid = [
+        [1, 2, 4],
+        [3, 3, 1]
+      ];
+      var result = 8;
+      // 解释：上图展示在每一步中需要移除的值。
+
+      var grid = [[10]];
+      var result = 10;
+      // 解释：上图展示在每一步中需要移除的值。
+
+      console.log('grid = ', grid);
+      console.log('result = ', result);
+      console.log('deleteGreatestValue = ', deleteGreatestValue(grid));
+    </script>
+  </body>
+</html>
