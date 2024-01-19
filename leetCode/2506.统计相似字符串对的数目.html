@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2506.统计相似字符串对的数目</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/count-pairs-of-similar-strings/
+
+      // 给你一个下标从 0 开始的字符串数组 words 。
+      // 如果两个字符串由相同的字符组成，则认为这两个字符串 相似 。
+      //
+      // 提示：
+      // 例如，"abca" 和 "cba" 相似，因为它们都由字符 'a'、'b'、'c' 组成。
+      // 然而，"abacba" 和 "bcfd" 不相似，因为它们不是相同字符组成的。
+      // 请你找出满足字符串 words[i] 和 words[j] 相似的下标对 (i, j) ，并返回下标对的数目，其中 0 <= i < j <= word.length - 1 。
+      //
+      // 提示：
+      // 1 <= words.length <= 100
+      // 1 <= words[i].length <= 100
+      // words[i] 仅由小写英文字母组成
+
+      /**
+       * @param {string[]} words
+       * @return {number}
+       */
+      var similarPairs = function (words) {};
+
+      // --- answer-1 ---
+
+      // 获取排序好的字母字符串
+      var getChars = function (str = '') {
+        const arr = new Array(26).fill('');
+        for (const ch of str) {
+          arr[ch.charCodeAt() - 'a'.charCodeAt()] = ch;
+        }
+        return arr.join('');
+      };
+
+      // 组合数
+      var c2 = function (num) {
+        if (num < 2) return 0;
+        if (num === 0 || num === 2) return 1;
+        return (num * (num - 1)) / 2;
+      };
+
+      var similarPairs = function (words = []) {
+        const map = new Map();
+        for (const str of words) {
+          const char = getChars(str);
+          map.set(char, (map.get(char) || 0) + 1);
+        }
+        let res = 0;
+        // 组合
+        for (const num of map.values()) {
+          res += c2(num);
+        }
+        return res;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 边循环 边计算
+      var similarPairs = function (words = []) {
+        const map = new Map();
+        let res = 0;
+        for (const str of words) {
+          const char = getChars(str);
+          let num = map.get(char) || 0;
+          res += num;
+          map.set(char, num + 1);
+        }
+        return res;
+      };
+
+      // --- answer-2 ---
+
+      var words = ['aba', 'aabb', 'abcd', 'bac', 'aabc'];
+      var result = 2;
+      // 解释：共有 2 对满足条件：
+
+      var words = ['aabb', 'ab', 'ba'];
+      var result = 3;
+      // 解释：共有 3 对满足条件：
+
+      var words = ['nba', 'cba', 'dba'];
+      var result = 0;
+      // 解释：不存在满足条件的下标对，返回 0 。
+
+      var words = ['aba', 'aabb', 'abcd', 'bac', 'aabc', 'aba', 'aabb', 'abcd', 'bac', 'aabc'];
+      var result = 13;
+
+      console.log('words = ', words);
+      console.log('result = ', result);
+      console.log('similarPairs = ', similarPairs(words));
+    </script>
+  </body>
+</html>

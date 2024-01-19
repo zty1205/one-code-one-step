@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (578 道)
+## 三、LeetCode (579 道)
 
 <br/>
 
@@ -722,6 +722,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2490.回环句.html](./leetCode/2490.回环句.html)
 - [2496.数组中字符串的最大值.html](./leetCode/2496.数组中字符串的最大值.html)
 - [2500.删除每行中的最大值.html](./leetCode/2500.删除每行中的最大值.html)
+- [506.统计相似字符串对的数目.html](./leetCode/506.统计相似字符串对的数目.html)
 
 <br/>
 
