@@ -40,7 +40,13 @@ async function getPageDataByUrl(url) {
 
     // 获取题目名
     const titleDom = document.querySelector('a.text-lg');
-    const title = titleDom ? titleDom.innerText : '';
+    let title = titleDom ? titleDom.innerText : '';
+
+    if (!title || title === ' ') {
+      // 兼容灵动布局
+      const titleDom1 = document.querySelector('.text-title-large a');
+      title = titleDom1 ? titleDom1.innerText : '';
+    }
 
     // 切换js
     const langBtn = document.querySelector('.relative .notranslate button');
