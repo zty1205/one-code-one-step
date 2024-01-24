@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (581 道)
+## 三、LeetCode (582 道)
 
 <br/>
 
@@ -725,6 +725,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [506.统计相似字符串对的数目.html](./leetCode/506.统计相似字符串对的数目.html)
 - [2511.最多可以摧毁的敌人城堡数目.html](./leetCode/2511.最多可以摧毁的敌人城堡数目.html)
 - [2515.到目标字符串的最短距离.html](./leetCode/2515.到目标字符串的最短距离.html)
+- [2520.统计能整除数字的位数.html](./leetCode/2520.统计能整除数字的位数.html)
 
 <br/>
 

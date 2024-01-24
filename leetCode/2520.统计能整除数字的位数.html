@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2520. 统计能整除数字的位数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/count-the-digits-that-divide-a-number/description/
+
+      // 给你一个整数 num ，返回 num 中能整除 num 的数位的数目。
+      // 如果满足 nums % val == 0 ，则认为整数 val 可以整除 nums 。
+      //
+      // 提示：
+      // 1 <= num <= 109
+      // num 的数位中不含 0
+
+      /**
+       * @param {number} num
+       * @return {number}
+       */
+      var countDigits = function (num) {};
+
+      // --- answer-1 ---
+
+      var countDigits = function (num = 1) {
+        return String(num)
+          .split('')
+          .filter((x) => num % +x === 0).length;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      var countDigits = function (num = 1) {
+        let res = 0;
+        let temp = num;
+        while (temp) {
+          const n = temp % 10;
+          temp = (temp - n) / 10;
+          res += num % n === 0 ? 1 : 0;
+        }
+        return res;
+      };
+
+      // --- answer-2 ---
+
+      var num = 7;
+      var result = 1;
+      // 解释：7 被自己整除，因此答案是 1 。
+
+      var num = 121;
+      var result = 2;
+      // 解释：121 可以被 1 整除，但无法被 2 整除。由于 1 出现两次，所以返回 2 。
+
+      var num = 1248;
+      var result = 4;
+      // 解释：1248 可以被它每一位上的数字整除，因此答案是 4 。
+
+      console.log('num = ', num);
+      console.log('result = ', result);
+      console.log('countDigits = ', countDigits(num));
+    </script>
+  </body>
+</html>
