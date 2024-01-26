@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2529. 正整数和负整数的最大计数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/maximum-count-of-positive-integer-and-negative-integer/description/
+
+      // 给你一个按 非递减顺序 排列的数组 nums ，返回正整数数目和负整数数目中的最大值。
+      //
+      // 提示：
+      // 换句话讲，如果 nums 中正整数的数目是 pos ，而负整数的数目是 neg ，返回 pos 和 neg二者中的最大值。
+      // 注意：0 既不是正整数也不是负整数。
+      //
+      // 提示：
+      // 1 <= nums.length <= 2000
+      // -2000 <= nums[i] <= 2000
+      // nums 按 非递减顺序 排列。
+      // 进阶：你可以设计并实现时间复杂度为 O(log(n)) 的算法解决此问题吗？
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var maximumCount = function (nums) {};
+
+      // --- answer-1 ---
+
+      // 直接遍历 或者在大于0的时候停下
+      var maximumCount = function (nums = []) {
+        let p = 0;
+        let n = 0;
+        for (const n of nums) {
+          if (n > 0) {
+            p += 1;
+          } else if (n < 0) {
+            n += 1;
+          }
+        }
+
+        return Math.max(p, n);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      // var nums = [-2,-1,-1,1,2,3];
+      // var result = 3;
+      // 解释：共有 3 个正整数和 3 个负整数。计数得到的最大值是 3 。
+
+      // var nums = [-3,-2,-1,0,0,1,2];
+      // var result = 3;
+      // 解释：共有 2 个正整数和 3 个负整数。计数得到的最大值是 3 。
+
+      // var nums = [5,20,66,1314];
+      // var result = 4;
+      // 解释：共有 4 个正整数和 0 个负整数。计数得到的最大值是 4 。
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('maximumCount = ', maximumCount(nums));
+    </script>
+  </body>
+</html>
