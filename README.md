@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (585 道)
+## 三、LeetCode (586 道)
 
 <br/>
 
@@ -729,6 +729,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2525.根据规则将箱子分类.html](./leetCode/2525.根据规则将箱子分类.html)
 - [2529.正整数和负整数的最大计数.html](./leetCode/2529.正整数和负整数的最大计数.html)
 - [2535.数组元素和与数字和的绝对差.html](./leetCode/2535.数组元素和与数字和的绝对差.html)
+- [2540.最小公共值.html](./leetCode/2540.最小公共值.html)
 
 <br/>
 
