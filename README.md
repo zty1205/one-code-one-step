@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (587 道)
+## 三、LeetCode (588 道)
 
 <br/>
 
@@ -731,6 +731,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2535.数组元素和与数字和的绝对差.html](./leetCode/2535.数组元素和与数字和的绝对差.html)
 - [2540.最小公共值.html](./leetCode/2540.最小公共值.html)
 - [2544.交替数字和.html](./leetCode/2544.交替数字和.html)
+- [2549.统计桌面上的不同数字.html](./leetCode/2549.统计桌面上的不同数字.html)
 
 <br/>
 

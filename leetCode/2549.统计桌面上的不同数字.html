@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2549. 统计桌面上的不同数字</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/count-distinct-numbers-on-board/description/
+
+      // 给你一个正整数 n ，开始时，它放在桌面上。在 109 天内，每天都要执行下述步骤：
+      //
+      // 提示：
+      // 对于出现在桌面上的每个数字 x ，找出符合 1 <= i <= n 且满足 x % i == 1 的所有数字 i 。
+      // 然后，将这些数字放在桌面上。
+      // 返回在 109 天之后，出现在桌面上的 不同 整数的数目。
+      // 注意：
+      //
+      // 提示：
+      // 一旦数字放在桌面上，则会一直保留直到结束。
+      // % 表示取余运算。例如，14 % 3 等于 2 。
+      //
+      // 提示：
+      // 1 <= n <= 100
+
+      /**
+       * @param {number} n
+       * @return {number}
+       */
+      var distinctIntegers = function (n) {};
+
+      // --- answer-1 ---
+
+      // 这么多天 怎么都得遍历完
+      var distinctIntegers = function (n = 1) {
+        return n === 1 ? 1 : n - 1;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      // var n = 5;
+      // var result = 4;
+      // 解释：最开始，5 在桌面上。
+
+      // var n = 3 ;
+      // var result = 2;
+      // 解释：
+
+      console.log('n = ', n);
+      console.log('result = ', result);
+      console.log('distinctIntegers = ', distinctIntegers(n));
+    </script>
+  </body>
+</html>
