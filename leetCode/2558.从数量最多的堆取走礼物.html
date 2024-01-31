@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2558. 从数量最多的堆取走礼物</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/take-gifts-from-the-richest-pile/
+
+      // 给你一个整数数组 gifts ，表示各堆礼物的数量。每一秒，你需要执行以下操作：
+      //
+      // 提示：
+      // 选择礼物数量最多的那一堆。
+      // 如果不止一堆都符合礼物数量最多，从中选择任一堆即可。
+      // 选中的那一堆留下平方根数量的礼物（向下取整），取走其他的礼物。
+      // 返回在 k 秒后剩下的礼物数量。
+      //
+      // 提示：
+      // 1 <= gifts.length <= 103
+      // 1 <= gifts[i] <= 109
+      // 1 <= k <= 103
+
+      /**
+       * @param {number[]} gifts
+       * @param {number} k
+       * @return {number}
+       */
+      var pickGifts = function (gifts, k) {};
+
+      // --- answer-1 ---
+
+      // 按题意模拟
+      var pickGifts = function (gifts = [], k = 1) {
+        const length = gifts.length;
+        while (k--) {
+          const max = Math.max.apply(Math, gifts);
+          for (let i = 0; i < length; i++) {
+            if (gifts[i] === max) {
+              gifts[i] = Math.floor(Math.sqrt(gifts[i]));
+              break;
+            }
+          }
+        }
+        return gifts.reduce((pre, cur) => (pre += cur), 0);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 排序 模拟大根堆
+      var pickGifts = function (gifts = [], k = 1) {
+        const length = gifts.length;
+        gifts.sort((a, b) => a - b);
+        while (k--) {
+          let n = gifts.pop();
+          gifts.push(Math.floor(Math.sqrt(n)));
+          let i = length - 1;
+          while (i > 0 && gifts[i] < gifts[i - 1]) {
+            let temp = gifts[i];
+            gifts[i] = gifts[i - 1];
+            gifts[i - 1] = temp;
+            i -= 1;
+          }
+        }
+        return gifts.reduce((pre, cur) => (pre += cur), 0);
+      };
+
+      // --- answer-2 ---
+
+      var gifts = [25, 64, 9, 4, 100],
+        k = 4;
+      var result = 29;
+      // 解释：
+
+      // var gifts = [1, 1, 1, 1],
+      //   k = 4;
+      // var result = 4;
+      // 解释：
+
+      var gifts = [25, 64, 9, 4, 100, 81, 16];
+      k = 4;
+      var result = 61;
+
+      var gifts = [25, 64, 9, 4, 100, 81, 16];
+      k = 5;
+      var result = 49;
+
+      console.log('gifts = ', gifts);
+      console.log('k = ', k);
+      console.log('result = ', result);
+      console.log('pickGifts = ', pickGifts(gifts, k));
+    </script>
+  </body>
+</html>
