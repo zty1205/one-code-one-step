@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2566. 替换一个数字后的最大差值</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/maximum-difference-by-remapping-a-digit/
+
+      // 给你一个整数 num 。你知道 Danny Mittal 会偷偷将 0 到 9 中的一个数字 替换 成另一个数字。
+      // 请你返回将 num 中 恰好一个 数字进行替换后，得到的最大值和最小值的差为多少。
+      // 注意：
+      //
+      // 提示：
+      // 当 Danny 将一个数字 d1 替换成另一个数字 d2 时，Danny 需要将 nums 中所有 d1 都替换成 d2 。
+      // Danny 可以将一个数字替换成它自己，也就是说 num 可以不变。
+      // Danny 可以将数字分别替换成两个不同的数字分别得到最大值和最小值。
+      // 替换后得到的数字可以包含前导 0 。
+      // Danny Mittal 获得周赛 326 前 10 名，让我们恭喜他。
+      //
+      // 提示：
+      // 1 <= num <= 108
+
+      /**
+       * @param {number} num
+       * @return {number}
+       */
+      var minMaxDifference = function (num) {};
+
+      // --- answer-1 ---
+
+      // 贪心
+      // 最大 首个非9数字 全部变9
+      // 最小 首个非0数字 全部变0
+      var minMaxDifference = function (num = 1) {
+        const nums = String(num).split('');
+        const length = nums.length;
+        let i = 0;
+        while (i < length - 1 && Number(nums[i]) >= 9) {
+          i += 1;
+        }
+        let max = [...nums];
+        for (let k = 0; k < length; k++) {
+          if (max[k] === nums[i]) {
+            max[k] = 9;
+          }
+        }
+
+        let j = 0;
+        while (j < length - 1 && Number(nums[j]) <= 0) {
+          j += 1;
+        }
+        let min = [...nums];
+        for (let k = 0; k < length; k++) {
+          if (min[k] === nums[j]) {
+            min[k] = 0;
+          }
+        }
+        return Number(max.join('')) - Number(min.join(''));
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // LeetCode 不能使用 new Regexp
+      var minMaxDifference = function (num = 1) {
+        const numStr = String(num);
+        const length = numStr.length;
+        let i = 0;
+        let j = 0;
+        while (i < length - 1 && Number(numStr[i]) >= 9) {
+          i += 1;
+        }
+        while (j < length - 1 && Number(numStr[j]) <= 0) {
+          j += 1;
+        }
+        return Number(numStr.replaceAll(numStr[i], 9)) - Number(numStr.replaceAll(numStr[j], 0));
+      };
+
+      // --- answer-2 ---
+
+      var num = 11891;
+      var result = 99009;
+      // 解释：
+
+      var num = 90;
+      var result = 99;
+      // 解释：
+
+      console.log('num = ', num);
+      console.log('result = ', result);
+      console.log('minMaxDifference = ', minMaxDifference(num));
+    </script>
+  </body>
+</html>
