@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2562. 找出数组的串联值</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/find-the-array-concatenation-value/
+
+      // 给你一个下标从 0 开始的整数数组 nums 。
+      // 现定义两个数字的 串联 是由这两个数值串联起来形成的新数字。
+      //
+      // 提示：
+      // 例如，15 和 49 的串联是 1549 。
+      // nums 的 串联值 最初等于 0 。执行下述操作直到 nums 变为空：
+      //
+      // 提示：
+      // 如果 nums 中存在不止一个数字，分别选中 nums 中的第一个元素和最后一个元素，将二者串联得到的值加到 nums 的 串联值 上，然后从 nums 中删除第一个和最后一个元素。
+      // 如果仅存在一个元素，则将该元素的值加到 nums 的串联值上，然后删除这个元素。
+      // 返回执行完所有操作后 nums 的串联值。
+      //
+      // 提示：
+      // 1 <= nums.length <= 1000
+      // 1 <= nums[i] <= 104
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var findTheArrayConcVal = function (nums) {};
+
+      // --- answer-1 ---
+
+      // 模拟
+      var findTheArrayConcVal = function (nums = []) {
+        let res = 0;
+        while (nums.length) {
+          let a = nums.shift() || '';
+          let b = nums.pop() || '';
+          res += Number(`${a}${b}`);
+        }
+        return res;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var nums = [7, 52, 2, 4];
+      var result = 596;
+      // 解释：在执行任一步操作前，nums 为 [7,52,2,4] ，串联值为 0 。
+
+      var nums = [5, 14, 13, 8, 12];
+      var result = 673;
+      // 解释：在执行任一步操作前，nums 为 [5,14,13,8,12] ，串联值为 0 。
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('findTheArrayConcVal = ', findTheArrayConcVal(nums));
+    </script>
+  </body>
+</html>
