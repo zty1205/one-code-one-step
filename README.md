@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (592 道)
+## 三、LeetCode (593 道)
 
 <br/>
 
@@ -736,6 +736,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2558.从数量最多的堆取走礼物.html](./leetCode/2558.从数量最多的堆取走礼物.html)
 - [2562.找出数组的串联值.html](./leetCode/2562.找出数组的串联值.html)
 - [2566.替换一个数字后的最大差值.html](./leetCode/2566.替换一个数字后的最大差值.html)
+- [2570.合并两个二维数组-求和法.html](./leetCode/2570.合并两个二维数组-求和法.html)
 
 <br/>
 
