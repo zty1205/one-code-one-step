@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2574. 左右元素和的差值</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/left-and-right-sum-differences/description/
+
+      // 给你一个下标从 0 开始的整数数组 nums ，请你找出一个下标从 0 开始的整数数组 answer ，其中：
+      //
+      // 提示：
+      // answer.length == nums.length
+      // answer[i] = |leftSum[i] - rightSum[i]|
+      // 其中：
+      //
+      // 提示：
+      // leftSum[i] 是数组 nums 中下标 i 左侧元素之和。如果不存在对应的元素，leftSum[i] = 0 。
+      // rightSum[i] 是数组 nums 中下标 i 右侧元素之和。如果不存在对应的元素，rightSum[i] = 0 。
+      // 返回数组 answer 。
+      //
+      // 提示：
+      // 1 <= nums.length <= 1000
+      // 1 <= nums[i] <= 105
+
+      /**
+       * @param {number[]} nums
+       * @return {number[]}
+       */
+      var leftRightDifference = function (nums) {};
+
+      // --- answer-1 ---
+
+      // 前缀和
+      var leftRightDifference = function (nums = []) {
+        const sum = nums.reduce((pre, cur) => pre + cur, 0);
+
+        let left = 0;
+        for (let i = 0; i < nums.length; i++) {
+          left += nums[i];
+          nums[i] = Math.abs(left - nums[i] - (sum - left));
+        }
+
+        return nums;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var nums = [10, 4, 8, 3];
+      var result = [15, 1, 11, 22];
+      // 解释：数组 leftSum 为 [0,10,14,22] 且数组 rightSum 为 [15,11,3,0] 。
+
+      var nums = [1];
+      var result = [0];
+      // 解释：数组 leftSum 为 [0] 且数组 rightSum 为 [0] 。
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('leftRightDifference = ', leftRightDifference(nums));
+    </script>
+  </body>
+</html>
