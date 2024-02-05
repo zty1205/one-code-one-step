@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2578. 最小和分割</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/split-with-minimum-sum/description/
+
+      // 给你一个正整数 num ，请你将它分割成两个非负整数 num1 和 num2 ，满足：
+      //
+      // 提示：
+      // num1 和 num2 直接连起来，得到 num 各数位的一个排列。
+      // 换句话说，num1 和 num2 中所有数字出现的次数之和等于 num 中所有数字出现的次数。
+      // num1 和 num2 可以包含前导 0 。
+      // 请你返回 num1 和 num2 可以得到的和的 最小 值。
+      // 注意：
+      //
+      // 提示：
+      // num 保证没有前导 0 。
+      // num1 和 num2 中数位顺序可以与 num 中数位顺序不同。
+      //
+      // 提示：
+      // 10 <= num <= 109
+
+      /**
+       * @param {number} num
+       * @return {number}
+       */
+      var splitNum = function (num) {};
+
+      // --- answer-1 ---
+
+      // 贪心 排序后 最小的放前面
+      var splitNum = function (num = 1) {
+        const str = String(num);
+        const arr = String(num)
+          .split('')
+          .sort((a, b) => a - b);
+        console.log(arr);
+
+        const a = [];
+        const b = [];
+        for (let i = 0; i < arr.length; i += 2) {
+          arr[i] && a.push(arr[i]);
+          arr[i + 1] && b.push(arr[i + 1]);
+        }
+        console.log(a, b);
+        return Number(a.join('')) + Number(b.join(''));
+      };
+
+      var splitNum = function (num) {
+        const stnum = [...String(num)].map(Number).sort((a, b) => a - b);
+        let num1 = 0,
+          num2 = 0;
+        stnum.forEach((val, i) => {
+          i % 2 == 0 ? (num1 = num1 * 10 + val) : (num2 = num2 * 10 + val);
+        });
+        return num1 + num2;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var num = 4325;
+      var result = 59;
+      // 解释：我们可以将 4325 分割成 num1 = 24 和 num2 = 35 ，和为 59 ，59 是最小和。
+
+      var num = 687;
+      var result = 75;
+      // 解释：我们可以将 687 分割成 num1 = 68 和 num2 = 7 ，和为最优值 75 。
+
+      console.log('num = ', num);
+      console.log('result = ', result);
+      console.log('splitNum = ', splitNum(num));
+    </script>
+  </body>
+</html>
