@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2582. 递枕头</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/pass-the-pillow/description/
+
+      // n 个人站成一排，按从 1 到 n 编号。
+      // 最初，排在队首的第一个人拿着一个枕头。每秒钟，拿着枕头的人会将枕头传递给队伍中的下一个人。一旦枕头到达队首或队尾，传递方向就会改变，队伍会继续沿相反方向传递枕头。
+      //
+      // 提示：
+      // 例如，当枕头到达第 n 个人时，TA 会将枕头传递给第 n - 1 个人，然后传递给第 n - 2 个人，依此类推。
+      // 给你两个正整数 n 和 time ，返回 time 秒后拿着枕头的人的编号。
+      //
+      // 提示：
+      // 2 <= n <= 1000
+      // 1 <= time <= 1000
+
+      /**
+       * @param {number} n
+       * @param {number} time
+       * @return {number}
+       */
+      var passThePillow = function (n, time) {};
+
+      // --- answer-1 ---
+
+      // 模拟
+      var passThePillow = function (n = 2, time = 1) {
+        let cur = 1;
+        let step = 1;
+        for (let i = 0; i < time; i++) {
+          cur += step;
+          if (cur === n || cur === 1) {
+            step = -step;
+          }
+        }
+        return cur;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 数学
+      var passThePillow = function (n, time) {
+        time %= (n - 1) * 2;
+        return time < n ? time + 1 : n * 2 - time - 1;
+      };
+
+      // --- answer-2 ---
+
+      var n = 4,
+        time = 5;
+      var result = 2;
+      // 解释：队伍中枕头的传递情况为：1 -> 2 -> 3 -> 4 -> 3 -> 2 。
+
+      var n = 3,
+        time = 2;
+      var result = 3;
+      // 解释：队伍中枕头的传递情况为：1 -> 2 -> 3 。
+
+      console.log('n = ', n);
+      console.log('time = ', time);
+      console.log('result = ', result);
+      console.log('passThePillow = ', passThePillow(n, time));
+    </script>
+  </body>
+</html>

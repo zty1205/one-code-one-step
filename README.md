@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (595 道)
+## 三、LeetCode (596 道)
 
 <br/>
 
@@ -739,6 +739,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2570.合并两个二维数组-求和法.html](./leetCode/2570.合并两个二维数组-求和法.html)
 - [2574.左右元素和的差值.html](./leetCode/2574.左右元素和的差值.html)
 - [2578.最小和分割.html](./leetCode/2578.最小和分割.html)
+- [2582.递枕头.html](./leetCode/2582.递枕头.html)
 
 <br/>
 
