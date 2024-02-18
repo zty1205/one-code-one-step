@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2586. 统计范围内的元音字符串数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/count-the-number-of-vowel-strings-in-range/description/
+
+      // 给你一个下标从 0 开始的字符串数组 words 和两个整数：left 和 right 。
+      // 如果字符串以元音字母开头并以元音字母结尾，那么该字符串就是一个 元音字符串 ，其中元音字母是 'a'、'e'、'i'、'o'、'u' 。
+      // 返回 words[i] 是元音字符串的数目，其中 i 在闭区间 [left, right] 内。
+      //
+      // 提示：
+      // 1 <= words.length <= 1000
+      // 1 <= words[i].length <= 10
+      // words[i] 仅由小写英文字母组成
+      // 0 <= left <= right < words.length
+
+      /**
+       * @param {string[]} words
+       * @param {number} left
+       * @param {number} right
+       * @return {number}
+       */
+      var vowelStrings = function (words, left, right) {};
+
+      // --- answer-1 ---
+
+      var v = new Set(['a', 'e', 'i', 'o', 'u']);
+      var isVowel = function (str = '') {
+        if (!str) return false;
+        return v.has(str[0]) && v.has(str[str.length - 1]);
+      };
+      var vowelStrings = function (words = [], left = 1, right = 1) {
+        let res = 0;
+        for (let i = left; i <= right; i++) {
+          if (isVowel(words[i])) {
+            res++;
+          }
+        }
+        return res;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var words = ['are', 'amy', 'u'],
+        left = 0,
+        right = 2;
+      var result = 2;
+      // 解释：
+
+      var words = ['hey', 'aeo', 'mu', 'ooo', 'artro'],
+        left = 1,
+        right = 4;
+      var result = 3;
+      // 解释：
+
+      console.log('words = ', words);
+      console.log('left = ', left);
+      console.log('right = ', right);
+      console.log('result = ', result);
+      console.log('vowelStrings = ', vowelStrings(words, left, right));
+    </script>
+  </body>
+</html>
