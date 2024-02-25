@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2595. 奇偶位数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/number-of-even-and-odd-bits/description/
+
+      // 给你一个 正 整数 n 。
+      // 用 even 表示在 n 的二进制形式（下标从 0 开始）中值为 1 的偶数下标的个数。
+      // 用 odd 表示在 n 的二进制形式（下标从 0 开始）中值为 1 的奇数下标的个数。
+      // 返回整数数组 answer ，其中 answer = [even, odd] 。
+      //
+      // 提示：
+      // 1 <= n <= 1000
+
+      /**
+       * @param {number} n
+       * @return {number[]}
+       */
+      var evenOddBit = function (n) {};
+
+      // --- answer-1 ---
+      // 0101010101 = 341
+      // 1010101010 = 682
+      var hammingWeight = function (n) {
+        let ans = 0;
+        while (n) {
+          n = n & (n - 1);
+          ans++;
+        }
+        return ans;
+      };
+      // 位运算
+      var evenOddBit = function (n) {
+        return [hammingWeight(n & 341), hammingWeight(n & 682)];
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 字符串
+      var evenOddBit = function (n) {
+        const str = n.toString(2);
+        const length = str.length;
+        let even = 0;
+        let odd = 0;
+        for (let i = 0; i < length; i++) {
+          if (str[length - 1 - i] === '1') {
+            i % 2 === 0 ? ++even : ++odd;
+          }
+        }
+        return [even, odd];
+      };
+
+      // 字符串
+      var evenOddBit = function (n) {
+        const res = [0, 0];
+        let i = 0;
+        while (n) {
+          res[i % 2] += n % 2;
+          n = Math.floor(n / 2);
+          i++;
+        }
+        return res;
+      };
+
+      // --- answer-2 ---
+
+      var n = 17;
+      var result = [2, 0];
+      // 解释：17 的二进制形式是 10001 。
+
+      var n = 2;
+      var result = [0, 1];
+      // 解释：2 的二进制形式是 10 。
+
+      console.log('n = ', n);
+      console.log('result = ', result);
+      console.log('evenOddBit = ', evenOddBit(n));
+    </script>
+  </body>
+</html>
