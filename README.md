@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (601 道)
+## 三、LeetCode (602 道)
 
 <br/>
 
@@ -745,6 +745,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2595.奇偶位数.html](./leetCode/2595.奇偶位数.html)
 - [2600.K 件物品的最大和.html](./leetCode/2600.K件物品的最大和.html)
 - [2605.从两个数字数组里生成最小数字.html](./leetCode/2605.从两个数字数组里生成最小数字.html)
+- [2609.最长平衡子字符串.html](./leetCode/2609.最长平衡子字符串.html)
 
 <br/>
 
