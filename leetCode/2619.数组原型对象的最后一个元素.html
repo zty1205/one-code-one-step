@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2619. 数组原型对象的最后一个元素</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/array-prototype-last/description/
+
+      // 请你编写一段代码实现一个数组方法，使任何数组都可以调用 array.last() 方法，这个方法将返回数组最后一个元素。如果数组中没有元素，则返回 -1 。
+      // 你可以假设数组是 JSON.parse 的输出结果。
+      //
+      // 提示：
+      // arr 是一个有效的 JSON 数组
+      // 0 <= arr.length <= 1000
+
+      /**
+       * @return {null|boolean|number|string|Array|Object}
+       */
+      Array.prototype.last = function () {};
+      /**
+       * const arr = [1, 2, 3];
+       * arr.last(); // 3
+       */
+
+      // --- answer-1 ---
+
+      Array.prototype.last = function () {
+        const length = this.length;
+        return length === 0 ? -1 : this[length - 1];
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var nums = [null, {}, 3];
+      var result = 3;
+      // 解释：调用 nums.last() 后返回最后一个元素： 3。
+
+      var nums = [];
+      var result = -1;
+      // 解释：因为此数组没有元素，所以应该返回 -1。
+
+      console.log('result = ', result);
+    </script>
+  </body>
+</html>
