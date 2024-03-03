@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2620. 计数器</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/counter/description/
+
+      // 给定一个整型参数 n，请你编写并返回一个 counter 函数。这个 counter 函数最初返回 n，每次调用它时会返回前一个值加 1 的值 ( n ,  n + 1 ,  n + 2 ，等等)。
+      //
+      // 提示：
+      // -1000 <= n <= 1000
+      // 0 <= calls.length <= 1000
+      // calls[i] === "call"
+
+      /**
+       * @param {number} n
+       * @return {Function} counter
+       */
+      var createCounter = function (n) {
+        return function () {};
+      };
+      /**
+       * const counter = createCounter(10)
+       * counter() // 10
+       * counter() // 11
+       * counter() // 12
+       */
+
+      // --- answer-1 ---
+
+      var createCounter = function (n) {
+        let counter = n - 1;
+        return function () {
+          counter += 1;
+          return counter;
+        };
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      // var n = ;
+      // n = 10 ;
+      // ['call', 'call', 'call'];
+
+      // var n = ;
+      // n = -2;
+      // ["call","call","call","call","call"]
+
+      console.log('n = ', n);
+      console.log('result = ', result);
+      console.log('createCounter = ', createCounter(n));
+    </script>
+  </body>
+</html>
