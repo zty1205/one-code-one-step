@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (606 道)
+## 三、LeetCode (607 道)
 
 <br/>
 
@@ -750,6 +750,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2619.数组原型对象的最后一个元素.html](./leetCode/2619.数组原型对象的最后一个元素.html)
 - [2620.计数器.html](./leetCode/2620.计数器.html)
 - [2621.睡眠函数.html](./leetCode/2621.睡眠函数.html)
+- [2626.数组归约运算.html](./leetCode/2626.数组归约运算.html)
 
 <br/>
 

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2626. 数组归约运算</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/array-reduce-transformation/description/
+
+      // 给定一个整数数组 nums、一个 reducer 函数 fn 和一个初始值 init，返回通过依次对数组的每个元素执行 fn 函数得到的最终结果。
+      // 通过以下操作实现这个结果：val = fn(init, nums[0])，val = fn(val, nums[1])，val = fn(val, nums[2])，... 直到处理数组中的每个元素。然后返回 val 的最终值。
+      // 如果数组的长度为 0，则函数应返回 init。
+      // 请你在不使用内置数组方法的 Array.reduce 前提下解决这个问题。
+      //
+      // 提示：
+      // 0 <= nums.length <= 1000
+      // 0 <= nums[i] <= 1000
+      // 0 <= init <= 1000
+
+      /**
+       * @param {number[]} nums
+       * @param {Function} fn
+       * @param {number} init
+       * @return {number}
+       */
+      var reduce = function (nums, fn, init) {};
+
+      // --- answer-1 ---
+
+      // 循环
+      var reduce = function (nums = [], fn = () => {}, init = 0) {
+        for (let n of nums) {
+          init = fn(init, n);
+        }
+        return init;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 递归
+      var reduce = function (nums = [], fn = () => {}, init = 0) {
+        if (nums.length) {
+          const n = nums.shift();
+          return reduce(nums, fn, fn(init, n));
+        }
+        return init;
+      };
+
+      function reduce(nums, fn, init) {
+        return nums.reverse().reduceRight(fn, init);
+      }
+
+      // --- answer-2 ---
+
+      var nums = [1, 2, 3, 4],
+        fn = function sum(accum, curr) {
+          return accum + curr;
+        },
+        init = 0;
+      var result = 10;
+
+      var nums = [1, 2, 3, 4],
+        fn = function sum(accum, curr) {
+          return accum + curr * curr;
+        },
+        init = 100;
+      var result = 130;
+
+      var nums = [],
+        fn = function sum(accum, curr) {
+          return 0;
+        },
+        init = 25;
+      var result = 24;
+
+      console.log('nums = ', nums);
+      console.log('fn = ', fn);
+      console.log('init = ', init);
+      console.log('result = ', result);
+      console.log('reduce = ', reduce(nums, fn, init));
+    </script>
+  </body>
+</html>
