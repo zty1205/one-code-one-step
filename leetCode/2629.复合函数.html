@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2629. 复合函数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/function-composition/description/
+
+      // 请你编写一个函数，它接收一个函数数组 [f1, f2, f3，…， fn] ，并返回一个新的函数 fn ，它是函数数组的 复合函数 。
+      // [f(x)， g(x)， h(x)] 的 复合函数 为 fn(x) = f(g(h(x))) 。
+      // 一个空函数列表的 复合函数 是 恒等函数 f(x) = x 。
+      // 你可以假设数组中的每个函数接受一个整型参数作为输入，并返回一个整型作为输出。
+      //
+      // 提示：
+      // -1000 <= x <= 1000
+      // 0 <= functions.length <= 1000
+      // 所有函数都接受并返回一个整型
+
+      /**
+       * @param {Function[]} functions
+       * @return {Function}
+       */
+      var compose = function (functions) {
+        return function (x) {};
+      };
+      /**
+       * const fn = compose([x => x + 1, x => 2 * x])
+       * fn(4) // 9
+       */
+
+      // --- answer-1 ---
+
+      var compose = function (functions) {
+        return function (x) {};
+      };
+
+      // --- answer-1 ---
+
+      // 反手一个reduce
+      var compose = function (functions = []) {
+        return function (x) {
+          return functions.reduceRight((val, fn) => fn(val), x);
+        };
+      };
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var functions = [(x) => x + 1, (x) => x * x, (x) => 2 * x],
+        x = 4;
+      var result = 65;
+      // 解释：
+
+      // 输出：functions = [x => 10 * x, x => 10 * x, x => 10 * x], x = 1;
+      // 输入：1000;
+      // 解释：
+
+      var functions = [],
+        x = 42;
+      var result = 42;
+      // 解释：
+
+      console.log('functions = ', functions);
+      console.log('result = ', result);
+      console.log('compose = ', compose(functions)(x));
+    </script>
+  </body>
+</html>
