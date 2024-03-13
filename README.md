@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (610 道)
+## 三、LeetCode (611 道)
 
 <br/>
 
@@ -754,6 +754,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2629.复合函数.html](./leetCode/2629.复合函数.html)
 - [2634.过滤数组中的元素.html](./leetCode/2634.过滤数组中的元素.html)
 - [2635.转换数组中的每个元素.html](./leetCode/2635.转换数组中的每个元素.html)
+- [2639.查询网格图中每一列的宽度.html](./leetCode/2639.查询网格图中每一列的宽度.html)
 
 <br/>
 
