@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>97. 交错字符串</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/interleaving-string/description/
+
+      // 给定三个字符串 s1、s2、s3，请你帮忙验证 s3 是否是由 s1 和 s2 交错 组成的。
+      // 两个字符串 s 和 t 交错 的定义与过程如下，其中每个字符串都会被分割成若干 非空
+      // 子字符串
+      // ：
+      //
+      // 提示：
+      // s = s1 + s2 + ... + sn
+      // t = t1 + t2 + ... + tm
+      // |n - m| <= 1
+      // 交错 是 s1 + t1 + s2 + t2 + s3 + t3 + ... 或者 t1 + s1 + t2 + s2 + t3 + s3 + ...
+      // 注意：a + b 意味着字符串 a 和 b 连接。
+      //
+      // 提示：
+      // 0 <= s1.length, s2.length <= 100
+      // 0 <= s3.length <= 200
+      // s1、s2、和 s3 都由小写英文字母组成
+      // 进阶：您能否仅使用 O(s2.length) 额外的内存空间来解决它?
+
+      /**
+       * @param {string} s1
+       * @param {string} s2
+       * @param {string} s3
+       * @return {boolean}
+       */
+      var isInterleave = function (s1, s2, s3) {};
+
+      // --- answer-1 ---
+
+      // 需要注意顺序，数量
+      // 动态规划
+      // f(i,j)=f(i-1,j) && s1[i-1] === s3[i+j-1]  || f(i, j - 1) && s2[j-1] === s3[i+j-1]
+      var isInterleave = function (s1 = '', s2 = '', s3 = '') {
+        let len1 = s1.length;
+        let len2 = s2.length;
+        let len3 = s3.length;
+        if (len1 + len2 !== len3) {
+          return false;
+        }
+        const dp = new Array(len2 + 1).fill(false);
+        dp[0] = true;
+        for (let i = 0; i <= len1; i++) {
+          for (let j = 0; j <= len2; j++) {
+            if (i === 0 && j === 0) continue;
+            let idx = i + j - 1;
+            if (i === 0) {
+              // s2的前j-1个字符和s3的前j-1个字符相同，并且s2的第j个字符和s3的第j个字符相同
+              dp[j] = dp[j - 1] && s2[j - 1] === s3[idx];
+            } else if (j === 0) {
+              // s1的前i-1个字符和s3的前i-1个字符相同，并且s1的第i个字符和s3的第i个字符相同
+              dp[j] = dp[j] && s1[i - 1] === s3[idx];
+            } else {
+              // 如果s1的第i位字符和s3的第i+j位字符相同，则看s1的前i-1位字符和s2的前j位字符是否能交错组成s3的前i-1+j位字符
+              // 否则，如果s2的第j位字符和s3的第i+j位字符相同，则看s1的前i位字符和s2的前j-1位字符是否能交错组成s3的前i+j-1位字符
+              // 上面两个只要满足一种，就表示s1的前i位和s2的前j位可以交错组成s3的前i+j位
+              dp[j] = (s1[i - 1] === s3[idx] && dp[j]) || (s2[j - 1] === s3[idx] && dp[j - 1]);
+            }
+          }
+        }
+        return dp[len2];
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // DPS
+      var isInterleave = function (s1 = '', s2 = '', s3 = '') {
+        let len1 = s1.length;
+        let len2 = s2.length;
+        let len3 = s3.length;
+        if (len1 + len2 !== len3) {
+          return false;
+        }
+
+        const memo = Array.from({ length: len1 + 1 }, () => Array.from({ length: len2 + 1 }));
+
+        const check = (i, j, k) => {
+          if (memo[i][j] != null) return memo[i][j];
+
+          if (k == s3.length) {
+            memo[i][j] = true;
+            return true;
+          }
+
+          let isValid = false;
+
+          if (i < s1.length && s1[i] == s3[k]) {
+            isValid = check(i + 1, j, k + 1);
+          }
+          if (j < s2.length && s2[j] == s3[k]) {
+            isValid = isValid || check(i, j + 1, k + 1);
+          }
+          memo[i][j] = isValid;
+          return isValid;
+        };
+
+        return check(0, 0, 0);
+      };
+
+      // --- answer-2 ---
+
+      var s1 = 'aabcc',
+        s2 = 'dbbca',
+        s3 = 'aadbbcbcac';
+      var result = true;
+
+      // var s1 = 'aabcc',
+      //   s2 = 'dbbca',
+      //   s3 = 'aadbbbaccc';
+      // var result = false;
+
+      // var s1 = "", s2 = "", s3 = "";
+      // var result = true;
+
+      console.log('s1 = ', s1);
+      console.log('s2 = ', s2);
+      console.log('s3 = ', s3);
+      console.log('result = ', result);
+      console.log('isInterleave = ', isInterleave(s1, s2, s3));
+    </script>
+  </body>
+</html>
