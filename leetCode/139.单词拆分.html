@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>139. 单词拆分</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/word-break/description/
+
+      // 给你一个字符串 s 和一个字符串列表 wordDict 作为字典。如果可以利用字典中出现的一个或多个单词拼接出 s 则返回 true。
+      // 注意：不要求字典中出现的单词全部都使用，并且字典中的单词可以重复使用。
+      //
+      // 提示：
+      // 1 <= s.length <= 300
+      // 1 <= wordDict.length <= 1000
+      // 1 <= wordDict[i].length <= 20
+      // s 和 wordDict[i] 仅由小写英文字母组成
+      // wordDict 中的所有字符串 互不相同
+
+      /**
+       * @param {string} s
+       * @param {string[]} wordDict
+       * @return {boolean}
+       */
+      var wordBreak = function (s, wordDict) {};
+
+      // --- answer-1 ---
+
+      //  超时
+      var wordBreak = function (s = '', wordDict = []) {
+        const length = s.length;
+        function check(str = '') {
+          const len = str.length;
+          if (len > length) return false;
+          if (len === length) return str === s;
+          for (let word of wordDict) {
+            if (check(str + word)) {
+              return true;
+            }
+          }
+          return false;
+        }
+        return check('');
+      };
+
+      // 记忆化 避免超时
+      const wordBreak = (s, wordDict) => {
+        const len = s.length;
+        const wordSet = new Set(wordDict);
+        const memo = new Array(len);
+
+        const canBreak = (start) => {
+          if (start == len) return true;
+          if (memo[start] !== undefined) return memo[start]; // memo中有，就用memo中的
+
+          for (let i = start + 1; i <= len; i++) {
+            const prefix = s.slice(start, i);
+            if (wordSet.has(prefix) && canBreak(i)) {
+              memo[start] = true; // 当前递归的结果存一下
+              return true;
+            }
+          }
+          memo[start] = false; // 当前递归的结果存一下
+          return false;
+        };
+        return canBreak(0);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 动态规划
+      // dp[i] = dp[j] && check(s[j, ...i-1]) 在字典中
+      var wordBreak = function (s = '', wordDict = []) {
+        const length = s.length;
+        const dp = new Array(length + 1).fill(false);
+        const set = new Set(wordDict);
+        dp[0] = true;
+        for (let i = 1; i <= length; i++) {
+          for (let j = 0; j < i; j++) {
+            if (dp[j] && set.has(s.substr(j, i - j))) {
+              dp[i] = true;
+              break;
+            }
+          }
+        }
+        return dp[length];
+      };
+
+      var wordBreak = function (s = '', wordDict = []) {
+        const length = s.length;
+        const dp = new Array(length + 1).fill(false);
+        const set = new Set(wordDict);
+        dp[0] = true;
+        for (let i = 1; i <= length; i++) {
+          for (let j = 0; j < i; j++) {
+            if (dp[i] == true) break;
+            if (dp[j] == false) continue;
+            const suffix = s.slice(j, i);
+            if (dp[j] && set.has(suffix)) {
+              dp[i] = true;
+              break;
+            }
+          }
+        }
+        return dp[length];
+      };
+
+      // --- answer-2 ---
+
+      var s = 'leetcode',
+        wordDict = ['leet', 'code'];
+      var result = true;
+      // 解释: 返回 true 因为 "leetcode" 可以由 "leet" 和 "code" 拼接成。
+
+      // var s = 'applepenapple',
+      //   wordDict = ['apple', 'pen'];
+      // var result = true;
+      // 解释: 返回 true 因为 "applepenapple" 可以由 "apple" "pen" "apple" 拼接成。
+
+      // var s = 'catsandog',
+      //   wordDict = ['cats', 'dog', 'sand', 'and', 'cat'];
+      // var result = false;
+
+      console.log('s = ', s);
+      console.log('vresult = ', wordDict);
+      console.log('result = ', result);
+      console.log('wordBreak = ', wordBreak(s, wordDict));
+    </script>
+  </body>
+</html>
