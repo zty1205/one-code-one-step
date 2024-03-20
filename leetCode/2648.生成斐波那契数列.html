@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2648. 生成斐波那契数列</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/generate-fibonacci-sequence/description/
+
+      // 请你编写一个生成器函数，并返回一个可以生成 斐波那契数列 的生成器对象。
+      // 斐波那契数列 的递推公式为 Xn = Xn-1 + Xn-2 。
+      // 这个数列的前几个数字是 0, 1, 1, 2, 3, 5, 8, 13 。
+      //
+      // 提示：
+      // 0 <= callCount <= 50
+
+      /**
+       * @return {Generator<number>}
+       */
+      var fibGenerator = function* () {};
+      /**
+       * const gen = fibGenerator();
+       * gen.next().value; // 0
+       * gen.next().value; // 1
+       */
+
+      // --- answer-1 ---
+
+      var fibGenerator = function* () {
+        let pre = 0,
+          cur = 1;
+        yield pre;
+        yield cur;
+        while (true) {
+          yield pre + cur;
+          [pre, cur] = [cur, pre + cur];
+        }
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // var fibGenerator = function* (n_1 = 1, n_2 = 0) {
+      //   yield n_2;
+      //   yield* fibGenerator(n_1 + n_2, n_1);
+      // };
+
+      // --- answer-2 ---
+
+      // function* 是 JavaScript 中用来定义生成器函数（Generator Function）的语法。生成器函数是一种特殊类型的函数，可以暂停执行并在稍后的时间继续执行。
+      // 它们通过使用 yield 关键字来产生（yield）一个值，并且在产生值后会暂停执行，等待下一次的调用继续执行。
+
+      function* myGenerator() {
+        yield 1;
+        yield 2;
+        yield 3;
+      }
+
+      const generator = myGenerator(); // 创建一个生成器对象
+      console.log(generator.next()); // { value: 1, done: false }
+      console.log(generator.next()); // { value: 2, done: false }
+      console.log(generator.next()); // { value: 3, done: false }
+      console.log(generator.next()); // { value: undefined, done: true }
+
+      var callCount = 5;
+      var result = [0, 1, 1, 2, 3];
+      // 解释：
+
+      var callCount = 0;
+      var result = [];
+      // 解释：gen.next() 永远不会被调用，所以什么也不会输出
+
+      const gen = fibGenerator();
+      for (let i = 0; i < callCount; i++) {
+        console.log('i = i, res = ', gen.next());
+      }
+      console.log('result = ', result);
+    </script>
+  </body>
+</html>

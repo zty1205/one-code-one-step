@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (615 道)
+## 三、LeetCode (616 道)
 
 <br/>
 
@@ -759,6 +759,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2639.查询网格图中每一列的宽度.html](./leetCode/2639.查询网格图中每一列的宽度.html)
 - [2643.一最多的行.html](./leetCode/2643.一最多的行.html)
 - [2644.找出可整除性得分最大的整数.html](./leetCode/2644.找出可整除性得分最大的整数.html)
+- [2648.生成斐波那契数列.html](./leetCode/2648.生成斐波那契数列.html)
 
 <br/>
 
