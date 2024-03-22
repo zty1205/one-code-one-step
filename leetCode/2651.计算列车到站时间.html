@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2651. 计算列车到站时间</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/calculate-delayed-arrival-time/description/
+
+      // 给你一个正整数 arrivalTime 表示列车正点到站的时间（单位：小时），另给你一个正整数 delayedTime 表示列车延误的小时数。
+      // 返回列车实际到站的时间。
+      // 注意，该问题中的时间采用 24 小时制。
+      //
+      // 提示：
+      // 1 <= arrivaltime < 24
+      // 1 <= delayedTime <= 24
+
+      /**
+       * @param {number} n
+       * @return {number}
+       */
+      var sumOfMultiples = function (n) {};
+
+      // --- answer-1 ---
+
+      // 循环
+      var sumOfMultiples = function (n) {
+        let res = 0;
+        for (let i = 1; i <= n; i++) {
+          if (i % 3 === 0 || i % 5 === 0 || i % 7 === 0) {
+            res += i;
+          }
+        }
+        return res;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 等差数列求和 - 重叠项
+      var f = function (n, m) {
+        return ((m + Math.floor(n / m) * m) * Math.floor(n / m)) / 2;
+      };
+      var sumOfMultiples = function (n) {
+        return f(n, 3) + f(n, 5) + f(n, 7) - f(n, 3 * 5) - f(n, 3 * 7) - f(n, 5 * 7) + f(n, 3 * 5 * 7);
+      };
+
+      // --- answer-2 ---
+
+      // var arrivalTime = 15, delayedTime = 5 ;
+      // var result = 20 ;
+      // 解释：列车正点到站时间是 15:00 ，延误 5 小时，所以列车实际到站的时间是 15 + 5 = 20（20:00）。
+
+      // var arrivalTime = 13, delayedTime = 11;
+      // var result = 0;
+      // 解释：列车正点到站时间是 13:00 ，延误 11 小时，所以列车实际到站的时间是 13 + 11 = 24（在 24 小时制中表示为 00:00 ，所以返回 0）。
+
+      console.log('result = ', result);
+    </script>
+  </body>
+</html>
