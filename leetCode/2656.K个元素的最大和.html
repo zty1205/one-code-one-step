@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2656. K 个元素的最大和</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/maximum-sum-with-exactly-k-elements/description/
+
+      // 给你一个下标从 0 开始的整数数组 nums 和一个整数 k 。你需要执行以下操作 恰好 k 次，最大化你的得分：
+      //
+      // 提示：
+      // 从 nums 中选择一个元素 m 。
+      // 将选中的元素 m 从数组中删除。
+      // 将新元素 m + 1 添加到数组中。
+      // 你的得分增加 m 。
+      // 请你返回执行以上操作恰好 k 次后的最大得分。
+      //
+      // 提示：
+      // 1 <= nums.length <= 100
+      // 1 <= nums[i] <= 100
+      // 1 <= k <= 100
+
+      /**
+       * @param {number[]} nums
+       * @param {number} k
+       * @return {number}
+       */
+      var maximizeSum = function (nums, k) {};
+
+      // --- answer-1 ---
+
+      // 模拟
+      var maximizeSum = function (nums = [], k = 1) {
+        let res = 0;
+        while (k--) {
+          nums.sort((a, b) => a - b);
+          let max = nums.pop();
+          console.log('max = ', max);
+          res += max;
+          nums.push(max + 1);
+        }
+        return res;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 最大值+1后还是最大值
+      var maximizeSum = function (nums = [], k = 1) {
+        const max = Math.max.apply(Math, nums);
+        // 等差数列
+        return ((max + max + k - 1) * k) / 2;
+      };
+
+      // --- answer-2 ---
+
+      var nums = [1, 2, 3, 4, 5],
+        k = 3;
+      var result = 18;
+      // 解释：我们需要从 nums 中恰好选择 3 个元素并最大化得分。
+
+      var nums = [5, 5, 5],
+        k = 2;
+      var result = 11;
+      // 解释：我们需要从 nums 中恰好选择 2 个元素并最大化得分。
+
+      var nums = [1, 2, 3, 4, 5],
+        k = 7;
+      var result = 56;
+
+      console.log('nums = ', nums);
+      console.log('k = ', k);
+      console.log('result = ', result);
+      console.log('maximizeSum = ', maximizeSum(nums, k));
+    </script>
+  </body>
+</html>
