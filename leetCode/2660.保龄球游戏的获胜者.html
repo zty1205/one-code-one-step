@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2660. 保龄球游戏的获胜者</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/determine-the-winner-of-a-bowling-game/
+
+      // 给你两个下标从 0 开始的整数数组 player1 和 player2 ，分别表示玩家 1 和玩家 2 击中的瓶数。
+      // 保龄球比赛由 n 轮组成，每轮的瓶数恰好为 10 。
+      // 假设玩家在第 i 轮中击中 xi 个瓶子。玩家第 i 轮的价值为：
+      //
+      // 提示：
+      // 如果玩家在该轮的前两轮的任何一轮中击中了 10 个瓶子，则为 2xi 。
+      // 否则，为 xi 。
+      // 玩家的得分是其 n 轮价值的总和。
+      // 返回
+      //
+      // 提示：
+      // 如果玩家 1 的得分高于玩家 2 的得分，则为 1 ；
+      // 如果玩家 2 的得分高于玩家 1 的得分，则为 2 ；
+      // 如果平局，则为 0 。
+      //
+      // 提示：
+      // n == player1.length == player2.length
+      // 1 <= n <= 1000
+      // 0 <= player1[i], player2[i] <= 10
+
+      /**
+       * @param {number[]} player1
+       * @param {number[]} player2
+       * @return {number}
+       */
+      var isWinner = function (player1, player2) {};
+
+      // --- answer-1 ---
+
+      // 模拟
+      var isWinner = function (player1, player2) {
+        const score = function (player) {
+          let res = 0;
+          for (let i = 0; i < player.length; i++) {
+            if ((i > 0 && player[i - 1] == 10) || (i > 1 && player[i - 2] == 10)) {
+              res += 2 * player[i];
+            } else {
+              res += player[i];
+            }
+          }
+          return res;
+        };
+        const s1 = score(player1);
+        const s2 = score(player2);
+        return s1 == s2 ? 0 : s1 > s2 ? 1 : 2;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var player1 = [4, 10, 7, 9],
+        player2 = [6, 5, 2, 3];
+      var result = 1;
+      // 解释：player1 的得分是 4 + 10 + 2*7 + 2*9 = 46 。
+
+      var player1 = [3, 5, 7, 6],
+        player2 = [8, 10, 10, 2];
+      var result = 2;
+      // 解释：player1 的得分是 3 + 5 + 7 + 6 = 21 。
+
+      var player1 = [2, 3],
+        player2 = [4, 1];
+      var result = 0;
+      // 解释：player1 的得分是 2 + 3 = 5 。
+
+      console.log('player1 = ', player1);
+      console.log('player2 = ', player2);
+      console.log('result = ', result);
+      console.log('isWinner = ', isWinner(player1, player2));
+    </script>
+  </body>
+</html>
