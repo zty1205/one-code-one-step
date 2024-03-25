@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2665. 计数器 II</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/counter-ii/description/\
+
+      // 请你写一个函数 createCounter。这个函数接收一个初始的整数值 init。并返回一个包含三个函数的对象。
+      // 这三个函数是：
+      //
+      // 提示：
+      // increment() 将当前值加 1 并返回。
+      // decrement() 将当前值减 1 并返回。
+      // reset() 将当前值设置为 init 并返回。
+      //
+      // 提示：
+      // -1000 <= init <= 1000
+      // 0 <= calls.length <= 1000
+      // calls[i] 是 “increment”、“decrement” 和 “reset” 中的一个
+
+      /**
+       * @param {integer} init
+       * @return { increment: Function, decrement: Function, reset: Function }
+       */
+      var createCounter = function (init) {};
+      /**
+       * const counter = createCounter(5)
+       * counter.increment(); // 6
+       * counter.reset(); // 5
+       * counter.decrement(); // 4
+       */
+
+      // --- answer-1 ---
+
+      // 直接构造
+      var createCounter = function (init = 0) {
+        let inital = init;
+        let current = init;
+        return {
+          increment: () => (current += 1),
+          decrement: () => (current -= 1),
+          reset: () => (current = init)
+        };
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var init = 5,
+        calls = ['increment', 'reset', 'decrement'];
+      var result = [6, 5, 4];
+      // 解释：
+
+      var init = 0,
+        calls = ['increment', 'increment', 'decrement', 'reset', 'reset'];
+      var result = [1, 2, 1, 0, 0];
+      // 解释：
+
+      var count = createCounter(init);
+      for (let fn of calls) {
+        console.log(`${fn} = `, count[fn]());
+      }
+      console.log('result = ', result);
+    </script>
+  </body>
+</html>
