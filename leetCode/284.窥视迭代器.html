@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>284. 窥视迭代器</title>
+  </head>
+  <body>
+    <script src="../helper/command.js"></script>
+    <script>
+      // https://leetcode.cn/problems/peeking-iterator/description/
+
+      // 请你在设计一个迭代器，在集成现有迭代器拥有的 hasNext 和 next 操作的基础上，还额外支持 peek 操作。
+      // 实现 PeekingIterator 类：
+      //
+      // 提示：
+      // PeekingIterator(Iterator<int> nums) 使用指定整数迭代器 nums 初始化迭代器。
+      // int next() 返回数组中的下一个元素，并将指针移动到下个元素处。
+      // bool hasNext() 如果数组中存在下一个元素，返回 true ；否则，返回 false 。
+      // int peek() 返回数组中的下一个元素，但 不 移动指针。
+      // 注意：每种语言可能有不同的构造函数和迭代器 Iterator，但均支持 int next() 和 boolean hasNext() 函数。
+      //
+      // 提示：
+      // 1 <= nums.length <= 1000
+      // 1 <= nums[i] <= 1000
+      // 对 next 和 peek 的调用均有效
+      // next、hasNext 和 peek 最多调用  1000 次
+      // 进阶：你将如何拓展你的设计？使之变得通用化，从而适应所有的类型，而不只是整数型？
+
+      /**
+       * // This is the Iterator's API interface.
+       * // You should not implement it, or speculate about its implementation.
+       * function Iterator() {
+       *    @ return {number}
+       *    this.next = function() { // return the next number of the iterator
+       *       ...
+       *    };
+       *
+       *    @return {boolean}
+       *    this.hasNext = function() { // return true if it still has numbers
+       *       ...
+       *    };
+       * };
+       */
+      /**
+       * @param {Iterator} iterator
+       */
+      var PeekingIterator = function (iterator) {};
+      /**
+       * @return {number}
+       */
+      PeekingIterator.prototype.peek = function () {};
+
+      // --- answer-1 ---
+
+      // 迭代器封装一下
+      var PeekingIterator = function (iterator) {
+        this.iterator = iterator;
+        this.nextElement = this.iterator.next();
+      };
+
+      PeekingIterator.prototype.peek = function () {
+        return this.nextElement;
+      };
+
+      PeekingIterator.prototype.next = function () {
+        const ret = this.nextElement;
+        this.nextElement = this.iterator.hasNext() ? this.iterator.next() : null;
+        return ret;
+      };
+
+      PeekingIterator.prototype.hasNext = function () {
+        return this.nextElement != null;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var iterator = ['PeekingIterator', 'next', 'peek', 'next', 'next', 'hasNext'];
+      var args = [[[1, 2, 3]], [], [], [], [], []];
+      var result = [null, 1, 2, 2, 3, false];
+
+      console.log('iterator = ', iterator);
+      console.log('args = ', args);
+      console.log('result = ', result);
+
+      classCommand(iterator, args);
+    </script>
+  </body>
+</html>
