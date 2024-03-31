@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (626 道)
+## 三、LeetCode (627 道)
 
 <br/>
 
@@ -347,6 +347,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [290.单词规律.html](./leetCode/290.单词规律.html)
 - [292.Nim 游戏.html](./leetCode/292.Nim游戏.html)
 - [303.区域和检索-数组不可变.html](./leetCode/303.区域和检索-数组不可变.html)
+- [319.灯泡开关.html](./leetCode/319.灯泡开关.html)
 - [326.3 的幂.html](./leetCode/326.3的幂.html)
 - [337.打家劫舍 III.html](./leetCode/337.打家劫舍III.html)
 - [338.比特位计数.html](./leetCode/338.比特位计数.html)

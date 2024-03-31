@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>319. 灯泡开关</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/bulb-switcher/description/
+
+      // 初始时有 n 个灯泡处于关闭状态。第一轮，你将会打开所有灯泡。接下来的第二轮，你将会每两个灯泡关闭第二个。
+      // 第三轮，你每三个灯泡就切换第三个灯泡的开关（即，打开变关闭，关闭变打开）。第 i 轮，你每 i 个灯泡就切换第 i 个灯泡的开关。直到第 n 轮，你只需要切换最后一个灯泡的开关。
+      // 找出并返回 n 轮后有多少个亮着的灯泡。
+      //
+      // 提示：
+      // 0 <= n <= 109
+
+      /**
+       * @param {number} n
+       * @return {number}
+       */
+      var bulbSwitch = function (n) {};
+
+      // --- answer-1 ---
+
+      // [0,0,0]
+      // [1,1,1]
+      // [1,0,1]
+
+      // [0,0,0,0]
+      // [1,1,1,1]
+      // [1,0,1,0]
+      // [1,0,0,0]
+
+      // [0,0,0,0,0]
+      // [1,1,1,1,1]
+      // [1,0,1,0,1]
+      // [1,0,0,0,0]
+      // [1,0,0,1,0]
+
+      // [0,0,0,0,0,0]
+      // [1,1,1,1,1,1]
+      // [1,0,1,0,1,0]
+      // [1,0,0,0,0,0]
+      // [1,0,0,1,0,0]
+
+      // 关闭为0 打开为1
+      // 0 ~ n-1
+      // 初始为0 对于第i个灯泡，只要有i的质数轮都可以使i切换状态
+      // 99999超时
+      var bulbSwitch = function (n) {
+        let res = 0;
+        const count = (num) => {
+          let init = false;
+          if (num === 1) return true;
+          for (let i = 1; i <= num; i++) {
+            if (num % i === 0) {
+              init = !init;
+            }
+          }
+          return init ? 1 : 0;
+        };
+        for (let i = 1; i <= n; i++) {
+          res += count(i);
+        }
+        return res;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 如果 k 有偶数个约数，那么最终第 k 个灯泡的状态为暗；如果 k 有奇数个约数，那么最终第 k 个灯泡的状态为亮。
+      // 只有当 k 是「完全平方数」时，它才会有奇数个约数，否则一定有偶数个约数。
+      var bulbSwitch = function (n) {
+        return Math.floor(Math.sqrt(n + 0.5));
+      };
+
+      // --- answer-2 ---
+
+      var n = 3;
+      var result = 1;
+      // 解释：
+
+      var n = 0;
+      var result = 0;
+
+      var n = 1;
+      var result = 1;
+
+      console.log('n = ', n);
+      console.log('result = ', result);
+      console.log('bulbSwitch = ', bulbSwitch(n));
+    </script>
+  </body>
+</html>
