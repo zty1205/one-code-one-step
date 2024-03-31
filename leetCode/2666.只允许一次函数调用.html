@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2666. 只允许一次函数调用</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/allow-one-function-call/description/
+
+      // 给定一个函数 fn ，它返回一个新的函数，返回的函数与原始函数完全相同，只不过它确保 fn 最多被调用一次。
+      //
+      // 提示：
+      // 第一次调用返回的函数时，它应该返回与 fn 相同的结果。
+      // 第一次后的每次调用，它应该返回 undefined 。
+      //
+      // 提示：
+      // calls 是一个有效的 JSON 数组
+      // 1 <= calls.length <= 10
+      // 1 <= calls[i].length <= 100
+      // 2 <= JSON.stringify(calls).length <= 1000
+
+      /**
+       * @param {Function} fn
+       * @return {Function}
+       */
+      var once = function (fn) {
+        return function (...args) {};
+      };
+      /**
+       * let fn = (a,b,c) => (a + b + c)
+       * let onceFn = once(fn)
+       *
+       * onceFn(1,2,3); // 6
+       * onceFn(2,3,6); // returns undefined without calling fn
+       */
+
+      // --- answer-1 ---
+
+      // 搞个标志位
+      var once = function (fn) {
+        let called = false;
+        return function (...args) {
+          if (!called) {
+            called = true;
+            return fn.apply(this, args);
+          }
+        };
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var fn = (a, b, c) => a + b + c,
+        calls = [
+          [1, 2, 3],
+          [2, 3, 6]
+        ];
+      var result = [{ calls: 1, value: 6 }];
+      // 解释：
+
+      // var fn = (a,b,c) => (a * b * c), calls = [[5,7,4],[2,3,6],[4,6,8]];
+      // var result = [{"calls":1,"value":140}];
+      // 解释：
+
+      // console.log('fn = ', fn);
+
+      console.log('result = ', result);
+      // console.log('once = ', once(fn));
+
+      let fn = (a, b, c) => a + b + c;
+      let onceFn = once(fn);
+
+      console.log('1 = ', onceFn(1, 2, 3)); // 6
+      console.log('2', onceFn(2, 3, 6)); // 6
+    </script>
+  </body>
+</html>

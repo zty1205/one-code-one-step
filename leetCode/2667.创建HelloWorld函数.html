@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2667. 创建 Hello World 函数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/create-hello-world-function/description/
+
+      //
+      // 提示：
+      // 0 <= args.length <= 10
+
+      /**
+       * @return {Function}
+       */
+      var createHelloWorld = function () {
+        return function (...args) {};
+      };
+      /**
+       * const f = createHelloWorld();
+       * f(); // "Hello World"
+       */
+
+      // --- answer-1 ---
+
+      var createHelloWorld = function () {
+        return () => 'Hello World';
+      };
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      // var args = [];
+      // var result = "Hello World";
+      // 解释：
+
+      // var args = [{},null,42];
+      // var result = "Hello World";
+      // 解释：
+
+      console.log('result = ', result);
+      console.log('createHelloWorld = ', createHelloWorld());
+    </script>
+  </body>
+</html>
