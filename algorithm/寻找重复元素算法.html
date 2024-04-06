@@ -10,20 +10,67 @@
     <script>
       /**
        * 寻找重复元素算法
+       *
+       * 假定给一组数字，返回重复的数字，只会存在1个重复的数字
        */
 
       // --- example-1 ---
 
-      // 1 运用map 或 set
-      // 2 floyd 「Floyd 判圈算法」（又称龟兔赛跑算法）
-
       // 查找的对象 数组，链表的思路同数组
+
+      // 排序 复杂度由排序算法决定
+      var findDuplicate0 = function (nums = []) {
+        nums.sort((a, b) => a - b);
+        let pre = nums[0];
+        for (let i = 0; i < nums.length - 2; i++) {
+          if (nums[i] === nums[i + 1]) {
+            return nums[i];
+          }
+        }
+        return -1;
+      };
+
+      // 使用set 或 map
+      var findDuplicate1 = function (nums = []) {
+        const set = new Set(); // new Map
+        for (const n of nums) {
+          if (set.has(n)) {
+            return n;
+          }
+          set.add(n);
+        }
+        return -1;
+      };
 
       // --- example-1 ---
 
       // --- example-2 ---
 
+      var findDuplicate2 = function (nums) {
+        let slow = 0;
+        let fast = 0;
+        do {
+          slow = nums[slow]; // slow走一步
+          fast = nums[nums[fast]]; // 走两步
+        } while (slow != fast);
+        slow = 0;
+        while (slow != fast) {
+          slow = nums[slow];
+          fast = nums[fast];
+        }
+        return slow;
+      };
+
       // --- example-2 ---
+
+      var nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 6, 15, 16, 17];
+      var result = 6;
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('findDuplicate0 = ', findDuplicate0([...nums]));
+      console.log('findDuplicate1 = ', findDuplicate1([...nums]));
+      console.log('findDuplicate2 = ', findDuplicate2([...nums]));
     </script>
   </body>
 </html>
