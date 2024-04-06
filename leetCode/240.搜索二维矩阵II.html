@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>240. 搜索二维矩阵 II</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/search-a-2d-matrix-ii/
+
+      // 编写一个高效的算法来搜索 m x n 矩阵 matrix 中的一个目标值 target 。该矩阵具有以下特性：
+      //
+      // 提示：
+      // 每行的元素从左到右升序排列。
+      // 每列的元素从上到下升序排列。
+      //
+      // 提示：
+      // m == matrix.length
+      // n == matrix[i].length
+      // 1 <= n, m <= 300
+      // -109 <= matrix[i][j] <= 109
+      // 每行的所有元素从左到右升序排列
+      // 每列的所有元素从上到下升序排列
+      // -109 <= target <= 109
+
+      /**
+       * @param {number[][]} matrix
+       * @param {number} target
+       * @return {boolean}
+       */
+      var searchMatrix = function (matrix, target) {};
+
+      // --- answer-1 ---
+
+      // 暴力  超时、
+
+      var searchMatrix = function (matrix = [[]], target = 0) {
+        const m = matrix.length;
+        const n = matrix[0].length;
+        for (let i = 0; i < m; i++) {
+          for (let j = 0; j < n; j++) {
+            if (matrix[i][j] === target) {
+              return true;
+            }
+          }
+        }
+        return false;
+      };
+
+      // m次二分
+      var searchMatrix = function (matrix, target) {
+        for (const row of matrix) {
+          const index = search(row, target);
+          if (index >= 0) {
+            return true;
+          }
+        }
+        return false;
+      };
+
+      const search = (nums, target) => {
+        let low = 0,
+          high = nums.length - 1;
+        while (low <= high) {
+          const mid = Math.floor((high - low) / 2) + low;
+          const num = nums[mid];
+          if (num === target) {
+            return mid;
+          } else if (num > target) {
+            high = mid - 1;
+          } else {
+            low = mid + 1;
+          }
+        }
+        return -1;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 从右上角开始， 大则往下一行，小则往左找
+      var searchMatrix = function (matrix = [[]], target = 0) {
+        const m = matrix.length;
+        const n = matrix[0].length;
+        const find = (i, j) => {
+          if (i >= m || i < 0 || j < 0 || j >= n) return false;
+          if (matrix[i][j] === target) return true;
+          if (matrix[i][j] < target) return find(i + 1, j);
+          return find(i, j - 1);
+        };
+        return find(0, n - 1);
+      };
+
+      var searchMatrix = function (matrix, target) {
+        const m = matrix.length,
+          n = matrix[0].length;
+        let x = 0,
+          y = n - 1;
+        while (x < m && y >= 0) {
+          if (matrix[x][y] === target) {
+            return true;
+          }
+          if (matrix[x][y] > target) {
+            --y;
+          } else {
+            ++x;
+          }
+        }
+        return false;
+      };
+
+      // --- answer-2 ---
+
+      var matrix = [
+          [1, 4, 7, 11, 15],
+          [2, 5, 8, 12, 19],
+          [3, 6, 9, 16, 22],
+          [10, 13, 14, 17, 24],
+          [18, 21, 23, 26, 30]
+        ],
+        target = 5;
+      var result = true;
+
+      var matrix = [
+          [1, 4, 7, 11, 15],
+          [2, 5, 8, 12, 19],
+          [3, 6, 9, 16, 22],
+          [10, 13, 14, 17, 24],
+          [18, 21, 23, 26, 30]
+        ],
+        target = 20;
+      var result = false;
+
+      console.log('matrix = ', matrix);
+      console.log('target = ', target);
+      console.log('result = ', result);
+      console.log('searchMatrix = ', searchMatrix(matrix, target));
+    </script>
+  </body>
+</html>
