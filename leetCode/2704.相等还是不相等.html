@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2704. 相等还是不相等</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/to-be-or-not-to-be/
+
+      // 请你编写一个名为 expect 的函数，用于帮助开发人员测试他们的代码。它应该接受任何值 val 并返回一个包含以下两个函数的对象。
+      //
+      // 提示：
+      // toBe(val) 接受另一个值并在两个值相等（ === ）时返回 true 。如果它们不相等，则应抛出错误 "Not Equal" 。
+      // notToBe(val) 接受另一个值并在两个值不相等（ !== ）时返回 true 。如果它们相等，则应抛出错误 "Equal" 。
+
+      /**
+       * @param {string} val
+       * @return {Object}
+       */
+      var expect = function (val) {};
+      /**
+       * expect(5).toBe(5); // true
+       * expect(5).notToBe(5); // throws "Equal"
+       */
+
+      // --- answer-1 ---
+
+      var expect = function (val) {
+        return {
+          toBe: (v) => {
+            if (val === v) return true;
+            throw new Error('Not Equal');
+          },
+          notToBe: (v) => {
+            if (val !== v) return true;
+            throw new Error('Equal');
+          }
+        };
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      // var func = () => expect(5).toBe(5);
+      // var result = {"value": true};
+      // 解释：5 === 5 因此该表达式返回 true。
+
+      // var func = () => expect(5).toBe(null);
+      // var result = {"error": "Not Equal"};
+      // 解释：5 !== null 因此抛出错误 "Not Equal".
+
+      // var func = () => expect(5).notToBe(null);
+      // var result = {"value": true};
+      // 解释：5 !== null 因此该表达式返回 true.
+
+      console.log('val = ', val);
+      console.log('result = ', result);
+      console.log('expect = ', expect(val));
+    </script>
+  </body>
+</html>
