@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (639 道)
+## 三、LeetCode (640 道)
 
 <br/>
 
@@ -783,6 +783,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2656.K 个元素的最大和.html](./leetCode/2656.K个元素的最大和.html)
 - [2652.倍数求和.html](./leetCode/2652.倍数求和.html)
 - [2651.计算列车到站时间.html](./leetCode/2651.计算列车到站时间.html)
+- [2715.执行可取消的延迟函数.html](./leetCode/2715.执行可取消的延迟函数.html)
 
 <br/>
 

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2710. 移除字符串中的尾随零</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/timeout-cancellation/description/
+
+      // 给定一个函数 fn ，一个参数数组 args 和一个以毫秒为单位的超时时间 t ，返回一个取消函数 cancelFn 。
+
+      // 在 cancelTimeMs 的延迟后，返回的取消函数 cancelFn 将被调用。
+
+      // setTimeout(cancelFn, cancelTimeMs)
+      // 最初，函数 fn 的执行应该延迟 t 毫秒。
+
+      // 如果在 t 毫秒的延迟之前调用了函数 cancelFn，它应该取消 fn 的延迟执行。否则，如果在指定的延迟 t 内没有调用 cancelFn，则应执行 fn，并使用提供的 args 作为参数。
+      //
+      // 提示：
+      // fn 是一个函数
+      // args 是一个有效的 JSON 数组
+      // 1 <= args.length <= 10
+      // 20 <= t <= 1000
+      // 10 <= cancelTimeMs <= 100
+
+      /**
+       * @param {Function} fn
+       * @param {Array} args
+       * @param {number} t
+       * @return {Function}
+       */
+      var cancellable = function (fn, args, t) {};
+
+      /**
+       *  const result = [];
+       *
+       *  const fn = (x) => x * 5;
+       *  const args = [2], t = 20, cancelTimeMs = 50;
+       *
+       *  const start = performance.now();
+       *
+       *  const log = (...argsArr) => {
+       *      const diff = Math.floor(performance.now() - start);
+       *      result.push({"time": diff, "returned": fn(...argsArr)});
+       *  }
+       *
+       *  const cancel = cancellable(log, args, t);
+       *
+       *  const maxT = Math.max(t, cancelTimeMs);
+       *
+       *  setTimeout(cancel, cancelTimeMs);
+       *
+       *  setTimeout(() => {
+       *      console.log(result); // [{"time":20,"returned":10}]
+       *  }, maxT + 15)
+       */
+
+      // --- answer-1 ---
+
+      var cancellable = function (fn, args, t) {
+        const timeoutId = setTimeout(function () {
+          fn.apply(null, args);
+        }, t);
+
+        const cancelFn = function () {
+          clearTimeout(timeoutId);
+        };
+
+        return cancelFn;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var num = '51230100';
+      var result = '512301';
+      // 解释：整数 "51230100" 有 2 个尾随零，移除并返回整数 "512301" 。
+
+      var num = '123';
+      var result = '123';
+      // 解释：整数 "123" 不含尾随零，返回整数 "123" 。
+
+      console.log('num = ', num);
+      console.log('result = ', result);
+      console.log('removeTrailingZeros = ', removeTrailingZeros(num));
+    </script>
+  </body>
+</html>
