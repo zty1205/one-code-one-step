@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (638 道)
+## 三、LeetCode (639 道)
 
 <br/>
 
@@ -765,6 +765,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2644.找出可整除性得分最大的整数.html](./leetCode/2644.找出可整除性得分最大的整数.html)
 - [2648.生成斐波那契数列.html](./leetCode/2648.生成斐波那契数列.html)
 - [2651.计算列车到站时间.html](./leetCode/2651.计算列车到站时间.html)
+- [2710.移除字符串中的尾随零.html](./leetCode/2710.移除字符串中的尾随零.html)
 - [2706.购买两块巧克力.html](./leetCode/2706.购买两块巧克力.html)
 - [2704.相等还是不相等.html](./leetCode/2704.相等还是不相等.html)
 - [2703.返回传递的参数的长度.html](./leetCode/2703.返回传递的参数的长度.html)

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2710. 移除字符串中的尾随零</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/remove-trailing-zeros-from-a-string/
+
+      // 给你一个用字符串表示的正整数 num ，请你以字符串形式返回不含尾随零的整数 num 。
+      //
+      // 提示：
+      // 1 <= num.length <= 1000
+      // num 仅由数字 0 到 9 组成
+      // num 不含前导零
+
+      /**
+       * @param {string} num
+       * @return {string}
+       */
+      var removeTrailingZeros = function (num) {};
+
+      // --- answer-1 ---
+
+      // 栈
+      var removeTrailingZeros = function (num = '') {
+        let stack = [];
+        let flag = true;
+        for (let i = num.length - 1; i >= 0; i--) {
+          if (num[i] === '0') {
+            if (!flag) {
+              stack.push(num[i]);
+            }
+          } else {
+            flag = false;
+            stack.push(num[i]);
+          }
+        }
+        return stack.reverse().join('');
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 正则
+      var removeTrailingZeros = function (num = '') {
+        return num.replace(/0*$/, '');
+      };
+      // --- answer-2 ---
+
+      // --- answer-3 ---
+
+      // slice
+      var removeTrailingZeros = function (num) {
+        for (let i = num.length - 1; i >= 0; i--) {
+          if (num[i] !== '0') {
+            return num.slice(0, i + 1);
+          }
+        }
+      };
+
+      // --- answer-3 ---
+
+      var num = '51230100';
+      var result = '512301';
+      // 解释：整数 "51230100" 有 2 个尾随零，移除并返回整数 "512301" 。
+
+      var num = '123';
+      var result = '123';
+      // 解释：整数 "123" 不含尾随零，返回整数 "123" 。
+
+      console.log('num = ', num);
+      console.log('result = ', result);
+      console.log('removeTrailingZeros = ', removeTrailingZeros(num));
+    </script>
+  </body>
+</html>
