@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2717. 半有序排列</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/semi-ordered-permutation/description/
+
+      // 给你一个下标从 0 开始、长度为 n 的整数排列 nums 。
+      // 如果排列的第一个数字等于 1 且最后一个数字等于 n ，则称其为 半有序排列 。你可以执行多次下述操作，直到将 nums 变成一个 半有序排列 ：
+      //
+      // 提示：
+      // 选择 nums 中相邻的两个元素，然后交换它们。
+      // 返回使 nums 变成 半有序排列 所需的最小操作次数。
+      // 排列 是一个长度为 n 的整数序列，其中包含从 1 到 n 的每个数字恰好一次。
+      //
+      // 提示：
+      // 2 <= nums.length == n <= 50
+      // 1 <= nums[i] <= 50
+      // nums 是一个 排列
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var semiOrderedPermutation = function (nums) {};
+
+      // --- answer-1 ---
+
+      // 取最两边的1和n 如果n在1前面则可以少交互一次
+      var semiOrderedPermutation = function (nums = []) {
+        const n = nums.length;
+        if (nums[0] === 1 && nums[n - 1] === n) {
+          return 0;
+        }
+        // 即indexOf
+        let i = 0;
+        while (nums[i] !== 1 && i < n) i++;
+        // 即lastIndexOf
+        let j = n - 1;
+        while (nums[j] !== n && j > 0) j--;
+
+        return i + (n - j - 1) - (j < i ? 1 : 0);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var nums = [2, 1, 4, 3];
+      var result = 2;
+      // 解释：可以依次执行下述操作得到半有序排列：
+
+      var nums = [2, 4, 1, 3];
+      var result = 3;
+      // 解释：
+
+      var nums = [1, 3, 4, 2, 5];
+      var result = 0;
+      // 解释：这个排列已经是一个半有序排列，无需执行任何操作。
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('semiOrderedPermutation = ', semiOrderedPermutation([...nums]));
+    </script>
+  </body>
+</html>
