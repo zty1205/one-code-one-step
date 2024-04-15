@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2723. 两个 Promise 对象相加</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/add-two-promises/description/
+
+      //
+      // 提示：
+      // promise1 和 promise2 都是被解析为一个数字的 promise 对象
+
+      /**
+       * @param {Promise} promise1
+       * @param {Promise} promise2
+       * @return {Promise}
+       */
+      var addTwoPromises = async function (promise1, promise2) {};
+      /**
+       * addTwoPromises(Promise.resolve(2), Promise.resolve(2))
+       *   .then(console.log); // 4
+       */
+
+      // --- answer-1 ---
+
+      // promise基础
+      var addTwoPromises = async function (promise1 = new Promise(), promise2 = new Promise()) {
+        const n1 = await promise1;
+        const n2 = await promise2;
+        return n1 + n2;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var promise1 = new Promise((resolve) => setTimeout(() => resolve(2), 20)),
+        promise2 = new Promise((resolve) => setTimeout(() => resolve(5), 60));
+
+      var promise1 = new Promise(resolve => setTimeout(() => resolve(10), 50)), ;
+      promise2 = new Promise(resolve => setTimeout(() => resolve(-12), 30))
+
+      console.log('promise1 = ', promise1);
+      console.log('promise2 = ', promise2);
+      console.log('addTwoPromises = ', addTwoPromises(promise1, promise2));
+    </script>
+  </body>
+</html>

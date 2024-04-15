@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (642 道)
+## 三、LeetCode (643 道)
 
 <br/>
 
@@ -786,6 +786,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2715.执行可取消的延迟函数.html](./leetCode/2715.执行可取消的延迟函数.html)
 - [2716.最小化字符串长度.html](./leetCode/2716.最小化字符串长度.html)
 - [2717.半有序排列.html](./leetCode/2717.半有序排列.html)
+- [2723.两个 Promise 对象相加.html](./leetCode/2723.两个Promise对象相加.html)
 
 <br/>
 
