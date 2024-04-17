@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (644 道)
+## 三、LeetCode (645 道)
 
 <br/>
 
@@ -788,6 +788,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2717.半有序排列.html](./leetCode/2717.半有序排列.html)
 - [2723.两个 Promise 对象相加.html](./leetCode/2723.两个Promise对象相加.html)
 - [2724.排序方式.html](./leetCode/2724.排序方式.html)
+- [2725.间隔取消.html](./leetCode/2725.间隔取消.html)
 
 <br/>
 
