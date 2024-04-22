@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2726. 使用方法链的计算器</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/calculator-with-method-chaining/description/
+
+      // 设计一个类 Calculator 。该类应提供加法、减法、乘法、除法和乘方等数学运算功能。同时，它还应支持连续操作的方法链式调用。Calculator 类的构造函数应接受一个数字作为 result 的初始值。
+      // 你的 Calculator 类应包含以下方法：
+      //
+      // 提示：
+      // add - 将给定的数字 value 与 result 相加，并返回更新后的 Calculator 对象。
+      // subtract - 从 result 中减去给定的数字 value ，并返回更新后的 Calculator 对象。
+      // multiply - 将 result 乘以给定的数字 value ，并返回更新后的 Calculator 对象。
+      // divide - 将 result 除以给定的数字 value ，并返回更新后的 Calculator 对象。如果传入的值为 0 ，则抛出错误 "Division by zero is not allowed" 。
+      // power - 计算 result 的幂，指数为给定的数字 value ，并返回更新后的 Calculator 对象。（result = result ^ value ）
+      // getResult - 返回 result 的值。
+      // 结果与实际结果相差在 10-5 范围内的解被认为是正确的。
+      //
+      // 提示：
+      // actions 是一个有效的 JSON 字符串数组
+      // values 是一个有效的 JSON 字符串数组
+      // 2 <= actions.length <= 2 * 104
+      // 1 <= values.length <= 2 * 104 - 1
+      // actions[i] 是 "Calculator", "add", "subtract", "multiply", "divide", "power", 和 "getResult" 其中的元素
+      // 第一个操作总是 "Calculator"
+      // 最后一个操作总是 "getResult"
+
+      class Calculator {
+        /**
+         * @param {number} value
+         */
+        constructor(value) {}
+
+        /**
+         * @param {number} value
+         * @return {Calculator}
+         */
+        add(value) {}
+
+        /**
+         * @param {number} value
+         * @return {Calculator}
+         */
+        subtract(value) {}
+
+        /**
+         * @param {number} value
+         * @return {Calculator}
+         */
+      }
+
+      // --- answer-1 ---
+
+      // 返回this 支持链式调用
+      class Calculator {
+        constructor(value) {
+          this.result = value;
+        }
+        add(value) {
+          this.result += value;
+          return this;
+        }
+        subtract(value) {
+          this.result -= value;
+          return this;
+        }
+        multiply(value) {
+          this.result *= value;
+          return this;
+        }
+        divide(value) {
+          if (value === 0) throw 'Division by zero is not allowed';
+          this.result /= value;
+          return this;
+        }
+        power(value) {
+          this.result **= value;
+          return this;
+        }
+        getResult() {
+          return this.result;
+        }
+      }
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var actions = ['Calculator', 'add', 'subtract', 'getResult'],
+        values = [10, 5, 7];
+      var result = 8;
+
+      var actions = ['Calculator', 'multiply', 'power', 'getResult'],
+        values = [2, 5, 2];
+      var result = 100;
+
+      var actions = ['Calculator', 'divide', 'getResult'],
+        values = [20, 0];
+      var result = 'Division by zero is not allowed';
+
+      console.log('cmds = ', actions);
+      console.log('args = ', values);
+      console.log('result = ', result);
+
+      classCommand(cmds, args);
+    </script>
+  </body>
+</html>

@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (646 道)
+## 三、LeetCode (647 道)
 
 <br/>
 
@@ -790,6 +790,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2723.两个 Promise 对象相加.html](./leetCode/2723.两个Promise对象相加.html)
 - [2724.排序方式.html](./leetCode/2724.排序方式.html)
 - [2725.间隔取消.html](./leetCode/2725.间隔取消.html)
+- [2726.使用方法链的计算器.html](./leetCode/2726.使用方法链的计算器.html)
 
 <br/>
 
