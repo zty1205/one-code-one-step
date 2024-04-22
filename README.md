@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (647 道)
+## 三、LeetCode (648 道)
 
 <br/>
 
@@ -791,6 +791,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2724.排序方式.html](./leetCode/2724.排序方式.html)
 - [2725.间隔取消.html](./leetCode/2725.间隔取消.html)
 - [2726.使用方法链的计算器.html](./leetCode/2726.使用方法链的计算器.html)
+- [2727.判断对象是否为空.html](./leetCode/2727.判断对象是否为空.html)
 
 <br/>
 

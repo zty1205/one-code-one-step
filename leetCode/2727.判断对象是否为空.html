@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2727. 判断对象是否为空</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/is-object-empty/description/
+
+      // 给定一个对象或数组，判断它是否为空。
+      //
+      // 提示：
+      // 一个空对象不包含任何键值对。
+      // 一个空数组不包含任何元素。
+      // 你可以假设对象或数组是通过 JSON.parse 解析得到的。
+      //
+      // 提示：
+      // obj 是一个有效的 JSON 对象或数组
+      // 2 <= JSON.stringify(obj).length <= 105
+
+      /**
+       * @param {Object|Array} obj
+       * @return {boolean}
+       */
+      var isEmpty = function (obj) {};
+
+      // --- answer-1 ---
+
+      // keys  for-in  json
+      var isEmpty = function (obj) {
+        return Object.keys(obj).length === 0;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var obj = { x: 5, y: 42 };
+      var result = false;
+      // 解释：这个对象有两个键值对，所以它不为空。
+
+      var obj = {};
+      var result = true;
+      // 解释：这个对象没有任何键值对，所以它为空。
+
+      var obj = [null, false, 0];
+      var result = false;
+      // 解释：这个数组有 3 个元素，所以它不为空。
+
+      console.log('obj = ', obj);
+      console.log('result = ', result);
+      console.log('isEmpty = ', isEmpty(obj));
+    </script>
+  </body>
+</html>
