@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2729. 判断一个数是否迷人</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/check-if-the-number-is-fascinating/description/
+
+      // 给你一个三位数整数 n 。
+      // 如果经过以下修改得到的数字 恰好 包含数字 1 到 9 各一次且不包含任何 0 ，那么我们称数字 n 是 迷人的 ：
+      //
+      // 提示：
+      // 将 n 与数字 2 * n 和 3 * n 连接 。
+      // 如果 n 是迷人的，返回 true，否则返回 false 。
+      // 连接 两个数字表示把它们首尾相接连在一起。比方说 121 和 371 连接得到 121371 。
+      //
+      // 提示：
+      // 100 <= n <= 999
+
+      /**
+       * @param {number} n
+       * @return {boolean}
+       */
+      var isFascinating = function (n) {};
+
+      // --- answer-1 ---
+
+      // n 本身不能重复
+      // 不能超过 329
+      var unique = (num = 1) => {
+        const str = String(num);
+        if (str.includes('0')) return false;
+        return str.length === new Set(str).size;
+      };
+      var isFascinating = function (n) {
+        if (n < 123 || n > 329) return false;
+        if (!unique(n)) return false;
+        console.log(String(n) + String(n * 2) + String(n * 3));
+        return unique(String(n) + String(n * 2) + String(n * 3));
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 数字优先 预先打表 结果只有 192,219,273,327
+
+      // --- answer-2 ---
+
+      var n = 192;
+      var result = true;
+      // 解释：我们将数字 n = 192 ，2 * n = 384 和 3 * n = 576 连接，得到 192384576 。这个数字包含 1 到 9 恰好各一次。
+
+      var n = 100;
+      var result = false;
+      // 解释：我们将数字 n = 100 ，2 * n = 200 和 3 * n = 300 连接，得到 100200300 。这个数字不符合上述条件。
+
+      var n = 267;
+      var result = false;
+
+      console.log('n = ', n);
+      console.log('result = ', result);
+      console.log('isFascinating = ', isFascinating(n));
+    </script>
+  </body>
+</html>
