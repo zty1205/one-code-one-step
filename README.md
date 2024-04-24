@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (649 道)
+## 三、LeetCode (650 道)
 
 <br/>
 
@@ -793,6 +793,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2726.使用方法链的计算器.html](./leetCode/2726.使用方法链的计算器.html)
 - [2727.判断对象是否为空.html](./leetCode/2727.判断对象是否为空.html)
 - [2729.判断一个数是否迷人.html](./leetCode/2729.判断一个数是否迷人.html)
+- [2733.既不是最小值也不是最大值.html](./leetCode/2733.既不是最小值也不是最大值.html)
 
 <br/>
 
