@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2739. 总行驶距离</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/total-distance-traveled/description/
+
+      // 卡车有两个油箱。给你两个整数，mainTank 表示主油箱中的燃料（以升为单位），additionalTank 表示副油箱中的燃料（以升为单位）。
+      // 该卡车每耗费 1 升燃料都可以行驶 10 km。每当主油箱使用了 5 升燃料时，如果副油箱至少有 1 升燃料，则会将 1 升燃料从副油箱转移到主油箱。
+      // 返回卡车可以行驶的最大距离。
+      // 注意：从副油箱向主油箱注入燃料不是连续行为。这一事件会在每消耗 5 升燃料时突然且立即发生。
+      //
+      // 提示：
+      // 1 <= mainTank, additionalTank <= 100
+
+      /**
+       * @param {number} mainTank
+       * @param {number} additionalTank
+       * @return {number}
+       */
+      var distanceTraveled = function (mainTank, additionalTank) {};
+
+      // --- answer-1 ---
+
+      // 辗转-5 但不能超过addition
+      var distanceTraveled = function (mainTank = 1, additionalTank = 1) {
+        let ans = 0;
+        while (mainTank >= 5) {
+          mainTank -= 5;
+          ans += 50;
+          if (additionalTank > 0) {
+            additionalTank--;
+            mainTank++;
+          }
+        }
+        return ans + mainTank * 10;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 数学
+      var distanceTraveled = function (mainTank, additionalTank) {
+        return 10 * (mainTank + Math.min(Math.floor((mainTank - 1) / 4), additionalTank));
+      };
+
+      // --- answer-2 ---
+
+      var mainTank = 5,
+        additionalTank = 10;
+      var result = 60;
+      // 解释：
+
+      // var mainTank = 1,
+      //   additionalTank = 2;
+      // var result = 10;
+      // 解释：
+
+      console.log('mainTank = ', mainTank);
+      console.log('additionalTank = ', additionalTank);
+      console.log('result = ', result);
+      console.log('distanceTraveled = ', distanceTraveled(mainTank, additionalTank));
+    </script>
+  </body>
+</html>
