@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2760. 最长奇偶子数组</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/longest-even-odd-subarray-with-threshold/description/
+
+      // 给你一个下标从 0 开始的整数数组 nums 和一个整数 threshold 。
+      // 请你从 nums 的子数组中找出以下标 l 开头、下标 r 结尾 (0 <= l <= r < nums.length) 且满足以下条件的 最长子数组 ：
+      //
+      // 提示：
+      // nums[l] % 2 == 0
+      // 对于范围 [l, r - 1] 内的所有下标 i ，nums[i] % 2 != nums[i + 1] % 2
+      // 对于范围 [l, r] 内的所有下标 i ，nums[i] <= threshold
+      // 以整数形式返回满足题目要求的最长子数组的长度。
+      // 注意：子数组 是数组中的一个连续非空元素序列。
+      //
+      // 提示：
+      // 1 <= nums.length <= 100
+      // 1 <= nums[i] <= 100
+      // 1 <= threshold <= 100
+
+      /**
+       * @param {number[]} nums
+       * @param {number} threshold
+       * @return {number}
+       */
+      var longestAlternatingSubarray = function (nums, threshold) {};
+
+      // --- answer-1 ---
+
+      // 偶数开始 偶奇偶奇
+      // f(l, r) =  f(l, r - 1) && nums[r-1] % 2 != nums[r] % 2
+      // d1 = 0 或 1
+      // dp(l, len - 1) =  dp(l-1, len - 1) && nums[l] % 2 != nums[l-1] % 2
+      // 动态规划
+      var longestAlternatingSubarray = function (nums = [], threshold = 1) {
+        let res = 0;
+        let dp = 0;
+        const len = nums.length;
+        for (let i = len - 1; i >= 0; i--) {
+          const n = nums[i];
+          if (n > threshold) {
+            dp = 0;
+          } else if (i === len - 1 || nums[i] % 2 !== nums[i + 1] % 2) {
+            dp++;
+          } else {
+            dp = 1;
+          }
+          if (n % 2 === 0) {
+            res = Math.max(res, dp);
+          }
+        }
+        return res;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var nums = [3, 2, 5, 4],
+        threshold = 5;
+      var result = 3;
+      // 解释：在这个示例中，我们选择从 l = 1 开始、到 r = 3 结束的子数组 => [2,5,4] ，满足上述条件。
+
+      // var nums = [1,2], threshold = 2;
+      // var result = 1;
+      // 解释：
+
+      // var nums = [2,3,4,5], threshold = 4;
+      // var result = 3;
+      // 解释：
+
+      console.log('nums = ', nums);
+      console.log('threshold = ', threshold);
+      console.log('result = ', result);
+      console.log('longestAlternatingSubarray = ', longestAlternatingSubarray(nums, threshold));
+    </script>
+  </body>
+</html>
