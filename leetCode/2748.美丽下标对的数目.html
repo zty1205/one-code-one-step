@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2748. 美丽下标对的数目</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/number-of-beautiful-pairs/description/
+
+      // 给你一个下标从 0 开始的整数数组 nums 。如果下标对 i、j 满足 0 ≤ i < j < nums.length ，如果 nums[i] 的 第一个数字 和 nums[j] 的 最后一个数字 互质 ，则认为 nums[i] 和 nums[j] 是一组 美丽下标对 。
+      // 返回 nums 中 美丽下标对 的总数目。
+      // 对于两个整数 x 和 y ，如果不存在大于 1 的整数可以整除它们，则认为 x 和 y 互质 。换而言之，如果 gcd(x, y) == 1 ，则认为 x 和 y 互质，其中 gcd(x, y) 是 x 和 k 最大公因数 。
+      //
+      // 提示：
+      // 2 <= nums.length <= 100
+      // 1 <= nums[i] <= 9999
+      // nums[i] % 10 != 0
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var countBeautifulPairs = function (nums) {};
+
+      // --- answer-1 ---
+
+      function gcd(x, y) {
+        return y ? gcd(y, x % y) : x;
+      }
+
+      // 按题意模拟
+      var countBeautifulPairs = function (nums = []) {
+        let res = 0;
+        for (let i = 0; i < nums.length; i++) {
+          for (let j = i + 1; j < nums.length; j++) {
+            const a = +String(nums[i])[0];
+            const b = +String(nums[j])[String(nums[j]).length - 1];
+            if (gcd(a, b) === 1) {
+              res++;
+            }
+          }
+        }
+        return res;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var nums = [2, 5, 1, 4];
+      var result = 5;
+      // 解释：nums 中共有 5 组美丽下标对：
+
+      // var nums = [11, 21, 12];
+      // var result = 2;
+      // // 解释：共有 2 组美丽下标对：
+
+      // var nums = [31, 25, 72, 79, 74];
+      // var result = 7;
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('countBeautifulPairs = ', countBeautifulPairs(nums));
+    </script>
+  </body>
+</html>
