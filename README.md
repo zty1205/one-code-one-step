@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (653 道)
+## 三、LeetCode (654 道)
 
 <br/>
 
@@ -797,6 +797,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2739.总行驶距离.html](./leetCode/2739.总行驶距离.html)
 - [2748.美丽下标对的数目.html](./leetCode/2748.美丽下标对的数目.html)
 - [2760.最长奇偶子数组.html](./leetCode/2760.最长奇偶子数组.html)
+- [2784.检查数组是否是好的.html](./leetCode/2784.检查数组是否是好的.html)
 
 <br/>
 
