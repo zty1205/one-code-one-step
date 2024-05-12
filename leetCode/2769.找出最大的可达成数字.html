@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2769. 找出最大的可达成数字</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/find-the-maximum-achievable-number/description/
+
+      // 给你两个整数 num 和 t 。
+      // 如果整数 x 可以在执行下述操作不超过 t 次的情况下变为与 num 相等，则称其为 可达成数字 ：
+      //
+      // 提示：
+      // 每次操作将 x 的值增加或减少 1 ，同时可以选择将 num 的值增加或减少 1 。
+      // 返回所有可达成数字中的最大值。可以证明至少存在一个可达成数字。
+      //
+      // 提示：
+      // 1 <= num, t <= 50
+
+      /**
+       * @param {number} num
+       * @param {number} t
+       * @return {number}
+       */
+      var theMaximumAchievableX = function (num, t) {};
+
+      // --- answer-1 ---
+
+      // 每次x+1 num-1
+      var theMaximumAchievableX = function (num = 1, t = 1) {
+        return num + t * 2;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var num = 4,
+        t = 1;
+      var result = 6;
+      // 解释：最大可达成数字是 x = 6 ，执行下述操作可以使其等于 num ：
+
+      var num = 3,
+        t = 2;
+      var result = 7;
+      // 解释：最大的可达成数字是 x = 7 ，执行下述操作可以使其等于 num ：
+
+      console.log('num = ', num);
+      console.log('t = ', t);
+      console.log('result = ', result);
+      console.log('theMaximumAchievableX = ', theMaximumAchievableX(num, t));
+    </script>
+  </body>
+</html>
