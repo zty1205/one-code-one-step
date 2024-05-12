@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (656 道)
+## 三、LeetCode (657 道)
 
 <br/>
 
@@ -795,6 +795,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2729.判断一个数是否迷人.html](./leetCode/2729.判断一个数是否迷人.html)
 - [2733.既不是最小值也不是最大值.html](./leetCode/2733.既不是最小值也不是最大值.html)
 - [2739.总行驶距离.html](./leetCode/2739.总行驶距离.html)
+- [2744.最大字符串配对数目.html](./leetCode/2744.最大字符串配对数目.html)
 - [2748.美丽下标对的数目.html](./leetCode/2748.美丽下标对的数目.html)
 - [2760.最长奇偶子数组.html](./leetCode/2760.最长奇偶子数组.html)
 - [2765.最长交替子数组.html](./leetCode/2765.最长交替子数组.html)
