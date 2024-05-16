@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (657 道)
+## 三、LeetCode (658 道)
 
 <br/>
 
@@ -800,6 +800,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2760.最长奇偶子数组.html](./leetCode/2760.最长奇偶子数组.html)
 - [2765.最长交替子数组.html](./leetCode/2765.最长交替子数组.html)
 - [2769.找出最大的可达成数字.html](./leetCode/2769.找出最大的可达成数字.html)
+- [2778.特殊元素平方和.html](./leetCode/2778.特殊元素平方和.html)
 - [2784.检查数组是否是好的.html](./leetCode/2784.检查数组是否是好的.html)
 
 <br/>
