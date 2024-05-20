@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2810. 故障键盘</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/faulty-keyboard/description/
+
+      // 你的笔记本键盘存在故障，每当你在上面输入字符 'i' 时，它会反转你所写的字符串。而输入其他字符则可以正常工作。
+      // 给你一个下标从 0 开始的字符串 s ，请你用故障键盘依次输入每个字符。
+      // 返回最终笔记本屏幕上输出的字符串。
+      //
+      // 提示：
+      // 1 <= s.length <= 100
+      // s 由小写英文字母组成
+      // s[0] != 'i'
+
+      /**
+       * @param {string} s
+       * @return {string}
+       */
+      var finalString = function (s) {};
+
+      // --- answer-1 ---
+
+      // 模拟
+      var finalString = function (s = '') {
+        const arr = [];
+        for (const ch of s) {
+          if (ch === 'i') {
+            arr.reverse();
+          } else {
+            arr.push(ch);
+          }
+        }
+        return arr.join('');
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var s = 'string';
+      var result = 'rtsng';
+      // 解释：
+
+      var s = 'poiinter';
+      var result = 'ponter';
+      // 解释：
+
+      console.log('s = ', s);
+      console.log('result = ', result);
+      console.log('finalString = ', finalString(s));
+    </script>
+  </body>
+</html>

@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (661 道)
+## 三、LeetCode (662 道)
 
 <br/>
 
@@ -805,6 +805,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2788.按分隔符拆分字符串.html](./leetCode/2788.按分隔符拆分字符串.html)
 - [2798.满足目标工作时长的员工数目.html](./leetCode/2798.满足目标工作时长的员工数目.html)
 - [2806.取整购买后的账户余额.html](./leetCode/2806.取整购买后的账户余额.html)
+- [2810.故障键盘.html](./leetCode/2810.故障键盘.html)
 
 <br/>
 
