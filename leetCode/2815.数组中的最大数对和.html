@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2815. 数组中的最大数对和</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/max-pair-sum-in-an-array/description/
+
+      // 给你一个下标从 0 开始的整数数组 nums 。请你从 nums 中找出和 最大 的一对数，且这两个数数位上最大的数字相等。
+      // 返回最大和，如果不存在满足题意的数字对，返回 -1 。
+      //
+      // 提示：
+      // 2 <= nums.length <= 100
+      // 1 <= nums[i] <= 104
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var maxSum = function (nums) {};
+
+      // --- answer-1 ---
+
+      var maxSum = function (nums) {
+        let ans = -1;
+        let maxVal = Array(10).fill(Number.MIN_SAFE_INTEGER);
+        for (const v of nums) {
+          let maxD = 0;
+          for (let x = v; x; x = Math.floor(x / 10)) maxD = Math.max(maxD, x % 10);
+          ans = Math.max(ans, v + maxVal[maxD]);
+          maxVal[maxD] = Math.max(maxVal[maxD], v);
+        }
+        return ans;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      // var nums = [51,71,17,24,42];
+      // var result = 88;
+      // 解释：
+
+      // var nums = [1,2,3,4];
+      // var result = -1;
+      // 解释：不存在数对满足数位上最大的数字相等。
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('maxSum = ', maxSum(nums));
+    </script>
+  </body>
+</html>
