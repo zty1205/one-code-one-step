@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (663 道)
+## 三、LeetCode (664 道)
 
 <br/>
 
@@ -807,6 +807,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2806.取整购买后的账户余额.html](./leetCode/2806.取整购买后的账户余额.html)
 - [2810.故障键盘.html](./leetCode/2810.故障键盘.html)
 - [2815.数组中的最大数对和.html](./leetCode/2815.数组中的最大数对和.html)
+- [2824.统计和小于目标的下标对数目.html](./leetCode/2824.统计和小于目标的下标对数目.html)
 
 <br/>
 
