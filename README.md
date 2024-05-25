@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (665 道)
+## 三、LeetCode (666 道)
 
 <br/>
 
@@ -809,6 +809,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2815.数组中的最大数对和.html](./leetCode/2815.数组中的最大数对和.html)
 - [2824.统计和小于目标的下标对数目.html](./leetCode/2824.统计和小于目标的下标对数目.html)
 - [2828.判别首字母缩略词.html](./leetCode/2828.判别首字母缩略词.html)
+- [2833.距离原点最远的点.html](./leetCode/2833.距离原点最远的点.html)
 
 <br/>
 
