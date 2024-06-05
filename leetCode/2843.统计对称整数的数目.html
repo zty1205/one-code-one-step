@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2843. 统计对称整数的数目</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/count-symmetric-integers/description/
+
+      // 给你两个正整数 low 和 high 。
+      // 对于一个由 2 * n 位数字组成的整数 x ，如果其前 n 位数字之和与后 n 位数字之和相等，则认为这个数字是一个对称整数。
+      // 返回在 [low, high] 范围内的 对称整数的数目 。
+      //
+      // 提示：
+      // 1 <= low <= high <= 104
+
+      /**
+       * @param {number} low
+       * @param {number} high
+       * @return {number}
+       */
+      var countSymmetricIntegers = function (low, high) {};
+
+      // --- answer-1 ---
+
+      // 打表 或 直接遍历
+
+      var isSym = function (i = 1) {
+        const s = i.toString();
+        const n = s.length;
+        if (n % 2 === 1) {
+          return false;
+        }
+        const m = n >> 1;
+        let sum = 0;
+        for (let j = 0; j < m; j++) {
+          sum += s.charCodeAt(j);
+        }
+        for (let j = m; j < n; j++) {
+          sum -= s.charCodeAt(j);
+        }
+        return sum === 0;
+      };
+      var countSymmetricIntegers = function (low = 1, high = 1) {
+        let res = 0;
+        for (let i = low; i <= high; i++) {
+          if (isSym(i)) {
+            res++;
+          }
+        }
+        return res;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      // var low = 1, high = 100;
+      // var result = 9;
+      // 解释：在 1 到 100 范围内共有 9 个对称整数：11、22、33、44、55、66、77、88 和 99 。
+
+      // var low = 1200, high = 1230;
+      // var result = 4;
+      // 解释：在 1200 到 1230 范围内共有 4 个对称整数：1203、1212、1221 和 1230 。
+
+      console.log('low = ', low);
+      console.log('high = ', high);
+      console.log('result = ', result);
+      console.log('countSymmetricIntegers = ', countSymmetricIntegers(low, high));
+    </script>
+  </body>
+</html>
