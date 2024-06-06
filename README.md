@@ -966,11 +966,12 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 八、经典-150 (1 道)
+## 八、经典-150 (2 道)
 
 <br/>
 
 - [88.合并两个有序数组.html](./经典-150/88.合并两个有序数组.html)
+- [27.移除元素.html](./经典-150/27.移除元素.html)
 
 <br/>
 
