@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>80. 删除有序数组中的重复项 II</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/remove-duplicates-from-sorted-array-ii/description/
+
+      // 给你一个有序数组 nums ，请你 原地 删除重复出现的元素，使得出现次数超过两次的元素只出现两次 ，返回删除后数组的新长度。
+      // 不要使用额外的数组空间，你必须在 原地 修改输入数组 并在使用 O(1) 额外空间的条件下完成。
+      // 说明：
+      // 为什么返回数值是整数，但输出的答案是数组呢？
+      // 请注意，输入数组是以「引用」方式传递的，这意味着在函数里修改输入数组对于调用者是可见的。
+      // 你可以想象内部操作如下:
+      //
+      // 提示：
+      // 1 <= nums.length <= 3 * 104
+      // -104 <= nums[i] <= 104
+      // nums 已按升序排列
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var removeDuplicates = function (nums) {};
+
+      // --- answer-1 ---
+
+      // 直接移除
+      var removeDuplicates = function (nums = []) {
+        for (let i = 2; i < nums.length; i++) {
+          if (nums[i] === nums[i - 2]) {
+            nums.splice(i, 1);
+            i--;
+          }
+        }
+        return nums.length;
+      };
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 双指针 快慢指针
+      var removeDuplicates = function (nums = []) {
+        if (nums == null || nums.length == 0) return 0;
+        var left = 0;
+        var right = 2;
+        while (right < nums.length) {
+          if (nums[left] !== nums[right]) {
+            if (right - left > 2) {
+              nums[left + 2] = nums[right];
+            }
+            left++;
+          }
+          right++;
+        }
+        // left+2进行赋值l 所以left+2是最后符合题意的
+        return left + 2;
+      };
+
+      // --- answer-2 ---
+
+      // // nums 是以“引用”方式传递的。也就是说，不对实参做任何拷贝;
+      // int len = removeDuplicates(nums);;
+
+      var nums = [1, 1, 1, 2, 2, 3]; // [1,1,1] left = 0 right = 2   => 0,3 => 2,3赋值 [1,1,2,2]
+      var result = 5,
+        rnums = [1, 1, 2, 2, 3];
+      // 解释：函数应返回新长度 length = 5, 并且原数组的前五个元素被修改为 1, 1, 2, 2, 3。 不需要考虑数组中超出新长度后面的元素。
+
+      // var nums = [0, 0, 1, 1, 1, 1, 2, 3, 3];
+      // var result = 7,
+      //   rnums = [0, 0, 1, 1, 2, 3, 3];
+      // 解释：函数应返回新长度 length = 7, 并且原数组的前七个元素被修改为 0, 0, 1, 1, 2, 3, 3。不需要考虑数组中超出新长度后面的元素。
+
+      var nums = [0, 0, 1, 1, 1, 1, 2, 3, 3, 3, 3, 3];
+      var result = 7,
+        rnums = [0, 0, 1, 1, 2, 3, 3];
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('removeDuplicates = ', removeDuplicates(nums));
+      console.log('nums = ', nums);
+      console.log('rnums = ', rnums);
+    </script>
+  </body>
+</html>
