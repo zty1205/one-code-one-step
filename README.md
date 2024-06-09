@@ -966,7 +966,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 八、经典-150 (5 道)
+## 八、经典-150 (6 道)
 
 <br/>
 
@@ -975,6 +975,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [27.移除元素.html](./经典-150/27.移除元素.html)
 - [80.删除有序数组中的重复项 II.html](./经典-150/80.删除有序数组中的重复项II.html)
 - [169.多数元素.html](./经典-150/169.多数元素.html)
+- [189.轮转数组.html](./经典-150/189.轮转数组.html)
 
 <br/>
 

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>189. 轮转数组</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/rotate-array/description/
+
+      // 给定一个整数数组 nums，将数组中的元素向右轮转 k 个位置，其中 k 是非负数。
+      //
+      // 提示：
+      // 1 <= nums.length <= 105
+      // -231 <= nums[i] <= 231 - 1
+      // 0 <= k <= 105
+      // 进阶：
+      //
+      // 提示：
+      // 尽可能想出更多的解决方案，至少有 三种 不同的方法可以解决这个问题。
+      // 你可以使用空间复杂度为 O(1) 的 原地 算法解决这个问题吗？
+
+      /**
+       * @param {number[]} nums
+       * @param {number} k
+       * @return {void} Do not return anything, modify nums in-place instead.
+       */
+      var rotate = function (nums, k) {};
+
+      // --- answer-1 ---
+
+      // 辅助数组
+      var rotate = function (nums = [], k = 1) {
+        k = k % nums.length;
+        if (k === 0) return;
+        const tmp = nums.slice(-k);
+        for (let i = nums.length - 1; i >= k; i--) {
+          nums[i] = nums[i - k];
+        }
+        for (let i = 0; i < k; i++) {
+          nums[i] = tmp[i];
+        }
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 不对的解法 重复访问相同的index时不能处理
+      // 需要一个visited辅助
+      var rotate = function (nums = [], k = 1) {
+        const length = nums.length;
+        k = k % length;
+        if (k === 0) return;
+        if (length === 2 * k) {
+          for (let i = 0; i < k; i++) {
+            [nums[i], nums[i + k]] = [nums[i + k], nums[i]];
+          }
+          return;
+        }
+        let index = 0;
+        let cur = nums[index];
+        let i = length;
+        while (i--) {
+          console.log([index, cur]);
+          // 当前元素 轮转后新的位置
+          // 新位置的元素进行下一轮
+          let newIndex = (index + k) % length;
+          let tmp = nums[newIndex];
+          nums[newIndex] = cur;
+          cur = tmp;
+          index = newIndex;
+        }
+      };
+
+      const reverse = (nums, start, end) => {
+        while (start < end) {
+          const temp = nums[start];
+          nums[start] = nums[end];
+          nums[end] = temp;
+          start += 1;
+          end -= 1;
+        }
+      };
+
+      var rotate = function (nums, k) {
+        k %= nums.length;
+        reverse(nums, 0, nums.length - 1);
+        reverse(nums, 0, k - 1);
+        reverse(nums, k, nums.length - 1);
+      };
+
+      // --- answer-2 ---
+
+      var nums = [1, 2, 3, 4, 5, 6, 7],
+        k = 3;
+      var result = [5, 6, 7, 1, 2, 3, 4];
+      // 解释:
+
+      // var nums = [1, 2, 3, 4, 5, 6, 7],
+      //   k = 4;
+      // var result = [4, 5, 6, 7, 1, 2, 3];
+
+      var nums = [-1, -100, 3, 99],
+        k = 2;
+      var result = [3, 99, -1, -100];
+      // 解释:
+
+      var nums = [1, 2, 3, 4, 5, 6],
+        k = 2;
+      var result = [5, 6, 1, 2, 3, 4];
+
+      console.log('nums = ', nums);
+      console.log('k = ', k);
+      console.log('result = ', result);
+      console.log('rotate = ', rotate(nums, k));
+      console.log('nums = ', nums);
+    </script>
+  </body>
+</html>
