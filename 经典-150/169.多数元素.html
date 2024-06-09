@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>169. 多数元素</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/majority-element/description/
+
+      // 给定一个大小为 n 的数组 nums ，返回其中的多数元素。多数元素是指在数组中出现次数 大于 ⌊ n/2 ⌋ 的元素。
+      // 你可以假设数组是非空的，并且给定的数组总是存在多数元素。
+      //
+      // 提示：
+      // n == nums.length
+      // 1 <= n <= 5 * 104
+      // -109 <= nums[i] <= 109
+      // 进阶：尝试设计时间复杂度为 O(n)、空间复杂度为 O(1) 的算法解决此问题。
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var majorityElement = function (nums) {};
+
+      // --- answer-1 ---
+
+      // 因为一定存在大于一半的数 所以排序后中间的数一定是
+      var majorityElement = function (nums = []) {
+        nums.sort((a, b) => a - b);
+        return nums[nums.length >> 1];
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 计数
+      var majorityElement = function (nums = []) {
+        const mid = nums.length >> 1;
+        const map = new Map();
+        for (const n of nums) {
+          const count = (map.get(n) || 0) + 1;
+          map.set(n, count);
+          if (count > mid) {
+            return n;
+          }
+        }
+        return -1;
+      };
+
+      // --- answer-2 ---
+
+      // --- answer-3 ---
+
+      // 选举算法 Boyer-Moore 投票算法 摩尔投票算法
+      var majorityElement = function (nums = []) {
+        let major = nums[0];
+        let count = 1;
+        for (let i = 1; i < nums.length; i++) {
+          if (nums[i] === major) {
+            count++;
+          } else {
+            count--;
+          }
+          if (count === 0 && i + 1 < nums.length) {
+            major = nums[i + 1];
+          }
+        }
+        return major;
+      };
+      var majorityElement = function (nums = []) {
+        let major = null;
+        let count = 0;
+        for (let i = 0; i < nums.length; i++) {
+          if (count === 0) {
+            major = nums[i];
+          }
+          count += major === nums[i] ? 1 : -1;
+        }
+        return major;
+      };
+
+      // --- answer-3 ---
+
+      var nums = [3, 2, 3];
+      var result = 3;
+
+      // var nums = [2, 2, 1, 1, 1, 2, 2];
+      // var result = 2;
+
+      // var nums = [6, 5, 5];
+      // var result = 5;
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('majorityElement = ', majorityElement(nums));
+    </script>
+  </body>
+</html>
