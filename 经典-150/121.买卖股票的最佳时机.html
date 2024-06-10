@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>121. 买卖股票的最佳时机</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/description/
+
+      // 给定一个数组 prices ，它的第 i 个元素 prices[i] 表示一支给定股票第 i 天的价格。
+      // 你只能选择 某一天 买入这只股票，并选择在 未来的某一个不同的日子 卖出该股票。设计一个算法来计算你所能获取的最大利润。
+      // 返回你可以从这笔交易中获取的最大利润。如果你不能获取任何利润，返回 0 。
+      //
+      // 提示：
+      // 1 <= prices.length <= 105
+      // 0 <= prices[i] <= 104
+
+      /**
+       * @param {number[]} prices
+       * @return {number}
+       */
+      var maxProfit = function (prices) {};
+
+      // --- answer-1 ---
+
+      // 遍历 以i当前的值认为是最大值 ，在维护i前的最小值
+      var maxProfit = function (prices = []) {
+        let min = prices[0];
+        let res = 0;
+        for (let i = 1; i < prices.length; i++) {
+          res = Math.max(res, prices[i] - min);
+          min = Math.min(min, prices[i]);
+        }
+        return res;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var prices = [7, 1, 5, 3, 6, 4];
+      var result = 5;
+      // 解释：在第 2 天（股票价格 = 1）的时候买入，在第 5 天（股票价格 = 6）的时候卖出，最大利润 = 6-1 = 5 。
+
+      var prices = [7, 6, 4, 3, 1];
+      var result = 0;
+      // 解释：在这种情况下, 没有交易完成, 所以最大利润为 0。
+
+      console.log('prices = ', prices);
+      console.log('result = ', result);
+      console.log('maxProfit = ', maxProfit(prices));
+    </script>
+  </body>
+</html>
