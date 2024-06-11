@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>55. 跳跃游戏</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/jump-game/
+
+      // 给你一个非负整数数组 nums ，你最初位于数组的 第一个下标 。数组中的每个元素代表你在该位置可以跳跃的最大长度。
+      // 判断你是否能够到达最后一个下标，如果可以，返回 true ；否则，返回 false 。
+      //
+      // 提示：
+      // 1 <= nums.length <= 104
+      // 0 <= nums[i] <= 105
+
+      /**
+       * @param {number[]} nums
+       * @return {boolean}
+       */
+      var canJump = function (nums) {};
+
+      // --- answer-1 ---
+
+      // i+nums[i] >= nums.length - 1 有一个达到即可
+      // 超出时间限制
+      var canJump = function (nums = []) {
+        const length = nums.length;
+        const dp = new Array(length).fill(false);
+        dp[0] = true;
+        for (let i = 0; i < length; i++) {
+          for (let j = 1; j <= nums[i]; j++) {
+            dp[i + j] = dp[i];
+          }
+        }
+        return dp[length - 1];
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 假设每次只跳1步 那么只需要判断nums[i]===0
+      // i !== length - 1, 判断是否能达到下一步
+      // i === length - 1, 判断能否到达
+      var canJump = function (nums = []) {
+        const length = nums.length;
+        if (length === 1) {
+          return true;
+        }
+        const dp = new Array(length).fill(false);
+        dp[0] = true;
+        for (let i = 0; i < length; i++) {
+          if (nums[i] === 0) {
+            let flag = false;
+            for (let j = i - 1; j >= 0; j--) {
+              if (dp[j] && (nums[j] + j > i || (i === length - 1 && nums[j] + j >= i))) {
+                flag = true;
+                break;
+              }
+            }
+            if (!flag) {
+              return false;
+            }
+          }
+          dp[i] = true;
+        }
+        return dp[length - 1];
+      };
+
+      // --- answer-2 ---
+
+      // --- answer-3 ---
+
+      // 想复杂了 维护能跳最长的
+      var canJump = function (nums = []) {
+        let dis = 0;
+        for (let i = 0; i < nums.length; i++) {
+          if (i > dis) return false;
+          dis = Math.max(dis, i + nums[i]);
+        }
+        return true;
+      };
+      // 对应动态规划
+      // dp[i] 表示能跳最长的距离
+      var canJump = function (nums = []) {
+        const length = nums.length;
+        const dp = [nums[0]];
+        for (let i = 1; i < length; i++) {
+          if (i > dp[i - 1]) {
+            return false;
+          }
+          dp[i] = Math.max(dp[i - 1], i + nums[i]);
+        }
+        return dp[length - 1] >= length - 1;
+      };
+
+      // --- answer-3 ---
+
+      var nums = [2, 3, 1, 1, 4];
+      var result = true;
+      // 解释：可以先跳 1 步，从下标 0 到达下标 1, 然后再从下标 1 跳 3 步到达最后一个下标。
+
+      var nums = [3, 2, 1, 0, 4];
+      var result = false;
+      // 解释：无论怎样，总会到达下标为 3 的位置。但该下标的最大跳跃长度是 0 ， 所以永远不可能到达最后一个下标。
+
+      var nums = [1, 0];
+      var result = true;
+
+      var nums = [0, 1];
+      var result = false;
+
+      var nums = [1, 0, 0];
+      var result = false;
+
+      var nums = [2, 3, 1, 1, 4, 0, 0, 2, 4, 3, 2];
+      var result = true;
+
+      var nums = [2, 0, 0];
+      var result = true;
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('canJump = ', canJump(nums));
+    </script>
+  </body>
+</html>
