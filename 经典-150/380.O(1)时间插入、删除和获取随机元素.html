@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>380. O(1) 时间插入、删除和获取随机元素</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/insert-delete-getrandom-o1/description/
+
+      // 实现RandomizedSet 类：
+
+      var RandomizedSet = function () {};
+      /**
+       * @param {number} val
+       * @return {boolean}
+       */
+      RandomizedSet.prototype.insert = function (val) {};
+      /**
+       * @param {number} val
+       * @return {boolean}
+       */
+      RandomizedSet.prototype.remove = function (val) {};
+      /**
+       * @return {number}
+       */
+      RandomizedSet.prototype.getRandom = function () {};
+
+      // --- answer-1 ---
+
+      var RandomizedSet = function () {
+        this.nums = [];
+        this.map = new Map();
+      };
+
+      RandomizedSet.prototype.insert = function (val) {
+        if (this.map.has(val)) {
+          return false;
+        }
+        const idx = this.nums.length;
+        this.nums.push(val);
+        this.map.set(val, idx);
+        return true;
+      };
+
+      RandomizedSet.prototype.remove = function (val) {
+        if (!this.map.has(val)) {
+          return false;
+        }
+        const idx = this.map.get(val);
+        this.nums[idx] = this.nums[this.nums.length - 1];
+        this.map.set(this.nums[idx], idx);
+        this.nums.pop();
+        this.map.delete(val);
+        return true;
+      };
+
+      RandomizedSet.prototype.getRandom = function () {
+        const randomIndex = Math.floor(Math.random() * this.nums.length);
+        return this.nums[randomIndex];
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      console.log('val = ', val);
+      console.log('val = ', val);
+      console.log('result = ', result);
+      console.log('RandomizedSet = ', RandomizedSet(val, val));
+    </script>
+  </body>
+</html>
