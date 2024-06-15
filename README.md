@@ -966,7 +966,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 八、经典-150 (12 道)
+## 八、经典-150 (13 道)
 
 <br/>
 
@@ -980,6 +980,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [122.买卖股票的最佳时机 II.html](./经典-150/122.买卖股票的最佳时机II.html)
 - [169.多数元素.html](./经典-150/169.多数元素.html)
 - [189.轮转数组.html](./经典-150/189.轮转数组.html)
+- [238.除自身以外数组的乘积.html](./经典-150/238.除自身以外数组的乘积.html)
 - [274.H 指数.html](./经典-150/274.H指数.html)
 - [380.O(1)时间插入、删除和获取随机元素.html](<./经典-150/380.O(1)时间插入、删除和获取随机元素.html>)
 

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>238. 除自身以外数组的乘积</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/product-of-array-except-self/description/
+
+      // 给你一个整数数组 nums，返回 数组 answer ，其中 answer[i] 等于 nums 中除 nums[i] 之外其余各元素的乘积 。
+      // 题目数据 保证 数组 nums之中任意元素的全部前缀元素和后缀的乘积都在  32 位 整数范围内。
+      // 请 不要使用除法，且在 O(n) 时间复杂度内完成此题。
+      //
+      // 提示：
+      // 2 <= nums.length <= 105
+      // -30 <= nums[i] <= 30
+      // 保证 数组 nums之中任意元素的全部前缀元素和后缀的乘积都在  32 位 整数范围内
+      // 进阶：你可以在 O(1) 的额外空间复杂度内完成这个题目吗？（ 出于对空间复杂度分析的目的，输出数组 不被视为 额外空间。）
+
+      /**
+       * @param {number[]} nums
+       * @return {number[]}
+       */
+      var productExceptSelf = function (nums) {};
+
+      // --- answer-1 ---
+
+      var productExceptSelf = function (nums = []) {
+        let zero = 0;
+        let mix = 1;
+        for (const n of nums) {
+          if (n === 0) {
+            zero++;
+          } else {
+            mix *= n;
+          }
+        }
+        return nums.map((x) => {
+          if (zero > 0) {
+            if (x === 0) {
+              return zero > 1 ? 0 : mix;
+            } else {
+              return 0;
+            }
+          } else {
+            return mix / x;
+          }
+        });
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      var productExceptSelf = function (nums = []) {
+        const length = nums.length;
+        let p = 1;
+        let a = 1;
+        let prefix = [p]; // 前缀乘积
+        let append = [a]; // 后缀乘积
+
+        for (let i = 0; i < length - 1; i++) {
+          p *= nums[i];
+          a *= nums[length - 1 - i];
+          prefix.push(p);
+          append.push(a);
+        }
+        for (let i = 0; i < length; i++) {
+          prefix[i] *= append[length - i - 1];
+        }
+        return prefix;
+      };
+
+      // 后缀乘积使用一个数保存即可满足仅仅条件
+      var productExceptSelf = function (nums = []) {
+        const length = nums.length;
+        const answer = [1];
+
+        for (let i = 1; i < length; i++) {
+          answer[i] = nums[i - 1] * answer[i - 1];
+        }
+        let append = 1;
+        for (let i = length - 1; i >= 0; i--) {
+          answer[i] *= append;
+          append *= nums[i];
+        }
+        return answer;
+      };
+
+      // --- answer-2 ---
+
+      var nums = [1, 2, 3, 4];
+      var result = [24, 12, 8, 6];
+
+      var nums = [-1, 1, 0, -3, 3];
+      var result = [0, 0, 9, 0, 0];
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('productExceptSelf = ', productExceptSelf(nums));
+    </script>
+  </body>
+</html>
