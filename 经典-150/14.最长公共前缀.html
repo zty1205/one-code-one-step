@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>14. 最长公共前缀</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/longest-common-prefix/description/
+
+      // 编写一个函数来查找字符串数组中的最长公共前缀。
+      // 如果不存在公共前缀，返回空字符串 ""。
+      //
+      // 提示：
+      // 1 <= strs.length <= 200
+      // 0 <= strs[i].length <= 200
+      // strs[i] 仅由小写英文字母组成
+
+      /**
+       * @param {string[]} strs
+       * @return {string}
+       */
+      var longestCommonPrefix = function (strs) {};
+
+      // --- answer-1 ---
+
+      var longestCommonPrefix = function (strs = []) {
+        const char = strs[0];
+        let i = char.length;
+        while (i) {
+          const prefix = char.substring(0, i);
+          console.log('p = ', prefix, i);
+          if (strs.every((s) => s.startsWith(prefix))) {
+            return prefix;
+          }
+          i--;
+        }
+        return '';
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      function getPrefix(str1 = '', str2 = '') {
+        const length = Math.min(str1.length, str2.length);
+        for (let i = 0; i < length; i++) {
+          if (str1[i] !== str2[i]) {
+            return str1.substring(0, i);
+          }
+        }
+        return str1.substring(0, length);
+      }
+
+      function commonPrefix(strs = [], start, end) {
+        if (start === end) {
+          return strs[start];
+        } else {
+          let mid = Math.floor((end - start) / 2) + start;
+          let strLeft = commonPrefix(strs, start, mid);
+          let strRight = commonPrefix(strs, mid + 1, end);
+          return getPrefix(strLeft, strRight);
+        }
+      }
+
+      // 分治
+      var longestCommonPrefix = function (strs = []) {
+        if (!strs || strs.length === 0) {
+          return '';
+        }
+        return commonPrefix(strs, 0, strs.length - 1);
+      };
+
+      // --- answer-2 ---
+
+      var strs = ['flower', 'flow', 'flight'];
+      var result = 'fl';
+
+      var strs = ['dog', 'racecar', 'car'];
+      var result = '';
+      // 解释：输入不存在公共前缀。
+
+      var strs = ['a'];
+      var result = 'a';
+
+      console.log('strs = ', strs);
+      console.log('result = ', result);
+      console.log('longestCommonPrefix = ', longestCommonPrefix(strs));
+    </script>
+  </body>
+</html>
