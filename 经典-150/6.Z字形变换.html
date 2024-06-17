@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>6. Z 字形变换</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/zigzag-conversion/description/
+
+      // 将一个给定字符串 s 根据给定的行数 numRows ，以从上往下、从左到右进行 Z 字形排列。
+      // 比如输入字符串为 "PAYPALISHIRING" 行数为 3 时，排列如下：
+      // 之后，你的输出需要从左往右逐行读取，产生出一个新的字符串，比如："PAHNAPLSIIGYIR"。
+      // 请你实现这个将字符串进行指定行数变换的函数：
+      //
+      // 提示：
+      // 1 <= s.length <= 1000
+      // s 由英文字母（小写和大写）、',' 和 '.' 组成
+      // 1 <= numRows <= 1000
+
+      /**
+       * @param {string} s
+       * @param {number} numRows
+       * @return {string}
+       */
+      var convert = function (s, numRows) {};
+
+      // --- answer-1 ---
+
+      // 模拟
+      var convert = function (s = '', numRows = 1) {
+        if (numRows < 2) {
+          return s;
+        }
+        const len = Math.min(s.length, numRows);
+        const rows = new Array(len).fill('');
+        let loc = 0;
+        let flag = false;
+        for (const ch of s) {
+          rows[loc] += ch;
+          if (loc === 0 || loc === numRows - 1) {
+            flag = !flag;
+          }
+          loc += flag ? 1 : -1;
+        }
+        return rows.join('');
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      // P   A   H   N;
+      // A P L S I I G;
+      // Y   I   R
+
+      // string convert(string s, int numRows);;
+
+      var s = 'PAYPALISHIRING',
+        numRows = 3;
+      var result = 'PAHNAPLSIIGYIR';
+
+      // var s = "PAYPALISHIRING", numRows = 4;
+      // var result = "PINALSIGYAHRPI";
+      // 解释：
+
+      // var s = "A", numRows = 1;
+      // var result = "A";
+
+      console.log('s = ', s);
+      console.log('numRows = ', numRows);
+      console.log('result = ', result);
+      console.log('convert = ', convert(s, numRows), convert(s, numRows) === result);
+    </script>
+  </body>
+</html>

@@ -126,8 +126,8 @@ function convertAnswer(answers = [], params = []) {
     let ansArr = ans.split(/\n/);
     const [input, output, explain] = ansArr;
 
-    let i = input.replace(/输入[：:]/, input.indexOf('=') === -1 ? `var ${params[0] || 'input'} = ` : 'var ');
-    let o = output.replace(/输出[：:]/, output.indexOf('=') === -1 ? 'var result = ' : 'var ');
+    let i = input?.replace(/输入[：:]/, input.indexOf('=') === -1 ? `var ${params[0] || 'input'} = ` : 'var ');
+    let o = output?.replace(/输出[：:]/, output.indexOf('=') === -1 ? 'var result = ' : 'var ');
 
     htmlAnswers += `// ${i};\n`;
     htmlAnswers += `// ${o};\n`;
