@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>125. 验证回文串</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/valid-palindrome/description/
+
+      // 如果在将所有大写字符转换为小写字符、并移除所有非字母数字字符之后，短语正着读和反着读都一样。则可以认为该短语是一个 回文串 。
+      // 字母和数字都属于字母数字字符。
+      // 给你一个字符串 s，如果它是 回文串 ，返回 true ；否则，返回 false 。
+      //
+      // 提示：
+      // 1 <= s.length <= 2 * 105
+      // s 仅由可打印的 ASCII 字符组成
+
+      /**
+       * @param {string} s
+       * @return {boolean}
+       */
+      var isPalindrome = function (s) {};
+
+      // --- answer-1 ---
+
+      // 双指针
+      var isPalindrome = function (s = '') {
+        s = s.replace(/[^a-zA-Z0-9]/g, '').toLocaleLowerCase();
+        let i = 0;
+        let j = s.length - 1;
+        while (i <= j) {
+          if (s[i] !== s[j]) {
+            return false;
+          }
+          i++;
+          j--;
+        }
+        return true;
+      };
+
+      var isPalindrome = function (s = '') {
+        const isChar = (ch) => /[a-zA-Z0-9]/.test(ch);
+        s = s.toLowerCase();
+        const length = s.length;
+        let i = 0;
+        let j = length - 1;
+        while (i < j) {
+          while (!isChar(s[i])) i++;
+          while (!isChar(s[j])) j--;
+          console.log('', {
+            i,
+            j,
+            's[i]': s[i],
+            's[j]': s[j]
+          });
+          if (s[i] !== s[j]) {
+            return false;
+          }
+          i++;
+          j--;
+        }
+        return true;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var s = 'A man, a plan, a canal: Panama';
+      var result = true;
+      // 解释："amanaplanacanalpanama" 是回文串。
+
+      // var s = 'race a car';
+      // var result = false;
+      // // 解释："raceacar" 不是回文串。
+
+      // var s = ' ';
+      // var result = true;
+      // // 解释：在移除非字母数字字符之后，s 是一个空字符串 "" 。
+
+      var s = 'ab_a';
+      var result = true;
+
+      console.log('s = ', s);
+      console.log('result = ', result);
+      console.log('isPalindrome = ', isPalindrome(s));
+    </script>
+  </body>
+</html>
