@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>28. 找出字符串中第一个匹配项的下标</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string/description/
+
+      // 给你两个字符串 haystack 和 needle ，请你在 haystack 字符串中找出 needle 字符串的第一个匹配项的下标（下标从 0 开始）。如果 needle 不是 haystack 的一部分，则返回  -1 。
+      //
+      // 提示：
+      // 1 <= haystack.length, needle.length <= 104
+      // haystack 和 needle 仅由小写英文字符组成
+
+      /**
+       * @param {string} haystack
+       * @param {string} needle
+       * @return {number}
+       */
+      var strStr = function (haystack, needle) {};
+
+      // --- answer-1 ---
+
+      // 直接api
+      var strStr = function (haystack = '', needle = '') {
+        return haystack.indexOf(needle);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 暴力
+      var strStr = function (haystack = '', needle = '') {
+        const len1 = haystack.length;
+        const len2 = needle.length;
+        if (len1 < len2) return -1;
+        const len = len1 - len2;
+        for (let i = 0; i <= len; i++) {
+          let flag = true;
+          for (let j = 0; j < len2; j++) {
+            if (haystack[i + j] !== needle[j]) {
+              flag = false;
+              break;
+            }
+          }
+          if (flag) {
+            return i;
+          }
+        }
+        return -1;
+      };
+
+      // --- answer-2 ---
+
+      // --- answer-3 ---
+
+      var strStr = function (haystack, needle) {
+        const n = haystack.length,
+          m = needle.length;
+        if (m === 0) {
+          return 0;
+        }
+        // 计算下标 0~i 有长度为多少的前缀和后缀，且前缀=后缀
+        // j就是这个前缀的长度
+        const pi = new Array(m).fill(0);
+        for (let i = 1, j = 0; i < m; i++) {
+          while (j > 0 && needle[i] !== needle[j]) {
+            j = pi[j - 1];
+          }
+          if (needle[i] == needle[j]) {
+            j++;
+          }
+          pi[i] = j;
+        }
+        console.log('pi = ', pi);
+
+        // 双指针 复杂度n+m
+        for (let i = 0, j = 0; i < n; i++) {
+          while (j > 0 && haystack[i] != needle[j]) {
+            // 往前移动到 当前字符串的 相同前后缀
+            j = pi[j - 1];
+          }
+          if (haystack[i] == needle[j]) {
+            j++;
+          }
+          if (j === m) {
+            return i - m + 1;
+          }
+        }
+        return -1;
+      };
+
+      // --- answer-3 ---
+
+      var haystack = 'sadbutsad',
+        needle = 'sad';
+      var result = 0;
+      // 解释："sad" 在下标 0 和 6 处匹配。
+
+      var haystack = 'leetcode',
+        needle = 'leeto';
+      var result = -1;
+      // 解释："leeto" 没有在 "leetcode" 中出现，所以返回 -1 。
+
+      var haystack = 'abscsadbutsad',
+        needle = 'sadasa';
+      var result = 4;
+
+      console.log('haystack = ', haystack);
+      console.log('needle = ', needle);
+      console.log('result = ', result);
+      console.log('strStr = ', strStr(haystack, needle));
+    </script>
+  </body>
+</html>
