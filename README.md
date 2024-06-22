@@ -966,7 +966,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 八、经典-150 (23 道)
+## 八、经典-150 (24 道)
 
 <br/>
 
@@ -987,6 +987,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [125.验证回文串.html](./经典-150/125.验证回文串.html)
 - [134.加油站.html](./经典-150/134.加油站.html)
 - [151.反转字符串中的单词.html](./经典-150/151.反转字符串中的单词.html)
+- [167.两数之和 II-输入有序数组.html](./经典-150/167.两数之和II-输入有序数组.html)
 - [169.多数元素.html](./经典-150/169.多数元素.html)
 - [189.轮转数组.html](./经典-150/189.轮转数组.html)
 - [238.除自身以外数组的乘积.html](./经典-150/238.除自身以外数组的乘积.html)
