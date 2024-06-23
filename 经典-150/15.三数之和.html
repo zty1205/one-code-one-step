@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>15. 三数之和</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/3sum
+
+      // 给你一个整数数组 nums ，判断是否存在三元组 [nums[i], nums[j], nums[k]] 满足 i != j、i != k 且 j != k ，同时还满足 nums[i] + nums[j] + nums[k] == 0 。请
+      // 你返回所有和为 0 且不重复的三元组。
+      // 注意：答案中不可以包含重复的三元组。
+      //
+      // 提示：
+      // 3 <= nums.length <= 3000
+      // -105 <= nums[i] <= 105
+
+      /**
+       * @param {number[]} nums
+       * @return {number[][]}
+       */
+      var threeSum = function (nums) {};
+
+      // --- answer-1 ---
+
+      // 排序后 使用双指针
+      var threeSum = function (nums = []) {
+        const length = nums.length;
+        const res = [];
+        nums.sort((a, b) => a - b);
+        const fill = (n = 0, start) => {
+          let end = length - 1;
+          while (start < end) {
+            const sum = nums[start] + nums[end];
+            if (sum === n) {
+              res.push([-n, nums[start], nums[end]]);
+              start++;
+              end--;
+              while (start < end && nums[start] == nums[start - 1]) start++;
+              while (start < end && nums[end] == nums[end + 1]) end--;
+            } else if (sum < n) {
+              start++;
+            } else {
+              end--;
+            }
+          }
+        };
+        for (let i = 0; i < length - 2; i++) {
+          if (i === 0 || nums[i] !== nums[i - 1]) {
+            fill(-nums[i], i + 1);
+          }
+        }
+        return res;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var nums = [-1, 0, 1, 2, -1, -4];
+      var result = [
+        [-1, -1, 2],
+        [-1, 0, 1]
+      ];
+      // 解释：
+
+      // var nums = [0,1,1];
+      // var result = [];
+      // 解释：唯一可能的三元组和不为 0 。
+
+      var nums = [0, 0, 0];
+      var result = [[0, 0, 0]];
+      // 解释：唯一可能的三元组和为 0 。
+
+      var nums = [0, 1, 0];
+      var result = [[0, 0, 0]];
+
+      var nums = [-2, 0, 0, 2, 2];
+      var result = [-2, 0, 2];
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('threeSum = ', threeSum(nums));
+    </script>
+  </body>
+</html>
