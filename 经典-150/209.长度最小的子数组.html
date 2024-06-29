@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>209. 长度最小的子数组</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/minimum-size-subarray-sum/description
+
+      // 给定一个含有 n 个正整数的数组和一个正整数 target 。
+      // 找出该数组中满足其总和大于等于 target 的长度最小的
+      // 子数组
+      //  [numsl, numsl+1, ..., numsr-1, numsr] ，并返回其长度。如果不存在符合条件的子数组，返回 0 。
+      //
+      // 提示：
+      // 1 <= target <= 109
+      // 1 <= nums.length <= 105
+      // 1 <= nums[i] <= 105
+      // 进阶：
+      //
+      // 提示：
+      // 如果你已经实现 O(n) 时间复杂度的解法, 请尝试设计一个 O(n log(n)) 时间复杂度的解法。
+
+      /**
+       * @param {number} target
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var minSubArrayLen = function (target, nums) {};
+
+      // --- answer-1 ---
+
+      // 滑动窗口
+      var minSubArrayLen = function (target = 1, nums = []) {
+        const length = nums.length;
+        if (n === 0) return 0;
+        let start = (end = 0);
+        let sum = nums[0];
+        let res = Infinity;
+        while (end < length) {
+          if (sum >= target) {
+            res = Math.min(res, end - start + 1);
+            sum -= nums[start];
+            start++;
+          } else if (sum < target) {
+            end++;
+            sum += nums[end];
+          }
+        }
+        return res === Infinity ? 0 : res;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 前缀和 + 二分
+      var minSubArrayLen = function (target = 1, nums = []) {
+        const length = nums.length;
+        if (n === 0) return 0;
+        let res = Infinity;
+        const sums = [0];
+        for (let i = 1; i <= n; i++) {
+          sums[i] = sums[i - 1] + nums[i - 1];
+        }
+        for (let i = 1; i <= n; i++) {
+          const tar = target + sums[i - 1];
+          const idx = binarySearch(sums, tar);
+          if (idx < 0) {
+            idx = -idx - 1;
+          }
+          if (idx <= n) {
+            res = Math.min(res, idx - (i - 1));
+          }
+        }
+        return res === Infinity ? 0 : res;
+      };
+
+      // --- answer-2 ---
+
+      var target = 7,
+        nums = [2, 3, 1, 2, 4, 3];
+      var result = 2;
+      // 解释：子数组 [4,3] 是该条件下的长度最小的子数组。
+
+      // var target = 4,
+      //   nums = [1, 4, 4];
+      // var result = 1;
+
+      var target = 11,
+        nums = [1, 1, 1, 1, 1, 1, 1, 1];
+      var result = 0;
+
+      var target = 11;
+      nums = [1, 2, 3, 4, 5];
+      var result = 3;
+
+      console.log('target = ', target);
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('minSubArrayLen = ', minSubArrayLen(target, nums));
+    </script>
+  </body>
+</html>
