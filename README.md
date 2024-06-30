@@ -966,7 +966,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 八、经典-150 (31 道)
+## 八、经典-150 (32 道)
 
 <br/>
 
@@ -986,6 +986,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [58.最后一个单词的长度.html](./经典-150/58.最后一个单词的长度.html)
 - [70.爬楼梯.html](./经典-150/70.爬楼梯.html)
 - [80.删除有序数组中的重复项 II.html](./经典-150/80.删除有序数组中的重复项II.html)
+- [120.三角形最小路径和.html](./经典-150/120.三角形最小路径和.html)
 - [121.买卖股票的最佳时机.html](./经典-150/121.买卖股票的最佳时机.html)
 - [122.买卖股票的最佳时机 II.html](./经典-150/122.买卖股票的最佳时机II.html)
 - [125.验证回文串.html](./经典-150/125.验证回文串.html)
