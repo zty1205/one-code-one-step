@@ -966,7 +966,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 八、经典-150 (30 道)
+## 八、经典-150 (31 道)
 
 <br/>
 
@@ -998,6 +998,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [209.长度最小的子数组.html](./经典-150/209.长度最小的子数组.html)
 - [238.除自身以外数组的乘积.html](./经典-150/238.除自身以外数组的乘积.html)
 - [274.H 指数.html](./经典-150/274.H指数.html)
+- [300.最长递增子序列.html](./经典-150/300.最长递增子序列.html)
 - [392.判断子序列.html](./经典-150/392.判断子序列.html)
 - [380.O(1)时间插入、删除和获取随机元素.html](<./经典-150/380.O(1)时间插入、删除和获取随机元素.html>)
 
