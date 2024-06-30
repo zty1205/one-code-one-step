@@ -966,7 +966,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 八、经典-150 (29 道)
+## 八、经典-150 (30 道)
 
 <br/>
 
@@ -994,6 +994,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [167.两数之和 II-输入有序数组.html](./经典-150/167.两数之和II-输入有序数组.html)
 - [169.多数元素.html](./经典-150/169.多数元素.html)
 - [189.轮转数组.html](./经典-150/189.轮转数组.html)
+- [198.打家劫舍.html](./经典-150/198.打家劫舍.html)
 - [209.长度最小的子数组.html](./经典-150/209.长度最小的子数组.html)
 - [238.除自身以外数组的乘积.html](./经典-150/238.除自身以外数组的乘积.html)
 - [274.H 指数.html](./经典-150/274.H指数.html)
