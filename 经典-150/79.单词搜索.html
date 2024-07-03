@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>79. 单词搜索</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/word-search/
+
+      // 给定一个 m x n 二维字符网格 board 和一个字符串单词 word 。如果 word 存在于网格中，返回 true ；否则，返回 false 。
+      // 单词必须按照字母顺序，通过相邻的单元格内的字母构成，其中“相邻”单元格是那些水平相邻或垂直相邻的单元格。同一个单元格内的字母不允许被重复使用。
+      //
+      // 提示：
+      // m == board.length
+      // n = board[i].length
+      // 1 <= m, n <= 6
+      // 1 <= word.length <= 15
+      // board 和 word 仅由大小写英文字母组成
+      // 进阶：你可以使用搜索剪枝的技术来优化解决方案，使其在 board 更大的情况下可以更快解决问题？
+
+      /**
+       * @param {character[][]} board
+       * @param {string} word
+       * @return {boolean}
+       */
+      var exist = function (board, word) {};
+
+      // --- answer-1 ---
+
+      // 回溯
+      var exist = function (board = [[]], word = '') {};
+
+      // --- answer-1 ---
+
+      var exist = function (board = [[]], word = '') {
+        const h = board.length;
+        const l = board[0].length;
+        const visited = new Array(h).fill(0).map(() => new Array(l).fill(false));
+
+        function isExist(i, j, idx) {
+          if (board[i][j] !== word[idx]) {
+            return false;
+          }
+          if (idx === word.length - 1) {
+            return true;
+          }
+          visited[i][j] = true;
+          const directions = [
+            [-1, 0],
+            [1, 0],
+            [0, -1],
+            [0, 1]
+          ];
+          for (const [x, y] of directions) {
+            const newI = i + x;
+            const newJ = j + y;
+            if (newI >= 0 && newI < h && newJ >= 0 && newJ < l && !visited[newI][newJ]) {
+              const flag = isExist(newI, newJ, idx + 1);
+              if (flag) {
+                visited[i][j] = false;
+                return true;
+              }
+            }
+          }
+
+          visited[i][j] = false;
+          return false;
+        }
+
+        for (let i = 0; i < h; i++) {
+          for (let j = 0; j < l; j++) {
+            const flag = isExist(i, j, 0);
+            if (flag) {
+              return true;
+            }
+          }
+        }
+        return false;
+      };
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var board = [
+          ['A', 'B', 'C', 'E'],
+          ['S', 'F', 'C', 'S'],
+          ['A', 'D', 'E', 'E']
+        ],
+        word = 'ABCCED';
+      var result = true;
+
+      // var board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "SEE";
+      // var result = true;
+
+      // var board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCB";
+      // var result = false;
+
+      console.log('board = ', board);
+      console.log('word = ', word);
+      console.log('result = ', result);
+      console.log('exist = ', exist(board, word));
+    </script>
+  </body>
+</html>
