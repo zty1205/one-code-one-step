@@ -966,7 +966,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 八、经典-150 (36 道)
+## 八、经典-150 (37 道)
 
 <br/>
 
@@ -982,6 +982,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [26.删除有序数组中的重复项.html](./经典-150/26.删除有序数组中的重复项.html)
 - [27.移除元素.html](./经典-150/27.移除元素.html)
 - [28.找出字符串中第一个匹配项的下标.html](./经典-150/28.找出字符串中第一个匹配项的下标.html)
+- [35.搜索插入位置.html](./经典-150/35.搜索插入位置.html)
 - [45.跳跃游戏 II.html](./经典-150/45.跳跃游戏II.html)
 - [46.全排列.html](./经典-150/46.全排列.html)
 - [55.跳跃游戏.html](./经典-150/55.跳跃游戏.html)
