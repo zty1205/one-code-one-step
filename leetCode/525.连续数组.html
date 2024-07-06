@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>525. 连续数组</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/contiguous-array/description/
+
+      // 给定一个二进制数组 nums , 找到含有相同数量的 0 和 1 的最长连续子数组，并返回该子数组的长度。
+      //
+      // 提示：
+      // 1 <= nums.length <= 105
+      // nums[i] 不是 0 就是 1
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var findMaxLength = function (nums) {};
+
+      // --- answer-1 ---
+
+      // 前缀和 + hash
+      var findMaxLength = function (nums = []) {
+        let maxLength = 0;
+        const map = new Map();
+        let counter = 0;
+        map.set(counter, -1);
+        const n = nums.length;
+        for (let i = 0; i < n; i++) {
+          const num = nums[i];
+          if (num == 1) {
+            counter++;
+          } else {
+            counter--;
+          }
+          // 上一次的counter和这一次的counter相等，说明中间的0和1的数量相等
+          if (map.has(counter)) {
+            const prevIndex = map.get(counter);
+            maxLength = Math.max(maxLength, i - prevIndex);
+          } else {
+            map.set(counter, i);
+          }
+        }
+        return maxLength;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      // var  nums = [0,1];
+      // var result =  2;
+      // 说明: [0, 1] 是具有相同数量 0 和 1 的最长连续子数组。
+
+      // var  nums = [0,1,0];
+      // var result =  2;
+      // 说明: [0, 1] (或 [1, 0]) 是具有相同数量0和1的最长连续子数组。
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('findMaxLength = ', findMaxLength(nums));
+    </script>
+  </body>
+</html>
