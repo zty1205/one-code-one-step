@@ -74,7 +74,7 @@ function buildNTreeByArray(list) {
   if (!list || !list.length) return null;
   let root = new NNode(list[0]);
   let stack = [root];
-  let parent;
+  let parent = root;
   for (let i = 1; i < list.length; i++) {
     let val = list[i];
     if (val) {

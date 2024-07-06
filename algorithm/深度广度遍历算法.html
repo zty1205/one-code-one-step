@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>深度广度遍历算法</title>
+    <script src="../helper/tree.js"></script>
+  </head>
+  <body>
+    <script>
+      /**
+       * 深度广度遍历算法
+       */
+
+      // --- example-1 ---
+
+      // 请写一个深度遍历的函数
+      function deepTraversal(node) {
+        if (!node) return;
+
+        console.log(node.val);
+        let children = node.children;
+        for (let i = 0; i < children.length; i++) {
+          deepTraversal(children[i]);
+        }
+      }
+
+      // 请写一个广度遍历的函数
+      function breadthTraversal(node) {
+        let queue = [];
+        queue.push(node);
+        while (queue.length) {
+          let item = queue.shift();
+          console.log(item.val);
+          let children = item.children;
+          for (let i = 0; i < children.length; i++) {
+            queue.push(children[i]);
+          }
+        }
+      }
+
+      // --- example-1 ---
+
+      // --- example-2 ---
+
+      // --- example-2 ---
+
+      const root = buildNTreeByArray([1, 2, 3]);
+      const node4 = buildNTreeByArray([4, 5, 6]);
+      const node7 = buildNTreeByArray([7, 8, 9, 10]);
+      root.children[0].children.push(node4, node7);
+      console.log(root);
+      //      1
+      //    2     3
+      // 4    7
+      // 56   89
+      console.log('--- deepTraversal ---');
+      deepTraversal(root);
+      console.log('--- breadthTraversal ---');
+      breadthTraversal(root);
+    </script>
+  </body>
+</html>
