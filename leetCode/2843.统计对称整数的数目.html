@@ -26,29 +26,21 @@
 
       // --- answer-1 ---
 
-      // 打表 或 直接遍历
-
-      var isSym = function (i = 1) {
-        const s = i.toString();
-        const n = s.length;
-        if (n % 2 === 1) {
-          return false;
-        }
-        const m = n >> 1;
-        let sum = 0;
-        for (let j = 0; j < m; j++) {
-          sum += s.charCodeAt(j);
-        }
-        for (let j = m; j < n; j++) {
-          sum -= s.charCodeAt(j);
-        }
-        return sum === 0;
-      };
+      // 事先打表或循环
       var countSymmetricIntegers = function (low = 1, high = 1) {
         let res = 0;
         for (let i = low; i <= high; i++) {
-          if (isSym(i)) {
-            res++;
+          const str = i.toString();
+          if (str.length % 2 === 0) {
+            const mid = str.length / 2;
+            let n1 = (n2 = 0);
+            for (let i = 0; i < mid; i++) {
+              n1 += Number(str[i]);
+              n2 += Number(str[str.length - 1 - i]);
+            }
+            if (n1 === n2) {
+              res++;
+            }
           }
         }
         return res;
