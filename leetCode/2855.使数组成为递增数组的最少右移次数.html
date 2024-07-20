@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2855. 使数组成为递增数组的最少右移次数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/minimum-right-shifts-to-sort-the-array/description/
+
+      // 给你一个长度为 n 下标从 0 开始的数组 nums ，数组中的元素为 互不相同 的正整数。请你返回让 nums 成为递增数组的 最少右移 次数，如果无法得到递增数组，返回 -1 。
+      // 一次 右移 指的是同时对所有下标进行操作，将下标为 i 的元素移动到下标 (i + 1) % n 处。
+      //
+      // 提示：
+      // 1 <= nums.length <= 100
+      // 1 <= nums[i] <= 100
+      // nums 中的整数互不相同。
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var minimumRightShifts = function (nums) {};
+
+      // --- answer-1 ---
+
+      // 至多两端递增子数组
+      // 拷贝
+      var minimumRightShifts = function (nums = []) {
+        const length = nums.length;
+        if (length <= 1) return 0;
+        let i = 0;
+        while (i < length - 1 && nums[i] < nums[i + 1]) i++;
+
+        const newArr = [...nums.slice(i + 1), ...nums.slice(0, i + 1)];
+        for (let j = 0; j < newArr.length - 1; j++) {
+          if (newArr[j] >= newArr[j + 1]) return -1;
+        }
+        return newArr.length - 1 - i;
+      };
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var nums = [3, 4, 5, 1, 2];
+      var result = 2;
+      // 解释：
+
+      var nums = [1, 3, 5];
+      var result = 0;
+      // 解释：nums 已经是递增数组了，所以答案为 0 。
+
+      var nums = [2, 1, 4];
+      var result = -1;
+      // 解释：无法将数组变为递增数组。
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('minimumRightShifts = ', minimumRightShifts(nums));
+    </script>
+  </body>
+</html>
