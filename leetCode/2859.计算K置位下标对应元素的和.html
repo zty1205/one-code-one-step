@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2859. 计算 K 置位下标对应元素的和</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/sum-of-values-at-indices-with-k-set-bits/description/
+
+      // 给你一个下标从 0 开始的整数数组 nums 和一个整数 k 。
+      // 请你用整数形式返回 nums 中的特定元素之 和 ，这些特定元素满足：其对应下标的二进制表示中恰存在 k 个置位。
+      // 整数的二进制表示中的 1 就是这个整数的 置位 。
+      //
+      // 提示：
+      // 1 <= nums.length <= 1000
+      // 1 <= nums[i] <= 105
+      // 0 <= k <= 10
+
+      /**
+       * @param {number[]} nums
+       * @param {number} k
+       * @return {number}
+       */
+      var sumIndicesWithKSetBits = function (nums, k) {};
+
+      // --- answer-1 ---
+
+      // 计算1个个数
+      var sumIndicesWithKSetBits = function (nums, k) {
+        // 或者 toString(2)
+        const bitCount = (x) => {
+          let cnt = 0;
+          while (x) {
+            cnt += x % 2;
+            x >>= 1;
+          }
+          return cnt;
+        };
+
+        let ans = 0;
+        for (let i = 0; i < nums.length; ++i) {
+          if (bitCount(i) == k) {
+            ans += nums[i];
+          }
+        }
+        return ans;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var nums = [5, 10, 1, 5, 2],
+        k = 1;
+      var result = 13;
+      // 解释：下标的二进制表示是：
+
+      var nums = [4, 3, 2, 1],
+        k = 2;
+      var result = 1;
+      // 解释：下标的二进制表示是：
+
+      console.log('nums = ', nums);
+      console.log('k = ', k);
+      console.log('result = ', result);
+      console.log('sumIndicesWithKSetBits = ', sumIndicesWithKSetBits(nums, k));
+    </script>
+  </body>
+</html>
