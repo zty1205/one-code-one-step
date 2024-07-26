@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2873. 有序三元组中的最大值 I</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/maximum-value-of-an-ordered-triplet-i/description/
+
+      // 给你一个下标从 0 开始的整数数组 nums 。
+      // 请你从所有满足 i < j < k 的下标三元组 (i, j, k) 中，找出并返回下标三元组的最大值。如果所有满足条件的三元组的值都是负数，则返回 0 。
+      // 下标三元组 (i, j, k) 的值等于 (nums[i] - nums[j]) * nums[k] 。
+      //
+      // 提示：
+      // 3 <= nums.length <= 100
+      // 1 <= nums[i] <= 106
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var maximumTripletValue = function (nums) {};
+
+      // --- answer-1 ---
+
+      // 维护i的右侧最大值和左侧最大值
+      // 贪心 两边都拿最大的
+      var maximumTripletValue = function (nums = []) {
+        const length = nums.length;
+        const leftMax = Array(length).fill(0);
+        const rightMax = Array(length).fill(0);
+        for (let i = 1; i < length; i++) {
+          leftMax[i] = Math.max(leftMax[i - 1], nums[i - 1]);
+        }
+        for (let i = length - 2; i >= 0; i--) {
+          rightMax[i] = Math.max(rightMax[i + 1], nums[i + 1]);
+        }
+        let result = 0;
+        for (let i = 1; i < length - 1; i++) {
+          result = Math.max(result, (leftMax[i] - nums[i]) * rightMax[i]);
+        }
+        return result < 0 ? 0 : result;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      var maximumTripletValue = function (nums = []) {
+        let res = 0;
+        let maxDiff = 0;
+        let preMax = 0;
+        for (const n of nums) {
+          res = Math.max(res, maxDiff * n);
+          maxDiff = Math.max(maxDiff, preMax - n);
+          preMax = Math.max(preMax, n);
+        }
+        return res;
+      };
+
+      // --- answer-2 ---
+
+      var nums = [12, 6, 1, 2, 7];
+      var result = 77;
+      // 解释：下标三元组 (0, 2, 4) 的值是 (nums[0] - nums[2]) * nums[4] = 77 。
+
+      var nums = [1, 10, 3, 4, 19];
+      var result = 133;
+      // 解释：下标三元组 (1, 2, 4) 的值是 (nums[1] - nums[2]) * nums[4] = 133 。
+
+      var nums = [1, 2, 3];
+      var result = 0;
+      // 解释：唯一的下标三元组 (0, 1, 2) 的值是一个负数，(nums[0] - nums[1]) * nums[2] = -3 。因此，答案是 0 。
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('maximumTripletValue = ', maximumTripletValue(nums));
+    </script>
+  </body>
+</html>
