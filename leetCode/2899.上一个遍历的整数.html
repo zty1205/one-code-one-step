@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2899. 上一个遍历的整数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/last-visited-integers/description/
+
+      // 给你一个整数数组 nums ，其中 nums[i] 要么是一个正整数，要么是 -1 。我们需要为每个 -1 找到相应的正整数，我们称之为最后访问的整数。
+      // 为了达到这个目标，定义两个空数组：seen 和 ans。
+      // 从数组 nums 的头部开始遍历。
+      //
+      // 提示：
+      // 如果遇到正整数，把它添加到 seen 的 头部。
+      // 如果遇到 -1，则设 k 是到目前为止看到的 连续 -1 的数目(包括当前 -1)，
+      // 如果 k 小于等于 seen 的长度，把 seen 的第 k 个元素添加到 ans。
+      // 如果 k 严格大于 seen 的长度，把 -1 添加到 ans。
+      // 请你返回数组 ans。
+      //
+      // 提示：
+      // 1 <= nums.length <= 100
+      // nums[i] == -1 或 1 <= nums[i] <= 100
+
+      /**
+       * @param {number[]} nums
+       * @return {number[]}
+       */
+      var lastVisitedIntegers = function (nums) {};
+
+      // --- answer-1 ---
+
+      // 模拟即可
+      var lastVisitedIntegers = function (nums) {
+        let stack = [];
+        let ans = [];
+        let k = 0;
+        for (let s of nums) {
+          if (s != -1) {
+            stack.push(parseInt(s));
+            k = 0;
+          } else {
+            ans.push(++k > stack.length ? -1 : stack[stack.length - k]);
+          }
+        }
+        return ans;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      // var nums = [1,2,-1,-1,-1];
+      // var result = [2,1,-1];
+      // 解释： 开始时 seen = [] 且 ans = []。
+
+      // var nums = [1,-1,2,-1,-1];
+      // var result = [1,2,1];
+      // 解释： 开始时 seen = [] 且 ans = []。
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('lastVisitedIntegers = ', lastVisitedIntegers(nums));
+    </script>
+  </body>
+</html>
