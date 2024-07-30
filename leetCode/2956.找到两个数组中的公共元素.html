@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2956. 找到两个数组中的公共元素</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/find-common-elements-between-two-arrays/description/
+
+      // 给你两个下标从 0 开始的整数数组 nums1 和 nums2 ，它们分别含有 n 和 m 个元素。请你计算以下两个数值：
+      //
+      // 提示：
+      // answer1：使得 nums1[i] 在 nums2 中出现的下标 i 的数量。
+      // answer2：使得 nums2[i] 在 nums1 中出现的下标 i 的数量。
+      // 返回 [answer1, answer2]。
+      //
+      // 提示：
+      // n == nums1.length
+      // m == nums2.length
+      // 1 <= n, m <= 100
+      // 1 <= nums1[i], nums2[i] <= 100
+
+      /**
+       * @param {number[]} nums1
+       * @param {number[]} nums2
+       * @return {number[]}
+       */
+      var findIntersectionValues = function (nums1, nums2) {};
+
+      // --- answer-1 ---
+
+      var findIntersectionValues = function (nums1 = [], nums2 = []) {
+        const set1 = new Set(nums1);
+        const set2 = new Set(nums2);
+        let answer1 = 0;
+        let answer2 = 0;
+        for (let i = 0; i < nums1.length; i++) {
+          if (set2.has(nums1[i])) {
+            answer1++;
+          }
+        }
+        for (let i = 0; i < nums2.length; i++) {
+          if (set1.has(nums2[i])) {
+            answer2++;
+          }
+        }
+        return [answer1, answer2];
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      console.log('nums1 = ', nums1);
+      console.log('nums2 = ', nums2);
+      console.log('result = ', result);
+      console.log('findIntersectionValues = ', findIntersectionValues(nums1, nums2));
+    </script>
+  </body>
+</html>
