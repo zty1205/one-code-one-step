@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>355. 设计推特</title>
+    <script src="../helper/command.js"></script>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/design-twitter/description/
+
+      // 设计一个简化版的推特(Twitter)，可以让用户实现发送推文，关注/取消关注其他用户，能够看见关注人（包括自己）的最近 10 条推文。
+      // 实现 Twitter 类：
+      //
+      // 提示：
+      // Twitter() 初始化简易版推特对象
+      // void postTweet(int userId, int tweetId) 根据给定的 tweetId 和 userId 创建一条新推文。每次调用此函数都会使用一个不同的 tweetId 。
+      // List<Integer> getNewsFeed(int userId) 检索当前用户新闻推送中最近  10 条推文的 ID 。新闻推送中的每一项都必须是由用户关注的人或者是用户自己发布的推文。推文必须 按照时间顺序由最近到最远排序 。
+      // void follow(int followerId, int followeeId) ID 为 followerId 的用户开始关注 ID 为 followeeId 的用户。
+      // void unfollow(int followerId, int followeeId) ID 为 followerId 的用户不再关注 ID 为 followeeId 的用户。
+      //
+      // 提示：
+      // 1 <= userId, followerId, followeeId <= 500
+      // 0 <= tweetId <= 104
+      // 所有推特的 ID 都互不相同
+      // postTweet、getNewsFeed、follow 和 unfollow 方法最多调用 3 * 104 次
+
+      var Twitter = function () {};
+      /**
+       * @param {number} userId
+       * @param {number} tweetId
+       * @return {void}
+       */
+      Twitter.prototype.postTweet = function (userId, tweetId) {};
+      /**
+       * @param {number} userId
+       * @return {number[]}
+       */
+      Twitter.prototype.getNewsFeed = function (userId) {};
+      /**
+       * @param {number} followerId
+       * @param {number} followeeId
+       * @return {void}
+       */
+      Twitter.prototype.follow = function (followerId, followeeId) {};
+
+      // --- answer-1 ---
+
+      // 用户类
+      var User = function (id) {
+        this.id = id;
+        this.following = new Set();
+      };
+      // 存储文章列表 从后面找即是最新的
+      // hash map 存储用户信息
+      var Twitter = function () {
+        this.tweets = [];
+        this.users = new Map();
+      };
+      Twitter.prototype.postTweet = function (userId, tweetId) {
+        let user;
+        if (!this.users.has(userId)) {
+          user = new User(userId);
+          this.users.set(userId, user);
+        } else {
+          user = this.users.get(userId);
+        }
+        this.tweets.push({ user, tweetId });
+      };
+      Twitter.prototype.getNewsFeed = function (userId) {
+        const result = [];
+        let user;
+        if (!this.users.has(userId)) {
+          return result;
+        } else {
+          user = this.users.get(userId);
+        }
+        for (let i = this.tweets.length - 1; i >= 0; i--) {
+          const { user: tweetUser, tweetId } = this.tweets[i];
+          if (tweetUser.id === userId || user.following.has(tweetUser.id)) {
+            result.push(tweetId);
+          }
+          if (result.length === 10) {
+            return result;
+          }
+        }
+        return result;
+      };
+      Twitter.prototype.follow = function (followerId, followeeId) {
+        if (followerId === followeeId) return;
+        let fw, fe;
+        if (!this.users.has(followerId)) {
+          fw = new User(followerId);
+          this.users.set(followerId, fw);
+        } else {
+          fw = this.users.get(followerId);
+        }
+        if (!this.users.has(followeeId)) {
+          fe = new User(followeeId);
+          this.users.set(followeeId, fe);
+        }
+        fw.following.add(followeeId);
+      };
+      Twitter.prototype.unfollow = function (followerId, followeeId) {
+        if (followerId === followeeId) return;
+        if (!this.users.has(followerId)) return;
+        if (!this.users.has(followeeId)) return;
+        this.users.get(followerId).following.delete(followeeId);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      // 输入;
+      var cmds = [
+        'Twitter',
+        'postTweet',
+        'getNewsFeed',
+        'follow',
+        'postTweet',
+        'getNewsFeed',
+        'unfollow',
+        'getNewsFeed'
+      ];
+      var args = [[], [1, 5], [1], [1, 2], [2, 6], [1], [1, 2], [1]];
+      var result = [null, null, [5], null, null, [6, 5], null, [5]];
+
+      classCommand(cmds, args);
+
+      console.log('userId  = ', cmds);
+      console.log('tweetId = ', args);
+      console.log('userId = ', result);
+      classCommand(cmds, args, result);
+    </script>
+  </body>
+</html>
