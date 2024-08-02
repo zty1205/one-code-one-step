@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2923. 找到冠军 I</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/find-champion-i/description/
+
+      // 一场比赛中共有 n 支队伍，按从 0 到  n - 1 编号。
+      // 给你一个下标从 0 开始、大小为 n * n 的二维布尔矩阵 grid 。对于满足 0 <= i, j <= n - 1 且 i != j 的所有 i, j ：如果 grid[i][j] == 1，那么 i 队比 j 队 强 ；否则，j 队比 i 队 强 。
+      // 在这场比赛中，如果不存在某支强于 a 队的队伍，则认为 a 队将会是 冠军 。
+      // 返回这场比赛中将会成为冠军的队伍。
+      //
+      // 提示：
+      // n == grid.length
+      // n == grid[i].length
+      // 2 <= n <= 100
+      // grid[i][j] 的值为 0 或 1
+      // 对于所有 i， grid[i][i] 等于 0.
+      // 对于满足 i != j 的所有 i, j ，grid[i][j] != grid[j][i] 均成立
+      // 生成的输入满足：如果 a 队比 b 队强，b 队比 c 队强，那么 a 队比 c 队强
+
+      /**
+       * @param {number[][]} grid
+       * @return {number}
+       */
+      var findChampion = function (grid) {};
+
+      // --- answer-1 ---
+
+      // 打擂台
+      var findChampion = function (grid) {
+        let ans = 0;
+        for (let i = 1; i < grid.length; i++) {
+          if (grid[i][ans]) {
+            ans = i;
+          }
+        }
+        return ans;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      // var grid = [[0,1],[0,0]];
+      // var result = 0;
+      // 解释：比赛中有两支队伍。
+
+      // var grid = [[0,0,1],[1,0,1],[0,0,0]];
+      // var result = 1;
+      // 解释：比赛中有三支队伍。
+
+      console.log('grid = ', grid);
+      console.log('result = ', result);
+      console.log('findChampion = ', findChampion(grid));
+    </script>
+  </body>
+</html>
