@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2942. 查找包含给定字符的单词</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/find-words-containing-character/description/
+
+      // 给你一个下标从 0 开始的字符串数组 words 和一个字符 x 。
+      // 请你返回一个 下标数组 ，表示下标在数组中对应的单词包含字符 x 。
+      // 注意 ，返回的数组可以是 任意 顺序。
+      //
+      // 提示：
+      // 1 <= words.length <= 50
+      // 1 <= words[i].length <= 50
+      // x 是一个小写英文字母。
+      // words[i] 只包含小写英文字母。
+
+      /**
+       * @param {string[]} words
+       * @param {character} x
+       * @return {number[]}
+       */
+      var findWordsContaining = function (words, x) {};
+
+      // --- answer-1 ---
+
+      // 遍历即可
+      var findWordsContaining = function (words = [], x = '') {
+        const result = [];
+        for (let i = 0; i < words.length; i++) {
+          if (words[i].includes(x)) {
+            result.push(i);
+          }
+        }
+        return result;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var words = ['leet', 'code'],
+        x = 'e';
+      var result = [0, 1];
+      // 解释："e" 在两个单词中都出现了："leet" 和 "code" 。所以我们返回下标 0 和 1 。
+
+      var words = ['abc', 'bcd', 'aaaa', 'cbc'],
+        x = 'a';
+      var result = [0, 2];
+      // 解释："a" 在 "abc" 和 "aaaa" 中出现了，所以我们返回下标 0 和 2 。
+
+      var words = ['abc', 'bcd', 'aaaa', 'cbc'],
+        x = 'z';
+      var result = [];
+      // 解释："z" 没有在任何单词中出现。所以我们返回空数组。
+
+      console.log('words = ', words);
+      console.log('x = ', x);
+      console.log('result = ', result);
+      console.log('findWordsContaining = ', findWordsContaining(words, x));
+    </script>
+  </body>
+</html>
