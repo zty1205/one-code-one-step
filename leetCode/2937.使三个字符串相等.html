@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2937. 使三个字符串相等</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/make-three-strings-equal/description/
+
+      // 给你三个字符串 s1、s2 和 s3。 你可以根据需要对这三个字符串执行以下操作 任意次数 。
+      // 在每次操作中，你可以选择其中一个长度至少为 2 的字符串 并删除其 最右位置上 的字符。
+      // 如果存在某种方法能够使这三个字符串相等，请返回使它们相等所需的 最小 操作次数；否则，返回 -1。
+      //
+      // 提示：
+      // 1 <= s1.length, s2.length, s3.length <= 100
+      // s1、s2 和 s3 仅由小写英文字母组成。
+
+      /**
+       * @param {string} s1
+       * @param {string} s2
+       * @param {string} s3
+       * @return {number}
+       */
+      var findMinimumOperations = function (s1, s2, s3) {};
+
+      // --- answer-1 ---
+
+      // 公共前缀
+      var findMinimumOperations = function (s1, s2, s3) {
+        if (s1[0] != s2[0] || s1[0] != s3[0] || s2[0] != s3[0]) {
+          return -1;
+        }
+        const n1 = s1.length;
+        const n2 = s2.length;
+        const n3 = s3.length;
+        const min = Math.min(n1, n2, n3);
+        let c = 0;
+        for (let i = 0; i < min; i++) {
+          if (s1[i] == s2[i] && s2[i] == s3[i]) {
+            c++;
+          } else {
+            break;
+          }
+        }
+        return n1 + n2 + n3 - 3 * c;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var s1 = 'abc',
+        s2 = 'abb',
+        s3 = 'ab';
+      var result = 2;
+      // 解释：对 s1 和 s2 进行一次操作后，可以得到三个相等的字符串。
+
+      var s1 = 'dac',
+        s2 = 'bac',
+        s3 = 'cac';
+      var result = -1;
+      // 解释：因为 s1 和 s2 的最左位置上的字母不相等，所以无论进行多少次操作，它们都不可能相等。因此答案是 -1 。
+
+      console.log('s1 = ', s1);
+      console.log('s2 = ', s2);
+      console.log('s3 = ', s3);
+      console.log('result = ', result);
+      console.log('findMinimumOperations = ', findMinimumOperations(s1, s2, s3));
+    </script>
+  </body>
+</html>
