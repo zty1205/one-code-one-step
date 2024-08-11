@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2903. 找出满足差值条件的下标 I</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/find-indices-with-index-and-value-difference-i/description/
+
+      // 给你一个下标从 0 开始、长度为 n 的整数数组 nums ，以及整数 indexDifference 和整数 valueDifference 。
+      // 你的任务是从范围 [0, n - 1] 内找出  2 个满足下述所有条件的下标 i 和 j ：
+      //
+      // 提示：
+      // abs(i - j) >= indexDifference 且
+      // abs(nums[i] - nums[j]) >= valueDifference
+      // 返回整数数组 answer。如果存在满足题目要求的两个下标，则 answer = [i, j] ；否则，answer = [-1, -1] 。如果存在多组可供选择的下标对，只需要返回其中任意一组即可。
+      // 注意：i 和 j 可能 相等 。
+      //
+      // 提示：
+      // 1 <= n == nums.length <= 100
+      // 0 <= nums[i] <= 50
+      // 0 <= indexDifference <= 100
+      // 0 <= valueDifference <= 50
+
+      /**
+       * @param {number[]} nums
+       * @param {number} indexDifference
+       * @param {number} valueDifference
+       * @return {number[]}
+       */
+      var findIndices = function (nums, indexDifference, valueDifference) {};
+
+      // --- answer-1 ---
+
+      // 暴力循环
+      var findIndices = function (nums = [], indexDifference = 1, valueDifference = 1) {
+        const length = nums.length;
+        for (let i = 0; i < length - indexDifference; i++) {
+          for (let j = i + indexDifference; j < length; j++) {
+            if (Math.abs(nums[i] - nums[j]) >= valueDifference) {
+              return [i, j];
+            }
+          }
+        }
+        return [-1, -1];
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      var findIndices = function (nums, indexDifference, valueDifference) {
+        // 最大最小的下标
+        let minIndex = 0;
+        let maxIndex = 0;
+        for (let j = indexDifference; j < nums.length; j++) {
+          let i = j - indexDifference;
+          if (nums[i] < nums[minIndex]) {
+            minIndex = i;
+          }
+          if (nums[j] - nums[minIndex] >= valueDifference) {
+            return [minIndex, j];
+          }
+          if (nums[i] > nums[maxIndex]) {
+            maxIndex = i;
+          }
+          if (nums[maxIndex] - nums[j] >= valueDifference) {
+            return [maxIndex, j];
+          }
+        }
+        return [-1, -1];
+      };
+
+      // --- answer-2 ---
+
+      var nums = [5, 1, 4, 1],
+        indexDifference = 2,
+        valueDifference = 4;
+      var result = [0, 3];
+      // 解释：在示例中，可以选择 i = 0 和 j = 3 。
+
+      var nums = [2, 1],
+        indexDifference = 0,
+        valueDifference = 0;
+      var result = [0, 0];
+      // 解释：
+
+      // var nums = [1,2,3], indexDifference = 2, valueDifference = 4;
+      // var result = [-1,-1];
+      // 解释：在示例中，可以证明无法找出 2 个满足所有条件的下标。
+
+      console.log('nums = ', nums);
+      console.log('indexDifference = ', indexDifference);
+      console.log('valueDifference = ', valueDifference);
+      console.log('result = ', result);
+      console.log('findIndices = ', findIndices(nums, indexDifference, valueDifference));
+    </script>
+  </body>
+</html>
