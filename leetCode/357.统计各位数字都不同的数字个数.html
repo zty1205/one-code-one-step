@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>357. 统计各位数字都不同的数字个数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/count-numbers-with-unique-digits/
+
+      //
+      // 提示：
+      // 0 <= n <= 8
+
+      /**
+       * @param {number} n
+       * @return {number}
+       */
+      var countNumbersWithUniqueDigits = function (n) {};
+
+      // --- answer-1 ---
+
+      var countNumbersWithUniqueDigits = function (n = 1) {
+        if (n === 0) return 1;
+        if (n === 1) return 10;
+        let res = 10;
+        let cur = 9;
+        for (let i = 0; i < n - 1; i++) {
+          cur *= 9 - i;
+          res += cur;
+        }
+        return res;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var n = 2;
+      var result = 91;
+
+      var n = 3;
+      var result = 739;
+
+      console.log('n = ', n);
+      console.log('result = ', result);
+      console.log('countNumbersWithUniqueDigits = ', countNumbersWithUniqueDigits(n));
+    </script>
+  </body>
+</html>
