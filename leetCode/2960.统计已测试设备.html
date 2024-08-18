@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2960. 统计已测试设备</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/count-tested-devices-after-test-operations/
+
+      // 给你一个长度为 n 、下标从 0 开始的整数数组 batteryPercentages ，表示 n 个设备的电池百分比。
+      // 你的任务是按照顺序测试每个设备 i，执行以下测试操作：
+      //
+      // 提示：
+      // 如果 batteryPercentages[i] 大于 0：
+      // 增加 已测试设备的计数。
+      // 将下标在 [i + 1, n - 1] 的所有设备的电池百分比减少 1，确保它们的电池百分比 不会低于 0 ，即 batteryPercentages[j] = max(0, batteryPercentages[j] - 1)。
+      // 移动到下一个设备。
+      // 否则，移动到下一个设备而不执行任何测试。
+      // 返回一个整数，表示按顺序执行测试操作后 已测试设备 的数量。
+      //
+      // 提示：
+      // 1 <= n == batteryPercentages.length <= 100
+      // 0 <= batteryPercentages[i] <= 100
+
+      /**
+       * @param {number[]} batteryPercentages
+       * @return {number}
+       */
+      var countTestedDevices = function (batteryPercentages) {};
+
+      // --- answer-1 ---
+
+      // 模拟
+      var countTestedDevices = function (batteryPercentages = []) {
+        let count = 0;
+        for (let i = 0; i < batteryPercentages.length; i++) {
+          if (batteryPercentages[i] > 0) {
+            count++;
+            for (let j = i + 1; j < batteryPercentages.length; j++) {
+              batteryPercentages[j] = Math.max(0, batteryPercentages[j] - 1);
+            }
+          }
+        }
+        return count;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 差分
+      var countTestedDevices = function (batteryPercentages) {
+        let need = 0;
+        for (let battery of batteryPercentages) {
+          if (battery > need) {
+            need++;
+          }
+        }
+        return need;
+      };
+
+      // --- answer-2 ---
+
+      var batteryPercentages = [1, 1, 2, 1, 3];
+      var result = 3;
+      // 解释：按顺序从设备 0 开始执行测试操作：
+
+      // var batteryPercentages = [0, 1, 2];
+      // var result = 2;
+      // 解释：按顺序从设备 0 开始执行测试操作：
+
+      console.log('batteryPercentages = ', batteryPercentages);
+      console.log('result = ', result);
+      console.log('countTestedDevices = ', countTestedDevices(batteryPercentages));
+    </script>
+  </body>
+</html>
