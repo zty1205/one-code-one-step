@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2980. 检查按位或是否存在尾随零</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/check-if-bitwise-or-has-trailing-zeros/
+
+      // 给你一个 正整数 数组 nums 。
+      // 你需要检查是否可以从数组中选出 两个或更多 元素，满足这些元素的按位或运算（ OR）结果的二进制表示中 至少 存在一个尾随零。
+      // 如果可以选择两个或更多元素，其按位或运算结果存在尾随零，返回 true；否则，返回 false 。
+      //
+      // 提示：
+      // 2 <= nums.length <= 100
+      // 1 <= nums[i] <= 100
+
+      /**
+       * @param {number[]} nums
+       * @return {boolean}
+       */
+      var hasTrailingZeros = function (nums) {};
+
+      // --- answer-1 ---
+
+      // 至少有两个偶数
+      var hasTrailingZeros = function (nums = []) {
+        let count = 0;
+        for (let i = 0; i < nums.length; i++) {
+          if (nums[i] % 2 === 0) {
+            count++;
+          }
+          if (count >= 2) {
+            return true;
+          }
+        }
+        return false;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var nums = [1, 2, 3, 4, 5];
+      var result = true;
+      // 解释：如果选择元素 2 和 4，按位或运算结果是 6，二进制表示为 "110" ，存在一个尾随零。
+
+      // var nums = [2,4,8,16];
+      // var result = true;
+      // 解释：如果选择元素 2 和 4，按位或运算结果是 6，二进制表示为 "110"，存在一个尾随零。
+
+      // var nums = [1,3,5,7,9];
+      // var result = false;
+      // 解释：不存在按位或运算结果存在尾随零的选择方案。
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('hasTrailingZeros = ', hasTrailingZeros(nums));
+    </script>
+  </body>
+</html>
