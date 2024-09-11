@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3046. 分割数组</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/split-the-array/description/
+
+      // 给你一个长度为 偶数 的整数数组 nums 。你需要将这个数组分割成 nums1 和 nums2 两部分，要求：
+      //
+      // 提示：
+      // nums1.length == nums2.length == nums.length / 2 。
+      // nums1 应包含 互不相同 的元素。
+      // nums2也应包含 互不相同 的元素。
+      // 如果能够分割数组就返回 true ，否则返回 false 。
+      //
+      // 提示：
+      // 1 <= nums.length <= 100
+      // nums.length % 2 == 0
+      // 1 <= nums[i] <= 100
+
+      /**
+       * @param {number[]} nums
+       * @return {boolean}
+       */
+      var isPossibleToSplit = function (nums) {};
+
+      // --- answer-1 ---
+
+      // 计数 不能超过2
+      var isPossibleToSplit = function (nums = []) {
+        let map = new Map();
+        for (let i = 0; i < nums.length; i++) {
+          let count = map.get(nums[i]) || 0;
+          if (count >= 2) return false;
+          map.set(nums[i], count + 1);
+        }
+        return true;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var nums = [1, 1, 2, 2, 3, 4];
+      var result = true;
+      // 解释：分割 nums 的可行方案之一是 nums1 = [1,2,3] 和 nums2 = [1,2,4] 。
+
+      var nums = [1, 1, 1, 1];
+      var result = false;
+      // 解释：分割 nums 的唯一可行方案是 nums1 = [1,1] 和 nums2 = [1,1] 。但 nums1 和 nums2 都不是由互不相同的元素构成。因此，返回 false 。
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('isPossibleToSplit = ', isPossibleToSplit(nums));
+    </script>
+  </body>
+</html>
