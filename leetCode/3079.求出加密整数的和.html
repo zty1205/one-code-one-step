@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3079. 求出加密整数的和</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/find-the-sum-of-encrypted-integers/description/
+
+      // 给你一个整数数组 nums ，数组中的元素都是 正 整数。定义一个加密函数 encrypt ，encrypt(x) 将一个整数 x 中 每一个 数位都用 x 中的 最大 数位替换。比方说 encrypt(523) = 555 且 encrypt(213) = 333 。
+      // 请你返回数组中所有元素加密后的 和 。
+      //
+      // 提示：
+      // 1 <= nums.length <= 50
+      // 1 <= nums[i] <= 1000
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var sumOfEncryptedInt = function (nums) {};
+
+      // --- answer-1 ---
+
+      var sumOfEncryptedInt = function (nums = []) {
+        return nums.reduce((prev, cur) => {
+          const arr = String(cur).split('');
+          const max = arr.sort((a, b) => b - a)[0];
+          return prev + Number(arr.map((item) => max).join(''));
+        }, 0);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 构建111... * max，然后求和
+      var sumOfEncryptedInt = function (nums = []) {
+        let res = 0;
+        for (let n of nums) {
+          let max = 0;
+          let base = 0;
+          while (n > 0) {
+            max = Math.max(max, n % 10);
+            n = Math.floor(n / 10);
+            base = base * 10 + 1;
+          }
+          res += max * base;
+        }
+        return res;
+      };
+
+      // --- answer-2 ---
+
+      var nums = [1, 2, 3],
+        result = 6;
+
+      var nums = [10, 21, 31],
+        result = 66;
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('sumOfEncryptedInt = ', sumOfEncryptedInt(nums));
+    </script>
+  </body>
+</html>
