@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3083. 字符串及其反转中是否存在同一子字符串</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/existence-of-a-substring-in-a-string-and-its-reverse/description/
+
+      // 给你一个字符串 s ，请你判断字符串 s 是否存在一个长度为 2 的子字符串，在其反转后的字符串中也出现。
+      // 如果存在这样的子字符串，返回 true；如果不存在，返回 false 。
+      //
+      // 提示：
+      // 1 <= s.length <= 100
+      // 字符串 s 仅由小写英文字母组成。
+
+      /**
+       * @param {string} s
+       * @return {boolean}
+       */
+      var isSubstringPresent = function (s) {};
+
+      // --- answer-1 ---
+
+      var isSubstringPresent = function (s = '') {
+        const r = s.split('').reverse().join('');
+        for (let i = 0; i < s.length - 1; i++) {
+          console.log(r, s[i] + s[i + 1]);
+          if (r.includes(s[i] + s[i + 1])) {
+            return true;
+          }
+        }
+        return false;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 二维矩阵
+      var isSubstringPresent = function (s = '') {
+        const matrix = Array.from({ length: 26 }, () => Array.from({ length: 26 }, () => false));
+        for (let i = 1; i < s.length; i++) {
+          const x = s[i - 1].charCodeAt() - 'a'.charCodeAt();
+          const y = s[i].charCodeAt() - 'a'.charCodeAt();
+          matrix[x][y] = true;
+          if (matrix[y][x]) {
+            return true;
+          }
+        }
+        return false;
+      };
+
+      // --- answer-2 ---
+
+      var s = 'leetcode',
+        result = true;
+
+      // 解释：子字符串 "ee" 的长度为 2，它也出现在 reverse(s) == "edocteel" 中。
+
+      // var s = 'abcba',
+      //   result = true;
+
+      // // 解释：所有长度为 2 的子字符串 "ab"、"bc"、"cb"、"ba" 也都出现在 reverse(s) == "abcba" 中。
+
+      // var s = 'abcd',
+      //   result = false;
+
+      // 解释：字符串 s 中不存在满足「在其反转后的字符串中也出现」且长度为 2 的子字符串。
+
+      console.log('s = ', s);
+      console.log('result = ', result);
+      console.log('isSubstringPresent = ', isSubstringPresent(s));
+    </script>
+  </body>
+</html>
