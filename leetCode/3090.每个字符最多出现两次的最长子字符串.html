@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3090. 每个字符最多出现两次的最长子字符串</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/maximum-length-substring-with-two-occurrences/
+
+      // 给你一个字符串 s ，请找出满足每个字符最多出现两次的最长子字符串，并返回该
+      // 子字符串
+      // 的 最大 长度。
+      //
+      // 提示：
+      // 2 <= s.length <= 100
+      // s 仅由小写英文字母组成。
+
+      /**
+       * @param {string} s
+       * @return {number}
+       */
+      var maximumLengthSubstring = function (s) {};
+
+      // --- answer-1 ---
+
+      // 计数
+      var maximumLengthSubstring = function (s = '') {
+        s = s.split('');
+        let ans = 0;
+        let left = 0;
+        const cnt = new Array(26).fill(0);
+        for (let i = 0; i < s.length; i++) {
+          const b = s[i].charCodeAt() - 'a'.charCodeAt();
+          cnt[b]++;
+          while (cnt[b] > 2) {
+            cnt[s[left++].charCodeAt() - 'a'.charCodeAt()]--;
+          }
+          ans = Math.max(ans, i - left + 1);
+        }
+        return ans;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var s = 'bcbbbcba',
+        result = 4;
+
+      // var s = 'aaaa',
+      //   result = 2;
+
+      var s = 'eebadadbfa',
+        result = 9;
+
+      console.log('s = ', s);
+      console.log('result = ', result);
+      console.log('maximumLengthSubstring = ', maximumLengthSubstring(s));
+    </script>
+  </body>
+</html>
