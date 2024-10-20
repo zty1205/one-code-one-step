@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3097. 或值至少为 K 的最短子数组 II</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/shortest-subarray-with-or-at-least-k-ii/description/
+
+      // 给你一个 非负 整数数组 nums 和一个整数 k 。
+      // 如果一个数组中所有元素的按位或运算 OR 的值 至少 为 k ，那么我们称这个数组是 特别的 。
+      // 请你返回 nums 中 最短特别非空
+      // 子数组
+      // 的长度，如果特别子数组不存在，那么返回 -1 。
+      //
+      // 提示：
+      // 1 <= nums.length <= 2 * 105
+      // 0 <= nums[i] <= 109
+      // 0 <= k <= 109
+
+      /**
+       * @param {number[]} nums
+       * @param {number} k
+       * @return {number}
+       */
+      var minimumSubarrayLength = function (nums, k) {};
+
+      // --- answer-1 ---
+
+      // 暴力
+      var minimumSubarrayLength = function (nums = [], k = 0) {
+        let len = nums.length;
+        let min = Infinity;
+        for (let i = 0; i < len; i++) {
+          let or = nums[i];
+          if (or >= k) return 1;
+          for (let j = i + 1; j < len; j++) {
+            or |= nums[j];
+            if (or >= k) {
+              min = Math.min(min, j - i + 1);
+              break;
+            }
+          }
+        }
+        return min === Infinity ? -1 : min;
+      };
+
+      // --- answer-1 ---
+
+      function deepClone(obj) {
+        return JSON.parse(JSON.stringify(obj));
+      }
+
+      // --- answer-2 ---
+
+      // 或只会递增或不变
+      var minimumSubarrayLength = function (nums = [], k = 0) {
+        let ans = Number.MAX_SAFE_INTEGER;
+        let ors = [];
+        for (let i = 0; i < nums.length; i++) {
+          // 维护子数组OR和，和对应子数组左端点的最大值
+          ors.push([0, i]);
+          let j = 0;
+          for (let or of ors) {
+            or[0] |= nums[i];
+            if (or[0] >= k) {
+              ans = Math.min(ans, i - or[1] + 1);
+            }
+            if (ors[j][0] === or[0]) {
+              ors[j][1] = or[1]; // 原地去重：合并相同值，左端点取靠右的
+            } else {
+              ors[j + 1] = or;
+              j++;
+            }
+          }
+          console.log('ors = ', deepClone(ors));
+          ors.splice(j + 1); // 去重：移除多余元素
+        }
+        return ans === Number.MAX_SAFE_INTEGER ? -1 : ans;
+      };
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var nums = [1, 2, 3],
+        k = 2;
+      var result = 1;
+
+      var nums = [2, 1, 8],
+        k = 10;
+      var result = 3;
+
+      var nums = [1, 2],
+        k = 0;
+      var result = 1;
+
+      var nums = [2, 1, 8, 5, 4, 6, 4],
+        k = 15;
+      var result = 4;
+
+      console.log('nums = ', nums);
+      console.log('k = ', k);
+      console.log('result = ', result);
+      console.log('minimumSubarrayLength = ', minimumSubarrayLength(nums, k));
+    </script>
+  </body>
+</html>
