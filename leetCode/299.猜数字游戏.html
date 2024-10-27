@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>299. 猜数字游戏</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/bulls-and-cows/
+
+      // 你在和朋友一起玩 猜数字（Bulls and Cows）游戏，该游戏规则如下：
+      //
+      // 提示：
+      // 猜测数字中有多少位属于数字和确切位置都猜对了（称为 "Bulls"，公牛），
+      // 有多少位属于数字猜对了但是位置不对（称为 "Cows"，奶牛）。也就是说，这次猜测中有多少位非公牛数字可以通过重新排列转换成公牛数字。
+      // 请注意秘密数字和朋友猜测的数字都可能含有重复数字。
+      //
+      // 提示：
+      // 1 <= secret.length, guess.length <= 1000
+      // secret.length == guess.length
+      // secret 和 guess 仅由数字组成
+
+      /**
+       * @param {string} secret
+       * @param {string} guess
+       * @return {string}
+       */
+      var getHint = function (secret, guess) {};
+
+      // --- answer-1 ---
+
+      var getMap = function (str = '') {
+        const map = {};
+        for (let i = 0; i < str.length; i++) {
+          if (map[str[i]]) {
+            map[str[i]]++;
+          } else {
+            map[str[i]] = 1;
+          }
+        }
+        return map;
+      };
+      // 记录相同位数的个数
+      // 记录相同数字不同位数的个数
+      var getHint = function (secret = '', guess = '') {
+        const sMap = getMap(secret);
+        const gMap = getMap(guess);
+        const length = secret.length;
+        let bulls = 0;
+        let cows = 0;
+        for (let i = 0; i < length; i++) {
+          if (secret[i] === guess[i]) {
+            bulls++;
+            sMap[secret[i]]--;
+            gMap[guess[i]]--;
+          }
+        }
+        for (let i = 0; i < 10; i++) {
+          cows += Math.min(sMap[i] || 0, gMap[i] || 0);
+        }
+        return `${bulls}A${cows}B`;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var secret = '1807',
+        guess = '7810';
+      var result = '1A3B';
+      // 解释：数字和位置都对（公牛）用 '|' 连接，数字猜对位置不对（奶牛）的采用斜体加粗标识。
+
+      var secret = '1123',
+        guess = '0111';
+      var result = '1A1B';
+      // 解释：数字和位置都对（公牛）用 '|' 连接，数字猜对位置不对（奶牛）的采用斜体加粗标识。
+
+      console.log('secret = ', secret);
+      console.log('guess = ', guess);
+      console.log('result = ', result);
+      console.log('getHint = ', getHint(secret, guess));
+    </script>
+  </body>
+</html>
