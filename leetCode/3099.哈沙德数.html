@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3099. 哈沙德数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/harshad-number/description/
+
+      // 如果一个整数能够被其各个数位上的数字之和整除，则称之为 哈沙德数（Harshad number）。给你一个整数 x 。如果 x 是 哈沙德数 ，则返回 x 各个数位上的数字之和，否则，返回 -1 。
+      //
+      // 提示：
+      // 1 <= x <= 100
+
+      /**
+       * @param {number} x
+       * @return {number}
+       */
+      var sumOfTheDigitsOfHarshadNumber = function (x) {};
+
+      // --- answer-1 ---
+
+      var sumOfTheDigitsOfHarshadNumber = function (x = 1) {
+        const result = x
+          .toString()
+          .split('')
+          .reduce((pre, cur) => pre + Number(cur), 0);
+
+
+        return X % result === 0 ? result : -1;
+      };
+
+      // --- answer-1 ---
+
+      var x = 18,
+        result = 9;
+
+      var x = 11,
+        result = -1;
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      console.log('x = ', x);
+      console.log('result = ', result);
+      console.log('sumOfTheDigitsOfHarshadNumber = ', sumOfTheDigitsOfHarshadNumber(x));
+    </script>
+  </body>
+</html>
