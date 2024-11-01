@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3110. 字符串的分数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/score-of-a-string/
+
+      // 给你一个字符串 s 。一个字符串的 分数 定义为相邻字符 ASCII 码差值绝对值的和。
+      // 请你返回 s 的 分数 。
+      //
+      // 提示：
+      // 2 <= s.length <= 100
+      // s 只包含小写英文字母。
+
+      /**
+       * @param {string} s
+       * @return {number}
+       */
+      var scoreOfString = function (s) {};
+
+      // --- answer-1 ---
+
+      // 遍历即可
+      var scoreOfString = function (s = '') {
+        let res = 0;
+        for (let i = 1; i < s.length; i++) {
+          res += Math.abs(s.charCodeAt(i - 1) - s.charCodeAt(i));
+        }
+        return res;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---'
+
+      var s = 'hello';
+      var resukt = 13;
+
+      var s = 'zaz';
+      var retult = 50;
+
+      console.log('s = ', s);
+      console.log('result = ', result);
+      console.log('scoreOfString = ', scoreOfString(s));
+    </script>
+  </body>
+</html>
