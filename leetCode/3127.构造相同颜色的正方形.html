@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3127. 构造相同颜色的正方形</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/make-a-square-with-the-same-color/description/
+
+      // 给你一个二维 3 x 3 的矩阵 grid ，每个格子都是一个字符，要么是 'B' ，要么是 'W' 。字符 'W' 表示白色，字符 'B' 表示黑色。
+      // 你的任务是改变 至多一个 格子的颜色，使得矩阵中存在一个 2 x 2 颜色完全相同的正方形。
+      // 如果可以得到一个相同颜色的 2 x 2 正方形，那么返回 true ，否则返回 false 。
+      //
+      // 提示：
+      // grid.length == 3
+      // grid[i].length == 3
+      // grid[i][j] 要么是 'W' ，要么是 'B' 。
+
+      /**
+       * @param {character[][]} grid
+       * @return {boolean}
+       */
+      var canMakeSquare = function (grid) {};
+
+      // --- answer-1 ---
+
+      // 颜色比为3:1 或4:0 那么只要不是2:2都存在
+      var canMakeSquare = function (grid = []) {
+        function check(x, y) {
+          const count = {
+            W: 0,
+            B: 0
+          };
+          for (let i = x; i < x + 2; i++) {
+            for (let j = y; j < y + 2; j++) {
+              count[grid[i][j]]++;
+            }
+          }
+          return count.W !== 2;
+        }
+
+        for (let i = 0; i < 2; i++) {
+          for (let j = 0; j < 2; j++) {
+            if (check(i, j)) {
+              return true;
+            }
+          }
+        }
+        return false;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var grid = [
+        ['B', 'W', 'B'],
+        ['B', 'W', 'W'],
+        ['B', 'W', 'B']
+      ];
+      var result = true;
+
+      var grid = [
+        ['B', 'W', 'B'],
+        ['W', 'B', 'W'],
+        ['B', 'W', 'B']
+      ];
+      var result = false;
+
+      var grid = [
+        ['B', 'W', 'B'],
+        ['B', 'W', 'W'],
+        ['B', 'W', 'W']
+      ];
+      var result = true;
+
+      console.log('grid = ', grid);
+      console.log('result = ', result);
+      console.log('canMakeSquare = ', canMakeSquare(grid));
+    </script>
+  </body>
+</html>
