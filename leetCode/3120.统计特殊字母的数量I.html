@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3120. 统计特殊字母的数量 I</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/count-the-number-of-special-characters-i/description/
+
+      // 给你一个字符串 word。如果 word 中同时存在某个字母的小写形式和大写形式，则称这个字母为 特殊字母 。
+      // 返回 word 中 特殊字母 的数量。
+      //
+      // 提示：
+      // 1 <= word.length <= 50
+      // word 仅由小写和大写英文字母组成。
+
+      /**
+       * @param {string} word
+       * @return {number}
+       */
+      var numberOfSpecialChars = function (word) {};
+
+      // --- answer-1 ---
+
+      // 循环+set
+      var numberOfSpecialChars = function (word = '') {
+        let count = 0;
+        const set = new Set(word);
+        set.forEach((item) => {
+          if (set.has(item.toLowerCase()) && set.has(item.toUpperCase())) {
+            count++;
+          }
+        });
+        // A和a会统计两次，所以除以2
+        return count / 2;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var word = 'aaAbcBC';
+      var result = 3;
+
+      // var word = 'abBCab';
+      // var result = 1;
+
+      console.log('word = ', word);
+      console.log('result = ', result);
+      console.log('numberOfSpecialChars = ', numberOfSpecialChars(word));
+    </script>
+  </body>
+</html>
