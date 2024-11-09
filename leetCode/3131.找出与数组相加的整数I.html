@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3131. 找出与数组相加的整数 I</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/find-the-integer-added-to-array-i/
+
+      // 给你两个长度相等的数组 nums1 和 nums2。
+      // 数组 nums1 中的每个元素都与变量 x 所表示的整数相加。如果 x 为负数，则表现为元素值的减少。
+      // 在与 x 相加后，nums1 和 nums2 相等 。当两个数组中包含相同的整数，并且这些整数出现的频次相同时，两个数组 相等 。
+      // 返回整数 x 。
+      //
+      // 提示：
+      // 1 <= nums1.length == nums2.length <= 100
+      // 0 <= nums1[i], nums2[i] <= 1000
+      // 测试用例以这样的方式生成：存在一个整数 x，使得 nums1 中的每个元素都与 x 相加后，nums1 与 nums2 相等。
+
+      /**
+       * @param {number[]} nums1
+       * @param {number[]} nums2
+       * @return {number}
+       */
+      var addedInteger = function (nums1, nums2) {};
+
+      // --- answer-1 ---
+
+      // a1 + x + a2 + x + a3 + x + ... + an + x = b1 + b2 + b3 + ... + bn
+      // (a1 + a2 + a3 + ... + an) + n * x = b1 + b2 + b3 + ... + bn
+      // x = (b1 + b2 + b3 + ... + bn) - (a1 + a2 + a3 + ... + an) / n
+      var addedInteger = function (nums1 = [], nums2 = []) {
+        const sum = (arr = []) => arr.reduce((a, b) => a + b, 0);
+        return (sum(nums2) - sum(nums1)) / nums1.length;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 因为题目保证有x存在，所以可以用最大值或最小值来计算
+      var addedInteger = function (nums1 = [], nums2 = []) {
+        return Math.max(...nums1) - Math.max(...nums2);
+      };
+
+      // --- answer-2 ---
+
+      var nums1 = [2, 6, 4],
+        nums2 = [9, 7, 5];
+      var result = 3;
+
+      var nums1 = [10],
+        nums2 = [5];
+      var result = -5;
+
+      console.log('nums1 = ', nums1);
+      console.log('nums2 = ', nums2);
+      console.log('result = ', result);
+      console.log('addedInteger = ', addedInteger(nums1, nums2));
+    </script>
+  </body>
+</html>
