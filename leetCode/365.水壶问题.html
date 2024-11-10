@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>365. 水壶问题</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/water-and-jug-problem/description/
+
+      // 有两个水壶，容量分别为 x 和 y 升。水的供应是无限的。确定是否有可能使用这两个壶准确得到 target 升。
+      // 你可以：
+      //
+      // 提示：
+      // 装满任意一个水壶
+      // 清空任意一个水壶
+      // 将水从一个水壶倒入另一个水壶，直到接水壶已满，或倒水壶已空。
+      //
+      // 提示：
+      // 1 <= x, y, target <= 103
+
+      /**
+       * @param {number} x
+       * @param {number} y
+       * @param {number} target
+       * @return {boolean}
+       */
+      var canMeasureWater = function (x, y, target) {};
+
+      // --- answer-1 ---
+
+      function gcd(a, b) {
+        if (b === 0) return a;
+        return gcd(b, a % b);
+      }
+
+      // 和不能小于target
+      // 其中一个等于target 或者和等于target
+      // 能被最大公约数整除
+      // 贝祖定理
+      // 因此，我们可以认为每次操作只会给水的总量带来 x 或者 y 的变化量。因此我们的目标可以改写成：找到一对整数 a,b，使得ax+by=z
+      // 而贝祖定理告诉我们，ax+by=z 有解当且仅当 z 是 x,y 的最大公约数的倍数。因此我们只需要找到 x,y 的最大公约数并判断 z 是否是它的倍数即可。
+      var canMeasureWater = function (x = 1, y = 1, target = 1) {
+        if (x + y < target) return false;
+        if (x === target || y === target || x + y === target) return true;
+        return target % gcd(x, y) === 0;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      // var  x = 3,y = 5,target = 4;
+      // var result =  true;
+      // 解释：
+
+      // var  x = 2, y = 6, target = 5;
+      // var result =  false;
+
+      // var  x = 1, y = 2, target = 3;
+      // var result =  true;
+      // 解释：同时倒满两个水壶。现在两个水壶中水的总量等于 3。
+
+      console.log('x = ', x);
+      console.log('y = ', y);
+      console.log('target = ', target);
+      console.log('result = ', result);
+      console.log('canMeasureWater = ', canMeasureWater(x, y, target));
+    </script>
+  </body>
+</html>
