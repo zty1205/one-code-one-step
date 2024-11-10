@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3136. 有效单词</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/valid-word/description/
+
+      // 有效单词 需要满足以下几个条件：
+      //
+      // 提示：
+      // 至少 包含 3 个字符。
+      // 由数字 0-9 和英文大小写字母组成。（不必包含所有这类字符。）
+      // 至少 包含一个 元音字母 。
+      // 至少 包含一个 辅音字母 。
+      // 给你一个字符串 word 。如果 word 是一个有效单词，则返回 true ，否则返回 false 。
+      // 注意：
+      //
+      // 提示：
+      // 'a'、'e'、'i'、'o'、'u' 及其大写形式都属于 元音字母 。
+      // 英文中的 辅音字母 是指那些除元音字母之外的字母。
+      //
+      // 提示：
+      // 1 <= word.length <= 20
+      // word 由英文大写和小写字母、数字、'@'、'#' 和 ' 组成。
+
+      /**
+       * @param {string} word
+       * @return {boolean}
+       */
+      var isValid = function (word) {};
+
+      // --- answer-1 ---
+
+      const vowels = new Set(['a', 'e', 'i', 'o', 'u']);
+      const consonants = new Set([
+        'b',
+        'c',
+        'd',
+        'f',
+        'g',
+        'h',
+        'j',
+        'k',
+        'l',
+        'm',
+        'n',
+        'p',
+        'q',
+        'r',
+        's',
+        't',
+        'v',
+        'w',
+        'x',
+        'y',
+        'z'
+      ]);
+      const isVowel = (c) => vowels.has(c.toLowerCase());
+      const isConsonant = (c) => consonants.has(c.toLowerCase());
+      const isValidChar = (c) => /[a-z0-9]/i.test(c);
+
+      // 遍历
+      var isValid = function (word) {
+        if (word.length < 3) return false;
+        let vowel = false;
+        let consonant = false;
+        let count = 0;
+        for (let ch of word) {
+          if (!isValidChar(ch)) return false;
+          if (isVowel(ch)) vowel = true;
+          if (isConsonant(ch)) consonant = true;
+          count++;
+        }
+        return vowel && consonant && count >= 3;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      console.log('word = ', word);
+      console.log('result = ', result);
+      console.log('isValid = ', isValid(word));
+    </script>
+  </body>
+</html>
