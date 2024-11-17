@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3142. 判断矩阵是否满足条件</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/check-if-grid-satisfies-conditions/description/
+
+      // 给你一个大小为 m x n 的二维矩阵 grid 。你需要判断每一个格子 grid[i][j] 是否满足：
+      //
+      // 提示：
+      // 如果它下面的格子存在，那么它需要等于它下面的格子，也就是 grid[i][j] == grid[i + 1][j] 。
+      // 如果它右边的格子存在，那么它需要不等于它右边的格子，也就是 grid[i][j] != grid[i][j + 1] 。
+      // 如果 所有 格子都满足以上条件，那么返回 true ，否则返回 false 。
+      //
+      // 提示：
+      // 1 <= n, m <= 10
+      // 0 <= grid[i][j] <= 9
+
+      /**
+       * @param {number[][]} grid
+       * @return {boolean}
+       */
+      var satisfiesConditions = function (grid) {};
+
+      // --- answer-1 ---
+
+      // 遍历
+      var satisfiesConditions = function (grid = [[]]) {
+        const m = grid.length;
+        const n = grid[0].length;
+
+        for (let i = 0; i < m; i++) {
+          for (let j = 0; j < n; j++) {
+            if (i + 1 < m && grid[i][j] !== grid[i + 1][j]) return false;
+            if (j + 1 < n && grid[i][j] === grid[i][j + 1]) return false;
+          }
+        }
+        return true;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      console.log('grid = ', grid);
+      console.log('result = ', result);
+      console.log('satisfiesConditions = ', satisfiesConditions(grid));
+    </script>
+  </body>
+</html>
