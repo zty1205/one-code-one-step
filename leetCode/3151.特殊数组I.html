@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3151. 特殊数组 I</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/special-array-i/description/
+
+      // 如果数组的每一对相邻元素都是两个奇偶性不同的数字，则该数组被认为是一个 特殊数组 。
+      // 你有一个整数数组 nums。如果 nums 是一个 特殊数组 ，返回 true，否则返回 false。
+      //
+      // 提示：
+      // 1 <= nums.length <= 100
+      // 1 <= nums[i] <= 100
+
+      /**
+       * @param {number[]} nums
+       * @return {boolean}
+       */
+      var isArraySpecial = function (nums) {};
+
+      // --- answer-1 ---
+
+      // 循环
+      var isArraySpecial = function (nums = []) {
+        if (nums.length < 2) return true;
+        let z = nums[0] % 2;
+        let o = nums[1] % 2;
+        if (z === o) return false;
+        for (let i = 2; i < nums.length; i += 2) {
+          if (nums[i] % 2 !== z) return false;
+        }
+        for (let i = 3; i < nums.length; i += 2) {
+          if (nums[i] % 2 !== o) return false;
+        }
+        return true;
+      };
+
+      var isArraySpecial = function (nums) {
+        const n = nums.length;
+        for (let i = 1; i < n; ++i) {
+          if (nums[i - 1] % 2 == nums[i] % 2) {
+            return false;
+          }
+        }
+        return true;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var nums = [2, 1, 4];
+      var result = true;
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('isArraySpecial = ', isArraySpecial(nums));
+    </script>
+  </body>
+</html>
