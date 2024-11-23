@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3000. 对角线最长的矩形的面积</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/maximum-area-of-longest-diagonal-rectangle/
+
+      // 给你一个下标从 0 开始的二维整数数组 dimensions。
+      // 对于所有下标 i（0 <= i < dimensions.length），dimensions[i][0] 表示矩形 i 的长度，而 dimensions[i][1] 表示矩形 i 的宽度。
+      // 返回对角线最 长 的矩形的 面积 。如果存在多个对角线长度相同的矩形，返回面积最 大 的矩形的面积。
+      //
+      // 提示：
+      // 1 <= dimensions.length <= 100
+      // dimensions[i].length == 2
+      // 1 <= dimensions[i][0], dimensions[i][1] <= 100
+
+      /**
+       * @param {number[][]} dimensions
+       * @return {number}
+       */
+      var areaOfMaxDiagonal = function (dimensions) {};
+
+      // --- answer-1 ---
+
+      // --- answer-1 ---
+
+      // 遍历
+      var areaOfMaxDiagonal = function (dimensions = [[]]) {
+        let maxArea = 0;
+        let maxDiagonal = 0;
+        for (const [x, y] of dimensions) {
+          const diagonal = x * x + y * y;
+          if (diagonal > maxDiagonal) {
+            maxDiagonal = diagonal;
+            maxArea = x * y;
+          } else if (diagonal === maxDiagonal) {
+            maxArea = Math.max(maxArea, x * y);
+          }
+        }
+        return maxArea;
+      };
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var dimensions = [
+        [9, 3],
+        [8, 6]
+      ];
+      var result = 48;
+      // 解释：
+
+      var dimensions = [
+        [3, 4],
+        [4, 3]
+      ];
+      var result = 12;
+      // 解释：两个矩形的对角线长度相同，为 5，所以最大面积 = 12。
+
+      var dimensions = [
+        [6, 5],
+        [8, 6],
+        [2, 10],
+        [8, 1],
+        [9, 2],
+        [3, 5],
+        [3, 5]
+      ];
+      var result = 20;
+
+      console.log('dimensions = ', dimensions);
+      console.log('result = ', result);
+      console.log('areaOfMaxDiagonal = ', areaOfMaxDiagonal(dimensions));
+    </script>
+  </body>
+</html>
