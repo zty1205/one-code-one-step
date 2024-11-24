@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3033. 修改矩阵</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/modify-the-matrix/description/
+
+      // 给你一个下标从 0 开始、大小为 m x n 的整数矩阵 matrix ，新建一个下标从 0 开始、名为 answer 的矩阵。使 answer 与 matrix 相等，接着将其中每个值为 -1 的元素替换为所在列的 最大 元素。
+      // 返回矩阵 answer 。
+      //
+      // 提示：
+      // m == matrix.length
+      // n == matrix[i].length
+      // 2 <= m, n <= 50
+      // -1 <= matrix[i][j] <= 100
+      // 测试用例中生成的输入满足每列至少包含一个非负整数。
+
+      /**
+       * @param {number[][]} matrix
+       * @return {number[][]}
+       */
+      var modifiedMatrix = function (matrix) {};
+
+      // --- answer-1 ---
+
+      // 求出列最大值，然后遍历矩阵，将-1替换为列最大值
+      var modifiedMatrix = function (matrix = [[]]) {
+        const n = matrix.length;
+        const m = matrix[0].length;
+        const maxArr = new Array(m).fill(-2);
+        for (let i = 0; i < n; i++) {
+          for (let j = 0; j < m; j++) {
+            maxArr[j] = Math.max(maxArr[j], matrix[i][j]);
+          }
+        }
+        const newMatrix = [];
+        for (let i = 0; i < n; i++) {
+          let arr = [];
+          for (let j = 0; j < m; j++) {
+            if (matrix[i][j] === -1) {
+              arr[j] = maxArr[j];
+            } else {
+              arr[j] = matrix[i][j];
+            }
+          }
+          newMatrix[i] = arr;
+        }
+        return newMatrix;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      // var matrix = [[1,2,-1],[4,-1,6],[7,8,9]];
+      // var result = [[1,2,9],[4,8,6],[7,8,9]];
+      // 解释：上图显示了发生替换的元素（蓝色区域）。
+
+      // var matrix = [[3,-1],[5,2]];
+      // var result = [[3,2],[5,2]];
+      // 解释：上图显示了发生替换的元素（蓝色区域）。
+
+      console.log('result = ', result);
+    </script>
+  </body>
+</html>
