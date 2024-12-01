@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3158. 求出出现两次数字的 XOR 值</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/find-the-xor-of-numbers-which-appear-twice/description/
+
+      // 给你一个数组 nums ，数组中的数字 要么 出现一次，要么 出现两次。
+      // 请你返回数组中所有出现两次数字的按位 XOR 值，如果没有数字出现过两次，返回 0 。
+      //
+      // 提示：
+      // 1 <= nums.length <= 50
+      // 1 <= nums[i] <= 50
+      // nums 中每个数字要么出现过一次，要么出现过两次。
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var duplicateNumbersXOR = function (nums) {};
+
+      // --- answer-1 ---
+
+      // 遍历
+      var duplicateNumbersXOR = function (nums = []) {
+        let result = 0;
+        const set = new Set();
+        for (let i = 0; i < nums.length; i++) {
+          const item = nums[i];
+          if (set.has(item)) {
+            result ^= item;
+          } else {
+            set.add(item);
+          }
+        }
+        return result;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var nums = [1, 2, 1, 3];
+      var result = 1;
+
+      var nums = [1, 2, 2, 1];
+      var result = 3;
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('duplicateNumbersXOR = ', duplicateNumbersXOR(nums));
+    </script>
+  </body>
+</html>
