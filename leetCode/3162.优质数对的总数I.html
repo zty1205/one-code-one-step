@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3162. 优质数对的总数 I</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/find-the-number-of-good-pairs-i/description/
+
+      // 给你两个整数数组 nums1 和 nums2，长度分别为 n 和 m。同时给你一个正整数 k。
+      // 如果 nums1[i] 可以除尽 nums2[j] * k，则称数对 (i, j) 为 优质数对（0 <= i <= n - 1, 0 <= j <= m - 1）。
+      // 返回 优质数对 的总数。
+      //
+      // 提示：
+      // 1 <= n, m <= 50
+      // 1 <= nums1[i], nums2[j] <= 50
+      // 1 <= k <= 50
+
+      /**
+       * @param {number[]} nums1
+       * @param {number[]} nums2
+       * @param {number} k
+       * @return {number}
+       */
+      var numberOfPairs = function (nums1, nums2, k) {};
+
+      // --- answer-1 ---
+
+      var numberOfPairs = function (nums1 = [], nums2 = [], k = 1) {
+        let count = 0;
+        for (let i = 0; i < nums1.length; i++) {
+          for (let j = 0; j < nums2.length; j++) {
+            if (nums1[i] % (nums2[j] * k) === 0) {
+              count++;
+            }
+          }
+        }
+        return count;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var nums1 = [1, 2, 3, 4],
+        nums2 = [5, 6, 7, 8],
+        k = 2;
+      var result = 5;
+
+      console.log('nums1 = ', nums1);
+      console.log('nums2 = ', nums2);
+      console.log('k = ', k);
+      console.log('result = ', result);
+      console.log('numberOfPairs = ', numberOfPairs(nums1, nums2, k));
+    </script>
+  </body>
+</html>
