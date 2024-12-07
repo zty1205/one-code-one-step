@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (727 道)
+## 三、LeetCode (728 道)
 
 <br/>
 
@@ -822,6 +822,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2833.距离原点最远的点.html](./leetCode/2833.距离原点最远的点.html)
 - [2839.判断通过操作能否让字符串相等 I.html](./leetCode/2839.判断通过操作能否让字符串相等I.html)
 - [2843.统计对称整数的数目.html](./leetCode/2843.统计对称整数的数目.html)
+- [3168.候诊室中的最少椅子数.html](./leetCode/3168.候诊室中的最少椅子数.html)
 - [3162.优质数对的总数 I.html](./leetCode/3162.优质数对的总数I.html)
 - [3158.求出出现两次数字的 XOR 值.html](./leetCode/3158.求出出现两次数字的XOR值.html)
 - [3033.修改矩阵.html](./leetCode/3033.修改矩阵.html)

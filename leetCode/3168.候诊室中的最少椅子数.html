@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3168. 候诊室中的最少椅子数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/minimum-number-of-chairs-in-a-waiting-room/description/
+
+      // 给你一个字符串 s，模拟每秒钟的事件 i：
+      //
+      // 提示：
+      // 如果 s[i] == 'E'，表示有一位顾客进入候诊室并占用一把椅子。
+      // 如果 s[i] == 'L'，表示有一位顾客离开候诊室，从而释放一把椅子。
+      // 返回保证每位进入候诊室的顾客都能有椅子坐的 最少 椅子数，假设候诊室最初是 空的 。
+      //
+      // 提示：
+      // 1 <= s.length <= 50
+      // s 仅由字母 'E' 和 'L' 组成。
+      // s 表示一个有效的进出序列。
+
+      /**
+       * @param {string} s
+       * @return {number}
+       */
+      var minimumChairs = function (s) {};
+
+      // --- answer-1 ---
+
+      // 遍历取最大值
+      var minimumChairs = function (s = '') {
+        let res = 0;
+        let cur = 0;
+        for (const ch of s) {
+          if (ch === 'E') {
+            cur++;
+          } else {
+            cur--;
+          }
+          res = Math.max(res, cur);
+        }
+        return res;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      console.log('s = ', s);
+      console.log('result = ', result);
+      console.log('minimumChairs = ', minimumChairs(s));
+    </script>
+  </body>
+</html>
