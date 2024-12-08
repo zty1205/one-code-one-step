@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3095. 或值至少 K 的最短子数组 I</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/shortest-subarray-with-or-at-least-k-i/
+
+      // 给你一个 非负 整数数组 nums 和一个整数 k 。
+      // 如果一个数组中所有元素的按位或运算 OR 的值 至少 为 k ，那么我们称这个数组是 特别的 。
+      // 请你返回 nums 中 最短特别非空
+      // 子数组
+      // 的长度，如果特别子数组不存在，那么返回 -1 。
+      //
+      // 提示：
+      // 1 <= nums.length <= 50
+      // 0 <= nums[i] <= 50
+      // 0 <= k < 64
+
+      /**
+       * @param {number[]} nums
+       * @param {number} k
+       * @return {number}
+       */
+      var minimumSubarrayLength = function (nums, k) {};
+
+      // --- answer-1 ---
+
+      var minimumSubarrayLength = function (nums, k) {
+        let ans = Number.MAX_SAFE_INTEGER;
+        let ors = []; // 保存 (右端点为 i 的子数组 OR, 该子数组左端点的最大值)
+        for (let i = 0; i < nums.length; i++) {
+          ors.push([0, i]);
+          let j = 0;
+          for (let or of ors) {
+            or[0] |= nums[i];
+            if (or[0] >= k) {
+              ans = Math.min(ans, i - or[1] + 1);
+            }
+            if (ors[j][0] === or[0]) {
+              ors[j][1] = or[1]; // 原地去重：合并相同值，左端点取靠右的
+            } else {
+              ors[j + 1] = or;
+              j++;
+            }
+          }
+          ors.splice(j + 1); // 去重：移除多余元素
+        }
+        return ans === Number.MAX_SAFE_INTEGER ? -1 : ans;
+      };
+
+      let solution = new Solution();
+      let nums = [2, 3, 1, 2, 4, 3];
+      let k = 7;
+      console.log(solution.minimumSubarrayLength(nums, k)); // 输出: 2
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      console.log('nums = ', nums);
+      console.log('k = ', k);
+      console.log('result = ', result);
+      console.log('minimumSubarrayLength = ', minimumSubarrayLength(nums, k));
+    </script>
+  </body>
+</html>
