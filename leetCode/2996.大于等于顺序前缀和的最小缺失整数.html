@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2996. 大于等于顺序前缀和的最小缺失整数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/smallest-missing-integer-greater-than-sequential-prefix-sum/description/
+
+      // 给你一个下标从 0 开始的整数数组 nums 。
+      // 如果一个前缀 nums[0..i] 满足对于 1 <= j <= i 的所有元素都有 nums[j] = nums[j - 1] + 1 ，那么我们称这个前缀是一个 顺序前缀 。特殊情况是，只包含 nums[0] 的前缀也是一个 顺序前缀 。
+      // 请你返回 nums 中没有出现过的 最小 整数 x ，满足 x 大于等于 最长 顺序前缀的和。
+      //
+      // 提示：
+      // 1 <= nums.length <= 50
+      // 1 <= nums[i] <= 50
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var missingInteger = function (nums) {};
+
+      // --- answer-1 ---
+
+
+      var missingInteger = function (nums = []) {
+        let arr = new Array(51).fill(false);
+        let sum = 0;
+        let maxSum = Number.MAX_SAFE_INTEGER;
+        let maxCount = 0;
+        let count = 0;
+        for (let i = 0; i < nums.length; i++) {
+          const n = nums[i];
+          arr[n] = true;
+
+          if (count === 0) {
+            sum = n;
+            count++;
+          } else {
+            if (n === nums[i - 1] + 1) {
+              count++;
+              sum += n;
+            }
+          }
+          if (count >= maxCount) {
+            maxCount = count;
+            maxSum = sum;
+          } else if (count === maxCount) {
+            maxSum = Math.min(maxSum, sum);
+          }
+        }
+        console.log({
+          arr,
+          maxSum,
+          maxCount,
+          sum
+        });
+
+        while (arr[maxSum]) {
+          maxSum++;
+        }
+        return maxSum;
+      };
+
+      // 只求第一个 而不是整段的
+      var missingInteger = function (nums) {
+        let sum = nums[0];
+        for (let i = 1; i < nums.length && nums[i] == nums[i - 1] + 1; i++) {
+          sum += nums[i];
+        }
+
+        let set = new Set();
+        for (let num of nums) {
+          set.add(num);
+        }
+        while (set.has(sum)) {
+          sum++;
+        }
+        return sum;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var nums = [1, 2, 3, 2, 5];
+      var result = 6;
+      // 解释：nums 的最长顺序前缀是 [1,2,3] ，和为 6 ，6 不在数组中，所以 6 是大于等于最长顺序前缀和的最小整数。
+
+      var nums = [3, 4, 5, 1, 12, 14, 13];
+      var result = 15;
+      // 解释：nums 的最长顺序前缀是 [3,4,5] ，和为 12 ，12、13 和 14 都在数组中，但 15 不在，所以 15 是大于等于最长顺序前缀和的最小整数。
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('missingInteger = ', missingInteger(nums));
+    </script>
+  </body>
+</html>
