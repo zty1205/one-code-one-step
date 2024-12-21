@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2913. 子数组不同元素数目的平方和 I</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/subarrays-distinct-element-sum-of-squares-i/description/
+
+      // 给你一个下标从 0 开始的整数数组 nums 。
+      // 定义 nums 一个子数组的 不同计数 值如下：
+      //
+      // 提示：
+      // 令 nums[i..j] 表示 nums 中所有下标在 i 到 j 范围内的元素构成的子数组（满足 0 <= i <= j < nums.length ），那么我们称子数组 nums[i..j] 中不同值的数目为 nums[i..j] 的不同计数。
+      // 请你返回 nums 中所有子数组的 不同计数 的 平方 和。
+      // 由于答案可能会很大，请你将它对 109 + 7 取余 后返回。
+      // 子数组指的是一个数组里面一段连续 非空 的元素序列。
+      //
+      // 提示：
+      // 1 <= nums.length <= 100
+      // 1 <= nums[i] <= 100
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var sumCounts = function (nums) {};
+
+      // --- answer-1 ---
+
+      // set + 暴力
+      var sumCounts = function (nums) {
+        let ans = 0;
+        const n = nums.length;
+        for (let i = 0; i < n; i++) {
+          const set = new Set();
+          for (let j = i; j < n; j++) {
+            set.add(nums[j]);
+            ans += Math.pow(set.size, 2);
+          }
+          set.clear();
+        }
+        return ans % (1e9 + 7);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 线段数
+      class Solution {
+        constructor() {
+          this.sum = [];
+          this.todo = [];
+        }
+
+        sumCounts(nums) {
+          const n = nums.length;
+          this.sum = new Array(n * 4).fill(0);
+          this.todo = new Array(n * 4).fill(0);
+
+          let ans = 0,
+            s = 0;
+          const last = new Map();
+          for (let i = 1; i <= n; i++) {
+            const x = nums[i - 1];
+            const j = last.get(x) || 0;
+            s += this.queryAndAdd1(1, 1, n, j + 1, i) * 2 + i - j;
+            ans = (ans + s) % 1_000_000_007;
+            last.set(x, i);
+          }
+          return ans;
+        }
+
+        do_(o, l, r, add) {
+          this.sum[o] += add * (r - l + 1);
+          this.todo[o] += add;
+        }
+
+        queryAndAdd1(o, l, r, L, R) {
+          if (L <= l && r <= R) {
+            const res = this.sum[o];
+            this.do_(o, l, r, 1);
+            return res;
+          }
+
+          const m = Math.floor((l + r) / 2);
+          const add = this.todo[o];
+          if (add !== 0) {
+            this.do_(o * 2, l, m, add);
+            this.do_(o * 2 + 1, m + 1, r, add);
+            this.todo[o] = 0;
+          }
+
+          let res = 0;
+          if (L <= m) res += this.queryAndAdd1(o * 2, l, m, L, R);
+          if (m < R) res += this.queryAndAdd1(o * 2 + 1, m + 1, r, L, R);
+          this.sum[o] = this.sum[o * 2] + this.sum[o * 2 + 1];
+          return res;
+        }
+      }
+
+      // Example usage:
+      const solution = new Solution();
+      const nums = [1, 2, 3, 4, 5];
+      console.log(solution.sumCounts(nums)); // Output: 0
+
+      // --- answer-2 ---
+
+      // var nums = [1,2,1];
+      // var result = 15;
+      // 解释：六个子数组分别为：
+
+      // var nums = [2,2];
+      // var result = 3;
+      // 解释：三个子数组分别为：
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('sumCounts = ', sumCounts(nums));
+    </script>
+  </body>
+</html>
