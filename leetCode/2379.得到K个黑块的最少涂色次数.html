@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2379. 得到 K 个黑块的最少涂色次数</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/minimum-recolors-to-get-k-consecutive-black-blocks/description/
+
+      // 给你一个长度为 n 下标从 0 开始的字符串 blocks ，blocks[i] 要么是 'W' 要么是 'B' ，表示第 i 块的颜色。字符 'W' 和 'B' 分别表示白色和黑色。
+      // 给你一个整数 k ，表示想要 连续 黑色块的数目。
+      // 每一次操作中，你可以选择一个白色块将它 涂成 黑色块。
+      // 请你返回至少出现 一次 连续 k 个黑色块的 最少 操作次数。
+      //
+      // 提示：
+      // n == blocks.length
+      // 1 <= n <= 100
+      // blocks[i] 要么是 'W' ，要么是 'B' 。
+      // 1 <= k <= n
+
+      /**
+       * @param {string} blocks
+       * @param {number} k
+       * @return {number}
+       */
+      var minimumRecolors = function (blocks, k) {};
+
+      // --- answer-1 ---
+
+      // 滑动窗口
+      var minimumRecolors = function (blocks = [], k = 1) {
+        let w = 0;
+        let l = 0;
+        let r = 0;
+        while (r < k) {
+          if (blocks[r] === 'W') w++;
+          r++;
+        }
+        let min = w;
+        while (r < blocks.length) {
+          if (blocks[l] === 'W') w--;
+          if (blocks[r] === 'W') w++;
+          min = Math.min(min, w);
+          l++;
+          r++;
+        }
+        return min;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var blocks = 'WBBWWBBWBW',
+        k = 7;
+      var result = 3;
+      // 解释：
+
+      var blocks = 'WBWBBBW',
+        k = 2;
+      var result = 0;
+      // 解释：
+
+      console.log('blocks = ', blocks);
+      console.log('k = ', k);
+      console.log('result = ', result);
+      console.log('minimumRecolors = ', minimumRecolors(blocks, k));
+    </script>
+  </body>
+</html>
