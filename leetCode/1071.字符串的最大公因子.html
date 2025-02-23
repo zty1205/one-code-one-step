@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1071. 字符串的最大公因子</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/greatest-common-divisor-of-strings/description/?envType=study-plan-v2&envId=leetcode-75
+
+      // 对于字符串 s 和 t，只有在 s = t + t + t + ... + t + t（t 自身连接 1 次或多次）时，我们才认定 “t 能除尽 s”。
+      // 给定两个字符串 str1 和 str2 。返回 最长字符串 x，要求满足 x 能除尽 str1 且 x 能除尽 str2 。
+      //
+      // 提示：
+      // 1 <= str1.length, str2.length <= 1000
+      // str1 和 str2 由大写英文字母组成
+
+      /**
+       * @param {string} str1
+       * @param {string} str2
+       * @return {string}
+       */
+      var gcdOfStrings = function (str1, str2) {};
+
+      // --- answer-1 ---
+
+      function gcd(x, y) {
+        return y ? gcd(y, x % y) : x;
+      }
+      var gcdOfStrings = function (str1 = '', str2 = '') {
+        // 关键点：如果str1 + str2 !== str2 + str1，则不存在最大公因子
+        if (str1 + str2 !== str2 + str1) return '';
+        return str1.slice(0, gcd(str1.length, str2.length));
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var str1 = 'ABCABC',
+        str2 = 'ABC';
+      var result = 'ABC';
+
+      var str1 = 'ABABAB',
+        str2 = 'ABAB';
+      var result = 'AB';
+
+      var str1 = 'LEET',
+        str2 = 'CODE';
+      var result = '';
+
+      console.log('str1 = ', str1);
+      console.log('str2 = ', str2);
+      console.log('result = ', result);
+      console.log('gcdOfStrings = ', gcdOfStrings(str1, str2));
+    </script>
+  </body>
+</html>
