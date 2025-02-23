@@ -1,5 +1,0 @@
-- nginx 开源版
-- nginx 商业版
-- openresty  lua拓展
-- tengine  c语音拓展 , taobao
-- kong
