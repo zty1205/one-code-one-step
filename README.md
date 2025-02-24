@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (744 道)
+## 三、LeetCode (745 道)
 
 <br/>
 
@@ -358,6 +358,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [337.打家劫舍 III.html](./leetCode/337.打家劫舍III.html)
 - [338.比特位计数.html](./leetCode/338.比特位计数.html)
 - [342.4 的幂.html](./leetCode/342.4的幂.html)
+- [345.反转字符串中的元音字母.html](./leetCode/345.反转字符串中的元音字母.html)
 - [345.反转字符串中的元音字母.html](./leetCode/345.反转字符串中的元音字母.html)
 - [347.前 K 个高频元素.html](./leetCode/347.前K个高频元素.html)
 - [349.两个数组的交集.html](./leetCode/349.两个数组的交集.html)

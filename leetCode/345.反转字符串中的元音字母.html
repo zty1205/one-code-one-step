@@ -8,10 +8,11 @@
   </head>
   <body>
     <script>
-      // https://leetcode-cn.com/problems/reverse-vowels-of-a-string/
+      // https://leetcode.cn/problems/reverse-vowels-of-a-string/description/?envType=study-plan-v2&envId=leetcode-75
 
       // 给你一个字符串 s ，仅反转字符串中的所有元音字母，并返回结果字符串。
-      // 元音字母包括 'a'、'e'、'i'、'o'、'u'，且可能以大小写两种形式出现。
+      // 元音字母包括 'a'、'e'、'i'、'o'、'u'，且可能以大小写两种形式出现不止一次。
+      //
       // 提示：
       // 1 <= s.length <= 3 * 105
       // s 由 可打印的 ASCII 字符组成
@@ -24,34 +25,46 @@
 
       // --- answer-1 ---
 
-      // 首尾双指针
-      const yuan = {
-        a: true,
-        A: true,
-        e: true,
-        E: true,
-        i: true,
-        I: true,
-        o: true,
-        O: true,
-        u: true,
-        U: true
+      const Vowels = new Set(['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U']);
+      // 前后指针
+      var reverseVowels = function (s = '') {
+        const length = s.length;
+        let left = 0;
+        let right = length - 1;
+        const arr = s.split('');
+        while (left < right) {
+          if (Vowels.has(arr[left]) && Vowels.has(arr[right])) {
+            [arr[left], arr[right]] = [arr[right], arr[left]];
+            left++;
+            right--;
+          } else if (Vowels.has(arr[left])) {
+            right--;
+          } else if (Vowels.has(arr[right])) {
+            left++;
+          } else {
+            left++;
+            right--;
+          }
+        }
+        return arr.join('');
       };
 
-      var reverseVowels = function (s) {
-        let arr = Array.from(s);
-        let start = 0;
-        let end = arr.length - 1;
-        while (start < end) {
-          while (!yuan[arr[start]] && start < arr.length) start++;
-          while (!yuan[arr[end]] && end > 0) end--;
-
-          if (start < end) {
-            let tmp = arr[start];
-            arr[start] = arr[end];
-            arr[end] = tmp;
-            start++;
-            end--;
+      var reverseVowels = function (s = '') {
+        const length = s.length;
+        let left = 0;
+        let right = length - 1;
+        const arr = s.split('');
+        while (left < right) {
+          while (left < length && !Vowels.has(arr[left])) {
+            left++;
+          }
+          while (right > 0 && !Vowels.has(arr[right])) {
+            right--;
+          }
+          if (left < right) {
+            [arr[left], arr[right]] = [arr[right], arr[left]];
+            left++;
+            right--;
           }
         }
         return arr.join('');
@@ -63,18 +76,11 @@
 
       // --- answer-2 ---
 
-      var s = 'hello';
-      var result = 'holle';
+      var s = 'IceCreAm';
+      var result = 'AceCreIm';
 
       var s = 'leetcode';
-      //          l  tc d
       var result = 'leotcede';
-
-      var s = 'bbbvv';
-      var result = 'bbbvv';
-
-      var s = '.,';
-      var result = '.,';
 
       console.log('s = ', s);
       console.log('result = ', result);
