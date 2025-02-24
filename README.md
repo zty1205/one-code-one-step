@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (743 道)
+## 三、LeetCode (744 道)
 
 <br/>
 
@@ -740,6 +740,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [506.统计相似字符串对的数目.html](./leetCode/506.统计相似字符串对的数目.html)
 - [523.连续的子数组和.html](./leetCode/523.连续的子数组和.html)
 - [525.连续数组.html](./leetCode/525.连续数组.html)
+- [605.种花问题.html](./leetCode/605.种花问题.html)
 - [1071.字符串的最大公因子.html](./leetCode/1071.字符串的最大公因子.html)
 - [1431.拥有最多糖果的孩子.html](./leetCode/1431.拥有最多糖果的孩子.html)
 - [1768.交替合并字符串.html](./leetCode/1768.交替合并字符串.html)
