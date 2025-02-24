@@ -8,12 +8,15 @@
   </head>
   <body>
     <script>
-      // https://leetcode.cn/problems/kids-with-the-greatest-number-of-candies/
+      // https://leetcode.cn/problems/kids-with-the-greatest-number-of-candies/description/?envType=study-plan-v2&envId=leetcode-75
 
-      // 给你一个数组 candies 和一个整数 extraCandies ，其中 candies[i] 代表第 i 个孩子拥有的糖果数目。
-      // 对每一个孩子，检查是否存在一种方案，将额外的 extraCandies 个糖果分配给孩子们之后，此孩子有 最多 的糖果。注意，允许有多个孩子同时拥有 最多 的糖果数目。
+      // 有 n 个有糖果的孩子。给你一个数组 candies，其中 candies[i] 代表第 i 个孩子拥有的糖果数目，和一个整数 extraCandies 表示你所有的额外糖果的数量。
+      // 返回一个长度为 n 的布尔数组 result，如果把所有的 extraCandies 给第 i 个孩子之后，他会拥有所有孩子中 最多 的糖果，那么 result[i] 为 true，否则为 false。
+      // 注意，允许有多个孩子同时拥有 最多 的糖果数目。
+      //
       // 提示：
-      // 2 <= candies.length <= 100
+      // n == candies.length
+      // 2 <= n <= 100
       // 1 <= candies[i] <= 100
       // 1 <= extraCandies <= 50
 
@@ -26,10 +29,10 @@
 
       // --- answer-1 ---
 
-      // 找到最大的 然后遍历
-      var kidsWithCandies = function (candies = [], extraCandies = 1) {
-        const max = Math.max.apply(Math, candies);
-        return candies.map((num) => num + extraCandies >= max);
+      // 超过最大值即可
+      var kidsWithCandies = function (candies = [], extraCandies = 0) {
+        const max = Math.max(...candies);
+        return candies.map((item) => item + extraCandies >= max);
       };
 
       // --- answer-1 ---
@@ -38,19 +41,16 @@
 
       // --- answer-2 ---
 
-      var candies = [2, 3, 5, 1, 3],
-        extraCandies = 3;
-      var result = [true, true, true, false, true];
-      // 解释：
+      // var candies = [2,3,5,1,3], extraCandies = 3;
+      // var result = [true,true,true,false,true] ;
+      // 解释：如果你把额外的糖果全部给：
 
-      var candies = [4, 2, 1, 1, 2],
-        extraCandies = 1;
-      var result = [true, false, false, false, false];
+      // var candies = [4,2,1,1,2], extraCandies = 1;
+      // var result = [true,false,false,false,false] ;
       // 解释：只有 1 个额外糖果，所以不管额外糖果给谁，只有孩子 1 可以成为拥有糖果最多的孩子。
 
-      var candies = [12, 1, 12],
-        extraCandies = 10;
-      var result = [true, false, true];
+      // var candies = [12,1,12], extraCandies = 10;
+      // var result = [true,false,true];
 
       console.log('candies = ', candies);
       console.log('extraCandies = ', extraCandies);
