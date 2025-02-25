@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>334. 递增的三元子序列</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/increasing-triplet-subsequence/description/?envType=study-plan-v2&envId=leetcode-75
+
+      // 给你一个整数数组 nums ，判断这个数组中是否存在长度为 3 的递增子序列。
+      // 如果存在这样的三元组下标 (i, j, k) 且满足 i < j < k ，使得 nums[i] < nums[j] < nums[k] ，返回 true ；否则，返回 false 。
+      //
+      // 提示：
+      // 1 <= nums.length <= 5 * 105
+      // -231 <= nums[i] <= 231 - 1
+      // 进阶：你能实现时间复杂度为 O(n) ，空间复杂度为 O(1) 的解决方案吗？
+
+      /**
+       * @param {number[]} nums
+       * @return {boolean}
+       */
+      var increasingTriplet = function (nums) {};
+
+      // --- answer-1 ---
+
+      var increasingTriplet = function (nums = []) {
+        if (nums.length < 3) return false;
+
+        const n = nums.length;
+        const pre = new Array(n).fill(Number.MAX_SAFE_INTEGER);
+        const post = new Array(n).fill(Number.MIN_SAFE_INTEGER);
+
+        for (let i = 1; i < n; i++) {
+          pre[i] = Math.min(pre[i - 1], nums[i - 1]);
+        }
+
+        for (let i = n - 2; i >= 0; i--) {
+          post[i] = Math.max(post[i + 1], nums[i + 1]);
+        }
+
+        for (let i = 0; i < nums.length; i++) {
+          if (pre[i] < nums[i] && nums[i] < post[i]) {
+            return true;
+          }
+        }
+        return false;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 贪心 第一个数取最小，保证第三个数大于第二个数
+      var increasingTriplet = function (nums) {
+        const n = nums.length;
+        if (n < 3) {
+          return false;
+        }
+        let first = nums[0],
+          second = Number.MAX_VALUE;
+        for (let i = 1; i < n; i++) {
+          const num = nums[i];
+          if (num > second) {
+            return true;
+          } else if (num > first) {
+            second = num;
+          } else {
+            first = num;
+          }
+        }
+        return false;
+      };
+
+      // --- answer-2 ---
+
+      // var nums = [1,2,3,4,5];
+      // var result = true;
+      // 解释：任何 i < j < k 的三元组都满足题意
+
+      // var nums = [5,4,3,2,1];
+      // var result = false;
+      // 解释：不存在满足题意的三元组
+
+      // var nums = [2,1,5,0,4,6];
+      // var result = true;
+      // 解释：三元组 (3, 4, 5) 满足题意，因为 nums[3] == 0 < nums[4] == 4 < nums[5] == 6
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('increasingTriplet = ', increasingTriplet(nums));
+    </script>
+  </body>
+</html>
