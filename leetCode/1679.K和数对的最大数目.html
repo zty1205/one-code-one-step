@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1679. K 和数对的最大数目</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/max-number-of-k-sum-pairs/description/?envType=study-plan-v2&envId=leetcode-75
+
+      // 给你一个整数数组 nums 和一个整数 k 。
+      // 每一步操作中，你需要从数组中选出和为 k 的两个整数，并将它们移出数组。
+      // 返回你可以对数组执行的最大操作数。
+      //
+      // 提示：
+      // 1 <= nums.length <= 105
+      // 1 <= nums[i] <= 109
+      // 1 <= k <= 109
+
+      /**
+       * @param {number[]} nums
+       * @param {number} k
+       * @return {number}
+       */
+      var maxOperations = function (nums, k) {};
+
+      // --- answer-1 ---
+
+      // 双指针
+      var maxOperations = function (nums = [], k = 0) {
+        nums.sort((a, b) => a - b);
+        let count = 0;
+        let i = 0,
+          j = nums.length - 1;
+        while (i < j) {
+          if (nums[i] + nums[j] === k) {
+            count++;
+            i++;
+            j--;
+          } else if (nums[i] + nums[j] < k) {
+            i++;
+          } else {
+            j--;
+          }
+        }
+        return count;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // hash 类似两数之和
+      var maxOperations = function (nums = [], k = 0) {
+        let count = 0;
+        let map = new Map();
+        for (let i = 0; i < nums.length; i++) {
+          const target = k - nums[i];
+
+          const gt = map.get(nums[i]);
+          if (gt && gt > 0) {
+            count++;
+            map.set(nums[i], gt - 1);
+          } else {
+            map.set(target, (map.get(target) || 0) + 1);
+          }
+        }
+        return count;
+      };
+
+      // --- answer-2 ---
+
+      var nums = [1, 2, 3, 4],
+        k = 5;
+      var result = 2;
+      // 解释：开始时 nums = [1,2,3,4]：
+
+      // var nums = [3, 1, 3, 4, 3],
+      //  k = 6;
+      // var result = 1;
+      // 解释：开始时 nums = [3,1,3,4,3]：
+
+      var nums = [2, 2, 2, 3, 1, 1, 4, 1],
+        k = 4;
+      var result = 2;
+
+      console.log('nums = ', nums);
+      console.log('k = ', k);
+      console.log('result = ', result);
+      console.log('maxOperations = ', maxOperations(nums, k));
+    </script>
+  </body>
+</html>
