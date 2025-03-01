@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1493. 删掉一个元素以后全为 1 的最长子数组</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/longest-subarray-of-1s-after-deleting-one-element/description/?envType=study-plan-v2&envId=leetcode-75
+
+      // 给你一个二进制数组 nums ，你需要从中删掉一个元素。
+      // 请你在删掉元素的结果数组中，返回最长的且只包含 1 的非空子数组的长度。
+      // 如果不存在这样的子数组，请返回 0 。
+      //
+      // 提示：
+      // 1 <= nums.length <= 105
+      // nums[i] 要么是 0 要么是 1 。
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var longestSubarray = function (nums) {};
+
+      // --- answer-1 ---
+
+      var longestSubarray = function (nums) {
+        let left = 0;
+        let right = 0;
+        let k = 0;
+        let max = 0;
+        while (right < nums.length) {
+          if (nums[right] === 0) {
+            k++;
+          }
+
+          while (k > 1) {
+            if (nums[left] === 0) {
+              k--;
+            }
+            left++;
+          }
+
+          max = Math.max(right - left, max);
+          right++;
+        }
+        return max;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      // var nums = [1,1,0,1];
+      // var result = 3;
+      // 解释：删掉位置 2 的数后，[1,1,1] 包含 3 个 1 。
+
+      // var nums = [0,1,1,1,0,1,1,0,1];
+      // var result = 5;
+      // 解释：删掉位置 4 的数字后，[0,1,1,1,1,1,0,1] 的最长全 1 子数组为 [1,1,1,1,1] 。
+
+      // var nums = [1,1,1];
+      // var result = 2;
+      // 解释：你必须要删除一个元素。
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('longestSubarray = ', longestSubarray(nums));
+    </script>
+  </body>
+</html>
