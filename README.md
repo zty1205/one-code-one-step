@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (758 道)
+## 三、LeetCode (759 道)
 
 <br/>
 
@@ -428,6 +428,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [596.超过 5 名学生的课.sql](./leetCode/596.超过5名学生的课.sql)
 - [599.两个列表的最小索引总和.html](./leetCode/599.两个列表的最小索引总和.html)
 - [605.种花问题.html](./leetCode/605.种花问题.html)
+- [724.寻找数组的中心下标.html](./leetCode/724.寻找数组的中心下标.html)
 - [1004.最大连续 1 的个数 III.html](./leetCode/1004.最大连续1的个数III.html)
 - [643.子数组最大平均数 I.html](./leetCode/643.子数组最大平均数I.html)
 - [617.合并二叉树.html](./leetCode/617.合并二叉树.html)
