@@ -8,10 +8,11 @@
   </head>
   <body>
     <script>
-      // https://leetcode.cn/problems/find-the-highest-altitude/
+      // https://leetcode.cn/problems/find-the-highest-altitude/description/?envType=study-plan-v2&envId=leetcode-75
 
       // 有一个自行车手打算进行一场公路骑行，这条路线总共由 n + 1 个不同海拔的点组成。自行车手从海拔为 0 的点 0 开始骑行。
       // 给你一个长度为 n 的整数数组 gain ，其中 gain[i] 是点 i 和点 i + 1 的 净海拔高度差（0 <= i < n）。请你返回 最高点的海拔 。
+      //
       // 提示：
       // n == gain.length
       // 1 <= n <= 100
@@ -25,15 +26,15 @@
 
       // --- answer-1 ---
 
-      // 直接遍历即可
-      var largestAltitude = function (gain = []) {
-        let res = 0;
-        let alt = 0;
-        for (let i = 0; i < gain.length; i++) {
-          alt += gain[i];
-          res = Math.max(res, alt);
+      // 纯前缀和
+      var largestAltitude = function (gain) {
+        const pre = 0;
+        let max = 0;
+        for (const g of gain) {
+          pre += g;
+          max = Math.max(max, pre);
         }
-        return res;
+        return max;
       };
 
       // --- answer-1 ---
@@ -42,12 +43,12 @@
 
       // --- answer-2 ---
 
-      var gain = [-5, 1, 5, 0, -7];
-      var result = 1;
+      // var gain = [-5,1,5,0,-7];
+      // var result = 1;
       // 解释：海拔高度依次为 [0,-5,-4,1,1,-6] 。最高海拔为 1 。
 
-      var gain = [-4, -3, -2, -1, 4, 3, 2];
-      var result = 0;
+      // var gain = [-4,-3,-2,-1,4,3,2];
+      // var result = 0;
       // 解释：海拔高度依次为 [0,-4,-7,-9,-10,-6,-3,-1] 。最高海拔为 0 。
 
       console.log('gain = ', gain);

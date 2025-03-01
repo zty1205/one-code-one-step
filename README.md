@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (757 道)
+## 三、LeetCode (758 道)
 
 <br/>
 
@@ -565,6 +565,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1417.重新格式化字符串.html](./leetCode/1417.重新格式化字符串.html)
 - [1422.分割字符串的最大得分.html](./leetCode/1422.分割字符串的最大得分.html)
 - [1431.拥有最多糖果的孩子.html](./leetCode/1431.拥有最多糖果的孩子.html)
+- [1732.找到最高海拔.html](./leetCode/1732.找到最高海拔.html)
 - [1493.删掉一个元素以后全为 1 的最长子数组.html](./leetCode/1493.删掉一个元素以后全为1的最长子数组.html)
 - [1456.定长子串中元音的最大数目.html](./leetCode/1456.定长子串中元音的最大数目.html)
 - [1679.K 和数对的最大数目.html](./leetCode/1679.K和数对的最大数目.html)
