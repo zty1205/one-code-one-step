@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1657. 确定两个字符串是否接近</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/determine-if-two-strings-are-close/description/?envType=study-plan-v2&envId=leetcode-75
+
+      // 如果可以使用以下操作从一个字符串得到另一个字符串，则认为两个字符串 接近 ：
+      //
+      // 提示：
+      // 操作 1：交换任意两个 现有 字符。
+      // 例如，abcde -> aecdb
+      // 操作 2：将一个 现有 字符的每次出现转换为另一个 现有 字符，并对另一个字符执行相同的操作。
+      // 例如，aacabb -> bbcbaa（所有 a 转化为 b ，而所有的 b 转换为 a ）
+      // 你可以根据需要对任意一个字符串多次使用这两种操作。
+      // 给你两个字符串，word1 和 word2 。如果 word1 和 word2 接近 ，就返回 true ；否则，返回 false 。
+      //
+      // 提示：
+      // 1 <= word1.length, word2.length <= 105
+      // word1 和 word2 仅包含小写英文字母
+
+      /**
+       * @param {string} word1
+       * @param {string} word2
+       * @return {boolean}
+       */
+      var closeStrings = function (word1, word2) {};
+
+      // --- answer-1 ---
+
+      var closeStrings = function (word1 = '', word2 = '') {
+        if (word1.length !== word2.length) {
+          return false;
+        }
+        const map1 = getMap(word1);
+        const map2 = getMap(word2);
+        const key1 = [...map1.keys()];
+        const key2 = [...map2.keys()];
+        key1.sort();
+        key2.sort();
+        if (key1.join('') !== key2.join('')) {
+          return false;
+        }
+        const value1 = [...map1.values()].sort((a, b) => a - b);
+        const value2 = [...map2.values()].sort((a, b) => a - b);
+        return value1.join('') === value2.join('');
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      var closeStrings = function (word1, word2) {
+        let count1 = new Array(26).fill(0);
+        let count2 = new Array(26).fill(0);
+        for (let i = 0; i < word1.length; i++) {
+          count1[word1.charCodeAt(i) - 97]++;
+        }
+        for (let i = 0; i < word2.length; i++) {
+          count2[word2.charCodeAt(i) - 97]++;
+        }
+        for (let i = 0; i < 26; i++) {
+          if ((count1[i] > 0 && count2[i] == 0) || (count1[i] == 0 && count2[i] > 0)) {
+            return false;
+          }
+        }
+        count1.sort();
+        count2.sort();
+        return count1.toString() == count2.toString();
+      };
+
+      // --- answer-2 ---
+
+      // var word1 = "abc", word2 = "bca";
+      // var result = true;
+      // 解释：2 次操作从 word1 获得 word2 。
+
+      // var word1 = "a", word2 = "aa";
+      // var result = false;
+      // 解释：不管执行多少次操作，都无法从 word1 得到 word2 ，反之亦然。
+
+      // var word1 = "cabbba", word2 = "abbccc";
+      // var result = true;
+      // 解释：3 次操作从 word1 获得 word2 。
+
+      console.log('word1 = ', word1);
+      console.log('word2 = ', word2);
+      console.log('result = ', result);
+      console.log('closeStrings = ', closeStrings(word1, word2));
+    </script>
+  </body>
+</html>
