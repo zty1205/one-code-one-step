@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (765 道)
+## 三、LeetCode (766 道)
 
 <br/>
 
@@ -377,6 +377,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [387.字符串中的第一个唯一字符.html](./leetCode/387.字符串中的第一个唯一字符.html)
 - [389.找不同.html](./leetCode/389.找不同.html)
 - [392.判断子序列.html](./leetCode/392.判断子序列.html)
+- [394.字符串解码.html](./leetCode/394.字符串解码.html)
 - [392.判断子序列.html](./leetCode/392.判断子序列.html)
 - [401.二进制手表.html](./leetCode/401.二进制手表.html)
 - [404.左叶子之和.html](./leetCode/404.左叶子之和.html)
