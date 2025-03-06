@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (769 道)
+## 三、LeetCode (770 道)
 
 <br/>
 
@@ -359,6 +359,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [304.二维区域和检索-矩阵不可变.html](./leetCode/304.二维区域和检索-矩阵不可变.html)
 - [319.灯泡开关.html](./leetCode/319.灯泡开关.html)
 - [326.3 的幂.html](./leetCode/326.3的幂.html)
+- [328.奇偶链表.html](./leetCode/328.奇偶链表.html)
 - [334.递增的三元子序列.html](./leetCode/334.递增的三元子序列.html)
 - [337.打家劫舍 III.html](./leetCode/337.打家劫舍III.html)
 - [338.比特位计数.html](./leetCode/338.比特位计数.html)

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>328. 奇偶链表</title>
+  </head>
+  <body>
+    <script src="../helper/node.js"></script>
+    <script>
+      // https://leetcode.cn/problems/odd-even-linked-list/description/?envType=study-plan-v2&envId=leetcode-75
+
+      // 给定单链表的头节点 head ，将所有索引为奇数的节点和索引为偶数的节点分别组合在一起，然后返回重新排序的列表。
+      // 第一个节点的索引被认为是 奇数 ， 第二个节点的索引为 偶数 ，以此类推。
+      // 请注意，偶数组和奇数组内部的相对顺序应该与输入时保持一致。
+      // 你必须在 O(1) 的额外空间复杂度和 O(n) 的时间复杂度下解决这个问题。
+      //
+      // 提示：
+      // n ==  链表中的节点数
+      // 0 <= n <= 104
+      // -106 <= Node.val <= 106
+
+      /**
+       * Definition for singly-linked list.
+       * function ListNode(val, next) {
+       *     this.val = (val===undefined ? 0 : val)
+       *     this.next = (next===undefined ? null : next)
+       * }
+       */
+      /**
+       * @param {ListNode} head
+       * @return {ListNode}
+       */
+      var oddEvenList = function (head) {};
+
+      // --- answer-1 ---
+
+      var oddEvenList = function (head) {
+        if (!head || !head.next) {
+          return head;
+        }
+        const oddHead = new ListNode(null);
+        let oddCur = oddHead;
+        let cur = head;
+        let pre = null;
+        let i = 0;
+        while (cur) {
+          if (i % 2 === 1) {
+            pre.next = cur.next;
+            cur.next = null;
+            oddCur.next = cur;
+            oddCur = oddCur.next;
+            cur = pre.next;
+          } else {
+            pre = cur;
+            cur = cur.next;
+          }
+          i++;
+        }
+        pre.next = oddHead.next;
+        return head;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      var oddEvenList = function (head) {
+        if (head === null) {
+          return head;
+        }
+        let evenHead = head.next;
+        let odd = head,
+          even = evenHead;
+        while (even !== null && even.next !== null) {
+          odd.next = even.next;
+          odd = odd.next;
+          even.next = odd.next;
+          even = even.next;
+        }
+        odd.next = evenHead;
+        return head;
+      };
+
+      // --- answer-2 ---
+
+      var head = [1, 2, 3, 4, 5];
+      var result = [1, 3, 5, 2, 4];
+
+      var head = [2, 1, 3, 5, 6, 4, 7];
+      var result = [2, 3, 6, 7, 1, 5, 4];
+
+      var root = buildLinkNodeByArray(head);
+      var resultNode = oddEvenList(root);
+      var resultList = buildArrayByLinkNode(resultNode);
+
+      console.log('head = ', head);
+      console.log('result = ', result);
+      console.log('oddEvenList = ', resultList);
+    </script>
+  </body>
+</html>
