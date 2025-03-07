@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (770 道)
+## 三、LeetCode (771 道)
 
 <br/>
 
@@ -768,6 +768,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1431.拥有最多糖果的孩子.html](./leetCode/1431.拥有最多糖果的孩子.html)
 - [1768.交替合并字符串.html](./leetCode/1768.交替合并字符串.html)
 - [2095.删除链表的中间节点.html](./leetCode/2095.删除链表的中间节点.html)
+- [2130.链表最大孪生和.html](./leetCode/2130.链表最大孪生和.html)
 - [2215.找出两数组的不同.html](./leetCode/2215.找出两数组的不同.html)
 - [2379.得到 K 个黑块的最少涂色次数.html](./leetCode/2379.得到K个黑块的最少涂色次数.html)
 - [2390.从字符串中移除星号.html](./leetCode/2390.从字符串中移除星号.html)

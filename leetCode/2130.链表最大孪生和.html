@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2130. 链表最大孪生和</title>
+  </head>
+  <body>
+    <script>
+      // http://leetcode.cn/problems/maximum-twin-sum-of-a-linked-list/description/?envType=study-plan-v2&envId=leetcode-75
+
+      // 在一个大小为 n 且 n 为 偶数 的链表中，对于 0 <= i <= (n / 2) - 1 的 i ，第 i 个节点（下标从 0 开始）的孪生节点为第 (n-1-i) 个节点 。
+      //
+      // 提示：
+      // 比方说，n = 4 那么节点 0 是节点 3 的孪生节点，节点 1 是节点 2 的孪生节点。这是长度为 n = 4 的链表中所有的孪生节点。
+      // 孪生和 定义为一个节点和它孪生节点两者值之和。
+      // 给你一个长度为偶数的链表的头节点 head ，请你返回链表的 最大孪生和 。
+      //
+      // 提示：
+      // 链表的节点数目是 [2, 105] 中的 偶数 。
+      // 1 <= Node.val <= 105
+
+      /**
+       * Definition for singly-linked list.
+       * function ListNode(val, next) {
+       *     this.val = (val===undefined ? 0 : val)
+       *     this.next = (next===undefined ? null : next)
+       * }
+       */
+      /**
+       * @param {ListNode} head
+       * @return {number}
+       */
+      var pairSum = function (head) {};
+
+      // --- answer-1 ---
+
+      // 转数组or双向链表
+
+      var pairSum = function (head) {
+        const arr = [];
+        while (head) {
+          arr.push(head.val);
+          head = head.next;
+        }
+        let max = 0;
+        for (let i = 0; i < arr.length / 2; i++) {
+          max = Math.max(max, arr[i] + arr[arr.length - 1 - i]);
+        }
+        return max;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      // var head = [5,4,2,1];
+      // var result = 6;
+      // 解释：
+
+      // var head = [4,2,2,3];
+      // var result = 7;
+      // 解释：
+
+      // var head = [1,100000];
+      // var result = 100001;
+      // 解释：
+
+      console.log('head = ', head);
+      console.log('result = ', result);
+      console.log('pairSum = ', pairSum(head));
+    </script>
+  </body>
+</html>
