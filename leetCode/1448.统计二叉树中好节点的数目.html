@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1448. 统计二叉树中好节点的数目</title>
+  </head>
+  <body>
+    <script src="../helper/tree.js"></script>
+    <script>
+      // https://leetcode.cn/problems/count-good-nodes-in-binary-tree/description/?envType=study-plan-v2&envId=leetcode-75
+
+      // 给你一棵根为 root 的二叉树，请你返回二叉树中好节点的数目。
+      // 「好节点」X 定义为：从根到该节点 X 所经过的节点中，没有任何节点的值大于 X 的值。
+      //
+      // 提示：
+      // 二叉树中节点数目范围是 [1, 10^5] 。
+      // 每个节点权值的范围是 [-10^4, 10^4] 。
+
+      /**
+       * Definition for a binary tree node.
+       * function TreeNode(val, left, right) {
+       *     this.val = (val===undefined ? 0 : val)
+       *     this.left = (left===undefined ? null : left)
+       *     this.right = (right===undefined ? null : right)
+       * }
+       */
+      /**
+       * @param {TreeNode} root
+       * @return {number}
+       */
+      var goodNodes = function (root) {};
+
+      // --- answer-1 ---
+
+      // 深度遍历
+      var goodNodes = function (root) {
+        let count = 0;
+        function dfs(node, max) {
+          if (!node) return;
+          if (node.val >= max) {
+            count++;
+            max = node.val;
+          }
+          dfs(node.left, max);
+          dfs(node.right, max);
+        }
+        dfs(root, root.val);
+        return count;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var root = [3, 1, 4, 3, null, 1, 5];
+      var result = 4;
+      // 解释：图中蓝色节点为好节点。
+
+      var root = [3, 3, null, 4, 2];
+      var result = 3;
+      // 解释：节点 2 -> (3, 3, 2) 不是好节点，因为 "3" 比它大。
+
+      var root = [1];
+      var result = 1;
+      // 解释：根节点是好节点。
+
+      const head = buildTreeByArray(root, {});
+
+      console.log('root = ', root);
+      console.log('head = ', head);
+      console.log('result = ', result);
+      console.log('goodNodes = ', goodNodes(head));
+    </script>
+  </body>
+</html>
