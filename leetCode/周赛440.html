@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>周赛440</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+
+    <script>
+      /**
+       * 周赛440
+       */
+      console.log(440);
+
+      // --- example-1 --
+
+      var numOfUnplacedFruits = function (fruits = [], baskets = []) {
+        let i = 0;
+        for (let n of fruits) {
+          const idx = baskets.findIndex((b) => b >= n);
+          if (idx !== -1) {
+            i++;
+            baskets.splice(idx, 1);
+          }
+        }
+        return fruits.length - i;
+      };
+
+      // 超时
+      var findMaxSum = function (nums1 = [], nums2 = [], k = 0) {
+        const list = Array.from({ length: nums1.length }, () => []);
+        for (let i = 0; i < nums1.length; i++) {
+          for (let j = 0; j < nums1.length; j++) {
+            if (j !== i) {
+              if (nums1[j] < nums1[i]) {
+                list[i].push(nums2[j]);
+              }
+            }
+          }
+        }
+        return list.map((l) => {
+          l.sort((a, b) => b - a);
+
+          return l.slice(0, k).reduce((a, b) => a + b, 0);
+        });
+      };
+
+      //const res = findMaxSum([4, 2, 1, 5, 3], [10, 20, 30, 40, 50], 2);
+      //console.log(res);
+
+      var fruits = [35, 61],
+        baskets = [76, 56];
+
+      // console.log(numOfUnplacedFruits(fruits, baskets));
+
+      var findMaxSum = function (nums1 = [], nums2 = [], k = 0) {
+        let arr1 = nums1.map((n, i) => {
+          return {
+            n,
+            i
+          };
+        });
+        const list = arr1.map((a) => {
+          const arr = arr1
+            .filter((b) => b.i !== a.i && b.n < a.n)
+            .map((b) => nums2[b.i])
+            .sort((a, b) => b - a)
+            .slice(0, k);
+          return arr.reduce((a, b) => a + b, 0);
+        });
+        return list;
+      };
+
+      var numOfUnplacedFruits = function (fruits = [], baskets = []) {
+        let i = 0;
+        baskets.sort((a, b) => b - a);
+        const used = new Array(baskets.length).fill(false);
+        for (let n of fruits) {
+          for (let j = 0; j < baskets.length; j++) {
+            if (baskets[j] >= n && !used[j]) {
+              i++;
+              used[j] = true;
+              break;
+            }
+          }
+        }
+        return fruits.length - i;
+      };
+
+      var fruits = [30, 67],
+        baskets = [49, 99];
+      console.log(numOfUnplacedFruits(fruits, baskets));
+
+      var findMaxSum = function (nums1, nums2, k) {
+        const n = nums1.length;
+        const answer = new Array(n).fill(0);
+
+        const pairs = nums1.map((num, index) => [num, nums2[index], index]);
+
+        pairs.sort((a, b) => a[0] - b[0]);
+
+        console.log('pairs', pairs);
+
+        for (let i = 1; i < n; i++) {
+          const [n1, n2, index] = pairs[i];
+          if (pairs[i - 1][0] < pairs[i][0]) {
+            const arr = pairs
+              .slice(0, i)
+              .map((p) => p[1])
+              .sort((a, b) => b - a)
+              .slice(0, k);
+            answer[index] = arr.reduce((a, b) => a + b, 0);
+          }
+        }
+
+        return answer;
+      };
+
+      var nums1 = [4, 2, 1, 5, 3],
+        nums2 = [10, 20, 30, 40, 50],
+        k = 2;
+
+      var result = [80, 30, 0, 80, 50];
+
+      var nums1 = [2, 2, 2, 2],
+        nums2 = [3, 1, 2, 3],
+        k = 1;
+
+      var result = [0, 0, 0, 0];
+
+      console.log('findMaxSum', findMaxSum(nums1, nums2, k));
+
+      // --- example-1 ---
+
+      // --- example-2 ---
+
+      // 堆
+      class Solution {
+        findMaxSum(nums1, nums2, k) {
+          const n = nums1.length;
+          const a = Array.from({ length: n }, (_, i) => [nums1[i], nums2[i], i]);
+          a.sort((p, q) => p[0] - q[0]);
+
+          const ans = new Array(n);
+          const pq = [];
+          let s = 0;
+          // 分组循环模板
+          for (let i = 0; i < n; ) {
+            const start = i;
+            const x = a[start][0];
+            // 找到所有相同的 nums1[i]，这些数的答案都是一样的
+            while (i < n && a[i][0] === x) {
+              ans[a[i][2]] = s;
+              i++;
+            }
+            // 把这些相同的 nums1[i] 对应的 nums2[i] 入堆
+            for (let j = start; j < i; j++) {
+              const y = a[j][1];
+              s += y;
+              pq.push(y);
+              pq.sort((a, b) => a - b);
+              if (pq.length > k) {
+                s -= pq.shift();
+              }
+            }
+          }
+          return ans;
+        }
+      }
+
+      // --- example-2 ---
+
+      // 线段树
+      class SegmentTree {
+        constructor(a) {
+          const n = a.length;
+          this.max = new Array(2 << (32 - Math.clz32(n - 1))).fill(0);
+          this.build(a, 1, 0, n - 1);
+        }
+
+        // 找区间内的第一个 >= x 的数，并更新为 -1，返回这个数的下标（没有则返回 -1）
+        findFirstAndUpdate(o, l, r, x) {
+          if (this.max[o] < x) {
+            // 区间没有 >= x 的数
+            return -1;
+          }
+          if (l === r) {
+            this.max[o] = -1; // 更新为 -1，表示不能放水果
+            return l;
+          }
+          const m = Math.floor((l + r) / 2);
+          let i = this.findFirstAndUpdate(o * 2, l, m, x); // 先递归左子树
+          if (i < 0) {
+            // 左子树没找到
+            i = this.findFirstAndUpdate(o * 2 + 1, m + 1, r, x); // 再递归右子树
+          }
+          this.maintain(o);
+          return i;
+        }
+
+        maintain(o) {
+          this.max[o] = Math.max(this.max[o * 2], this.max[o * 2 + 1]);
+        }
+
+        // 初始化线段树
+        build(a, o, l, r) {
+          if (l === r) {
+            this.max[o] = a[l];
+            return;
+          }
+          const m = Math.floor((l + r) / 2);
+          this.build(a, o * 2, l, m);
+          this.build(a, o * 2 + 1, m + 1, r);
+          this.maintain(o);
+        }
+      }
+
+      class Solution {
+        numOfUnplacedFruits(fruits, baskets) {
+          const t = new SegmentTree(baskets);
+          const n = baskets.length;
+          let ans = 0;
+          for (const x of fruits) {
+            if (t.findFirstAndUpdate(1, 0, n - 1, x) < 0) {
+              ans++;
+            }
+          }
+          return ans;
+        }
+      }
+    </script>
+  </body>
+</html>
