@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>236. 二叉树的最近公共祖先</title>
+  </head>
+  <body>
+    <script src="../helper/tree.js"></script>
+    <script>
+      // https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/?envType=study-plan-v2&envId=leetcode-75
+
+      // 给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。
+      // 百度百科中最近公共祖先的定义为：“对于有根树 T 的两个节点 p、q，最近公共祖先表示为一个节点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”
+      //
+      // 提示：
+      // 树中节点数目在范围 [2, 105] 内。
+      // -109 <= Node.val <= 109
+      // 所有 Node.val 互不相同 。
+      // p != q
+      // p 和 q 均存在于给定的二叉树中。
+
+      /**
+       * Definition for a binary tree node.
+       * function TreeNode(val) {
+       *     this.val = val;
+       *     this.left = this.right = null;
+       * }
+       */
+      /**
+       * @param {TreeNode} root
+       * @param {TreeNode} p
+       * @param {TreeNode} q
+       * @return {TreeNode}
+       */
+      var lowestCommonAncestor = function (root, p, q) {};
+
+      // --- answer-1 ---
+
+      // 构建父节点关系
+      var lowestCommonAncestor = function (root, p, q) {
+        function dfs(node, parent, visitor) {
+          if (!node) return;
+          visitor(node, parent);
+          dfs(node.left, node, visitor);
+          dfs(node.right, node, visitor);
+        }
+
+        dfs(root, null, (node, parent) => {
+          node.parent = parent;
+          node.parentCount = 0;
+          if (node === p || node === q) {
+            let cur = node;
+            while (cur) {
+              cur.parentCount++;
+              cur = cur.parent;
+            }
+          }
+        });
+
+        let res = null;
+        // 可以使用父节点构建的map来查找
+        // 可以dfs在找一遍，那么就不需要parentCount了
+        dfs(root, null, (node, parent) => {
+          if (node.parentCount === 2) {
+            res = node;
+          }
+        });
+        return res;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // lson表示left节点是否有p或q，rson表示right节点是否有p或q
+      var lowestCommonAncestor = function (root, p, q) {
+        let ans;
+        const dfs = (root, p, q) => {
+          if (root === null) return false;
+          const lson = dfs(root.left, p, q);
+          const rson = dfs(root.right, p, q);
+          if ((lson && rson) || ((root.val === p.val || root.val === q.val) && (lson || rson))) {
+            ans = root;
+          }
+          return lson || rson || root.val === p.val || root.val === q.val;
+        };
+        dfs(root, p, q);
+        return ans;
+      };
+
+      // --- answer-2 ---
+
+      var root = [3, 5, 1, 6, 2, 0, 8, null, null, 7, 4],
+        p = 5,
+        q = 1;
+      var result = 3;
+      // 解释：节点 5 和节点 1 的最近公共祖先是节点 3 。
+
+      // var root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4;
+      // var result = 5;
+      // 解释：节点 5 和节点 4 的最近公共祖先是节点 5 。因为根据定义最近公共祖先节点可以为节点本身。
+
+      // var root = [1,2], p = 1, q = 2;
+      // var result = 1;
+
+      const { root: head, nodeMap } = buildTreeByArray(root, { nodeMap: true });
+      console.log('head = ', head);
+      console.log('nodeMap = ', nodeMap);
+
+      console.log('root = ', root);
+      console.log('p = ', p);
+      console.log('q = ', q);
+      console.log('result = ', result);
+      console.log('lowestCommonAncestor = ', lowestCommonAncestor(head, nodeMap.get(p), nodeMap.get(q)));
+    </script>
+  </body>
+</html>
