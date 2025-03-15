@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (783 道)
+## 三、LeetCode (784 道)
 
 <br/>
 
@@ -435,6 +435,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [596.超过 5 名学生的课.sql](./leetCode/596.超过5名学生的课.sql)
 - [599.两个列表的最小索引总和.html](./leetCode/599.两个列表的最小索引总和.html)
 - [605.种花问题.html](./leetCode/605.种花问题.html)
+- [875.爱吃香蕉的珂珂.html](./leetCode/875.爱吃香蕉的珂珂.html)
 - [649.Dota2 参议院.html](./leetCode/649.Dota2参议院.html)
 - [933.最近的请求次数.html](./leetCode/933.最近的请求次数.html)
 - [735.小行星碰撞.html](./leetCode/735.小行星碰撞.html)
