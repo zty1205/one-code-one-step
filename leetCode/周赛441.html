@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>周赛441</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script>
+      /**
+       * 周赛441
+       */
+
+      // --- example-1 ---
+
+      var maxSum = function (nums = []) {
+        const set = new Set(nums);
+        if (set.size === 1) {
+          return set.values().next().value;
+        }
+        let sum = 0;
+        let overZero = false;
+        let max = -Infinity;
+        for (const n of set) {
+          if (n >= 0) {
+            sum += n;
+            overZero = true;
+          } else {
+            max = Math.max(max, n);
+          }
+        }
+        return overZero ? sum : max;
+      };
+
+      // --- example-1 ---
+
+      // 超时
+      var solveQueries = function (nums = [], querie = []) {
+        const length = nums.length;
+        const hash = [];
+        for (let i = 0; i < length; i++) {
+          const n = nums[i];
+          if (!hash[n]) {
+            hash[n] = {
+              list: [],
+              map: {}
+            };
+          }
+          const node = {
+            index: i,
+            value: n,
+            recent: Infinity
+          };
+          hash[n].list.push(node);
+          hash[n].map[i] = node;
+          const len = hash[n].list.length;
+          if (len > 1) {
+            // 当前节点的最近 = 上一个节点和下一个节点的距离的最小值
+            const prev = hash[n].list[len - 2];
+            const next = hash[n].list[0];
+            node.recent = Math.min(
+              node.index - prev.index,
+              node.index - next.index,
+              next.index + length - node.index,
+              node.recent
+            );
+            // 前一个节点也需要更新
+            prev.recent = Math.min(prev.recent, node.recent);
+            // 后一个节点也需要更新
+            next.recent = Math.min(next.recent, node.recent);
+          }
+        }
+        console.log('hash = ', hash);
+
+        return querie.map((q, i) => {
+          const node = hash[nums[q]]?.map[q];
+          console.log('node = ', node, node.recent);
+          const recent = node.recent === Infinity ? -1 : node.recent;
+          return recent;
+        });
+      };
+
+      // 预处理前序和后续
+      var solveQueries = function (nums, queries) {
+        const n = nums.length;
+        const left = new Array(n).fill(0);
+        const pos = new Map();
+
+        for (let i = -n; i < n; i++) {
+          if (i >= 0) {
+            left[i] = pos.get(nums[i]);
+          }
+          pos.set(nums[(i + n) % n], i);
+        }
+
+        const right = new Array(n).fill(0);
+        pos.clear();
+
+        for (let i = n * 2 - 1; i >= 0; i--) {
+          if (i < n) {
+            right[i] = pos.get(nums[i]);
+          }
+          pos.set(nums[i % n], i);
+        }
+
+        console.log('left = ', left, 'right = ', right);
+
+        const ans = [];
+        for (let i of queries) {
+          const l = left[i];
+          ans.push(i - l === n ? -1 : Math.min(i - l, right[i] - i));
+        }
+        return ans;
+      };
+
+      const case2 = [
+        {
+          nums: [
+            [1, 3, 1, 4, 1, 3, 2],
+            [0, 3, 5]
+          ],
+          result: [2, -1, 3]
+        }
+      ];
+
+      console.log('solveQueries = ', solveQueries([1, 3, 1, 4, 1, 3, 2], [0, 3, 5]), ' = ', [2, -1, 3]);
+
+      console.log('solveQueries = ', solveQueries([1, 2, 3, 4], [0, 1, 2, 3]), ' = ', [-1, -1, -1, -1]);
+
+      console.log('solveQueries = ', solveQueries([6, 12, 17, 9, 16, 7, 6], [5, 6, 0, 4]), ' = ', [-1, 1, 1, -1]);
+
+      console.log(
+        'solveQueries = ',
+        solveQueries([14, 14, 4, 2, 19, 19, 14, 19, 14], [2, 4, 8, 6, 3]),
+        ' = ',
+        [-1, 1, 1, 2, -1]
+      );
+
+      // --- example-2 ---
+
+      // --- example-2 ---
+
+      var minZeroArray = function (nums = [], queries = []) {
+        let count = 0;
+        for (const [l, r, val] of queries) {
+          for (let i = l; i <= r; i++) {
+            if (nums[i] >= val) {
+              nums[i] -= val;
+            }
+          }
+          count++;
+          if (nums.every((n) => n === 0)) {
+            return count;
+          }
+        }
+        return -1;
+      };
+
+      // 01背包
+      var minZeroArray = function (nums, queries) {
+        if (nums.every((x) => x === 0)) {
+          return 0; // nums 全为 0
+        }
+
+        const n = nums.length;
+        const f = Array.from({ length: n }, (v, i) => new Array(nums[i] + 1).fill(false));
+        for (let i = 0; i < n; i++) {
+          f[i][0] = true;
+        }
+
+        for (let k = 0; k < queries.length; k++) {
+          const l = queries[k][0],
+            r = queries[k][1],
+            val = queries[k][2];
+          for (let i = l; i <= r; i++) {
+            for (let j = nums[i]; j >= val; j--) {
+              f[i][j] = f[i][j] || f[i][j - val];
+            }
+          }
+          let ok = true;
+          for (let i = 0; i < n; i++) {
+            if (!f[i][nums[i]]) {
+              ok = false;
+              break;
+            }
+          }
+          if (ok) {
+            return k + 1;
+          }
+        }
+        return -1;
+      };
+
+      console.log(
+        'minZeroArray = ',
+        minZeroArray(
+          [2, 0, 2],
+          [
+            [0, 2, 1],
+            [0, 2, 1],
+            [1, 1, 3]
+          ]
+        ),
+        ' = ',
+        2
+      );
+      console.log(
+        'minZeroArray = ',
+        minZeroArray(
+          [10],
+          [
+            [0, 0, 4],
+            [0, 0, 8],
+            [0, 0, 1],
+            [0, 0, 10],
+            [0, 0, 10]
+          ]
+        ),
+        ' = ',
+        4
+      );
+
+      const cache = new Set([]);
+
+      for (let i = 2; i < 10; i++) {
+        for (let j = 1; j < 10; j++) {
+          cache.add(String(i).repeat(j));
+        }
+      }
+
+      // 超时
+      var isBEautiful = function (num = 1) {
+        if (num <= 10) {
+          return true;
+        }
+        if (num % 10 === 0) {
+          return true;
+        }
+        const str = num.toString();
+        if (cache.has(str)) {
+          return true;
+        }
+        const arr = num.toString().split('');
+        if (arr.find((x) => x === '0')) {
+          return true;
+        }
+
+        const mutil = arr.reduce((p, c) => p * c, 1);
+        const sum = arr.reduce((p, c) => p + Number(c), 0);
+        return mutil % sum === 0;
+      };
+      var beautifulNumbers = function (l, r) {
+        let count = 0;
+        for (let i = l; i <= r; i++) {
+          if (isBEautiful(i)) {
+            count++;
+          }
+        }
+        return count;
+      };
+
+      // 数位DP
+      class Solution {
+        beautifulNumbers(l, r) {
+          const low = String(l).split('');
+          const high = String(r).split('');
+          const memo = new Map();
+          return this.dfs(0, 1, 0, true, true, low, high, memo);
+        }
+
+        dfs(i, m, s, limitLow, limitHigh, low, high, memo) {
+          if (i === high.length) {
+            return s > 0 && m % s === 0 ? 1 : 0;
+          }
+          const mask = (m << 32) | (i << 16) | s;
+          if (!limitLow && !limitHigh && memo.has(mask)) {
+            return memo.get(mask);
+          }
+
+          const diffLh = high.length - low.length;
+          const lo = limitLow && i >= diffLh ? low[i - diffLh].charCodeAt(0) - '0'.charCodeAt(0) : 0;
+          const hi = limitHigh ? high[i].charCodeAt(0) - '0'.charCodeAt(0) : 9;
+
+          let res = 0;
+          let d = lo;
+          if (limitLow && i < diffLh) {
+            res = this.dfs(i + 1, 1, 0, true, false, low, high, memo); // 什么也不填
+            d = 1; // 下面循环从 1 开始
+          }
+          for (; d <= hi; d++) {
+            res += this.dfs(i + 1, m * d, s + d, limitLow && d === lo, limitHigh && d === hi, low, high, memo);
+          }
+
+          if (!limitLow && !limitHigh) {
+            memo.set(mask, res);
+          }
+          return res;
+        }
+      }
+
+      console.log(beautifulNumbers(1, 1000), ' = ', 4);
+
+      const case3 = [
+        {
+          l: 10,
+          r: 20,
+          result: 2
+        },
+        {
+          l: 1,
+          r: 15,
+          result: 10
+        }
+      ];
+
+      case3.forEach((item) => {
+        console.log(beautifulNumbers(item.l, item.r), ' = ', item.result);
+      });
+    </script>
+  </body>
+</html>
