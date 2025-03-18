@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>547. 省份数量</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/number-of-provinces/?envType=study-plan-v2&envId=leetcode-75
+
+      /**
+       * @param {number[][]} isConnected
+       * @return {number}
+       */
+      var findCircleNum = function (isConnected) {};
+
+      // --- answer-1 ---
+
+      var dfs = function (isConnected, visited, i) {
+        for (let j = 0; j < isConnected.length; j++) {
+          if (isConnected[i][j] === 1 && !visited[j]) {
+            visited[j] = true;
+            dfs(isConnected, visited, j);
+          }
+        }
+      };
+
+      var findCircleNum = function (isConnected = [[]]) {
+        const length = isConnected.length;
+        const visited = new Array(length).fill(false);
+        let count = 0;
+        for (let i = 0; i < length; i++) {
+          if (!visited[i]) {
+            dfs(isConnected, visited, i);
+            count++;
+          }
+        }
+        return count;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var isConnected = [
+        [1, 1, 0],
+        [1, 1, 0],
+        [0, 0, 1]
+      ];
+      var result = 2;
+
+      var isConnected = [
+        [1, 0, 0],
+        [0, 1, 0],
+        [0, 0, 1]
+      ];
+      var result = 3;
+
+      console.log('isConnected = ', isConnected);
+      console.log('result = ', result);
+      console.log('findCircleNum = ', findCircleNum(isConnected));
+    </script>
+  </body>
+</html>
