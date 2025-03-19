@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1466. 重新规划路线</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/reorder-routes-to-make-all-paths-lead-to-the-city-zero/description/?envType=study-plan-v2&envId=leetcode-75
+
+      // n 座城市，从 0 到 n-1 编号，其间共有 n-1 条路线。因此，要想在两座不同城市之间旅行只有唯一一条路线可供选择（路线网形成一颗树）。去年，交通运输部决定重新规划路线，以改变交通拥堵的状况。
+      // 路线用 connections 表示，其中 connections[i] = [a, b] 表示从城市 a 到 b 的一条有向路线。
+      // 今年，城市 0 将会举办一场大型比赛，很多游客都想前往城市 0 。
+      // 请你帮助重新规划路线方向，使每个城市都可以访问城市 0 。返回需要变更方向的最小路线数。
+      // 题目数据 保证 每个城市在重新规划路线方向后都能到达城市 0 。
+      //
+      // 提示：
+      // 2 <= n <= 5 * 10^4
+      // connections.length == n-1
+      // connections[i].length == 2
+      // 0 <= connections[i][0], connections[i][1] <= n-1
+      // connections[i][0] != connections[i][1]
+
+      /**
+       * @param {number} n
+       * @param {number[][]} connections
+       * @return {number}
+       */
+      var minReorder = function (n, connections) {};
+
+      // --- answer-1 ---
+
+      // 超时
+      var minReorder = function (n = 1, connections = [[]]) {
+        let toZero = new Set([0]);
+        let count = 0;
+        while (connections.length) {
+          debugger;
+          for (let i = 0; i < connections.length; i++) {
+            if (!connections[i]) {
+              console.log('connections = ', connections, i);
+            }
+
+            const [from, to] = connections[i];
+            if (from === 0 || to === 0) {
+              if (to === 0) {
+                connections.splice(i, 1);
+                toZero.add(from);
+                i--;
+              }
+              if (from === 0) {
+                connections.splice(i, 1);
+                toZero.add(to);
+                i--;
+                count++;
+              }
+            } else {
+              if (toZero.has(from)) {
+                connections.splice(i, 1);
+                toZero.add(to);
+                i--;
+                count++;
+              } else if (toZero.has(to)) {
+                connections.splice(i, 1);
+                toZero.add(from);
+                i--;
+              }
+            }
+          }
+        }
+        return count;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 总边数为 2 * (n - 1)。
+      // 从0出发需要变更的边数为 a
+      // 那么从其他城市出发需要变更的边数为 2 * (n - 1) - (n - 1 ) - a
+      var minReorder = function (n, connections) {
+        const e = new Array(n).fill(0).map(() => new Array());
+        for (const edge of connections) {
+          e[edge[0]].push([edge[1], 1]);
+          e[edge[1]].push([edge[0], 0]);
+        }
+
+        const dfs = function (x, parent) {
+          let res = 0;
+          for (const edge of e[x]) {
+            if (edge[0] == parent) {
+              continue;
+            }
+            res += edge[1] + dfs(edge[0], x);
+          }
+          return res;
+        };
+        return dfs(0, -1, e);
+      };
+
+      // --- answer-2 ---
+
+      var n = 6,
+        connections = [
+          [0, 1],
+          [1, 3],
+          [2, 3],
+          [4, 0],
+          [4, 5]
+        ];
+      var result = 3;
+      // 解释：更改以红色显示的路线的方向，使每个城市都可以到达城市 0 。
+
+      var n = 5,
+        connections = [
+          [1, 0],
+          [1, 2],
+          [3, 2],
+          [3, 4]
+        ];
+      var result = 2;
+      // 解释：更改以红色显示的路线的方向，使每个城市都可以到达城市 0 。
+
+      var n = 3,
+        connections = [
+          [1, 0],
+          [2, 0]
+        ];
+      var result = 0;
+
+      console.log('n = ', n);
+      console.log('connections = ', connections);
+      console.log('result = ', result);
+      console.log('minReorder = ', minReorder(n, connections));
+    </script>
+  </body>
+</html>
