@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1926. 迷宫中离入口最近的出口</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode.cn/problems/nearest-exit-from-entrance-in-maze/description/?envType=study-plan-v2&envId=leetcode-75
+
+      // 给你一个 m x n 的迷宫矩阵 maze （下标从 0 开始），矩阵中有空格子（用 '.' 表示）和墙（用 '+' 表示）。同时给你迷宫的入口 entrance ，用 entrance = [entrancerow, entrancecol] 表示你一开始所在格子的行和列。
+      // 每一步操作，你可以往 上，下，左 或者 右 移动一个格子。你不能进入墙所在的格子，你也不能离开迷宫。你的目标是找到离 entrance 最近 的出口。出口 的含义是 maze 边界 上的 空格子。entrance 格子 不算 出口。
+      // 请你返回从 entrance 到最近出口的最短路径的 步数 ，如果不存在这样的路径，请你返回 -1 。
+      //
+      // 提示：
+      // maze.length == m
+      // maze[i].length == n
+      // 1 <= m, n <= 100
+      // maze[i][j] 要么是 '.' ，要么是 '+' 。
+      // entrance.length == 2
+      // 0 <= entrancerow < m
+      // 0 <= entrancecol < n
+      // entrance 一定是空格子。
+
+      /**
+       * @param {character[][]} maze
+       * @param {number[]} entrance
+       * @return {number}
+       */
+      var nearestExit = function (maze, entrance) {};
+
+      // --- answer-1 ---
+
+      var nearestExit = function (maze = [[]], entrance = []) {
+        const [eX, eY] = entrance;
+        const m = maze.length;
+        const n = maze[0].length;
+        const isExit = (x, y) => {
+          if (x === eX && y === eY) return false;
+          if (x === 0 || x === m - 1 || y === 0 || y === n - 1) return true;
+          return false;
+        };
+        const visited = Array.from({ length: m }, () => Array.from({ length: n }, () => false));
+        const dirs = [
+          [0, 1],
+          [0, -1],
+          [1, 0],
+          [-1, 0]
+        ];
+        const queue = [[eX, eY, 0]];
+        let res = Infinity;
+        while (queue.length) {
+          const [x, y, dis] = queue.shift();
+          if (isExit(x, y)) {
+            res = Math.min(res, dis);
+            continue;
+          }
+          if (visited[x][y]) continue;
+          visited[x][y] = true;
+          for (const [dx, dy] of dirs) {
+            const nx = x + dx;
+            const ny = y + dy;
+            if (nx >= 0 && nx < m && ny >= 0 && ny < n && maze[nx][ny] === '.') {
+              queue.push([nx, ny, dis + 1]);
+            }
+          }
+        }
+        return res === Infinity ? -1 : res;
+      };
+
+      // --- answer-1 ---
+
+      var nearestExit = function (maze = [[]], entrance = []) {
+        const [eX, eY] = entrance;
+        const m = maze.length;
+        const n = maze[0].length;
+        const isExit = (x, y) => {
+          if (x === eX && y === eY) return false;
+          if (x === 0 || x === m - 1 || y === 0 || y === n - 1) return true;
+          return false;
+        };
+        const dirs = [
+          [0, 1],
+          [0, -1],
+          [1, 0],
+          [-1, 0]
+        ];
+        const queue = [[eX, eY, 0]];
+        maze[eX][eY] = '+'; // 防止重复访问
+
+        while (queue.length) {
+          const [x, y, dis] = queue.shift();
+          for (const [dx, dy] of dirs) {
+            const nx = x + dx;
+            const ny = y + dy;
+            if (nx >= 0 && nx < m && ny >= 0 && ny < n && maze[nx][ny] == '.') {
+              if (nx == 0 || nx == m - 1 || ny == 0 || ny == n - 1) {
+                // 新坐标为出口，返回距离作为答案
+                return d + 1;
+              }
+              // 新坐标为空格子且不为出口，修改为墙并加入队列
+              maze[nx][ny] = '+';
+              queue.push([nx, ny, d + 1]);
+            }
+          }
+        }
+        return -1;
+      };
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var maze = [
+          ['+', '+', '.', '+'],
+          ['.', '.', '.', '+'],
+          ['+', '+', '+', '.']
+        ],
+        entrance = [1, 2];
+      var result = 1;
+      // 解释：总共有 3 个出口，分别位于 (1,0)，(0,2) 和 (2,3) 。
+
+      var maze = [
+          ['+', '+', '+'],
+          ['.', '.', '.'],
+          ['+', '+', '+']
+        ],
+        entrance = [1, 0];
+      var result = 2;
+      // 解释：迷宫中只有 1 个出口，在 (1,2) 处。
+
+      var maze = [['.', '+']],
+        entrance = [0, 0];
+      var result = -1;
+      // 解释：这个迷宫中没有出口。
+
+      console.log('maze = ', maze);
+      console.log('entrance = ', entrance);
+      console.log('result = ', result);
+      console.log('nearestExit = ', nearestExit(maze, entrance));
+    </script>
+  </body>
+</html>
