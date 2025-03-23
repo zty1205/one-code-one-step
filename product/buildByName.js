@@ -5,14 +5,10 @@ function getSimpleContent(title) {
  /** 
   * ${title}
   */
-
- // --- example-1 ---
  
- // --- example-1 ---
- 
- // --- example-2 ---
- 
- // --- example-2 ---`;
+ // var node = buildLinkNodeByArray(head);
+ // var tree = buildTreeByArray([...root]);
+ // var { graph: node } = buildUndirectedGraphByArray(adjList);`;
 }
 
 function buildByName(str, dist, ext) {

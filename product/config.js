@@ -15,6 +15,10 @@ const html_template = `<!DOCTYPE html>
     <title>#htmlTitle#</title>
   </head>
   <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
     <script>
       #htmlContent#
     </script>
