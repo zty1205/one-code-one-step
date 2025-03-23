@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>周赛442</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script>
+      /**
+       * 周赛442
+       */
+
+      // var node = buildLinkNodeByArray(head);
+      // var tree = buildTreeByArray([...root]);
+      // var { graph: node } = buildUndirectedGraphByArray(adjList);
+    </script>
+    <script>
+      // 通过
+      var maxContainers = function (n, w, maxWeight) {
+        return Math.min(n * n, Math.floor(maxWeight / w));
+      };
+    </script>
+    <script>
+      // 返回两个数组的共有的不同整数的数量
+      var intersect = function (nums1 = [], nums2 = []) {
+        const s1 = new Set(nums1);
+        const s2 = new Set(nums2);
+        let cnt = 0;
+        for (const num of s1) {
+          if (s2.has(num)) {
+            cnt++;
+          }
+        }
+        return cnt;
+      };
+      var numberOfComponents = function (properties = [[]], k = 1) {
+        const n = properties.length;
+        const m = properties[0].length;
+        const graph = Array.from({ length: n }, () => new Set());
+        for (let i = 0; i < n; i++) {
+          for (let j = i + 1; j < n; j++) {
+            if (intersect(properties[i], properties[j]) >= k) {
+              graph[i].add(j);
+              graph[j].add(i);
+            }
+          }
+        }
+        console.log(graph, 'graph');
+
+        const nodes = Object.keys(graph).map(Number);
+        const visited = new Set();
+        let cnt = 0;
+        // 深度遍历 查找连通分量
+        const dfs = (node) => {
+          if (visited.has(node)) return;
+          visited.add(node);
+          for (const next of graph[node]) {
+            dfs(next);
+          }
+        };
+        for (const node of nodes) {
+          if (!visited.has(node)) {
+            dfs(node);
+            cnt++;
+          }
+        }
+        return cnt;
+      };
+
+      var properties = [
+        [1, 2, 3],
+        [2, 3, 4],
+        [4, 3, 5]
+      ];
+      var k = 2;
+
+      var properties = [
+          [1, 2],
+          [1, 1],
+          [3, 4],
+          [4, 5],
+          [5, 6],
+          [7, 7]
+        ],
+        k = 1;
+      var result = 3;
+
+      var properties = [
+          [1, 1],
+          [2, 3],
+          [1, 3]
+        ],
+        k = 1;
+      var result = 1;
+      console.log(numberOfComponents(properties, k));
+    </script>
+
+    <script>
+      // 通过
+      var minTime = function (skill = [], mana = []) {
+        const n = skill.length;
+        const m = mana.length;
+        let pre = skill[0] * mana[0];
+        const count = [pre];
+        for (let i = 1; i < n; i++) {
+          const cut = pre + skill[i] * mana[0];
+          count.push(cut);
+          pre = cut;
+        }
+        console.log(count, 'count');
+        for (let i = 1; i < m; i++) {
+          // 最后一个人刚好
+          let post = count[n - 1] + skill[n - 1] * mana[i];
+          const next = [post];
+          for (let j = n - 1; j > 0; j--) {
+            const cut = post - skill[j] * mana[i];
+            next.push(cut);
+            post = cut;
+          }
+          next.reverse();
+          console.log(next, 'next');
+          const need = count.map((v, k) => v + skill[k] * mana[i]);
+          console.log(need, 'need');
+          // 需要往后延迟的时间
+          let delay = 0;
+          for (let j = 0; j < n; j++) {
+            if (need[j] > next[j]) {
+              delay = Math.max(delay, need[j] - next[j]);
+            }
+          }
+          for (let k = 0; k < n; k++) {
+            count[k] = next[k] + delay;
+          }
+          console.log(count, 'count');
+        }
+        return count[n - 1];
+      };
+
+      var skill = [1, 5, 2, 4];
+      var mana = [5, 1, 4, 2];
+      var result = 110;
+
+      //var skill = [1, 2, 3, 4],
+      // mana = [1, 2];
+
+      var result = 21;
+      console.log(minTime(skill, mana));
+    </script>
+    <script>
+      // 超时
+      var op = function (num) {
+        let cnt = 0;
+        while (num > 0) {
+          num = Math.floor(num / 4);
+          cnt++;
+        }
+        return cnt;
+      };
+      // 一个数 需要几次 floor(num / 4) 才能到达0 使用数学方法 [14, 18] 计算6 答案是7
+      var op = function (num) {
+        if (num < 4) return 1;
+        return Math.ceil(Math.pow(num, 1 / 4));
+      };
+      var minOperations = function (queries = []) {
+        let res = 0;
+        const cache = new Map();
+        for (let [a, b] of queries) {
+          let cnt = 0;
+          if (cache.has(`${a}-${b}`)) {
+            res += cache.get(a);
+            continue;
+          }
+          while (a <= b) {
+            console.log({
+              a: a,
+              opt: op(a)
+            });
+            cnt += op(a);
+            a++;
+          }
+          console.log({
+            cnt: cnt
+          });
+          const tmp = Math.ceil(cnt / 2);
+          res += tmp;
+          cache.set(`${a}-${b}`, tmp);
+        }
+        return res;
+      };
+
+      var queries = [
+        [1, 2],
+        [2, 4]
+      ];
+      var queries = [
+        [3, 7],
+        [3, 7]
+      ];
+      var queries = [[14, 18]];
+      console.log('minOperations', minOperations(queries));
+    </script>
+    <script>
+      // 10：30 - 11:42 完成前3题，第4题超时，数量太大也不能打表
+    </script>
+    <script>
+      var minTime = function (skill, mana) {
+        const n = skill.length;
+        let lastFinish = new Array(n).fill(0); // 第 i 名巫师完成上一瓶药水的时间
+        for (let m of mana) {
+          // 按题意模拟
+          let sumT = 0;
+          for (let i = 0; i < n; i++) {
+            sumT = Math.max(sumT, lastFinish[i]) + skill[i] * m;
+          }
+          // 倒推：如果酿造药水的过程中没有停顿，那么 lastFinish[i] 应该是多少
+          lastFinish[n - 1] = sumT;
+          for (let i = n - 2; i >= 0; i--) {
+            sumT -= skill[i + 1] * m;
+            lastFinish[i] = sumT;
+          }
+        }
+        return lastFinish[n - 1];
+      };
+    </script>
+    <script>
+      // 位运算
+      class Solution {
+        minOperations(queries) {
+          let ans = 0;
+          for (let q of queries) {
+            let l = q[0],
+              r = q[1];
+            let totOp = this.f(r) - this.f(l - 1);
+            let maxOp = (33 - this.numberOfLeadingZeros(r)) / 2;
+            ans += Math.max((totOp + 1) / 2, maxOp);
+          }
+          return ans;
+        }
+
+        // 返回 [1,n] 的单个元素的操作次数之和
+        f(n) {
+          let m = 32 - this.numberOfLeadingZeros(n);
+          let res = 0;
+          for (let i = 1; i < m; i++) {
+            res += ((i + 1) / 2) << (i - 1);
+          }
+          return res + ((m + 1) / 2) * (n + 1 - ((1 << m) >> 1));
+        }
+
+        // 计算一个数的二进制表示中前导零的个数
+        numberOfLeadingZeros(num) {
+          if (num === 0) return 32;
+          let count = 0;
+          while (num > 0) {
+            num >>= 1;
+            count++;
+          }
+          return 32 - count;
+        }
+      }
+    </script>
+  </body>
+</html>
