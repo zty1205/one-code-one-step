@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (798 道)
+## 三、LeetCode (799 道)
 
 <br/>
 
@@ -780,6 +780,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [547.省份数量.html](./leetCode/547.省份数量.html)
 - [605.种花问题.html](./leetCode/605.种花问题.html)
 - [1071.字符串的最大公因子.html](./leetCode/1071.字符串的最大公因子.html)
+- [1143.最长公共子序列.html](./leetCode/1143.最长公共子序列.html)
 - [1161.最大层内元素和.html](./leetCode/1161.最大层内元素和.html)
 - [1207.独一无二的出现次数.html](./leetCode/1207.独一无二的出现次数.html)
 - [1431.拥有最多糖果的孩子.html](./leetCode/1431.拥有最多糖果的孩子.html)
