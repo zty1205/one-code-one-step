@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>72. 编辑距离</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script>
+      // https://leetcode.cn/problems/edit-distance/description/?envType=study-plan-v2&envId=leetcode-75
+
+      // 给你两个单词 word1 和 word2， 请返回将 word1 转换成 word2 所使用的最少操作数  。
+      // 你可以对一个单词进行如下三种操作：
+      //
+      // 提示：
+      // 插入一个字符
+      // 删除一个字符
+      // 替换一个字符
+      //
+      // 提示：
+      // 0 <= word1.length, word2.length <= 500
+      // word1 和 word2 由小写英文字母组成
+
+      /**
+       * @param {string} word1
+       * @param {string} word2
+       * @return {number}
+       */
+      var minDistance = function (word1, word2) {};
+
+      // --- answer-1 ---
+
+      // dp[i][j] 表示 word1 的前 i 个字母和 word2 的前 j 个字母之间的编辑距离
+      // dp[i][j] = dp[i - 1][j - 1]  word1[i] === word2[j] 无需操作
+      // dp[i][j] = dp[i - 1][j - 1] + 1  word1[i] !== word2[j] 替换
+      // dp[i][j] = dp[i - 1][j] + 1  删除
+      // dp[i][j] = dp[i][j - 1] + 1  插入
+      var minDistance = function (word1, word2) {
+        const m = word1.length;
+        const n = word2.length;
+        const dp = Array.from({ length: m + 1 }, (v1, k1) =>
+          Array.from({ length: n + 1 }, (v2, k2) => {
+            if (k1 === 0) {
+              return k2;
+            }
+            if (k2 === 0) {
+              return k1;
+            }
+            return 0;
+          })
+        );
+        for (let i = 1; i <= m; i++) {
+          for (let j = 1; j <= n; j++) {
+            if (word1[i - 1] === word2[j - 1]) {
+              dp[i][j] = dp[i - 1][j - 1];
+            } else {
+              dp[i][j] = Math.min(dp[i - 1][j - 1] + 1, dp[i - 1][j] + 1, dp[i][j - 1] + 1);
+            }
+          }
+        }
+        return dp[m][n];
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      // var word1 = "horse", word2 = "ros";
+      // var result = 3;
+      // 解释：
+
+      // var word1 = "intention", word2 = "execution";
+      // var result = 5;
+      // 解释：
+
+      console.log('word1 = ', word1);
+      console.log('word2 = ', word2);
+      console.log('result = ', result);
+      console.log('minDistance = ', minDistance(word1, word2));
+    </script>
+  </body>
+</html>
