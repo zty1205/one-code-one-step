@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>周赛443</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script>
+      /**
+       * 周赛443
+       */
+
+      // var node = buildLinkNodeByArray(head);
+      // var tree = buildTreeByArray([...root]);
+      // var { graph: node } = buildUndirectedGraphByArray(adjList);
+    </script>
+    <script>
+      // 前缀最小值
+      var minCosts = function (cost = []) {
+        const length = cost.length;
+        const result = [cost[0]];
+        for (let i = 1; i < length; i++) {
+          result[i] = Math.min(result[i - 1], cost[i]);
+        }
+        return result;
+      };
+    </script>
+    <script>
+      /**
+       * @param {string} s
+       * @param {string} t
+       * @return {number}
+       */
+
+      // 获取一个字符串的最长回文子串
+      var palindrome = function (s) {
+        const length = s.length;
+        if (length === 1) return s;
+        let dp = Array.from({ length }, (v, k) => Array.from({ length }, (v1, k1) => k1 === k));
+
+        let maxLen = 1;
+        let begin = 0;
+
+        // 子串长度
+        for (let l = 2; l < length; l++) {
+          for (let i = 0; i < length; i++) {
+            const j = i + l - 1;
+            if (j > length) break;
+
+            if (s[j] !== s[i]) {
+              dp[i][j] = false;
+            } else {
+              dp[i][j] = j - i < 3 ? true : dp[i + 1][j - 1];
+            }
+
+            if (dp[i][j] && j - i + 1 > maxLen) {
+              maxLen = j - i + 1;
+              begin = i;
+            }
+          }
+        }
+
+        // return s.substring(begin, begin + maxLen);
+        return {
+          b: begin,
+          e: begin + maxLen,
+          l: maxLen,
+          len: s.length,
+        };
+      };
+
+      // 如何处理aabc aabc 这种情况
+
+      // 贪心 找出s和t的最长回文子串
+      // 再尝试能否拼接成一个回文子串
+      // 如果能拼接成一个回文子串，则返回拼接的长度
+      var longestPalindrome = function (s = '', t = '') {
+        const { b: b1, e: e1, l: l1, s: s1, len: len1 } = palindrome(s);
+        const { b: b2, e: e2, l: l2, s: s2, len: len2 } = palindrome(t);
+        if (l1 === 0 || l2 === 0) {
+          // 如果有相同字符，则返回2，否则返回1
+          const ss = new Set(s);
+          for (let i = 0; i < l2; i++) {
+            if (ss.has(t[i])) return 2;
+          }
+          return 1;
+        }
+        // 如果两个子串中间还有字符，则尝试拼接
+        if(e1 < len1 && b2 > 0) {
+          // 如果两个子串中间还有字符，则尝试拼接
+          const ss = new Set(s);
+          for (let i = b2; i < e2; i++) {
+            if (ss.has(t[i])) return 2;
+          }
+        } else if (e1 < )
+      };
+    </script>
+
+    <script>
+      // 前面思路歪了
+      function isPalindrome(s) {
+        return s === s.split('').reverse().join('');
+      }
+
+      // 暴力法
+      var longestPalindrome = function (s = '', t = '') {
+        const subS = [''];
+        // s的所有子串
+        for (let i = 0; i < s.length; i++) {
+          for (let j = i + 1; j <= s.length; j++) {
+            subS.push(s.slice(i, j));
+          }
+        }
+        const subT = [''];
+        // t的所有子串
+        for (let i = 0; i < t.length; i++) {
+          for (let j = i + 1; j <= t.length; j++) {
+            subT.push(t.slice(i, j));
+          }
+        }
+        console.log(subS, subT);
+        // 计算s和t的最长回文子串
+        let maxLen = 1;
+        for (let i = 0; i < subS.length; i++) {
+          for (let j = 0; j < subT.length; j++) {
+            if (isPalindrome(subS[i] + subT[j])) {
+              maxLen = Math.max(maxLen, subS[i].length + subT[j].length);
+            }
+          }
+        }
+        return maxLen;
+      };
+
+      console.log(longestPalindrome('a', 'a'));
+    </script>
+    <script>
+      // 题目3就是上门一题 解决数据量大 不能使用暴力法
+      class Solution {
+        constructor() {
+          this.calc = this.calc.bind(this);
+          this.longestPalindrome = this.longestPalindrome.bind(this);
+        }
+
+        calc(S, T) {
+          let ans = 0;
+          let s = S.split('');
+          let t = T.split('');
+          let n = s.length;
+          let m = t.length;
+          let mx = new Array(n + 1).fill(0);
+          let f = Array.from({ length: n + 1 }, () => new Array(m + 1).fill(0));
+
+          for (let i = 0; i < n; i++) {
+            for (let j = 0; j < m; j++) {
+              if (s[i] === t[j]) {
+                f[i + 1][j] = f[i][j + 1] + 1;
+                mx[i + 1] = Math.max(mx[i + 1], f[i + 1][j]);
+              }
+            }
+            ans = Math.max(ans, mx[i + 1] * 2); // |x| = |y| 的情况
+          }
+
+          // 计算 |x| > |y| 的情况，中心扩展法
+          for (let i = 0; i < 2 * n - 1; i++) {
+            let l = Math.floor(i / 2),
+              r = Math.floor((i + 1) / 2);
+            while (l >= 0 && r < n && s[l] === s[r]) {
+              l--;
+              r++;
+            }
+            if (l + 1 <= r - 1) {
+              // s[l+1] 到 s[r-1] 是非空回文串
+              ans = Math.max(ans, r - l - 1 + mx[l + 1] * 2);
+            }
+          }
+          return ans;
+        }
+
+        longestPalindrome(s, t) {
+          let rs = s.split('').reverse().join('');
+          let rt = t.split('').reverse().join('');
+          return Math.max(this.calc(s, t), this.calc(rt, rs));
+        }
+      }
+
+      // 使用示例
+      let solution = new Solution();
+      console.log(solution.longestPalindrome('s', 't')); // 输出结果
+    </script>
+  </body>
+</html>
