@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>435. 无重叠区间</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script>
+      // https://leetcode.cn/problems/non-overlapping-intervals/description/?envType=study-plan-v2&envId=leetcode-75
+
+      // 给定一个区间的集合 intervals ，其中 intervals[i] = [starti, endi] 。返回 需要移除区间的最小数量，使剩余区间互不重叠 。
+      // 注意 只在一点上接触的区间是 不重叠的。例如 [1, 2] 和 [2, 3] 是不重叠的。
+      //
+      // 提示：
+      // 1 <= intervals.length <= 105
+      // intervals[i].length == 2
+      // -5 * 104 <= starti < endi <= 5 * 104
+
+      /**
+       * @param {number[][]} intervals
+       * @return {number}
+       */
+      var eraseOverlapIntervals = function (intervals) {};
+
+      // --- answer-1 ---
+
+      // 动态规划
+      // dp[i] 表示以 intervals[i] 为结尾的区间，最多可以保留的区间数量
+      var eraseOverlapIntervals = function (intervals = [[]]) {
+        if (intervals.length === 0) return 0;
+
+        intervals.sort((a, b) => a[0] - b[0]);
+        // console.log(intervals)
+
+        const dp = new Array(intervals.length).fill(1);
+
+        for (let i = 1; i < intervals.length; i++) {
+          for (let j = 0; j < i; j++) {
+            if (intervals[i][0] >= intervals[j][1]) {
+              dp[i] = Math.max(dp[i], dp[j] + 1);
+            }
+          }
+        }
+
+        // console.log(dp)
+
+        return intervals.length - Math.max(...dp);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 贪心
+      var eraseOverlapIntervals = function (intervals = [[]]) {
+        if (intervals.length === 0) return 0;
+
+        intervals.sort((a, b) => a[1] - b[1]);
+        // console.log(intervals)
+
+        let count = 0;
+        let end = intervals[0][1]; // 最大的右边界
+
+        for (let i = 1; i < intervals.length; i++) {
+          if (intervals[i][0] < end) {
+            count++;
+          } else {
+            end = intervals[i][1];
+          }
+        }
+
+        return count;
+      };
+
+      // 判断两个区间是否重叠
+      function isOverlap(interval1, interval2) {
+        // return interval1[0] <= interval2[1] && interval1[1] >= interval2[0]
+        if (interval1[1] <= interval2[0] || interval1[0] >= interval2[1]) {
+          return false;
+        }
+        return true;
+      }
+
+      // 判断多个区间是否重叠
+      function isOverlap1(intervals) {
+        for (let i = 0; i < intervals.length; i++) {
+          for (let j = i + 1; j < intervals.length; j++) {
+            if (isOverlap(intervals[i], intervals[j])) return true;
+          }
+        }
+        return false;
+      }
+
+      // 判断多个区间是否重叠 优化
+      function isOverlap2(intervals) {
+        intervals.sort((a, b) => a[0] - b[0]);
+        for (let i = 1; i < intervals.length; i++) {
+          if (intervals[i - 1][1] > intervals[i][0]) return true;
+        }
+        return false;
+      }
+
+      // --- answer-2 ---
+
+      // var  intervals = [[1,2],[2,3],[3,4],[1,3]];
+      // var result =  1;
+      // 解释: 移除 [1,3] 后，剩下的区间没有重叠。
+
+      // var  intervals = [ [1,2], [1,2], [1,2] ];
+      // var result =  2;
+      // 解释: 你需要移除两个 [1,2] 来使剩下的区间没有重叠。
+
+      // var  intervals = [ [1,2], [2,3] ];
+      // var result =  0;
+      // 解释: 你不需要移除任何区间，因为它们已经是无重叠的了。
+
+      console.log('intervals = ', intervals);
+      console.log('result = ', result);
+      console.log('eraseOverlapIntervals = ', eraseOverlapIntervals(intervals));
+    </script>
+  </body>
+</html>
