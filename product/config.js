@@ -19,6 +19,7 @@ const html_template = `<!DOCTYPE html>
     <script src="../helper/node.js"></script>
     <script src="../helper/tree.js"></script>
     <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
     <script>
       #htmlContent#
     </script>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2336. 无限集中的最小数字</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
+    <script>
+      // https://leetcode.cn/problems/smallest-number-in-infinite-set/description/?envType=study-plan-v2&envId=leetcode-75
+
+      // 现有一个包含所有正整数的集合 [1, 2, 3, 4, 5, ...] 。
+      // 实现 SmallestInfiniteSet 类：
+      //
+      // 提示：
+      // SmallestInfiniteSet() 初始化 SmallestInfiniteSet 对象以包含 所有 正整数。
+      // int popSmallest() 移除 并返回该无限集中的最小整数。
+      // void addBack(int num) 如果正整数 num 不 存在于无限集中，则将一个 num 添加 到该无限集中。
+      //
+      // 提示：
+      // 1 <= num <= 1000
+      // 最多调用 popSmallest 和 addBack 方法 共计 1000 次
+
+      var SmallestInfiniteSet = function () {};
+      /**
+       * @return {number}
+       */
+      SmallestInfiniteSet.prototype.popSmallest = function () {};
+      /**
+       * @param {number} num
+       * @return {void}
+       */
+      SmallestInfiniteSet.prototype.addBack = function (num) {};
+      /**
+       * Your SmallestInfiniteSet object will be instantiated and called as such:
+       * var obj = new SmallestInfiniteSet()
+       * var param_1 = obj.popSmallest()
+       * obj.addBack(num)
+       */
+
+      // --- answer-1 ---
+
+      class MinHeap {
+        constructor() {
+          this.heap = [];
+        }
+
+        // 插入元素（上浮调整）
+        push(val) {
+          this.heap.push(val);
+          this.shiftUp(this.heap.length - 1);
+        }
+
+        // 提取最小值（下沉调整）
+        pop() {
+          if (this.heap.length === 0) return null;
+          const min = this.heap[0];
+          this.heap[0] = this.heap.pop();
+          this.shiftDown(0);
+          return min;
+        }
+
+        // 上浮操作
+        shiftUp(index) {
+          while (index > 0) {
+            const parentIdx = Math.floor((index - 1) / 2);
+            if (this.heap[parentIdx] <= this.heap[index]) break;
+            [this.heap[parentIdx], this.heap[index]] = [this.heap[index], this.heap[parentIdx]];
+            index = parentIdx;
+          }
+        }
+
+        // 下沉操作
+        shiftDown(index) {
+          const leftChildIdx = 2 * index + 1;
+          const rightChildIdx = 2 * index + 2;
+          let minIdx = index;
+          if (leftChildIdx < this.heap.length && this.heap[leftChildIdx] < this.heap[minIdx]) {
+            minIdx = leftChildIdx;
+          }
+          if (rightChildIdx < this.heap.length && this.heap[rightChildIdx] < this.heap[minIdx]) {
+            minIdx = rightChildIdx;
+          }
+          if (minIdx !== index) {
+            [this.heap[minIdx], this.heap[index]] = [this.heap[index], this.heap[minIdx]];
+            this.shiftDown(minIdx);
+          }
+        }
+      }
+
+      var SmallestInfiniteSet = function () {
+        this.set = new Set();
+        this.minHeap = new MinHeap();
+        for (let i = 1; i <= 1000; i++) {
+          this.addBack(i);
+        }
+      };
+      SmallestInfiniteSet.prototype.popSmallest = function () {
+        if (this.set.size > 0) {
+          const num = this.minHeap.pop();
+          this.set.delete(num);
+          return num;
+        }
+        return;
+      };
+      SmallestInfiniteSet.prototype.addBack = function (num) {
+        if (!this.set.has(num)) {
+          this.set.add(num);
+          this.minHeap.push(num);
+        }
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      // 输入;
+      var cmds = [
+        'SmallestInfiniteSet',
+        'addBack',
+        'popSmallest',
+        'popSmallest',
+        'popSmallest',
+        'addBack',
+        'popSmallest',
+        'popSmallest',
+        'popSmallest'
+      ];
+      var args = [[], [2], [], [], [], [1], [], [], []];
+      var result = [null, null, 1, 2, 3, null, 1, 4, 5];
+
+      console.log('cmds = ', cmds);
+      console.log('args = ', args);
+      console.log('result = ', result);
+
+      // const instance = classCommand(cmds, args, result);
+
+      const ins = new SmallestInfiniteSet();
+      ins.a;
+    </script>
+  </body>
+</html>

@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (812 道)
+## 三、LeetCode (813 道)
 
 <br/>
 
@@ -732,6 +732,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2206.将数组划分成相等数对.html](./leetCode/2206.将数组划分成相等数对.html)
 - [2210.统计数组中峰和谷的数量.html](./leetCode/2210.统计数组中峰和谷的数量.html)
 - [2215.找出两数组的不同.html](./leetCode/2215.找出两数组的不同.html)
+- [2336.无限集中的最小数字.html](./leetCode/2336.无限集中的最小数字.html)
 - [2300.咒语和药水的成功对数.html](./leetCode/2300.咒语和药水的成功对数.html)
 - [2352.相等行列对.html](./leetCode/2352.相等行列对.html)
 - [2220.转换数字的最少位翻转次数.html](./leetCode/2220.转换数字的最少位翻转次数.html)
