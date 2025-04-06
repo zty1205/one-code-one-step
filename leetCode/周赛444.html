@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>周赛444</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
+    <script>
+      /**
+       * 周赛444
+       */
+
+      // var node = buildLinkNodeByArray(head);
+      // var tree = buildTreeByArray([...root]);
+      // var { graph: node } = buildUndirectedGraphByArray(adjList);
+    </script>
+    <script>
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+
+      // 检查数组非递减
+      var check = function (nums = []) {
+        for (let i = 1; i < nums.length; i++) {
+          if (nums[i] < nums[i - 1]) {
+            return false;
+          }
+        }
+        return true;
+      };
+
+      var minimumPairRemoval = function (nums = []) {
+        if (check(nums)) {
+          return 0;
+        }
+        let count = 0;
+        while (!check(nums)) {
+          let min = Infinity;
+          let index = -1;
+          for (let i = 1; i < nums.length; i++) {
+            const _min = nums[i] + nums[i - 1];
+            if (_min < min) {
+              min = _min;
+              index = i - 1;
+            }
+          }
+          if (index !== -1) {
+            nums.splice(index, 2, min);
+            count++;
+          }
+        }
+        return count;
+      };
+    </script>
+    <script>
+      /**
+       * @param {number} memoryLimit
+       */
+      var Router = function (memoryLimit) {
+        this.memoryLimit = memoryLimit;
+        this.packets = [];
+        this.uidMap = new Map();
+        this.destMap = new Map();
+      };
+
+      Router.prototype.genUid = function (source, destination, timestamp) {
+        return `${source}-${destination}-${timestamp}`;
+      };
+
+      Router.prototype.addPacket = function (source, destination, timestamp) {
+        const uid = this.genUid(source, destination, timestamp);
+        if (this.uidMap.has(uid)) {
+          return false;
+        }
+        this.uidMap.set(uid, true);
+        this.packets.push([source, destination, timestamp]);
+        const destVal = this.destMap.get(destination) || [];
+        destVal.push(timestamp);
+        this.destMap.set(destination, destVal);
+        if (this.packets.length > this.memoryLimit) {
+          this.forwardPacket();
+        }
+        return true;
+      };
+
+      Router.prototype.forwardPacket = function () {
+        if (this.packets.length === 0) {
+          return [];
+        }
+        const [source, destination, timestamp] = this.packets.shift();
+        const uid = this.genUid(source, destination, timestamp);
+        this.uidMap.delete(uid);
+        const destVal = this.destMap.get(destination);
+        if (destVal) {
+          const idx = destVal.findIndex((t) => t === timestamp);
+          if (idx !== -1) {
+            destVal.splice(idx, 1);
+          }
+        }
+        return [source, destination, timestamp];
+      };
+      Router.prototype.getCount = function (destination, startTime, endTime) {
+        const destVal = this.destMap.get(destination);
+        if (!destVal) {
+          return 0;
+        }
+        const length = destVal.length;
+        let left = 0;
+        let right = length - 1;
+        while (left < length && destVal[left] < startTime) {
+          left++;
+        }
+        while (right >= 0 && destVal[right] > endTime) {
+          right--;
+        }
+        return right - left + 1;
+      };
+
+      /**
+       * Your Router object will be instantiated and called as such:
+       * var obj = new Router(memoryLimit)
+       * var param_1 = obj.addPacket(source,destination,timestamp)
+       * var param_2 = obj.forwardPacket()
+       * var param_3 = obj.getCount(destination,startTime,endTime)
+       */
+    </script>
+    <script>
+      // 回溯超时
+      var maxProduct = function (nums = [], k = 1, limit = 1) {
+        // 回溯
+        let max = -1;
+        const length = nums.length;
+        const backtrack = (index, flag, sum, product, arr) => {
+          // 因为都是大于1的数，所以乘积会越来越大
+          if (index > nums.length) {
+            return;
+          }
+          if (sum === k && product <= limit) {
+            max = Math.max(max, product);
+          }
+
+          console.log('index', index, 'flag', flag, 'sum', sum, 'product', product, 'arr', arr);
+
+          for (let i = index + 1; i < length; i++) {
+            // 下一个数可以加入序列或者不加入序列
+            backtrack(i, flag * -1, sum + flag * nums[i], product * nums[i], [...arr, nums[i]]);
+            backtrack(i, flag, sum, product, [...arr]);
+          }
+          return max;
+        };
+        // 以i为起点，回溯
+        for (let i = 0; i < length; i++) {
+          backtrack(i, -1, nums[i], nums[i], [nums[i]]);
+        }
+        return max;
+      };
+
+      var nums = [1, 2, 3],
+        k = 2,
+        limit = 10;
+      var result = 6;
+
+      var nums = [6, 3, 3],
+        k = 6,
+        limit = 20;
+      var result = 6;
+
+      var nums = [10, 10, 9, 0],
+        k = 1,
+        limit = 20;
+      var result = 0;
+
+      console.log('maxProduct', maxProduct(nums, k, limit));
+
+      // 动态规划是否可行
+    </script>
+    <script></script>
+  </body>
+</html>
