@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3396. 使数组元素互不相同所需的最少操作次数</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
+    <script>
+      // https://leetcode.cn/problems/minimum-number-of-operations-to-make-elements-in-array-distinct/description/?envType=daily-question&envId=2025-04-08
+
+      // 给你一个整数数组 nums，你需要确保数组中的元素 互不相同 。为此，你可以执行以下操作任意次：
+      //
+      // 提示：
+      // 从数组的开头移除 3 个元素。如果数组中元素少于 3 个，则移除所有剩余元素。
+      // 注意：空数组也视作为数组元素互不相同。返回使数组元素互不相同所需的 最少操作次数 。
+      //
+      // 提示：
+      // 1 <= nums.length <= 100
+      // 1 <= nums[i] <= 100
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var minimumOperations = function (nums) {};
+
+      // --- answer-1 ---
+
+      var minimumOperations = function (nums = []) {
+        const length = nums.length;
+        if (length === 0) return 0;
+        // 从后面开始遍历
+        let dist = 0;
+        const set = new Set();
+        for (let i = length - 1; i >= 0; i--) {
+          if (!set.has(nums[i])) {
+            set.add(nums[i]);
+          } else {
+            dist = i + 1;
+            break;
+          }
+        }
+        // /3 向上取整
+        return Math.ceil(dist / 3);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var nums = [1, 2, 3, 4, 2, 3, 3, 5, 7];
+      var result = 2;
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('minimumOperations = ', minimumOperations(nums));
+    </script>
+  </body>
+</html>
