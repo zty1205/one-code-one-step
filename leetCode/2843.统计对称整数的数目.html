@@ -7,8 +7,13 @@
     <title>2843. 统计对称整数的数目</title>
   </head>
   <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
     <script>
-      // https://leetcode.cn/problems/count-symmetric-integers/description/
+      // https://leetcode.cn/problems/count-symmetric-integers/description/?envType=daily-question&envId=2025-04-11
 
       // 给你两个正整数 low 和 high 。
       // 对于一个由 2 * n 位数字组成的整数 x ，如果其前 n 位数字之和与后 n 位数字之和相等，则认为这个数字是一个对称整数。
@@ -26,34 +31,90 @@
 
       // --- answer-1 ---
 
-      // 事先打表或循环
-      var countSymmetricIntegers = function (low = 1, high = 1) {
-        let res = 0;
-        for (let i = low; i <= high; i++) {
-          const str = i.toString();
-          if (str.length % 2 === 0) {
-            const mid = str.length / 2;
-            let n1 = (n2 = 0);
-            for (let i = 0; i < mid; i++) {
-              n1 += Number(str[i]);
-              n2 += Number(str[str.length - 1 - i]);
-            }
-            if (n1 === n2) {
-              res++;
-            }
-          }
+      var isSym = function (num) {
+        const str = num.toString();
+        if (str.length % 2 !== 0) return false;
+        let pre = 0;
+        let post = 0;
+        for (let i = 0; i < str.length / 2; i++) {
+          pre += Number(str[i]);
+          post += Number(str[str.length - 1 - i]);
         }
-        return res;
+        return pre === post;
+      };
+
+      var countSymmetricIntegers = function (low = 1, high = 1) {
+        let count = 0;
+        for (let i = low; i <= high; i++) {
+          if (isSym(i)) count++;
+        }
+        return count;
       };
 
       // --- answer-1 ---
 
       // --- answer-2 ---
 
+      // 数量很大的时候采用数位DP
+      var countSymmetricIntegers = function (low = 1, high = 1) {
+        const lowS = String(low).split('');
+        const highS = String(high).split('');
+        const n = highS.length;
+        const m = Math.floor(n / 2);
+        const diffLh = n - lowS.length;
+
+        // dfs 中的 start <= diffLh，-9m <= diff <= 9m
+        const memo = Array.from({ length: n }, () =>
+          Array.from({ length: diffLh + 1 }, () => Array(m * 18 + 1).fill(-1))
+        );
+        console.log('memo = ', JSON.parse(JSON.stringify(memo)));
+
+        const dfs = (i, start, diff, limitLow, limitHigh) => {
+          if (i === n) {
+            return diff === m * 9 ? 1 : 0;
+          }
+
+          // start 当 isNum 用
+          if (start !== -1 && !limitLow && !limitHigh && memo[i][start][diff] !== -1) {
+            return memo[i][start][diff];
+          }
+
+          const lo = limitLow && i >= diffLh ? parseInt(lowS[i - diffLh]) : 0;
+          const hi = limitHigh ? parseInt(highS[i]) : 9;
+
+          // 如果前面没有填数字，且剩余数位个数是奇数，那么当前数位不能填数字
+          if (start < 0 && (n - i) % 2 > 0) {
+            // 如果必须填数字（lo > 0），不合法，返回 0
+            return lo > 0 ? 0 : dfs(i + 1, start, diff, true, false);
+          }
+
+          let res = 0;
+          const isLeft = start < 0 || i < (start + n) / 2;
+          for (let d = lo; d <= hi; d++) {
+            res += dfs(
+              i + 1,
+              start < 0 && d > 0 ? i : start, // 记录第一个填数字的位置
+              diff + (isLeft ? d : -d), // 左半 +，右半 -
+              limitLow && d === lo,
+              limitHigh && d === hi
+            );
+          }
+
+          if (start !== -1 && !limitLow && !limitHigh) {
+            memo[i][start][diff] = res;
+          }
+          return res;
+        };
+
+        // 初始化 diff = m * 9，避免出现负数导致 memo 下标越界
+        return dfs(0, -1, m * 9, true, true);
+      };
+
       // --- answer-2 ---
 
-      // var low = 1, high = 100;
-      // var result = 9;
+      var low = 1,
+        high = 100;
+      var result = 9;
       // 解释：在 1 到 100 范围内共有 9 个对称整数：11、22、33、44、55、66、77、88 和 99 。
 
       // var low = 1200, high = 1230;
