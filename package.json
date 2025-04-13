@@ -31,7 +31,8 @@
     "file": "node product/index.js",
     "deploy": "node product/deploy.js",
     "dm": "node product/dm.js && rollup -c -w",
-    "build:helper": "node product/buildHelperSnippets.js"
+    "build:helper": "node product/buildHelperSnippets.js",
+    "count": "node product/count.js"
   },
   "eslintConfig": {
     "extends": "react-app"
