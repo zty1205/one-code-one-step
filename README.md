@@ -149,10 +149,11 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (821 道)
+## 三、LeetCode (799 道)
 
 <br/>
 
+- [周赛 445.html](./leetCode/周赛445.html)
 - [周赛 444.html](./leetCode/周赛444.html)
 - [周赛 443.html](./leetCode/周赛443.html)
 - [周赛 442.html](./leetCode/周赛442.html)
@@ -798,6 +799,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1207.独一无二的出现次数.html](./leetCode/1207.独一无二的出现次数.html)
 - [1431.拥有最多糖果的孩子.html](./leetCode/1431.拥有最多糖果的孩子.html)
 - [1768.交替合并字符串.html](./leetCode/1768.交替合并字符串.html)
+- [1922.统计好数字的数目.html](./leetCode/1922.统计好数字的数目.html)
 - [1926.迷宫中离入口最近的出口.html](./leetCode/1926.迷宫中离入口最近的出口.html)
 - [2095.删除链表的中间节点.html](./leetCode/2095.删除链表的中间节点.html)
 - [2130.链表最大孪生和.html](./leetCode/2130.链表最大孪生和.html)

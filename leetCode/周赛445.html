@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>周赛445</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
+    <script>
+      /**
+       * 周赛445
+       */
+
+      // var node = buildLinkNodeByArray(head);
+      // var tree = buildTreeByArray([...root]);
+      // var { graph: node } = buildUndirectedGraphByArray(adjList);
+    </script>
+    <script>
+      var findClosest = function (x, y, z) {
+        const n1 = Math.abs(x - z);
+        const n2 = Math.abs(y - z);
+        if (n1 < n2) {
+          return 1;
+        } else if (n1 > n2) {
+          return 2;
+        } else {
+          return 0;
+        }
+      };
+    </script>
+    <script>
+      var smallestPalindrome = function (s) {
+        const length = s.length;
+        if (length === 1) {
+          return s;
+        }
+        const half = Math.floor(length / 2);
+        const left = s.slice(0, half);
+        // 比较字典序
+        const lfs = left.split('').sort((a, b) => a.charCodeAt() - b.charCodeAt());
+        const rgs = lfs.slice().reverse();
+        const mid = length % 2 === 0 ? '' : s[half];
+        const result = lfs.join('') + mid + rgs.join('');
+        return result;
+      };
+
+      console.log('abccba = ', smallestPalindrome('abccba'));
+      console.log('a = ', smallestPalindrome('a'));
+      console.log('babab = ', smallestPalindrome('babab'));
+    </script>
+    <script>
+      console.clear();
+      var smallestPalindrome = function (s, k) {
+        const length = s.length;
+
+        if (length === 1) {
+          return k === 1 ? s : '';
+        }
+
+        const half = Math.floor(length / 2);
+        const left = s.slice(0, half).split('');
+        // 需要存在k个字母才能保证有k个排列
+        /*  const set = new Set();
+        const size = new Set(left).size;
+        if (size < k) {
+          return '';
+        }*/
+        left.sort((a, b) => a.charCodeAt() - b.charCodeAt());
+        const map = left.reduce((acc, cur, index) => {
+          acc[cur] = index < k - 1 ? 26 + index : index;
+          return acc;
+        }, {});
+        console.log('map = ', map);
+
+        // 根据codeArr的顺序来进行排序
+        const lfs = left.sort((a, b) => {
+          return map[a] - map[b];
+        });
+        const rgs = lfs.slice().reverse();
+        const mid = length % 2 === 0 ? '' : s[half];
+        return lfs.join('') + mid + rgs.join('');
+      };
+
+      function getKthPermutation(arr, k) {
+        const sortedArr = [...arr].sort();
+        const counts = {};
+        for (const c of sortedArr) {
+          counts[c] = (counts[c] || 0) + 1;
+        }
+        const m = sortedArr.length;
+
+        function factorial(n) {
+          if (n <= 1) return 1;
+          return n * factorial(n - 1);
+        }
+
+        function backtrack(currentCounts, currentK, remaining) {
+          if (remaining === 0) return '';
+
+          // 获取已排序的字符列表
+          const chars = Object.keys(currentCounts).sort((a, b) => a.localeCompare(b));
+          for (const c of chars) {
+            if (currentCounts[c] === 0) continue;
+
+            // 计算当前字符c开头的排列数目
+            const total = factorial(remaining - 1);
+            let denominator = 1;
+
+            // 遍历所有字符，计算分母（各字符剩余次数的阶乘乘积）
+            for (const char of Object.keys(currentCounts)) {
+              const cnt = char === c ? currentCounts[char] - 1 : currentCounts[char];
+              if (cnt > 0) denominator *= factorial(cnt);
+            }
+
+            const currentCnt = Math.floor(total / denominator);
+            if (currentK > currentCnt) {
+              currentK -= currentCnt;
+              continue;
+            }
+
+            // 选择当前字符c，复制并更新计数
+            const newCounts = { ...currentCounts };
+            newCounts[c] -= 1;
+            if (newCounts[c] === 0) delete newCounts[c];
+
+            return c + backtrack(newCounts, currentK, remaining - 1);
+          }
+          return ''; // 理论上不会执行到这里
+        }
+
+        return backtrack(counts, k, m);
+      }
+
+      var smallestPalindrome = function (s, k) {
+        const length = s.length;
+
+        if (length === 1) {
+          return k === 1 ? s : '';
+        }
+
+        const half = Math.floor(length / 2);
+        const left = s.slice(0, half).split('');
+        left.sort((a, b) => a.charCodeAt() - b.charCodeAt());
+
+        const lfs = getKthPermutation(left, k);
+        if (!lfs) {
+          return '';
+        }
+        const rgs = lfs.split().reverse();
+        const mid = length % 2 === 0 ? '' : s[half];
+        return lfs + mid + rgs.join('');
+      };
+      console.log('abccba 2, = ', smallestPalindrome('abccba', 2));
+      console.log('abccba 3, = ', smallestPalindrome('abccba', 3));
+      console.log('abba 2= ', smallestPalindrome('abba', 2));
+      console.log('abcba 2= ', smallestPalindrome('abcba', 2));
+      console.log('abcba 3= ', smallestPalindrome('abcba', 3));
+      console.log('a 1= ', smallestPalindrome('a', 1));
+      console.log('a 2= ', smallestPalindrome('a', 2));
+      console.log('aba 1= ', smallestPalindrome('aba', 1));
+      console.log('aba 2= ', smallestPalindrome('aba', 2));
+      console.log('hcch 2= ', smallestPalindrome('hcch', 2));
+      console.log('nyggyn 4= ', smallestPalindrome('nyggyn', 4)); // 这个不对k大了之后就不能单纯用map比较
+    </script>
+    <script>
+      // console.clear();
+      // 数字非递减
+      var isValid = function (str = '') {
+        const length = str.length;
+        if (length === 1) {
+          return true;
+        }
+        for (let i = 0; i < length - 1; i++) {
+          if (str[i] > str[i + 1]) {
+            return false;
+          }
+        }
+        return true;
+      };
+      var countNumbers = function (l = '', r = '', b = 1) {
+        let ans = 0;
+        l = Number(l);
+        r = Number(r);
+        for (let i = l; i <= r; i++) {
+          if (isValid(Number(i).toString(b))) {
+            ans++;
+          }
+        }
+        return ans;
+      };
+
+      var countNumbers = function (l = '', r = '', b = 1) {
+        // 将字符串形式的数字按B进制转换为数字字符串
+        const lStr = BigInt(l).toString(b);
+        const rStr = BigInt(r).toString(b);
+      };
+
+      console.log('countNumbers 23,28,8 = 3 === ', countNumbers(23, 28, 8));
+      console.log('countNumbers 2,7,2 = 2 === ', countNumbers(2, 7, 2));
+      console.log('countNumbers 2,10,2 = 2 === ', countNumbers(2, 10, 2));
+
+      // 字符串表示的所以会是大数
+      // 感觉可以使用数位DP
+      // 1. 先将数字转换为字符串
+      // 2. 然后进行数位DP
+      // 3. 计算每一位的合法方案数
+      // 4. 最后进行组合
+      // 5. 注意进制转换
+      // 6. 注意边界条件
+      // 7. 注意大数的处理
+
+      // --- answer-1 ---
+      var countNumbers = function (l = '', r = '', b = 1) {
+        var hgihS = BigInt(r).toString(b);
+        var lowS = BigInt(l).toString(b);
+        const n = hgihS.length;
+        lows = lowS.padStart(n, '0');
+      };
+    </script>
+  </body>
+</html>
