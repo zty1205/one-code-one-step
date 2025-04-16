@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2537. 统计好子数组的数目</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
+    <script>
+      // https://leetcode.cn/problems/count-the-number-of-good-subarrays/?envType=daily-question&envId=2025-04-16
+
+      // 给你一个整数数组 nums 和一个整数 k ，请你返回 nums 中 好 子数组的数目。
+      // 一个子数组 arr 如果有 至少 k 对下标 (i, j) 满足 i < j 且 arr[i] == arr[j] ，那么称它是一个 好 子数组。
+      // 子数组 是原数组中一段连续 非空 的元素序列。
+      //
+      // 提示：
+      // 1 <= nums.length <= 105
+      // 1 <= nums[i], k <= 109
+
+      /**
+       * @param {number[]} nums
+       * @param {number} k
+       * @return {number}
+       */
+      var countGood = function (nums, k) {};
+
+      // --- answer-1 ---
+
+      // 带缓存功能的阶乘函数
+      // 滑动窗口 + 组合数 直接加就是组合数
+      var countGood = function (nums, k) {
+        let left = 0;
+        let right = 0;
+        let count = 0;
+        let res = 0;
+        const map = new Map();
+        while (right < nums.length) {
+          if (map.has(nums[right])) {
+            count += map.get(nums[right]);
+            map.set(nums[right], map.get(nums[right]) + 1);
+          } else {
+            map.set(nums[right], 1);
+          }
+          right++;
+          console.log('count = ', count);
+          while (count >= k) {
+            res += 1;
+            map.set(nums[left], map.get(nums[left]) - 1);
+            count -= map.get(nums[left]);
+            left++;
+          }
+        }
+        return res;
+      };
+      var countGood = function (nums, k) {
+        const n = nums.length;
+        let count = 0;
+        let right = -1;
+        const cnt = new Map();
+        let ans = 0;
+        for (let left = 0; left < n; ++left) {
+          while (count < k && right + 1 < n) {
+            ++right;
+            const rightCnt = cnt.get(nums[right]) || 0;
+            count += rightCnt;
+            cnt.set(nums[right], rightCnt + 1);
+          }
+          if (count >= k) {
+            ans += n - right;
+          }
+          const leftCnt = cnt.get(nums[left]) - 1;
+          cnt.set(nums[left], leftCnt);
+          count -= leftCnt;
+        }
+        return ans;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var nums = [1, 1, 1, 1, 1],
+        k = 10;
+      var result = 1;
+      // 解释：唯一的好子数组是这个数组本身。
+
+      var nums = [3, 1, 4, 3, 2, 2, 4],
+        k = 2;
+      var result = 4;
+      // 解释：总共有 4 个不同的好子数组：
+
+      console.log('nums = ', nums);
+      console.log('k = ', k);
+      console.log('result = ', result);
+      console.log('countGood = ', countGood(nums, k));
+    </script>
+  </body>
+</html>
