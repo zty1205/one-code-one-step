@@ -7,8 +7,13 @@
     <title>2176. 统计数组中相等且可以被整除的数对</title>
   </head>
   <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
     <script>
-      // https://leetcode.cn/problems/count-equal-and-divisible-pairs-in-an-array/
+      // https://leetcode.cn/problems/count-equal-and-divisible-pairs-in-an-array/description/?envType=daily-question&envId=2025-04-17
 
       // 给你一个下标从 0 开始长度为 n 的整数数组 nums 和一个整数 k ，请你返回满足 0 <= i < j < n ，nums[i] == nums[j] 且 (i * j) 能被 k 整除的数对 (i, j) 的 数目 。
       //
@@ -25,34 +30,62 @@
 
       // --- answer-1 ---
 
-      // 直接遍历
-      var countPairs = function (nums, k) {
-        let result = 0;
+      // 暴力法
+      var countPairs = function (nums = [], k = 1) {
+        let ans = 0;
         for (let i = 0; i < nums.length; i++) {
           for (let j = i + 1; j < nums.length; j++) {
-            if (nums[i] == nums[j] && (i * j) % k == 0) {
-              result++;
+            if (nums[i] === nums[j] && (i * j) % k === 0) {
+              ans++;
             }
           }
         }
-        return result;
+        return ans;
       };
 
       // --- answer-1 ---
 
       // --- answer-2 ---
 
-      // --- answer-2 ---
+      var countPairs = function (nums = [], k = 1) {
+        let ans = 0;
+        const hash = [];
+        for (let i = 0; i < nums.length; i++) {
+          if (!hash[nums[i]]) {
+            hash[nums[i]] = [];
+          }
+          hash[nums[i]].push(i);
+        }
+        console.log('hash = ', hash);
+        for (let i = 0; i < hash.length; i++) {
+          const arr = hash[i];
+          if (!arr || arr.length < 2) {
+            continue;
+          }
+          console.log('arr = ', arr);
+          for (let m = 0; m < arr.length - 1; m++) {
+            for (let n = m + 1; n < arr.length; n++) {
+              if ((arr[m] * arr[n]) % k === 0) {
+                console.log('m = ', m, 'n = ', n);
+                ans++;
+              }
+            }
+          }
+        }
+        return ans;
+      };
 
-      var nums = [3, 1, 2, 2, 2, 1, 3],
-        k = 2;
-      var result = 4;
-      // 解释：
+      // --- answer-2 ---
 
       var nums = [1, 2, 3, 4],
         k = 1;
       var result = 0;
       // 解释：由于数组中没有重复数值，所以没有数对 (i,j) 符合所有要求。
+
+      var nums = [3, 1, 2, 2, 2, 1, 3],
+        k = 2;
+      var result = 4;
+      // 解释：
 
       console.log('nums = ', nums);
       console.log('k = ', k);

@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (828 道)
+## 三、LeetCode (829 道)
 
 <br/>
 
@@ -804,6 +804,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1926.迷宫中离入口最近的出口.html](./leetCode/1926.迷宫中离入口最近的出口.html)
 - [2095.删除链表的中间节点.html](./leetCode/2095.删除链表的中间节点.html)
 - [2130.链表最大孪生和.html](./leetCode/2130.链表最大孪生和.html)
+- [2176.统计数组中相等且可以被整除的数对.html](./leetCode/2176.统计数组中相等且可以被整除的数对.html)
 - [2215.找出两数组的不同.html](./leetCode/2215.找出两数组的不同.html)
 - [2379.得到 K 个黑块的最少涂色次数.html](./leetCode/2379.得到K个黑块的最少涂色次数.html)
 - [2390.从字符串中移除星号.html](./leetCode/2390.从字符串中移除星号.html)
