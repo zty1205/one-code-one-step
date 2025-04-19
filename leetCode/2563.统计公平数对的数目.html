@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2563. 统计公平数对的数目</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
+    <script>
+      // https://leetcode.cn/problems/count-the-number-of-fair-pairs/description/?envType=daily-question&envId=2025-04-19
+
+      // 给你一个下标从 0 开始、长度为 n 的整数数组 nums ，和两个整数 lower 和 upper ，返回 公平数对的数目 。
+      // 如果 (i, j) 数对满足以下情况，则认为它是一个 公平数对 ：
+      //
+      // 提示：
+      // 0 <= i < j < n，且
+      // lower <= nums[i] + nums[j] <= upper
+      //
+      // 提示：
+      // 1 <= nums.length <= 105
+      // nums.length == n
+      // -109 <= nums[i] <= 109
+      // -109 <= lower <= upper <= 109
+
+      /**
+       * @param {number[]} nums
+       * @param {number} lower
+       * @param {number} upper
+       * @return {number}
+       */
+      var countFairPairs = function (nums, lower, upper) {};
+
+      // --- answer-1 ---
+
+      // 超时
+      var countFairPairs = function (nums = [], lower = 1, upper = 1) {
+        let count = 0;
+        nums.sort((a, b) => a - b);
+        let n = nums.length;
+        for (let i = 0; i < n; i++) {
+          let right = i + 1;
+          while (right < n && nums[i] + nums[right] < lower) {
+            right++;
+          }
+          while (right < n && nums[i] + nums[right] <= upper) {
+            console.log(nums[i], nums[right], nums[i] + nums[right], lower, upper);
+            right++;
+            count++;
+          }
+        }
+        return count;
+      };
+
+      var countFairPairs = function (nums = [], lower = 1, upper = 1) {
+        let count = 0;
+        nums.sort((a, b) => a - b);
+        let right = nums.length - 1;
+        let left = 0;
+        while (left < right) {
+          let sum = nums[left] + nums[right];
+          if (sum < lower) {
+            left++;
+          } else if (sum > upper) {
+            right--;
+          } else {
+            console.log({
+              left: nums[left],
+              leftIndex: left,
+              rightIndex: right,
+              right: nums[right],
+              sum,
+              lower,
+              upper
+            });
+            count += right - left; // 中间可能超过upper
+            left++;
+          }
+        }
+        return count;
+      };
+
+      // 二分查找左右边界
+      var countFairPairs = function (nums, lower, upper) {
+        nums.sort((a, b) => a - b);
+        let ans = 0;
+
+        for (let j = 0; j < nums.length; j++) {
+          let r = bound(nums, 0, j, upper - nums[j] + 1);
+          let l = bound(nums, 0, j, lower - nums[j]);
+          ans += r - l;
+        }
+
+        return ans;
+      };
+
+      function bound(nums, left, right, target) {
+        while (left < right) {
+          let mid = Math.floor((left + right) / 2);
+          if (nums[mid] < target) {
+            left = mid + 1;
+          } else {
+            right = mid;
+          }
+        }
+        return left;
+      }
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      var countFairPairs = function (nums, lower, upper) {
+        nums.sort((a, b) => a - b);
+        let ans = 0,
+          l = nums.length,
+          r = nums.length;
+        for (let j = 0; j < nums.length; j++) {
+          while (r && nums[r - 1] > upper - nums[j]) {
+            r--;
+          }
+          while (l && nums[l - 1] >= lower - nums[j]) {
+            l--;
+          }
+          // 在方法一中，二分的结果必须 <= j，方法二同理
+          ans += Math.min(r, j) - Math.min(l, j);
+        }
+        return ans;
+      };
+
+      // --- answer-2 ---
+
+      var nums = [1, 7, 9, 2, 5],
+        lower = 11,
+        upper = 11;
+      var result = 1;
+      // 解释：只有单个公平数对：(2,3) 。
+
+      var nums = [0, 1, 7, 4, 4, 5],
+        lower = 4,
+        upper = 8;
+      var result = 9;
+
+      var nums = [0, 1, 7, 4, 4, 5],
+        lower = 3,
+        upper = 6;
+      var result = 6;
+      // 解释：共计 6 个公平数对：(0,3)、(0,4)、(0,5)、(1,3)、(1,4) 和 (1,5) 。
+
+      console.log('nums = ', nums);
+      console.log('lower = ', lower);
+      console.log('upper = ', upper);
+      console.log('result = ', result);
+      console.log('countFairPairs = ', countFairPairs(nums, lower, upper));
+    </script>
+  </body>
+</html>
