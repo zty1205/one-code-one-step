@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>781. 森林中的兔子</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
+    <script>
+      // https://leetcode.cn/problems/rabbits-in-forest/description/?envType=daily-question&envId=2025-04-20
+
+      // 森林中有未知数量的兔子。提问其中若干只兔子 "还有多少只兔子与你（指被提问的兔子）颜色相同?" ，将答案收集到一个整数数组 answers 中，其中 answers[i] 是第 i 只兔子的回答。
+      // 给你数组 answers ，返回森林中兔子的最少数量。
+      //
+      // 提示：
+      // 1 <= answers.length <= 1000
+      // 0 <= answers[i] < 1000
+
+      /**
+       * @param {number[]} answers
+       * @return {number}
+       */
+      var numRabbits = function (answers) {};
+
+      // --- answer-1 ---
+
+      // 1. 兔子回答的数字是兔子数量减一
+      // 如果满足n只兔子回答了x，那么实际上有x+1只兔子
+      var numRabbits = function (answers = []) {
+        const map = new Map();
+        let count = 0;
+        for (const n of answers) {
+          if (n === 0) {
+            count++;
+            continue;
+          }
+          if (map.has(n)) {
+            const v = map.get(n) || 0;
+            if (v < n) {
+              map.set(n, v + 1);
+            } else {
+              count += n + 1;
+              map.set(n, 0);
+            }
+          } else {
+            map.set(n, 1);
+          }
+        }
+        for (const [k, v] of map) {
+          if (v > 0) {
+            count += k + 1;
+          }
+        }
+        return count;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var answers = [1, 1, 2];
+      var result = 5;
+      // 解释：
+
+      var answers = [10, 10, 10];
+      var result = 11;
+
+      console.log('answers = ', answers);
+      console.log('result = ', result);
+      console.log('numRabbits = ', numRabbits(answers));
+    </script>
+  </body>
+</html>
