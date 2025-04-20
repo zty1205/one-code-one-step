@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>竞赛446</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
+    <script>
+      /**
+       * 竞赛446
+       */
+
+      // var node = buildLinkNodeByArray(head);
+      // var tree = buildTreeByArray([...root]);
+      // var { graph: node } = buildUndirectedGraphByArray(adjList);
+    </script>
+    <script>
+      var calculateScore = function (instructions, values) {
+        const visited = new Set();
+        let score = 0;
+        let i = 0;
+        while (i >= 0 && i < instructions.length) {
+          if (visited.has(i)) {
+            break;
+          }
+          visited.add(i);
+          const cmd = instructions[i];
+          if (cmd === 'jump') {
+            i += values[i];
+          } else {
+            score += values[i];
+            i++;
+          }
+        }
+        return score;
+      };
+
+      var instructions = ['jump', 'add', 'add', 'jump', 'add', 'jump'],
+        values = [2, 1, 3, 1, -2, -3];
+      var result = 1;
+      console.log(calculateScore(instructions, values), result);
+    </script>
+    <script>
+      console.clear();
+
+      var maximumPossibleSize = function (nums = []) {
+        const stack = [nums[0]];
+        for (let i = 1; i < nums.length; i++) {
+          if (nums[i] >= stack[stack.length - 1]) {
+            stack.push(nums[i]);
+          }
+        }
+        return stack.length;
+      };
+    </script>
+    <script>
+      // 题目tm给我搞晕了，理解就花了好久
+      // 下面的代码是用例是正确的，但是答案是错的
+      var resultArray = function (nums = [], k = 1) {
+        // 前缀乘积
+        const prefix = [1];
+        for (let i = 0; i < nums.length; i++) {
+          prefix[i + 1] = prefix[i] * nums[i];
+        }
+        console.log(prefix);
+        const total = prefix[nums.length];
+        // 结果
+        const length = nums.length;
+        const result = new Array(k).fill(0);
+        for (let n = 0; n < length; n++) {
+          for (let m = n; m < length; m++) {
+            const res = prefix[m + 1] / prefix[n];
+            result[res % k] += 1;
+          }
+        }
+        return result;
+      };
+
+      // dp 定义 f[i+1][x] 表示右端点为 i 的、元素积模 k 等于 x 的子数组的个数
+      var resultArray = function (nums = [], k = 1) {
+        // 前缀乘积
+        const length = nums.length;
+        const ans = new Array(k).fill(0);
+        const dp = Array.from({ length: length + 1 }, () => new Array(k).fill(0));
+        for (let i = 0; i < length; i++) {
+          const v = nums[i];
+          dp[i + 1][v % k] = 1; // 初始化
+          for (let j = 0; j < k; j++) {
+            dp[i + 1][(j * v) % k] += dp[i][j]; // 刷表法
+          }
+          for (let y = 0; y < k; y++) {
+            ans[y] += dp[i + 1][y]; // 结果
+          }
+        }
+        return ans;
+      };
+
+      // 前缀法 有问题，需要使用DP
+
+      var nums = [1, 2, 3, 4, 5],
+        k = 3;
+      var result = [9, 2, 4];
+
+      var nums = [1, 2, 4, 8, 16, 32],
+        k = 4;
+      var result = [18, 1, 2, 0];
+
+      var nums = [1, 1, 2, 1, 1],
+        k = 2;
+      var result = [9, 6];
+
+      var nums = [1, 2, 3, 4, 5],
+        k = 4;
+      var result = [15, 6, 4, 1];
+
+      // 前缀法失败
+      var nums = [
+        8, 35, 73, 12, 6, 39, 41, 91, 99, 66, 28, 32, 64, 97, 85, 40, 10, 53, 25, 51, 35, 4, 64, 96, 1, 55, 9, 60, 43,
+        73, 30, 32, 9, 82, 77, 22, 38
+      ];
+      var k = 4;
+      var result = [641, 19, 25, 18];
+      const res = resultArray(nums, k);
+      console.log('res', res, result);
+    </script>
+  </body>
+</html>
