@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2618. 检查是否是类的对象实例</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
+    <script>
+      // https://leetcode.cn/problems/check-if-object-instance-of-class/description/?difficulty=EASY
+
+      // 请你编写一个函数，检查给定的值是否是给定类或超类的实例。
+      // 可以传递给函数的数据类型没有限制。例如，值或类可能是  undefined 。
+
+      /**
+       * @param {*} obj
+       * @param {*} classFunction
+       * @return {boolean}
+       */
+      var checkIfInstanceOf = function (obj, classFunction) {};
+      /**
+       * checkIfInstanceOf(new Date(), Date); // true
+       */
+
+      // --- answer-1 ---
+
+      var checkIfInstanceOf = function (obj, classFunction) {
+        if (obj === null || obj === undefined || typeof classFunction !== 'function') {
+          return false;
+        }
+        let p = Object.getPrototypeOf(obj);
+        while (p) {
+          if (p === classFunction.prototype) {
+            return true;
+          }
+          p = Object.getPrototypeOf(p);
+        }
+        return false;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      // var func = () => checkIfInstance(new Date(), Date);
+      // var result = true;
+      // 解释：根据定义，Date 构造函数返回的对象是 Date 的一个实例。
+
+      // var func = () => { class Animal {}; class Dog extends Animal {}; return checkIfInstance(new Dog(), Animal); };
+      // var result = true;
+      // 解释：
+
+      // var func = () => checkIfInstance(Date, Date);
+      // var result = false;
+      // 解释：日期的构造函数在逻辑上不能是其自身的实例。
+
+      // var func = () => checkIfInstance(5, Number);
+      // var result = true;
+      // 解释：5 是一个 Number。注意，"instanceof" 关键字将返回 false。
+
+      console.log('obj = ', obj);
+      console.log('classFunction = ', classFunction);
+      console.log('result = ', result);
+      console.log('checkIfInstanceOf = ', checkIfInstanceOf(obj, classFunction));
+    </script>
+  </body>
+</html>
