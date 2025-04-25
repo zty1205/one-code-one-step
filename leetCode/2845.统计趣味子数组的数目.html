@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2845. 统计趣味子数组的数目</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
+    <script>
+      // https://leetcode.cn/problems/count-of-interesting-subarrays/description/?envType=daily-question&envId=2025-04-25
+
+      // 给你一个下标从 0 开始的整数数组 nums ，以及整数 modulo 和整数 k 。
+      // 请你找出并统计数组中 趣味子数组 的数目。
+      // 如果 子数组 nums[l..r] 满足下述条件，则称其为 趣味子数组 ：
+      //
+      // 提示：
+      // 在范围 [l, r] 内，设 cnt 为满足 nums[i] % modulo == k 的索引 i 的数量。并且 cnt % modulo == k 。
+      // 以整数形式表示并返回趣味子数组的数目。
+      // 注意：子数组是数组中的一个连续非空的元素序列。
+      //
+      // 提示：
+      // 1 <= nums.length <= 105
+      // 1 <= nums[i] <= 109
+      // 1 <= modulo <= 109
+      // 0 <= k < modulo
+
+      /**
+       * @param {number[]} nums
+       * @param {number} modulo
+       * @param {number} k
+       * @return {number}
+       */
+      var countInterestingSubarrays = function (nums, modulo, k) {};
+
+      // --- answer-1 ---
+
+      // 前缀和 暴力超时
+      var countInterestingSubarrays = function (nums = [], modulo = 1, k = 1) {
+        const n = nums.length;
+        const prefix = new Array(n + 1).fill(0);
+        for (let i = 0; i < n; i++) {
+          prefix[i + 1] = prefix[i] + (nums[i] % modulo === k ? 1 : 0);
+        }
+        let ans = 0;
+        for (let i = 0; i < n; i++) {
+          for (let j = i; j < n; j++) {
+            const cnt = prefix[j + 1] - prefix[i];
+            if (cnt % modulo === k) {
+              ans++;
+            }
+          }
+        }
+        return ans;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 前缀和 哈希表
+      // (sum[r]−sum[l−1]) mod modulo = k
+      // => (sum[r]−k+modulo) mod modulo=sum[l−1]modmodulo
+      var countInterestingSubarrays = function (nums, modulo, k) {
+        let n = nums.length;
+        let cnt = new Map();
+        let res = 0;
+        let prefix = 0;
+        cnt.set(0, 1);
+        for (let i = 0; i < n; i++) {
+          prefix += nums[i] % modulo === k ? 1 : 0;
+          res += cnt.get((prefix - k + modulo) % modulo) || 0;
+          cnt.set(prefix % modulo, (cnt.get(prefix % modulo) || 0) + 1);
+        }
+        return res;
+      };
+
+      // --- answer-2 ---
+
+      var nums = [3, 2, 4],
+        modulo = 2,
+        k = 1;
+      var result = 3;
+      // 解释：在这个示例中，趣味子数组分别是：
+
+      var nums = [3, 1, 9, 6],
+        modulo = 3,
+        k = 0;
+      var result = 2;
+      // 解释：在这个示例中，趣味子数组分别是：
+
+      console.log('nums = ', nums);
+      console.log('modulo = ', modulo);
+      console.log('k = ', k);
+      console.log('result = ', result);
+      console.log('countInterestingSubarrays = ', countInterestingSubarrays(nums, modulo, k));
+    </script>
+  </body>
+</html>
