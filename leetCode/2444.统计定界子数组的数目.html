@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2444. 统计定界子数组的数目</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
+    <script>
+      // https://leetcode.cn/problems/count-subarrays-with-fixed-bounds/description/?envType=daily-question&envId=2025-04-26
+
+      // 给你一个整数数组 nums 和两个整数 minK 以及 maxK 。
+      // nums 的定界子数组是满足下述条件的一个子数组：
+      //
+      // 提示：
+      // 子数组中的 最小值 等于 minK 。
+      // 子数组中的 最大值 等于 maxK 。
+      // 返回定界子数组的数目。
+      // 子数组是数组中的一个连续部分。
+      //
+      // 提示：
+      // 2 <= nums.length <= 105
+      // 1 <= nums[i], minK, maxK <= 106
+
+      /**
+       * @param {number[]} nums
+       * @param {number} minK
+       * @param {number} maxK
+       * @return {number}
+       */
+      var countSubarrays = function (nums, minK, maxK) {};
+
+      // --- answer-1 ---
+
+      // 核心思路：枚举子数组的右端点，统计有多少个合法的左端点。
+      // 遍历 nums，记录 minK 最近出现的位置 minI，以及 maxK 最近出现的位置 maxI，当遍历到 nums[i] 时，如果 minK 和 maxK 都遇到过，则左端点在 [0,min(minI,maxI)] 中的子数组，包含 minK 和 maxK，最小值一定是 minK，最大值一定是 maxK。
+      // 以 i 为右端点的合法子数组的个数为
+      // min(minI,maxI)+1
+      // 回到原问题，由于子数组不能包含在 [minK,maxK] 范围之外的元素，我们需要额外记录在 [minK,maxK] 范围之外的最近元素位置，记作 i0
+      //  ，则左端点在 [i0+1,min(minI,maxI)] 中的子数组都是合法的。
+      // 以 i 为右端点的合法子数组的个数为
+      // min(minI,maxI)−i 0
+
+      var countSubarrays = function (nums, minK, maxK) {
+        let ans = 0,
+          minI = -1,
+          maxI = -1,
+          i0 = -1;
+        for (let i = 0; i < nums.length; i++) {
+          const x = nums[i];
+          if (x === minK) {
+            minI = i; // 最近的 minK 位置
+          }
+          if (x === maxK) {
+            maxI = i; // 最近的 maxK 位置
+          }
+          if (x < minK || x > maxK) {
+            i0 = i; // 子数组不能包含 nums[i0]
+          }
+          ans += Math.max(Math.min(minI, maxI) - i0, 0);
+        }
+        return ans;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var nums = [1, 3, 5, 2, 7, 5],
+        minK = 1,
+        maxK = 5;
+      var result = 2;
+      // 解释：定界子数组是 [1,3,5] 和 [1,3,5,2] 。
+
+      // var nums = [1,1,1,1], minK = 1, maxK = 1;
+      // var result = 10;
+      // 解释：nums 的每个子数组都是一个定界子数组。共有 10 个子数组。
+
+      var nums = [1, 1, 3, 5, 2, 7, 5],
+        minK = 1,
+        maxK = 5;
+      var result = 4;
+
+      console.log('nums = ', nums);
+      console.log('minK = ', minK);
+      console.log('maxK = ', maxK);
+      console.log('result = ', result);
+      console.log('countSubarrays = ', countSubarrays(nums, minK, maxK));
+    </script>
+  </body>
+</html>
