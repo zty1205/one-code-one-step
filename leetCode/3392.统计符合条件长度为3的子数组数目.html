@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3392. 统计符合条件长度为 3 的子数组数目</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
+    <script>
+      // https://leetcode.cn/problems/count-subarrays-of-length-three-with-a-condition/description/?envType=daily-question&envId=2025-04-27
+
+      // 给你一个整数数组 nums ，请你返回长度为 3 的 子数组 的数量，满足第一个数和第三个数的和恰好为第二个数的一半。
+      // 子数组 指的是一个数组中连续 非空 的元素序列。
+      //
+      // 提示：
+      // 3 <= nums.length <= 100
+      // -100 <= nums[i] <= 100
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var countSubarrays = function (nums) {};
+
+      // --- answer-1 ---
+
+      // 直接循环
+      var countSubarrays = function (nums = []) {
+        const n = nums.length;
+        let ans = 0;
+        for (let i = 1; i < n - 1; i++) {
+          if (nums[i] === (nums[i - 1] + nums[i + 1]) * 2) {
+            ans++;
+          }
+        }
+        return ans;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('countSubarrays = ', countSubarrays(nums));
+    </script>
+  </body>
+</html>
