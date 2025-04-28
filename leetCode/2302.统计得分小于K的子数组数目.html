@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2302. 统计得分小于 K 的子数组数目</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
+    <script>
+      // https://leetcode.cn/problems/count-subarrays-with-score-less-than-k/description/?envType=daily-question&envId=2025-04-28
+
+      // 一个数组的 分数 定义为数组之和 乘以 数组的长度。
+      //
+      // 提示：
+      // 比方说，[1, 2, 3, 4, 5] 的分数为 (1 + 2 + 3 + 4 + 5) * 5 = 75 。
+      // 给你一个正整数数组 nums 和一个整数 k ，请你返回 nums 中分数 严格小于 k 的 非空整数子数组数目。
+      // 子数组 是数组中的一个连续元素序列。
+      //
+      // 提示：
+      // 1 <= nums.length <= 105
+      // 1 <= nums[i] <= 105
+      // 1 <= k <= 1015
+
+      /**
+       * @param {number[]} nums
+       * @param {number} k
+       * @return {number}
+       */
+      var countSubarrays = function (nums, k) {};
+
+      // --- answer-1 ---
+
+      // 双指针 因为都是大于0的数，所以可以 越短约合
+      var countSubarrays2 = function (nums, k) {
+        const n = nums.length;
+        const prefix = new Array(n + 1).fill(0);
+        for (let i = 1; i <= n; i++) {
+          prefix[i] = prefix[i - 1] + nums[i - 1];
+        }
+        let ans = 0;
+        let left = 0;
+        let right = 0;
+        while (right < n) {
+          let sum = prefix[right + 1] - prefix[left];
+          let len = right - left + 1;
+          while (sum * len >= k) {
+            sum -= nums[left];
+            len--;
+            left++;
+          }
+          ans += right - left + 1;
+          right++;
+        }
+        return ans;
+      };
+
+      var countSubarrays = function (nums, k) {
+        let n = nums.length;
+        let res = 0,
+          total = 0;
+        for (let i = 0, j = 0; j < n; j++) {
+          total += nums[j];
+          while (i <= j && total * (j - i + 1) >= k) {
+            total -= nums[i];
+            i++;
+          }
+          res += j - i + 1;
+        }
+        return res;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      // var nums = [2,1,4,3,5], k = 10;
+      // var result = 6;
+      // 解释：
+
+      // var nums = [1,1,1], k = 5;
+      // var result = 5;
+      // 解释：
+
+      console.log('nums = ', nums);
+      console.log('k = ', k);
+      console.log('result = ', result);
+      console.log('countSubarrays = ', countSubarrays(nums, k));
+    </script>
+  </body>
+</html>
