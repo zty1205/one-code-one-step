@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2109. 向字符串添加空格</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
+    <script>
+      // https://leetcode.cn/problems/adding-spaces-to-a-string/description/?envType=daily-question&envId=2025-04-28
+
+      // 给你一个下标从 0 开始的字符串 s ，以及一个下标从 0 开始的整数数组 spaces 。
+      // 数组 spaces 描述原字符串中需要添加空格的下标。每个空格都应该插入到给定索引处的字符值 之前 。
+      //
+      // 提示：
+      // 例如，s = "EnjoyYourCoffee" 且 spaces = [5, 9] ，那么我们需要在 'Y' 和 'C' 之前添加空格，这两个字符分别位于下标 5 和下标 9 。因此，最终得到 "Enjoy Your Coffee" 。
+      // 请你添加空格，并返回修改后的字符串。
+      //
+      // 提示：
+      // 1 <= s.length <= 3 * 105
+      // s 仅由大小写英文字母组成
+      // 1 <= spaces.length <= 3 * 105
+      // 0 <= spaces[i] <= s.length - 1
+      // spaces 中的所有值 严格递增
+
+      /**
+       * @param {string} s
+       * @param {number[]} spaces
+       * @return {string}
+       */
+      var addSpaces = function (s, spaces) {};
+
+      // --- answer-1 ---
+
+      var addSpaces = function (s = '', spaces = []) {
+        const lenS = s.length;
+        const lenSpaces = spaces.length;
+        if (lenS === 0 || lenSpaces === 0) {
+          return s;
+        }
+        let result = '';
+        let spaceIndex = 0;
+        let i = 0;
+
+        for (; i < s.length; i++) {
+          if (spaceIndex >= lenSpaces) {
+            break;
+          }
+          if (i === spaces[spaceIndex] + add) {
+            result += ' ';
+            spaceIndex++;
+          }
+          result += s[i];
+        }
+        for (; i < s.length; i++) {
+          result += s[i];
+        }
+        return result;
+      };
+
+      var addSpaces = function (s = '', spaces = []) {
+        const lenS = s.length;
+        const lenSpaces = spaces.length;
+        let result = '';
+        let spaceIndex = 0;
+
+        for (let i = 0; i < lenS; i++) {
+          if (spaceIndex < lenSpaces && i === spaces[spaceIndex]) {
+            result += ' ';
+            spaceIndex++;
+          }
+          result += s[i];
+        }
+
+        return result;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var s = 'LeetcodeHelpsMeLearn',
+        spaces = [8, 13, 15];
+      var result = 'Leetcode Helps Me Learn';
+      // 解释：
+
+      // var s = "icodeinpython", spaces = [1,5,7,9];
+      // var result = "i code in py thon";
+      // 解释：
+
+      // var s = "spacing", spaces = [0,1,2,3,4,5,6];
+      // var result = " s p a c i n g";
+      // 解释：
+
+      console.log('s = ', s);
+      console.log('spaces = ', spaces);
+      console.log('result = ', result);
+      console.log('addSpaces = ', addSpaces(s, spaces));
+    </script>
+  </body>
+</html>
