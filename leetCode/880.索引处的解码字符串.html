@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>880. 索引处的解码字符串</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
+    <script>
+      // https://leetcode.cn/problems/decoded-string-at-index/description/?page=16&difficulty=EASY
+
+      // 给定一个编码字符串 s 。请你找出 解码字符串 并将其写入磁带。解码时，从编码字符串中 每次读取一个字符 ，并采取以下步骤：
+      //
+      // 提示：
+      // 如果所读的字符是字母，则将该字母写在磁带上。
+      // 如果所读的字符是数字（例如 d），则整个当前磁带总共会被重复写 d-1 次。
+      // 现在，对于给定的编码字符串 s 和索引 k，查找并返回解码字符串中的第 k 个字母。
+      //
+      // 提示：
+      // 2 <= s.length <= 100
+      // s 只包含小写字母与数字 2 到 9 。
+      // s 以字母开头。
+      // 1 <= k <= 109
+      // 题目保证 k 小于或等于解码字符串的长度。
+      // 解码后的字符串保证少于 263 个字母。
+
+      /**
+       * @param {string} s
+       * @param {number} k
+       * @return {string}
+       */
+      var decodeAtIndex = function (s, k) {};
+
+      // --- answer-1 ---
+
+      var decodeAtIndex = function (s = '', k = 1) {
+        let str = '';
+        // 遍历 状态机
+        for (const ch of s) {
+          if (/[0-9]/.test(ch)) {
+            str = str.repeat(+ch);
+          } else {
+            str += ch;
+          }
+          if (str.length >= k) {
+            return str[k - 1];
+          }
+        }
+        return str[k - 1];
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 会溢出，那么只能通过移动指针来判断
+      var decodeAtIndex = function (s = '', k = 1) {
+        let ans = '';
+        const readStr = (str = '', repeat = 1, start = 0) => {
+          if (start > k) {
+            return;
+          }
+          const n = str.length;
+          for (let i = 0; i < repeat; i++) {
+            for (let j = 0; i < n; j++) {
+              if (/[0-9]/.test(str[j])) {
+                start = readStr(str.slice(0, j), +str[j], start);
+              } else {
+                start++;
+              }
+              if (start === k) {
+                ans = str[j];
+                return start;
+              }
+            }
+          }
+          return start;
+        };
+        let str = '';
+        let i = 0;
+        let idx = 0;
+        for (let i = 0; i < s.length; i++) {
+          if (/[0-9]/.test(s[i])) {
+            readStr(str, +s[i], idx);
+          } else {
+            str += s[i];
+            idx++;
+          }
+          if (!ans && idx === k) {
+            ans = str[i];
+          }
+        }
+        return ans;
+      };
+
+      // 逆向
+      var decodeAtIndex = function (s = '', k = 1) {
+        let length = 0;
+        for (const ch of s) {
+          if (/[0-9]/.test(ch)) {
+            length *= +ch;
+          } else {
+            length++;
+          }
+        }
+        for (let i = s.length - 1; i >= 0; i--) {
+          k %= length;
+          if (k === 0 && /[a-z]/.test(s[i])) {
+            return s[i];
+          }
+          if (/[0-9]/.test(s[i])) {
+            length = Math.ceil(length / +s[i]);
+          } else {
+            length--;
+          }
+        }
+      };
+
+      var isNum = function (ch) {
+        return /[0-9]/.test(ch);
+      };
+
+      // 正向
+      var decodeAtIndex = function (s = '', k = 1) {
+        const len = 0;
+        for (let i = 0; i < s.length; i++) {
+          let add = isNum(s[i]) ? len * +s[i] : 1;
+          if (len + add < k) {
+            len += add;
+          } else {
+            if (len + add === k || k % len === 0) {
+              while (isNum(s[i])) {
+                --i;
+              }
+              return s[i];
+            }
+            return decodeAtIndex(s.slice(0, i), k % len);
+          }
+        }
+      };
+
+      // --- answer-2 ---
+
+      // var s = "leet2code3", k = 10;
+      // var result = "o";
+      // 解释：
+      // 逆向
+      // (4*2 + 4) * 3 = 36 求k=10
+      // k % 36 = 10;
+      // i = s.length - 1 s[i] = 3
+      // length = 36 / 3 = 12
+      // k = 10 % 12 = 10
+      // i = s.length - 2 s[i] = e 执行lenght-1 = 11
+
+      // 执行k%length 即 10%11
+      // i = s.length - 3 s[i] = d 执行length-1 = 10
+
+      // 执行k%length 即 10%10 s[i] === 0
+      // return s[i] = o
+
+      // var s = "ha22", k = 5;
+      // var result = "h";
+      // 解释：
+
+      // var s = "a2345678999999999999999", k = 1;
+      // var result = "a";
+      // 解释：
+
+      var s = 'cpmxv8ewnfk3xxcilcmm68d2ygc88daomywc3imncfjgtwj8nrxjtwhiem5nzqnicxzo248g52y72v3yujqpvqcssrofd99lkovg';
+      k = 480551547;
+      var result = 'x';
+
+      console.log('s = ', s);
+      console.log('k = ', k);
+      console.log('result = ', result);
+      console.log('decodeAtIndex = ', decodeAtIndex(s, k));
+    </script>
+  </body>
+</html>
