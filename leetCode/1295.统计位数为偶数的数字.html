@@ -7,65 +7,50 @@
     <title>1295. 统计位数为偶数的数字</title>
   </head>
   <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
     <script>
-      // https://leetcode.cn/problems/find-numbers-with-even-number-of-digits/
+      // https://leetcode.cn/problems/find-numbers-with-even-number-of-digits/description/?envType=daily-question&envId=2025-04-30
 
-      // 给你一个整数数组 nums，请你返回其中位数为 偶数 的数字的个数。
+      // 给你一个整数数组 nums，请你返回其中包含 偶数 个数位的数字的个数。
+      //
       // 提示：
       // 1 <= nums.length <= 500
-      // 1 <= nums[i] <= 10^5
+      // 1 <= nums[i] <= 105
 
       /**
-       * @param {number[]} nums
-       * @return {number}
+       * @param {number[]} nums
+       * @return {number}
        */
       var findNumbers = function (nums) {};
 
       // --- answer-1 ---
 
-      // 使用字符串
       var findNumbers = function (nums = []) {
-        return nums.filter((num) => (String(num).length & 1) === 0).length;
+        // 统计偶数位数
+        return nums.filter((num) => {
+          return num.toString().length % 2 === 0;
+        }).length;
       };
 
       // --- answer-1 ---
 
       // --- answer-2 ---
 
-      // 数学
-      function numLen(num) {
-        let res = 0;
-        while (num) {
-          num = Math.floor(num / 10);
-          res += 1;
-        }
-        return res;
-      }
-      function numLen(num) {
-        return Math.floor(Math.log10(num)) + 1;
-      }
-      var findNumbers = function (nums = []) {
-        let res = 0;
-        for (let n of nums) {
-          const len = numLen(n);
-          if ((len & 1) === 0) res += 1;
-        }
-        return res;
-      };
-
       // --- answer-2 ---
 
-      var nums = [12, 345, 2, 6, 7896];
-      var result = 2;
+      // var nums = [12,345,2,6,7896];
+      // var result = 2;
       // 解释：
 
-      var nums = [555, 901, 482, 1771];
-      var result = 1;
+      // var nums = [555,901,482,1771];
+      // var result = 1 ;
       // 解释：
 
-      console.log('nums = ', nums);
       console.log('result = ', result);
-      console.log('findNumbers = ', findNumbers(nums));
     </script>
   </body>
 </html>
