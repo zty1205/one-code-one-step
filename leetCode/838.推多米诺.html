@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>838. 推多米诺</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
+    <script>
+      // https://leetcode.cn/problems/push-dominoes/?envType=daily-question&envId=2025-05-02
+
+      // n 张多米诺骨牌排成一行，将每张多米诺骨牌垂直竖立。在开始时，同时把一些多米诺骨牌向左或向右推。
+      // 每过一秒，倒向左边的多米诺骨牌会推动其左侧相邻的多米诺骨牌。同样地，倒向右边的多米诺骨牌也会推动竖立在其右侧的相邻多米诺骨牌。
+      // 如果一张垂直竖立的多米诺骨牌的两侧同时有多米诺骨牌倒下时，由于受力平衡， 该骨牌仍然保持不变。
+      // 就这个问题而言，我们会认为一张正在倒下的多米诺骨牌不会对其它正在倒下或已经倒下的多米诺骨牌施加额外的力。
+      // 给你一个字符串 dominoes 表示这一行多米诺骨牌的初始状态，其中：
+      //
+      // 提示：
+      // dominoes[i] = 'L'，表示第 i 张多米诺骨牌被推向左侧，
+      // dominoes[i] = 'R'，表示第 i 张多米诺骨牌被推向右侧，
+      // dominoes[i] = '.'，表示没有推动第 i 张多米诺骨牌。
+      // 返回表示最终状态的字符串。
+      //
+      // 提示：
+      // n == dominoes.length
+      // 1 <= n <= 105
+      // dominoes[i] 为 'L'、'R' 或 '.'
+
+      /**
+       * @param {string} dominoes
+       * @return {string}
+       */
+      var pushDominoes = function (dominoes) {};
+
+      // --- answer-1 ---
+
+      // R的右边设置为 RR RRR
+      // L的左边设置为 LL LLL
+      // 如果是RRRLL 说明L先到达
+      // 如果是LLLRR 说明R先到达
+      // 如果是LLRR 说明L和R同时到达
+
+      // 1代表1秒后到达
+      // 2代表2秒后到达
+      const cnt = () => {
+        return {
+          L: 0,
+          R: 0,
+          '.': 0
+        };
+      };
+
+      var pushDominoes = function (dominoes = []) {
+        const length = dominoes.length;
+        const result = [];
+        for (let i = 0; i < length; i++) {
+          const char = dominoes[i];
+          result[i] = cnt();
+          result[i][char] = 1;
+        }
+        for (let i = 0; i < length; i++) {
+          const char = dominoes[i];
+          if (char === 'L') {
+            let j = i - 1;
+            while (j >= 0 && dominoes[j] === '.') {
+              result[j].L = i - j;
+              j--;
+            }
+          } else if (char === 'R') {
+            let j = i + 1;
+            while (j < length && dominoes[j] === '.') {
+              result[j].R = j - i;
+              j++;
+            }
+          }
+        }
+        console.log('result = ', result);
+        return result
+          .map((item) => {
+            if (item.L === item.R) {
+              return '.';
+            } else if (item.L === 0) {
+              return 'R';
+            } else if (item.R === 0) {
+              return 'L';
+            } else if (item.L < item.R) {
+              return 'L';
+            } else if (item.L > item.R) {
+              return 'R';
+            } else {
+              return '.';
+            }
+          })
+          .join('');
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 分类
+      // 1. L...L => 全是 L
+      // 2. R...R => 全是 R
+      // 3. R...L => 前一半是 R，后一半是 L
+      // 4. L...R => 不用处理
+      var pushDominoes = function (dominoes) {
+        const s = ('L' + dominoes + 'R').split(''); // 前后各加一个哨兵
+        const n = s.length;
+        let pre = 0; // 上一个 L 或 R 的位置
+        for (let i = 1; i < n; i++) {
+          if (s[i] === '.') {
+            continue;
+          }
+          if (s[i] === s[pre]) {
+            // L...L 或 R...R
+            s.fill(s[i], pre + 1, i); // 全变成 s[i]
+          } else if (s[i] === 'L') {
+            // R...L
+            s.fill('R', pre + 1, Math.floor((pre + i + 1) / 2)); // 前一半变 R
+            s.fill('L', Math.floor((pre + i) / 2) + 1, i); // 后一半变 L
+          }
+          // L...R 不用处理
+          pre = i;
+        }
+        return s.slice(1, n - 1).join(''); // 去掉前后哨兵
+      };
+
+      // --- answer-2 ---
+
+      var dominoes = 'RR.L';
+      var result = 'RR.L';
+      // 解释：第一张多米诺骨牌没有给第二张施加额外的力。
+
+      var dominoes = '.L.R...LR..L..';
+      var result = 'LL.RR.LLRRLL..';
+
+      console.log('dominoes = ', dominoes);
+      console.log('result = ', result);
+      const es = pushDominoes(dominoes);
+      console.log('pushDominoes = ', es);
+      console.log('equal = ', es === result);
+    </script>
+  </body>
+</html>

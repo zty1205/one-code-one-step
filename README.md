@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (845 道)
+## 三、LeetCode (846 道)
 
 <br/>
 
@@ -447,6 +447,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [596.超过 5 名学生的课.sql](./leetCode/596.超过5名学生的课.sql)
 - [599.两个列表的最小索引总和.html](./leetCode/599.两个列表的最小索引总和.html)
 - [605.种花问题.html](./leetCode/605.种花问题.html)
+- [838.推多米诺.html](./leetCode/838.推多米诺.html)
 - [880.索引处的解码字符串.html](./leetCode/880.索引处的解码字符串.html)
 - [781.森林中的兔子.html](./leetCode/781.森林中的兔子.html)
 - [901.股票价格跨度.html](./leetCode/901.股票价格跨度.html)
