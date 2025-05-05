@@ -1,4 +1,6 @@
 function classCommand(cmds, args, result = []) {
+  console.log('');
+
   let classFunc = cmds[0];
   let arg1 = args[0];
   const instance = new window[classFunc](...arg1);
@@ -6,9 +8,11 @@ function classCommand(cmds, args, result = []) {
     let cmd = cmds[i];
     let arg = args[i];
     let res = instance[cmd].apply(instance, arg);
-    console.log(`${cmd}, ${arg} : `, res, result[i]);
+    console.log(`CMD: ${cmd}, ARG: ${arg}`);
+    console.log(`OUT: ${res}, RES: ${result[i]}`);
+    console.log('');
   }
-  console.log('');
+
   console.log(`${classFunc}: `, instance);
   return instance;
 }
