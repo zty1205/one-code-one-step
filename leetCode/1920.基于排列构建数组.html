@@ -7,15 +7,22 @@
     <title>1920. 基于排列构建数组</title>
   </head>
   <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
     <script>
-      // https://leetcode.cn/problems/build-array-from-permutation/
+      // https://leetcode.cn/problems/build-array-from-permutation/description/?envType=daily-question&envId=2025-05-06
 
       // 给你一个 从 0 开始的排列 nums（下标也从 0 开始）。请你构建一个 同样长度 的数组 ans ，其中，对于每个 i（0 <= i < nums.length），都满足 ans[i] = nums[nums[i]] 。返回构建好的数组 ans 。
       // 从 0 开始的排列 nums 是一个由 0 到 nums.length - 1（0 和 nums.length - 1 也包含在内）的不同整数组成的数组。
+      //
       // 提示：
       // 1 <= nums.length <= 1000
       // 0 <= nums[i] < nums.length
       // nums 中的元素 互不相同
+      // 进阶：你能在不使用额外空间的情况下解决此问题吗（即 O(1) 内存）？
 
       /**
        * @param {number[]} nums
@@ -25,26 +32,36 @@
 
       // --- answer-1 ---
 
-      // 直接构建
-      // 原地的话 可以使用ax+b进行散列
       var buildArray = function (nums = []) {
-        return nums.map((x) => {
-          return nums[x];
-        });
+        return nums.map((num) => nums[num]);
       };
 
       // --- answer-1 ---
 
       // --- answer-2 ---
 
+      // O(1)内存
+      var buildArray = function (nums = []) {
+        // 最大值为1000 放大10000倍
+        for (let i = 0; i < nums.length; i++) {
+          // 后面需要
+          nums[i] += 10000 * (nums[nums[i]] % 10000);
+        }
+        for (let i = 0; i < nums.length; i++) {
+          // 取出后面需要的值
+          nums[i] = Math.floor(nums[i] / 10000);
+        }
+        return nums;
+      };
+
       // --- answer-2 ---
 
-      var nums = [0, 2, 1, 5, 3, 4];
-      var result = [0, 1, 2, 4, 5, 3];
+      // var nums = [0,2,1,5,3,4];
+      // var result = [0,1,2,4,5,3];
       // 解释：数组 ans 构建如下：
 
-      var nums = [5, 0, 1, 2, 3, 4];
-      var result = [4, 5, 0, 1, 2, 3];
+      // var nums = [5,0,1,2,3,4];
+      // var result = [4,5,0,1,2,3];
       // 解释：数组 ans 构建如下：
 
       console.log('nums = ', nums);
