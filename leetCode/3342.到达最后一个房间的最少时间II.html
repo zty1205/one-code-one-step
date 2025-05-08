@@ -55,7 +55,6 @@
           for (const [dx, dy] of directions) {
             const x = i + dx;
             const y = j + dy;
-            debugger;
             if (x >= 0 && x < m && y >= 0 && y < n) {
               const newTime = time + cost;
               if (newTime > moveTime[x][y] && newTime < dp[x][y]) {
