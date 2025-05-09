@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>846. 一手顺子</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
+    <script>
+      // https://leetcode.cn/problems/hand-of-straights/description/?page=16&difficulty=EASY
+
+      // Alice 手中有一把牌，她想要重新排列这些牌，分成若干组，使每一组的牌数都是 groupSize ，并且由 groupSize 张连续的牌组成。
+      // 给你一个整数数组 hand 其中 hand[i] 是写在第 i 张牌上的数值。如果她可能重新排列这些牌，返回 true ；否则，返回 false 。
+      //
+      // 提示：
+      // 1 <= hand.length <= 104
+      // 0 <= hand[i] <= 109
+      // 1 <= groupSize <= hand.length
+      // 注意：此题目与 1296 重复：https://leetcode-cn.com/problems/divide-array-in-sets-of-k-consecutive-numbers/
+
+      /**
+       * @param {number[]} hand
+       * @param {number} groupSize
+       * @return {boolean}
+       */
+      var isNStraightHand = function (hand, groupSize) {};
+
+      // --- answer-1 ---
+
+      var isNStraightHand = function (hand = [], groupSize = 1) {
+        const n = hand.length;
+        if (n % groupSize !== 0) return false;
+        const map = new Map();
+        for (const num of hand) {
+          map.set(num, (map.get(num) || 0) + 1);
+        }
+        const keys = [...map.keys()].sort((a, b) => a - b);
+        for (const k of keys) {
+          const cnt = map.get(k);
+          if (cnt === 0) continue;
+          for (let i = 1; i < groupSize; i++) {
+            const next = k + i;
+            if (!map.has(next)) return false;
+            const nextCnt = map.get(next);
+            if (nextCnt < cnt) return false;
+            map.set(next, nextCnt - cnt);
+          }
+        }
+        return true;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      // var hand = [1,2,3,6,2,3,4,7,8], groupSize = 3;
+      // var result = true;
+      // 解释：Alice 手中的牌可以被重新排列为 [1,2,3]，[2,3,4]，[6,7,8]。
+
+      // var hand = [1,2,3,4,5], groupSize = 4;
+      // var result = false;
+      // 解释：Alice 手中的牌无法被重新排列成几个大小为 4 的组。
+
+      console.log('hand = ', hand);
+      console.log('groupSize = ', groupSize);
+      console.log('result = ', result);
+      console.log('isNStraightHand = ', isNStraightHand(hand, groupSize));
+    </script>
+  </body>
+</html>
