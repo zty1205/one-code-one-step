@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2918. 数组的最小相等和</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
+    <script>
+      // https://leetcode.cn/problems/minimum-equal-sum-of-two-arrays-after-replacing-zeros/description/?envType=daily-question&envId=2025-05-10
+
+      // 给你两个由正整数和 0 组成的数组 nums1 和 nums2 。
+      // 你必须将两个数组中的 所有 0 替换为 严格 正整数，并且满足两个数组中所有元素的和 相等 。
+      // 返回 最小 相等和 ，如果无法使两数组相等，则返回 -1 。
+      //
+      // 提示：
+      // 1 <= nums1.length, nums2.length <= 105
+      // 0 <= nums1[i], nums2[i] <= 106
+
+      /**
+       * @param {number[]} nums1
+       * @param {number[]} nums2
+       * @return {number}
+       */
+      var minSum = function (nums1, nums2) {};
+
+      // --- answer-1 ---
+
+      // sum1 + n1X = sum2 + n2Y
+
+      var getSum = function (nums) {
+        let sum = 0;
+        let n = 0;
+        for (const num of nums) {
+          if (num === 0) {
+            n++;
+          } else {
+            sum += num;
+          }
+        }
+        return [sum, n];
+      };
+      var minSum = function (nums1 = [], nums2 = []) {
+        const [sum1, n1] = getSum(nums1);
+        const [sum2, n2] = getSum(nums2);
+
+        if (n1 === 0 && n2 === 0) {
+          return sum1 === sum2 ? sum1 : -1;
+        }
+        if (n1 === 0) {
+          return sum1 >= sum2 + n2 ? Math.max(sum1 + n1, sum2 + n2) : -1;
+        }
+        if (n2 === 0) {
+          return sum2 >= sum1 + n1 ? Math.max(sum1 + n1, sum2 + n2) : -1;
+        }
+
+        return Math.max(sum1 + n1, sum2 + n2);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      var minSum = function (nums1, nums2) {
+        let sum1 = 0,
+          sum2 = 0;
+        let zero1 = 0,
+          zero2 = 0;
+
+        for (let i of nums1) {
+          sum1 += i;
+          if (i === 0) {
+            sum1++;
+            zero1++;
+          }
+        }
+
+        for (let i of nums2) {
+          sum2 += i;
+          if (i === 0) {
+            sum2++;
+            zero2++;
+          }
+        }
+
+        if ((zero1 === 0 && sum2 > sum1) || (zero2 === 0 && sum1 > sum2)) {
+          return -1;
+        }
+
+        return Math.max(sum1, sum2);
+      };
+
+      // --- answer-2 ---
+
+      var nums1 = [3, 2, 0, 1, 0],
+        nums2 = [6, 5, 0];
+      var result = 12;
+      // 解释：可以按下述方式替换数组中的 0 ：
+      // 6 + 2x = 11 + y  => y = 2x - 5 => x = 2.5 y = 0
+
+      var nums1 = [2, 0, 2, 0],
+        nums2 = [1, 4];
+      var result = -1;
+      // 解释：无法使两个数组的和相等。
+
+      var nums1 = [3, 2, 0, 1, 0, 1, 3, 5, 2, 3, 4, 0],
+        nums2 = [6, 5, 0, 1, 5, 0, 4, 5];
+      var result = 28;
+
+      var nums1 = [0, 17, 20, 17, 5, 0, 14, 19, 7, 8, 16, 18, 6],
+        nums2 = [21, 1, 27, 19, 2, 2, 24, 21, 16, 1, 13, 27, 8, 5, 3, 11, 13, 7, 29, 7];
+      var result = 257;
+
+      console.log('nums1 = ', nums1);
+      console.log('nums2 = ', nums2);
+      console.log('result = ', result);
+      console.log('minSum = ', minSum(nums1, nums2));
+    </script>
+  </body>
+</html>
