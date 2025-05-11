@@ -7,10 +7,16 @@
     <title>1550. 存在连续三个奇数的数组</title>
   </head>
   <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
     <script>
-      // https://leetcode.cn/problems/three-consecutive-odds/
+      // https://leetcode.cn/problems/three-consecutive-odds/description/?envType=daily-question&envId=2025-05-11
 
       // 给你一个整数数组 arr，请你判断数组中是否存在连续三个元素都是奇数的情况：如果存在，请返回 true ；否则，返回 false 。
+      //
       // 提示：
       // 1 <= arr.length <= 1000
       // 1 <= arr[i] <= 1000
@@ -23,11 +29,11 @@
 
       // --- answer-1 ---
 
-      // 直接遍历 + 位运算
-      var threeConsecutiveOdds = function (arr = 0) {
-        const isOdd = (val) => (val & 1) === 1;
-        for (let i = 0; i < arr.length - 2; i++) {
-          if (isOdd(arr[i]) && isOdd(arr[i + 1]) && isOdd(arr[i + 2])) {
+      var threeConsecutiveOdds = function (arr = []) {
+        const n = arr.length;
+        const isOdd = (num) => num % 2 === 1;
+        for (let i = 1; i < n - 1; i++) {
+          if (isOdd(arr[i - 1]) && isOdd(arr[i]) && isOdd(arr[i + 1])) {
             return true;
           }
         }
@@ -40,15 +46,13 @@
 
       // --- answer-2 ---
 
-      var arr = [2, 6, 4, 1];
-      var result = false;
+      // var arr = [2,6,4,1];
+      // var result = false;
       // 解释：不存在连续三个元素都是奇数的情况。
 
-      // var arr = [1, 2, 34, 3, 4, 5, 7, 23, 12];
+      // var arr = [1,2,34,3,4,5,7,23,12];
       // var result = true;
       // 解释：存在连续三个元素都是奇数的情况，即 [5,7,23] 。
-
-      var arr = [1, 2, 3];
 
       console.log('arr = ', arr);
       console.log('result = ', result);
