@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2094. 找出 3 位偶数</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
+    <script>
+      // https://leetcode.cn/problems/finding-3-digit-even-numbers/description/?envType=daily-question&envId=2025-05-12
+
+      // 给你一个整数数组 digits ，其中每个元素是一个数字（0 - 9）。数组中可能存在重复元素。
+      // 你需要找出 所有 满足下述条件且 互不相同 的整数：
+      //
+      // 提示：
+      // 该整数由 digits 中的三个元素按 任意 顺序 依次连接 组成。
+      // 该整数不含 前导零
+      // 该整数是一个 偶数
+      // 将找出的所有互不相同的整数按 递增顺序 排列，并以数组形式返回。
+      //
+      // 提示：
+      // 3 <= digits.length <= 100
+      // 0 <= digits[i] <= 9
+
+      /**
+       * @param {number[]} digits
+       * @return {number[]}
+       */
+      var findEvenNumbers = function (digits) {};
+
+      // --- answer-1 ---
+
+      // 回溯
+      const findEvenNumbers = (digits = []) => {
+        const result = new Set();
+
+        const length = digits.length;
+
+        const visited = new Array(length).fill(false);
+
+        // 回溯枚举所有的可能
+        const dfs = (num, loop) => {
+          if (loop === 3) {
+            if (num > 99 && num % 2 === 0) {
+              result.add(num);
+            }
+            return;
+          }
+          for (let i = 0; i < digits.length; i++) {
+            if (visited[i]) continue;
+            visited[i] = true;
+            dfs(num * 10 + digits[i], loop + 1);
+            visited[i] = false;
+          }
+        };
+
+        dfs(0, 0);
+
+        return Array.from(result).sort((a, b) => a - b);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 回溯2
+      const findEvenNumbers2 = (digits = []) => {
+        const result = [];
+
+        const hash = new Array(10).fill(0);
+
+        for (let i = 0; i < digits.length; i++) {
+          hash[digits[i]]++;
+        }
+
+        const dfs = (num, loop) => {
+          if (loop === 3) {
+            if (num > 99 && num % 2 === 0) {
+              result.push(num);
+            }
+            return;
+          }
+
+          for (let i = 0; i < 10; i++) {
+            if (hash[i] === 0) continue;
+            hash[i]--;
+            dfs(num * 10 + i, loop + 1);
+            hash[i]++;
+          }
+        };
+
+        dfs(0, 0);
+
+        return result;
+      };
+
+      // --- answer-2 ---
+
+      // --- answer-3 ---
+
+      // 暴力
+      const findEvenNumbers3 = (digits = []) => {
+        const result = [];
+
+        const map = new Map();
+
+        for (let i = 0; i < digits.length; i++) {
+          map.set(digits[i], (map.get(digits[i]) || 0) + 1);
+        }
+
+        const k = 3;
+        const start = Math.pow(10, k - 1);
+        const end = Math.pow(10, k) - 1;
+
+        for (let i = start; i <= end; i++) {
+          if (i % 2 !== 0) {
+            continue;
+          }
+
+          const feq = new Map();
+          let n = i;
+          while (n > 0) {
+            const digit = n % 10;
+            feq.set(digit, (feq.get(digit) || 0) + 1);
+            n = Math.floor(n / 10);
+          }
+
+          let isValid = true;
+
+          for (let [key, value] of feq.entries()) {
+            if (!map.has(key) || map.get(key) < value) {
+              isValid = false;
+              break;
+            }
+          }
+
+          if (isValid) {
+            result.push(i);
+          }
+        }
+
+        return result;
+      };
+
+      // --- answer-3 ---
+
+      // var digits = [2,1,3,0];
+      // var result = [102,120,130,132,210,230,302,310,312,320];
+      // 解释：
+
+      // var digits = [2,2,8,8,2];
+      // var result = [222,228,282,288,822,828,882];
+      // 解释：
+
+      // var digits = [3,7,5];
+      // var result = [];
+      // 解释：
+
+      console.log('digits = ', digits);
+      console.log('result = ', result);
+      console.log('findEvenNumbers = ', findEvenNumbers(digits));
+    </script>
+  </body>
+</html>
