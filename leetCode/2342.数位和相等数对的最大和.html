@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2342. 数位和相等数对的最大和</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
+    <script>
+      // https://leetcode.cn/problems/max-sum-of-a-pair-with-equal-sum-of-digits/?page=16&difficulty=EASY
+
+      // 给你一个下标从 0 开始的数组 nums ，数组中的元素都是 正 整数。请你选出两个下标 i 和 j（i != j），且 nums[i] 的数位和 与  nums[j] 的数位和相等。
+      // 请你找出所有满足条件的下标 i 和 j ，找出并返回 nums[i] + nums[j] 可以得到的 最大值。如果不存在这样的下标对，返回 -1。
+      //
+      // 提示：
+      // 1 <= nums.length <= 105
+      // 1 <= nums[i] <= 109
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var maximumSum = function (nums) {};
+
+      // --- answer-1 ---
+
+      const getDitgitSum = (num = 1) => {
+        let sum = 0;
+        while (num) {
+          sum += num % 10;
+          num = Math.floor(num / 10);
+        }
+        return sum;
+      };
+
+      var maximumSum = function (nums = []) {
+        const map = new Map();
+
+        let max = -1;
+
+        for (let i = 0; i < nums.length; i++) {
+          const sum = getDitgitSum(nums[i]);
+
+          if (map.has(sum)) {
+            const pre = map.get(sum);
+            max = Math.max(max, pre + nums[i]);
+            // 更新最大值
+            map.set(sum, Math.max(pre, nums[i]));
+          } else {
+            map.set(sum, nums[i]);
+          }
+        }
+        return max;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var nums = [18, 43, 36, 13, 7];
+      var result = 54;
+      // 解释：满足条件的数对 (i, j) 为：
+
+      // var nums = [10,12,19,14];
+      // var result = -1;
+      // 解释：不存在满足条件的数对，返回 -1 。
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('maximumSum = ', maximumSum(nums));
+    </script>
+  </body>
+</html>
