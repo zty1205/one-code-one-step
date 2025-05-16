@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3340. 检查平衡字符串</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
+    <script>
+      // https://leetcode.cn/problems/check-balanced-string/?envType=daily-question&envId=2025-05-16
+
+      // 给你一个仅由数字 0 - 9 组成的字符串 num。如果偶数下标处的数字之和等于奇数下标处的数字之和，则认为该数字字符串是一个 平衡字符串。
+      // 如果 num 是一个 平衡字符串，则返回 true；否则，返回 false。
+      //
+      // 提示：
+      // 2 <= num.length <= 100
+      // num 仅由数字 0 - 9 组成。
+
+      /**
+       * @param {string} num
+       * @return {boolean}
+       */
+      var isBalanced = function (num) {};
+
+      // --- answer-1 ---
+
+      var isBalanced = function (num = '') {
+        let ans = 0;
+        let flag = 1;
+        for (let i = 0; i < num.length; i++) {
+          ans += Number(num[i]) * flag;
+          flag *= -1;
+        }
+        return ans === 0;
+      };
+
+      var isBalanced = function (num = '') {
+        const sum = [0, 0];
+        for (let i = 0; i < num.length; i++) {
+          sum[i % 2] += Number(num[i]);
+        }
+        return sum[0] === sum[1];
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      console.log('num = ', num);
+      console.log('result = ', result);
+      console.log('isBalanced = ', isBalanced(num));
+    </script>
+  </body>
+</html>
