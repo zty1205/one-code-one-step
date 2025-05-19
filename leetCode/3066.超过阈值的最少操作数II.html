@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3066. 超过阈值的最少操作数 II</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
+    <script>
+      // https://leetcode.cn/problems/minimum-operations-to-exceed-threshold-value-ii/description/?envType=daily-question&envId=2025-05-19
+
+      // 给你一个下标从 0 开始的整数数组 nums 和一个整数 k 。
+      // 你可以对 nums 执行一些操作，在一次操作中，你可以：
+      //
+      // 提示：
+      // 选择 nums 中 最小 的两个整数 x 和 y 。
+      // 将 x 和 y 从 nums 中删除。
+      // 将 min(x, y) * 2 + max(x, y) 添加到数组中的任意位置。
+      // 注意，只有当 nums 至少 包含两个元素时，你才可以执行以上操作。
+      // 你需要使数组中的所有元素都 大于或等于 k ，请你返回需要的 最少 操作次数。
+      //
+      // 提示：
+      // 2 <= nums.length <= 2 * 105
+      // 1 <= nums[i] <= 109
+      // 1 <= k <= 109
+      // 输入保证答案一定存在，也就是说，在进行某些次数的操作后，数组中所有元素都大于等于 k 。
+
+      /**
+       * @param {number[]} nums
+       * @param {number} k
+       * @return {number}
+       */
+      var minOperations = function (nums, k) {};
+
+      // --- answer-1 ---
+
+      class MinHeap {
+        constructor(list = []) {
+          this.heap = [];
+          for (const val of list) {
+            this.push(val);
+          }
+        }
+
+        size() {
+          return this.heap.length;
+        }
+
+        top() {
+          return this.heap[0];
+        }
+
+        // 插入元素（上浮调整）
+        push(val) {
+          this.heap.push(val);
+          this.shiftUp();
+        }
+
+        // 提取最小值（下沉调整）
+        pop() {
+          if (this.size() === 1) return this.heap.pop();
+          const min = this.heap[0];
+          this.heap[0] = this.heap.pop();
+          this.shiftDown();
+          return min;
+        }
+
+        // 上浮操作
+        shiftUp() {
+          let index = this.size() - 1;
+          const element = this.heap[index];
+
+          while (index > 0) {
+            const parentIndex = Math.floor((index - 1) / 2);
+            const parent = this.heap[parentIndex];
+
+            if (element >= parent) break;
+
+            this.heap[index] = parent;
+            this.heap[parentIndex] = element;
+            index = parentIndex;
+          }
+        }
+
+        // 下沉操作
+        shiftDown() {
+          let index = 0;
+          const length = this.size();
+          const element = this.heap[0];
+
+          while (true) {
+            let leftChildIndex = 2 * index + 1;
+            let rightChildIndex = 2 * index + 2;
+            let smallest = index;
+
+            if (leftChildIndex < length && this.heap[leftChildIndex] < this.heap[smallest]) {
+              smallest = leftChildIndex;
+            }
+
+            if (rightChildIndex < length && this.heap[rightChildIndex] < this.heap[smallest]) {
+              smallest = rightChildIndex;
+            }
+
+            if (smallest === index) break;
+
+            this.heap[index] = this.heap[smallest];
+            this.heap[smallest] = element;
+            index = smallest;
+          }
+        }
+      }
+
+      var minOperations = function (nums = [], k = 1) {
+        const heap = new MinHeap(nums);
+        let count = 0;
+        while (heap.top() < k) {
+          console.log('heap = ', [...heap.heap]);
+          const x = heap.pop();
+          const y = heap.pop();
+          const newVal = x + x + y;
+          heap.push(newVal);
+          count++;
+        }
+        return count;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var nums = [2, 11, 10, 1, 3];
+      k = 10;
+      var result = 2;
+
+      var nums = [1, 1, 2, 4, 9],
+        k = 20;
+      var result = 4;
+
+      console.log('nums = ', nums);
+      console.log('k = ', k);
+      console.log('result = ', result);
+      console.log('minOperations = ', minOperations(nums, k));
+    </script>
+  </body>
+</html>
