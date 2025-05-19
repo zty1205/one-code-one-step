@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>堆算法</title>
+  </head>
+  <body>
+    <script>
+      // 小根堆和大根堆
+      // 小根堆：父节点的值小于等于子节点的值
+      // 大根堆：父节点的值大于等于子节点的值
+
+      class MinHeap {
+        constructor(list = []) {
+          this.heap = [];
+          for (const val of list) {
+            this.push(val);
+          }
+        }
+
+        size() {
+          return this.heap.length;
+        }
+
+        top() {
+          return this.heap[0];
+        }
+
+        // 插入元素（上浮调整）
+        push(val) {
+          this.heap.push(val);
+          this.shiftUp();
+        }
+
+        // 提取最小值（下沉调整）
+        pop() {
+          if (this.size() === 1) return this.heap.pop();
+          const min = this.heap[0];
+          this.heap[0] = this.heap.pop();
+          this.shiftDown();
+          return min;
+        }
+
+        // 上浮操作
+        shiftUp() {
+          let index = this.size() - 1;
+          const element = this.heap[index];
+
+          while (index > 0) {
+            const parentIndex = Math.floor((index - 1) / 2);
+            const parent = this.heap[parentIndex];
+
+            if (element >= parent) break;
+
+            this.heap[index] = parent;
+            this.heap[parentIndex] = element;
+            index = parentIndex;
+          }
+        }
+
+        // 下沉操作
+        shiftDown() {
+          let index = 0;
+          const length = this.size();
+          const element = this.heap[0];
+
+          while (true) {
+            let leftChildIndex = 2 * index + 1;
+            let rightChildIndex = 2 * index + 2;
+            let smallest = index;
+
+            if (leftChildIndex < length && this.heap[leftChildIndex] < this.heap[smallest]) {
+              smallest = leftChildIndex;
+            }
+
+            if (rightChildIndex < length && this.heap[rightChildIndex] < this.heap[smallest]) {
+              smallest = rightChildIndex;
+            }
+
+            if (smallest === index) break;
+
+            this.heap[index] = this.heap[smallest];
+            this.heap[smallest] = element;
+            index = smallest;
+          }
+        }
+      }
+
+      const minHeap = new MinHeap([3, 1, 4, 1, 5, 9, 2, 6, 5]);
+
+      console.log('MinHeap:', [...minHeap.heap]);
+      console.log('MinHeap pop:', minHeap.pop());
+      console.log('MinHeap:', [...minHeap.heap]);
+      console.log('MinHeap top:', minHeap.top());
+      minHeap.push(0);
+      console.log('MinHeap push 0:', [...minHeap.heap]);
+      minHeap.push(10);
+      console.log('MinHeap push 10:', [...minHeap.heap]);
+
+      console.log('--------------------');
+      for (let i = 0; i < 10; i++) {
+        console.log('MinHeap pop:', minHeap.pop());
+      }
+
+      class MaxHeap {
+        constructor(list = []) {
+          this.heap = [];
+          for (const val of list) {
+            this.push(val);
+          }
+        }
+        size() {
+          return this.heap.length;
+        }
+
+        top() {
+          return this.heap[0];
+        }
+
+        push(val) {
+          this.heap.push(val);
+          this.shiftUp();
+        }
+
+        pop() {
+          if (this.size() === 1) return this.heap.pop();
+          const max = this.heap[0];
+          this.heap[0] = this.heap.pop();
+          this.shiftDown();
+          return max;
+        }
+
+        shiftUp() {
+          let index = this.size() - 1;
+          const element = this.heap[index];
+
+          while (index > 0) {
+            const parentIndex = Math.floor((index - 1) / 2);
+            const parent = this.heap[parentIndex];
+
+            if (element <= parent) break;
+
+            this.heap[index] = parent;
+            this.heap[parentIndex] = element;
+            index = parentIndex;
+          }
+        }
+
+        shiftDown() {
+          let index = 0;
+          const length = this.size();
+          const element = this.heap[0];
+
+          while (true) {
+            let leftChildIndex = 2 * index + 1;
+            let rightChildIndex = 2 * index + 2;
+            let largest = index;
+
+            if (leftChildIndex < length && this.heap[leftChildIndex] > this.heap[largest]) {
+              largest = leftChildIndex;
+            }
+
+            if (rightChildIndex < length && this.heap[rightChildIndex] > this.heap[largest]) {
+              largest = rightChildIndex;
+            }
+
+            if (largest === index) break;
+
+            this.heap[index] = this.heap[largest];
+            this.heap[largest] = element;
+            index = largest;
+          }
+        }
+      }
+
+      console.log('');
+      console.log('');
+
+      const maxHeap = new MaxHeap([3, 1, 4, 1, 5, 9, 2, 6, 5]);
+
+      console.log('MaxHeap:', [...maxHeap.heap]);
+      console.log('MaxHeap pop:', maxHeap.pop());
+      console.log('MaxHeap:', [...maxHeap.heap]);
+      console.log('MaxHeap top:', maxHeap.top());
+      maxHeap.push(0);
+      console.log('MaxHeap push 0:', [...maxHeap.heap]);
+      maxHeap.push(10);
+      console.log('MaxHeap push 10:', [...maxHeap.heap]);
+
+      console.log('--------------------');
+      for (let i = 0; i < 10; i++) {
+        console.log('MaxHeap pop:', maxHeap.pop());
+      }
+
+      console.log(new MaxHeap([2, 3, 8, 5, 4, 9]));
+
+      /*
+       *常见误解：
+       *是完全有序结构（仅局部有序）
+       次小元素不一定在第二层，可能出现在任意位置
+       */
+    </script>
+  </body>
+</html>
