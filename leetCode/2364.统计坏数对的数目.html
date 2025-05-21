@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2364. 统计坏数对的数目</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
+    <script>
+      // https://leetcode.cn/problems/count-number-of-bad-pairs/?envType=daily-question&envId=2025-05-21
+
+      // 给你一个下标从 0 开始的整数数组 nums 。如果 i < j 且 j - i != nums[j] - nums[i] ，那么我们称 (i, j) 是一个 坏数对 。
+      // 请你返回 nums 中 坏数对 的总数目。
+      //
+      // 提示：
+      // 1 <= nums.length <= 105
+      // 1 <= nums[i] <= 109
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var countBadPairs = function (nums) {};
+
+      // --- answer-1 ---
+
+      var countBadPairs = function (nums = []) {
+        let ans = 0;
+        for (let i = 0; i < nums.length; i++) {
+          for (let j = i + 1; j < nums.length; j++) {
+            if (j - i != nums[j] - nums[i]) {
+              ans++;
+            }
+          }
+        }
+        return ans;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 统计 j - i === nums[j] - nums[i] 的数量
+      // => j - nums[j] === i - nums[i]
+      var countBadPairs = function (nums = []) {
+        const map = new Map();
+        let ans = 0;
+        for (let i = 0; i < nums.length; i++) {
+          const key = i - nums[i];
+          if (map.has(key)) {
+            ans += map.get(key);
+          }
+          map.set(key, (map.get(key) || 0) + 1);
+        }
+        return (nums.length * (nums.length - 1)) / 2 - ans;
+      };
+
+      var countBadPairs = function (nums = []) {
+        const map = new Map();
+        let ans = 0;
+        for (let i = 0; i < nums.length; i++) {
+          const key = i - nums[i];
+          ans += i - (map.get(key) || 0);
+          map.set(key, (map.get(key) || 0) + 1);
+        }
+        return ans;
+      };
+
+      // --- answer-2 ---
+
+      // var nums = [4,1,3,3];
+      // var result = 5;
+      // 解释：数对 (0, 1) 是坏数对，因为 1 - 0 != 1 - 4 。
+
+      // var nums = [1,2,3,4,5];
+      // var result = 0;
+      // 解释：没有坏数对。
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('countBadPairs = ', countBadPairs(nums));
+    </script>
+  </body>
+</html>
