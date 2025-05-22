@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2874. 有序三元组中的最大值 II</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
+    <script>
+      // https://leetcode.cn/problems/maximum-value-of-an-ordered-triplet-ii/?envType=daily-question&envId=2025-05-22
+
+      // 给你一个下标从 0 开始的整数数组 nums 。
+      // 请你从所有满足 i < j < k 的下标三元组 (i, j, k) 中，找出并返回下标三元组的最大值。如果所有满足条件的三元组的值都是负数，则返回 0 。
+      // 下标三元组 (i, j, k) 的值等于 (nums[i] - nums[j]) * nums[k] 。
+      //
+      // 提示：
+      // 3 <= nums.length <= 105
+      // 1 <= nums[i] <= 106
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var maximumTripletValue = function (nums) {};
+
+      // --- answer-1 ---
+
+      // 前缀 后缀最大值
+      var maximumTripletValue = function (nums = []) {
+        const n = nums.length;
+        const prefixMax = new Array(n).fill(0);
+        const suffixMax = new Array(n).fill(0);
+        for (let i = 0; i < n; i++) {
+          prefixMax[i] = i === 0 ? nums[i] : Math.max(prefixMax[i - 1], nums[i]);
+        }
+        for (let i = n - 1; i >= 0; i--) {
+          suffixMax[i] = i === n - 1 ? nums[i] : Math.max(suffixMax[i + 1], nums[i]);
+        }
+        let ans = 0;
+        for (let i = 1; i < n - 1; i++) {
+          const result = Math.max(0, (prefixMax[i - 1] - nums[i]) * suffixMax[i + 1]);
+          ans = Math.max(ans, result);
+        }
+        return ans;
+      };
+      var maximumTripletValue = function (nums) {
+        const n = nums.length;
+        const leftMax = new Array(n).fill(0);
+        const rightMax = new Array(n).fill(0);
+        for (let i = 1; i < n; i++) {
+          leftMax[i] = Math.max(leftMax[i - 1], nums[i - 1]);
+          rightMax[n - 1 - i] = Math.max(rightMax[n - i], nums[n - i]);
+        }
+        let res = 0;
+        for (let j = 1; j < n - 1; j++) {
+          res = Math.max(res, (leftMax[j] - nums[j]) * rightMax[j]);
+        }
+        return res;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 枚举 k，我们需要知道 k 左边 nums[i]−nums[j] 的最大值。
+      // 这个顺序是精心设置的：
+      // 首先更新 ans，此时 maxDiff 还没有更新，表示在当前元素左边的两个数的最大差值。
+      // 然后更新 maxDiff，此时 preMax 还没有更新，表示在当前元素左边的最大值。
+      // 最后更新 preMax。
+      var maximumTripletValue = function (nums) {
+        let ans = 0,
+          maxDiff = 0,
+          preMax = 0;
+        for (const x of nums) {
+          // 先算ans 保证 x的下标大于( nums[i] - nums[j])
+          ans = Math.max(ans, maxDiff * x);
+          // 计算前缀最大值
+          maxDiff = Math.max(maxDiff, preMax - x);
+          preMax = Math.max(preMax, x);
+        }
+        return ans;
+      };
+
+      // --- answer-2 ---
+
+      var nums = [12, 6, 1, 2, 7];
+      var result = 77;
+      // 解释：下标三元组 (0, 2, 4) 的值是 (nums[0] - nums[2]) * nums[4] = 77 。
+
+      var nums = [1, 10, 3, 4, 19];
+      var result = 133;
+      // 解释：下标三元组 (1, 2, 4) 的值是 (nums[1] - nums[2]) * nums[4] = 133 。
+
+      var nums = [1, 2, 3];
+      var result = 0;
+      // 解释：唯一的下标三元组 (0, 1, 2) 的值是一个负数，(nums[0] - nums[1]) * nums[2] = -3 。因此，答案是 0 。
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      var res = maximumTripletValue(nums);
+      console.log('res = ', res);
+    </script>
+  </body>
+</html>
