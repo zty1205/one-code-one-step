@@ -7,8 +7,13 @@
     <title>2894. 分类求和并作差</title>
   </head>
   <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
     <script>
-      // https://leetcode.cn/problems/divisible-and-non-divisible-sums-difference/description/
+      // https://leetcode.cn/problems/divisible-and-non-divisible-sums-difference/?envType=daily-question&envId=2025-05-27
 
       // 给你两个正整数 n 和 m 。
       // 现定义两个整数 num1 和 num2 ，如下所示：
@@ -30,44 +35,40 @@
 
       // --- answer-1 ---
 
-      // 循环
       var differenceOfSums = function (n = 1, m = 1) {
-        let res = 0;
+        let ans = 0;
         for (let i = 1; i <= n; i++) {
           if (i % m === 0) {
-            res -= i;
+            ans -= i; // num2
           } else {
-            res += i;
+            ans += i; // num1
           }
         }
-        return res;
+        return ans;
       };
 
       // --- answer-1 ---
 
       // --- answer-2 ---
 
-      // 数学公式
+      // 等差数列 - 等比数列
       var differenceOfSums = function (n, m) {
-        let k = (n / m) >> 0;
+        const k = Math.floor(n / m);
         return (n * (n + 1)) / 2 - k * (k + 1) * m;
       };
 
       // --- answer-2 ---
 
-      var n = 10,
-        m = 3;
-      var result = 19;
+      // var n = 10, m = 3;
+      // var result = 19;
       // 解释：在这个示例中：
 
-      var n = 5,
-        m = 6;
-      var result = 15;
+      // var n = 5, m = 6;
+      // var result = 15;
       // 解释：在这个示例中：
 
-      var n = 5,
-        m = 1;
-      var result = -15;
+      // var n = 5, m = 1;
+      // var result = -15;
       // 解释：在这个示例中：
 
       console.log('n = ', n);
