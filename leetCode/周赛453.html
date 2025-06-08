@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>周赛453</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
+    <script>
+      /**
+       * 周赛453
+       */
+
+      // var node = buildLinkNodeByArray(head);
+      // var tree = buildTreeByArray([...root]);
+      // var { graph: node } = buildUndirectedGraphByArray(adjList);
+    </script>
+    <script>
+      var canMakeEqual = function (nums = [], k = 1) {
+        const n = nums.length;
+
+        let one = 0;
+        let lastI = undefined;
+        let countI = 0;
+
+        let nOne = 0;
+        let lastJ = undefined;
+        let countJ = 0;
+        for (let i = 0; i < n; i++) {
+          if (nums[i] === 1) {
+            if (lastI !== undefined) {
+              countI += i - lastI;
+              lastI = undefined;
+            } else {
+              lastI = i;
+            }
+            one++;
+          } else {
+            if (lastJ !== undefined) {
+              countJ += i - lastJ;
+              lastJ = undefined;
+            } else {
+              lastJ = i;
+            }
+            nOne++;
+          }
+        }
+        if (one === n || nOne === n) {
+          return true;
+        }
+        if (lastI !== undefined && lastJ !== undefined) {
+          return false;
+        }
+        return (countI <= k && lastI === undefined) || (countJ <= k && lastJ === undefined);
+      };
+
+      var nums = [1, -1, 1, -1, 1],
+        k = 3;
+      var result = true;
+      console.log('canMakeEqual = ', canMakeEqual(nums, k), 'result = ', result);
+
+      var nums = [-1, -1, -1, 1, 1, 1],
+        k = 5;
+      var result = false;
+      console.log('canMakeEqual = ', canMakeEqual(nums, k), 'result = ', result);
+
+      var nums = [1, 1, -1, -1, 1, 1, 1, -1, -1, -1, -1, 1, -1],
+        k = 3;
+      var result = false;
+      console.log('canMakeEqual = ', canMakeEqual(nums, k), 'result = ', result);
+    </script>
+    <script>
+      var countPermutations = function (complexity = []) {
+        const BASE = 10 ** 9 + 7;
+        const guard = complexity[0];
+        let ans = 1;
+        for (let i = 1; i < complexity.length; i++) {
+          if (complexity[i] <= guard) {
+            return 0;
+          }
+          ans = (ans * i) % BASE;
+        }
+        return ans;
+      };
+
+      var complexity = [1, 2, 3];
+      var result = 2;
+      console.log('countPermutations = ', countPermutations(complexity), 'result = ', result);
+
+      var complexity = [1, 2, 3, 4];
+      var result = 6;
+      console.log('countPermutations = ', countPermutations(complexity), 'result = ', result);
+
+      var complexity = [1, 2, 3, 4, 5];
+      var result = 24;
+      console.log('countPermutations = ', countPermutations(complexity), 'result = ', result);
+
+      var complexity = [3, 3, 3, 4, 4, 4];
+      var result = 0;
+      console.log('countPermutations = ', countPermutations(complexity), 'result = ', result);
+    </script>
+    <script>
+      // dp[i][j]
+      // dp[0][0] + dp[1][5]
+      // dp[0][1] + dp[2][5]
+      var countPartitions = function (nums, k) {};
+    </script>
+    <script></script>
+  </body>
+</html>
