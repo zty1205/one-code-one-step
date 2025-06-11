@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1561. 你可以获得的最大硬币数目</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
+    <script>
+      // https://leetcode.cn/problems/maximum-number-of-coins-you-can-get/?envType=daily-question&envId=2025-06-11
+
+      // 有 3n 堆数目不一的硬币，你和你的朋友们打算按以下方式分硬币：
+      //
+      // 提示：
+      // 每一轮中，你将会选出 任意 3 堆硬币（不一定连续）。
+      // Alice 将会取走硬币数量最多的那一堆。
+      // 你将会取走硬币数量第二多的那一堆。
+      // Bob 将会取走最后一堆。
+      // 重复这个过程，直到没有更多硬币。
+      // 给你一个整数数组 piles ，其中 piles[i] 是第 i 堆中硬币的数目。
+      // 返回你可以获得的最大硬币数目。
+      //
+      // 提示：
+      // 3 <= piles.length <= 10^5
+      // piles.length % 3 == 0
+      // 1 <= piles[i] <= 10^4
+
+      /**
+       * @param {number[]} piles
+       * @return {number}
+       */
+      var maxCoins = function (piles) {};
+
+      // --- answer-1 ---
+
+      // 贪心算法 每次取 最大 次大和最小的
+      var maxCoins = function (piles = []) {
+        piles.sort((a, b) => a - b);
+        let ans = 0;
+        for (let i = 0; i < piles.length; i++) {
+          piles.pop();
+          ans += piles.pop();
+        }
+        return ans;
+      };
+
+      var maxCoins = function (piles = []) {
+        piles.sort((a, b) => a - b);
+        const n = piles.length / 3;
+        let ans = 0;
+        let idx = piles.length - 2;
+        for (let i = 0; i < n; i++) {
+          ans += piles[idx];
+          idx -= 2;
+        }
+        return ans;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var piles = [2, 4, 1, 2, 7, 8];
+      var result = 9;
+      // 解释：选出 (2, 7, 8) ，Alice 取走 8 枚硬币的那堆，你取走 7 枚硬币的那堆，Bob 取走最后一堆。
+
+      // var piles = [2,4,5];
+      // var result = 4;
+
+      // var piles = [9,8,7,6,5,1,2,3,4];
+      // var result = 18;
+
+      console.log('piles = ', piles);
+      console.log('result = ', result);
+      console.log('maxCoins = ', maxCoins(piles));
+    </script>
+  </body>
+</html>

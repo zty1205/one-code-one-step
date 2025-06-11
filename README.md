@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (873 道)
+## 三、LeetCode (874 道)
 
 <br/>
 
@@ -607,6 +607,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1417.重新格式化字符串.html](./leetCode/1417.重新格式化字符串.html)
 - [1422.分割字符串的最大得分.html](./leetCode/1422.分割字符串的最大得分.html)
 - [1431.拥有最多糖果的孩子.html](./leetCode/1431.拥有最多糖果的孩子.html)
+- [1561.你可以获得的最大硬币数目.html](./leetCode/1561.你可以获得的最大硬币数目.html)
 - [1550.存在连续三个奇数的数组.html](./leetCode/1550.存在连续三个奇数的数组.html)
 - [1534.统计好三元组.html](./leetCode/1534.统计好三元组.html)
 - [1466.重新规划路线.html](./leetCode/1466.重新规划路线.html)
