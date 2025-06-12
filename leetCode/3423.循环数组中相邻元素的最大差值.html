@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3423. 循环数组中相邻元素的最大差值</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
+    <script>
+      // https://leetcode.cn/problems/maximum-difference-between-adjacent-elements-in-a-circular-array/?envType=daily-question&envId=2025-06-12
+
+      // 给你一个 循环 数组 nums ，请你找出相邻元素之间的 最大 绝对差值。
+      // 注意：一个循环数组中，第一个元素和最后一个元素是相邻的。
+      //
+      // 提示：
+      // 2 <= nums.length <= 100
+      // -100 <= nums[i] <= 100
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var maxAdjacentDistance = function (nums) {};
+
+      // --- answer-1 ---
+
+      var maxAdjacentDistance = function (nums = []) {
+        const n = nums.length;
+        let maxDiff = 0;
+        for (let i = 0; i < n; i++) {
+          const diff = Math.abs(nums[i] - nums[(i + 1) % n]);
+          maxDiff = Math.max(maxDiff, diff);
+        }
+        return maxDiff;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('maxAdjacentDistance = ', maxAdjacentDistance(nums));
+    </script>
+  </body>
+</html>
