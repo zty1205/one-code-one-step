@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1432. 改变一个整数能得到的最大差值</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
+    <script>
+      // https://leetcode.cn/problems/max-difference-you-can-get-from-changing-an-integer/description/?envType=daily-question&envId=2025-06-15
+
+      // 给你一个整数 num 。你可以对它进行以下步骤共计 两次：
+      //
+      // 提示：
+      // 选择一个数字 x (0 <= x <= 9).
+      // 选择另一个数字 y (0 <= y <= 9) 。数字 y 可以等于 x 。
+      // 将 num 中所有出现 x 的数位都用 y 替换。
+      // 令两次对 num 的操作得到的结果分别为 a 和 b 。
+      // 请你返回 a 和 b 的 最大差值 。
+      // 注意，新的整数（a 或 b）必须不能 含有前导 0，并且 非 0。
+      //
+      // 提示：
+      // 1 <= num <= 10^8
+
+      /**
+       * @param {number} num
+       * @return {number}
+       */
+      var maxDiff = function (num) {};
+
+      // --- answer-1 ---
+
+      var maxDiff = function (num = 1) {
+        let str = num.toString();
+        let tmp = str;
+
+        let i = 0;
+        while (i < str.length && str[i] === '9') {
+          i++;
+        }
+        // 正则需要使用 global
+
+        // 最大值
+        if (i < str.length) {
+          str = str.replace(new RegExp(tmp[i], 'g'), '9');
+        }
+
+        const guard = tmp[0];
+
+        // 只能是以1开头的数字
+        if (guard === '1') {
+          // 不能包含前导0, 必须大于0和1
+          let j = 1;
+          while (j < tmp.length && (tmp[j] === '1' || tmp[j] === '0')) {
+            j++;
+          }
+
+          if (j < tmp.length) {
+            tmp = tmp.replace(new RegExp(tmp[j], 'g'), '0');
+          }
+        } else {
+          tmp = tmp.replace(new RegExp(guard, 'g'), '1');
+        }
+
+        return parseInt(str) - parseInt(tmp);
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var num = 555;
+      var result = 888;
+      // 解释：第一次选择 x = 5 且 y = 9 ，并把得到的新数字保存在 a 中。
+
+      var num = 9;
+      var result = 8;
+      // 解释：第一次选择 x = 9 且 y = 9 ，并把得到的新数字保存在 a 中。
+
+      var num = 123456;
+      // var result = 820000;
+
+      var num = 10000;
+      var result = 80000;
+
+      var num = 9288;
+      var result = 8700;
+
+      var num = 11233;
+      var result = 88200;
+
+      var num = 1101057;
+      var result = 8808050;
+
+      var num = 102301;
+      var result = 802008;
+
+      console.log('num = ', num);
+      console.log('result = ', result);
+      console.log('maxDiff = ', maxDiff(num));
+    </script>
+  </body>
+</html>
