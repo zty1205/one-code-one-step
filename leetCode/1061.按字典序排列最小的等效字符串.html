@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1061. 按字典序排列最小的等效字符串</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
+    <script>
+      // https://leetcode.cn/problems/lexicographically-smallest-equivalent-string/?envType=daily-question&envId=2025-06-17
+
+      // 给出长度相同的两个字符串s1 和 s2 ，还有一个字符串 baseStr 。
+      // 其中  s1[i] 和 s2[i]  是一组等价字符。
+      //
+      // 提示：
+      // 举个例子，如果 s1 = "abc" 且 s2 = "cde"，那么就有 'a' == 'c', 'b' == 'd', 'c' == 'e'。
+      // 等价字符遵循任何等价关系的一般规则：
+      //
+      // 提示：
+      // 自反性 ：'a' == 'a'
+      //  对称性 ：'a' == 'b' 则必定有 'b' == 'a'
+      //  传递性 ：'a' == 'b' 且 'b' == 'c' 就表明 'a' == 'c'
+      // 利用 s1 和 s2 的等价信息，找出并返回 baseStr 的按字典序排列最小的等价字符串。
+      //
+      // 提示：
+      // 1 <= s1.length, s2.length, baseStr <= 1000
+      // s1.length == s2.length
+      // 字符串s1, s2, and baseStr 仅由从 'a' 到 'z' 的小写英文字母组成。
+
+      /**
+       * @param {string} s1
+       * @param {string} s2
+       * @param {string} baseStr
+       * @return {string}
+       */
+      var smallestEquivalentString = function (s1, s2, baseStr) {};
+
+      // --- answer-1 ---
+
+      // 并查集
+      class UnionFind {
+        constructor(n) {
+          this.parent = Array.from({ length: n }, (_, i) => i);
+        }
+
+        find(x) {
+          if (this.parent[x] !== x) {
+            this.parent[x] = this.find(this.parent[x]);
+          }
+          return this.parent[x];
+        }
+
+        unite(x, y) {
+          x = this.find(x);
+          y = this.find(y);
+          if (x === y) {
+            return;
+          }
+          if (x > y) {
+            [x, y] = [y, x];
+          }
+          // 总是让字典序更小的作为集合代表字符
+          this.parent[y] = x;
+          console.log(
+            `Unite ${String.fromCharCode(x + 'a'.charCodeAt())} and ${String.fromCharCode(y + 'a'.charCodeAt())}`
+          );
+          console.log(
+            'parent = ',
+            this.parent.reduce((acc, cur, i) => {
+              acc[String.fromCharCode(i + 'a'.charCodeAt())] = String.fromCharCode(cur + 'a'.charCodeAt());
+              return acc;
+            }, {})
+          );
+        }
+      }
+
+      var smallestEquivalentString = function (s1, s2, baseStr) {
+        const codeA = 'a'.charCodeAt();
+        const uf = new UnionFind(26);
+        for (let i = 0; i < s1.length; i++) {
+          uf.unite(s1.charCodeAt(i) - codeA, s2.charCodeAt(i) - codeA);
+        }
+        return [...baseStr].map((c) => String.fromCharCode(uf.find(c.charCodeAt(0) - codeA) + codeA)).join('');
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var s1 = 'parker',
+        s2 = 'morris',
+        baseStr = 'parser';
+      var result = 'makkek';
+      // 解释：根据 A 和 B 中的等价信息，我们可以将这些字符分为 [m,p], [a,o], [k,r,s], [e,i] 共 4 组。每组中的字符都是等价的，并按字典序排列。所以答案是 "makkek"。
+
+      // var s1 = "hello", s2 = "world", baseStr = "hold";
+      // var result = "hdld";
+      // 解释：根据 A 和 B 中的等价信息，我们可以将这些字符分为 [h,w], [d,e,o], [l,r] 共 3 组。所以只有 S 中的第二个字符 'o' 变成 'd'，最后答案为 "hdld"。
+
+      // var s1 = "leetcode", s2 = "programs", baseStr = "sourcecode";
+      // var result = "aauaaaaada";
+      // 解释：我们可以把 A 和 B 中的等价字符分为 [a,o,e,r,s,c], [l,p], [g,t] 和 [d,m] 共 4 组，因此 S 中除了 'u' 和 'd' 之外的所有字母都转化成了 'a'，最后答案为 "aauaaaaada"。
+
+      console.log('s1 = ', s1);
+      console.log('s2 = ', s2);
+      console.log('baseStr = ', baseStr);
+      console.log('result = ', result);
+      console.log('smallestEquivalentString = ', smallestEquivalentString(s1, s2, baseStr));
+    </script>
+  </body>
+</html>
