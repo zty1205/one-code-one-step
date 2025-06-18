@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2966. 划分数组并满足最大差限制</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
+    <script>
+      // https://leetcode.cn/problems/divide-array-into-arrays-with-max-difference/?envType=daily-question&envId=2025-06-18
+
+      // 给你一个长度为 n 的整数数组 nums，以及一个正整数 k 。
+      // 将这个数组划分为 n / 3 个长度为 3 的子数组，并满足以下条件：
+      //
+      // 提示：
+      // 子数组中 任意 两个元素的差必须 小于或等于 k 。
+      // 返回一个 二维数组 ，包含所有的子数组。如果不可能满足条件，就返回一个空数组。如果有多个答案，返回 任意一个 即可。
+      //
+      // 提示：
+      // n == nums.length
+      // 1 <= n <= 105
+      // n 是 3 的倍数
+      // 1 <= nums[i] <= 105
+      // 1 <= k <= 105
+
+      /**
+       * @param {number[]} nums
+       * @param {number} k
+       * @return {number[][]}
+       */
+      var divideArray = function (nums, k) {};
+
+      // --- answer-1 ---
+
+      // 贪心排序后相邻的数字差值最小
+      var divideArray = function (nums = [], k = 1) {
+        const ans = [];
+        nums.sort((a, b) => a - b);
+        for (let i = 0; i < nums.length; i += 3) {
+          const a = nums[i],
+            b = nums[i + 1],
+            c = nums[i + 2];
+          if (b - a > k || c - b > k || c - a > k) {
+            return [];
+          }
+          ans.push([a, b, c]);
+        }
+        return ans;
+      };
+
+      // 比较两边的数字即可
+      var divideArray = function (nums = [], k = 1) {
+        const ans = [];
+        nums.sort((a, b) => a - b);
+        for (let i = 0; i < nums.length; i += 3) {
+          if (nums[i + 2] - nums[i] > k) {
+            return [];
+          }
+          ans.push(nums.slice(i, i + 3));
+        }
+        return ans;
+      };
+
+      var divideArray = function (nums = [], k = 1) {
+        const ans = [];
+        nums.sort((a, b) => a - b);
+        for (let i = 0; i < nums.length; i += 3) {
+          const a = nums[i],
+            b = nums[i + 1],
+            c = nums[i + 2];
+          if (c - a > k) {
+            return [];
+          }
+          ans.push([a, b, c]);
+        }
+        return ans;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var nums = [1, 3, 4, 8, 7, 9, 3, 5, 1],
+        k = 2;
+
+      var result = [
+        [1, 1, 3],
+        [3, 4, 5],
+        [7, 8, 9]
+      ];
+
+      console.log('nums = ', nums);
+      console.log('k = ', k);
+      console.log('result = ', result);
+      console.log('divideArray = ', divideArray(nums, k));
+    </script>
+  </body>
+</html>
