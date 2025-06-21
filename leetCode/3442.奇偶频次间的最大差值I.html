@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3442. 奇偶频次间的最大差值 I</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
+    <script>
+      // https://leetcode.cn/problems/maximum-difference-between-even-and-odd-frequency-i/?envType=daily-question&envId=2025-06-21
+
+      // 给你一个由小写英文字母组成的字符串 s。
+      // 请你找出字符串中两个字符 a1 和 a2 的出现频次之间的 最大 差值 diff = freq(a1) - freq(a2)，这两个字符需要满足：
+      //
+      // 提示：
+      // a1 在字符串中出现 奇数次 。
+      // a2 在字符串中出现 偶数次 。
+      // 返回 最大 差值。
+      //
+      // 提示：
+      // 3 <= s.length <= 100
+      // s 仅由小写英文字母组成。
+      // s 至少由一个出现奇数次的字符和一个出现偶数次的字符组成。
+
+      /**
+       * @param {string} s
+       * @return {number}
+       */
+      var maxDifference = function (s) {};
+
+      // --- answer-1 ---
+
+      // 取最大的奇数和最小的偶数
+      var maxDifference = function (s = '') {
+        const freq = {};
+        for (const c of s) {
+          freq[c] = (freq[c] || 0) + 1;
+        }
+        const fq = Object.values(freq).sort((a, b) => a - b);
+        const n = fq.length;
+        let i = 0;
+        while (i < n && fq[i] % 2 === 1) {
+          i++;
+        }
+        let j = n - 1;
+        while (j >= 0 && fq[j] % 2 === 0) {
+          j--;
+        }
+
+        return fq[j] - fq[i];
+      };
+
+      var maxDifference = function (s = '') {
+        const freq = {};
+        for (const c of s) {
+          freq[c] = (freq[c] || 0) + 1;
+        }
+        const fq = Object.values(freq);
+
+        let oddMax = -1;
+        let evenMin = Infinity;
+        for (const f of fq) {
+          if (f % 2 === 1) {
+            oddMax = Math.max(oddMax, f);
+          } else {
+            evenMin = Math.min(evenMin, f);
+          }
+        }
+        return oddMax - evenMin;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var s = 'aaaaabbc';
+      var result = 3;
+      var s = 'abcabcab';
+      var result = 1;
+
+      console.log('s = ', s);
+      console.log('result = ', result);
+      console.log('maxDifference = ', maxDifference(s));
+    </script>
+  </body>
+</html>

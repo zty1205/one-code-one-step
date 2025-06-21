@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (882 道)
+## 三、LeetCode (883 道)
 
 <br/>
 
@@ -924,6 +924,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2833.距离原点最远的点.html](./leetCode/2833.距离原点最远的点.html)
 - [2839.判断通过操作能否让字符串相等 I.html](./leetCode/2839.判断通过操作能否让字符串相等I.html)
 - [2843.统计对称整数的数目.html](./leetCode/2843.统计对称整数的数目.html)
+- [3442.奇偶频次间的最大差值 I.html](./leetCode/3442.奇偶频次间的最大差值I.html)
 - [2966.划分数组并满足最大差限制.html](./leetCode/2966.划分数组并满足最大差限制.html)
 - [3423.循环数组中相邻元素的最大差值.html](./leetCode/3423.循环数组中相邻元素的最大差值.html)
 - [2894.分类求和并作差.html](./leetCode/2894.分类求和并作差.html)
