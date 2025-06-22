@@ -7,8 +7,13 @@
     <title>2138. 将字符串拆分为若干长度为 k 的组</title>
   </head>
   <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
     <script>
-      // https://leetcode.cn/problems/divide-a-string-into-groups-of-size-k/
+      // https://leetcode.cn/problems/divide-a-string-into-groups-of-size-k/description/?envType=daily-question&envId=2025-06-22
 
       // 字符串 s 可以按下述步骤划分为若干长度为 k 的组：
       //
@@ -34,16 +39,9 @@
 
       // --- answer-1 ---
 
-      // 切割
-      var divideString = function (s = '', k = 0, fill = '') {
-        const length = s.length;
-        const num = length % k;
-        if (num !== 0) {
-          for (let i = 0; i < k - num; i++) {
-            s = s + fill;
-          }
-        }
-
+      var divideString = function (s = '', k = 1, fill = '') {
+        const num = s.length % k;
+        s += num ? fill.repeat(k - num) : '';
         const result = [];
         for (let i = 0; i < s.length; i += k) {
           result.push(s.slice(i, i + k));
@@ -57,8 +55,10 @@
 
       // --- answer-2 ---
 
-      // var s = "abcdefghi", k = 3, fill = "x";
-      // var result = ["abc","def","ghi"];
+      var s = 'abcdefghi',
+        k = 3,
+        fill = 'x';
+      var result = ['abc', 'def', 'ghi'];
       // 解释：
 
       var s = 'abcdefghij',
