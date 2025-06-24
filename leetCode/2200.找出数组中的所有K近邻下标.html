@@ -7,17 +7,22 @@
     <title>2200. 找出数组中的所有 K 近邻下标</title>
   </head>
   <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
     <script>
-      // https://leetcode.cn/problems/find-all-k-distant-indices-in-an-array/description/
+      // https://leetcode.cn/problems/find-all-k-distant-indices-in-an-array/solutions/1365061/zhao-chu-shu-zu-zhong-de-suo-you-k-jin-l-b3k2/?envType=daily-question&envId=2025-06-24
 
       // 给你一个下标从 0 开始的整数数组 nums 和两个整数 key 和 k 。K 近邻下标 是 nums 中的一个下标 i ，并满足至少存在一个下标 j 使得 |i - j| <= k 且 nums[j] == key 。
       // 以列表形式返回按 递增顺序 排序的所有 K 近邻下标。
       //
       // 提示：
       // 1 <= nums.length <= 1000
-      // 1 <= nums[i] <= 1000
-      // key 是数组 nums 中的一个整数
-      // 1 <= k <= nums.length
+      // 	1 <= nums[i] <= 1000
+      // 	key 是数组 nums 中的一个整数
+      // 	1 <= k <= nums.length
 
       /**
        * @param {number[]} nums
@@ -29,16 +34,19 @@
 
       // --- answer-1 ---
 
-      // 先找到key 在把下标放入
       var findKDistantIndices = function (nums, key, k) {
-        const set = new Set();
-        const l = nums.length - 1;
-        nums.forEach((item, idx) => {
-          if (item === key) {
-            for (let i = Math.max(0, idx - k); i <= Math.min(idx + k, l); i++) set.add(i);
+        const res = [];
+        const n = nums.length;
+        // 遍历数对
+        for (let i = 0; i < n; ++i) {
+          for (let j = 0; j < n; ++j) {
+            if (nums[j] === key && Math.abs(i - j) <= k) {
+              res.push(i);
+              break; // 提前结束以防止重复添加
+            }
           }
-        });
-        return [...set];
+        }
+        return res;
       };
 
       // --- answer-1 ---
@@ -51,13 +59,13 @@
         key = 9,
         k = 1;
       var result = [1, 2, 3, 4, 5, 6];
-      // 解释：因此，nums[2] == key 且 nums[5] == key 。
+      // 解释：因此，nums[2] == key 且 nums[5] == key。
 
       var nums = [2, 2, 2, 2, 2],
         key = 2,
         k = 2;
       var result = [0, 1, 2, 3, 4];
-      // 解释：对 nums 的所有下标 i ，总存在某个下标 j 使得 |i - j| <= k 且 nums[j] == key ，所以每个下标都是一个 K 近邻下标。
+      // 解释：对 nums 的所有下标 i ，总存在某个下标 j 使得 |i - j| <= k 且 nums[j] == key，所以每个下标都是一个 K 近邻下标。
 
       console.log('nums = ', nums);
       console.log('key = ', key);
