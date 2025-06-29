@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1498. 满足条件的子序列数目</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
+    <script>
+      // https://leetcode.cn/problems/number-of-subsequences-that-satisfy-the-given-sum-condition/?envType=daily-question&envId=2025-06-29
+
+      // 给你一个整数数组 nums 和一个整数 target 。
+      // 请你统计并返回 nums 中能满足其最小元素与最大元素的 和 小于或等于 target 的 非空 子序列的数目。
+      // 由于答案可能很大，请将结果对 109 + 7 取余后返回。
+      //
+      // 提示：
+      // 1 <= nums.length <= 105
+      // 1 <= nums[i] <= 106
+      // 1 <= target <= 106
+
+      /**
+       * @param {number[]} nums
+       * @param {number} target
+       * @return {number}
+       */
+      var numSubseq = function (nums, target) {};
+
+      // --- answer-1 ---
+
+      // 子序列不要求连续，所以可以排序，然后双指针
+      // 双指针 + 预处理2的幂次
+      // 数字出现或者不出现的子序列数目是2的幂次
+      var numSubseq = function (nums, target) {
+        const mod = 10e9 + 7;
+
+        // 预处理2的幂次
+        const pow2 = [1];
+        for (let i = 1; i < 100000; i++) {
+          pow2[i] = (pow2[i - 1] * 2) % mod;
+        }
+
+        nums.sort((a, b) => a - b);
+        let ans = 0;
+        let left = 0;
+        let right = nums.length - 1;
+        while (left <= right) {
+          // 可以相等，此时子序列的最小最大是同一个数
+          if (nums[left] + nums[right] <= target) {
+            // nums[left] 可以作为子序列的最小值
+            // 其余下标在 [left+1,right] 中的数选或不选都可以
+            ans = (ans + pow2[right - left]) % mod;
+            left++;
+          } else {
+            // nums[right] 太大了，即使与剩余元素的最小值 nums[left] 相加也不满足要求
+            right--;
+          }
+        }
+        return ans;
+      };
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      // var nums = [3,5,6,7], target = 9;
+      // var result = 4;
+      // 解释：有 4 个子序列满足该条件。
+
+      // var nums = [3,3,6,8], target = 10;
+      // var result = 6;
+      // 解释：有 6 个子序列满足该条件。（nums 中可以有重复数字）
+
+      // var nums = [2,3,3,4,6,7], target = 12;
+      // var result = 61;
+      // 解释：共有 63 个非空子序列，其中 2 个不满足条件（[6,7], [7]）
+
+      console.log('nums = ', nums);
+      console.log('target = ', target);
+      console.log('result = ', result);
+      console.log('numSubseq = ', numSubseq(nums, target));
+    </script>
+  </body>
+</html>
