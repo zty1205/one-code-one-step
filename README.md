@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (888 道)
+## 三、LeetCode (889 道)
 
 <br/>
 
@@ -825,6 +825,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1207.独一无二的出现次数.html](./leetCode/1207.独一无二的出现次数.html)
 - [1431.拥有最多糖果的孩子.html](./leetCode/1431.拥有最多糖果的孩子.html)
 - [1768.交替合并字符串.html](./leetCode/1768.交替合并字符串.html)
+- [1863.找出所有子集的异或总和再求和.html](./leetCode/1863.找出所有子集的异或总和再求和.html)
 - [1920.基于排列构建数组.html](./leetCode/1920.基于排列构建数组.html)
 - [1922.统计好数字的数目.html](./leetCode/1922.统计好数字的数目.html)
 - [1926.迷宫中离入口最近的出口.html](./leetCode/1926.迷宫中离入口最近的出口.html)
