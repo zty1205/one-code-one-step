@@ -7,14 +7,21 @@
     <title>1394. 找出数组中的幸运数</title>
   </head>
   <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
     <script>
-      // https://leetcode.cn/problems/find-lucky-integer-in-an-array/
+      // https://leetcode.cn/problems/find-lucky-integer-in-an-array/description/?envType=daily-question&envId=2025-07-05
 
       // 在整数数组中，如果一个整数的出现频次和它的数值大小相等，我们就称这个整数为「幸运数」。
       // 给你一个整数数组 arr，请你从中找出并返回一个幸运数。
+      //
       // 提示：
       // 如果数组中存在多个幸运数，只需返回 最大 的那个。
       // 如果数组中不含幸运数，则返回 -1 。
+      //
       // 提示：
       // 1 <= arr.length <= 500
       // 1 <= arr[i] <= 500
@@ -23,18 +30,20 @@
        * @param {number[]} arr
        * @return {number}
        */
-      var findLucky = function (arr = []) {};
+      var findLucky = function (arr) {};
 
       // --- answer-1 ---
 
-      // HASH 统计
       var findLucky = function (arr = []) {
-        const hash = new Array(501).fill(0);
-        for (let n of arr) {
-          hash[n] += 1;
+        const cnt = [];
+        for (let i = 0; i < arr.length; i++) {
+          cnt[arr[i]] = (cnt[arr[i]] || 0) + 1;
         }
-        for (let i = hash.length - 1; i > 0; i--) {
-          if (i === hash[i]) return i;
+        const n = cnt.length;
+        for (let i = n - 1; i >= 0; i--) {
+          if (cnt[i] === i) {
+            return i;
+          }
         }
         return -1;
       };
@@ -45,23 +54,23 @@
 
       // --- answer-2 ---
 
-      var arr = [2, 2, 3, 4];
-      var result = 2;
+      // var arr = [2,2,3,4];
+      // var result = 2;
       // 解释：数组中唯一的幸运数是 2 ，因为数值 2 的出现频次也是 2 。
 
-      var arr = [1, 2, 2, 3, 3, 3];
-      var result = 3;
+      // var arr = [1,2,2,3,3,3];
+      // var result = 3;
       // 解释：1、2 以及 3 都是幸运数，只需要返回其中最大的 3 。
 
-      var arr = [2, 2, 2, 3, 3];
-      var result = -1;
+      // var arr = [2,2,2,3,3];
+      // var result = -1;
       // 解释：数组中不存在幸运数。
 
-      var arr = [5];
-      var result = -1;
+      // var arr = [5];
+      // var result = -1;
 
-      var arr = [7, 7, 7, 7, 7, 7, 7];
-      var result = 7;
+      // var arr = [7,7,7,7,7,7,7];
+      // var result = 7;
 
       console.log('arr = ', arr);
       console.log('result = ', result);
