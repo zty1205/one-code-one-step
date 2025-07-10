@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2116. 判断一个括号字符串是否有效</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
+    <script>
+      // https://leetcode.cn/problems/check-if-a-parentheses-string-can-be-valid/?envType=daily-question&envId=2025-07-08
+
+      // 一个括号字符串是只由 '(' 和 ')' 组成的 非空 字符串。如果一个字符串满足下面 任意 一个条件，那么它就是有效的：
+      //
+      // 提示：
+      // 字符串为 ().
+      // 它可以表示为 AB（A 与 B 连接），其中A 和 B 都是有效括号字符串。
+      // 它可以表示为 (A) ，其中 A 是一个有效括号字符串。
+      // 给你一个括号字符串 s 和一个字符串 locked ，两者长度都为 n 。locked 是一个二进制字符串，只包含 '0' 和 '1' 。对于 locked 中 每一个 下标 i ：
+      //
+      // 提示：
+      // 如果 locked[i] 是 '1' ，你 不能 改变 s[i] 。
+      // 如果 locked[i] 是 '0' ，你 可以 将 s[i] 变为 '(' 或者 ')' 。
+      // 如果你可以将 s 变为有效括号字符串，请你返回 true ，否则返回 false 。
+      //
+      // 提示：
+      // n == s.length == locked.length
+      // 1 <= n <= 105
+      // s[i] 要么是 '(' 要么是 ')' 。
+      // locked[i] 要么是 '0' 要么是 '1' 。
+
+      /**
+       * @param {string} s
+       * @param {string} locked
+       * @return {boolean}
+       */
+      var canBeValid = function (s, locked) {};
+
+      // --- answer-1 ---
+
+      var canBeValid = function (s, locked) {
+        if (s.length % 2 > 0) {
+          return false;
+        }
+        // 维护 （ 可以达到的的最大值和最小值
+        let mn = 0,
+          mx = 0;
+        for (let i = 0; i < s.length; i++) {
+          if (locked[i] === '1') {
+            // 不能改
+            const d = s[i] === '(' ? 1 : -1;
+            mx += d;
+            if (mx < 0) {
+              // c 不能为负
+              return false;
+            }
+            mn += d;
+          } else {
+            // 可以改
+            mx++; // 改成左括号，c 加一
+            mn--; // 改成右括号，c 减一
+          }
+          if (mn < 0) {
+            // c 不能为负
+            mn = 1; // 此时 c 的取值范围都是奇数，最小的奇数是 1
+          }
+        }
+        console.log('mn = ', mn, 'mx = ', mx);
+        return mn === 0; // 说明最终 c 能是 0
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var s = '))()))',
+        locked = '010100';
+      var result = true;
+      // 解释：locked[1] == '1' 和 locked[3] == '1' ，所以我们无法改变 s[1] 或者 s[3] 。
+
+      var s = '()()',
+        locked = '0000';
+      var result = true;
+      // 解释：我们不需要做任何改变，因为 s 已经是有效字符串了。
+
+      var s = ')',
+        locked = '0';
+      var result = false;
+      // 解释：locked 允许改变 s[0] 。
+
+      var s = '(((())(((())',
+        locked = '111111010111';
+      var result = true;
+      // 解释：locked 允许我们改变 s[6] 和 s[8]。
+
+      var s = '((()(()()))()((()()))))()((()(()',
+        locked = '10111100100101001110100010001001';
+      var result = true;
+
+      console.log('s = ', s);
+      console.log('locked = ', locked);
+      console.log('result = ', result);
+      console.log('canBeValid = ', canBeValid(s, locked));
+    </script>
+  </body>
+</html>

@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (891 道)
+## 三、LeetCode (892 道)
 
 <br/>
 
@@ -835,6 +835,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2094.找出 3 位偶数.html](./leetCode/2094.找出3位偶数.html)
 - [2095.删除链表的中间节点.html](./leetCode/2095.删除链表的中间节点.html)
 - [2109.向字符串添加空格.html](./leetCode/2109.向字符串添加空格.html)
+- [2116.判断一个括号字符串是否有效.html](./leetCode/2116.判断一个括号字符串是否有效.html)
 - [2130.链表最大孪生和.html](./leetCode/2130.链表最大孪生和.html)
 - [2138.将字符串拆分为若干长度为 k 的组.html](./leetCode/2138.将字符串拆分为若干长度为k的组.html)
 - [2145.统计隐藏数组数目.html](./leetCode/2145.统计隐藏数组数目.html)
