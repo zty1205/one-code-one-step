@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (893 道)
+## 三、LeetCode (894 道)
 
 <br/>
 
@@ -578,6 +578,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1189.“气球”的最大数量.html](./leetCode/1189.“气球”的最大数量.html)
 - [1200.最小绝对差.html](./leetCode/1200.最小绝对差.html)
 - [1207.独一无二的出现次数.html](./leetCode/1207.独一无二的出现次数.html)
+- [1290.二进制链表转整数.html](./leetCode/1290.二进制链表转整数.html)
 - [1394.找出数组中的幸运数.html](./leetCode/1394.找出数组中的幸运数.html)
 - [1287.有序数组中出现次数超过 25%的元素.html](./leetCode/1287.有序数组中出现次数超过25%的元素.html)
 - [1295.统计位数为偶数的数字.html](./leetCode/1295.统计位数为偶数的数字.html)

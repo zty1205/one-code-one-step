@@ -7,12 +7,18 @@
     <title>1290. 二进制链表转整数</title>
   </head>
   <body>
+    <script src="../helper/common.js"></script>
     <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
     <script>
-      // https://leetcode.cn/problems/convert-binary-number-in-a-linked-list-to-integer/
+      // https://leetcode.cn/problems/convert-binary-number-in-a-linked-list-to-integer/description/?envType=daily-question&envId=2025-07-14
 
       // 给你一个单链表的引用结点 head。链表中每个结点的值不是 0 就是 1。已知此链表是一个整数数字的二进制表示形式。
       // 请你返回该链表所表示数字的 十进制值 。
+      // 最高位 在链表的头部。
+      //
       // 提示：
       // 链表不为空。
       // 链表的结点总数不超过 30。
@@ -33,21 +39,10 @@
 
       // --- answer-1 ---
 
-      // 模拟
       var getDecimalValue = function (head) {
         let result = 0;
         while (head) {
-          result = result * 2 + head.val;
-          head = head.next;
-        }
-        return result;
-      };
-
-      var getDecimalValue = function (head) {
-        let result = 0;
-        while (head) {
-          result <<= 1;
-          result |= head.val;
+          result = (result << 1) | head.val; // 左移一位并加上当前值
           head = head.next;
         }
         return result;
@@ -59,28 +54,16 @@
 
       // --- answer-2 ---
 
-      var head = [1, 0, 1];
-      var result = 5;
+      // var head = [1,0,1];
+      // var result = 5;
       // 解释：二进制数 (101) 转化为十进制数 (5)
 
-      var head = [0];
-      var result = 0;
-
-      var head = [1];
-      var result = 1;
-
-      var head = [1, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0];
-      var result = 18880;
-
-      // var head = [0, 0];
+      // var head = [0];
       // var result = 0;
 
-      var node = buildLinkNodeByArray(head);
-
-      console.log('head = ', head);
-      console.log('result = ', result);
-      console.log('node = ', node);
-      console.log('getDecimalValue = ', getDecimalValue(node));
+      console.log("head = ", head);
+      console.log("result = ", result);
+      console.log("getDecimalValue = ", getDecimalValue(head));
     </script>
   </body>
 </html>
