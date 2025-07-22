@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3201. 找出有效子序列的最大长度 I</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
+    <script>
+      // https://leetcode.cn/problems/find-the-maximum-length-of-valid-subsequence-i/description/?envType=daily-question&envId=2025-07-16
+
+      // 给你一个整数数组 nums。
+      // nums 的子序列 sub 的长度为 x ，如果其满足以下条件，则称其为 有效子序列：
+      //
+      // 提示：
+      // (sub[0] + sub[1]) % 2 == (sub[1] + sub[2]) % 2 == ... == (sub[x - 2] + sub[x - 1]) % 2
+      // 返回 nums 的 最长的有效子序列 的长度。
+      // 一个 子序列 指的是从原数组中删除一些元素（也可以不删除任何元素），剩余元素保持原来顺序组成的新数组。
+      //
+      // 提示：
+      // 2 <= nums.length <= 2 * 105
+      // 1 <= nums[i] <= 107
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var maximumLength = function (nums) {};
+
+      // --- answer-1 ---
+
+      function maximumLength(nums = [], k) {
+        const f = Array.from({ length: k }, () => Array(k).fill(0));
+        let ans = 0;
+        for (let x of nums) {
+          x %= k;
+          for (let j = 0; j < k; ++j) {
+            const y = (j - x + k) % k;
+            f[x][y] = f[y][x] + 1; // 因为是类似 ababab的形式 所以 f[x][y] = f[y][x] + 1 = 前一个序列加上该数
+            ans = Math.max(ans, f[x][y]);
+          }
+        }
+        return ans;
+      }
+
+      // 枚举 奇奇 偶偶 奇偶 偶奇的组合
+      var maximumLength = function (nums) {
+        let res = 0;
+        const patterns = [
+          [0, 0],
+          [0, 1],
+          [1, 0],
+          [1, 1]
+        ];
+        for (const pattern of patterns) {
+          let cnt = 0;
+          for (const num of nums) {
+            if (num % 2 === pattern[cnt % 2]) {
+              cnt++;
+            }
+          }
+          res = Math.max(res, cnt);
+        }
+        return res;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var nums = [1, 2, 3, 4];
+      var result = 4;
+
+      var nums = [1, 2, 1, 1, 2, 1, 2];
+      var result = 6;
+
+      var nums = [1, 3];
+      var result = 2;
+
+      var nums = [1, 1, 1, 2, 2, 2, 2];
+      var result = 4;
+
+      var nums = [1, 1, 1, 2, 2];
+      var result = 3;
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('maximumLength = ', maximumLength(nums));
+    </script>
+  </body>
+</html>
