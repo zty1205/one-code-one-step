@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (895 道)
+## 三、LeetCode (896 道)
 
 <br/>
 
@@ -612,6 +612,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1417.重新格式化字符串.html](./leetCode/1417.重新格式化字符串.html)
 - [1422.分割字符串的最大得分.html](./leetCode/1422.分割字符串的最大得分.html)
 - [1431.拥有最多糖果的孩子.html](./leetCode/1431.拥有最多糖果的孩子.html)
+- [1695.删除子数组的最大得分.html](./leetCode/1695.删除子数组的最大得分.html)
 - [1498.满足条件的子序列数目.html](./leetCode/1498.满足条件的子序列数目.html)
 - [1432.改变一个整数能得到的最大差值.html](./leetCode/1432.改变一个整数能得到的最大差值.html)
 - [1561.你可以获得的最大硬币数目.html](./leetCode/1561.你可以获得的最大硬币数目.html)
@@ -934,6 +935,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2833.距离原点最远的点.html](./leetCode/2833.距离原点最远的点.html)
 - [2839.判断通过操作能否让字符串相等 I.html](./leetCode/2839.判断通过操作能否让字符串相等I.html)
 - [2843.统计对称整数的数目.html](./leetCode/2843.统计对称整数的数目.html)
+- [3487.删除后的最大子数组元素和.html](./leetCode/3487.删除后的最大子数组元素和.html)
 - [3201.找出有效子序列的最大长度 I.html](./leetCode/3201.找出有效子序列的最大长度I.html)
 - [3170.删除星号以后字典序最小的字符串.html](./leetCode/3170.删除星号以后字典序最小的字符串.html)
 - [3442.奇偶频次间的最大差值 I.html](./leetCode/3442.奇偶频次间的最大差值I.html)

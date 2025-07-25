@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3487. 删除后的最大子数组元素和</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
+    <script>
+      // https://leetcode.cn/problems/maximum-unique-subarray-sum-after-deletion/description/?envType=daily-question&envId=2025-07-25
+
+      // 给你一个整数数组 nums 。
+      // 你可以从数组 nums 中删除任意数量的元素，但不能将其变为 空 数组。执行删除操作后，选出 nums 中满足下述条件的一个子数组：
+      //
+      // 提示：
+      // 子数组中的所有元素 互不相同 。
+      // 最大化 子数组的元素和。
+      // 返回子数组的 最大元素和 。
+      //
+      // 提示：
+      // 1 <= nums.length <= 100
+      // -100 <= nums[i] <= 100
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var maxSum = function (nums) {};
+
+      // --- answer-1 ---
+
+      // hash
+      var maxSum = function (nums = []) {
+        const set = new Set(); // 用于存储当前子数组的元素
+        let maxSum = 0; // 最大和
+        let max = -Infinity; // 当前子数组的最大值
+        for (const n of nums) {
+          max = Math.max(max, n);
+          if (n <= 0) {
+            continue;
+          }
+          if (!set.has(n)) {
+            // 如果当前元素不在 set 中，直接加入
+            set.add(n);
+            maxSum += n;
+          }
+        }
+        return maxSum === 0 ? max : maxSum;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('maxSum = ', maxSum(nums));
+    </script>
+  </body>
+</html>
