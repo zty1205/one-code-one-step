@@ -451,6 +451,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [596.超过 5 名学生的课.sql](./leetCode/596.超过5名学生的课.sql)
 - [599.两个列表的最小索引总和.html](./leetCode/599.两个列表的最小索引总和.html)
 - [605.种花问题.html](./leetCode/605.种花问题.html)
+- [869.重新排序得到 2 的幂.html](./leetCode/869.重新排序得到2的幂.html)
 - [624.数组列表中的最大距离.html](./leetCode/624.数组列表中的最大距离.html)
 - [1061.按字典序排列最小的等效字符串.html](./leetCode/1061.按字典序排列最小的等效字符串.html)
 - [846.一手顺子.html](./leetCode/846.一手顺子.html)

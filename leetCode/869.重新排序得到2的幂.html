@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>869. 重新排序得到 2 的幂</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
+    <script>
+      // https://leetcode.cn/problems/reordered-power-of-2/description/?envType=daily-question&envId=2025-08-10
+
+      // 给定正整数 n ，我们按任何顺序（包括原始顺序）将数字重新排序，注意其前导数字不能为零。
+      // 如果我们可以通过上述方式得到 2 的幂，返回 true；否则，返回 false。
+      //
+      // 提示：
+      // 1 <= n <= 109
+
+      /**
+       * @param {number} n
+       * @return {boolean}
+       */
+      var reorderedPowerOf2 = function (n) {};
+
+      // --- answer-1 ---
+
+      var twoSet = new Set();
+      var toStr = function (num) {
+        return num
+          .toString()
+          .split('')
+          .sort((a, b) => a - b)
+          .join('');
+      };
+      var genSet = function () {
+        var max = 1e9;
+        var i = 1;
+        while (i <= max) {
+          console.log(i);
+          twoSet.add(toStr(i));
+          i = i * 2;
+        }
+      };
+
+      // 打表
+      var reorderedPowerOf2 = function (n = 1) {
+        if (Math.log2(n) % 1 === 0) return true;
+        genSet();
+        return twoSet.has(toStr(n));
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // 回溯
+      const reorderedPowerOf2 = (n) => {
+        const backtrack = (nums, idx, num) => {
+          if (idx === nums.length) {
+            return isPowerOfTwo(num);
+          }
+          for (let i = 0; i < nums.length; ++i) {
+            // 不能有前导零
+            if ((num === 0 && nums[i] === '0') || vis[i] || (i > 0 && !vis[i - 1] && nums[i] === nums[i - 1])) {
+              continue;
+            }
+            vis[i] = true;
+            if (backtrack(nums, idx + 1, num * 10 + nums[i].charCodeAt() - '0'.charCodeAt())) {
+              return true;
+            }
+            vis[i] = false;
+          }
+          return false;
+        };
+
+        const nums = Array.from('' + n);
+        nums.sort();
+        const vis = new Array(nums.length).fill(false);
+        return backtrack(nums, 0, 0);
+      };
+
+      const isPowerOfTwo = (n) => {
+        return (n & (n - 1)) === 0;
+      };
+
+      // --- answer-2 ---
+
+      var n = 1;
+      var result = true;
+
+      var n = 10;
+      var result = false;
+
+      console.log('n = ', n);
+      console.log('result = ', result);
+      console.log('reorderedPowerOf2 = ', reorderedPowerOf2(n));
+    </script>
+  </body>
+</html>
