@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>498. 对角线遍历</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
+    <script>
+      // https://leetcode.cn/problems/diagonal-traverse/description/?envType=daily-question&envId=2025-08-25
+
+      // 给你一个大小为 m x n 的矩阵 mat ，请以对角线遍历的顺序，用一个数组返回这个矩阵中的所有元素。
+      //
+      // 提示：
+      // m == mat.length
+      // n == mat[i].length
+      // 1 <= m, n <= 104
+      // 1 <= m * n <= 104
+      // -105 <= mat[i][j] <= 105
+
+      /**
+       * @param {number[][]} mat
+       * @return {number[]}
+       */
+      var findDiagonalOrder = function (mat) {};
+
+      // --- answer-1 ---
+
+      // 模拟
+      var findDiagonalOrder = function (mat) {
+        const m = mat.length;
+        const n = mat[0].length;
+        const res = new Array(m * n).fill(0);
+        let pos = 0;
+        for (let i = 0; i < m + n - 1; i++) {
+          // 向下
+          if (i % 2 === 1) {
+            let x = i < n ? 0 : i - n + 1;
+            let y = i < n ? i : n - 1;
+            while (x < m && y >= 0) {
+              res[pos] = mat[x][y];
+              pos++;
+              x++;
+              y--;
+            }
+          } else {
+            // 向上
+            let x = i < m ? i : m - 1;
+            let y = i < m ? 0 : i - m + 1;
+            while (x >= 0 && y < n) {
+              res[pos] = mat[x][y];
+              pos++;
+              x--;
+              y++;
+            }
+          }
+        }
+        return res;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var mat = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9]
+      ];
+      var result = [1, 2, 4, 7, 5, 3, 6, 8, 9];
+      // 解释：矩阵中的对角线遍历顺序如下图所示：
+      // (0,0) -> (0,1) -> (1,0) -> (2,0) -> (1,1) -> (0,2) -> (1,2) -> (2,1) -> (2,2)
+
+      // var mat = [[1,2],[3,4]];
+      // var result = [1,2,3,4];
+
+      var mat1 = [[1]];
+      var result1 = [1];
+
+      var mat2 = [
+        [1, 2, 3, 4, 5],
+        [6, 7, 8, 9, 10],
+        [11, 12, 13, 14, 15]
+      ];
+      var result2 = [1, 2, 6, 11, 7, 3, 4, 8, 12, 16, 10, 5, 9, 13, 14, 15];
+      // 解释：注意，这里的对角线遍历顺序如下图所示：
+      // (0,0) -> (0,1) -> (1,0) -> (2,0) -> (1,1) -> (0,2)
+      // -> (0,3) -> (1,2) -> (2,1) -> (2,2) -> (1,3) -> (0,4) -> (1,4) -> (2,3) -> (2,4)
+
+      var mat = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9],
+        [10, 11, 12]
+      ];
+      var result = [1, 2, 4, 7, 5, 3, 6, 8, 10, 11, 9, 12];
+
+      console.log('mat = ', mat);
+      console.log('result = ', result);
+      console.log('findDiagonalOrder = ', findDiagonalOrder(mat));
+    </script>
+  </body>
+</html>
