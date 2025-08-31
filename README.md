@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (902 道)
+## 三、LeetCode (903 道)
 
 <br/>
 
@@ -822,6 +822,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [506.统计相似字符串对的数目.html](./leetCode/506.统计相似字符串对的数目.html)
 - [523.连续的子数组和.html](./leetCode/523.连续的子数组和.html)
 - [525.连续数组.html](./leetCode/525.连续数组.html)
+- [543.二叉树的直径.html](./leetCode/543.二叉树的直径.html)
 - [547.省份数量.html](./leetCode/547.省份数量.html)
 - [598.区间加法 II.html](./leetCode/598.区间加法II.html)
 - [605.种花问题.html](./leetCode/605.种花问题.html)
