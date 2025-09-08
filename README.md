@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (903 道)
+## 三、LeetCode (904 道)
 
 <br/>
 
@@ -580,6 +580,8 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1189.“气球”的最大数量.html](./leetCode/1189.“气球”的最大数量.html)
 - [1200.最小绝对差.html](./leetCode/1200.最小绝对差.html)
 - [1207.独一无二的出现次数.html](./leetCode/1207.独一无二的出现次数.html)
+- [1317.将整数转换为两个无零整数的和.html](./leetCode/1317.将整数转换为两个无零整数的和.html)
+- [1304.和为零的 N 个不同整数.html](./leetCode/1304.和为零的N个不同整数.html)
 - [1290.二进制链表转整数.html](./leetCode/1290.二进制链表转整数.html)
 - [1394.找出数组中的幸运数.html](./leetCode/1394.找出数组中的幸运数.html)
 - [1287.有序数组中出现次数超过 25%的元素.html](./leetCode/1287.有序数组中出现次数超过25%的元素.html)
@@ -832,6 +834,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1207.独一无二的出现次数.html](./leetCode/1207.独一无二的出现次数.html)
 - [1431.拥有最多糖果的孩子.html](./leetCode/1431.拥有最多糖果的孩子.html)
 - [1768.交替合并字符串.html](./leetCode/1768.交替合并字符串.html)
+- [1792.最大平均通过率.html](./leetCode/1792.最大平均通过率.html)
 - [1863.找出所有子集的异或总和再求和.html](./leetCode/1863.找出所有子集的异或总和再求和.html)
 - [1920.基于排列构建数组.html](./leetCode/1920.基于排列构建数组.html)
 - [1922.统计好数字的数目.html](./leetCode/1922.统计好数字的数目.html)

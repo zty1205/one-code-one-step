@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1317. 将整数转换为两个无零整数的和</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
+    <script>
+      // https://leetcode.cn/problems/convert-integer-to-the-sum-of-two-no-zero-integers/description/?envType=daily-question&envId=2025-09-08
+
+      // 「无零整数」是十进制表示中 不含任何 0 的正整数。
+      // 给你一个整数 n，请你返回一个 由两个整数组成的列表 [a, b]，满足：
+      //
+      // 提示：
+      // a 和 b 都是无零整数
+      // a + b = n
+      // 题目数据保证至少有一个有效的解决方案。
+      // 如果存在多个有效解决方案，你可以返回其中任意一个。
+      //
+      // 提示：
+      // 2 <= n <= 104
+
+      /**
+       * @param {number} n
+       * @return {number[]}
+       */
+      var getNoZeroIntegers = function (n) {};
+
+      // --- answer-1 ---
+
+      // 预设一些无零整数，遍历这些数，判断 n - num 是否无零整数
+      var getNoZeroIntegers = function (n = 1) {
+        const nums = [1, 11, 111, 1111, 2, 22, 222, 2222, 3, 33, 333, 3333];
+        for (const num of nums) {
+          const str = (n - num).toString();
+          if (!str.includes('0')) {
+            return [num, n - num];
+          }
+        }
+        return [];
+      };
+
+      // --- answer-1 ---
+
+      var getNoZeroIntegers = function (n) {
+        let a = 0;
+        let base = 1; // 10^k
+        for (let x = n; x > 1; x = Math.floor(x / 10)) {
+          let d = x % 10;
+          if (d <= 1) {
+            d += 10;
+            x -= 10; // 借位
+          }
+          // a 这一位填 d/2，比如百位数就是 d/2 * 100
+          a += Math.floor(d / 2) * base;
+          base *= 10;
+        }
+        return [a, n - a];
+      };
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      // var n = 2;
+      // var result = [1,1];
+      // 解释：a = 1, b = 1。a + b = n 并且 a 和 b 的十进制表示形式都不包含任何 0。
+
+      // var n = 11;
+      // var result = [2,9];
+
+      // var n = 10000;
+      // var result = [1,9999];
+
+      // var n = 69;
+      // var result = [1,68];
+
+      // var n = 1010;
+      // var result = [11,999];
+
+      var n = 10010;
+      var result = [11, 9999];
+
+      var n = 11;
+      var result = [2, 9];
+
+      var n = 5012;
+      var redult = [13, 4999];
+
+      var n = 1501;
+      var result = [2, 1499];
+
+      console.log('n = ', n);
+      console.log('result = ', result);
+      console.log('getNoZeroIntegers = ', getNoZeroIntegers(n));
+    </script>
+  </body>
+</html>
