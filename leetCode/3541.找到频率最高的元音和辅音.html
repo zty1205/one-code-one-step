@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3541. 找到频率最高的元音和辅音</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
+    <script>
+      // https://leetcode.cn/problems/find-most-frequent-vowel-and-consonant/description/?envType=daily-question&envId=2025-09-13
+
+      // 给你一个由小写英文字母（'a' 到 'z'）组成的字符串 s。你的任务是找出出现频率 最高 的元音（'a'、'e'、'i'、'o'、'u' 中的一个）和出现频率最高的辅音（除元音以外的所有字母），并返回这两个频率之和。
+      // 注意：如果有多个元音或辅音具有相同的最高频率，可以任选其中一个。如果字符串中没有元音或没有辅音，则其频率视为 0。
+      //
+      // 提示：
+      // 1 <= s.length <= 100
+      // s 只包含小写英文字母
+
+      /**
+       * @param {string} s
+       * @return {number}
+       */
+      var maxFreqSum = function (s) {};
+
+      // --- answer-1 ---
+
+      var maxFreqSum = function (s = '') {
+        const vowels = new Set(['a', 'e', 'i', 'o', 'u']);
+        let maxVowelFreq = 0;
+        let maxConsonantFreq = 0;
+        const count = new Array(26).fill(0);
+        for (const char of s) {
+          count[char.charCodeAt() - 'a'.charCodeAt()]++;
+          if (vowels.has(char)) {
+            maxVowelFreq = Math.max(maxVowelFreq, count[char.charCodeAt() - 'a'.charCodeAt()]);
+          } else {
+            maxConsonantFreq = Math.max(maxConsonantFreq, count[char.charCodeAt() - 'a'.charCodeAt()]);
+          }
+        }
+        return maxVowelFreq + maxConsonantFreq;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      console.log('s = ', s);
+      console.log('result = ', result);
+      console.log('maxFreqSum = ', maxFreqSum(s));
+    </script>
+  </body>
+</html>
