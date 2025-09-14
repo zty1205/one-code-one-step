@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>966. 元音拼写检查器</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
+    <script>
+      // https://leetcode.cn/problems/vowel-spellchecker/description/?envType=daily-question&envId=2025-09-14
+
+      // 在给定单词列表 wordlist 的情况下，我们希望实现一个拼写检查器，将查询单词转换为正确的单词。
+      // 对于给定的查询单词 query，拼写检查器将会处理两类拼写错误：
+      //
+      // 提示：
+      // 大小写：如果查询匹配单词列表中的某个单词（不区分大小写），则返回的正确单词与单词列表中的大小写相同。
+      // 例如：wordlist = ["yellow"], query = "YellOw": correct = "yellow"
+      // 例如：wordlist = ["Yellow"], query = "yellow": correct = "Yellow"
+      // 例如：wordlist = ["yellow"], query = "yellow": correct = "yellow"
+      // 元音错误：如果在将查询单词中的元音 ('a', 'e', 'i', 'o', 'u')  分别替换为任何元音后，能与单词列表中的单词匹配（不区分大小写），则返回的正确单词与单词列表中的匹配项大小写相同。
+      // 例如：wordlist = ["YellOw"], query = "yollow": correct = "YellOw"
+      // 例如：wordlist = ["YellOw"], query = "yeellow": correct = "" （无匹配项）
+      // 例如：wordlist = ["YellOw"], query = "yllw": correct = "" （无匹配项）
+      // 此外，拼写检查器还按照以下优先级规则操作：
+      //
+      // 提示：
+      // 当查询完全匹配单词列表中的某个单词（区分大小写）时，应返回相同的单词。
+      // 当查询匹配到大小写问题的单词时，您应该返回单词列表中的第一个这样的匹配项。
+      // 当查询匹配到元音错误的单词时，您应该返回单词列表中的第一个这样的匹配项。
+      // 如果该查询在单词列表中没有匹配项，则应返回空字符串。
+      // 给出一些查询 queries，返回一个单词列表 answer，其中 answer[i] 是由查询 query = queries[i] 得到的正确单词。
+      //
+      // 提示：
+      // 1 <= wordlist.length, queries.length <= 5000
+      // 1 <= wordlist[i].length, queries[i].length <= 7
+      // wordlist[i] 和 queries[i] 只包含英文字母
+
+      /**
+       * @param {string[]} wordlist
+       * @param {string[]} queries
+       * @return {string[]}
+       */
+      var spellchecker = function (wordlist, queries) {};
+
+      // --- answer-1 ---
+
+      var spellchecker = function (wordlist = [], queries = []) {
+        const oMap = new Map(); // 原始映射
+        const sMap = new Map(); // 大小写映射
+        const vMap = new Map(); // 元音映射
+        const isVowel = (ch) => 'aeiou'.includes(ch.toLowerCase());
+        const devowel = (word) =>
+          word
+            .toLowerCase()
+            .split('')
+            .map((ch) => (isVowel(ch) ? '*' : ch))
+            .join('');
+
+        // 构建映射
+        for (const word of wordlist) {
+          if (!oMap.has(word)) {
+            oMap.set(word, word);
+          }
+          const lowerWord = word.toLowerCase();
+          if (!sMap.has(lowerWord)) {
+            sMap.set(lowerWord, word);
+          }
+          const devowelWord = devowel(word);
+          if (!vMap.has(devowelWord)) {
+            vMap.set(devowelWord, word);
+          }
+        }
+
+        // 查询
+        return queries.map((query) => {
+          if (oMap.has(query)) {
+            return oMap.get(query);
+          }
+          const lowerQuery = query.toLowerCase();
+          if (sMap.has(lowerQuery)) {
+            return sMap.get(lowerQuery);
+          }
+          const devowelQuery = devowel(query);
+          if (vMap.has(devowelQuery)) {
+            return vMap.get(devowelQuery);
+          }
+          return '';
+        });
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var wordlist = ['KiTe', 'kite', 'hare', 'Hare'],
+        queries = ['kite', 'Kite', 'KiTe', 'Hare', 'HARE', 'Hear', 'hear', 'keti', 'keet', 'keto'];
+      var result = ['kite', 'KiTe', 'KiTe', 'Hare', 'hare', '', '', 'KiTe', '', 'KiTe'];
+
+      // var wordlist = ["yellow"], queries = ["YellOw"];
+      // var result = ["yellow"];
+
+      console.log('wordlist = ', wordlist);
+      console.log('queries = ', queries);
+      console.log('result = ', result);
+      console.log('checke = ', spellchecker(wordlist, queries));
+    </script>
+  </body>
+</html>
