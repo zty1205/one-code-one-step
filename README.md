@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (908 道)
+## 三、LeetCode (909 道)
 
 <br/>
 
@@ -841,6 +841,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [1922.统计好数字的数目.html](./leetCode/1922.统计好数字的数目.html)
 - [1926.迷宫中离入口最近的出口.html](./leetCode/1926.迷宫中离入口最近的出口.html)
 - [2016.增量元素之间的最大差值.html](./leetCode/2016.增量元素之间的最大差值.html)
+- [2043.简易银行系统.html](./leetCode/2043.简易银行系统.html)
 - [2094.找出 3 位偶数.html](./leetCode/2094.找出3位偶数.html)
 - [2095.删除链表的中间节点.html](./leetCode/2095.删除链表的中间节点.html)
 - [2109.向字符串添加空格.html](./leetCode/2109.向字符串添加空格.html)
