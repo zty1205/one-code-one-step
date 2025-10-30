@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2348. 全 0 子数组的数目</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
+    <script>
+      // https://leetcode.cn/problems/number-of-zero-filled-subarrays/description/?envType=daily-question&envId=2025-10-30
+
+      // 给你一个整数数组 nums ，返回全部为 0 的 子数组 数目。
+      // 子数组 是一个数组中一段连续非空元素组成的序列。
+      //
+      // 提示：
+      // 1 <= nums.length <= 105
+      // -109 <= nums[i] <= 109
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var zeroFilledSubarray = function (nums) {};
+
+      // --- answer-1 ---
+
+      var zeroFilledSubarray = function (nums = []) {
+        let count = 0;
+        let step = 0;
+        for (let i = 0; i < nums.length; i++) {
+          if (nums[i] === 0) {
+            step++;
+            count += step;
+          } else {
+            step = 0;
+          }
+        }
+        return count;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      // var nums = [1,3,0,0,2,0,0,4];
+      // var result = 6;
+      // 解释：
+
+      // var nums = [0,0,0,2,0,0];
+      // var result = 9;
+      // 解释：
+
+      // var nums = [2,10,2019];
+      // var result = 0;
+      // 解释：没有全 0 子数组，所以我们返回 0 。
+
+      console.log('nums = ', nums);
+      console.log('result = ', result);
+      console.log('zeroFilledSubarray = ', zeroFilledSubarray(nums));
+    </script>
+  </body>
+</html>
