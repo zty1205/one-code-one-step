@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3202. 找出有效子序列的最大长度 II</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
+    <script>
+      // https://leetcode.cn/problems/find-the-maximum-length-of-valid-subsequence-ii/description/?envType=daily-question&envId=2025-11-08
+
+      // nums 的一个 子序列 sub 的长度为 x ，如果其满足以下条件，则称其为 有效子序列 ：
+      //
+      // 提示：
+      // (sub[0] + sub[1]) % k == (sub[1] + sub[2]) % k == ... == (sub[x - 2] + sub[x - 1]) % k
+      //
+      // 提示：
+      // 2 <= nums.length <= 103
+      // 1 <= nums[i] <= 107
+      // 1 <= k <= 103
+
+      /**
+       * @param {number[]} nums
+       * @param {number} k
+       * @return {number}
+       */
+      var maximumLength = function (nums, k) {};
+
+      // --- answer-1 ---
+
+      // (a+b)%k == (b+c)%k  => (a-c)%k == 0
+      // 即 奇数位 和 偶数位 mod k 相等
+      // dp[i][j] 表示mod为 i,j 的最长子序列长度
+      var maximumLength = function (nums = [], k = 1) {
+        const dp = Array.from({ length: k }, () => new Array(k).fill(0));
+        let result = 1;
+        for (const n of nums) {
+          const mod = n % k;
+          for (let i = 0; i < k; i++) {
+            // jij结尾的长度 = ji结尾的长度+1
+            dp[i][mod] = dp[mod][i] + 1;
+            result = Math.max(result, dp[i][mod]);
+          }
+        }
+        return result;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      var nums = [1, 2, 3, 4, 5],
+        k = 2;
+
+      var result = 5;
+
+      console.log('nums = ', nums);
+      console.log('k = ', k);
+      console.log('result = ', result);
+      console.log('maximumLength = ', maximumLength(nums, k));
+    </script>
+  </body>
+</html>
