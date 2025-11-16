@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1513. 仅含 1 的子串数</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
+    <script>
+      // https://leetcode.cn/problems/number-of-substrings-with-only-1s/description/?envType=daily-question&envId=2025-11-16
+
+      // 给你一个二进制字符串 s（仅由 '0' 和 '1' 组成的字符串）。
+      // 返回所有字符都为 1 的子字符串的数目。
+      // 由于答案可能很大，请你将它对 10^9 + 7 取模后返回。
+      //
+      // 提示：
+      // s[i] == '0' 或 s[i] == '1'
+      // 1 <= s.length <= 10^5
+
+      /**
+       * @param {string} s
+       * @return {number}
+       */
+      var numSub = function (s) {};
+
+      // --- answer-1 ---
+
+      var numSub = function (s) {
+        const MODULO = 1000000007;
+        let total = 0;
+        let consecutive = 0;
+        for (const c of s) {
+          if (c === '0') {
+            total += (consecutive * (consecutive + 1)) / 2;
+            total %= MODULO;
+            consecutive = 0;
+          } else {
+            consecutive++;
+          }
+        }
+        total += (consecutive * (consecutive + 1)) / 2;
+        total %= MODULO;
+        return total;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      // var s = "0110111";
+      // var result = 9;
+      // 解释：共有 9 个子字符串仅由 '1' 组成
+
+      // var s = "101";
+      // var result = 2;
+      // 解释：子字符串 "1" 在 s 中共出现 2 次
+
+      // var s = "111111";
+      // var result = 21;
+      // 解释：每个子字符串都仅由 '1' 组成
+
+      // var s = "000";
+      // var result = 0;
+
+      console.log('s = ', s);
+      console.log('result = ', result);
+      console.log('numSub = ', numSub(s));
+    </script>
+  </body>
+</html>
