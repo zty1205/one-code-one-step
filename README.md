@@ -149,7 +149,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 
 <br/>
 
-## 三、LeetCode (913 道)
+## 三、LeetCode (914 道)
 
 <br/>
 
@@ -948,6 +948,7 @@ npm run file --open=false --name=test --ext=html --dir=leetCode
 - [2833.距离原点最远的点.html](./leetCode/2833.距离原点最远的点.html)
 - [2839.判断通过操作能否让字符串相等 I.html](./leetCode/2839.判断通过操作能否让字符串相等I.html)
 - [2843.统计对称整数的数目.html](./leetCode/2843.统计对称整数的数目.html)
+- [3186.施咒的最大总伤害.html](./leetCode/3186.施咒的最大总伤害.html)
 - [3202.找出有效子序列的最大长度 II.html](./leetCode/3202.找出有效子序列的最大长度II.html)
 - [3541.找到频率最高的元音和辅音.html](./leetCode/3541.找到频率最高的元音和辅音.html)
 - [3479.水果成篮 III.html](./leetCode/3479.水果成篮III.html)
