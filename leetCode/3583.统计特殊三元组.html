@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3583. 统计特殊三元组</title>
+  </head>
+  <body>
+    <script src="../helper/common.js"></script>
+    <script src="../helper/node.js"></script>
+    <script src="../helper/tree.js"></script>
+    <script src="../helper/graph.js"></script>
+    <script src="../helper/command.js"></script>
+    <script>
+      // https://leetcode.cn/problems/count-special-triplets/description/?envType=daily-question&envId=2025-12-09
+
+      // 给你一个整数数组 nums。
+      // 特殊三元组 定义为满足以下条件的下标三元组 (i, j, k)：
+      //
+      // 提示：
+      // 0 <= i < j < k < n，其中 n = nums.length
+      // nums[i] == nums[j] * 2
+      // nums[k] == nums[j] * 2
+      // 返回数组中 特殊三元组 的总数。
+      // 由于答案可能非常大，请返回结果对 109 + 7 取余数后的值。
+      //
+      // 提示：
+      // 3 <= n == nums.length <= 105
+      // 0 <= nums[i] <= 105
+
+      /**
+       * @param {number[]} nums
+       * @return {number}
+       */
+      var specialTriplets = function (nums) {};
+
+      // --- answer-1 ---
+
+      var specialTriplets = function (nums = []) {
+        const MOD = 1e9 + 7;
+        const n = nums.length;
+        let count = 0;
+
+        const numCnt = new Map();
+        const numPartialCnt = new Map();
+
+        for (let num of nums) {
+          numCnt.set(num, (numCnt.get(num) || 0) + 1);
+        }
+
+        for (const n of nums) {
+          const target = n * 2;
+          const lCnt = numPartialCnt.get(target) || 0;
+          numPartialCnt.set(n, (numPartialCnt.get(n) || 0) + 1);
+
+          const rCnt = (numCnt.get(target) ?? 0) - (numPartialCnt.get(target) ?? 0);
+
+          count += (lCnt * rCnt) % MOD;
+          count %= MOD;
+        }
+
+        return count;
+      };
+
+      // --- answer-1 ---
+
+      // --- answer-2 ---
+
+      // --- answer-2 ---
+
+      console.log('result = ', result);
+    </script>
+  </body>
+</html>
